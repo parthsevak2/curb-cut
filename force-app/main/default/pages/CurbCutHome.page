@@ -1,0 +1,119 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Curb Cut" cache="true" expires="3600">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Find out what could make work easier, and ask for it. No form, no login, and no need to say what condition you have."/>
+  <title>Curb Cut</title>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Curb Cut" current="home"
+  eyebrow="Accommodation without disclosure"
+  heading="Find out what could make work easier. Then ask for it."
+  lede="No form. No login. And you never have to say what condition you have.">
+
+  <section>
+    <div class="plain">
+      <span class="tag">In one sentence</span>
+      <p>
+        Text a number, say what is hard at work, and get real answers about what
+        you could ask for &mdash; anonymously, if you want. If you decide to ask
+        for something, nothing is sent until you say yes.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Sixty-one in a hundred cost nothing</h2>
+    <p>
+      The Job Accommodation Network asked employers what accommodations actually
+      cost. Through 2024, <strong>61 out of every 100 cost the employer
+      nothing at all</strong>. For the rest, the middle cost was about $300, once.
+    </p>
+    <p>
+      The money was never the barrier. The process is. To get help you first have
+      to find the policy, learn its words, hold a work login, fill in a form, and
+      tell a stranger something you may not want to tell anyone.
+    </p>
+    <p>
+      That is a lot to ask of someone who is already having a hard week.
+    </p>
+  </section>
+
+  <section>
+    <h2>What is different here</h2>
+
+    <h3>You can ask before you tell anyone anything</h3>
+    <p>
+      You can find out what you could ask for without giving your name, and
+      without saying what condition you have. Nothing is written down while you
+      are anonymous. Knowing is allowed. Asking is optional.
+    </p>
+
+    <h3>There is nowhere to put a diagnosis</h3>
+    <p>
+      This is not a promise to be discreet. There is no field for a diagnosis,
+      a condition, a disability type, or a medical note anywhere in the system.
+      If you mention one, it is not recorded, and you will be told so. A manager
+      who asks is refused, because there is genuinely nothing to tell them.
+    </p>
+
+    <h3>Nothing is sent until you say yes</h3>
+    <p>
+      A request is written for you, in your words, and read back. It is not sent
+      until you clearly agree. &ldquo;I guess so&rdquo; is not agreement, and you
+      will be asked again.
+    </p>
+
+    <h3>You will never be told to phone someone</h3>
+    <p>
+      Every workplace process seems to end at &ldquo;give us a call.&rdquo; If you
+      cannot use a phone, that is a locked door. Here, a real person always
+      reaches you by message.
+    </p>
+  </section>
+
+  <section>
+    <h2>However you want to talk</h2>
+    <p>
+      Text, a voice note, a video, or a photo of your desk. All four are front
+      doors, not fallbacks, and you get an answer back the same way you asked.
+    </p>
+    <div class="note">
+      <p>
+        <strong>Sign language goes to a human being.</strong> Signed video is
+        never machine translated. It is passed to a person, and you get a text
+        straight away so you are not left waiting in silence, wondering.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>If you want to try it</h2>
+    <p>
+      Text <span class="kw">+1 276 495 9311</span> and say what is hard.
+      That is the whole thing.
+    </p>
+    <p>
+      Message and data rates may apply. Reply <span class="kw">HELP</span> for
+      help, or <span class="kw">STOP</span> to stop receiving messages.
+    </p>
+  </section>
+
+  <section>
+    <h2>This page, too</h2>
+    <p>
+      A site arguing that process shuts people out should not shut anyone out.
+      Text size and contrast controls are at the top and remember your choice.
+      Nothing here relies on colour alone to tell you something. It works by
+      keyboard, it works with a screen reader, and it holds still if you have
+      asked your device to reduce motion.
+    </p>
+  </section>
+
+</c:CurbCutShell>
+</body>
+</html>
+</apex:page>

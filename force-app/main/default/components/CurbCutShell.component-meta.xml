@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Shared shell for the Curb Cut public site: design system, reader controls, header, footer.</description>
+    <label>Curb Cut Shell</label>
+</ApexComponent>
