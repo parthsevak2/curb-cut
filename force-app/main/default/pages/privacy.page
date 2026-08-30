@@ -10,7 +10,7 @@
 </head>
 <body>
 <c:CurbCutShell pageTitle="Privacy" current="privacy"
-  eyebrow="Privacy Policy &middot; updated 30 August 2026"
+  eyebrow="Privacy Policy, updated 30 August 2026"
   heading="What we hold, and what does not exist."
   lede="The safest way to protect something is not to collect it. Most of this is about what there is nowhere to put.">
 

@@ -10,7 +10,7 @@
 </head>
 <body>
 <c:CurbCutShell pageTitle="Terms" current="terms"
-  eyebrow="Terms and Conditions &middot; updated 30 August 2026"
+  eyebrow="Terms and Conditions, updated 30 August 2026"
   heading="You text first. Nothing leaves without your yes."
   lede="That is the whole agreement. The rest is detail the phone companies require us to spell out.">
 
