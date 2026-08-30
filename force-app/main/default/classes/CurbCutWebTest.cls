@@ -114,5 +114,7 @@ private class CurbCutWebTest {
         Accommodation_Request__c ar = [SELECT Barrier_Report__c FROM Accommodation_Request__c LIMIT 1];
         System.assertEquals(c.barrierId, ar.Barrier_Report__c,
             'The request must be linked to the intake it came from');
+        System.assertNotEquals(null, ar.Barrier_Report__c,
+            'Provenance must survive: every web request was losing this link');
     }
 }
