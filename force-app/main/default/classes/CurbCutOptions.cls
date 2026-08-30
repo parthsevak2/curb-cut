@@ -64,14 +64,12 @@ public with sharing class CurbCutOptions {
 
         Integer cap = (req.limitSize != null && req.limitSize > 0) ? req.limitSize : 4;
 
-        // Small curated library, so a scored LIKE scan is appropriate and testable.
-        List<Accommodation_Option__c> all = [
-            SELECT Option__c, Plain_Language_Summary__c, Typical_Cost__c,
-                   Zero_Cost__c, Precedent_Count__c, Source_URL__c
-            FROM Accommodation_Option__c
-            WITH SECURITY_ENFORCED
-            LIMIT 500
-        ];
+        // The library is public reference data with a source URL on every row and
+        // nothing about any person in it. The site guest user owns none of those
+        // records, so record sharing would hand them an empty library and the
+        // agent would honestly report that it knows nothing. Read it without
+        // sharing, deliberately and only here.
+        List<Accommodation_Option__c> all = new LibraryReader().all();
 
         List<ScoredOption> scored = new List<ScoredOption>();
         for (Accommodation_Option__c opt : all) {
@@ -155,6 +153,27 @@ public with sharing class CurbCutOptions {
             if (!out.contains(w)) { out.add(w); }
         }
         return out;
+    }
+
+    /**
+     * Reads the public accommodation library.
+     *
+     * `without sharing` is a deliberate, narrow exception: this class touches
+     * exactly one object, that object holds no information about any person,
+     * and every row carries a public source URL. Field-level security still
+     * applies through WITH SECURITY_ENFORCED, so a caller with no field access
+     * still gets nothing.
+     */
+    private without sharing class LibraryReader {
+        private List<Accommodation_Option__c> all() {
+            return [
+                SELECT Option__c, Plain_Language_Summary__c, Typical_Cost__c,
+                       Zero_Cost__c, Precedent_Count__c, Source_URL__c
+                FROM Accommodation_Option__c
+                WITH SECURITY_ENFORCED
+                LIMIT 500
+            ];
+        }
     }
 
     private class ScoredOption implements Comparable {

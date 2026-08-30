@@ -61,6 +61,27 @@ for m in re.finditer(r'<object>([^<]+)</object>\s*<viewAllRecords>(\w+)</viewAll
         check('no-viewall-on-person-data', view == 'false',
               f'{obj} grants viewAllRecords; it holds data about a person')
 
+# 3b. The guest permission set must never exceed what a guest may hold, and must
+#     never see a person. Salesforce allows guests read and create only; an edit
+#     permission makes the whole set unassignable, which fails at runtime rather
+#     than at deploy.
+GUEST_PS = os.path.join(ROOT, 'force-app/main/default/permissionsets/Curb_Cut_Guest.permissionset-meta.xml')
+if os.path.exists(GUEST_PS):
+    g = open(GUEST_PS).read()
+    for m in re.finditer(r'<object>([^<]+)</object>\s*<viewAllRecords>(\w+)</viewAllRecords>', g):
+        check('guest-no-viewall', m.group(2) == 'false',
+              f'guest set grants viewAllRecords on {m.group(1)}')
+    check('guest-no-edit', '<allowEdit>true</allowEdit>' not in g,
+          'guest set grants edit; Salesforce permits guests read and create only')
+    for m in re.finditer(r'<object>([^<]+)</object>\s*<viewAllRecords>', g):
+        pass
+    # A guest must never be able to create or read a disclosure ledger entry
+    # about someone else.
+    check('guest-no-disclosure-access', '<object>Disclosure_Event__c</object>' not in g,
+          'guest set grants access to Disclosure_Event__c')
+    check('guest-no-profile-access', '<object>Access_Profile__c</object>' not in g,
+          'guest set grants access to Access_Profile__c')
+
 # 4. Lookups must resolve inside the package.
 objs = set(objects())
 for o in objects():
