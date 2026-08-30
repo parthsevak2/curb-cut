@@ -50,6 +50,39 @@ a request to its barrier report failed the insert. The last one is now a retry
 that drops the link rather than losing the request -- the link is bookkeeping,
 the request is what the person actually asked for.
 
+## Email deliverability, diagnosed with evidence
+
+Reported as "no reply arrived". The evidence says the reply was sent:
+
+    Apex handler        emailInvocationsUsed=1, no exception thrown
+    Barrier report      created, 3 -> 4
+    Org counter         SingleEmail used 4 of 15
+
+Two real causes, neither of them the mail server:
+
+**1. The From address is a stranger.** There is no OrgWideEmailAddress in this
+org, and the run-as user is `epic.orgfarm@salesforce.com`, whose domain is not
+verified for sending. Deliverability therefore substitutes
+`email@<uniqueId>.sfcustomeremail.com`. Gmail spam-files an unrecognised domain
+with no relationship to the sender almost every time.
+
+**2. The org sends at most 15 emails a day.** Four were already gone. Every
+inbound email consumes one reply, so a demo exhausts the cap within the hour --
+after which replies failed *silently*, because the handler was built never to
+bounce.
+
+The second was a defect in my design, not an environment quirk. A failed reply
+now creates a `Human_Handoff__c`: if the machine cannot answer, a person picks it
+up. Silence is the failure mode this project exists to remove, and the email
+channel had quietly reintroduced it. Regression test
+`aFailedReplyBecomesAHumanHandoffRatherThanSilence` forces the failure through a
+`@TestVisible` seam, because Apex reports success for suppressed test sends and
+the path would otherwise never be exercised.
+
+**Still unfixed:** the 15/day cap is a trial-org limit and cannot be raised.
+Verifying a sending domain would fix the spam problem but needs a domain the
+project does not own.
+
 ## Still weak
 
 **Video and image are designed, not received.** The agent routes signed video to
