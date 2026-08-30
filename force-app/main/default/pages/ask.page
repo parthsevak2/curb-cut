@@ -1,0 +1,171 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           controller="CurbCutWeb" title="Ask | Curb Cut">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Find out what you could ask for at work. No phone needed, no account, no need to say what condition you have."/>
+  <title>Ask | Curb Cut</title>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Ask" current="ask"
+  eyebrow="No phone needed. Nothing saved about who you are."
+  heading="Tell me what is hard right now."
+  lede="In your own words. Not why it is hard — just what is hard.">
+
+  <section>
+    <div class="plain">
+      <span class="tag">Before you start</span>
+      <p>
+        You do not have to give your name, and you never have to say what
+        condition you have. Nothing is sent to anyone unless you choose to send
+        it, on a later screen, with a button you press yourself.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <form id="askForm" onsubmit="return false;">
+      <label for="need" class="fieldLabel">What is hard at work right now?</label>
+      <p id="needHelp" class="fieldHelp">
+        For example: I keep missing things in meetings. Or: some days I cannot
+        type for long.
+      </p>
+      <textarea id="need" name="need" rows="4" aria-describedby="needHelp"></textarea>
+      <div class="actions">
+        <button type="button" id="go" class="btn primary">Show me what I could ask for</button>
+        <button type="button" id="wantHuman" class="btn">I would rather talk to a person</button>
+      </div>
+    </form>
+
+    <!-- Announced to screen readers as it changes, without stealing focus. -->
+    <div id="status" role="status" aria-live="polite" class="statusLine"></div>
+  </section>
+
+  <section id="results" hidden="hidden" aria-labelledby="resultsHeading">
+    <h2 id="resultsHeading">What other people have asked for</h2>
+    <div id="optionsBox" class="optionsBox"></div>
+    <div class="actions">
+      <button type="button" id="draftBtn" class="btn primary">Help me ask for one of these</button>
+      <button type="button" id="stopHere" class="btn">I just wanted to know. Stop here.</button>
+    </div>
+  </section>
+
+  <section id="draftSection" hidden="hidden" aria-labelledby="draftHeading">
+    <h2 id="draftHeading">Read this over</h2>
+    <p>Nothing has been sent. This is only a draft, and only you can send it.</p>
+    <div id="draftBox" class="draftBox"></div>
+    <div class="actions">
+      <button type="button" id="sendBtn" class="btn primary">Yes, send this</button>
+      <button type="button" id="deleteBtn" class="btn">Delete it</button>
+    </div>
+  </section>
+
+  <section id="doneSection" hidden="hidden" aria-labelledby="doneHeading">
+    <h2 id="doneHeading">Done</h2>
+    <div id="doneBox" class="doneBox"></div>
+  </section>
+
+</c:CurbCutShell>
+
+<script type="text/javascript">
+(function () {
+  'use strict';
+  var need = document.getElementById('need');
+  var status = document.getElementById('status');
+  var results = document.getElementById('results');
+  var optionsBox = document.getElementById('optionsBox');
+  var draftSection = document.getElementById('draftSection');
+  var draftBox = document.getElementById('draftBox');
+  var doneSection = document.getElementById('doneSection');
+  var doneBox = document.getElementById('doneBox');
+
+  var barrierId = null, draftText = null, chosen = null;
+
+  function say(msg) { status.textContent = msg; }
+  function busy(on, btn, label) {
+    btn.disabled = on;
+    btn.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (!on && label) { btn.textContent = label; }
+  }
+  function show(el) { el.hidden = false; }
+  function hide(el) { el.hidden = true; }
+
+  function remote(fn, args, onOk) {
+    Visualforce.remoting.Manager.invokeAction(fn, ...args, function (res, ev) {
+      if (ev.status && res) { onOk(res); }
+      else {
+        say('Something went wrong on my end, and that is not your problem to solve. ' +
+            'Try again, or ask for a person.');
+      }
+    }, { escape: false, timeout: 30000 });
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    var text = need.value.trim();
+    if (!text) { say('Tell me what is hard, in your own words.'); need.focus(); return; }
+    var b = this; busy(true, b); say('Looking up what other people have asked for...');
+    remote('{!$RemoteAction.CurbCutWeb.consult}', [text], function (r) {
+      busy(false, b);
+      barrierId = r.barrierId;
+      say(r.message);
+      optionsBox.textContent = r.noMatch ? '' : r.options;
+      optionsBox.hidden = !!r.noMatch;
+      show(results);
+      document.getElementById('resultsHeading').setAttribute('tabindex', '-1');
+      document.getElementById('resultsHeading').focus();
+    });
+  });
+
+  document.getElementById('draftBtn').addEventListener('click', function () {
+    var b = this; busy(true, b); say('Putting that into words...');
+    remote('{!$RemoteAction.CurbCutWeb.draft}', [need.value.trim(), chosen], function (r) {
+      busy(false, b);
+      draftText = r.draft;
+      draftBox.textContent = r.draft;
+      say(r.message);
+      show(draftSection);
+      document.getElementById('draftHeading').setAttribute('tabindex', '-1');
+      document.getElementById('draftHeading').focus();
+    });
+  });
+
+  document.getElementById('sendBtn').addEventListener('click', function () {
+    var b = this; busy(true, b); say('Sending it...');
+    remote('{!$RemoteAction.CurbCutWeb.send}', [draftText, true, barrierId], function (r) {
+      busy(false, b);
+      doneBox.textContent = r.message;
+      say(r.message);
+      hide(draftSection); show(doneSection);
+      document.getElementById('doneHeading').setAttribute('tabindex', '-1');
+      document.getElementById('doneHeading').focus();
+    });
+  });
+
+  document.getElementById('deleteBtn').addEventListener('click', function () {
+    draftText = null; draftBox.textContent = ''; hide(draftSection);
+    say('Deleted. Nothing was sent. You can start again whenever you want.');
+  });
+
+  document.getElementById('stopHere').addEventListener('click', function () {
+    say('That is fine. Knowing is allowed, and asking is optional. ' +
+        'Nothing has been sent to anyone.');
+  });
+
+  document.getElementById('wantHuman').addEventListener('click', function () {
+    var b = this; busy(true, b); say('Getting a person for you...');
+    remote('{!$RemoteAction.CurbCutWeb.human}', [need.value.trim(), barrierId], function (r) {
+      busy(false, b);
+      doneBox.textContent = r.message + (r.handlerName ? ' You are being picked up by ' + r.handlerName + '.' : '');
+      say(r.message);
+      show(doneSection);
+      document.getElementById('doneHeading').setAttribute('tabindex', '-1');
+      document.getElementById('doneHeading').focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>
+</apex:page>

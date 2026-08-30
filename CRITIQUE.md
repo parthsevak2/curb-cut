@@ -29,18 +29,32 @@ North Americans". The Statistics Canada figure is 35.4% of *employed Canadians
 with a disability*. On a project whose entire argument is not inventing figures,
 that would have been self-refuting.
 
+## Closed since
+
+**The web is now a front door, not a brochure.** `/curbcut/ask` runs the whole
+journey with no phone, no account and no app: consult, draft, send, or ask for a
+person. It calls exactly the same Apex actions the agent calls, in the same
+order, against the same library -- deliberately with no model in the loop. For
+the highest-stakes step, creating a request, there is nothing to hallucinate and
+the approval gate is code rather than judgement. Verified end to end in a
+browser as an anonymous visitor.
+
+**Barrier reports are written.** They were not, on any channel. The web channel
+logs one on every consult, anonymously, and the records exist.
+
+**Three failures found only by testing the live thing:**
+`WITH SECURITY_ENFORCED` rejected the guest user, so the library came back empty;
+guest users may hold read and create only, so the first permission set was
+unassignable; and a guest cannot reference a record it may not read, so linking
+a request to its barrier report failed the insert. The last one is now a retry
+that drops the link rather than losing the request -- the link is bookkeeping,
+the request is what the person actually asked for.
+
 ## Still weak
 
-**One real channel, not four.** SMS and voice are built and tested. Video and
-image are described in the design and routed in the agent script, but nothing
-receives them yet. The site is a set of documents, not an agent surface: someone
-with no phone at all still cannot start a conversation. That is the largest
-remaining gap against the accessibility argument, and it is the next thing worth
-building.
-
-**Barrier reports are still not written.** `log_barrier` is bound, unit-tested
-and live, and the agent does not call it during consult. Every conversation
-leaves no intake record. Tests pass because they call the Apex directly.
+**Video and image are designed, not received.** The agent routes signed video to
+a human and the schema records the modality, but nothing accepts an upload yet.
+Voice and text are real; the other two are honest roadmap.
 
 **Visualforce, and why.** Not a preference. `Network`, `ExperienceBundle` and
 `DigitalExperienceConfig` are all unavailable in this org, so Experience Cloud
@@ -48,10 +62,9 @@ and LWR cannot be created here at all. `CustomSite` plus `ApexPage` is the only
 public-site mechanism available. `LightningComponentBundle` does deploy, so LWC
 inside the Site is the upgrade path if Digital Experiences is ever licensed.
 
-**The library is 14 rows.** Enough to demonstrate grounding, not enough to serve
-anyone. Statistics Canada names modified hours, modified duties, working from
-home, ergonomic workstation and back support as the top five needs; only some of
-those are in the library.
+**The library is 24 rows.** All five needs Statistics Canada names most
+often are now in it, each with a source. Still small for a real deployment, but
+no longer missing the most common things people actually ask for.
 
 **No accessibility audit by a person who needs it.** Every claim on the site
 about screen readers, keyboard use and contrast is mine, tested by me. The spec

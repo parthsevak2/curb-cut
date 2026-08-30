@@ -11,6 +11,9 @@
 public with sharing class CurbCutCreateRequest {
 
     private static final Integer INTERACTIVE_PROCESS_DAYS = 10;
+    private static final String COULD_NOT_SEND =
+        'I could not send that, and that is my problem, not yours. '
+      + 'Ask for a real person and someone will pick this up.';
 
     public class Request {
         @InvocableVariable(required=true label='The draft the person read')
@@ -78,14 +81,30 @@ public with sharing class CurbCutCreateRequest {
 
         try {
             insert ar;
-            res.requestId = ar.Id;
-            res.created = true;
-            res.message = 'Sent. You will hear back by ' + ar.Interactive_Process_Due__c.format()
-                        + ' at the latest. You can stop this any time.';
         } catch (DmlException e) {
-            res.message = 'I could not send that, and that is my problem, not yours. '
-                        + 'Reply HUMAN and a real person will pick this up.';
+            // A guest user cannot reference a record it is not allowed to read,
+            // so the link to the barrier report can fail even though the request
+            // itself is perfectly valid. The link is bookkeeping. The request is
+            // the thing the person actually asked for, and they do not lose it
+            // over a foreign key.
+            if (ar.Barrier_Report__c != null) {
+                ar = ar.clone(false, true, false, false);
+                ar.Barrier_Report__c = null;
+                try {
+                    insert ar;
+                } catch (DmlException retry) {
+                    res.message = COULD_NOT_SEND;
+                    return res;
+                }
+            } else {
+                res.message = COULD_NOT_SEND;
+                return res;
+            }
         }
+        res.requestId = ar.Id;
+        res.created = true;
+        res.message = 'Sent. You will hear back by ' + ar.Interactive_Process_Due__c.format()
+                    + ' at the latest. You can stop this any time.';
         return res;
     }
 }

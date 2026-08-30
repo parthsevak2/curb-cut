@@ -217,6 +217,42 @@ footer.page {
   margin-top:4rem; padding:2.2rem 0 4rem; border-top:4px solid var(--ink);
   color:var(--ink-soft); font-size:.95rem;
 }
+/* ---------- the ask flow ---------- */
+.fieldLabel {
+  display:block; font-family:Archivo,system-ui,sans-serif; font-weight:700;
+  font-size:1.1rem; margin-bottom:.3rem;
+}
+.fieldHelp { color:var(--ink-soft); font-size:.95rem; margin:0 0 .6rem; }
+textarea {
+  width:100%; font:inherit; font-size:1.05rem; line-height:1.55; padding:.8rem .9rem;
+  background:var(--raised); color:var(--ink);
+  border:2px solid var(--line-firm); border-radius:5px; resize:vertical;
+}
+textarea:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+.actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem; }
+.btn {
+  font:inherit; font-family:Archivo,system-ui,sans-serif; font-weight:700; font-size:1rem;
+  min-height:48px; padding:.7rem 1.15rem; cursor:pointer; border-radius:5px;
+  background:var(--raised); color:var(--ink); border:2px solid var(--line-firm);
+}
+.btn:hover { background:var(--sunk); }
+.btn.primary { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+.btn.primary:hover { opacity:.9; }
+.btn[disabled] { opacity:.55; cursor:progress; }
+/* Status is announced to screen readers; sighted users get a visible line too. */
+.statusLine {
+  margin-top:1.1rem; font-size:1.02rem; color:var(--ink); min-height:1.6em;
+  border-left:5px solid var(--deep); background:var(--deep-bg);
+  padding:.75rem .95rem; border-radius:0 5px 5px 0;
+}
+.statusLine:empty { display:none; }
+.optionsBox, .draftBox, .doneBox {
+  white-space:pre-wrap; background:var(--raised); border:1px solid var(--line);
+  border-left:5px solid var(--signal); border-radius:5px;
+  padding:1rem 1.2rem; margin-top:.4rem; font-size:1.02rem; line-height:1.6;
+}
+.doneBox { border-left-color:var(--deep); }
+
 footer.page .who { color:var(--ink-soft); }
 footer.page .stand {
   font-family:Archivo,system-ui,sans-serif; font-size:1.15rem; font-weight:600;
@@ -240,6 +276,7 @@ footer.page p { margin-bottom:.6rem; }
     </a>
     <nav class="nav" aria-label="Site">
       <a href="/" aria-current="{!IF(current == 'home', 'page', 'false')}">Home</a>
+      <a href="/ask" aria-current="{!IF(current == 'ask', 'page', 'false')}">Ask</a>
       <a href="/privacy" aria-current="{!IF(current == 'privacy', 'page', 'false')}">Privacy</a>
       <a href="/terms" aria-current="{!IF(current == 'terms', 'page', 'false')}">Terms</a>
     </nav>

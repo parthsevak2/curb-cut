@@ -13,5 +13,13 @@
         <apexPage>terms</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
+    <pageAccesses>
+        <apexPage>ask</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <classAccesses>
+        <apexClass>CurbCutWeb</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <userLicense>Guest User License</userLicense>
 </Profile>
