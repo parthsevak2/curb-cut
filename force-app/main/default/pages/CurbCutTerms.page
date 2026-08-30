@@ -1,0 +1,142 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Terms | Curb Cut" cache="true" expires="3600">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Terms for the Curb Cut messaging service: what it does, message rates, frequency, support, and how to get help or stop messages."/>
+  <title>Terms | Curb Cut</title>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Terms" current="terms"
+  eyebrow="Terms and Conditions &middot; updated 30 August 2026"
+  heading="You text first. Nothing leaves without your yes."
+  lede="That is the whole agreement. The rest is detail the phone companies require us to spell out.">
+
+  <section>
+    <div class="plain">
+      <span class="tag">The short version</span>
+      <p>
+        You start the conversation, always. We never message anyone who has not
+        messaged us first, and we never send advertising.
+      </p>
+      <p>
+        Nothing goes to your employer unless you clearly say yes. Your phone
+        company may charge you for texts at your normal rate; we charge nothing.
+      </p>
+      <p>
+        Reply <strong>HELP</strong> for help. Reply <strong>STOP</strong> to stop
+        the messages.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The programme</h2>
+    <table class="facts">
+      <tbody>
+        <tr><th scope="row">Name</th><td>Curb Cut</td></tr>
+        <tr><th scope="row">Made by</th>
+            <td>Parth Sevak, in Welland, Ontario, Canada</td></tr>
+        <tr><th scope="row">What it does</th>
+            <td>Helps you work out what could make work easier, and helps you ask
+                for it. It can write a request and send it to your employer, but
+                only after you have agreed to it in the conversation.</td></tr>
+        <tr><th scope="row">How you start</th>
+            <td>By texting the number yourself. It is printed on a poster at
+                work. We never message anyone who has not messaged first. There is
+                no mailing list, no upload, and no bought data.</td></tr>
+        <tr><th scope="row">How often we message</th>
+            <td>It varies. Every message is a reply inside a conversation you
+                started. Nothing is scheduled and nothing repeats on its own.</td></tr>
+        <tr><th scope="row">Cost</th>
+            <td><strong>Message and data rates may apply.</strong> Curb Cut is
+                free. Your phone company may still charge you at your usual
+                rate.</td></tr>
+        <tr><th scope="row">Help</th>
+            <td>Reply <span class="kw">HELP</span>, or email
+                <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a></td></tr>
+        <tr><th scope="row">Phone companies</th>
+            <td>Mobile carriers are not liable for messages that arrive late or
+                not at all.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Getting help, and stopping messages</h2>
+    <div class="note">
+      <p>Reply <strong>HELP</strong> at any time for help and how to reach a person.</p>
+      <p>
+        Reply <strong>STOP</strong> at any time to stop receiving messages from
+        this number. You get one confirmation, then nothing. You can come back
+        later by texting again.
+      </p>
+    </div>
+    <p>
+      Three other words do something narrower inside a conversation. They are not
+      ways to stop messages:
+    </p>
+    <ul class="kwlist">
+      <li><span class="kw">DELETE</span><span>Throw away a drafted request before it is sent.</span></li>
+      <li><span class="kw">OFF</span><span>Turn off a preference you saved earlier. Immediate, and you will not be asked why.</span></li>
+      <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What we promise</h2>
+    <ul>
+      <li><strong>Nothing reaches your employer without your clear yes.</strong>
+          A maybe is not a yes. If you say &ldquo;I guess so&rdquo;, you will be
+          asked again rather than have it sent.</li>
+      <li><strong>We never ask what condition you have</strong>, and there is
+          nowhere in the system to keep one.</li>
+      <li><strong>We never send you to a phone call.</strong> If you want a
+          person, you get one by message.</li>
+      <li><strong>We only describe things we have a source for.</strong> If we do
+          not know, we say we do not know instead of guessing.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What this is not</h2>
+    <p>
+      Curb Cut is not a lawyer, a doctor, or your employer. It does not give legal
+      or medical advice. It cannot promise any request will be granted, and it does
+      not replace your employer's own process or advice from a professional. Cost
+      figures come from published Job Accommodation Network survey data and
+      describe employers in general, not yours.
+    </p>
+    <div class="note absent">
+      <p>
+        <strong>This is not an emergency service.</strong> Nobody is watching it
+        around the clock. In an emergency, contact your local emergency services.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fair use, and the legal bit</h2>
+    <p>
+      Please use it for what it is for. Do not try to get information about other
+      people through it, and do not use it to harass anyone. We may stop serving
+      an account used that way.
+    </p>
+    <p>
+      The service is provided as is. So far as the law allows, we are not liable
+      for indirect or consequential loss arising from using it. Nothing here takes
+      away a right you have that cannot be taken away. These terms are governed by
+      the law of Ontario, Canada.
+    </p>
+    <p>
+      How your information is handled is set out in the
+      <a href="/privacy">privacy policy</a>, which is part of these terms.
+    </p>
+  </section>
+
+</c:CurbCutShell>
+</body>
+</html>
+</apex:page>

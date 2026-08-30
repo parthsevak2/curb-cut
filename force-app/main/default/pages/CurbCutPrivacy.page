@@ -1,0 +1,153 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Privacy | Curb Cut" cache="true" expires="3600">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="What Curb Cut collects, what deliberately does not exist in the system, and who processes it."/>
+  <title>Privacy | Curb Cut</title>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Privacy" current="privacy"
+  eyebrow="Privacy Policy &middot; updated 30 August 2026"
+  heading="What we hold, and what does not exist."
+  lede="The safest way to protect something is not to collect it. Most of this is about what there is nowhere to put.">
+
+  <section>
+    <div class="plain">
+      <span class="tag">The short version</span>
+      <p>
+        We keep a scrambled version of your phone number, what you tell us is
+        hard at work, and anything you ask us to remember. There is no field for
+        a diagnosis, so we could not store one if we tried.
+      </p>
+      <p>
+        We never sell it, never share it for anyone else's purposes, and never
+        use it to advertise to you. You can see what is held, turn it off, or
+        have it deleted, at any time, without giving a reason.
+      </p>
+      <p>The rest of this page says the same thing more carefully.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What does not exist here</h2>
+    <div class="note absent">
+      <p>
+        There is no field anywhere in this system for a <strong>diagnosis</strong>,
+        <strong>condition</strong>, <strong>disability type</strong>,
+        <strong>medical note</strong>, <strong>severity</strong> or
+        <strong>prognosis</strong>.
+      </p>
+      <p>
+        Not hidden, not locked, not encrypted &mdash; absent. If you mention a
+        condition anyway, it is not written to any record, and you are told so in
+        the same reply. An automated check refuses to let the software be built
+        if anyone ever adds such a field.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What we do keep</h2>
+    <table class="facts">
+      <tbody>
+        <tr>
+          <th scope="row">A scrambled phone number</th>
+          <td>So your conversation carries on across messages. Your number is
+              turned into an irreversible code the moment it arrives. The number
+              itself is never saved and never written to a log.</td>
+        </tr>
+        <tr>
+          <th scope="row">What you say is hard</th>
+          <td>In your own words, so we can look up what might help. What is
+              difficult, never why it is difficult.</td>
+        </tr>
+        <tr>
+          <th scope="row">Anything you ask us to remember</th>
+          <td>A standing preference, in your exact words, and who you chose to
+              let see it.</td>
+        </tr>
+        <tr>
+          <th scope="row">Requests you approved</th>
+          <td>So the request you agreed to can be sent, and so you can see what
+              came back.</td>
+        </tr>
+        <tr>
+          <th scope="row">Every time a preference was shown</th>
+          <td>So you can see it. Something that travels ahead of you into a new
+              team is a disclosure made while you were not in the room. You are
+              entitled to know it happened.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Conversations are anonymous unless you choose otherwise.</p>
+  </section>
+
+  <section>
+    <h2>What we never do</h2>
+    <ul>
+      <li><strong>We never sell your information.</strong> Not to anyone, at any
+          price.</li>
+      <li><strong>We never hand it to anyone for their own purposes.</strong>
+          No data brokers, no advertisers, no analytics companies.</li>
+      <li><strong>We never advertise to you.</strong> No promotional messages are
+          sent at all. Every message you get is a reply to one you sent.</li>
+      <li><strong>We never guess things about you.</strong> Nothing is profiled
+          or predicted from your behaviour. Every signal in the system is one you
+          set yourself, in your own words.</li>
+      <li><strong>We never tell your employer anything you did not approve</strong>,
+          in the conversation, at the time.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Who else touches it</h2>
+    <p>
+      Two companies handle data so the service can work at all. Neither may use
+      it for their own ends.
+    </p>
+    <ul>
+      <li><strong>Twilio</strong> carries the messages and calls, and necessarily
+          handles your phone number to deliver them, as any phone company must.</li>
+      <li><strong>Salesforce</strong> hosts the database and the assistant.</li>
+    </ul>
+    <p>
+      Information is stored on Salesforce infrastructure in the United States. We
+      give it to no one else, except where the law compels it &mdash; and there is
+      no medical information in the system to give.
+    </p>
+  </section>
+
+  <section>
+    <h2>What you can do, any time</h2>
+    <ul class="kwlist">
+      <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours.</span></li>
+      <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate. You will not be asked why &mdash; there is nowhere to record a reason, so nobody can ask you for one later.</span></li>
+      <li><span class="kw">DELETE</span><span>Throw away a drafted request before it is sent.</span></li>
+      <li><span class="kw">STOP</span><span>Stop receiving messages from the number entirely.</span></li>
+    </ul>
+    <p>
+      Or email <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
+      to ask what is held about you, correct it, or have it deleted.
+    </p>
+    <p>
+      Records are kept only while the request or preference they belong to is
+      live. An anonymous conversation that leads nowhere leaves nothing behind
+      that could identify you.
+    </p>
+  </section>
+
+  <section>
+    <h2>If this changes</h2>
+    <p>
+      A changed policy appears here with a new date at the top. Carrying on using
+      the service after that means the newer version applies.
+    </p>
+  </section>
+
+</c:CurbCutShell>
+</body>
+</html>
+</apex:page>
