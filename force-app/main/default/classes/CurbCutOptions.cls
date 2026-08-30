@@ -13,12 +13,31 @@
  */
 public with sharing class CurbCutOptions {
 
+    // Function words carry no meaning here, and a match on one is worse than no
+    // match at all: 'Typing hurts after a while' once returned 'Written follow-up
+    // after verbal instructions' as its top result, on the strength of 'after'.
+    // An irrelevant suggestion tells someone already having a hard week that they
+    // were not heard. Anything appearing incidentally in library prose belongs here.
     private static final Set<String> STOPWORDS = new Set<String>{
         'the','a','an','and','or','but','i','im','my','me','to','for','of','in','on',
         'at','it','is','am','are','was','were','be','been','with','that','this','have',
         'has','had','do','does','did','can','cant','cannot','not','no','when','what',
-        'very','really','just','so','too','get','got','because','they','them'
+        'very','really','just','so','too','get','got','because','they','them',
+        // connectives and quantifiers that turn up in the library's own summaries
+        'after','before','while','during','than','then','rather','into','from','out',
+        'own','one','some','all','any','each','more','less','most','much','also',
+        'still','about','over','under','without','you','your','their','there','here',
+        // filler that appears in almost every sentence a person types
+        'keep','keeps','keeping','need','needs','needed','make','makes','made',
+        'thing','things','right','now','way','ways','use','uses','using','used',
+        'like','lot','bit','day','days','time','times',
+        // 'work' is in half the library and in almost every phrase a person types,
+        // so it separates nothing
+        'work','works','working','job'
     };
+
+    private static final Integer TITLE_WEIGHT = 3;
+    private static final Integer BODY_WEIGHT = 1;
 
     public class Request {
         @InvocableVariable(required=true label='Functional need in the person\'s own words')
@@ -77,16 +96,22 @@ public with sharing class CurbCutOptions {
             // to someone who said they could not type for long, because 'long' is
             // inside 'alongside'. An irrelevant suggestion is not a harmless miss:
             // it tells someone already having a hard week that they were not heard.
-            Set<String> words = new Set<String>(tokenize(
-                (opt.Option__c == null ? '' : opt.Option__c) + ' ' +
-                (opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c)
+            //
+            // The name of the accommodation is what it is about; the summary is
+            // explanation around it. So a hit on the name counts for more. Without
+            // this, 'the noise in the office' ranked a chair above a quiet room,
+            // because the chair's summary happens to mention an office.
+            Set<String> titleWords = new Set<String>(tokenize(
+                opt.Option__c == null ? '' : opt.Option__c
+            ));
+            Set<String> bodyWords = new Set<String>(tokenize(
+                opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c
             ));
 
             Integer score = 0;
             for (String kw : keywords) {
-                if (words.contains(kw)) {
-                    score++;
-                }
+                if (titleWords.contains(kw)) { score += TITLE_WEIGHT; }
+                else if (bodyWords.contains(kw)) { score += BODY_WEIGHT; }
             }
             if (score > 0) {
                 scored.add(new ScoredOption(opt, score));
@@ -187,8 +212,18 @@ public with sharing class CurbCutOptions {
 
         public Integer compareTo(Object other) {
             ScoredOption o = (ScoredOption) other;
-            if (this.score == o.score) { return 0; }
-            return this.score > o.score ? -1 : 1;   // highest score first
+            if (this.score != o.score) {
+                return this.score > o.score ? -1 : 1;   // highest score first
+            }
+            // Ties are broken by how many workplaces have already done it, then
+            // alphabetically. Without a total order the same question can return
+            // a different answer twice, which reads as the system being unsure.
+            Integer mine  = this.option.Precedent_Count__c == null ? 0 : Integer.valueOf(this.option.Precedent_Count__c);
+            Integer yours = o.option.Precedent_Count__c    == null ? 0 : Integer.valueOf(o.option.Precedent_Count__c);
+            if (mine != yours) { return mine > yours ? -1 : 1; }
+            String a = this.option.Option__c == null ? '' : this.option.Option__c;
+            String b = o.option.Option__c    == null ? '' : o.option.Option__c;
+            return a.compareTo(b);
         }
     }
 }

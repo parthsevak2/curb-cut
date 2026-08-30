@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Needs_An_Interpreter</fullName>
+    <columns>NAME</columns>
+    <columns>Inbound_Modality__c</columns>
+    <columns>Functional_Description__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Interpreter_Needed__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Needs a human interpreter</label>
+</ListView>

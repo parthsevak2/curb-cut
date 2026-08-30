@@ -3,6 +3,10 @@
     <label>Curb Cut Access</label>
     <description>Object, field and Apex access for the Curb Cut app. Required because custom fields deployed via the Metadata API carry no field-level security by default.</description>
     <hasActivationRequired>false</hasActivationRequired>
+    <applicationVisibilities>
+        <application>Curb_Cut_Console</application>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>CurbCutCostBrief</apexClass>
         <enabled>true</enabled>
@@ -341,4 +345,32 @@
         <object>Message_Log__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <tabSettings>
+        <tab>Access_Preference__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Accommodation_Option__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Accommodation_Request__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Barrier_Report__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Disclosure_Event__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Human_Handoff__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Message_Log__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>
