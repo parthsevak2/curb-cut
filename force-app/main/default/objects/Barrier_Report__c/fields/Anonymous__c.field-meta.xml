@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Anonymous__c</fullName>
+    <description>If true, no Access Profile link is written at all.</description>
+    <label>Anonymous</label>
+    <defaultValue>true</defaultValue>
+    <type>Checkbox</type>
+</CustomField>
