@@ -144,6 +144,116 @@ proj = json.load(open(os.path.join(ROOT, 'sfdx-project.json')))
 check('api-version', float(proj.get('sourceApiVersion', 0)) >= 66.0,
       f"sourceApiVersion {proj.get('sourceApiVersion')} < 66.0")
 
+
+# 9. Nothing in the internal console may point at something that is not there.
+#    Deploying an app whose tab does not exist gives 'The app you're trying to
+#    view is invalid or inaccessible' and no clue which reference is dangling,
+#    which cost most of an afternoon.
+DEF   = os.path.join(ROOT, 'force-app/main/default')
+def stems(sub, suffix):
+    d = os.path.join(DEF, sub)
+    if not os.path.isdir(d): return set()
+    return {os.path.basename(f)[:-len(suffix)] for f in glob.glob(os.path.join(d, '*' + suffix))}
+
+tabs_have  = stems('tabs',       '.tab-meta.xml')
+flex_have  = stems('flexipages', '.flexipage-meta.xml')
+apps_have  = stems('applications', '.app-meta.xml')
+reports_have = {
+    os.path.basename(os.path.dirname(f)) + '/' + os.path.basename(f)[:-len('.report-meta.xml')]
+    for f in glob.glob(os.path.join(DEF, 'reports', '*', '*.report-meta.xml'))
+}
+listviews_have = {
+    os.path.basename(os.path.dirname(os.path.dirname(f))) + '.' +
+    os.path.basename(f)[:-len('.listView-meta.xml')]
+    for f in glob.glob(os.path.join(OBJ, '*', 'listViews', '*.listView-meta.xml'))
+}
+
+# Every tab an app names must exist. Standard tabs start with 'standard-'.
+for app in glob.glob(os.path.join(DEF, 'applications', '*.app-meta.xml')):
+    for t in ET.parse(app).getroot().findall(f'{{{NS}}}tabs'):
+        name = (t.text or '').strip()
+        if name.startswith('standard-'): continue
+        check('app-tab-exists', name in tabs_have or name in objects(),
+              f'{os.path.basename(app)} lists tab {name}, which does not exist')
+
+# Every tab that fronts a FlexiPage must have that page.
+for tab in glob.glob(os.path.join(DEF, 'tabs', '*.tab-meta.xml')):
+    fp = ET.parse(tab).getroot().find(f'{{{NS}}}flexiPage')
+    if fp is not None:
+        check('tab-flexipage-exists', (fp.text or '').strip() in flex_have,
+              f'{os.path.basename(tab)} points at FlexiPage {fp.text}, which does not exist')
+
+# Every list view a FlexiPage card names must exist on that object.
+for fpf in glob.glob(os.path.join(DEF, 'flexipages', '*.flexipage-meta.xml')):
+    root = ET.parse(fpf).getroot()
+    for ci in root.iter(f'{{{NS}}}componentInstance'):
+        props = {}
+        for pr in ci.findall(f'{{{NS}}}componentInstanceProperties'):
+            n = pr.find(f'{{{NS}}}name'); v = pr.find(f'{{{NS}}}value')
+            if n is not None and v is not None: props[n.text] = (v.text or '').strip()
+        if 'entityName' in props and 'filterName' in props:
+            ref = props['entityName'] + '.' + props['filterName']
+            check('flexipage-listview-exists', ref in listviews_have,
+                  f'{os.path.basename(fpf)} shows list view {ref}, which does not exist')
+
+# Every report a dashboard component names must exist.
+for db in glob.glob(os.path.join(DEF, 'dashboards', '*', '*.dashboard-meta.xml')):
+    for r in ET.parse(db).getroot().iter(f'{{{NS}}}report'):
+        check('dashboard-report-exists', (r.text or '').strip() in reports_have,
+              f'{os.path.basename(db)} charts report {r.text}, which does not exist')
+
+# Every tab and app the permission set grants must exist, or the grant is a
+# silent no-op and the console simply will not open for anyone but an admin.
+if os.path.exists(PS):
+    psr = ET.parse(PS).getroot()
+    for ts in psr.findall(f'{{{NS}}}tabSettings'):
+        t = (ts.find(f'{{{NS}}}tab').text or '').strip()
+        check('permset-tab-exists', t in tabs_have or t in objects(),
+              f'permission set grants tab {t}, which does not exist')
+    for av in psr.findall(f'{{{NS}}}applicationVisibilities'):
+        a = (av.find(f'{{{NS}}}application').text or '').strip()
+        check('permset-app-exists', a in apps_have,
+              f'permission set grants app {a}, which does not exist')
+
+# 10. A picklist filter must name a value the picklist actually has. A report
+#     filtered on Manager_Response__c = '' returned nothing forever, because
+#     every request is created as 'Pending'. Silence is the worst failure mode
+#     this project has: a queue that looks empty is a person nobody is helping.
+def picklist_values(obj, field):
+    f = os.path.join(OBJ, obj, 'fields', field + '.field-meta.xml')
+    if not os.path.exists(f): return None
+    root = ET.parse(f).getroot()
+    if (root.find(f'{{{NS}}}type') is None or root.find(f'{{{NS}}}type').text != 'Picklist'):
+        return None
+    return {v.text for v in root.iter(f'{{{NS}}}fullName')} - {field}
+
+for lv in glob.glob(os.path.join(OBJ, '*', 'listViews', '*.listView-meta.xml')):
+    obj = os.path.basename(os.path.dirname(os.path.dirname(lv)))
+    for flt in ET.parse(lv).getroot().findall(f'{{{NS}}}filters'):
+        fld = flt.find(f'{{{NS}}}field'); val = flt.find(f'{{{NS}}}value')
+        if fld is None or val is None or not (val.text or '').strip(): continue
+        vals = picklist_values(obj, fld.text)
+        if vals is None: continue
+        for one in (val.text or '').split(','):
+            one = one.strip()
+            if not one: continue
+            check('listview-picklist-value-real', one in vals,
+                  f'{os.path.basename(lv)} filters {fld.text} = {one}, not a value of that picklist')
+
+for rp in glob.glob(os.path.join(DEF, 'reports', '*', '*.report-meta.xml')):
+    for ci in ET.parse(rp).getroot().iter(f'{{{NS}}}criteriaItems'):
+        col = ci.find(f'{{{NS}}}column'); val = ci.find(f'{{{NS}}}value')
+        if col is None or val is None or not (val.text or '').strip(): continue
+        if '.' not in (col.text or ''): continue
+        obj, fld = col.text.split('.', 1)
+        vals = picklist_values(obj, fld)
+        if vals is None: continue
+        for one in (val.text or '').split(','):
+            one = one.strip()
+            if not one: continue
+            check('report-picklist-value-real', one in vals,
+                  f'{os.path.basename(rp)} filters {col.text} = {one}, not a value of that picklist')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')

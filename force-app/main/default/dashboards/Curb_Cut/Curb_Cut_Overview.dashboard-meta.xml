@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>TopToBottom</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <dashboardType>LoggedInUser</dashboardType>
+    <description>Who is waiting, who has not been answered, and where the system is failing people. Nothing here shows a diagnosis, because there is none to show.</description>
+    <leftSection>
+        <columnSize>Medium</columnSize>
+        <components>
+            <componentType>Table</componentType>
+            <footer>Oldest first. Start at the top.</footer>
+            <header>A person is waiting</header>
+            <indicatorBreakpoint1>1.0</indicatorBreakpoint1>
+            <indicatorBreakpoint2>5.0</indicatorBreakpoint2>
+            <indicatorHighColor>#B50E03</indicatorHighColor>
+            <indicatorLowColor>#1F5A4E</indicatorLowColor>
+            <indicatorMiddleColor>#8A5D0F</indicatorMiddleColor>
+            <report>Curb_Cut/Who_Is_Waiting</report>
+            <title>Waiting for a person</title>
+        </components>
+        <components>
+            <chartAxisRange>Auto</chartAxisRange>
+            <componentType>Bar</componentType>
+            <footer>If one channel carries everyone, the others are not really open.</footer>
+            <header>Which door they came through</header>
+            <report>Curb_Cut/How_People_Reach_Us</report>
+            <sortBy>RowValueDescending</sortBy>
+            <title>How people reach us</title>
+        </components>
+    </leftSection>
+    <middleSection>
+        <columnSize>Medium</columnSize>
+        <components>
+            <componentType>Table</componentType>
+            <footer>Sorted by the date the interactive process is due.</footer>
+            <header>Asked, and not yet answered</header>
+            <indicatorBreakpoint1>1.0</indicatorBreakpoint1>
+            <indicatorBreakpoint2>5.0</indicatorBreakpoint2>
+            <indicatorHighColor>#B50E03</indicatorHighColor>
+            <indicatorLowColor>#1F5A4E</indicatorLowColor>
+            <indicatorMiddleColor>#8A5D0F</indicatorMiddleColor>
+            <report>Curb_Cut/Awaiting_A_Decision</report>
+            <title>Awaiting a decision</title>
+        </components>
+        <components>
+            <componentType>Table</componentType>
+            <footer>Signed video is never machine translated. The wait is the whole cost.</footer>
+            <header>Waiting on a human interpreter</header>
+            <indicatorBreakpoint1>1.0</indicatorBreakpoint1>
+            <indicatorBreakpoint2>5.0</indicatorBreakpoint2>
+            <indicatorHighColor>#B50E03</indicatorHighColor>
+            <indicatorLowColor>#1F5A4E</indicatorLowColor>
+            <indicatorMiddleColor>#8A5D0F</indicatorMiddleColor>
+            <report>Curb_Cut/Needs_An_Interpreter</report>
+            <title>Needs an interpreter</title>
+        </components>
+    </middleSection>
+    <rightSection>
+        <columnSize>Medium</columnSize>
+        <components>
+            <chartAxisRange>Auto</chartAxisRange>
+            <componentType>Bar</componentType>
+            <footer>Anything not Accepted is someone who asked for help and heard nothing back.</footer>
+            <header>Where replies end up</header>
+            <report>Curb_Cut/Messages_That_Did_Not_Arrive</report>
+            <sortBy>RowValueDescending</sortBy>
+            <title>Where replies end up</title>
+        </components>
+    </rightSection>
+    <textColor>#14171A</textColor>
+    <title>Curb Cut Overview</title>
+    <titleColor>#14171A</titleColor>
+    <titleSize>14</titleSize>
+</Dashboard>
