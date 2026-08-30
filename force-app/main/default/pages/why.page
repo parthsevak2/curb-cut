@@ -1,0 +1,246 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Why now | Curb Cut" cache="true" expires="300">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="One side of the accommodation conversation has been automated. The other side is a person having a hard week. That asymmetry is new, and it is why this exists now."/>
+  <title>Why now | Curb Cut</title>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Why now" current="why"
+  eyebrow="Why this, and why now"
+  heading="One side of this conversation got an agent. The other side got a form."
+  lede="That asymmetry is new. It is the whole reason for building this in 2026 rather than admiring the problem for another decade.">
+
+  <section>
+    <p class="sec-label">The finding everything rests on</p>
+    <h2>The thing that works is the thing almost nobody does</h2>
+    <p>
+      Among college-educated people working in white-collar jobs in the United
+      States, <strong>30% have a disability</strong> under the federal
+      definition. <strong>3.2% tell their employer.</strong>
+    </p>
+    <p>
+      That gap is not caused by the outcome being bad. Of the people who did
+      disclose, <strong>83% said it got them better support</strong>. Disclosure
+      works. It works for five out of six people who try it.
+    </p>
+    <p>
+      So this is not a population making a cost-benefit calculation and landing
+      on no. Something is stopping people at the door, before the calculation.
+      What is stopping them is the asking itself: finding the policy, learning
+      its words, holding a work login, filling in the form, and saying a
+      sentence about your own body to somebody who will still be your manager
+      on Monday.
+    </p>
+    <div class="note">
+      <p>
+        <strong>And the answer, when people do ask, is usually yes and usually
+        free.</strong> Of the employers who gave the Job Accommodation Network
+        cost figures, 61% said the accommodation cost them nothing. A third
+        reported a one-time cost with a median of $300. Two thirds called it
+        very or extremely effective. Twelve per cent said it did not work, which
+        is worth stating, because a page that only quotes the two thirds is
+        selling something.
+      </p>
+    </div>
+    <p>
+      A cheap, effective, mostly-granted thing that almost nobody requests. The
+      bottleneck was never money and it was never willingness. It has always
+      been the request.
+    </p>
+  </section>
+
+  <section>
+    <p class="sec-label">What changed</p>
+    <h2>Meanwhile, the employer's side of it was quietly automated</h2>
+    <p>
+      At an EEOC public hearing in January 2023, the estimate put on the record
+      was that <strong>as many as 83% of employers, and up to 99% of the
+      Fortune 500, use some automated tool to screen or rank candidates</strong>.
+      Treat that as an estimate rather than a measurement &mdash; it is quoted
+      as one. It is still enough to say that at a large employer, something
+      automated reads you before a person does.
+    </p>
+    <p>
+      The EEOC's own guidance names three ways those systems fail disabled
+      people in particular. None of them require anybody to intend harm.
+    </p>
+    <ul class="negs">
+      <li>
+        <b>They screen you out for a disability-related trait.</b> An employment
+        gap that was treatment. Speech a voice model scores as low confidence.
+        Input speed on a timed assessment.
+      </li>
+      <li>
+        <b>They ask a medical question without anyone deciding to ask one.</b>
+        A pre-offer disability-related inquiry is prohibited under the ADA. A
+        tool can conduct one as a side effect of what it measures, and often
+        nobody in the building knows it happened.
+      </li>
+      <li>
+        <b>They give you nowhere to ask for an adjustment to the process
+        itself.</b> A timed assessment with no way to request more time is a
+        closed door with no handle on your side.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="thesis">
+      So the disabled person now negotiates with a system, <em>using a PDF.</em>
+    </p>
+    <p class="thesis-sub">
+      This is the part that is genuinely new. For most of the history of this
+      problem, both sides of an accommodation conversation were people, moving
+      at the speed of people. Now one side runs at machine scale, applies the
+      same rule to fifty thousand applicants before lunch, and never gets tired.
+      The other side is one person, on a hard day, being asked to explain
+      themselves in a box.
+    </p>
+  </section>
+
+  <section>
+    <p class="sec-label">Why regulation is not the whole answer</p>
+    <h2>Every rule so far governs their machine. None of them gives you one.</h2>
+    <p>
+      California's rules on automated decision systems in employment took effect
+      on 1 October 2025. The EEOC has kept algorithmic bias in its sights
+      through 2026, with an expectation that employers audit these tools.
+      This is real progress and it should continue.
+    </p>
+    <p>
+      But look at what all of it does. It constrains the system that is pointed
+      <em>at</em> you. It makes the screening fairer, the audit more likely, the
+      liability clearer. What none of it does is hand you anything. After every
+      one of those rules lands, the person who cannot type for long still has to
+      find the policy, learn its words, and say the sentence.
+    </p>
+    <p>
+      <strong>There is no reason the capability should only run in one
+      direction.</strong> The same technology that reads fifty thousand
+      applicants can sit on the other side of the table and know the answer to
+      "what am I even allowed to ask for" &mdash; which is the question almost
+      nobody can answer, and the reason almost nobody asks.
+    </p>
+  </section>
+
+  <section>
+    <p class="sec-label">What this is</p>
+    <h2>An agent pointed the other way</h2>
+    <p>
+      Curb Cut belongs to the person, not to the employer. It knows a sourced
+      library of adjustments and what they typically cost. It will write the
+      request in your words. It will not send it until you say yes, and a hedge
+      is not a yes.
+    </p>
+    <p>
+      And it never asks what you have. Not as a courtesy &mdash; there is no
+      field for a diagnosis anywhere in the system, so a manager who asks is
+      told that nobody knows and nobody can find out. The 3.2% number at the top
+      of this page is a measurement of how much people fear that question. The
+      correct response to it is not to promise discretion. It is to make the
+      question unanswerable.
+    </p>
+  </section>
+
+  <section>
+    <p class="sec-label">The uncomfortable part</p>
+    <h2>What an agent built for disabled people could do to them</h2>
+    <p>
+      Pointing a capable agent at this problem creates new ways to hurt the
+      people it is for. These are not hypotheticals we are being careful about.
+      Each one is a specific harm with a specific thing built to prevent it, and
+      each is enforced somewhere a reader can check.
+    </p>
+    <table class="facts">
+      <tbody>
+        <tr>
+          <th>It becomes a new place to disclose</th>
+          <td>An assistant that is easy to talk to collects more than a form
+              does. So there is no field for a diagnosis, condition, disability
+              type, medical note, severity or prognosis. Not restricted &mdash;
+              absent. An automated check fails the build if anyone adds one.</td>
+        </tr>
+        <tr>
+          <th>It guesses, confidently</th>
+          <td>A fluent wrong answer to "what could I ask for" sends someone to
+              their manager with a bad request and costs them the ask. Options
+              come from a sourced library or not at all; when there is no match
+              it says so rather than improvising.</td>
+        </tr>
+        <tr>
+          <th>It acts on an ambiguous yes</th>
+          <td>"I guess so" is how people agree to things they do not want. The
+              code that creates a request refuses to run without explicit
+              approval, and a test proves the refusal.</td>
+        </tr>
+        <tr>
+          <th>It becomes another thing you cannot escape</th>
+          <td>Being stuck with a machine is the specific failure mode disabled
+              people already know from phone trees. A person is always
+              reachable, and always reaches you by message, never by telephone.</td>
+        </tr>
+        <tr>
+          <th>It profiles the people it serves</th>
+          <td>Inferred disability status is a category that should not exist.
+              Nothing here is scored, predicted or inferred. Every signal is one
+              the person set, in their own words.</td>
+        </tr>
+        <tr>
+          <th>It makes you audition for the bot</th>
+          <td>Explaining yourself to a machine to earn a human is a worse
+              version of the original problem. You can ask for a person at any
+              point, including as your first message, without saying why.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <p class="sec-label">Who this is actually for</p>
+    <h2>It is Thursday</h2>
+    <p>
+      You have not slept properly since Sunday, because the new seating plan put
+      you under a light that hums. You already know what would fix it. You have
+      known for three weeks.
+    </p>
+    <p>
+      What you do not know is how to say it. Not the words &mdash; the
+      consequence. Whether it goes in a file. Whether it comes up in March.
+      Whether the person you tell is the person who decides about the promotion,
+      and whether they will remember you as someone who needed something.
+    </p>
+    <p>
+      So you do the arithmetic everybody in this position does, and you decide
+      you will manage, because managing is a known quantity and asking is not.
+      Then the form asks you to describe your limitations in the box provided.
+    </p>
+    <p>
+      <strong>Curb Cut is built for that Thursday.</strong> Not for the policy,
+      not for the audit, and not for the employer's compliance position. For the
+      forty seconds in which somebody decides it is not worth it, and is right,
+      because the way we have built this has made them right.
+    </p>
+  </section>
+
+  <section>
+    <h2>Where the numbers come from</h2>
+    <p>
+      Every figure on this page is recorded with its source, its date and its
+      denominator, including the ones that weaken the argument. That file is in
+      the repository as <span class="kw">docs/EVIDENCE.md</span>, and it exists
+      because a claim you cannot check is not evidence, it is decoration.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="/ask">Try it <span class="arrow">&rarr;</span></a>
+      <a class="btn" href="/">What it does</a>
+    </div>
+  </section>
+
+</c:CurbCutShell>
+</body>
+</html>
+</apex:page>
