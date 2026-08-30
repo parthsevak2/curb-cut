@@ -6,11 +6,11 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>CurbCutPrivacy</apexPage>
+        <apexPage>privacy</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>CurbCutTerms</apexPage>
+        <apexPage>terms</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <userLicense>Guest User License</userLicense>

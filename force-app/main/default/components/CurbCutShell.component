@@ -7,7 +7,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@500&amp;display=swap"/>
+<!-- One request per family. A single combined URL needs ampersands, and
+     Visualforce double-encodes them to &amp;#38; which silently breaks every
+     family after the first. The body face is an accessibility decision, so
+     it must actually arrive. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500"/>
 
 <style>
 /* ------------------------------------------------------------------
@@ -208,8 +214,13 @@ section { margin-top:2.8rem; }
 }
 
 footer.page {
-  margin-top:4rem; padding:1.8rem 0 4rem; border-top:4px solid var(--ink);
+  margin-top:4rem; padding:2.2rem 0 4rem; border-top:4px solid var(--ink);
   color:var(--ink-soft); font-size:.95rem;
+}
+footer.page .stand {
+  font-family:Archivo,system-ui,sans-serif; font-size:1.15rem; font-weight:600;
+  line-height:1.42; color:var(--ink); letter-spacing:-.012em;
+  max-width:46ch; margin-bottom:1.4rem; text-wrap:pretty;
 }
 footer.page p { margin-bottom:.6rem; }
 .fine { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.75rem; color:var(--ink-mute); letter-spacing:.03em; }
@@ -253,10 +264,15 @@ footer.page p { margin-bottom:.6rem; }
   <apex:componentBody />
 
   <footer class="page">
+    <p class="stand">
+      Every promise on this site is enforced somewhere you can check. A field
+      that does not exist. A rule that refuses the write. A test that fails the
+      build. A commitment that lives only in a policy document is not a
+      commitment &mdash; it is an intention, and intentions are not load bearing.
+    </p>
     <p>
-      <strong>Curb Cut is made by Parth Sevak, in Welland, Ontario.</strong>
-      One person, which is rather the point: if asking for help at work were
-      simple, it would not take a company to fix it.
+      <strong>Curb Cut</strong> is designed and built in Welland, Ontario,
+      by Parth Sevak.
     </p>
     <p>
       Questions, or anything held about you:

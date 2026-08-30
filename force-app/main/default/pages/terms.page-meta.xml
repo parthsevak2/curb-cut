@@ -3,6 +3,6 @@
     <apiVersion>66.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <description>Curb Cut terms and conditions.</description>
-    <label>Curb Cut Terms</label>
+    <description>Curb Cut terms (clean URL).</description>
+    <label>terms</label>
 </ApexPage>
