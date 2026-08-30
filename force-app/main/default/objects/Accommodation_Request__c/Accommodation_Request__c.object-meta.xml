@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Created ONLY on explicit human approval. A validation rule blocks insert without it.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Accommodation Request</label>
+    <nameField>
+        <label>Request Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>AR-{00000}</displayFormat>
+    </nameField>
+    <pluralLabel>Accommodation Requests</pluralLabel>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

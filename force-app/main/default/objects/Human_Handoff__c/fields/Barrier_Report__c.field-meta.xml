@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Barrier_Report__c</fullName>
+    <label>Barrier Report</label>
+    <referenceTo>Barrier_Report__c</referenceTo>
+    <relationshipLabel>Human Handoffs</relationshipLabel>
+    <relationshipName>Human_Handoffs</relationshipName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Decline_Requires_Reason</fullName>
+    <active>true</active>
+    <description>A decline must be explained. Keeps the decline path accountable and dignified.</description>
+    <errorConditionFormula>AND(ISPICKVAL(Manager_Response__c, "Declined"), ISBLANK(Decline_Reason__c))</errorConditionFormula>
+    <errorMessage>Please give a reason for declining. It will be visible to the person who asked.</errorMessage>
+</ValidationRule>

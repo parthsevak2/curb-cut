@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Person_Handle__c</fullName>
+    <description>Hashed contact handle. Never store a raw phone number or email.</description>
+    <label>Person Handle</label>
+    <length>64</length>
+    <type>Text</type>
+    <externalId>true</externalId>
+    <unique>true</unique>
+</CustomField>

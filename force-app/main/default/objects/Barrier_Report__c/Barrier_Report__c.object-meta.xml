@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>An intake describing what is hard, never why. May be fully anonymous. CONTAINS NO DIAGNOSIS, CONDITION, MEDICAL OR DISABILITY-TYPE FIELD BY DESIGN.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Barrier Report</label>
+    <nameField>
+        <label>Report Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>BR-{00000}</displayFormat>
+    </nameField>
+    <pluralLabel>Barrier Reports</pluralLabel>
+    <sharingModel>Private</sharingModel>
+</CustomObject>
