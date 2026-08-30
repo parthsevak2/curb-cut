@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_adversarial:
+        description: "Run the adversarial suite against the live agent"
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Fast, no org, no secrets. Runs on every PR including from forks.
+  invariants:
+    name: Invariants
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Schema and wiring invariants
+        run: python3 tests/invariants.py
+      - name: XML well-formedness
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse(sys.argv[1])" "$f" \
+              || { echo "malformed: $f"; fail=1; }
+          done < <(find force-app -name '*.xml')
+          exit $fail
+
+  # Needs an org. Skipped automatically when the secret is absent, so forks
+  # and first-time contributors still get a green, meaningful CI run.
+  org:
+    name: Org checks
+    runs-on: ubuntu-latest
+    needs: invariants
+    timeout-minutes: 25
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli@latest
+      - name: Authenticate
+        id: auth
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        run: |
+          if [ -z "$SFDX_AUTH_URL" ]; then
+            echo "no SFDX_AUTH_URL secret; skipping org checks"
+            echo "authed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          printf '%s' "$SFDX_AUTH_URL" > /tmp/auth.txt
+          sf org login sfdx-url --sfdx-url-file /tmp/auth.txt --alias curbcut
+          rm -f /tmp/auth.txt
+          echo "authed=true" >> "$GITHUB_OUTPUT"
+
+      # Validate-only. Never mutates the org from CI.
+      - name: Deploy (dry run)
+        if: steps.auth.outputs.authed == 'true'
+        run: |
+          sf project deploy start --dry-run \
+            --source-dir force-app/main/default/objects \
+            --source-dir force-app/main/default/classes \
+            --source-dir force-app/main/default/permissionsets \
+            --target-org curbcut --wait 20
+
+      - name: Apex tests
+        if: steps.auth.outputs.authed == 'true'
+        run: |
+          sf apex run test --target-org curbcut --wait 20 \
+            --class-names CurbCutOptionsTest \
+            --class-names CurbCutActionsTest \
+            --class-names CurbCutSpecTest \
+            --result-format human --code-coverage
+
+      # Compiles the Agent Script server-side. This is the only syntax check
+      # that exists; there is no offline compiler.
+      - name: Agent Script compiles
+        if: steps.auth.outputs.authed == 'true'
+        run: sf agent validate authoring-bundle --api-name Curb_Cut --target-org curbcut
+
+  # Talks to the live agent and costs real calls, so it is opt-in.
+  adversarial:
+    name: Adversarial suite
+    runs-on: ubuntu-latest
+    needs: org
+    timeout-minutes: 30
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_adversarial }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm install -g @salesforce/cli@latest
+      - name: Authenticate
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        run: |
+          printf '%s' "$SFDX_AUTH_URL" > /tmp/auth.txt
+          sf org login sfdx-url --sfdx-url-file /tmp/auth.txt --alias curbcut
+          rm -f /tmp/auth.txt
+      - name: Run the ten adversarial cases, headless
+        run: node tests/headless_agent_api.mjs
+      - name: Score
+        run: python3 tests/score_adversarial.py
+      - name: Upload transcripts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-transcripts
+          path: transcripts/
+          retention-days: 30
