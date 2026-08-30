@@ -23,6 +23,57 @@ const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || '';
 const PUBLIC_URL        = process.env.PUBLIC_URL || '';
 // Salt so a stored handle cannot be reversed to a phone number by rainbow table.
 const HANDLE_SALT = process.env.HANDLE_SALT || 'curb-cut-local-dev-salt';
+// The public site. Carriers require the opt-in flow to be verifiable at a URL,
+// and the disclosure messages below quote these two pages by name.
+const SITE = process.env.CURB_CUT_SITE ||
+  'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+
+/* ------------------------------------------------------------------
+   Carrier compliance.
+
+   A2P 10DLC campaign CMcb0b8f321bcc5aa98b2cc45bb3ea594a was rejected with
+   error 30909: the reviewer could not verify how anyone consents. That was
+   fair. The agent and the legal pages existed; the channel's own compliance
+   layer did not. Every inbound message went straight to the agent, so HELP
+   was answered by an accessibility assistant rather than by the required
+   help text, and nobody was ever sent the disclosure that makes their
+   opt-in real.
+
+   Opt-in here is keyword-style: the person texts first, from a poster. That
+   is the hardest kind for a reviewer to verify, which is exactly why the
+   auto-reply below has to carry every required element, and why /messaging
+   on the public site reproduces the poster verbatim.
+   ------------------------------------------------------------------ */
+
+// Sent once, the first time we ever reply to someone. Program name, frequency,
+// rates, HELP, STOP, and both policy links - the full required set.
+const DISCLOSURE =
+  'Curb Cut: you texted first, so you will get replies from this number. ' +
+  'Message frequency varies and replies only follow your own messages. ' +
+  'Message and data rates may apply. Reply HELP for help, STOP to stop. ' +
+  `Terms ${SITE}/terms Privacy ${SITE}/privacy`;
+
+// HELP is a reserved keyword and must be answered by us, not by the agent.
+const HELP_REPLY =
+  'Curb Cut helps you find out what could make work easier at work, and ask ' +
+  'for it, without ever saying what condition you have. ' +
+  'Message and data rates may apply. Reply STOP to stop. ' +
+  `Help: parth.sevak2@gmail.com  Terms ${SITE}/terms Privacy ${SITE}/privacy`;
+
+const STOP_REPLY =
+  'Curb Cut: you will not get any more messages from this number. ' +
+  'Reply START if you ever want to come back. Nothing about you is kept.';
+
+const START_REPLY =
+  'Curb Cut: you are back. Tell me what is hard at work right now. ' +
+  'Message and data rates may apply. Reply HELP for help, STOP to stop.';
+
+// Reserved keywords the carriers own. These must never reach the agent: an
+// assistant improvising a reply to STOP is a compliance failure, and worse,
+// it is someone asking to be left alone and being answered back.
+const HELP_WORDS  = new Set(['help', 'info']);
+const STOP_WORDS  = new Set(['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']);
+const START_WORDS = new Set(['start', 'yes', 'unstop']);
 
 const org = await Org.create({ aliasOrUsername: ALIAS });
 const connection = org.getConnection();
@@ -34,6 +85,9 @@ const sessions = new Map();
 
 const handleFor = (from) =>
   createHash('sha256').update(HANDLE_SALT + from).digest('hex').slice(0, 32);
+// Belt and braces before this ever reaches a SOQL string. It is our own hex
+// digest, so it cannot be anything else, and it still gets checked.
+const safeHandle = (h) => (/^[0-9a-f]{32}$/.test(h) ? h : null);
 
 const xmlEscape = (s) => String(s)
   .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
@@ -49,8 +103,47 @@ const gather = (say) =>
   `<Say voice="Polly.Joanna">I did not hear anything. Call back any time, or send a message instead.</Say>` +
   `</Response>`;
 
-const twiml = (body) =>
-  `<?xml version="1.0" encoding="UTF-8"?><Response><Message>${xmlEscape(body)}</Message></Response>`;
+// More than one <Message> is allowed, and the order matters. The useful answer
+// goes first and the disclosure second, because someone who is having a hard
+// enough week to be texting this number should not have to read carrier
+// boilerplate before they read the help.
+const twiml = (...bodies) =>
+  `<?xml version="1.0" encoding="UTF-8"?><Response>` +
+  bodies.filter(Boolean).map(b => `<Message>${xmlEscape(b)}</Message>`).join('') +
+  `</Response>`;
+
+/* Delivery ledger. The email channel failed silently for days because nothing
+   recorded the attempt, and SMS had exactly the same hole. Records that we
+   tried, never what was said, never the number. */
+async function ledger(channel, direction, status, handle, detail) {
+  try {
+    await connection.sobject('Message_Log__c').create({
+      Channel__c: channel, Direction__c: direction, Status__c: status,
+      Recipient_Hash__c: handle, Detail__c: detail ? String(detail).slice(0, 30000) : null,
+      Attempted_At__c: new Date().toISOString(),
+    });
+  } catch (e) {
+    console.error('[ledger]', e?.message);   // never break a conversation to log it
+  }
+}
+
+/* Has this person ever been sent the disclosure? Answered from the ledger so it
+   survives a restart, with an in-process cache so the common case costs nothing.
+   Erring towards sending it twice is safe; erring towards never is not. */
+const greeted = new Set();
+async function needsDisclosure(handle) {
+  if (greeted.has(handle)) return false;
+  try {
+    const r = await connection.query(
+      `SELECT Id FROM Message_Log__c WHERE Recipient_Hash__c = '${handle}' ` +
+      `AND Direction__c = 'Outbound' LIMIT 1`);
+    if (r.totalSize > 0) { greeted.add(handle); return false; }
+  } catch (e) {
+    console.error('[greet]', e?.message);
+  }
+  greeted.add(handle);
+  return true;
+}
 
 // Twilio signs each request with the auth token over URL + sorted params.
 function signatureValid(url, params, header) {
@@ -99,13 +192,16 @@ const server = createServer((req, res) => {
       }
 
       console.log(`[voice] ${handle.slice(0,8)}… ${said.length} chars`);
+      await ledger('Voice', 'Inbound', 'Accepted', safeHandle(handle), `${said.length} chars`);
       try {
         const agent = await agentFor(handle);
         const reply = await agent.preview.send(said);
         const text  = (reply?.messages ?? []).map(m => m.message).filter(Boolean).join(' ');
+        await ledger('Voice', 'Outbound', 'Accepted', safeHandle(handle), 'spoken reply');
         return res.end(gather(text || 'I did not catch that. Say it again however you like.'));
       } catch (e) {
         console.error('[voice] agent error:', e?.message);
+        await ledger('Voice', 'Outbound', 'Escalated', safeHandle(handle), `agent error: ${e?.message}`);
         sessions.delete(handle);
         return res.end(gather(
           'Something went wrong on my end, and that is not your problem to solve. ' +
@@ -135,20 +231,50 @@ const server = createServer((req, res) => {
     // Log the hash, never the number, never the message body. What someone
     // finds hard is not ops telemetry.
     console.log(`[sms] ${handle.slice(0,8)}… ${body.length} chars`);
+    const key  = safeHandle(handle);
+    const word = body.toLowerCase().replace(/[^a-z]/g, '');
+    const xml  = (...m) => {
+      res.writeHead(200, {'content-type':'text/xml'});
+      res.end(twiml(...m));
+    };
+
+    await ledger('SMS', 'Inbound', 'Accepted', key, `${body.length} chars`);
+
+    // Reserved keywords are answered here and never forwarded. If Twilio's own
+    // Advanced Opt-Out is handling them this code never runs; if it is not, the
+    // carrier still requires an answer, so both paths are covered.
+    if (STOP_WORDS.has(word)) {
+      sessions.delete(handle);
+      await ledger('SMS', 'Outbound', 'Accepted', key, 'stop confirmation');
+      return xml(STOP_REPLY);
+    }
+    if (HELP_WORDS.has(word)) {
+      await ledger('SMS', 'Outbound', 'Accepted', key, 'help reply');
+      return xml(HELP_REPLY);
+    }
+    if (START_WORDS.has(word) && !sessions.has(handle)) {
+      greeted.delete(handle);
+      await ledger('SMS', 'Outbound', 'Accepted', key, 'start reply');
+      return xml(START_REPLY);
+    }
+
+    // Only on the very first reply this person has ever had from us.
+    const disclose = await needsDisclosure(key) ? DISCLOSURE : null;
 
     try {
       const agent = await agentFor(handle);
       const reply = await agent.preview.send(body);
-      const text = (reply?.messages ?? []).map(m => m.message).filter(Boolean).join('\n\n');
-      res.writeHead(200, {'content-type':'text/xml'});
-      res.end(twiml(text || 'I did not catch that. Say it again however you like.'));
+      const text = (reply?.messages ?? []).map(m => m.message).filter(Boolean).join('\n\n')
+        || 'I did not catch that. Say it again however you like.';
+      await ledger('SMS', 'Outbound', 'Accepted', key, disclose ? 'reply + disclosure' : 'reply');
+      return xml(text, disclose);
     } catch (e) {
       console.error('[sms] agent error:', e?.message);
       sessions.delete(handle);   // a broken session must not trap the person
-      res.writeHead(200, {'content-type':'text/xml'});
-      res.end(twiml(
+      await ledger('SMS', 'Outbound', 'Escalated', key, `agent error: ${e?.message}`);
+      return xml(
         'Something went wrong on my end, and that is not your problem to solve. ' +
-        'Reply HUMAN and a real person will pick this up.'));
+        'Reply HUMAN and a real person will pick this up.', disclose);
     }
   });
 });
@@ -159,5 +285,5 @@ server.listen(PORT, () => {
   console.log(`  agent    ${AGENT}`);
   console.log(`  verify   ${TWILIO_AUTH_TOKEN ? 'on' : 'OFF — set TWILIO_AUTH_TOKEN'}`);
   console.log(`  POST /voice  ready now, no registration`);
-  console.log(`  POST /sms    needs A2P 10DLC approval first`);
+  console.log(`  POST /sms    HELP/STOP/START handled here, disclosure on first reply`);
 });

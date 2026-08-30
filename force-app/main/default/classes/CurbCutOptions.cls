@@ -101,10 +101,10 @@ public with sharing class CurbCutOptions {
             // explanation around it. So a hit on the name counts for more. Without
             // this, 'the noise in the office' ranked a chair above a quiet room,
             // because the chair's summary happens to mention an office.
-            Set<String> titleWords = new Set<String>(tokenize(
+            Set<String> titleWords = stemAll(tokenize(
                 opt.Option__c == null ? '' : opt.Option__c
             ));
-            Set<String> bodyWords = new Set<String>(tokenize(
+            Set<String> bodyWords = stemAll(tokenize(
                 opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c
             ));
 
@@ -161,6 +161,42 @@ public with sharing class CurbCutOptions {
     }
 
     /** Words of three characters or more, lowercased, punctuation stripped. */
+    /**
+     * A deliberately small stemmer, so that 'type' finds 'typing'.
+     *
+     * Whole-word matching fixed a bug where 'long' matched 'alongside', and
+     * introduced a quieter one: the library says 'typing' and the canonical
+     * sentence this whole system was designed around is 'I cannot type for
+     * long'. That returned nothing at all over SMS. Being told 'I do not have
+     * good information on that' when you have just described the single most
+     * common accommodation need is worse than a wrong suggestion, because it
+     * reads as: you are unusual, and there is nothing for you.
+     *
+     * Both sides are stemmed with the same rules, so matching stays symmetric
+     * and 'alongside' still never becomes 'long'.
+     */
+    private static String stem(String w) {
+        if (w == null || w.length() < 4) { return w; }
+        // plural first, so 'meetings' can reach 'meet' via 'meeting'
+        if (w.endsWith('ses') || w.endsWith('xes') || w.endsWith('zes')) { w = w.substring(0, w.length() - 2); }
+        else if (w.endsWith('s') && !w.endsWith('ss')) { w = w.substring(0, w.length() - 1); }
+        if (w.length() >= 5 && w.endsWith('ing')) { w = w.substring(0, w.length() - 3); }
+        else if (w.length() >= 4 && w.endsWith('ed')) { w = w.substring(0, w.length() - 2); }
+        // 'type' and 'typing' both land on 'typ'
+        if (w.length() >= 4 && w.endsWith('e')) { w = w.substring(0, w.length() - 1); }
+        return w;
+    }
+
+    /** Stems a whole list, dropping anything that collapses to nothing useful. */
+    private static Set<String> stemAll(List<String> words) {
+        Set<String> out = new Set<String>();
+        for (String w : words) {
+            String st = stem(w);
+            if (String.isNotBlank(st) && st.length() >= 3) { out.add(st); }
+        }
+        return out;
+    }
+
     private static List<String> tokenize(String text) {
         List<String> out = new List<String>();
         if (String.isBlank(text)) { return out; }
@@ -172,11 +208,15 @@ public with sharing class CurbCutOptions {
     }
 
     private static List<String> extractKeywords(String need) {
-        List<String> out = new List<String>();
+        // Stopwords are matched on the word as typed; stemming happens after,
+        // so 'needs' is dropped as filler rather than stemmed into a keyword.
+        List<String> kept = new List<String>();
         for (String w : tokenize(need)) {
             if (STOPWORDS.contains(w)) { continue; }
-            if (!out.contains(w)) { out.add(w); }
+            kept.add(w);
         }
+        List<String> out = new List<String>();
+        for (String st : stemAll(kept)) { out.add(st); }
         return out;
     }
 
