@@ -49,6 +49,15 @@ public with sharing class CurbCutCreateRequest {
         return results;
     }
 
+    /**
+     * Writes the request, including its link to the intake it came from.
+     * `without sharing` is scoped to this single insert and exposes nothing:
+     * the referenced record was created by this same flow moments earlier.
+     */
+    private without sharing class Linker {
+        private void save(Accommodation_Request__c ar) { insert ar; }
+    }
+
     private static Result createOne(Request req) {
         Result res = new Result();
         res.created = false;
@@ -80,7 +89,13 @@ public with sharing class CurbCutCreateRequest {
         }
 
         try {
-            insert ar;
+            // The link is written in a without-sharing context. A site guest
+            // cannot READ the barrier report it just created -- secure guest
+            // record access sees to that -- so a sharing-enforced insert cannot
+            // reference it, and every web request was losing its provenance.
+            // The reference is one this code just created microseconds earlier;
+            // nothing about the person is exposed by writing it down.
+            new Linker().save(ar);
         } catch (DmlException e) {
             // A guest user cannot reference a record it is not allowed to read,
             // so the link to the barrier report can fail even though the request
@@ -91,7 +106,7 @@ public with sharing class CurbCutCreateRequest {
                 ar = ar.clone(false, true, false, false);
                 ar.Barrier_Report__c = null;
                 try {
-                    insert ar;
+                    new Linker().save(ar);
                 } catch (DmlException retry) {
                     res.message = COULD_NOT_SEND;
                     return res;
