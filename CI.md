@@ -44,10 +44,20 @@ Transcripts upload as an artifact and are kept 30 days.
 
 ## Setting the secret
 
-    sf org display --target-org curbcut --verbose --json | jq -r .result.sfdxAuthUrl
+    sf org auth show-sfdx-auth-url --target-org curbcut --no-prompt --json \
+      | python3 -c "import json,sys,subprocess; u=json.load(sys.stdin)['result']['sfdxAuthUrl']; \
+        subprocess.run(['pbcopy'],input=u.encode()); print('copied,',len(u),'chars, starts',u[:8])"
+
+Copies to the clipboard and prints only a shape check, never the value itself.
+You should see `starts force://` and roughly 145 characters.
 
 Paste into **Settings → Secrets and variables → Actions → New repository secret**,
-named `SFDX_AUTH_URL`.
+named `SFDX_AUTH_URL`. Then clear the clipboard: `printf '' | pbcopy`
+
+`sf org display --verbose` does **not** work for this. Newer CLI versions redact
+the URL and return the literal text `[REDACTED] Use 'sf org auth
+show-sfdx-auth-url' to view`, which saves cleanly as a secret and then fails
+authentication with no obvious cause.
 
 That URL is a credential. Put it in the secret store, never in a file, never in
 a commit, never in chat.
