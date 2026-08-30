@@ -14,6 +14,27 @@ sounds. Everything in "Shipped" is verified live; everything below it is honest.
 | **Grounded library, 24 rows, every row cited** | Everyone — it is what stops the system inventing entitlements |
 | **Disclosure ledger** | Anyone whose preference travels ahead of them into a new team |
 
+## Blocked on something outside the code
+
+### Email delivery
+The ledger now proves Salesforce **accepts** every reply — `Email / Outbound /
+Accepted`, no error text. It never arrives, not even in spam. That places the
+loss downstream of Salesforce, and there are only two candidates:
+
+1. **No verified sending domain.** There is no `OrgWideEmailAddress`, and the
+   run-as user's domain is unverified, so Deliverability substitutes
+   `email@<uniqueId>.sfcustomeremail.com`. Some receivers reject that outright
+   rather than filing it.
+2. **Org deliverability access level.** If it is *System email only*, Apex mail
+   is accepted and discarded, which matches the symptom exactly.
+
+**Fix requires a domain the project does not own**, plus DKIM records on it.
+Until then the escalation path carries the load: an undeliverable reply becomes
+a `Human_Handoff__c` rather than silence.
+
+**Do not demo email live.** It receives correctly and logs correctly; the reply
+leg is not dependable on this org.
+
 ## Next — buildable in this org today
 
 ### 1. Image intake on the web  *(spec §3, the fourth modality)*
@@ -35,12 +56,18 @@ does not expose save/revoke yet, so principle 4 is SMS-only.
 `cost_brief` returns cost, precedent and the interactive-process clock. A manager
 should be able to open one page rather than converse. Refusals still apply.
 
-### 5. Reading-level enforcement in CI
+### 5. Extend the ledger to every channel
+`Message_Log__c` records email today. SMS, voice and web should write to it too,
+so one query answers "did we reach this person, on any channel, and if not why".
+Delivery status should also flow back from Twilio's status callback, which
+reports actual carrier delivery rather than acceptance.
+
+### 6. Reading-level enforcement in CI
 Run the agent's own instruction text and canned replies through a Flesch-Kincaid
 check and fail the build above grade 8. The system currently *asks* for grade 6
 and nothing verifies it.
 
-### 6. Accommodation outcome tracking
+### 7. Accommodation outcome tracking
 `Manager_Response__c` and `Decline_Reason__c` exist and nothing reports on them.
 Precedent counts are the one figure the agent refuses to invent — and they would
 become real the moment decisions are recorded.

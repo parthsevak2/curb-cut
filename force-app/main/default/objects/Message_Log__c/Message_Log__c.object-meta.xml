@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Delivery ledger. Records THAT we tried to reach someone and whether it worked. Never records what they said, and never the raw address. CONTAINS NO MESSAGE CONTENT BY DESIGN.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <label>Message Log</label>
+    <nameField>
+        <label>Log Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>ML-{000000}</displayFormat>
+    </nameField>
+    <pluralLabel>Message Logs</pluralLabel>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

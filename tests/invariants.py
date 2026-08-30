@@ -18,6 +18,19 @@ CSV_ = os.path.join(ROOT, 'accommodation_options_seed.csv')
 
 # The one object that is public reference data. Everything else is about a person.
 PUBLIC_LIBRARY = 'Accommodation_Option__c'
+
+# Objects an operator may legitimately see in full, each with a stated reason.
+# Adding to this list is a privacy decision and should be argued for in review,
+# which is the point of making it an explicit list rather than a loose rule.
+VIEW_ALL_ALLOWED = {
+    'Accommodation_Option__c':
+        'Public reference data. Every row carries a source URL and no row is '
+        'about a person.',
+    'Message_Log__c':
+        'Delivery telemetry. Holds a salted hash, never a raw address, and no '
+        'message content. An operator cannot debug an undelivered reply without '
+        'seeing that the attempt happened.',
+}
 FORBIDDEN = re.compile(r'diagnos|condition|disabilit|medical|severity|prognos', re.I)
 
 fails, checks = [], 0
@@ -57,9 +70,9 @@ for o in objects():
 # 3. Read-all may exist ONLY on the public library. Never on person data.
 for m in re.finditer(r'<object>([^<]+)</object>\s*<viewAllRecords>(\w+)</viewAllRecords>', ps):
     obj, view = m.group(1), m.group(2)
-    if obj != PUBLIC_LIBRARY:
-        check('no-viewall-on-person-data', view == 'false',
-              f'{obj} grants viewAllRecords; it holds data about a person')
+    if view == 'true':
+        check('viewall-must-be-justified', obj in VIEW_ALL_ALLOWED,
+              f'{obj} grants viewAllRecords with no stated justification')
 
 # 3b. The guest permission set must never exceed what a guest may hold, and must
 #     never see a person. Salesforce allows guests read and create only; an edit
