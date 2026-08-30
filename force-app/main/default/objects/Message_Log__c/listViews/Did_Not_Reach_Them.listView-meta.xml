@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Did_Not_Reach_Them</fullName>
+    <columns>NAME</columns>
+    <columns>Channel__c</columns>
+    <columns>Status__c</columns>
+    <columns>Attempted_At__c</columns>
+    <columns>Detail__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Accepted</value>
+    </filters>
+    <label>Did not reach them</label>
+</ListView>
