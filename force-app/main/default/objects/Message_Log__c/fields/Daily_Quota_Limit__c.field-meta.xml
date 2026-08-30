@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Daily_Quota_Limit__c</fullName>
+    <label>Txn Email Limit</label>
+    <type>Number</type><precision>6</precision><scale>0</scale>
+    <description>Per-transaction ceiling from Limits.getLimitEmailInvocations(), not the org daily cap. On this org the transaction limit is 10 and the daily cap is 15; they are different numbers and conflating them hides an outage.</description>
+</CustomField>

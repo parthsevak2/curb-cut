@@ -131,23 +131,36 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         msg.setSubject('Re: ' + (String.isBlank(email.subject) ? 'what could make work easier' : email.subject));
         msg.setPlainTextBody(bodyText);
 
+        CurbCutLog.record('Email', 'Inbound', 'Accepted', envelope.fromAddress, null, barrierId);
+
         Boolean delivered = false;
+        String detail = null;
         try {
             if (forceReplyFailure) { throw new EmailException('forced for test'); }
             List<Messaging.SendEmailResult> res =
                 Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ msg }, false);
             delivered = !res.isEmpty() && res[0].isSuccess();
             if (!delivered && !res.isEmpty()) {
+                List<String> errs = new List<String>();
                 for (Messaging.SendEmailError err : res[0].getErrors()) {
-                    System.debug(LoggingLevel.ERROR, 'reply rejected: ' + err.getMessage());
+                    errs.add(err.getStatusCode() + ': ' + err.getMessage());
                 }
+                detail = String.join(errs, ' | ');
+                System.debug(LoggingLevel.ERROR, 'reply rejected: ' + detail);
             }
         } catch (Exception e) {
-            System.debug(LoggingLevel.ERROR, 'reply failed: ' + e.getMessage());
+            detail = e.getTypeName() + ': ' + e.getMessage();
+            System.debug(LoggingLevel.ERROR, 'reply failed: ' + detail);
         }
+
+        CurbCutLog.record('Email', 'Outbound',
+            delivered ? 'Accepted' : 'Rejected',
+            envelope.fromAddress, detail, barrierId);
 
         if (!delivered) {
             escalate(barrierId);
+            CurbCutLog.record('Email', 'Outbound', 'Escalated',
+                envelope.fromAddress, 'Reply undeliverable; handed to a person.', barrierId);
         }
     }
 
