@@ -12,6 +12,14 @@
  */
 global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler {
 
+    /**
+     * Apex suppresses real sending in tests and reports success, which would
+     * leave the escalation path -- the one that matters when the org's daily
+     * email cap is exhausted -- permanently unexercised. This seam lets a test
+     * force the failure it cannot otherwise produce.
+     */
+    @TestVisible private static Boolean forceReplyFailure = false;
+
     global Messaging.InboundEmailResult handleInboundEmail(
             Messaging.InboundEmail email, Messaging.InboundEnvelope envelope) {
 
@@ -20,7 +28,7 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
 
         String body = pickBody(email);
         if (String.isBlank(body)) {
-            reply(email, envelope, greeting());
+            reply(email, envelope, greeting(), null);
             return result;
         }
 
@@ -37,7 +45,7 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         CurbCutOptions.Result opts =
             CurbCutOptions.find(new List<CurbCutOptions.Request>{ optReq })[0];
 
-        reply(email, envelope, compose(opts, intake));
+        reply(email, envelope, compose(opts, intake), intake.barrierReportId);
         return result;
     }
 
@@ -107,16 +115,53 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
              + 'Text +1 276 495 9311, or reply to this email. Whichever is easier.';
     }
 
-    private void reply(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope, String bodyText) {
+    /**
+     * Reply, and escalate to a person if the reply cannot be delivered.
+     *
+     * The org has a hard daily cap on outbound email. Once it is exhausted, or
+     * if delivery fails for any other reason, a person who wrote in gets nothing
+     * back and never learns why. Silence is the failure mode this whole project
+     * exists to remove, so a failed reply becomes a human handoff rather than a
+     * log line nobody reads.
+     */
+    private void reply(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope,
+                       String bodyText, String barrierId) {
         Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
         msg.setToAddresses(new List<String>{ envelope.fromAddress });
         msg.setSubject('Re: ' + (String.isBlank(email.subject) ? 'what could make work easier' : email.subject));
         msg.setPlainTextBody(bodyText);
+
+        Boolean delivered = false;
         try {
-            Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ msg });
+            if (forceReplyFailure) { throw new EmailException('forced for test'); }
+            List<Messaging.SendEmailResult> res =
+                Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ msg }, false);
+            delivered = !res.isEmpty() && res[0].isSuccess();
+            if (!delivered && !res.isEmpty()) {
+                for (Messaging.SendEmailError err : res[0].getErrors()) {
+                    System.debug(LoggingLevel.ERROR, 'reply rejected: ' + err.getMessage());
+                }
+            }
         } catch (Exception e) {
-            // A failed reply must not bounce the person's message back at them.
             System.debug(LoggingLevel.ERROR, 'reply failed: ' + e.getMessage());
+        }
+
+        if (!delivered) {
+            escalate(barrierId);
+        }
+    }
+
+    private class EmailException extends Exception {}
+
+    /** Nobody is left with silence. */
+    private void escalate(String barrierId) {
+        try {
+            CurbCutCreateHandoff.Request hr = new CurbCutCreateHandoff.Request();
+            hr.context = 'Wrote in by email. The automated reply could not be delivered.';
+            hr.barrierReportId = barrierId;
+            CurbCutCreateHandoff.create(new List<CurbCutCreateHandoff.Request>{ hr });
+        } catch (Exception e) {
+            System.debug(LoggingLevel.ERROR, 'escalation failed: ' + e.getMessage());
         }
     }
 }

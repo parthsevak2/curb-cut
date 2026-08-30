@@ -76,6 +76,26 @@ private class CurbCutEmailTest {
     }
 
     @IsTest
+    static void aFailedReplyBecomesAHumanHandoffRatherThanSilence() {
+        // Apex reports success for suppressed test sends, so the failure has to
+        // be forced. This is the path that runs when the org's daily email cap
+        // is exhausted -- which on this org is 15 messages.
+        CurbCutEmail.forceReplyFailure = true;
+        Test.startTest();
+        new CurbCutEmail().handleInboundEmail(
+            mail('I keep missing things in meetings', 'help'), env());
+        Test.stopTest();
+        CurbCutEmail.forceReplyFailure = false;
+
+        System.assertEquals(1, [SELECT COUNT() FROM Human_Handoff__c],
+            'An undeliverable reply must escalate to a person, not vanish');
+        Human_Handoff__c h = [SELECT Reachable_By__c, Handler_Name__c FROM Human_Handoff__c LIMIT 1];
+        System.assertEquals('Text message', h.Reachable_By__c,
+            'Even the escalation never routes anyone to a phone call');
+        System.assert(String.isNotBlank(h.Handler_Name__c));
+    }
+
+    @IsTest
     static void unknownNeedSaysSoRatherThanGuessing() {
         Test.startTest();
         new CurbCutEmail().handleInboundEmail(
