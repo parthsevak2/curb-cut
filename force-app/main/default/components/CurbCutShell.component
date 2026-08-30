@@ -425,6 +425,50 @@ a.btn:hover { text-decoration:none; }
 .sentinel .dot { width:.6rem; height:.6rem; border-radius:50%; background:currentColor; flex:0 0 auto; }
 .sentinel[data-sent="yes"] { border-color:var(--signal); background:var(--signal-bg); color:var(--signal); }
 .sentinel[data-sent="yes"] .dot { border-radius:1px; }
+
+/* ---------- the poster ---------- */
+/* A carrier reviewing this campaign has to be able to see the exact call to
+   action a person reads before they text. Ours is printed and pinned to a wall,
+   which is unverifiable from a browser, so the wall goes on the website. */
+.poster {
+  border: 3px solid var(--ink); border-radius: 6px; background: var(--raised);
+  padding: clamp(1.4rem, 4vw, 2.2rem); margin: 1.4rem 0 0; max-width: 34rem;
+}
+.poster-kicker {
+  font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 1.15rem;
+  line-height: 1.25; margin: 0 0 1rem; text-wrap: balance;
+}
+.poster-do {
+  font-family: Archivo, system-ui, sans-serif; font-weight: 800;
+  font-size: clamp(1.5rem, 5vw, 2.1rem); letter-spacing: -.03em; line-height: 1.05;
+  margin: 0 0 .2rem;
+}
+.poster-num {
+  font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 500;
+  font-size: clamp(1.3rem, 4.5vw, 1.7rem); letter-spacing: -.01em; margin: 0 0 1rem;
+}
+.poster-why { margin: 0 0 1.2rem; color: var(--ink-soft); max-width: none; }
+.poster-legal {
+  border-top: 1px solid var(--line); padding-top: .9rem; margin: 0;
+  font-size: .82rem; line-height: 1.55; color: var(--ink-soft); max-width: none;
+}
+.poster-legal a { color: var(--ink); }
+
+/* ---------- verbatim message blocks ---------- */
+/* Shown exactly as sent, so what is quoted here can be compared against what
+   arrives on a handset. */
+.sms {
+  font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .82rem;
+  line-height: 1.65; background: var(--sunk); border: 1px solid var(--line);
+  border-left: 4px solid var(--signal); border-radius: 5px;
+  padding: .9rem 1.05rem; margin: .5rem 0 1.2rem; white-space: pre-wrap;
+  overflow-wrap: anywhere; max-width: none;
+}
+.sms-label {
+  font-family: Archivo, system-ui, sans-serif; font-size: .74rem; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-mute);
+  margin: 1.2rem 0 0;
+}
 </style>
 
 <a href="#main" class="skip">Skip to the main content</a>
@@ -443,6 +487,7 @@ a.btn:hover { text-decoration:none; }
       <a href="/ask" aria-current="{!IF(current == 'ask', 'page', 'false')}">Ask</a>
       <a href="/privacy" aria-current="{!IF(current == 'privacy', 'page', 'false')}">Privacy</a>
       <a href="/terms" aria-current="{!IF(current == 'terms', 'page', 'false')}">Terms</a>
+      <a href="/messaging" aria-current="{!IF(current == 'messaging', 'page', 'false')}">Messaging</a>
     </nav>
     <div class="tools">
       <button type="button" id="tsize" aria-pressed="false" title="Make the text bigger">A+</button>

@@ -160,4 +160,41 @@ private class CurbCutOptionsTest {
         }
         Test.stopTest();
     }
+
+    /**
+     * The sentence this entire system was designed around. The library says
+     * 'typing'; a person says 'I cannot type for long'. Whole-word matching
+     * made that return nothing, and nothing is the cruellest answer here.
+     */
+    @IsTest
+    static void theCanonicalSentenceFindsSomething() {
+        Test.startTest();
+        CurbCutOptions.Result res = run('I cannot type for long');
+        Test.stopTest();
+        System.assertEquals(false, res.noMatch,
+            'The canonical example sentence returned nothing at all');
+        System.assert(res.options.contains('keyboard'),
+            'Expected the keyboard option, got: ' + res.options);
+    }
+
+    /**
+     * Stemming must not undo the fix it was built on top of. 'long' inside
+     * 'alongside' is how someone who could not type was once offered a fire alarm.
+     */
+    @IsTest
+    static void stemmingDoesNotResurrectSubstringMatching() {
+        CurbCutOptions.Result res = run('alongside');
+        System.assertEquals(true, res.noMatch,
+            'A word that merely contains another word must not match: ' + res.options);
+    }
+
+    /** Singular and plural of the same need must reach the same place. */
+    @IsTest
+    static void singularAndPluralAgree() {
+        CurbCutOptions.Result one  = run('I miss things in the meeting');
+        CurbCutOptions.Result many = run('I miss things in meetings');
+        System.assertEquals(false, one.noMatch, 'singular found nothing');
+        System.assertEquals(one.options, many.options,
+            'singular and plural gave different answers');
+    }
 }
