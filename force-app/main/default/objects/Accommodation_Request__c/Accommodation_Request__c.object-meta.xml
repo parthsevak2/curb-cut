@@ -3,6 +3,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Created ONLY on explicit human approval. A validation rule blocks insert without it.</description>
     <enableActivities>false</enableActivities>
+    <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>

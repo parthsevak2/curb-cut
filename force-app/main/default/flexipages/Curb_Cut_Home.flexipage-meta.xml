@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>What the person on duty sees first. Three queues, in the order they should be worked.</description>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:richText</componentName>
+                <componentInstanceProperties>
+                    <name>richTextValue</name>
+                    <value>&lt;h2&gt;If you are on duty, work these top to bottom.&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Waiting for a person&lt;/b&gt; comes first. Someone asked for a human and is currently getting silence. Reach them the way the record says they can be reached, and never by telephone unless it says so.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Awaiting a decision&lt;/b&gt; is next. Each of these has a date by which the interactive process is due, and the ones closest to it are at the top. Nobody here is chasing their own request; that is the point.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Needs an interpreter&lt;/b&gt; is last only because it is smallest. Signed video is never machine translated; it waits on a person, and the wait is the entire cost to the person waiting.&lt;/p&gt;&lt;p&gt;&lt;i&gt;You will not find a diagnosis on any record here. There is no field for one. If someone asks you what a person has, the answer is that nobody knows and nobody can find out.&lt;/i&gt;&lt;/p&gt;</value>
+                </componentInstanceProperties>
+                <identifier>dutyOrders</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:filterListCard</componentName>
+                <componentInstanceProperties>
+                    <name>entityName</name>
+                    <value>Human_Handoff__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>filterName</name>
+                    <value>Waiting_For_A_Person</value>
+                </componentInstanceProperties>
+                <identifier>queueWaiting</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:filterListCard</componentName>
+                <componentInstanceProperties>
+                    <name>entityName</name>
+                    <value>Accommodation_Request__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>filterName</name>
+                    <value>Awaiting_Decision</value>
+                </componentInstanceProperties>
+                <identifier>queueClock</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:filterListCard</componentName>
+                <componentInstanceProperties>
+                    <name>entityName</name>
+                    <value>Barrier_Report__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>filterName</name>
+                    <value>Needs_An_Interpreter</value>
+                </componentInstanceProperties>
+                <identifier>queueInterpreter</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Curb Cut Home</masterLabel>
+    <template>
+        <name>flexipage:defaultAppHomeTemplate</name>
+    </template>
+    <type>AppPage</type>
+</FlexiPage>

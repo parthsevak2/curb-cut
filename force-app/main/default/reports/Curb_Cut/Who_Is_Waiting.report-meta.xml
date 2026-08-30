@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Everyone who asked for a person and has not been picked up, oldest first. Whoever is on duty starts at the top of this list. Grouped by how each person can be reached, so you can work them in batches, and never by telephone unless the record says so.</description>
+    <format>Summary</format>
+    <name>Who is waiting</name>
+    <reportType>CustomEntity$Human_Handoff__c</reportType>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Human_Handoff__c.Reachable_By__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <columns><field>CUST_NAME</field></columns>
+    <columns><field>Human_Handoff__c.Requested_At__c</field></columns>
+    <columns><field>Human_Handoff__c.Handler_Name__c</field></columns>
+    <columns><field>Human_Handoff__c.Barrier_Report__c</field></columns>
+    <filter>
+        <criteriaItems>
+            <column>Human_Handoff__c.Picked_Up_At__c</column>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

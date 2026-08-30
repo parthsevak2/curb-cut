@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Every reply the system tried to send, grouped by what happened to it. Anything that is not Accepted is a person who asked for help and heard nothing back, so this is the panel to read first when it looks quiet.</description>
+    <format>Summary</format>
+    <name>Where replies end up</name>
+    <reportType>CustomEntity$Message_Log__c</reportType>
+    <chart>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>RowCount</column>
+        </chartSummaries>
+        <chartType>HorizontalBar</chartType>
+        <groupingColumn>Message_Log__c.Status__c</groupingColumn>
+        <size>Medium</size>
+        <title>Outbound replies by outcome</title>
+    </chart>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Message_Log__c.Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Message_Log__c.Channel__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <columns><field>CUST_NAME</field></columns>
+    <columns><field>Message_Log__c.Attempted_At__c</field></columns>
+    <columns><field>Message_Log__c.Detail__c</field></columns>
+    <filter>
+        <criteriaItems>
+            <column>Message_Log__c.Direction__c</column>
+            <operator>equals</operator>
+            <value>Outbound</value>
+        </criteriaItems>
+    </filter>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

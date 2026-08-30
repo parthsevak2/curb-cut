@@ -3,6 +3,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <description>The escape hatch. If the agent fails, the person who was already struggling must not be stuck with a machine. Reached by message, never by phone call.</description>
     <enableActivities>false</enableActivities>
+    <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
