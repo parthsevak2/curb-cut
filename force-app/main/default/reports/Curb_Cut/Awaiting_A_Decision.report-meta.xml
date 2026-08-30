@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Approved requests an employer has not answered. Sorted by the date the interactive process is due, so the ones running out of time are at the top. Grouped by the date the interactive process is due. The earliest group is the one running out of time.</description>
+    <format>Summary</format>
+    <name>Awaiting a decision</name>
+    <reportType>CustomEntity$Accommodation_Request__c</reportType>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Accommodation_Request__c.Interactive_Process_Due__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <columns><field>CUST_NAME</field></columns>
+    <columns><field>Accommodation_Request__c.Approved_At__c</field></columns>
+    <columns><field>Accommodation_Request__c.Barrier_Report__c</field></columns>
+    <filter>
+        <criteriaItems>
+            <column>Accommodation_Request__c.Manager_Response__c</column>
+            <operator>equals</operator>
+            <value>Pending</value>
+        </criteriaItems>
+    </filter>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

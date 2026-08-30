@@ -31,6 +31,25 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Voice | +1 276 495 9311 | built, speech in and out |
 | Email | `curbcut@…apex.salesforce.com` (see `channels/.env.example`) | live |
 | Agent | Curb Cut v6 | active |
+| Console (internal) | `/lightning/app/Curb_Cut_Console` | live |
+
+The console is the half of this that nobody demos. Every promise the assistant
+makes about a person reaching a human being is worthless unless a human being
+has somewhere to stand. `Human_Handoff__c` was creating records that said
+"a person is picking this up" with no surface for that person.
+
+| Console surface | What it is for |
+|---|---|
+| **On Duty** (app home) | Three queues in the order they should be worked, with standing orders above them |
+| Waiting for a person | Someone asked for a human and is currently getting silence |
+| Awaiting a decision | Approved requests an employer has not answered, nearest deadline first |
+| Needs an interpreter | Signed video, waiting on a person, never machine translated |
+| Curb Cut Overview (dashboard) | Where the system is failing people, in five panels |
+| Record feeds | Two people often work one request, so the conversation lives on the record |
+
+Nothing in the console shows a diagnosis, because there is no field for one.
+An operator who is asked what a person has can only answer that nobody knows
+and nobody can find out.
 
 ## The four principles
 
@@ -64,11 +83,13 @@ node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 
 | Path | What |
 |---|---|
-| `force-app/main/default/objects/` | 7 objects, 37 fields, 2 validation rules |
-| `force-app/main/default/classes/` | 9 Apex classes + 5 test classes |
+| `force-app/main/default/objects/` | 8 objects, 46 fields, 5 triage list views |
+| `force-app/main/default/classes/` | 10 Apex classes + 5 test classes, 45 tests |
 | `force-app/main/default/aiAuthoringBundles/` | the Agent Script |
 | `force-app/main/default/pages/` `components/` `sites/` | the public site |
 | `force-app/main/default/emailservices/` | inbound email channel |
+| `force-app/main/default/applications/` `tabs/` `flexipages/` | the internal console |
+| `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard |
 | `channels/` | SMS + voice relay, Twilio configuration |
 | `tests/` | invariants, adversarial suite, headless runner, scorer |
 | `submission/` | shot list, submission text |

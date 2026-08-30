@@ -11,6 +11,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Curb Cut Console</label>
     <navType>Standard</navType>
+    <tabs>Curb_Cut_Home</tabs>
     <tabs>Human_Handoff__c</tabs>
     <tabs>Accommodation_Request__c</tabs>
     <tabs>Barrier_Report__c</tabs>

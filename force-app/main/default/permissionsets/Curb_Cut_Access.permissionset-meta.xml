@@ -346,6 +346,10 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabSettings>
+        <tab>Curb_Cut_Home</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Access_Preference__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
