@@ -3,6 +3,6 @@
     <apiVersion>66.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <description>Curb Cut privacy policy.</description>
-    <label>Curb Cut Privacy</label>
+    <description>Curb Cut privacy policy (clean URL).</description>
+    <label>privacy</label>
 </ApexPage>
