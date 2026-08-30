@@ -40,13 +40,13 @@ start_agent curb_cut_router:
               If a draft request has been shown and not yet sent, then ANY reply
               goes to @subagent.request. That includes a bare yes, yeah, yep, ok,
               okay, sure, send it, send, go ahead, do it, please send, fine,
-              alright, no, nope, change, edit, redo, stop, cancel, wait, and
+              alright, no, nope, change, edit, redo, delete, wait, and
               anything hedged such as I guess so, I think so, maybe, or probably
               fine. Never send those anywhere else, and never treat them as a new
               topic. {!@variables.draft_text} is set once a draft exists.
 
               If a standing preference has just been offered or saved, a bare yes,
-              no, WHO, or STOP goes to @subagent.standing.
+              no, WHO, or OFF goes to @subagent.standing.
 
               If someone describes something that is hard at work, or asks what
               they could ask for, go to @subagent.consult.
@@ -175,7 +175,7 @@ subagent consult:
 
 subagent request:
     label: "Request"
-    description: "Draft a request in the person's own words and stop until they approve it. ALSO handles every follow-up turn in that exchange, including a bare yes, yeah, ok, sure, send it, go ahead, do it, or please send arriving on its own with no other context: when the person replies YES, or says send it, or replies CHANGE, or replies STOP, or gives any hedged or unclear answer such as I guess so or I think so or maybe or probably fine. Any reply that follows a draft belongs here."
+    description: "Draft a request in the person's own words and stop until they approve it. ALSO handles every follow-up turn in that exchange, including a bare yes, yeah, ok, sure, send it, go ahead, do it, or please send arriving on its own with no other context: when the person replies YES, or says send it, or replies CHANGE, or replies DELETE, or gives any hedged or unclear answer such as I guess so or I think so or maybe or probably fine. Any reply that follows a draft belongs here."
 
     reasoning:
         instructions: ->
@@ -187,7 +187,11 @@ subagent request:
               A yes means yes. Silence, a question, or "I think so" is not a yes.
 
               Tell them: reply YES to send it, reply CHANGE to fix something,
-              reply STOP and you will delete it.
+              reply DELETE and you will delete it.
+
+              Never tell anyone to reply STOP, CANCEL, END or QUIT. Those words
+              are taken by the phone network to mean unsubscribe, and the person
+              would be silently cut off instead of doing what they asked for.
 
               Nothing goes anywhere until they say yes.
 
@@ -201,7 +205,7 @@ subagent request:
                 "probably fine", "sure I suppose", silence, or a question) is
                 NOT a yes. Do NOT call {!@actions.create_request}. Say you want
                 to be sure before sending anything, and ask them to reply YES.
-              - CHANGE -> redraft. STOP -> delete it and confirm.
+              - CHANGE -> redraft. DELETE -> delete it and confirm.
 
               Never say you have sent something unless
               {!@actions.create_request} returned created = true. If it returns
@@ -280,7 +284,7 @@ subagent request:
 
 subagent standing:
     label: "Standing Preference"
-    description: "Save a standing preference so the person never has to explain it again. ALSO handles WHO, and STOP or turn it off or revoke when it refers to a saved preference rather than to a draft request."
+    description: "Save a standing preference so the person never has to explain it again. ALSO handles WHO, and OFF or turn it off or revoke when it refers to a saved preference rather than to a draft request."
 
     reasoning:
         instructions: ->
@@ -295,7 +299,12 @@ subagent standing:
 
               Tell them how to revoke it before they agree to it, not after:
               they can reply WHO any time to see everyone who has been shown it,
-              and reply STOP any time to turn it off. You will not ask why.
+              and reply OFF any time to turn it off. You will not ask why.
+
+              Never tell anyone to reply STOP to turn a preference off. The phone
+              network takes STOP to mean unsubscribe and you would never see it,
+              so the preference would stay live and keep being shown while they
+              believed they had turned it off.
 
               Use {!@actions.standing_preference} with operation "save" to save it,
               and with operation "revoke" to turn it off. When they ask you to turn

@@ -1,0 +1,221 @@
+<title>Curb Cut Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:#EFEFEB; --surface:#FAFAF7; --sunken:#E4E4DE;
+    --ink:#17191A; --ink-soft:#4A4E4F; --muted:#74797A;
+    --rule:#C9C9C1; --paint:#B57F1E; --paint-ink:#8A6115;
+    --verified:#2C6659; --void:#9E362C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#111314; --surface:#1A1D1E; --sunken:#0B0D0E;
+      --ink:#E9EAE6; --ink-soft:#B6BAB8; --muted:#868B8A;
+      --rule:#2E3335; --paint:#DFA847; --paint-ink:#EFC377;
+      --verified:#56A995; --void:#D2726A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#111314; --surface:#1A1D1E; --sunken:#0B0D0E;
+    --ink:#E9EAE6; --ink-soft:#B6BAB8; --muted:#868B8A;
+    --rule:#2E3335; --paint:#DFA847; --paint-ink:#EFC377;
+    --verified:#56A995; --void:#D2726A;
+  }
+  * { box-sizing:border-box; }
+  body {
+    background:var(--ground); color:var(--ink); margin:0;
+    font-family:"Source Serif 4",Georgia,serif; font-size:17px; line-height:1.62;
+    padding:0 clamp(18px,5vw,48px) 100px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1,h2,.eyebrow { font-family:Archivo,"Helvetica Neue",Arial,sans-serif; }
+  header { padding:clamp(48px,9vh,88px) 0 0; }
+  .eyebrow {
+    font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:20px;
+  }
+  h1 { font-size:clamp(34px,6vw,52px); font-weight:800; line-height:1; letter-spacing:-.03em; margin:0; text-wrap:balance; }
+  .lede { font-size:20px; line-height:1.45; color:var(--ink-soft); margin:22px 0 0; max-width:34ch; }
+  .rule { height:3px; background:var(--ink); margin:38px 0 0; opacity:.88; }
+  section { margin-top:46px; }
+  h2 { font-size:21px; font-weight:700; letter-spacing:-.01em; margin:0 0 .5em; text-wrap:balance; }
+  p { margin:0 0 1em; }
+  ul { margin:0 0 1em; padding-left:1.15em; }
+  li { margin-bottom:.5em; }
+  code {
+    font-family:"JetBrains Mono",monospace; font-size:.85em; background:var(--sunken);
+    padding:1.5px 5px; border-radius:2px; color:var(--ink-soft); overflow-wrap:anywhere;
+  }
+  .callout {
+    background:var(--surface); border:1px solid var(--rule);
+    border-left:3px solid var(--verified); border-radius:3px;
+    padding:16px 19px; margin:0 0 1em;
+  }
+  .callout.absent { border-left-color:var(--void); }
+  .callout p:last-child { margin-bottom:0; }
+  .never { display:grid; gap:0; border-top:1px solid var(--rule); margin-top:8px; }
+  .never div { padding:13px 0; border-bottom:1px solid var(--rule); font-size:16px; color:var(--ink-soft); }
+  .never b { color:var(--ink); font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin:0 0 1em; font-size:15.5px; }
+  th,td { text-align:left; padding:10px 12px 10px 0; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-family:Archivo,sans-serif; font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  a { color:var(--paint-ink); }
+  footer {
+    margin-top:60px; padding-top:22px; border-top:3px solid var(--ink);
+    font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted); line-height:1.9;
+  }
+  :focus-visible { outline:2px solid var(--paint); outline-offset:3px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Curb Cut &middot; Privacy Policy</div>
+    <h1>What we hold, and what does not exist.</h1>
+    <p class="lede">
+      The shortest way to protect information is not to collect it. Most of this
+      policy is about what Curb Cut deliberately has no place to store.
+    </p>
+    <div class="rule"></div>
+  </header>
+
+  <section>
+    <h2>Who runs this</h2>
+    <p>
+      Curb Cut is operated by Parth Sevak, a sole proprietor in Welland, Ontario,
+      Canada. Questions about this policy, or about data held about you, go to
+      <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2>Information that does not exist in this system</h2>
+    <div class="callout absent">
+      <p>
+        There is no field anywhere in Curb Cut for a <b>diagnosis</b>,
+        <b>condition</b>, <b>disability type</b>, <b>medical note</b>,
+        <b>severity</b> or <b>prognosis</b>.
+      </p>
+      <p>
+        Not encrypted, not permission-restricted &mdash; absent. If you tell the
+        agent about a medical condition anyway, it is not written to any record,
+        and the agent is instructed to tell you so in the same reply. This is
+        enforced by the database schema and by an automated check that fails the
+        build if anyone adds such a field.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What we do collect</h2>
+    <table>
+      <thead><tr><th>What</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>A one-way hash of your phone number</b></td>
+          <td>To keep your conversation continuous across messages. The raw
+              number is hashed with a secret salt the moment it arrives and is
+              never written to storage or to logs.</td>
+        </tr>
+        <tr>
+          <td><b>What you say is hard at work</b>, in your own words</td>
+          <td>To look up what adjustments might help. Recorded as a functional
+              description &mdash; what is difficult, never why it is difficult.</td>
+        </tr>
+        <tr>
+          <td><b>Standing preferences you ask us to remember</b></td>
+          <td>So you do not have to explain the same thing to every new manager.
+              Stored in your exact words, with who you chose to share it with.</td>
+        </tr>
+        <tr>
+          <td><b>Requests you explicitly approve</b></td>
+          <td>To send the request you approved to your employer, and to track the
+              response.</td>
+        </tr>
+        <tr>
+          <td><b>A record of every time a preference was shown to someone</b></td>
+          <td>So you can see it. A preference that travels ahead of you is a
+              disclosure made in your absence, and you are entitled to know.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Conversations are anonymous by default. No identity is attached unless you
+      choose to attach one.
+    </p>
+  </section>
+
+  <section>
+    <h2>What we never do</h2>
+    <div class="never">
+      <div><b>We do not sell your information.</b> Not to anyone, at any price, ever.</div>
+      <div><b>We do not share it with third parties for their own purposes.</b>
+           No data brokers, no advertisers, no analytics networks, no partners.</div>
+      <div><b>We do not use it for marketing.</b> No promotional messages are sent
+           through this service at all. Every message you receive is a direct reply
+           to a message you sent.</div>
+      <div><b>We do not infer anything about you from your behaviour.</b>
+           Nothing is profiled, scored or predicted. Every signal in the system is
+           one you set, in your own words.</div>
+      <div><b>We do not send anything to your employer without your explicit
+           approval</b> in the conversation, given at the time.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Service providers</h2>
+    <p>
+      Two companies process data on our behalf, under contract, solely to make the
+      service work. Neither may use your information for their own purposes.
+    </p>
+    <ul>
+      <li><b>Twilio Inc.</b> delivers the text messages and phone calls. Twilio
+          handles your phone number in order to route messages, as any carrier
+          must.</li>
+      <li><b>Salesforce, Inc.</b> hosts the database and the agent.</li>
+    </ul>
+    <p>
+      Data is stored in Salesforce's United States infrastructure. We disclose
+      information to no one else, except where law compels it &mdash; and there is
+      no medical or diagnostic information in the system to disclose.
+    </p>
+  </section>
+
+  <section>
+    <h2>Your control</h2>
+    <ul>
+      <li>Reply <code>WHO</code> at any time to see everyone who has been shown a
+          standing preference of yours.</li>
+      <li>Reply <code>OFF</code> at any time to turn a standing preference off. It
+          takes effect immediately, and you will not be asked why. The system has
+          nowhere to record a reason, so no one can ask you for one later.</li>
+      <li>Reply <code>DELETE</code> to discard a drafted request before it is sent.</li>
+      <li>Reply <code>STOP</code> to stop receiving messages from this number
+          entirely.</li>
+      <li>Email <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
+          to ask what is held about you, to correct it, or to have it deleted.</li>
+    </ul>
+    <p>
+      Records are kept only while the request or preference they support is live.
+      An anonymous conversation that produces no request leaves no identifiable
+      record at all.
+    </p>
+  </section>
+
+  <section>
+    <h2>Changes</h2>
+    <p>
+      If this policy changes materially, the updated version appears here with a
+      new date below. Continuing to use the service after that means the new
+      version applies.
+    </p>
+  </section>
+
+  <footer>
+    Curb Cut &middot; accommodation without disclosure<br>
+    Parth Sevak, sole proprietor &middot; Welland, Ontario, Canada<br>
+    parth.sevak2@gmail.com &middot; Last updated 30 August 2026
+  </footer>
+</div>
