@@ -254,6 +254,105 @@ for rp in glob.glob(os.path.join(DEF, 'reports', '*', '*.report-meta.xml')):
             check('report-picklist-value-real', one in vals,
                   f'{os.path.basename(rp)} filters {col.text} = {one}, not a value of that picklist')
 
+
+# 11. Carrier compliance for the text channel.
+#     A2P campaign CMcb0b8f321bcc5aa98b2cc45bb3ea594a was rejected under error
+#     30909 because a reviewer could not verify consent. The legal pages were
+#     fine; the channel had no compliance layer and the site had no page showing
+#     the opt-in. Both are now checked here, because "we wrote it down once" is
+#     exactly how it was missed.
+RELAY = os.path.join(ROOT, 'channels/sms-relay.mjs')
+PAGES = os.path.join(DEF, 'pages')
+
+if os.path.exists(RELAY):
+    relay = open(RELAY).read()
+
+    # The one-time disclosure has to carry every element a carrier requires.
+    m = re.search(r'const DISCLOSURE\s*=(.*?);\n', relay, re.S)
+    disclosure = m.group(1) if m else ''
+    for needle, why in [
+        ('Curb Cut',                        'programme name'),
+        ('Message frequency varies',        'message frequency'),
+        ('Message and data rates may apply','rates disclosure'),
+        ('Reply HELP',                      'HELP instruction'),
+        ('STOP to stop',                    'STOP instruction'),
+        ('/terms',                          'terms link'),
+        ('/privacy',                        'privacy link'),
+    ]:
+        check('sms-disclosure-complete', needle in disclosure,
+              f'first-contact SMS disclosure is missing the {why}')
+
+    m = re.search(r'const HELP_REPLY\s*=(.*?);\n', relay, re.S)
+    helper = m.group(1) if m else ''
+    for needle, why in [
+        ('Curb Cut',                        'programme name'),
+        ('Message and data rates may apply','rates disclosure'),
+        ('STOP to stop',                    'STOP instruction'),
+        ('@',                               'a contact address'),
+    ]:
+        check('sms-help-reply-complete', needle in helper,
+              f'HELP reply is missing the {why}')
+
+    # Reserved keywords belong to the carrier and to the person, not to us. An
+    # assistant improvising an answer to STOP is someone asking to be left alone
+    # and being answered back.
+    for kw in ['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']:
+        check('stop-word-reserved', f"'{kw}'" in relay,
+              f'{kw} is a reserved opt-out keyword and the relay does not know it')
+    check('help-handled-before-agent',
+          relay.find('HELP_WORDS.has(word)') != -1 and
+          relay.find('HELP_WORDS.has(word)') < relay.find('agentFor(handle)', relay.find('/sms')),
+          'HELP reaches the agent instead of returning the required help text')
+
+# The opt-in page a reviewer lands on must show the whole call to action.
+MSG = os.path.join(PAGES, 'messaging.page')
+if os.path.exists(MSG):
+    msg = open(MSG).read()
+    for needle, why in [
+        ('+1 276 495 9311',                  'the number'),
+        ('you agree to receive text messages','the consent sentence'),
+        ('Message frequency varies',         'message frequency'),
+        ('Message and data rates may apply', 'the rates disclosure'),
+        ('HELP',                             'the HELP keyword'),
+        ('STOP',                             'the STOP keyword'),
+        ('/terms',                           'a link to the terms'),
+        ('/privacy',                         'a link to the privacy policy'),
+    ]:
+        check('optin-page-complete', needle in msg,
+              f'the public opt-in page does not show {why}')
+else:
+    check('optin-page-exists', False, 'there is no public page showing the opt-in flow')
+
+# 12. A page nobody can open is not a page. Every Visualforce page in the repo
+#     must be granted on the site guest profile, or it ships a 401 to the public
+#     and to any carrier reviewing the campaign.
+PROF = glob.glob(os.path.join(DEF, 'profiles', '*.profile-meta.xml'))
+if PROF:
+    prof = ET.parse(PROF[0]).getroot()
+    granted = {(pa.find(f'{{{NS}}}apexPage').text or '').strip()
+               for pa in prof.findall(f'{{{NS}}}pageAccesses')
+               if (pa.find(f'{{{NS}}}enabled').text or '') == 'true'}
+    for pg in glob.glob(os.path.join(PAGES, '*.page')):
+        name = os.path.basename(pg)[:-len('.page')]
+        check('guest-can-open-page', name in granted,
+              f'{name} is not granted on the guest profile; the public gets a 401')
+
+
+# 13. Carriers reject a campaign whose privacy policy does not say, in so many
+#     words, that mobile information is not shared for marketing. Error 30908.
+#     Meaning it is not enough; the words have to be findable.
+PRIV = os.path.join(PAGES, 'privacy.page')
+if os.path.exists(PRIV):
+    priv = open(PRIV).read().lower()
+    for needle, why in [
+        ('mobile information', 'the phrase "mobile information"'),
+        ('opt-in consent',     'text-message opt-in consent'),
+        ('third party',        'a statement about third parties'),
+        ('marketing',          'a statement about marketing purposes'),
+    ]:
+        check('privacy-states-mobile-sharing', needle in priv,
+              f'the privacy policy does not contain {why}, which carriers check for')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
