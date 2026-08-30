@@ -14,90 +14,246 @@
   heading="Find out what could make work easier. Then ask for it."
   lede="No form. No login. And you never have to say what condition you have.">
 
+  <div class="cta">
+    <a class="btn primary" href="/ask">Ask now <span class="arrow">&rarr;</span></a>
+    <a class="btn" href="#doors">Other ways to reach it</a>
+  </div>
+  <p class="cta-note">
+    You can stop at any point. Nothing is written down while you are anonymous,
+    and nothing reaches your employer unless you say yes first.
+  </p>
+
   <section>
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
-        Text a number, say what is hard at work, and get real answers about what
-        you could ask for &mdash; anonymously, if you want. If you decide to ask
-        for something, nothing is sent until you say yes.
+        Say what is hard at work and get real answers about what you could ask
+        for &mdash; anonymously, if you want. If you decide to ask for something,
+        a request is written for you and read back, and nothing is sent until
+        you agree.
       </p>
     </div>
   </section>
 
   <section>
-    <h2>Sixty-one in a hundred cost nothing</h2>
+    <p class="sec-label">The number this is built on</p>
+    <h2>Sixty-one employers in a hundred paid nothing</h2>
     <p>
       The Job Accommodation Network asked 5,406 employers what accommodations
-      actually cost, between January 2019 and December 2024.
-      <strong>61 out of every 100 cost the employer nothing at all.</strong>
-      Of the rest, the middle cost was about $300, once.
+      actually cost them, between January 2019 and December 2024. This is what
+      they said.
     </p>
+
+    <div class="tally">
+      <div class="tally-fig">
+        <p class="bignum">61<small>of every 100 cost the employer nothing at all</small></p>
+        <div class="dots" role="img"
+             aria-label="A grid of 100 squares. 61 are filled in, representing the 61 percent of employers who reported no cost at all. 39 are empty, representing those who reported some cost, with a median of about 300 dollars, paid once.">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <p class="tally-key">
+        <span><i class="on"></i> Cost the employer nothing</span>
+        <span><i></i> Cost something. Median: about $300, once.</span>
+      </p>
+    </div>
+
     <p>
       And yet in 2022, Statistics Canada found that
       <strong>more than a third of employed Canadians with a disability had an
       accommodation need that went unmet</strong>. The most common thing people
       needed was not equipment. It was modified working hours.
     </p>
-    <p>
-      The money was never the barrier. The process is. To get help you first have
-      to find the policy, learn its words, hold a work login, fill in a form, and
-      tell a stranger something you may not want to tell anyone.
-    </p>
-    <p>
-      That is a lot to ask of someone who is already having a hard week.
-    </p>
   </section>
 
   <section>
-    <h2>What is different here</h2>
-
-    <h3>You can ask before you tell anyone anything</h3>
-    <p>
-      You can find out what you could ask for without giving your name, and
-      without saying what condition you have. Nothing is written down while you
-      are anonymous. Knowing is allowed. Asking is optional.
-    </p>
-
-    <h3>There is nowhere to put a diagnosis</h3>
-    <p>
-      This is not a promise to be discreet. There is no field for a diagnosis,
-      a condition, a disability type, or a medical note anywhere in the system.
-      If you mention one, it is not recorded, and you will be told so. A manager
-      who asks is refused, because there is genuinely nothing to tell them.
-    </p>
-
-    <h3>Nothing is sent until you say yes</h3>
-    <p>
-      A request is written for you, in your words, and read back. It is not sent
-      until you clearly agree. &ldquo;I guess so&rdquo; is not agreement, and you
-      will be asked again.
-    </p>
-
-    <h3>You will never be told to phone someone</h3>
-    <p>
-      Every workplace process seems to end at &ldquo;give us a call.&rdquo; If you
-      cannot use a phone, that is a locked door. Here, a real person always
-      reaches you by message.
+    <p class="thesis">The money was never the barrier. <em>The process is.</em></p>
+    <p class="thesis-sub">
+      To get help you first have to find the policy, learn its words, hold a work
+      login, fill in a form, and tell a stranger something you may not want to
+      tell anyone. That is a lot to ask of someone who is already having a hard
+      week. The request process for a disability accommodation is, itself, an
+      accessibility barrier.
     </p>
   </section>
 
-  <section>
-    <h2>However you want to talk</h2>
+  <section id="doors">
+    <p class="sec-label">Four front doors</p>
+    <h2>Reach it however you are able to</h2>
     <p>
-      Text, a voice note, a video, or a photo of your desk. All four are front
-      doors, not fallbacks, and you get an answer back the same way you asked.
+      These are four doors into the same assistant, not a main route with
+      fallbacks bolted on. You get an answer back the same way you asked.
+      Status below is the live truth, not a plan.
     </p>
-    <div class="note">
+
+    <div class="cards">
+      <div class="card open">
+        <span class="chip live">Open now</span>
+        <h3>This website</h3>
+        <p>
+          Type what is hard, read what you could ask for, approve a request or
+          close the tab. No account, and nothing kept unless you ask for it.
+        </p>
+        <p><a href="/ask">Go to the ask page &rarr;</a></p>
+      </div>
+
+      <div class="card pending">
+        <span class="chip wait">Awaiting carrier approval</span>
+        <h3>Text message</h3>
+        <p>
+          Text <span class="kw">+1 276 495 9311</span> and say what is hard. No
+          app to install, and it works on a phone that cannot run anything else.
+          Registration with the mobile carriers is under review.
+        </p>
+      </div>
+
+      <div class="card pending">
+        <span class="chip wait">Awaiting carrier approval</span>
+        <h3>Voice</h3>
+        <p>
+          Call the same number and speak instead of typing. For anyone for whom
+          typing is the hard part &mdash; tremor, pain, low vision, or a hand
+          that is simply not co-operating today.
+        </p>
+      </div>
+
+      <div class="card open">
+        <span class="chip live">Open now</span>
+        <h3>Email</h3>
+        <p>
+          Write in your own time, in your own words, with no one waiting on the
+          other end of a cursor. If a reply cannot be delivered, the message is
+          handed to a person rather than dropped.
+        </p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
       <p>
         <strong>Sign language goes to a human being.</strong> Signed video is
         never machine translated. It is passed to a person, and you get a text
-        straight away so you are not left waiting in silence, wondering.
+        straight away so you are not left waiting in silence, wondering whether
+        it arrived.
       </p>
     </div>
   </section>
 
   <section>
+    <p class="sec-label">What happens</p>
+    <h2>Five steps, and you can stop after any of them</h2>
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>You say what is hard</h3>
+          <p>
+            In your own words. &ldquo;I cannot type for long.&rdquo; &ldquo;The
+            open office is unbearable by two o'clock.&rdquo; You are never asked
+            why, and there is nowhere to record why.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>You get real options</h3>
+          <p>
+            Drawn from a sourced library of adjustments, with what each one
+            typically costs. If there is nothing good to say, you are told that
+            rather than given a guess.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>You decide whether to ask at all</h3>
+          <p>
+            Knowing is allowed. Asking is optional. Plenty of people only ever
+            want to find out what exists, and that is a complete use of this.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>A request is written and read back to you</h3>
+          <p>
+            In your words, describing what would help &mdash; never a condition.
+            You can change it, or throw it away.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Nothing is sent until you clearly agree</h3>
+          <p>
+            &ldquo;I guess so&rdquo; is not agreement. A hedge gets you asked
+            again, not a sent request.
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="sec-label">Guarantees, not intentions</p>
+    <h2>What cannot happen here</h2>
+    <p>
+      Each of these is prevented by the way the system is built, not by a
+      promise to behave. The difference matters, because a promise can be
+      quietly revised.
+    </p>
+    <ul class="negs">
+      <li>
+        <b>Your diagnosis cannot be stored, because there is nowhere to put it.</b>
+        There is no field for a diagnosis, condition, disability type, medical
+        note, severity or prognosis anywhere in the system. Not encrypted &mdash;
+        absent. An automated check fails the build if anyone adds one.
+      </li>
+      <li>
+        <b>A manager cannot be told what you have.</b> Not because access is
+        restricted, but because there is genuinely nothing to tell them.
+      </li>
+      <li>
+        <b>Nothing can be sent to your employer without your explicit yes.</b>
+        The code that creates a request refuses to run without it, and a test
+        proves the refusal.
+      </li>
+      <li>
+        <b>You cannot be told to phone someone.</b> Every workplace process
+        seems to end at &ldquo;give us a call.&rdquo; If you cannot use a phone,
+        that is a locked door. A person here always reaches you by message.
+      </li>
+      <li>
+        <b>You cannot be asked why you turned something off.</b> Withdrawing a
+        standing preference takes no reason, because the system has nowhere to
+        record one, so nobody can ask you for one later.
+      </li>
+      <li>
+        <b>You cannot be profiled.</b> Nothing about you is inferred, scored or
+        predicted. Every signal in the system is one you set, in your own words.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="sec-label">Checkable</p>
+    <h2>Every promise on this page is enforced somewhere</h2>
+    <p>
+      A commitment that lives only in a policy document is an intention, and
+      intentions are not load bearing. These run before any change ships.
+    </p>
+    <div class="proof">
+      <div><b>126</b><span>structural checks that must hold before anything ships</span></div>
+      <div><b>45</b><span>automated tests against the rules above</span></div>
+      <div><b>0</b><span>of the 46 fields in the system hold anything medical</span></div>
+      <div><b>10</b><span>adversarial scenarios the assistant is scored against</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-label">Prior art</p>
     <h2>This is not a new idea. It is an unfinished one.</h2>
     <p>
       The Government of Canada already built this principle. Its Workplace
@@ -116,12 +272,31 @@
   </section>
 
   <section>
-    <h2>If you want to try it</h2>
+    <p class="sec-label">Where the name comes from</p>
+    <h2>The ramp cut into the kerb was fought for by wheelchair users</h2>
     <p>
-      Text <span class="kw">+1 276 495 9311</span> and say what is hard.
-      That is the whole thing.
+      It is now used by anyone pushing a pram, dragging a suitcase, riding a
+      bike, or walking with a knee that hurts. Nobody thinks of it as
+      accommodation any more. It is just how the pavement works.
     </p>
     <p>
+      A process that lets someone ask for what they need without first
+      explaining their body to a stranger is the same shape of thing. Built
+      because some people cannot get up the kerb, and better for everyone once
+      it is there.
+    </p>
+  </section>
+
+  <section>
+    <h2>If you want to try it</h2>
+    <div class="cta">
+      <a class="btn primary" href="/ask">Start on this page <span class="arrow">&rarr;</span></a>
+    </div>
+    <p>
+      Or text <span class="kw">+1 276 495 9311</span> and say what is hard, once
+      carrier registration clears. That is the whole thing.
+    </p>
+    <p class="cta-note">
       Message and data rates may apply. Reply <span class="kw">HELP</span> for
       help, or <span class="kw">STOP</span> to stop receiving messages.
     </p>
@@ -132,9 +307,10 @@
     <p>
       A site arguing that process shuts people out should not shut anyone out.
       Text size and contrast controls are at the top and remember your choice.
-      Nothing here relies on colour alone to tell you something. It works by
-      keyboard, it works with a screen reader, and it holds still if you have
-      asked your device to reduce motion.
+      Nothing here relies on colour alone to tell you something &mdash; every
+      state also carries a word or a shape. Body text is set for AAA contrast
+      rather than AA. It works by keyboard, it works with a screen reader, and
+      it holds still if you have asked your device to reduce motion.
     </p>
   </section>
 

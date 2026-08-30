@@ -14,6 +14,18 @@
   heading="Tell me what is hard right now."
   lede="In your own words. Not why it is hard — just what is hard.">
 
+  <ol class="rail" id="rail" aria-label="Where you are">
+    <li data-state="now"><span class="n">1</span>Say what is hard<span class="vh"> - you are here</span></li>
+    <li data-state="todo"><span class="n">2</span>See what you could ask for<span class="vh"> - not started</span></li>
+    <li data-state="todo"><span class="n">3</span>Read a draft<span class="vh"> - not started</span></li>
+    <li data-state="todo"><span class="n">4</span>Decide whether to send<span class="vh"> - not started</span></li>
+  </ol>
+
+  <p class="sentinel" id="sentinel" data-sent="no">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="sentinelText">Nothing has been sent to anyone.</span>
+  </p>
+
   <section>
     <div class="plain">
       <span class="tag">Before you start</span>
@@ -29,9 +41,17 @@
     <form id="askForm" onsubmit="return false;">
       <label for="need" class="fieldLabel">What is hard at work right now?</label>
       <p id="needHelp" class="fieldHelp">
-        For example: I keep missing things in meetings. Or: some days I cannot
-        type for long.
+        In whatever words you would use yourself. If typing is the hard part,
+        tap one of these instead and change it if you want to.
       </p>
+      <ul class="starters" id="starters" aria-label="Common starting points. Choosing one fills the box, and you can edit it.">
+        <li><button type="button">I keep missing things in meetings</button></li>
+        <li><button type="button">Typing hurts after a while</button></li>
+        <li><button type="button">The noise in the office is too much</button></li>
+        <li><button type="button">I cannot use the phone</button></li>
+        <li><button type="button">I need to change my hours</button></li>
+        <li><button type="button">My back hurts by the afternoon</button></li>
+      </ul>
       <textarea id="need" name="need" rows="4" aria-describedby="needHelp"></textarea>
       <div class="actions">
         <button type="button" id="go" class="btn primary">Show me what I could ask for</button>
@@ -83,6 +103,31 @@
 
   var barrierId = null, draftText = null, chosen = null;
 
+  var railItems = document.getElementById('rail').getElementsByTagName('li');
+  var sentinel = document.getElementById('sentinel');
+  var sentinelText = document.getElementById('sentinelText');
+
+  /* The rail is set from one place so it can never disagree with the sections
+     that are actually visible. State is carried by fill, by the numeral, and
+     by words only a screen reader hears - never by colour on its own. */
+  function step(current) {
+    for (var i = 0; i < railItems.length; i++) {
+      var n = i + 1, li = railItems[i], vh = li.getElementsByTagName('span')[1];
+      var state = n < current ? 'done' : (n === current ? 'now' : 'todo');
+      li.setAttribute('data-state', state);
+      vh.textContent = state === 'done' ? ' - done'
+                     : state === 'now'  ? ' - you are here'
+                     : ' - not started';
+    }
+  }
+
+  /* Stays true for the whole session rather than being a sentence someone
+     read once at the top and then stopped believing. */
+  function markSent() {
+    sentinel.setAttribute('data-sent', 'yes');
+    sentinelText.textContent = 'A request was sent, because you approved it.';
+  }
+
   function say(msg) { status.textContent = msg; }
   function busy(on, btn, label) {
     btn.disabled = on;
@@ -112,7 +157,7 @@
       say(r.message);
       optionsBox.textContent = r.noMatch ? '' : r.options;
       optionsBox.hidden = !!r.noMatch;
-      show(results);
+      show(results); step(2);
       document.getElementById('resultsHeading').setAttribute('tabindex', '-1');
       document.getElementById('resultsHeading').focus();
     });
@@ -125,7 +170,7 @@
       draftText = r.draft;
       draftBox.textContent = r.draft;
       say(r.message);
-      show(draftSection);
+      show(draftSection); step(3);
       document.getElementById('draftHeading').setAttribute('tabindex', '-1');
       document.getElementById('draftHeading').focus();
     });
@@ -137,14 +182,14 @@
       busy(false, b);
       doneBox.textContent = r.message;
       say(r.message);
-      hide(draftSection); show(doneSection);
+      hide(draftSection); show(doneSection); step(5); markSent();
       document.getElementById('doneHeading').setAttribute('tabindex', '-1');
       document.getElementById('doneHeading').focus();
     });
   });
 
   document.getElementById('deleteBtn').addEventListener('click', function () {
-    draftText = null; draftBox.textContent = ''; hide(draftSection);
+    draftText = null; draftBox.textContent = ''; hide(draftSection); step(2);
     say('Deleted. Nothing was sent. You can start again whenever you want.');
   });
 
@@ -152,6 +197,18 @@
     say('That is fine. Knowing is allowed, and asking is optional. ' +
         'Nothing has been sent to anyone.');
   });
+
+  /* Tapping a starter fills the box and leaves the cursor in it, so it is a
+     starting point rather than a menu of approved answers. */
+  var starterBtns = document.getElementById('starters').getElementsByTagName('button');
+  for (var si = 0; si < starterBtns.length; si++) {
+    starterBtns[si].addEventListener('click', function () {
+      need.value = this.textContent;
+      need.focus();
+      try { need.setSelectionRange(need.value.length, need.value.length); } catch (e) {}
+      say('Filled in for you. Change any of it, or press the button below.');
+    });
+  }
 
   document.getElementById('wantHuman').addEventListener('click', function () {
     var b = this; busy(true, b); say('Getting a person for you...');

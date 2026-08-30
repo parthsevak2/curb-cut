@@ -261,6 +261,170 @@ footer.page .stand {
 }
 footer.page p { margin-bottom:.6rem; }
 .fine { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.75rem; color:var(--ink-mute); letter-spacing:.03em; }
+
+/* ---------- hero call to action ---------- */
+/* The old home page ended every section in prose and offered no next step.
+   Someone having a hard week should not have to read to the bottom to find
+   the door. */
+a.btn { text-decoration:none; display:inline-flex; align-items:center; gap:.55rem; }
+a.btn:hover { text-decoration:none; }
+.cta { display:flex; flex-wrap:wrap; gap:.7rem; margin:1.7rem 0 .9rem; }
+.cta .arrow { font-family:"JetBrains Mono",ui-monospace,monospace; }
+.cta-note { font-size:.92rem; color:var(--ink-soft); margin:0; }
+
+/* ---------- section labels ---------- */
+.sec-label {
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute); margin:0 0 .55rem;
+}
+
+/* ---------- the tally ---------- */
+/* One hundred employers. Sixty-one paid nothing. Drawn rather than stated,
+   because the whole argument rests on this number and a sentence slides past.
+   Filled squares are solid AND the rest are hollow, so the split survives
+   greyscale, low vision and any colour blindness. */
+.tally { margin:1.5rem 0 0; }
+.tally-fig { display:flex; flex-wrap:wrap; gap:1.6rem 2.2rem; align-items:flex-start; }
+.bignum {
+  font-family:Archivo,system-ui,sans-serif; font-weight:800;
+  font-size:clamp(3.2rem,11vw,5.4rem); line-height:.82; letter-spacing:-.045em;
+  color:var(--deep); margin:0;
+}
+.bignum small { display:block; font-size:.9rem; font-weight:700; letter-spacing:.01em; line-height:1.35; color:var(--ink); margin-top:.6rem; max-width:14ch; }
+.dots { display:grid; grid-template-columns:repeat(20,1fr); gap:4px; flex:1 1 20rem; max-width:30rem; }
+.dots span { aspect-ratio:1/1; border-radius:2px; border:2px solid var(--line-firm); }
+.dots span.on { background:var(--deep); border-color:var(--deep); }
+@media (max-width:36rem) { .dots { grid-template-columns:repeat(10,1fr); max-width:18rem; } }
+.tally-key { display:flex; flex-wrap:wrap; gap:.4rem 1.5rem; margin:.9rem 0 0; max-width:none; font-size:.92rem; color:var(--ink-soft); }
+.tally + p { margin-top:1.5rem; }
+.tally-key span { display:inline-flex; align-items:center; gap:.5rem; }
+.tally-key i { width:.85rem; height:.85rem; border-radius:2px; border:2px solid var(--line-firm); flex:0 0 auto; }
+.tally-key i.on { background:var(--deep); border-color:var(--deep); }
+
+/* ---------- the thesis ---------- */
+.thesis {
+  font-family:Archivo,system-ui,sans-serif; font-weight:700;
+  font-size:clamp(1.45rem,4vw,2.1rem); line-height:1.22; letter-spacing:-.025em;
+  margin:0; max-width:22ch; text-wrap:balance;
+}
+.thesis em { font-style:normal; color:var(--signal); }
+.thesis-sub { margin:1.1rem 0 0; color:var(--ink-soft); }
+
+/* ---------- doors ---------- */
+.cards { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(14.5rem,1fr)); margin:1.3rem 0 0; }
+.card {
+  background:var(--raised); border:1px solid var(--line); border-top:4px solid var(--line-firm);
+  border-radius:6px; padding:1.15rem 1.25rem 1.3rem; display:flex; flex-direction:column; gap:.5rem;
+}
+.card.open { border-top-color:var(--deep); }
+.card.pending { border-top-color:var(--signal); }
+.card h3 { margin:0; }
+.card p { margin:0; max-width:none; font-size:1rem; color:var(--ink-soft); }
+.chip {
+  align-self:flex-start; font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:.68rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  padding:.22rem .5rem; border-radius:3px; border:1px solid var(--line-firm); color:var(--ink-mute);
+}
+.chip.live { background:var(--deep-bg); border-color:var(--deep); color:var(--deep); }
+.chip.wait { background:var(--signal-bg); border-color:var(--signal); color:var(--signal); }
+
+/* ---------- what happens, in order ---------- */
+/* Numbered because it genuinely is a sequence, and the order is the part
+   people are anxious about. */
+.steps { list-style:none; counter-reset:s; padding:0; margin:1.3rem 0 0; display:grid; gap:1.15rem; }
+.steps li { counter-increment:s; display:grid; grid-template-columns:2.1rem 1fr; gap:.95rem; align-items:start; margin:0; }
+.steps li::before {
+  content:counter(s); font-family:Archivo,system-ui,sans-serif; font-weight:800; font-size:.95rem;
+  width:2.1rem; height:2.1rem; display:flex; align-items:center; justify-content:center;
+  border-radius:50%; background:var(--ink); color:var(--ground);
+}
+.steps h3 { margin:0 0 .2rem; }
+.steps p { margin:0; color:var(--ink-soft); }
+
+/* ---------- what cannot happen ---------- */
+.negs { list-style:none; padding:0; margin:1.2rem 0 0; border-top:1px solid var(--line); max-width:var(--measure); }
+.negs li { margin:0; padding:.95rem 0 .95rem 2.1rem; border-bottom:1px solid var(--line); position:relative; color:var(--ink-soft); }
+.negs li::before { content:""; position:absolute; left:.2rem; top:1.55rem; width:1.1rem; height:3px; background:var(--alert); border-radius:2px; }
+.negs b { color:var(--ink); font-weight:700; }
+
+/* ---------- proof strip ---------- */
+/* Claims a reader can go and check. Numbers here are read out of the repo,
+   not asserted. */
+.proof {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));
+  border:1px solid var(--line); border-radius:6px; overflow:hidden;
+  background:var(--raised); margin:1.3rem 0 0;
+}
+.proof div { padding:1.05rem 1.1rem; border-top:1px solid var(--line); border-right:1px solid var(--line); }
+.proof div:nth-child(-n+4) { border-top:0; }
+.proof b { display:block; font-family:Archivo,system-ui,sans-serif; font-size:1.85rem; font-weight:800; letter-spacing:-.03em; line-height:1; }
+.proof span { display:block; margin-top:.4rem; font-size:.88rem; color:var(--ink-soft); line-height:1.4; }
+
+/* ---------- the entrance ---------- */
+/* The rule under the heading draws itself left to right: a cut being made.
+   The blanket prefers-reduced-motion rule above switches all of this off. */
+@keyframes cc-rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+@keyframes cc-cut  { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@media (prefers-reduced-motion: no-preference) {
+  header.page .eyebrow { animation:cc-rise .45s ease-out both; }
+  header.page h1       { animation:cc-rise .5s .05s ease-out both; }
+  header.page .lede    { animation:cc-rise .5s .12s ease-out both; }
+  header.page .hr      { animation:cc-cut .55s .2s cubic-bezier(.2,.7,.3,1) both; transform-origin:left center; }
+}
+
+/* ---------- screen-reader-only text ---------- */
+.vh {
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ---------- progress rail ---------- */
+/* Four hidden sections revealing one at a time is disorienting, and the
+   thing people are anxious about is exactly what comes next. So the whole
+   path is visible from the start, including the fact that sending is last. */
+.rail { list-style:none; padding:0; margin:0 0 1.7rem; display:flex; flex-wrap:wrap; gap:.45rem; }
+.rail li {
+  display:flex; align-items:center; gap:.5rem; margin:0;
+  font-family:Archivo,system-ui,sans-serif; font-weight:600; font-size:.87rem;
+  color:var(--ink-mute); background:var(--raised);
+  border:1px solid var(--line); border-radius:100px; padding:.3rem .8rem .3rem .35rem;
+}
+.rail .n {
+  width:1.5rem; height:1.5rem; flex:0 0 auto; border-radius:50%;
+  border:2px solid var(--line-firm); display:flex; align-items:center;
+  justify-content:center; font-size:.72rem; line-height:1;
+}
+.rail li[data-state="now"] { color:var(--ink); border-color:var(--ink); }
+.rail li[data-state="now"] .n { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+.rail li[data-state="done"] { color:var(--deep); border-color:var(--deep); }
+.rail li[data-state="done"] .n { background:var(--deep); color:var(--raised); border-color:var(--deep); }
+
+/* ---------- starters ---------- */
+/* Someone whose difficulty is typing should not have to type in order to
+   say that typing is difficult. One tap fills the box, and it stays
+   editable because these are starting points, not categories. */
+.starters { list-style:none; display:flex; flex-wrap:wrap; gap:.5rem; padding:0; margin:.1rem 0 1.1rem; }
+.starters li { margin:0; }
+.starters button {
+  font:inherit; font-size:.95rem; text-align:left; cursor:pointer;
+  background:var(--raised); color:var(--ink); border:1px solid var(--line-firm);
+  border-radius:100px; padding:.5rem .95rem; min-height:44px;
+}
+.starters button:hover { background:var(--sunk); }
+
+/* ---------- the sent indicator ---------- */
+/* It reads "nothing has been sent" for the entire session and only changes
+   when something actually is. The reassurance has to be continuously true,
+   not a sentence someone read once at the top. */
+.sentinel {
+  display:flex; align-items:center; gap:.6rem; margin:0 0 1.3rem;
+  font-family:Archivo,system-ui,sans-serif; font-weight:700; font-size:.92rem;
+  padding:.65rem .9rem; border-radius:5px;
+  border:1px solid var(--deep); background:var(--deep-bg); color:var(--deep);
+}
+.sentinel .dot { width:.6rem; height:.6rem; border-radius:50%; background:currentColor; flex:0 0 auto; }
+.sentinel[data-sent="yes"] { border-color:var(--signal); background:var(--signal-bg); color:var(--signal); }
+.sentinel[data-sent="yes"] .dot { border-radius:1px; }
 </style>
 
 <a href="#main" class="skip">Skip to the main content</a>
