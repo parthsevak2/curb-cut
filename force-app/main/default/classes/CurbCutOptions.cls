@@ -75,14 +75,18 @@ public with sharing class CurbCutOptions {
 
         List<ScoredOption> scored = new List<ScoredOption>();
         for (Accommodation_Option__c opt : all) {
-            String haystack = (
+            // Whole words only. Substring matching once offered visual fire alarms
+            // to someone who said they could not type for long, because 'long' is
+            // inside 'alongside'. An irrelevant suggestion is not a harmless miss:
+            // it tells someone already having a hard week that they were not heard.
+            Set<String> words = new Set<String>(tokenize(
                 (opt.Option__c == null ? '' : opt.Option__c) + ' ' +
                 (opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c)
-            ).toLowerCase();
+            ));
 
             Integer score = 0;
             for (String kw : keywords) {
-                if (haystack.contains(kw)) {
+                if (words.contains(kw)) {
                     score++;
                 }
             }
@@ -133,14 +137,20 @@ public with sharing class CurbCutOptions {
         return line;
     }
 
+    /** Words of three characters or more, lowercased, punctuation stripped. */
+    private static List<String> tokenize(String text) {
+        List<String> out = new List<String>();
+        if (String.isBlank(text)) { return out; }
+        for (String raw : text.toLowerCase().split('[^a-z0-9]+')) {
+            String w = raw.trim();
+            if (w.length() >= 3) { out.add(w); }
+        }
+        return out;
+    }
+
     private static List<String> extractKeywords(String need) {
         List<String> out = new List<String>();
-        if (String.isBlank(need)) {
-            return out;
-        }
-        for (String raw : need.toLowerCase().split('[^a-z0-9]+')) {
-            String w = raw.trim();
-            if (w.length() < 3) { continue; }
+        for (String w : tokenize(need)) {
             if (STOPWORDS.contains(w)) { continue; }
             if (!out.contains(w)) { out.add(w); }
         }

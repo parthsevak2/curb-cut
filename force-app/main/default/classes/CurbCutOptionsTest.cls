@@ -59,6 +59,23 @@ private class CurbCutOptionsTest {
     }
 
     @IsTest
+    static void doesNotMatchAWordInsideAnotherWord() {
+        // 'long' lives inside 'alongside'. Substring matching once recommended
+        // visual fire alarms to someone who said they could not type for long.
+        insert new Accommodation_Option__c(
+            Option__c = 'Visual fire and safety alerts',
+            Plain_Language_Summary__c = 'Strobe or vibrating alerts alongside audio alarms.',
+            Zero_Cost__c = false, Source_URL__c = 'https://askjan.org/topics/costs.cfm');
+
+        Test.startTest();
+        CurbCutOptions.Result res = run('I cannot type for long');
+        Test.stopTest();
+
+        System.assert(!res.options.contains('Visual fire'),
+            'alongside must not match the keyword long: ' + res.options);
+    }
+
+    @IsTest
     static void blankInputIsSafe() {
         CurbCutOptions.Result res = run('   ');
         System.assertEquals(true, res.noMatch);
