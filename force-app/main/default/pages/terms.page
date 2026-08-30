@@ -1,6 +1,6 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false"
            applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
-           title="Terms | Curb Cut" cache="true" expires="3600">
+           title="Terms | Curb Cut" cache="true" expires="300">
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -47,7 +47,7 @@
             <td>By texting the number yourself. It is printed on a poster at
                 work. We never message anyone who has not messaged first. There is
                 no mailing list, no upload, and no bought data.</td></tr>
-        <tr><th scope="row">How often we message</th>
+        <tr><th scope="row">Message frequency</th>
             <td>It varies. Every message is a reply inside a conversation you
                 started. Nothing is scheduled and nothing repeats on its own.</td></tr>
         <tr><th scope="row">Cost</th>
