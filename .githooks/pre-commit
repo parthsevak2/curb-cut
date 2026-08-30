@@ -1,0 +1,7 @@
+#!/bin/bash
+# Fast schema and wiring invariants. ~1 second.
+python3 "$(git rev-parse --show-toplevel)/tests/invariants.py" || {
+  echo
+  echo "Commit blocked. Fix the invariant above, or --no-verify if you truly mean it."
+  exit 1
+}
