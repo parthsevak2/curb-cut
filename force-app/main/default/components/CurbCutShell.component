@@ -485,6 +485,7 @@ a.btn:hover { text-decoration:none; }
     <nav class="nav" aria-label="Site">
       <a href="/" aria-current="{!IF(current == 'home', 'page', 'false')}">Home</a>
       <a href="/ask" aria-current="{!IF(current == 'ask', 'page', 'false')}">Ask</a>
+      <a href="/why" aria-current="{!IF(current == 'why', 'page', 'false')}">Why now</a>
       <a href="/privacy" aria-current="{!IF(current == 'privacy', 'page', 'false')}">Privacy</a>
       <a href="/terms" aria-current="{!IF(current == 'terms', 'page', 'false')}">Terms</a>
       <a href="/messaging" aria-current="{!IF(current == 'messaging', 'page', 'false')}">Messaging</a>
@@ -512,10 +513,10 @@ a.btn:hover { text-decoration:none; }
 
   <footer class="page">
     <p class="stand">
-      In 2022, more than a third of employed Canadians with a disability had an
-      accommodation need go unmet. Curb Cut is built for them, and for everyone
-      across North America who has been asked to explain themselves to a stranger
-      in order to get a chair.
+      Thirty in a hundred white-collar employees have a disability. Three tell
+      their employer. Of the ones who did, five in six say it got them better
+      support. Curb Cut is built for the twenty-seven who decided it was not
+      worth finding out.
     </p>
     <p>
       Every promise here is enforced somewhere you can check. A field that does
@@ -528,10 +529,13 @@ a.btn:hover { text-decoration:none; }
       <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
     </p>
     <p class="fine">
-      Cost figures: Job Accommodation Network employer survey, 1 January 2019 to
-      31 December 2024, 5,406 employer responses &middot; askjan.org<br/>
+      Cost figures: Job Accommodation Network, 26,028 employers surveyed
+      1 January 2019 to 31 December 2024, 5,406 responses, 1,425 giving cost
+      data &middot; askjan.org<br/>
+      Disclosure figures: Coqual, Disabilities and Inclusion &middot; coqual.org<br/>
       Unmet-need figures: Statistics Canada, Canadian Survey on Disability, 2022
-      &middot; statcan.gc.ca
+      &middot; statcan.gc.ca<br/>
+      Every figure, with its denominator and its caveats: docs/EVIDENCE.md
     </p>
   </footer>
 </main>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Why an agent for the person is needed now: the disclosure gap, the automation of the employer side, and the harms this design had to prevent in itself.</description>
+    <label>Why now</label>
+</ApexPage>

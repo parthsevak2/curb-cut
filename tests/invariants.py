@@ -353,6 +353,23 @@ if os.path.exists(PRIV):
         check('privacy-states-mobile-sharing', needle in priv,
               f'the privacy policy does not contain {why}, which carriers check for')
 
+
+# 14. Every figure the public site quotes must be recorded in docs/EVIDENCE.md
+#     with its source and its denominator. The site's entire argument is that a
+#     claim should be checkable, and it once shipped "61 out of every 100"
+#     against the wrong denominator. A number without a source is decoration.
+EV = os.path.join(ROOT, 'docs/EVIDENCE.md')
+if os.path.exists(EV):
+    evidence = open(EV).read()
+    figure = re.compile(r'\$[\d,]+|\b\d{1,3}(?:,\d{3})+\b|\b\d+(?:\.\d+)?%')
+    for pg in glob.glob(os.path.join(PAGES, '*.page')):
+        body = re.sub(r'<style.*?</style>', '', open(pg).read(), flags=re.S)
+        for fig in sorted(set(figure.findall(body))):
+            check('figure-has-evidence', fig in evidence,
+                  f'{os.path.basename(pg)} states {fig}, which is not recorded in docs/EVIDENCE.md')
+else:
+    check('evidence-file-exists', False, 'docs/EVIDENCE.md is missing; the site quotes unsourced numbers')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')

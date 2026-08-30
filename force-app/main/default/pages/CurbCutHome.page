@@ -39,16 +39,17 @@
     <p class="sec-label">The number this is built on</p>
     <h2>Sixty-one employers in a hundred paid nothing</h2>
     <p>
-      The Job Accommodation Network asked 5,406 employers what accommodations
-      actually cost them, between January 2019 and December 2024. This is what
-      they said.
+      The Job Accommodation Network surveyed 26,028 employers who had contacted
+      it for accommodation guidance between January 2019 and December 2024.
+      5,406 replied, and 1,425 of those gave actual cost figures. This is what
+      those 1,425 said.
     </p>
 
     <div class="tally">
       <div class="tally-fig">
-        <p class="bignum">61<small>of every 100 cost the employer nothing at all</small></p>
+        <p class="bignum">61<small>of every 100 of them paid nothing at all</small></p>
         <div class="dots" role="img"
-             aria-label="A grid of 100 squares. 61 are filled in, representing the 61 percent of employers who reported no cost at all. 39 are empty, representing those who reported some cost, with a median of about 300 dollars, paid once.">
+             aria-label="A grid of 100 squares. 61 are filled in, representing the 61 percent of the 1,425 employers who gave cost figures and reported no cost at all. 39 are empty: 33 reported a one-time cost with a median of about 300 dollars, and 6 reported an ongoing cost with a median of about 2,400 dollars a year.">
           <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
           <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
           <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
@@ -58,16 +59,43 @@
       </div>
       <p class="tally-key">
         <span><i class="on"></i> Cost the employer nothing</span>
-        <span><i></i> Cost something. Median: about $300, once.</span>
+        <span><i></i> Cost something: 33 one-time, median $300; 6 ongoing, median $2,400 a year.</span>
       </p>
     </div>
 
     <p>
+      Two thirds of employers called the adjustment very or extremely effective.
+      <strong>Twelve per cent said it did not work</strong>, and that belongs on
+      this page too, because a page that quotes only the two thirds is selling
+      something. Everyone in this survey had already contacted JAN for help, so
+      these are employers who were already trying.
+    </p>
+    <p>
       And yet in 2022, Statistics Canada found that
       <strong>more than a third of employed Canadians with a disability had an
       accommodation need that went unmet</strong>. The most common thing people
-      needed was not equipment. It was modified working hours.
+      needed was not equipment. It was modified working hours &mdash; a change
+      that costs nothing and requires only that somebody say yes.
     </p>
+  </section>
+
+  <section>
+    <p class="sec-label">The gap</p>
+    <h2>Thirty in a hundred have one. Three tell anyone.</h2>
+    <p>
+      Among college-educated people in white-collar jobs in the United States,
+      <strong>30% have a disability</strong> under the federal definition.
+      <strong>3.2% disclose it to their employer.</strong> And of the people who
+      did disclose, <strong>83% said it got them better support</strong>.
+    </p>
+    <p>
+      Disclosure works for five out of six people who try it, and almost nobody
+      tries. That is not a population weighing costs and benefits. That is a
+      door nobody can get through.
+    </p>
+    <div class="cta">
+      <a class="btn" href="/why">Why this matters more in 2026 <span class="arrow">&rarr;</span></a>
+    </div>
   </section>
 
   <section>
@@ -242,7 +270,10 @@
     <h2>Every promise on this page is enforced somewhere</h2>
     <p>
       A commitment that lives only in a policy document is an intention, and
-      intentions are not load bearing. These run before any change ships.
+      intentions are not load bearing. These run before any change ships. Every
+      figure on this site is recorded with its source, its date and its
+      denominator in <span class="kw">docs/EVIDENCE.md</span>, including the
+      ones that weaken the argument.
     </p>
     <div class="proof">
       <div><b>126</b><span>structural checks that must hold before anything ships</span></div>

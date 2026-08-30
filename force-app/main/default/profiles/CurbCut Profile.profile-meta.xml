@@ -21,6 +21,10 @@
         <apexPage>messaging</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
+    <pageAccesses>
+        <apexPage>why</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <classAccesses>
         <apexClass>CurbCutWeb</apexClass>
         <enabled>true</enabled>
