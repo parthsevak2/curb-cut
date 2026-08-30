@@ -12,3 +12,7 @@ transcripts/
 
 # OS
 .DS_Store
+
+# Local channel config — never commit
+.env
+channels/.env
