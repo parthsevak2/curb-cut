@@ -217,6 +217,7 @@ footer.page {
   margin-top:4rem; padding:2.2rem 0 4rem; border-top:4px solid var(--ink);
   color:var(--ink-soft); font-size:.95rem;
 }
+footer.page .who { color:var(--ink-soft); }
 footer.page .stand {
   font-family:Archivo,system-ui,sans-serif; font-size:1.15rem; font-weight:600;
   line-height:1.42; color:var(--ink); letter-spacing:-.012em;
@@ -265,22 +266,26 @@ footer.page p { margin-bottom:.6rem; }
 
   <footer class="page">
     <p class="stand">
-      Every promise on this site is enforced somewhere you can check. A field
-      that does not exist. A rule that refuses the write. A test that fails the
-      build. A commitment that lives only in a policy document is not a
-      commitment &mdash; it is an intention, and intentions are not load bearing.
+      In 2022, more than a third of employed Canadians with a disability had an
+      accommodation need go unmet. Curb Cut is built for them, and for everyone
+      across North America who has been asked to explain themselves to a stranger
+      in order to get a chair.
     </p>
     <p>
-      <strong>Curb Cut</strong> is designed and built in Welland, Ontario,
-      by Parth Sevak.
+      Every promise here is enforced somewhere you can check. A field that does
+      not exist. A rule that refuses the write. A test that fails the build.
+      A commitment that lives only in a policy document is an intention, and
+      intentions are not load bearing.
     </p>
-    <p>
-      Questions, or anything held about you:
+    <p class="who">
+      Built by <strong>Parth Sevak</strong>. Welland, Ontario, Canada.
       <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
     </p>
     <p class="fine">
-      Cost figures come from the Job Accommodation Network employer survey
-      through 2024 &middot; askjan.org
+      Cost figures: Job Accommodation Network employer survey, 1 January 2019 to
+      31 December 2024, 5,406 employer responses &middot; askjan.org<br/>
+      Unmet-need figures: Statistics Canada, Canadian Survey on Disability, 2022
+      &middot; statcan.gc.ca
     </p>
   </footer>
 </main>
