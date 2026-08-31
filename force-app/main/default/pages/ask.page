@@ -87,6 +87,65 @@
     <div id="doneBox" class="doneBox"></div>
   </section>
 
+  <section id="standingSection" aria-labelledby="standingHeading">
+    <p class="sec-label">Optional, and separate from anything above</p>
+    <h2 id="standingHeading">Say it once, instead of to every new manager</h2>
+    <p>
+      If something about how you work is going to be true next month as well as
+      today, you can have it remembered and shown to the people you choose. It
+      is written in your words and never rewritten into policy language.
+    </p>
+    <div class="plain">
+      <span class="tag">Before you save anything</span>
+      <p>
+        This is a disclosure that travels ahead of you into rooms you are not
+        in. That is the whole point of it, and it is also the risk, so you pick
+        exactly who sees it, you can see everyone who has been shown it, and you
+        can turn it off in one press without being asked why.
+      </p>
+    </div>
+
+    <form id="standingForm" onsubmit="return false;">
+      <label for="statement" class="fieldLabel">What should be remembered?</label>
+      <p id="statementHelp" class="fieldHelp">
+        In your words. For example: please face me when you speak, or please
+        send an agenda before meetings.
+      </p>
+      <textarea id="statement" name="statement" rows="3" aria-describedby="statementHelp"></textarea>
+
+      <label for="sharedWith" class="fieldLabel">Who should see it?</label>
+      <p id="sharedHelp" class="fieldHelp">Only these people. Nobody else is told.</p>
+      <select id="sharedWith" class="picker" aria-describedby="sharedHelp">
+        <option value="Manager only">My manager only</option>
+        <option value="Meeting hosts">Whoever runs a meeting I am in</option>
+        <option value="My team">My team</option>
+      </select>
+
+      <label for="scope" class="fieldLabel">When does it apply?</label>
+      <select id="scope" class="picker">
+        <option value="Always">Always</option>
+        <option value="Meetings">In meetings</option>
+        <option value="This team">On this team</option>
+        <option value="This manager">With this manager</option>
+      </select>
+
+      <div class="actions">
+        <button type="button" id="saveStanding" class="btn primary">Remember this</button>
+      </div>
+    </form>
+
+    <div id="standingStatus" role="status" aria-live="polite" class="statusLine"></div>
+
+    <div id="standingSaved" hidden="hidden">
+      <div id="standingBox" class="doneBox"></div>
+      <div class="actions">
+        <button type="button" id="whoBtn" class="btn">Who has been shown this?</button>
+        <button type="button" id="offBtn" class="btn">Turn it off</button>
+      </div>
+      <div id="whoBox" class="optionsBox" hidden="hidden"></div>
+    </div>
+  </section>
+
 </c:CurbCutShell>
 
 <script type="text/javascript">
@@ -196,6 +255,64 @@
   document.getElementById('stopHere').addEventListener('click', function () {
     say('That is fine. Knowing is allowed, and asking is optional. ' +
         'Nothing has been sent to anyone.');
+  });
+
+
+  /* ---------- standing preferences ----------
+     Reachable here for the first time. This capability has existed since the
+     first week, wired to the agent, which made it usable by voice and text and
+     by nobody in a browser. Zero preferences existed in the org. */
+  var stStatus = document.getElementById('standingStatus');
+  var stSaved  = document.getElementById('standingSaved');
+  var stBox    = document.getElementById('standingBox');
+  var whoBox   = document.getElementById('whoBox');
+  var prefId   = null;
+
+  function saySt(msg) { stStatus.textContent = msg; }
+
+  document.getElementById('saveStanding').addEventListener('click', function () {
+    var text = document.getElementById('statement').value.trim();
+    if (!text) {
+      saySt('Write what you would like remembered, in your own words.');
+      document.getElementById('statement').focus();
+      return;
+    }
+    var b = this; busy(true, b); saySt('Saving it in your words...');
+    remote('{!$RemoteAction.CurbCutWeb.saveStanding}',
+      [text, document.getElementById('scope').value,
+       document.getElementById('sharedWith').value, true],
+      function (r) {
+        busy(false, b);
+        saySt(r.message);
+        if (r.created) {
+          prefId = r.preferenceId;
+          stBox.textContent = text;
+          show(stSaved);
+          document.getElementById('standingHeading').setAttribute('tabindex', '-1');
+        }
+      });
+  });
+
+  document.getElementById('whoBtn').addEventListener('click', function () {
+    if (!prefId) { return; }
+    var b = this; busy(true, b); saySt('Looking up who has been shown it...');
+    remote('{!$RemoteAction.CurbCutWeb.whoSaw}', [prefId], function (r) {
+      busy(false, b);
+      saySt(r.message);
+      whoBox.textContent = r.shownTo || '';
+      whoBox.hidden = !r.shownTo;
+    });
+  });
+
+  document.getElementById('offBtn').addEventListener('click', function () {
+    if (!prefId) { return; }
+    var b = this; busy(true, b); saySt('Turning it off...');
+    remote('{!$RemoteAction.CurbCutWeb.revokeStanding}', [prefId], function (r) {
+      busy(false, b);
+      saySt(r.message + ' You were not asked why, and there is nowhere to record a reason.');
+      hide(stSaved);
+      prefId = null;
+    });
   });
 
   /* Tapping a starter fills the box and leaves the cursor in it, so it is a

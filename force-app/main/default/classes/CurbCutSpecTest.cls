@@ -91,7 +91,14 @@ private class CurbCutSpecTest {
         Test.stopTest();
         System.assertEquals(true, res.ok);
         System.assert(res.message.contains('will see it'), 'Disclosure must be stated up front');
-        System.assert(res.message.contains('STOP'), 'Revocation must be explained before agreeing');
+        // OFF, never STOP. This assertion used to require the opposite and so
+        // held the bug in place: STOP is a carrier keyword that unsubscribes the
+        // person from the number entirely and never reaches our code, so anyone
+        // following that instruction would lose the service and keep the
+        // preference they were trying to turn off.
+        System.assert(res.message.contains('OFF'), 'The way to turn it off must be stated');
+        System.assert(!res.message.contains('STOP'),
+            'Must not tell anyone to reply STOP; the carrier intercepts it: ' + res.message);
         System.assertEquals('Manager only',
             [SELECT Shared_With__c FROM Access_Preference__c LIMIT 1].Shared_With__c);
     }
