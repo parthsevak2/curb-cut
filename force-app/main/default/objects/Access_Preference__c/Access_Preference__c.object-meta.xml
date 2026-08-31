@@ -14,5 +14,12 @@
         <displayFormat>PR-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Access Preferences</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Statement__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Shared_With__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Scope__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Auto_Apply__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Revoked_On__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

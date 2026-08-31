@@ -14,5 +14,12 @@
         <displayFormat>BR-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Barrier Reports</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Functional_Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Inbound_Modality__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Interpreter_Needed__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Anonymous__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Access_Profile__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

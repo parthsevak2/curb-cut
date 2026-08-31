@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Asked_For_Plain_Language</fullName>
+    <columns>NAME</columns>
+    <columns>Preferred_Modality__c</columns>
+    <columns>Never_Call__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Plain_Language_Mode__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Asked for plain language</label>
+</ListView>

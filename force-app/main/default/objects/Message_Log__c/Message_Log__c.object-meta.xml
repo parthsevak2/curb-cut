@@ -14,5 +14,12 @@
         <displayFormat>ML-{000000}</displayFormat>
     </nameField>
     <pluralLabel>Message Logs</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Channel__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Direction__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Attempted_At__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Detail__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

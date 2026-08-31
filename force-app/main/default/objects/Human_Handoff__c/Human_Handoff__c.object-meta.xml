@@ -19,5 +19,12 @@
     <label>Human Handoff</label>
     <nameField><label>Handoff Number</label><type>AutoNumber</type><displayFormat>HH-{00000}</displayFormat></nameField>
     <pluralLabel>Human Handoffs</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Requested_At__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Reachable_By__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Handler_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Picked_Up_At__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Barrier_Report__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>
