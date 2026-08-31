@@ -32,6 +32,9 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Email | `curbcut@…apex.salesforce.com` (see `channels/.env.example`) | live |
 | Agent | Curb Cut v6 | active |
 | Console (internal) | `/lightning/app/Curb_Cut_Console` | live |
+| Why now | `/curbcut/why` | live |
+| Messaging programme | `/curbcut/messaging` | live |
+| MCP server | `node channels/mcp-server.mjs` | 3 tools, none of which can send |
 
 The console is the half of this that nobody demos. Every promise the assistant
 makes about a person reaching a human being is worthless unless a human being
@@ -84,13 +87,13 @@ node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 | Path | What |
 |---|---|
 | `force-app/main/default/objects/` | 8 objects, 46 fields, 5 triage list views |
-| `force-app/main/default/classes/` | 10 Apex classes + 5 test classes, 45 tests |
+| `force-app/main/default/classes/` | 11 Apex classes + 6 test classes, 56 tests |
 | `force-app/main/default/aiAuthoringBundles/` | the Agent Script |
 | `force-app/main/default/pages/` `components/` `sites/` | the public site |
 | `force-app/main/default/emailservices/` | inbound email channel |
 | `force-app/main/default/applications/` `tabs/` `flexipages/` | the internal console |
 | `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard |
-| `channels/` | SMS + voice relay, Twilio configuration |
+| `channels/` | SMS + voice relay, MCP server, Twilio configuration and A2P copy |
 | `tests/` | invariants, adversarial suite, headless runner, scorer |
 | `submission/` | shot list, submission text |
 | `legal/` | privacy and terms source |
@@ -108,6 +111,8 @@ weak lives.
 | [`docs/BRD.md`](docs/BRD.md) | Business requirements and traceability |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | What is next, and what was rejected |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Every significant call and why |
+| [`docs/EVIDENCE.md`](docs/EVIDENCE.md) | Every public figure, with source, denominator and caveat |
+| [`docs/AGENT-INTERFACES.md`](docs/AGENT-INTERFACES.md) | Headless, MCP, agent-to-agent, and the profile we will not build |
 | [`CRITIQUE.md`](CRITIQUE.md) | What is still wrong |
 | [`SPEC-CONFORMANCE.md`](SPEC-CONFORMANCE.md) | Build spec conformance |
 | [`FINDINGS.md`](FINDINGS.md) | Adversarial run results |

@@ -412,6 +412,61 @@ for obj in objects():
     check('object-has-layout', bool(lay),
           f'{obj} has no page layout in source; the org is running an auto-generated one')
 
+
+# 16. A cost of zero must mean "the employer pays nothing", never "we do not
+#     know". Nine of twenty-four library rows carried a placeholder 0 with
+#     Zero_Cost false, which the Apex happened to guard against and the MCP
+#     surface did not: it answered "typically about $0, once" for a booked ASL
+#     interpreter. Someone could repeat that to their employer.
+if os.path.exists(CSV_):
+    import csv as _csv
+    with open(CSV_, newline='') as fh:
+        for row in _csv.DictReader(fh):
+            cost = (row.get('Typical_Cost__c') or '').strip()
+            zero = (row.get('Zero_Cost__c') or '').strip().lower() == 'true'
+            if cost in ('0', '0.0', '0.00'):
+                check('zero-cost-means-free', zero,
+                      f"{row.get('Option__c')} stores a cost of 0 without Zero_Cost true; "
+                      f'leave the figure blank when none is published')
+            if zero and cost not in ('', '0', '0.0', '0.00'):
+                check('zero-cost-is-consistent', False,
+                      f"{row.get('Option__c')} is marked zero-cost but carries a figure of {cost}")
+
+
+# 17. The agent-to-agent payload is an allow-list, so a field added to the
+#     schema next year cannot leak by default. These names must never appear in
+#     the builder at all, in a SELECT or anywhere else.
+HO = os.path.join(CLS, 'CurbCutHandover.cls')
+if os.path.exists(HO):
+    ho = open(HO).read()
+    for banned in ['Person_Handle__c', 'Recipient_Hash__c', 'OwnerId', 'CreatedById',
+                   'Decline_Reason__c', 'Access_Profile__c']:
+        check('handover-allowlist', banned not in ho,
+              f'CurbCutHandover references {banned}; the handover payload is an '
+              f'allow-list and this is not on it')
+    # The refusal is the whole design, so it must actually be there.
+    check('handover-refuses-without-consent',
+          'Person_Approved__c != true' in ho and 'RefusedException' in ho,
+          'CurbCutHandover no longer refuses to build a payload without consent')
+    check('handover-declares-absence',
+          'must_not_ask' in ho and 'no such field exists in this system' in ho,
+          'CurbCutHandover no longer tells the recipient what it must not ask for')
+
+# The MCP surface must never gain a tool that sends anything. A model can be
+# talked into calling a tool; it cannot be talked into calling one that is not
+# there.
+MCP = os.path.join(ROOT, 'channels/mcp-server.mjs')
+if os.path.exists(MCP):
+    mcp = open(MCP).read()
+    tool_names = re.findall(r"name:\s*'(curbcut_[a-z_]+)'", mcp)
+    for t in tool_names:
+        check('mcp-has-no-send-tool',
+              not any(w in t for w in ['send', 'submit', 'file_', 'notify', 'email']),
+              f'the MCP server exposes {t}; nothing reachable by another model may '
+              f'send an accommodation request on a person behalf')
+    check('mcp-refuses-medical', 'FORBIDDEN' in mcp and 'refused' in mcp,
+          'the MCP server no longer refuses medical input')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')

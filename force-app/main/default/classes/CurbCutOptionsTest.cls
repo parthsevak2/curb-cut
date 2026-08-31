@@ -26,7 +26,14 @@ private class CurbCutOptionsTest {
             new Accommodation_Option__c(
                 Option__c = 'Alternative or ergonomic keyboard',
                 Plain_Language_Summary__c = 'A keyboard shaped to make typing easier or less painful.',
-                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/topics/costs.cfm')
+                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/topics/costs.cfm'),
+            // Costs money, but no figure is published. The library must say
+            // nothing about the price rather than imply one.
+            new Accommodation_Option__c(
+                Option__c = 'ASL interpreter booked in advance',
+                Plain_Language_Summary__c = 'A human interpreter arranged ahead of the meeting.',
+                Zero_Cost__c = false, Typical_Cost__c = null,
+                Source_URL__c = 'https://askjan.org/topics/costs.cfm')
         };
     }
 
@@ -196,5 +203,32 @@ private class CurbCutOptionsTest {
         System.assertEquals(false, one.noMatch, 'singular found nothing');
         System.assertEquals(one.options, many.options,
             'singular and plural gave different answers');
+    }
+
+    /**
+     * An option with no published price must produce no price. A placeholder
+     * zero in the library once made another surface answer "typically about
+     * $0, once" for a booked ASL interpreter. Somebody could repeat that to
+     * their employer and lose both the argument and their footing, on a number
+     * we made up. Saying nothing is the correct answer to a fact we lack.
+     */
+    @IsTest
+    static void neverStatesAPriceItDoesNotHave() {
+        Test.startTest();
+        CurbCutOptions.Result res = run('I need an interpreter booked for meetings');
+        Test.stopTest();
+        System.assertEquals(false, res.noMatch, 'Should have matched the interpreter');
+        System.assert(res.options.contains('interpreter'),
+            'Expected the interpreter option, got: ' + res.options);
+        // Scope the assertion to the interpreter's own block. Other options in
+        // the same answer are legitimately free and do say so.
+        Integer start = res.options.indexOf('ASL interpreter');
+        Integer next  = res.options.indexOf('\n\n', start);
+        String block  = next > start ? res.options.substring(start, next)
+                                     : res.options.substring(start);
+        System.assert(!block.contains('$'),
+            'Stated a price for an option that has none: ' + block);
+        System.assert(!block.contains('costs nothing'),
+            'Claimed an unpriced option is free: ' + block);
     }
 }
