@@ -79,13 +79,13 @@
       </p>
     </div>
     <p>
-      Three other words do something narrower inside a conversation. They are not
-      ways to stop messages:
+      Four other words do something different. None of them stops the messages:
     </p>
     <ul class="kwlist">
-      <li><span class="kw">DELETE</span><span>Throw away a drafted request before it is sent.</span></li>
-      <li><span class="kw">OFF</span><span>Turn off a preference you saved earlier. Immediate, and you will not be asked why.</span></li>
-      <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours.</span></li>
+      <li><span class="kw">HUMAN</span><span>Hands you to a real person, on the channel you are already using. Works everywhere, at any point, and never becomes a phone call.</span></li>
+      <li><span class="kw">OFF</span><span>Turns off a preference you saved earlier. Immediate, and you will not be asked why. Send it with the code you were given, like <span class="kw">OFF 4KQ7MT</span>.</span></li>
+      <li><span class="kw">WHO</span><span>Lists everyone who has been shown a preference of yours. Sent with your code the same way.</span></li>
+      <li><span class="kw">DELETE</span><span>Throws away a drafted request before it is sent. This one only means something while a draft is on the table.</span></li>
     </ul>
   </section>
 
