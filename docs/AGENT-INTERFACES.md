@@ -78,6 +78,39 @@ us. Somebody who already lives inside another assistant should be able to ask
   argument on a number we invented. Nine library rows were corrected, and both
   an invariant and an Apex test now hold the line.
 
+## 2b. The internal agent, and what is honestly wrong with it
+
+`Curb_Cut_Desk` is a second Agentforce agent, active in the org, sharing the
+public agent's grounded library and its refusals but pointed at staff.
+
+**What is verified working.** It refuses to tell a member of staff anything
+medical about a person, including when the asker says they are a manager or that
+it is urgent. It refuses to name an accommodation from its own knowledge — an
+earlier version answered "on-screen keyboards, a scribe, suppliers", none of
+which are in the library, and that is fixed. It gives correct guidance on never
+routing somebody to a telephone, including the sentence to use with a manager.
+
+Those two refusals are the properties that matter, and they hold.
+
+**What is not working, stated plainly.**
+
+1. Asked what to offer, it says it will check the library and then asks
+   permission rather than calling the action. It does not invent, which is the
+   safe failure, but it does not finish the job either.
+2. One route errors and returns the agent's configured error message.
+
+Five rounds of narrowing the routing rules, labelling the subagents, and
+removing an action gate that could never open did not move either behaviour. I
+was wrong about the gate being the cause. Rather than keep tuning prompts
+through a ten-step publish loop, the state is recorded here so nobody
+demonstrates a path that does not work.
+
+**So the grounded internal surface is the component, not the agent.**
+`CurbCutAssist` on the handoff record calls `CurbCutOptions` directly, is
+deterministic, has ten tests on it, and provably cannot hallucinate about a
+disabled person. The agent is live and supplementary until the two behaviours
+above are fixed.
+
 ## 3. Agent-to-agent handover
 
 `CurbCutHandover.payloadFor(requestId)`, also invocable from a flow.
