@@ -23,5 +23,12 @@
         <displayFormat>AR-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Accommodation Requests</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Interactive_Process_Due__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Manager_Response__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Person_Approved__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Approved_At__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Barrier_Report__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

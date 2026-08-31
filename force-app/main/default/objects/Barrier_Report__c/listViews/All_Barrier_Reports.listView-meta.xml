@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Barrier_Reports</fullName>
+    <columns>NAME</columns>
+    <columns>Functional_Description__c</columns>
+    <columns>Inbound_Modality__c</columns>
+    <columns>Interpreter_Needed__c</columns>
+    <columns>Anonymous__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All barrier reports</label>
+</ListView>

@@ -8,6 +8,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>CurbCutAssist</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CurbCutConsole</apexClass>
         <enabled>true</enabled>
     </classAccesses>

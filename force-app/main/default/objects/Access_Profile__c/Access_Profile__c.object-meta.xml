@@ -14,5 +14,11 @@
         <displayFormat>AP-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Access Profiles</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Preferred_Modality__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Never_Call__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Plain_Language_Mode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>
