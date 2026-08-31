@@ -31,9 +31,10 @@ Every field below is written to be pasted as-is. Figures verified 31 August 2026
 > in the schema, the agent may only name accommodations a grounded Apex action
 > returned, and nothing reaches an employer without an explicit yes — a hedge is
 > refused. Observability is a delivery ledger that records every attempt on every
-> channel with a salted hash and never the message, plus 446 structural
-> invariants, 105 Apex tests and six auditors that fail the build, including one
-> that fails if an error message blames the user or leaves them nowhere to go.
+> channel with a salted hash and never the message, plus 468 structural
+> invariants, 116 Apex tests and six auditors that fail the build — including one
+> that fails if an error message blames the user, and one that fails if our copy
+> tells somebody to send a word no channel actually routes.
 
 ---
 
@@ -63,9 +64,10 @@ the person; none of it hands the person anything. That asymmetry is what makes a
 agent the right answer in 2026 rather than a nicer form.
 
 **What it is.** Curb Cut is an Agentforce agent whose principal is the worker.
-Four front doors — web, text, voice and email — plus a Model Context Protocol
-server so the same grounded library is reachable from whatever assistant somebody
-already uses. A person says what is *hard*, never why. They get real options from
+Five front doors — web, text, voice, email and Slack — plus a Model Context
+Protocol server so the same grounded library is reachable from whatever assistant
+somebody already uses. One Apex router decides what every control word means, so
+`OFF` cannot mean one thing on a phone and another in an inbox. A person says what is *hard*, never why. They get real options from
 a sourced library with what each typically costs. If they want to ask, a request
 is written in their words and read back, and nothing is sent until they clearly
 agree. They can send a photo instead of typing, or a signed video — which is
@@ -94,6 +96,12 @@ the same words, and hands the operator the sentence to use on their own manager.
 code that creates a request refuses to run without approval and a test proves the
 refusal.
 
+*The way out works from anywhere.* Send `HUMAN` on any channel and a real person
+picks it up where you already are. Send `OFF` and the six-character code you were
+given, and a standing disclosure is withdrawn immediately, no reason asked — from
+a text message, on a service that holds no account and no number it could look you
+up with. You keep the code; we keep a salted hash of it.
+
 *Nobody is ever routed to a telephone.* For some of the people this serves, a
 phone call is a door that does not open. There is exactly one narrow exception —
 an emergency escalation for a named squad — which cannot ring the person, because
@@ -117,11 +125,13 @@ what they did.
 
 ## Tools used
 
-Agentforce (Agent Script, two agents: one public, one internal), Apex (15
-classes, 12 test classes), Lightning Web Components (5), Force.com Sites +
-Visualforce for the anonymous public site, Flows-free architecture, Salesforce
+Agentforce (Agent Script, two agents: one public, one internal), Apex (17
+classes, 13 test classes), Lightning Web Components (5), Force.com Sites +
+Visualforce for the anonymous public site, an authenticated Apex REST channel
+API that every non-web channel shares, Flows-free architecture, Salesforce
 Reports and Dashboards, Path, Twilio (SMS + voice relay over TwiML), Salesforce
-Email Services, a zero-dependency Model Context Protocol server, and the
+Email Services, a Slack app (Events API and slash command, signature-verified,
+direct messages only), a zero-dependency Model Context Protocol server, and the
 Salesforce Agent API for headless invocation. Python and Node for the audit
 suite; GitHub Actions for CI.
 
@@ -141,6 +151,9 @@ https://github.com/parthsevak2/curb-cut
 
 ## Known limitations, stated plainly
 
-Documented in `CRITIQUE.md` and `docs/AGENT-INTERFACES.md` rather than omitted.
+Documented in `CRITIQUE.md`, `docs/CHANNELS.md` and `docs/AGENT-INTERFACES.md`
+rather than omitted. `docs/CHANNELS.md` opens with the six control words this
+project advertised for months and did not route, including the one that withdraws
+a disclosure.
 No screen-reader user has tested this yet; one session with somebody who uses one
 daily would be worth more than the next five features.
