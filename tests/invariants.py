@@ -262,6 +262,7 @@ for rp in glob.glob(os.path.join(DEF, 'reports', '*', '*.report-meta.xml')):
 #     the opt-in. Both are now checked here, because "we wrote it down once" is
 #     exactly how it was missed.
 RELAY = os.path.join(ROOT, 'channels/sms-relay.mjs')
+SITE_URL = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut'
 PAGES = os.path.join(DEF, 'pages')
 
 if os.path.exists(RELAY):
@@ -292,6 +293,21 @@ if os.path.exists(RELAY):
     ]:
         check('sms-help-reply-complete', needle in helper,
               f'HELP reply is missing the {why}')
+
+
+    # Carrier keyword auto-responses cap at 320 characters. Ours are sent as
+    # TwiML, which has no such cap, so an over-long reply passes every test we
+    # run and is then silently truncated in the Messaging Service field - and
+    # /messaging, which quotes these verbatim as "the exact messages, as sent",
+    # becomes a page that lies. One text, short enough for both.
+    for const in ['HELP_REPLY', 'STOP_REPLY', 'START_REPLY']:
+        m = re.search(const + r'\s*=(.*?);\n', relay, re.S)
+        if not m: continue
+        literal = ''.join(re.findall(r"'([^']*)'", m.group(1)))
+        literal += ''.join(re.findall(r'`([^`]*)`', m.group(1)))
+        literal = literal.replace('${SITE}', SITE_URL)
+        check('keyword-reply-fits-carrier-field', len(literal) <= 320,
+              f'{const} is {len(literal)} characters; the carrier keyword field caps at 320')
 
     # Reserved keywords belong to the carrier and to the person, not to us. An
     # assistant improvising an answer to STOP is someone asking to be left alone

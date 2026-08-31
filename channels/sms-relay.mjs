@@ -54,11 +54,14 @@ const DISCLOSURE =
   `Terms ${SITE}/terms Privacy ${SITE}/privacy`;
 
 // HELP is a reserved keyword and must be answered by us, not by the agent.
+// Kept under 320 characters so the identical text fits the carrier keyword
+// field too. Two different HELP replies would make /messaging quote something
+// that is not what arrives, and that page exists to be verifiable.
 const HELP_REPLY =
-  'Curb Cut helps you find out what could make work easier at work, and ask ' +
+'Curb Cut helps you find out what could make work easier at work, and ask ' +
   'for it, without ever saying what condition you have. ' +
   'Message and data rates may apply. Reply STOP to stop. ' +
-  `Help: parth.sevak2@gmail.com  Terms ${SITE}/terms Privacy ${SITE}/privacy`;
+  `Help: parth.sevak2@gmail.com Terms ${SITE}/terms`;
 
 const STOP_REPLY =
   'Curb Cut: you will not get any more messages from this number. ' +
