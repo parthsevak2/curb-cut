@@ -75,7 +75,7 @@ guest profile, which is how `/messaging` first shipped as a 401.
 
 | Keywords | Reply |
 |---|---|
-| HELP, INFO | Curb Cut helps you find out what could make work easier at work, and ask for it, without ever saying what condition you have. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms [link] Privacy [link] |
+| HELP, INFO | Curb Cut helps you find out what could make work easier at work, and ask for it, without ever saying what condition you have. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms |
 | STOP, STOPALL, UNSUBSCRIBE, CANCEL, END, QUIT | Curb Cut: you will not get any more messages from this number. Reply START if you ever want to come back. Nothing about you is kept. |
 | START, YES, UNSTOP | Curb Cut: you are back. Tell me what is hard at work right now. Message and data rates may apply. Reply HELP for help, STOP to stop. |
 
@@ -91,6 +91,15 @@ guest profile, which is how `/messaging` first shipped as a 401.
 | 30917 | complete workflow for every opt-in method | only one method, described end to end |
 | 30924 | consent language in the opt-in flow | on the notice itself, reproduced on the page |
 | 30925 | opt-in unchecked by default, active consent | there is no checkbox; the person sends the first message |
+
+## A limit worth knowing
+
+Carrier keyword auto-responses cap at **320 characters**. Ours are delivered as
+TwiML, which has no such cap, so an over-long HELP reply passed every test and
+would then have been silently truncated in the Messaging Service field - leaving
+`/messaging` quoting text that is not what arrives, on the one page whose whole
+job is to be verifiable. The HELP reply is now 279 characters and identical
+everywhere. An invariant fails the build if any keyword reply exceeds 320.
 
 ## What I could not do
 
