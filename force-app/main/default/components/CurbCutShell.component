@@ -36,7 +36,7 @@
   --ink:#14171A;            /* 15.8:1 on ground - AAA */
   --ink-soft:#41474A;       /* 8.9:1  on ground - AAA */
   --ink-mute:#5E6568;       /* 5.9:1  on ground - AA large, labels only */
-  --line:#C8C6BC; --line-firm:#8E8C82;
+  --line:#C8C6BC; --line-firm:#87857B;   /* 3.28:1 on ground - WCAG 1.4.11 */
   --signal:#8A5D0F;         /* ochre, 5.6:1 - never alone, always with text */
   --signal-bg:#F5E7CC;
   --deep:#1F5A4E;           /* teal, 6.8:1 */
@@ -51,7 +51,7 @@
   :root:not([data-theme="light"]) {
     --ground:#0F1214; --raised:#181C1E; --sunk:#080A0B;
     --ink:#EDEEEA; --ink-soft:#BFC4C2; --ink-mute:#8E9593;
-    --line:#2C3133; --line-firm:#4C5457;
+    --line:#2C3133; --line-firm:#5F676A;   /* 3.25:1 on ground - WCAG 1.4.11 */
     --signal:#E5B15A; --signal-bg:#2E2413;
     --deep:#63B7A3; --deep-bg:#102B26;
     --alert:#E08B82; --alert-bg:#331916;
@@ -61,7 +61,7 @@
 :root[data-theme="dark"] {
   --ground:#0F1214; --raised:#181C1E; --sunk:#080A0B;
   --ink:#EDEEEA; --ink-soft:#BFC4C2; --ink-mute:#8E9593;
-  --line:#2C3133; --line-firm:#4C5457;
+  --line:#2C3133; --line-firm:#5F676A;   /* 3.25:1 on ground - WCAG 1.4.11 */
   --signal:#E5B15A; --signal-bg:#2E2413;
   --deep:#63B7A3; --deep-bg:#102B26;
   --alert:#E08B82; --alert-bg:#331916;
@@ -519,6 +519,11 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
       <button type="button" id="tsize" aria-pressed="false" title="Make the text bigger">A+</button>
       <button type="button" id="tcon" aria-pressed="false" title="Increase contrast">Contrast</button>
     </div>
+    <!-- Text size cycles through three states and aria-pressed is binary, so
+         going from larger to largest announced "pressed" twice and nothing
+         about the size. Someone using these controls is, by definition, likely
+         to be someone who cannot see the change. So it gets said out loud. -->
+    <p id="readerSaid" class="vh" role="status" aria-live="polite"></p>
   </div>
 </div>
 
@@ -580,27 +585,43 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
-  function applySize() {
+  var said = document.getElementById('readerSaid');
+  var SIZE_SAID = ['Text size: normal', 'Text size: larger', 'Text size: largest'];
+  function announce(msg) {
+    if (!said) { return; }
+    // Re-setting identical text does not re-announce, so clear first.
+    said.textContent = '';
+    window.setTimeout(function () { said.textContent = msg; }, 60);
+  }
+
+  function applySize(spoken) {
     root.style.setProperty('--step', STEPS[i]);
     sizeBtn.textContent = LABEL[i];
     sizeBtn.setAttribute('aria-pressed', i > 0 ? 'true' : 'false');
     sizeBtn.setAttribute('title', i === 2 ? 'Back to normal text size' : 'Make the text bigger');
+    sizeBtn.setAttribute('aria-label', SIZE_SAID[i] + '. Press to change.');
+    if (spoken) { announce(SIZE_SAID[i]); }
   }
-  function applyContrast() {
+  function applyContrast(spoken) {
     if (contrast) { root.setAttribute('data-contrast', 'more'); }
     else { root.removeAttribute('data-contrast'); }
     conBtn.setAttribute('aria-pressed', contrast ? 'true' : 'false');
+    conBtn.setAttribute('aria-label',
+      contrast ? 'Higher contrast is on. Press to turn it off.'
+               : 'Higher contrast is off. Press to turn it on.');
+    if (spoken) { announce(contrast ? 'Higher contrast on' : 'Higher contrast off'); }
   }
 
   var s = parseInt(get('cc-size'), 10); if (!isNaN(s) && s >= 0 && s < STEPS.length) { i = s; }
   contrast = get('cc-contrast') === '1';
-  applySize(); applyContrast();
+  // Silent on load: restoring a saved preference is not an event worth announcing.
+  applySize(false); applyContrast(false);
 
   sizeBtn.addEventListener('click', function () {
-    i = (i + 1) % STEPS.length; set('cc-size', i); applySize();
+    i = (i + 1) % STEPS.length; set('cc-size', i); applySize(true);
   });
   conBtn.addEventListener('click', function () {
-    contrast = !contrast; set('cc-contrast', contrast ? '1' : '0'); applyContrast();
+    contrast = !contrast; set('cc-contrast', contrast ? '1' : '0'); applyContrast(true);
   });
 })();
 </script>

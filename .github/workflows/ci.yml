@@ -27,6 +27,10 @@ jobs:
         with: { python-version: "3.12" }
       - name: Schema and wiring invariants
         run: python3 tests/invariants.py
+      - name: Contrast, computed from the design tokens
+        # Accessibility claims rot silently. Somebody nudges a grey to calm a
+        # panel down and the help text under every field stops being readable.
+        run: python3 tests/contrast_audit.py
       - name: XML well-formedness
         run: |
           fail=0
@@ -35,6 +39,22 @@ jobs:
               || { echo "malformed: $f"; fail=1; }
           done < <(find force-app -name '*.xml')
           exit $fail
+
+  # Hits only the public site. No secrets, so it runs on forks too, and it
+  # audits what actually shipped rather than what the source says.
+  public-site:
+    name: Public site
+    runs-on: ubuntu-latest
+    needs: invariants
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Accessibility of the deployed pages
+        run: python3 tests/a11y_audit.py
+      - name: Links resolve and every surface says the same words
+        run: python3 tests/link_and_copy_audit.py
 
   # Needs an org. Skipped automatically when the secret is absent, so forks
   # and first-time contributors still get a green, meaningful CI run.
