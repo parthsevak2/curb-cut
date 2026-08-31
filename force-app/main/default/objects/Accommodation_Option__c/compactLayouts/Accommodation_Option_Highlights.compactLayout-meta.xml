@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accommodation_Option_Highlights</fullName>
+    <fields>Name</fields>
+    <fields>Typical_Cost__c</fields>
+    <fields>Zero_Cost__c</fields>
+    <fields>Precedent_Count__c</fields>
+    <label>Accommodation Option highlights</label>
+</CompactLayout>

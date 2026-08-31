@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Plain_Language_Mode__c</fullName>
+    <description>The person asked for plain language.</description>
+    <inlineHelpText>This person asked for plain language. Write to them the way you would speak: short sentences, no policy words, no acronyms. It is a request, not a judgement about them.</inlineHelpText>
     <label>Plain Language Mode</label>
     <defaultValue>true</defaultValue>
     <type>Checkbox</type>

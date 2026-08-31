@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayoutAssignment>Disclosure_Event_Highlights</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Ledger of every time a preference was shown to someone, visible to the person it concerns. Added after self-critique: a preference that travels ahead of you is a disclosure made in your absence.</description>
     <enableActivities>false</enableActivities>

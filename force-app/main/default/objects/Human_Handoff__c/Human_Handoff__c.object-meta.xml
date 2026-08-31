@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>The guidance belongs beside the record, not in a manual nobody opens.</comment>
+        <content>Curb_Cut_Handoff_Record</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayoutAssignment>Human_Handoff_Highlights</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>The escape hatch. If the agent fails, the person who was already struggling must not be stuck with a machine. Reached by message, never by phone call.</description>
     <enableActivities>false</enableActivities>

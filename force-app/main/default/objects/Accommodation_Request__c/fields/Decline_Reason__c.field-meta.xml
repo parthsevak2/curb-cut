@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Decline_Reason__c</fullName>
     <description>Required if declined. Creates an audit trail and keeps the decline path dignified.</description>
+    <inlineHelpText>The employer's reason, in the employer's words. Never add clinical detail here, and never ask for any in order to fill it in.</inlineHelpText>
     <label>Decline Reason</label>
     <length>32768</length>
     <type>LongTextArea</type>

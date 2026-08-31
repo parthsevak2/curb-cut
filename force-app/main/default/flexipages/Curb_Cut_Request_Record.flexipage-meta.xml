@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Curb Cut Request record page. The guidance sits beside the record rather than in a manual nobody opens at four in the afternoon.</description>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:highlightsPanel</componentName>
+                <identifier>hl</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>header</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:detailPanel</componentName>
+                <identifier>detail</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:relatedListContainer</componentName>
+                <identifier>related</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>richTextValue</name>
+                    <value>&lt;h2&gt;Before you answer this&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Check Person Approved.&lt;/b&gt; If it is not ticked, this request should not exist and should not be acted on.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Interactive Process Due is a real date&lt;/b&gt; and somebody is waiting behind it who cannot see it.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Never ask for anything medical.&lt;/b&gt; Not to verify, not to process, not to be thorough. The system has nowhere to put an answer, and asking is the harm this was built to remove.&lt;/p&gt;&lt;p&gt;&lt;b&gt;&amp;quot;More info&amp;quot; quietly kills requests.&lt;/b&gt; If you set it, say precisely what is needed and by when.&lt;/p&gt;&lt;p&gt;&lt;i&gt;Two people often work one request. Keep the discussion in the feed below so the next person is not starting from nothing.&lt;/i&gt;&lt;/p&gt;</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:richText</componentName>
+                <identifier>guide</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>sidebar</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Curb Cut Request</masterLabel>
+    <sobjectType>Accommodation_Request__c</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
+    <type>RecordPage</type>
+</FlexiPage>

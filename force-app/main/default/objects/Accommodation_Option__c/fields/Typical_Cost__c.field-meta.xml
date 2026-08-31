@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Typical_Cost__c</fullName>
+    <description>Typical one-time cost, where a figure is published.</description>
+    <inlineHelpText>The published typical cost. Leave empty rather than estimating. Someone may repeat this number to their employer.</inlineHelpText>
     <label>Typical Cost</label>
     <precision>10</precision>
     <scale>2</scale>

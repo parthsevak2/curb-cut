@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Reachable_By__c</fullName>
+    <description>How this person can be reached.</description>
+    <inlineHelpText>Use exactly what this says. Telephone is not on this list and never will be. 'I'll just give them a quick call' is the specific failure this record exists to prevent.</inlineHelpText>
     <label>Reachable By</label>
     <type>Picklist</type>
     <valueSet>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Never_Call__c</fullName>
     <description>Default true. Only the person may set this to false.</description>
+    <inlineHelpText>Ticked means never telephone this person. Not 'prefer not to'. For some people a phone call is a door that does not open.</inlineHelpText>
     <label>Never Call</label>
     <defaultValue>true</defaultValue>
     <type>Checkbox</type>

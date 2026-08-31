@@ -370,6 +370,48 @@ if os.path.exists(EV):
 else:
     check('evidence-file-exists', False, 'docs/EVIDENCE.md is missing; the site quotes unsourced numbers')
 
+
+# 15. Every field must carry help text, and no help text may leak a medical
+#     frame. Help text is what an operator reads at four in the afternoon;
+#     it is the last place guidance actually lands, and it was empty on all
+#     46 fields while the documentation was thorough.
+for obj in objects():
+    for fld in fields(obj):
+        fp = os.path.join(OBJ, obj, 'fields', fld + '.field-meta.xml')
+        if not os.path.exists(fp): continue
+        root = ET.parse(fp).getroot()
+        help_el = root.find(f'{{{NS}}}inlineHelpText')
+        desc_el = root.find(f'{{{NS}}}description')
+        check('field-has-help-text', help_el is not None and (help_el.text or '').strip(),
+              f'{obj}.{fld} has no inline help text')
+        check('field-has-description', desc_el is not None and (desc_el.text or '').strip(),
+              f'{obj}.{fld} has no description')
+        # A medical word may appear only in text that is refusing it. Check each
+        # string on its own: an earlier version concatenated the help text with
+        # the description, so a description saying 'never' laundered a help text
+        # saying 'record the condition and severity'. The negative test caught
+        # the check rather than the code, which is the whole reason to run one.
+        for label, el in (('help text', help_el), ('description', desc_el)):
+            body = (el.text or '') if el is not None else ''
+            if not FORBIDDEN.search(body):
+                continue
+            refuses = any(w in body.lower() for w in
+                          ['never', 'no field', 'nowhere', 'not record', 'nobody knows',
+                           'without ever', 'do not', 'must not'])
+            check('help-text-refuses-medical', refuses,
+                  f'{obj}.{fld} {label} mentions a medical concept without refusing it: '
+                  f'{body[:70]}')
+
+# Every object an operator works in should have a compact layout, so the
+# highlights panel says something useful instead of the record name twice.
+for obj in objects():
+    cl = glob.glob(os.path.join(OBJ, obj, 'compactLayouts', '*.compactLayout-meta.xml'))
+    check('object-has-compact-layout', bool(cl),
+          f'{obj} has no compact layout; its highlights panel is Salesforce default')
+    lay = glob.glob(os.path.join(DEF, 'layouts', obj + '-*.layout-meta.xml'))
+    check('object-has-layout', bool(lay),
+          f'{obj} has no page layout in source; the org is running an auto-generated one')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')

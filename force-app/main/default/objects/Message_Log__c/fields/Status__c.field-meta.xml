@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Status__c</fullName>
+    <inlineHelpText>Accepted means the platform took it, which is not the same as it arriving. Anything other than Accepted is a person who heard nothing back.</inlineHelpText>
     <label>Status</label>
     <type>Picklist</type>
     <description>Accepted means the platform took it. That is not the same as delivered, and the difference is where a person disappears.</description>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Preferred_Modality__c</fullName>
+    <description>How this person prefers to send and receive.</description>
+    <inlineHelpText>How they prefer to be reached. Answer in the same form they used. A voice note answered with a wall of text is a door closing.</inlineHelpText>
     <label>Preferred Modality</label>
     <type>Picklist</type>
     <valueSet>

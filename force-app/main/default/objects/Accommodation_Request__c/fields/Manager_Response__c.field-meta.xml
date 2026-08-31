@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Manager_Response__c</fullName>
+    <description>Where the employer has got to.</description>
+    <inlineHelpText>Where the employer has got to. 'More info' is the answer that quietly kills requests, so if you set it, say precisely what is needed and never ask for anything medical.</inlineHelpText>
     <label>Manager Response</label>
     <type>Picklist</type>
     <valueSet>
