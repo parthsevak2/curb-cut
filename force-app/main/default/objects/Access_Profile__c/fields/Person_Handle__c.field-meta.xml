@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Person_Handle__c</fullName>
     <description>Hashed contact handle. Never store a raw phone number or email.</description>
+    <inlineHelpText>A salted hash or an employee reference. Never a raw phone number. If you are looking at a phone number here, something is broken.</inlineHelpText>
     <label>Person Handle</label>
     <length>64</length>
     <type>Text</type>

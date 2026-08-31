@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Inbound_Modality__c</fullName>
+    <description>How this arrived.</description>
+    <inlineHelpText>How they reached us. Reply the same way. This is also how we tell whether a channel is genuinely open or just listed.</inlineHelpText>
     <label>Inbound Modality</label>
     <type>Picklist</type>
     <valueSet>

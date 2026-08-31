@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Person_Approved__c</fullName>
     <description>The person holds the pen. Nothing leaves the system without this.</description>
+    <inlineHelpText>The person explicitly agreed to send this. A hedge is not agreement. If this is not ticked, the request should not exist.</inlineHelpText>
     <label>Person Approved</label>
     <defaultValue>false</defaultValue>
     <type>Checkbox</type>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Statement__c</fullName>
     <description>The person's own words. Never paraphrased into clinical language.</description>
+    <inlineHelpText>The person's own words. Do not tidy them, shorten them, or translate them into policy language. The wording is the point.</inlineHelpText>
     <label>Statement</label>
     <length>255</length>
     <type>Text</type>

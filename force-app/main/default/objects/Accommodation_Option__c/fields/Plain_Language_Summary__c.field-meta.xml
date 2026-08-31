@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Plain_Language_Summary__c</fullName>
+    <description>What it is, in plain words, with no policy language.</description>
+    <inlineHelpText>What it actually is, in words that need no explaining. If it needs a glossary it is not finished.</inlineHelpText>
     <label>Plain Language Summary</label>
     <length>32768</length>
     <type>LongTextArea</type>

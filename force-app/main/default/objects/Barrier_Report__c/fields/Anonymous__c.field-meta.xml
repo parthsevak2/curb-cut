@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Anonymous__c</fullName>
     <description>If true, no Access Profile link is written at all.</description>
+    <inlineHelpText>Nobody has attached a name. That is a normal, complete way to use this, not an incomplete record. Do not try to work out who it is.</inlineHelpText>
     <label>Anonymous</label>
     <defaultValue>true</defaultValue>
     <type>Checkbox</type>

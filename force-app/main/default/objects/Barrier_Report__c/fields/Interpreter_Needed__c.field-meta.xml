@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Interpreter_Needed__c</fullName>
     <description>Set when inbound modality is signed video. Routes to a human. Never machine-translated.</description>
+    <inlineHelpText>Signed video is never machine translated. This waits for a person, and the wait is the entire cost to the person waiting.</inlineHelpText>
     <label>Interpreter Needed</label>
     <defaultValue>false</defaultValue>
     <type>Checkbox</type>

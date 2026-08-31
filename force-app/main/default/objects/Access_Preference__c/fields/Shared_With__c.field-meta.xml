@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Shared_With__c</fullName>
+    <description>Who the person chose to show this to.</description>
+    <inlineHelpText>Who the person chose. Not who would find it useful. Showing it to anyone else is a disclosure they did not make.</inlineHelpText>
     <label>Shared With</label>
     <type>Picklist</type>
     <valueSet>

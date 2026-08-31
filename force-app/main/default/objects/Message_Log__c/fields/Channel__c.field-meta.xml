@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Channel__c</fullName>
+    <description>Which channel carried it.</description>
+    <inlineHelpText>Which door this came through or went out of. If one channel is carrying everyone, the others are not really open.</inlineHelpText>
     <label>Channel</label>
     <type>Picklist</type>
     <valueSet>

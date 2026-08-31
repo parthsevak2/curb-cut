@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Scope__c</fullName>
+    <description>Where this preference applies.</description>
+    <inlineHelpText>How far this travels. Narrow it if the person asked for narrow. Never widen it because it would be convenient.</inlineHelpText>
     <label>Scope</label>
     <type>Picklist</type>
     <valueSet>

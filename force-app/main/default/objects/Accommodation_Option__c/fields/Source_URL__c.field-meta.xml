@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Source_URL__c</fullName>
     <description>Required for third-party data authorization under Official Rules section 4.V.</description>
+    <inlineHelpText>Where this came from. Every row needs one, because someone may quote this to their employer and should be able to point at the source.</inlineHelpText>
     <label>Source URL</label>
     <type>Url</type>
 </CustomField>

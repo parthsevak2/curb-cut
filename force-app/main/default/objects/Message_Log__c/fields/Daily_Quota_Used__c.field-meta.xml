@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Daily_Quota_Used__c</fullName>
+    <inlineHelpText>How much of the daily allowance was gone at the moment of the attempt. When replies stop arriving, look here first.</inlineHelpText>
     <label>Txn Emails Used</label>
     <type>Number</type><precision>6</precision><scale>0</scale>
     <description>Emails sent in THIS transaction, from Limits.getEmailInvocations(). Apex cannot read the org daily cap; that is only visible from the REST limits endpoint as SingleEmail. Do not read this as a daily figure.</description>

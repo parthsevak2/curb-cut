@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Revoked_On__c</fullName>
     <description>Revocation is instant and requires no reason.</description>
+    <inlineHelpText>When they turned it off. There is deliberately no field for why, so nobody can ask them for a reason later.</inlineHelpText>
     <label>Revoked On</label>
     <type>DateTime</type>
 </CustomField>

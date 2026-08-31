@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Functional_Description__c</fullName>
     <description>What is hard, in the person's words. Never why.</description>
+    <inlineHelpText>What is hard, in their words. Never why it is hard. If you catch yourself wanting to add a reason here, that impulse is exactly what this system was built to refuse.</inlineHelpText>
     <label>Functional Description</label>
     <length>32768</length>
     <type>LongTextArea</type>

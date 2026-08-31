@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Approved_At__c</fullName>
+    <description>When the person approved sending this.</description>
+    <inlineHelpText>The moment the person said yes. If this is empty, they did not say yes, and nothing should have been sent.</inlineHelpText>
     <label>Approved At</label>
     <type>DateTime</type>
 </CustomField>

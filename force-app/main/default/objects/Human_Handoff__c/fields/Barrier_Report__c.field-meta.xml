@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Barrier_Report__c</fullName>
+    <description>What the person had already said before asking for a human.</description>
+    <inlineHelpText>Read this before you make contact. They have already explained once. Making them do it again is the thing we promised would not happen.</inlineHelpText>
     <label>Barrier Report</label>
     <referenceTo>Barrier_Report__c</referenceTo>
     <relationshipLabel>Human Handoffs</relationshipLabel>

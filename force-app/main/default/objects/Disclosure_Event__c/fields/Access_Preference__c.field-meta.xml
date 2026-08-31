@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Access_Preference__c</fullName>
+    <description>The preference that was shown.</description>
+    <inlineHelpText>The preference that travelled. Every row here is something disclosed about a person while they were not in the room.</inlineHelpText>
     <label>Access Preference</label>
     <referenceTo>Access_Preference__c</referenceTo>
     <relationshipLabel>Disclosure Events</relationshipLabel>

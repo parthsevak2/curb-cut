@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Direction__c</fullName>
+    <description>Inbound from the person, or outbound to them.</description>
+    <inlineHelpText>Inbound is them reaching us. Outbound is us reaching them, and only ever as a reply to something they sent.</inlineHelpText>
     <label>Direction</label>
     <type>Picklist</type>
     <valueSet>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Active__c</fullName>
+    <description>Whether this profile is currently in use.</description>
+    <inlineHelpText>Untick to stand the whole profile down. Preferences stop travelling immediately and nobody is asked why.</inlineHelpText>
     <label>Active</label>
     <defaultValue>true</defaultValue>
     <type>Checkbox</type>
