@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>What they sent belongs beside what they said, not behind a related list.</comment>
+        <content>Curb_Cut_Barrier_Record</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
     <compactLayoutAssignment>Barrier_Report_Highlights</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>An intake describing what is hard, never why. May be fully anonymous. CONTAINS NO DIAGNOSIS, CONDITION, MEDICAL OR DISABILITY-TYPE FIELD BY DESIGN.</description>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interpreter_Booked_At__c</fullName>
+    <description>When a human interpreter was actually booked. The gap between this and Requested At is the whole cost to the person waiting.</description>
+    <inlineHelpText>When an interpreter was booked. Until this is filled in, somebody is waiting on a person and cannot do anything else. The gap between this and Requested At is the entire cost to them.</inlineHelpText>
+    <label>Interpreter Booked At</label>
+    <type>DateTime</type>
+</CustomField>

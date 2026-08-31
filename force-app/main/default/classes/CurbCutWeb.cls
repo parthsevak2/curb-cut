@@ -275,4 +275,17 @@ global with sharing class CurbCutWeb {
             : String.valueOf(seen.size()) + ' people have been shown it.';
         return r;
     }
+
+    /**
+     * Photo and signed video, delegated to CurbCutMedia.
+     *
+     * Visualforce registers remote actions per page controller, so this thin
+     * pass-through exists to keep the page's remoting surface in one class
+     * rather than bolting a second controller onto the page.
+     */
+    @RemoteAction
+    global static CurbCutMedia.Result sendMedia(String barrierId, String fileName,
+                                                String base64, String kind) {
+        return CurbCutMedia.send(barrierId, fileName, base64, kind);
+    }
 }

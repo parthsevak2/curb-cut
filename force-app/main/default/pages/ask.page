@@ -53,6 +53,45 @@
         <li><button type="button">My back hurts by the afternoon</button></li>
       </ul>
       <textarea id="need" name="need" rows="4" aria-describedby="needHelp"></textarea>
+
+    <div class="showme">
+      <p class="sec-label">Or show me instead</p>
+      <h3 class="showme-h">You do not have to put it into words at all</h3>
+      <p class="fieldHelp">
+        A photo of your desk, your screen or your chair is often faster and less
+        painful than describing it. And if you sign, send a video &mdash; it is a
+        front door here, not a fallback.
+      </p>
+
+      <div class="note absent" style="margin:.6rem 0 1rem">
+        <p>
+          <strong>Signed video is never machine translated.</strong> Not by us, not
+          by anything. It goes to a person, and you get a message the moment it
+          arrives so you are not left watching a screen wondering whether it sent.
+          Nothing here will try to guess what is in your photo either.
+        </p>
+      </div>
+
+      <div class="uploads">
+        <div class="upload">
+          <label for="photoFile" class="fieldLabel">Send a photo</label>
+          <p id="photoHelp" class="fieldHelp">Your workstation, your screen, whatever shows it.</p>
+          <input type="file" id="photoFile" accept="image/*" aria-describedby="photoHelp"/>
+        </div>
+        <div class="upload">
+          <label for="videoFile" class="fieldLabel">Send a video</label>
+          <p id="videoHelp" class="fieldHelp">Signed, spoken, or just pointing at the thing.</p>
+          <input type="file" id="videoFile" accept="video/*" aria-describedby="videoHelp"/>
+        </div>
+      </div>
+      <p class="fine" style="margin-top:.4rem">
+        Up to about four megabytes. If a file is too big, a shorter clip works,
+        and so does simply telling me in words.
+      </p>
+
+      <div id="mediaStatus" role="status" aria-live="polite" class="statusLine"></div>
+    </div>
+
       <div class="actions">
         <button type="button" id="go" class="btn primary">Show me what I could ask for</button>
         <button type="button" id="wantHuman" class="btn">I would rather talk to a person</button>
@@ -257,6 +296,57 @@
         'Nothing has been sent to anyone.');
   });
 
+
+
+  /* ---------- showing instead of telling ----------
+     Two modalities the site has promised since the first week and never
+     delivered on the web. Someone who cannot type was being asked to type in
+     order to reach the thing that means they do not have to. */
+  var mediaStatus = document.getElementById('mediaStatus');
+  function sayMedia(m) { mediaStatus.textContent = m; }
+
+  function sendFile(input, kind, label) {
+    var file = input.files && input.files[0];
+    if (!file) { return; }
+    if (file.size > 4 * 1024 * 1024) {
+      sayMedia('That ' + label + ' is bigger than about four megabytes, which is all '
+             + 'I can take here. A shorter clip or a smaller photo will work, and so '
+             + 'will telling me in words.');
+      input.value = '';
+      return;
+    }
+    sayMedia(kind === 'Video'
+      ? 'Sending your video. It goes to a person, never to a machine translator.'
+      : 'Sending your photo.');
+
+    var reader = new FileReader();
+    reader.onerror = function () {
+      sayMedia('I could not read that file, and that is not your problem to solve. '
+             + 'Try again, or tell me in words.');
+    };
+    reader.onload = function () {
+      var b64 = String(reader.result || '');
+      var comma = b64.indexOf(',');
+      if (comma > -1) { b64 = b64.slice(comma + 1); }
+      remote('{!$RemoteAction.CurbCutWeb.sendMedia}', [barrierId, file.name, b64, kind],
+        function (r) {
+          sayMedia(r.message);
+          if (r.accepted) {
+            barrierId = r.barrierId;
+            input.value = '';
+            if (r.interpreter) { step(2); }
+          }
+        });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById('photoFile').addEventListener('change', function () {
+    sendFile(this, 'Image', 'photo');
+  });
+  document.getElementById('videoFile').addEventListener('change', function () {
+    sendFile(this, 'Video', 'video');
+  });
 
   /* ---------- standing preferences ----------
      Reachable here for the first time. This capability has existed since the

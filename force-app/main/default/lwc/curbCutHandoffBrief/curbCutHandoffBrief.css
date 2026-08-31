@@ -21,3 +21,6 @@
 .take:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }
 .taken { margin-top: 1rem; font-weight: 700; color: #1f5a4e; }
 .err   { color: #8c2f26; margin: 0; }
+
+.take.book { background:#8c2f26; border-color:#8c2f26; }
+.take.book:hover { background:#7a281f; }

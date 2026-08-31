@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The clock, made visible.
+
+  A person cannot see this record and cannot chase it. The guidance on each step
+  is written for whoever can, and says the thing that is easy to forget: there is
+  somebody on the other end of this date.
+-->
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Accommodation_Request__c</entityName>
+    <fieldName>Manager_Response__c</fieldName>
+    <masterLabel>Accommodation Request</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Interactive_Process_Due__c</fieldNames>
+        <fieldNames>Barrier_Report__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Somebody is waiting behind this date and cannot see it.&lt;/b&gt; They have no way to chase it and no way to know whether anyone has looked.&lt;/p&gt;&lt;p&gt;Open the barrier report and read what they said in their own words before you decide anything. They explained once already.&lt;/p&gt;&lt;p&gt;Sixty-one per cent of the employers who gave the Job Accommodation Network cost figures paid nothing at all. Assume this is cheap until you have checked, not the other way round.&lt;/p&gt;</info>
+        <picklistValueName>Pending</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Decline_Reason__c</fieldNames>
+        <fieldNames>Interactive_Process_Due__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;This is the answer that quietly kills requests.&lt;/b&gt; Most people asked for more information do not come back, and it reads to them as a no with extra steps.&lt;/p&gt;&lt;p&gt;Say precisely what you need and by when. Never ask for anything medical: not a diagnosis, not a note, not confirmation from anyone clinical. The system has nowhere to put an answer and asking is the harm this was built to remove.&lt;/p&gt;&lt;p&gt;If you can answer it without asking them, do that instead.&lt;/p&gt;</info>
+        <picklistValueName>More info</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Interactive_Process_Due__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Tell them, on the channel they used.&lt;/b&gt; A yes nobody passed on is the same as a no to the person waiting.&lt;/p&gt;&lt;p&gt;This one now counts as precedent. The next person who asks for the same thing can be told it has been done here before, which is the single most useful sentence in this whole system.&lt;/p&gt;</info>
+        <picklistValueName>Approved</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Decline_Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;A decline must be explained, and the rule enforces it.&lt;/b&gt; The reason is visible to the person who asked, so write it to them rather than to the file.&lt;/p&gt;&lt;p&gt;Say what you considered, what the obstacle actually is, and what you are doing next. &amp;quot;Not possible&amp;quot; is not a reason. If an alternative exists, offer it in the same message.&lt;/p&gt;&lt;p&gt;Never cite cost without checking it. Most accommodations cost nothing.&lt;/p&gt;</info>
+        <picklistValueName>Declined</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

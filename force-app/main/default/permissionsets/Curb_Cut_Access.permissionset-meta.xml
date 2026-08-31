@@ -8,6 +8,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>CurbCutMedia</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CurbCutAssist</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -55,6 +59,16 @@
         <apexClass>CurbCutWeb</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Human_Handoff__c.Interpreter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Human_Handoff__c.Interpreter_Booked_At__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Access_Preference__c.Access_Profile__c</field>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interpreter_Name__c</fullName>
+    <description>Who is interpreting. A person, always: signed video is never machine translated.</description>
+    <inlineHelpText>The interpreter's name. A person, always. Nothing signed is ever put through a machine translator, so this field being empty means the work has not started.</inlineHelpText>
+    <label>Interpreter</label>
+    <length>121</length>
+    <type>Text</type>
+</CustomField>

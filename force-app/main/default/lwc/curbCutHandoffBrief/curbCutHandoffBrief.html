@@ -40,6 +40,14 @@
             <template if:true={data.pickedUp}>
                 <p class="taken">Picked up by {data.handler}.</p>
             </template>
+
+            <template if:true={needsInterpreter}>
+                <button class="take book" onclick={book} disabled={working}>
+                    I have booked an interpreter
+                </button>
+                <p class="soft">Nothing else on this record can move until a person is
+                   booked, and the wait is the entire cost to them.</p>
+            </template>
         </article>
     </template>
 </template>
