@@ -19,15 +19,33 @@ guest profile, which is how `/messaging` first shipped as a 401.
 
 ---
 
-## Campaign description
+## Campaign description  *(rejected 30 Aug under error 30886)*
 
-> Curb Cut is a workplace accessibility assistant. Employees, contractors and
-> job applicants text the number to find out what workplace adjustments they
-> could ask for, and the assistant can draft an accommodation request and send
-> it to their employer, but only with the person's explicit approval given in
-> the conversation. All messages are conversational replies to a message the
-> user sent first. There is no marketing, promotional, recurring or scheduled
-> messaging of any kind.
+Error 30886 wants three things named explicitly: **who is sending**, **who
+receives**, and **why** — and it wants them to match the registered brand. The
+first version described the product ("Curb Cut is a workplace accessibility
+assistant") and never named the sender. The registered brand is **Parth Sevak**,
+a sole proprietor, so the description has to start there.
+
+> Parth Sevak, a sole proprietor based in Welland, Ontario, Canada, is the
+> sender of these messages and operates them under the program name Curb Cut.
+> The recipients are individual employees, contractors and job applicants who
+> have each personally texted +1 276 495 9311 first, after seeing a printed
+> notice displayed in their workplace. No one else receives a message: there is
+> no contact list, no uploaded or purchased phone numbers, and no third-party
+> lead source. Messages are sent for a single purpose: to answer that
+> individual's own question about what workplace accessibility adjustments they
+> could ask for at work, and, only where that individual explicitly agrees
+> during the conversation, to confirm that an accommodation request has been
+> drafted and sent to their employer on their behalf. Every message is a
+> one-to-one conversational reply to that same individual's most recent message.
+> Volume is low and is determined entirely by the recipient. No marketing,
+> promotional, recurring, scheduled or bulk messages are sent at any time.
+
+Sample message 3 was also swapped to the HELP reply, so that two of the four
+samples carry the program name and the samples corroborate the description
+rather than sitting beside it. 30886 rejects on misalignment between the
+description, the samples and the brand, not only on the description alone.
 
 ## Message flow / call to action  *(this is the field that was rejected)*
 
