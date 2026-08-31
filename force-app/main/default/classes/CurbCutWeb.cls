@@ -124,9 +124,12 @@ global with sharing class CurbCutWeb {
 
         r.options = opts.options;
         r.noMatch = opts.noMatch;
-        r.message = opts.noMatch
+        // Told in the same reply, every time, because the code did it rather
+        // than because a model remembered to mention it.
+        String took = intake.redacted == true ? CurbCutRedact.notice() + '\n\n' : '';
+        r.message = took + (opts.noMatch
             ? 'I do not have good information on that one, and I would rather tell you that than guess. You can ask for a real person instead.'
-            : 'Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional.';
+            : 'Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional.');
         return r;
     }
 

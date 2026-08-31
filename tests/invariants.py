@@ -661,6 +661,61 @@ check('handoff-refuses-telephone',
       'CurbCutCreateHandoff no longer refuses telephone as a reply channel')
 
 
+
+# ---------------------------------------------------------------------------
+# The adversarial scorer must be scoring the runner that actually runs.
+#
+# There are two harnesses. The pty one numbers its scenarios 01-08; the headless
+# Agent API one numbers them 01-11 and is the one the scorer's rules name. Run
+# the wrong one and all 23 assertions go inconclusive - and until this was
+# fixed, the process still exited 0. This is a static check, so CI catches the
+# drift without needing a live agent.
+# ---------------------------------------------------------------------------
+scorer = read(os.path.join(ROOT, 'tests', 'score_adversarial.py'))
+runner = read(os.path.join(ROOT, 'tests', 'headless_agent_api.mjs'))
+scored = set(re.findall(r'\("([0-9]{2}_[a-z_]+)"', scorer))
+runnable = set(re.findall(r"'([0-9]{2}_[a-z_]+)'", runner))
+for scen in sorted(scored):
+    check('adversarial-scenario-is-runnable', scen in runnable,
+          f'score_adversarial.py asserts on {scen}, which '
+          f'headless_agent_api.mjs never produces')
+
+check('adversarial-silence-is-not-success',
+      'sys.exit(1)' in scorer and "counts[\"????\"]" in scorer,
+      'score_adversarial.py no longer fails when assertions are inconclusive; '
+      'an empty transcript would read as a green run')
+
+
+
+# ---------------------------------------------------------------------------
+# A volunteered condition must be taken out on the one shared write path.
+#
+# There is no Diagnosis__c, which is true and is the claim the project rests on.
+# Functional_Description__c is free text, and "I have multiple sclerosis and
+# some days I cannot type for long" was stored whole while the privacy policy
+# said in public that it was not written to any record.
+# ---------------------------------------------------------------------------
+intake = strip_apex_comments(read(os.path.join(CLS, 'CurbCutIntake.cls')))
+check('intake-redacts-before-insert',
+      'CurbCutRedact.clean' in intake and 'CurbCutRedact.names' in intake,
+      'CurbCutIntake no longer redacts; a volunteered condition would be stored '
+      'verbatim in Functional_Description__c')
+
+redact = read(os.path.join(CLS, 'CurbCutRedact.cls'))
+for identity in ('deaf', 'blind', 'hard of hearing', 'wheelchair'):
+    check('redaction-spares-identity-words',
+          f"'{identity}'" not in redact.lower().split('CONDITIONS')[-1].split('};')[0],
+          f'"{identity}" is how people describe themselves and the interpreter '
+          f'routing reads it; it must never be redacted')
+
+# The privacy page must not go back to promising an absolute the code cannot keep.
+priv = read(os.path.join(DEF, 'pages', 'privacy.page'))
+check('privacy-page-does-not-overclaim',
+      'it is not written to any record' not in priv,
+      'privacy.page has gone back to claiming a volunteered condition is never '
+      'written down, which the redaction list cannot guarantee')
+
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
