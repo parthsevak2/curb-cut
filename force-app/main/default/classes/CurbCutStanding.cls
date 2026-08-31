@@ -55,6 +55,23 @@ public with sharing class CurbCutStanding {
         return results;
     }
 
+
+    /**
+     * The site guest user can create a preference but cannot edit one, and
+     * secure guest record access means it cannot read back the row it just
+     * wrote. Both are correct defaults and both would make revocation from the
+     * web impossible, which would leave a person able to switch a disclosure ON
+     * and not OFF. That is the worst possible asymmetry for this particular
+     * feature, so the write runs without sharing -- narrowly, on one object,
+     * by id, with no reason recorded and nothing read back.
+     */
+    private without sharing class Pen {
+        private void save(Access_Preference__c p) { insert p; }
+        private void revoke(Id prefId) {
+            update new Access_Preference__c(Id = prefId, Revoked_On__c = System.now());
+        }
+    }
+
     private static Result save(Request req) {
         Result res = new Result();
         res.ok = false; res.preferenceId = '';
@@ -71,13 +88,18 @@ public with sharing class CurbCutStanding {
             Auto_Apply__c  = req.autoApply == true
         );
         try {
-            insert p;
+            new Pen().save(p);
             res.preferenceId = p.Id;
             res.ok = true;
             res.sharedWith = p.Shared_With__c;
+            // Never STOP. STOP belongs to the carrier: it unsubscribes the person
+            // from the number entirely, and is intercepted before it ever reaches
+            // us. Someone told to reply STOP to turn off one preference would lose
+            // the whole service and keep the preference, which is the exact
+            // opposite of what they asked for. OFF is ours; STOP is not.
             res.message = 'Saved. ' + p.Shared_With__c + ' will see it. '
                         + 'Reply WHO any time to see everyone who has been shown it. '
-                        + 'Reply STOP any time to turn it off. I will not ask why.';
+                        + 'Reply OFF any time to turn it off. I will not ask why.';
         } catch (DmlException e) {
             res.message = 'I could not save that.';
         }
@@ -94,11 +116,7 @@ public with sharing class CurbCutStanding {
             return res;
         }
         try {
-            Access_Preference__c p = new Access_Preference__c(
-                Id = Id.valueOf(req.preferenceId),
-                Revoked_On__c = System.now()
-            );
-            update p;
+            new Pen().revoke(Id.valueOf(req.preferenceId));
             res.ok = true;
             // No reason is captured. There is nowhere to put one.
             res.message = 'Turned off. It will not be shown to anyone again.';

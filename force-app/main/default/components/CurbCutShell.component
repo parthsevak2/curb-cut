@@ -469,6 +469,15 @@ a.btn:hover { text-decoration:none; }
   letter-spacing: .09em; text-transform: uppercase; color: var(--ink-mute);
   margin: 1.2rem 0 0;
 }
+
+/* ---------- pickers ---------- */
+select.picker {
+  font:inherit; font-size:1.05rem; width:100%; max-width:28rem;
+  padding:.7rem .8rem; margin:0 0 1.1rem;
+  background:var(--raised); color:var(--ink);
+  border:2px solid var(--line-firm); border-radius:5px; min-height:48px;
+}
+select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
 </style>
 
 <a href="#main" class="skip">Skip to the main content</a>

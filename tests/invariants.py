@@ -483,6 +483,27 @@ if os.path.exists(MCP):
     check('mcp-refuses-medical', 'FORBIDDEN' in mcp and 'refused' in mcp,
           'the MCP server no longer refuses medical input')
 
+
+# 18. No Apex reply may tell someone to reply STOP to control anything. STOP is
+#     the carrier's keyword: it unsubscribes the person from the number entirely
+#     and is intercepted before it reaches us, so anyone following that advice
+#     loses the whole service and keeps the thing they were turning off. The
+#     site and the agent both say OFF; CurbCutStanding said STOP, and a test
+#     asserted that it did.
+def strip_apex_comments(src):
+    # Comments discuss STOP on purpose - the whole reason the rule exists is
+    # written down next to the code that broke it. Only string literals ship.
+    src = re.sub(r'/\*.*?\*/', '', src, flags=re.S)
+    return re.sub(r'//[^\n]*', '', src)
+
+for cls in glob.glob(os.path.join(CLS, '*.cls')):
+    if cls.endswith('Test.cls'):
+        continue
+    body = strip_apex_comments(open(cls).read())
+    for m in re.finditer(r"'([^'\n]*[Rr]eply STOP[^'\n]*)'", body):
+        check('never-instructs-reply-stop', False,
+              f'{os.path.basename(cls)} tells someone to reply STOP: "{m.group(1)[:60]}"')
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
