@@ -253,6 +253,30 @@ textarea:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
 }
 .doneBox { border-left-color:var(--deep); }
 
+/* The claim code. Deliberately the loudest thing on the panel: it is the only
+   way an anonymous person can ever turn this off again, and somebody who
+   scrolls past it loses that ability entirely. Letter-spaced and tabular so it
+   can be read aloud, copied by hand, or magnified without characters merging. */
+.codeBox {
+  margin-top:.9rem; padding:1rem 1.2rem; border-radius:5px;
+  background:var(--deep-bg); border:2px solid var(--deep);
+}
+.codeLabel {
+  font-size:.82rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-soft); margin-bottom:.3rem;
+}
+.codeValue {
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-variant-numeric:tabular-nums; font-size:2rem; font-weight:700;
+  letter-spacing:.22em; color:var(--ink); line-height:1.2;
+  margin-bottom:.6rem; word-break:break-all;
+}
+.codeHelp { font-size:.98rem; line-height:1.6; color:var(--ink); margin:0; }
+.codeHelp strong {
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.06em;
+}
+
 footer.page .who { color:var(--ink-soft); }
 footer.page .stand {
   font-family:Archivo,system-ui,sans-serif; font-size:1.15rem; font-weight:600;

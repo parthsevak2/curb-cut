@@ -30,6 +30,10 @@ global with sharing class CurbCutWeb {
         global String  sharedWith   { get; set; }
         global String  shownTo      { get; set; }
         global Integer shownCount   { get; set; }
+        /** Set when the person typed a control word rather than a need. */
+        global String  intent       { get; set; }
+        /** Shown once, at save. Never stored in readable form. */
+        global String  claimCode    { get; set; }
     }
 
     /**
@@ -75,6 +79,31 @@ global with sharing class CurbCutWeb {
         if (String.isBlank(need)) {
             r.message = 'Tell me what is hard right now, in your own words.';
             r.noMatch = true;
+            return r;
+        }
+
+        // Control words first. Somebody typing OFF is withdrawing consent, not
+        // describing a barrier, and answering that with a list of accommodations
+        // is how a withdrawal gets quietly ignored.
+        CurbCutKeyword.Match kw = CurbCutKeyword.route(need);
+        if (kw.matched && kw.intent != 'START') {
+            r.intent = kw.intent;
+            if (kw.intent == 'HUMAN') { return human(need, null); }
+            if (kw.intent == 'WHO' || kw.intent == 'OFF') {
+                if (String.isBlank(kw.code)) {
+                    r.message = kw.message;
+                    return r;
+                }
+                CurbCutStanding.Result sr =
+                    CurbCutStanding.byCode(kw.intent == 'WHO' ? 'who' : 'revoke', kw.code);
+                r.message      = sr.message;
+                r.created      = sr.ok;
+                r.preferenceId = sr.preferenceId;
+                ledger('Outbound', 'Accepted', 'keyword: ' + kw.intent.toLowerCase(), null);
+                return r;
+            }
+            r.message = kw.message;
+            ledger('Outbound', 'Accepted', 'keyword: ' + kw.intent.toLowerCase(), null);
             return r;
         }
 
@@ -153,15 +182,26 @@ global with sharing class CurbCutWeb {
         CurbCutCreateHandoff.Request hr = new CurbCutCreateHandoff.Request();
         hr.context = context;
         hr.barrierReportId = barrierId;
+        hr.reachableBy = 'Web chat';
         CurbCutCreateHandoff.Result res = CurbCutCreateHandoff.create(
             new List<CurbCutCreateHandoff.Request>{ hr })[0];
 
         Reply r = new Reply();
         r.handlerName = res.handlerName;
         r.created     = res.created;
+        r.claimCode   = res.returnCode;
+        // This used to say "they will reply by message", which was not true.
+        // A web visitor is anonymous by design: no name, no address, no number.
+        // There was nothing to reply to, so the one promise made at the moment
+        // somebody gave up on the agent was a promise the system could not keep.
         r.message     = res.created
-            ? 'A person is picking this up. They will reply by message. You will not have to call anyone, and you will not have to explain any of this again.'
-            : 'I could not reach a person just now. Please email parth.sevak2@gmail.com and someone will pick it up.';
+            ? res.handlerName + ' is picking this up. You will not have to call anyone, '
+              + 'and you will not have to explain any of this again.\n\n'
+              + 'You have not told me anything I could reach you with, and I am not going '
+              + 'to ask. So keep this code: ' + res.returnCode + '. Send it here, or by '
+              + 'text, or by email, and you land straight back with the same person.'
+            : 'I could not reach a person just now, and I am not going to pretend I did. '
+              + 'Please email parth.sevak2@gmail.com and someone will pick it up.';
         return r;
     }
 
@@ -200,6 +240,7 @@ global with sharing class CurbCutWeb {
         r.preferenceId = res.preferenceId;
         r.sharedWith   = res.sharedWith;
         r.message      = res.message;
+        r.claimCode    = res.claimCode;
         ledger('Outbound', res.ok ? 'Accepted' : 'Rejected',
                res.ok ? 'standing: saved' : 'standing: save failed', null);
         return r;

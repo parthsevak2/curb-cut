@@ -122,14 +122,19 @@
     </p>
     <div class="note">
       <p>
-        <strong>Three other words do something different, and none of them stop
-        the messages.</strong> Inside a conversation,
-        <span class="kw">DELETE</span> discards a drafted request before it is
-        sent, <span class="kw">OFF</span> turns off a standing preference you
-        saved, and <span class="kw">WHO</span> lists everyone who has been shown
-        one of your standing preferences. The assistant is specifically
-        instructed never to tell you to reply STOP for any of these, because
-        STOP belongs to you and to your carrier, not to us.
+        <strong>Four other words do something different, and none of them stop
+        the messages.</strong>
+        <span class="kw">HUMAN</span> hands you to a real person, on this same
+        channel, at any point.
+        <span class="kw">OFF</span> turns off a standing preference you saved,
+        and <span class="kw">WHO</span> lists everyone who has been shown it
+        &mdash; both take the six-character code you were given when you saved
+        it, like <span class="kw">OFF 4KQ7MT</span>, because we hold no record of
+        who you are and cannot look you up.
+        Inside a conversation, <span class="kw">DELETE</span> discards a drafted
+        request before it is sent. The assistant is specifically instructed never
+        to tell you to reply STOP for any of these, because STOP belongs to you
+        and to your carrier, not to us.
       </p>
     </div>
   </section>

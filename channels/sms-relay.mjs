@@ -75,6 +75,31 @@ const START_REPLY =
 // assistant improvising a reply to STOP is a compliance failure, and worse,
 // it is someone asking to be left alone and being answered back.
 const HELP_WORDS  = new Set(['help', 'info']);
+
+/* Control words. These are NOT carrier keywords - they are ours, and they were
+   advertised for months with nothing behind them: HUMAN came back with an ASL
+   interpreter card, OFF came back with "I do not have good information on that".
+   Somebody withdrawing a disclosure was told the system did not understand, and
+   the sharing stayed on.
+
+   The list is mirrored from CurbCutKeyword.cls, which is the one place the rules
+   live. An invariant fails the build if these two ever disagree, because two
+   channels quietly disagreeing about what OFF means is exactly how this broke. */
+const CONTROL_WORDS = new Set([
+  'actualhuman','actualperson','agent','ahuman','anactualperson','aperson',
+  'arealhuman','arealone','arealperson','canitalktoaperson',
+  'canitalktosomeone','getmeahuman','human','humanplease','humans',
+  'ineedahuman','ineedaperson','ineedsomeone','iwantahuman','iwantaperson',
+  'iwantsomeone','letmetalktoaperson','letmetalktosomeone','notabot',
+  'notarobot','off','person','personplease','realhuman','realpeople',
+  'realperson','rep','representative','somebody','someone','speaktoahuman',
+  'speaktoaperson','speaktohuman','speaktosomeone','stopsharing',
+  'stopsharingit','switchitoff','switchoff','takeitback','takethatback',
+  'talktoahuman','talktoaperson','talktohuman','talktosomeone','turnitoff',
+  'turnoff','unshare','who','whocansee','whocanseeit','whohasit',
+  'whohasseen','whohasseenit','whoknows','whoknowsit','whosaw','whosawit',
+  'whoseesit','whowastold','withdraw','withdrawit',
+]);
 const STOP_WORDS  = new Set(['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']);
 const START_WORDS = new Set(['start', 'yes', 'unstop']);
 
@@ -261,6 +286,28 @@ const server = createServer((req, res) => {
       return xml(START_REPLY);
     }
 
+    /* Our own control words. Answered by the shared Apex router rather than by
+       the agent, so HUMAN books a real handoff and OFF actually revokes, and so
+       the wording is identical to the wording on email and on the web. A code
+       may travel with the word - "off 4KQ7MT" - which is how somebody turns a
+       standing disclosure off from a phone when we deliberately have no idea
+       who they are. */
+    if (CONTROL_WORDS.has(word) || /^(off|who)\s+[a-z0-9]{6}$/i.test(body.trim())) {
+      try {
+        const answer = await connection.apex.post('/curbcut/v1/message/', {
+          channel: 'SMS', text: body, handle: key,
+        });
+        return xml(answer.message, await needsDisclosure(key) ? DISCLOSURE : null);
+      } catch (e) {
+        console.error('[sms] control word failed:', e?.message);
+        await ledger('SMS', 'Outbound', 'Escalated', key, `control word failed: ${e?.message}`);
+        // Never leave somebody reaching for the exit with nothing.
+        return xml(
+          'I could not do that just now, and I am not going to pretend I did. ' +
+          'Write to parth.sevak2@gmail.com and a person will sort it out.');
+      }
+    }
+
     // Only on the very first reply this person has ever had from us.
     const disclose = await needsDisclosure(key) ? DISCLOSURE : null;
 
@@ -277,7 +324,7 @@ const server = createServer((req, res) => {
       await ledger('SMS', 'Outbound', 'Escalated', key, `agent error: ${e?.message}`);
       return xml(
         'Something went wrong on my end, and that is not your problem to solve. ' +
-        'Reply HUMAN and a real person will pick this up.', disclose);
+        'Send HUMAN and a real person will pick this up.', disclose);
     }
   });
 });

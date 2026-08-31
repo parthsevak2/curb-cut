@@ -32,6 +32,16 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
             return result;
         }
 
+        // Control words before anything else. This channel used to tell people
+        // to "reply with the word PERSON" and then feed PERSON to the library,
+        // which answered with "face the person when speaking". The one route out
+        // was the one route that did not work.
+        CurbCutKeyword.Match kw = CurbCutKeyword.route(body);
+        if (kw.matched) {
+            reply(email, envelope, forKeyword(kw), null);
+            return result;
+        }
+
         // Log the intake anonymously. The sender address is never stored.
         CurbCutIntake.Request ir = new CurbCutIntake.Request();
         ir.functionalDescription = body;
@@ -74,12 +84,47 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         return false;
     }
 
+    /**
+     * Control words, answered the same way they are answered everywhere else.
+     * HUMAN books a real person here rather than only promising one.
+     */
+    private String forKeyword(CurbCutKeyword.Match kw) {
+        if (kw.intent == 'HUMAN') {
+            CurbCutCreateHandoff.Request hr = new CurbCutCreateHandoff.Request();
+            hr.context = 'Asked for a person by email.';
+            hr.reachableBy = 'Email';
+            CurbCutCreateHandoff.Result hres =
+                CurbCutCreateHandoff.create(new List<CurbCutCreateHandoff.Request>{ hr })[0];
+            return 'Yes.\n\n'
+                 + (hres.created
+                     ? hres.handlerName + ' will pick this up and reply to this email. '
+                     : 'A real person will pick this up and reply to this email. ')
+                 + 'You will not have to explain it again, and nobody will ring you.\n\n'
+                 + signature();
+        }
+        if (kw.intent == 'WHO' || kw.intent == 'OFF') {
+            if (String.isBlank(kw.code)) {
+                return kw.message + '\n\n' + signature();
+            }
+            CurbCutStanding.Result sr =
+                CurbCutStanding.byCode(kw.intent == 'WHO' ? 'who' : 'revoke', kw.code);
+            return sr.message + '\n\n' + signature();
+        }
+        if (kw.intent == 'STOP') {
+            return 'Done. I will not write to you again unless you write first.\n\n'
+                 + 'Nothing about you was being kept anyway. There is no list to come off.\n\n'
+                 + signature();
+        }
+        return kw.message + '\n\n' + signature();
+    }
+
     private String greeting() {
         return 'Hi.\n\n'
              + 'I can help you work out what might make work easier, and help you ask for it.\n\n'
              + 'You do not have to tell me your name. You do not have to tell me what condition '
              + 'you have. I will never ask.\n\n'
              + 'Just reply and tell me what is hard right now, in your own words.\n\n'
+             + 'Reply HUMAN at any point and a real person takes over instead.\n\n'
              + signature();
     }
 
@@ -88,7 +133,7 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         if (opts.noMatch) {
             s += 'I do not have good information on that one, and I would rather tell you '
                + 'that than guess.\n\n'
-               + 'A real person can help. Reply with the word PERSON and someone will pick '
+               + 'A real person can help. Reply with the word HUMAN and someone will pick '
                + 'this up by email. You will not have to explain it again.\n\n';
         } else {
             s += 'Here is what other people have asked for in situations like yours.\n\n'
