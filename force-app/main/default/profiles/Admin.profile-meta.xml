@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Only the app assignment. Profile deployments merge, so nothing else on the
+  System Administrator profile is touched by this file.
+
+  Curb Cut Console is the default app because the people who use this org are
+  answering accommodation requests, not selling anything, and landing on a Sales
+  home every morning is a small daily statement about what the org is for.
+-->
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Curb_Cut_Console</application>
+        <default>true</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Sales</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+</Profile>

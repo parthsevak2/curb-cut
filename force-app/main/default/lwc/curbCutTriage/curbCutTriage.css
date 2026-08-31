@@ -1,0 +1,32 @@
+/* Tone is carried by a stripe, a weight and a sentence -- never colour alone,
+   because an operator with a colour vision difference is working this queue too. */
+.board { padding: .25rem 0 .5rem; }
+.board-title {
+    font-size: 1rem; font-weight: 700; letter-spacing: -.01em;
+    margin: 0 0 .75rem; color: #14171a;
+}
+.cards {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: .75rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+.card {
+    width: 100%; text-align: left; cursor: pointer; font: inherit;
+    background: #fff; border: 1px solid #d8dde1; border-top: 4px solid #8e949a;
+    border-radius: 6px; padding: 1rem 1.1rem 1.1rem;
+    display: flex; flex-direction: column; gap: .15rem;
+}
+.card:hover  { background: #f7f9fa; }
+.card:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }
+.card[data-tone="urgent"] { border-top-color: #8c2f26; }
+.card[data-tone="live"]   { border-top-color: #8a5d0f; }
+.card[data-tone="calm"]   { border-top-color: #1f5a4e; }
+.n {
+    font-size: 2.1rem; font-weight: 800; line-height: 1;
+    letter-spacing: -.03em; color: #14171a; font-variant-numeric: tabular-nums;
+}
+.label { font-size: .95rem; font-weight: 600; color: #14171a; }
+.note  { font-size: .82rem; color: #4a4e4f; line-height: 1.4; }
+.err   { color: #8c2f26; font-size: .9rem; margin: 0; }
+
+.soft { color:#4a4e4f; font-size:.88rem; margin:0; }
