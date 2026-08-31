@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Person_Knows__c</fullName>
+    <description>Whether the person this concerns knows the escalation is happening.</description>
+    <inlineHelpText>Does the person know? If no or unknown, that is not a reason to stop, but it is a reason to be careful: you are acting about someone who is not in the room.</inlineHelpText>
+    <label>Person Knows</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Yes</fullName><default>false</default><label>Yes</label></value>
+            <value><fullName>No</fullName><default>false</default><label>No</label></value>
+            <value><fullName>Unknown</fullName><default>true</default><label>Unknown</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

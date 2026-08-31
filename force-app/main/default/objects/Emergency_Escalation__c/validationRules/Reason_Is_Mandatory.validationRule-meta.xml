@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_Is_Mandatory</fullName>
+    <active>true</active>
+    <description>Curb Cut does not route anyone to a telephone. Every exception carries a written reason, and the friction is deliberate.</description>
+    <errorConditionFormula>LEN(TRIM(Reason__c)) &lt; 15</errorConditionFormula>
+    <errorMessage>Say why this call is being made, in a sentence someone reviewing it in six months could understand.</errorMessage>
+</ValidationRule>

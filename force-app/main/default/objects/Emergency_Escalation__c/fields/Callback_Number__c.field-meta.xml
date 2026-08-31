@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Callback_Number__c</fullName>
+    <description>A number volunteered during this escalation only. Never taken from the system, because the system does not hold one.</description>
+    <inlineHelpText>Only a number somebody gave you just now, for this. Curb Cut stores no phone numbers at all, so nothing here came from a record. Clear it when the escalation closes.</inlineHelpText>
+    <label>Callback Number Given</label>
+    <type>Phone</type>
+</CustomField>

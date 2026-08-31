@@ -1,0 +1,81 @@
+<template>
+    <div class="wrap">
+        <button class="toggle" onclick={toggle}>
+            <span class="tri" aria-hidden="true"></span>{toggleLabel}
+        </button>
+
+        <template if:true={open}>
+            <template if:true={ready}>
+                <div class="box">
+                    <p class="warn">
+                        Curb Cut promises nobody is ever routed to a telephone. This is the
+                        exception, for something unforeseen &mdash; a family member reaching out,
+                        a safeguarding concern. It is recorded as an exception, with your name on it.
+                    </p>
+
+                    <template if:true={ctx.neverCall}>
+                        <p class="block">
+                            <strong>This person has recorded that they cannot take a call at all.</strong>
+                            That is not a preference to override in a hurry: for some people a phone
+                            is a door that does not open, and an emergency does not change that.
+                            You may still reach a colleague below. Do not ring them.
+                        </p>
+                    </template>
+
+                    <template if:true={ctx.alreadyOpen}>
+                        <p class="open-note">
+                            Escalation {ctx.openEscalation} is already open on this handoff.
+                            Check it before raising another.
+                        </p>
+                    </template>
+
+                    <template if:false={raised}>
+                        <label class="lbl" for="why">Why is this happening?</label>
+                        <textarea id="why" class="ta" rows="3" value={reason} oninput={onReason}
+                                  placeholder="A family member rang, worried they have not heard anything and cannot reach them."></textarea>
+                        <p class="hint">{reasonHint}</p>
+
+                        <lightning-combobox label="Reach which squad" value={squad}
+                            options={squadOptions} onchange={onSquad}></lightning-combobox>
+                        <lightning-combobox label="Who raised this" value={raisedByWhom}
+                            options={whoOptions} onchange={onWho}></lightning-combobox>
+                        <lightning-combobox label="Does the person know?" value={personKnows}
+                            options={knowsOptions} onchange={onKnows}></lightning-combobox>
+
+                        <label class="lbl" for="cb">Callback number, if one was given to you</label>
+                        <input id="cb" type="tel" class="inp" value={callback} oninput={onCallback}
+                               placeholder="Only a number somebody just gave you"/>
+                        <p class="hint">
+                            Curb Cut stores no phone numbers at all, so nothing here came from a
+                            record. It is cleared when you close the escalation.
+                        </p>
+
+                        <button class="go" onclick={doRaise} disabled={raiseDisabled}>
+                            Record the reason and get the number
+                        </button>
+                    </template>
+
+                    <template if:true={raised}>
+                        <p class="done">Escalation {raised.Name} recorded, in your name.</p>
+                        <template if:true={hasSquadNumber}>
+                            <a class="dial" href={squadTel}>Call the {raised.Squad__c}: {squadNumber}</a>
+                        </template>
+                        <template if:false={hasSquadNumber}>
+                            <p class="block">
+                                No number is configured for the {raised.Squad__c}. An admin sets
+                                these on this component in Lightning App Builder, so that the only
+                                numbers in this system belong to staff.
+                            </p>
+                        </template>
+                        <button class="ghost" onclick={doClose} disabled={busy}>
+                            Close it, and clear the callback number
+                        </button>
+                    </template>
+                </div>
+            </template>
+            <template if:true={error}>
+                <p class="block" role="alert">{error}</p>
+            </template>
+        </template>
+    </div>
+</template>
