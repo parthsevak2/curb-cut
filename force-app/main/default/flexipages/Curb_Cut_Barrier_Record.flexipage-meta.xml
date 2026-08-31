@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Curb Cut Request record page. The guidance sits beside the record rather than in a manual nobody opens at four in the afternoon.</description>
+    <description>Barrier report. What they said is hard, and what they sent instead of saying it.</description>
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentName>force:highlightsPanel</componentName>
                 <identifier>hl</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-                <identifier>requestPath</identifier>
             </componentInstance>
         </itemInstances>
         <name>header</name>
@@ -36,19 +30,25 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>curbCutMediaViewer</componentName>
+                <identifier>mediaViewer</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
-                    <value>&lt;h2&gt;Before you answer this&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Check Person Approved.&lt;/b&gt; If it is not ticked, this request should not exist and should not be acted on.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Interactive Process Due is a real date&lt;/b&gt; and somebody is waiting behind it who cannot see it.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Never ask for anything medical.&lt;/b&gt; Not to verify, not to process, not to be thorough. The system has nowhere to put an answer, and asking is the harm this was built to remove.&lt;/p&gt;&lt;p&gt;&lt;b&gt;&amp;quot;More info&amp;quot; quietly kills requests.&lt;/b&gt; If you set it, say precisely what is needed and by when.&lt;/p&gt;&lt;p&gt;&lt;i&gt;Two people often work one request. Keep the discussion in the feed below so the next person is not starting from nothing.&lt;/i&gt;&lt;/p&gt;</value>
+                    <value>&lt;h2&gt;Reading this well&lt;/h2&gt;&lt;p&gt;&lt;b&gt;What is hard, never why.&lt;/b&gt; That is all this record holds, and all it is allowed to hold. If you find yourself wanting to add a reason, that impulse is the thing this system was built to refuse.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Anonymous is complete, not incomplete.&lt;/b&gt; A report with no name attached is a finished report. Do not try to work out who it is.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Answer in the form they used.&lt;/b&gt; A voice note answered with a wall of text is a door closing.&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
-                <identifier>guide</identifier>
+                <identifier>readingGuide</identifier>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Curb Cut Request</masterLabel>
-    <sobjectType>Accommodation_Request__c</sobjectType>
+    <masterLabel>Curb Cut Barrier Report</masterLabel>
+    <sobjectType>Barrier_Report__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>
     </template>

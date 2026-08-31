@@ -26,6 +26,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <classAccesses>
+        <apexClass>CurbCutMedia</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CurbCutWeb</apexClass>
         <enabled>true</enabled>
     </classAccesses>

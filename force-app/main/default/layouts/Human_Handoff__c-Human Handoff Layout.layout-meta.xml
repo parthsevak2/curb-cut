@@ -32,6 +32,14 @@
                     <behavior>Edit</behavior>
                     <field>Picked_Up_At__c</field>
                 </layoutItems>
+                <layoutItems>
+                    <behavior>Edit</behavior>
+                    <field>Interpreter_Name__c</field>
+                </layoutItems>
+                <layoutItems>
+                    <behavior>Edit</behavior>
+                    <field>Interpreter_Booked_At__c</field>
+                </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

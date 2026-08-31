@@ -3,6 +3,7 @@ import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import brief from '@salesforce/apex/CurbCutConsole.brief';
 import pickUp from '@salesforce/apex/CurbCutConsole.pickUp';
+import bookInterpreter from '@salesforce/apex/CurbCutConsole.bookInterpreter';
 import USER_NAME from '@salesforce/schema/User.Name';
 import USER_ID from '@salesforce/user/Id';
 import { getRecord, getFieldValue, notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
@@ -36,6 +37,9 @@ export default class CurbCutHandoffBrief extends LightningElement {
 
     get loaded() { return !!this.data; }
     get canTake() { return this.data && !this.data.pickedUp && !this.working; }
+    // Booking is offered only where it is the blocking step, so it never becomes
+    // a button people press out of habit on records it does not apply to.
+    get needsInterpreter() { return !!this.data?.interpreter; }
 
     get waitedText() {
         const h = this.data?.waitedHours ?? 0;
@@ -84,5 +88,27 @@ export default class CurbCutHandoffBrief extends LightningElement {
         } finally {
             this.working = false;
         }
+    }
+
+    async book() {
+        this.working = true;
+        try {
+            await bookInterpreter({
+                handoffId: this.recordId,
+                interpreterName: getFieldValue(this.user.data, USER_NAME)
+            });
+            await refreshApex(this.wiredResult);
+            await notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Interpreter booked',
+                message: 'Tell them now. The waiting was the whole cost.',
+                variant: 'success'
+            }));
+        } catch (e) {
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Could not book it',
+                message: e?.body?.message || 'Try again.', variant: 'error'
+            }));
+        } finally { this.working = false; }
     }
 }

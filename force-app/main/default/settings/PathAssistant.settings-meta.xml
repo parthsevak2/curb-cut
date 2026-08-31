@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Path is off by default in a new org, which makes a deployed PathAssistant
+     silently render nothing. Turned on here so the guidance on each step of a
+     request actually reaches the person deciding. -->
+<PathAssistantSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <pathAssistantEnabled>true</pathAssistantEnabled>
+</PathAssistantSettings>
