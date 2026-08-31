@@ -1,0 +1,45 @@
+<template>
+    <template if:true={error}>
+        <p class="err" role="alert">{error}</p>
+    </template>
+
+    <template if:true={loaded}>
+        <article class="brief">
+            <p class="status" data-tone={waitTone}>{statusLine}</p>
+
+            <h2 class="h">What they already told us</h2>
+            <template if:true={data.theirWords}>
+                <blockquote class="words">{data.theirWords}</blockquote>
+            </template>
+            <template if:false={data.theirWords}>
+                <p class="none">No words are attached to this handoff. Do not ask them to
+                   start again if you can avoid it.</p>
+            </template>
+
+            <h2 class="h">How to reach them</h2>
+            <p class="reach">{reachLine}</p>
+            <p class="rule">Never by telephone. That is the door this record exists to keep open.</p>
+
+            <ul class="flags">
+                <template if:true={data.interpreter}>
+                    <li class="flag">Needs a human interpreter. Signed video is never machine translated.</li>
+                </template>
+                <template if:true={data.neverCall}>
+                    <li class="flag">This person has recorded that they cannot take a call at all.</li>
+                </template>
+                <template if:true={data.modality}>
+                    <li class="soft">They came in by {data.modality}. Answer the same way.</li>
+                </template>
+            </ul>
+
+            <template if:true={canTake}>
+                <button class="take" onclick={take}>I am picking this up</button>
+                <p class="soft">Puts your name on it, so the next shift can see it is
+                   not waiting on nobody.</p>
+            </template>
+            <template if:true={data.pickedUp}>
+                <p class="taken">Picked up by {data.handler}.</p>
+            </template>
+        </article>
+    </template>
+</template>
