@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Disclosures</fullName>
+    <columns>NAME</columns>
+    <columns>Shown_To__c</columns>
+    <columns>Shown_At__c</columns>
+    <columns>Context__c</columns>
+    <columns>Access_Preference__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All disclosures</label>
+</ListView>

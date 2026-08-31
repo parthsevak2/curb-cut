@@ -14,5 +14,11 @@
         <displayFormat>DE-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Disclosure Events</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Shown_To__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Shown_At__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Context__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Access_Preference__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Costs_The_Employer_Nothing</fullName>
+    <columns>NAME</columns>
+    <columns>Option__c</columns>
+    <columns>Plain_Language_Summary__c</columns>
+    <columns>Precedent_Count__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Zero_Cost__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Costs the employer nothing</label>
+</ListView>

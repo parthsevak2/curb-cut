@@ -1,0 +1,55 @@
+<template>
+    <div class="assist">
+        <div class="head">
+            <span class="dot" aria-hidden="true"></span>
+            <h2 class="title">Assistant</h2>
+            <span class="badge">grounded, never guesses</span>
+        </div>
+
+        <template if:true={error}>
+            <p class="err" role="alert">{error}</p>
+        </template>
+
+        <template if:true={ready}>
+            <p class="lede">{plan.message}</p>
+
+            <ol class="steps">
+                <template for:each={steps} for:item="s">
+                    <li key={s.id} class={s.cls}>
+                        <span class="num" aria-hidden="true">{s.n}</span>
+                        <div class="body">
+                            <p class="label">{s.label}</p>
+                            <p class="why">{s.why}</p>
+                            <template if:true={s.actionable}>
+                                <button class="act" data-id={s.id} onclick={runStep}
+                                        disabled={busy}>{s.label}</button>
+                            </template>
+                        </div>
+                    </li>
+                </template>
+            </ol>
+
+            <template if:true={hasResult}>
+                <div class={resultCls} role="status" aria-live="polite">
+                    <p class="panel-title">{resultTitle}</p>
+                    <p class="panel-msg">{result.message}</p>
+                    <template if:true={result.body}>
+                        <pre class="panel-body">{result.body}</pre>
+                        <button class="ghost" onclick={copy}>Copy this</button>
+                    </template>
+                </div>
+            </template>
+
+            <div class="askbox">
+                <label class="ask-label" for="q">Ask about this one</label>
+                <input id="q" type="text" class="ask-input" value={question}
+                       oninput={handleQuestion}
+                       placeholder="What could I offer them? What does it cost?"/>
+                <button class="act wide" onclick={askIt} disabled={busy}>Ask</button>
+                <p class="foot">Answers come from this record and the sourced library.
+                   It will refuse to tell you anything medical about a person, because
+                   there is nothing to tell.</p>
+            </div>
+        </template>
+    </div>
+</template>

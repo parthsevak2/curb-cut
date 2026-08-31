@@ -14,5 +14,11 @@
         <displayFormat>AO-{00000}</displayFormat>
     </nameField>
     <pluralLabel>Accommodation Options</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Plain_Language_Summary__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Zero_Cost__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Typical_Cost__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Precedent_Count__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>Private</sharingModel>
 </CustomObject>

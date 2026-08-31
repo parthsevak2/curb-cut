@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Live_Right_Now</fullName>
+    <columns>NAME</columns>
+    <columns>Statement__c</columns>
+    <columns>Shared_With__c</columns>
+    <columns>Scope__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Revoked_On__c</field>
+        <operation>equals</operation>
+        <value></value>
+    </filters>
+    <label>Live right now</label>
+</ListView>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Take_A_Call</fullName>
+    <columns>NAME</columns>
+    <columns>Preferred_Modality__c</columns>
+    <columns>Plain_Language_Mode__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Never_Call__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Cannot take a call</label>
+</ListView>

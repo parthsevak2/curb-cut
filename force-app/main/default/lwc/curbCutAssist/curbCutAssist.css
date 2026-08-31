@@ -1,0 +1,120 @@
+/* Curb Cut assistant.
+   Restraint, not decoration: an operator reads this at four in the afternoon
+   with someone waiting. Depth is one soft shadow, motion is one 140ms fade, and
+   every state carries a word as well as a colour. */
+
+:host {
+    --ink:        #14171a;
+    --ink-soft:   #4a4e4f;
+    --ink-mute:   #6b7174;
+    --line:       #e3e7ea;
+    --surface:    #ffffff;
+    --sunken:     #f6f8f9;
+    --deep:       #1f5a4e;
+    --deep-wash:  #eaf3f0;
+    --signal:     #8a5d0f;
+    --signal-wash:#fbf2e1;
+    --alert:      #8c2f26;
+    --alert-wash: #fbeceb;
+    --focus:      #0b57c7;
+    display: block;
+}
+
+.assist {
+    font-size: .93rem; line-height: 1.55; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- header ---------- */
+.head { display: flex; align-items: center; gap: .5rem; margin-bottom: .15rem; }
+.title { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; margin: 0; }
+.dot {
+    width: .5rem; height: .5rem; border-radius: 50%; flex: 0 0 auto;
+    background: var(--deep); box-shadow: 0 0 0 3px var(--deep-wash);
+}
+.badge {
+    margin-left: auto; font-size: .66rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--deep);
+    background: var(--deep-wash); border-radius: 100px; padding: .2rem .5rem;
+}
+.lede { margin: .35rem 0 .9rem; color: var(--ink-soft); }
+
+/* ---------- the ordered steps ---------- */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.step {
+    display: grid; grid-template-columns: 1.55rem 1fr; gap: .65rem;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: .7rem .8rem .75rem;
+    box-shadow: 0 1px 2px rgba(20,23,26,.04);
+}
+.step .num {
+    width: 1.55rem; height: 1.55rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .74rem; font-weight: 800; color: #fff; background: var(--ink-mute);
+}
+.step.tone-urgent { border-color: #f0cdc9; background: linear-gradient(180deg, var(--alert-wash), var(--surface) 60%); }
+.step.tone-urgent .num { background: var(--alert); }
+.step.tone-live   .num { background: var(--signal); }
+.step.tone-calm   .num { background: var(--deep); }
+.step.is-done { opacity: .62; }
+.step.is-done .label { text-decoration: line-through; text-decoration-thickness: 1px; }
+.label { margin: 0; font-weight: 700; }
+.why   { margin: .1rem 0 0; color: var(--ink-soft); font-size: .84rem; }
+
+/* ---------- actions ---------- */
+.act {
+    margin-top: .5rem; font: inherit; font-size: .84rem; font-weight: 700;
+    cursor: pointer; min-height: 34px; padding: .35rem .75rem;
+    border-radius: 7px; background: var(--ink); color: #fff; border: 1px solid var(--ink);
+}
+.act:hover:not(:disabled) { background: #23282c; }
+.act:disabled { opacity: .5; cursor: progress; }
+.act.wide { width: 100%; min-height: 40px; margin-top: .5rem; }
+.ghost {
+    margin-top: .55rem; font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer;
+    min-height: 32px; padding: .3rem .7rem; border-radius: 7px;
+    background: transparent; color: var(--ink); border: 1px solid var(--ink);
+}
+.ghost:hover { background: var(--sunken); }
+.act:focus-visible, .ghost:focus-visible, .ask-input:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 2px;
+}
+
+/* ---------- result ---------- */
+.panel {
+    margin-top: .85rem; border-radius: 10px; padding: .75rem .85rem;
+    background: var(--deep-wash); border: 1px solid #cfe2dc; border-left: 4px solid var(--deep);
+    animation: rise .14s ease-out both;
+}
+.panel.refused {
+    background: var(--alert-wash); border-color: #f0cdc9; border-left-color: var(--alert);
+}
+.panel-title {
+    margin: 0; font-size: .68rem; font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-mute);
+}
+.panel-msg  { margin: .25rem 0 0; white-space: pre-wrap; }
+.panel-body {
+    margin: .55rem 0 0; padding: .6rem .7rem; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 7px;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: .8rem; line-height: 1.6; white-space: pre-wrap; overflow-x: auto;
+}
+
+/* ---------- ask ---------- */
+.askbox { margin-top: 1rem; padding-top: .85rem; border-top: 1px solid var(--line); }
+.ask-label { display: block; font-weight: 700; font-size: .84rem; margin-bottom: .3rem; }
+.ask-input {
+    width: 100%; font: inherit; font-size: .88rem; padding: .5rem .6rem;
+    border: 1px solid #c9d0d4; border-radius: 7px; background: var(--surface); color: var(--ink);
+    min-height: 40px;
+}
+.foot { margin: .5rem 0 0; font-size: .78rem; color: var(--ink-mute); }
+.err  { color: var(--alert); margin: 0; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
+@media (prefers-contrast: more) {
+    .why, .foot, .panel-title { color: var(--ink); }
+    .step, .ask-input { border-color: var(--ink); }
+}

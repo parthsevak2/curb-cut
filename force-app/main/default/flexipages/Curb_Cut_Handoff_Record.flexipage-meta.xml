@@ -36,6 +36,12 @@
         </itemInstances>
 <itemInstances>
             <componentInstance>
+                <componentName>curbCutAssist</componentName>
+                <identifier>assistPanel</identifier>
+            </componentInstance>
+        </itemInstances>
+<itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>richTextValue</name>
                     <value>&lt;h2&gt;Before you make contact&lt;/h2&gt;&lt;p&gt;&lt;b&gt;Read the barrier report first.&lt;/b&gt; They have already explained once. Making them do it again is the thing this system promised would not happen.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Use the channel in Reachable By, exactly.&lt;/b&gt; Telephone is not on that list and never will be. &amp;quot;I will just give them a quick call&amp;quot; is the specific failure this record exists to prevent.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Put your name in Handler Name when you take it&lt;/b&gt;, so the next shift knows it is not waiting on nobody.&lt;/p&gt;&lt;p&gt;&lt;b&gt;You will not find a diagnosis here.&lt;/b&gt; There is no field for one. If someone asks you what this person has, the answer is that nobody knows and nobody can find out.&lt;/p&gt;&lt;p&gt;&lt;i&gt;Talk about this case in the feed below, not in a private message. Shifts change.&lt;/i&gt;&lt;/p&gt;</value>

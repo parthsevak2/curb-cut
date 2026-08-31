@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arrived_By_Voice_Or_Video</fullName>
+    <columns>NAME</columns>
+    <columns>Inbound_Modality__c</columns>
+    <columns>Functional_Description__c</columns>
+    <columns>Interpreter_Needed__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Inbound_Modality__c</field>
+        <operation>equals</operation>
+        <value>Voice note,Video</value>
+    </filters>
+    <label>Arrived by voice or video</label>
+</ListView>
