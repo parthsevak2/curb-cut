@@ -1,0 +1,46 @@
+<template>
+    <div class="board">
+        <h2 class="board-title">Where things stand right now</h2>
+
+        <template if:true={error}>
+            <p class="err" role="alert">{error}</p>
+        </template>
+
+        <template if:false={settled}>
+            <p class="soft">Counting the queues…</p>
+        </template>
+
+        <template if:true={loaded}>
+            <ul class="cards">
+                <li>
+                    <button class="card" data-tone={waitingTone} onclick={goWaiting}>
+                        <span class="n">{data.waiting}</span>
+                        <span class="label">waiting for a person</span>
+                        <span class="note">{waitingNote}</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="card" data-tone={decisionTone} onclick={goDecisions}>
+                        <span class="n">{data.undecided}</span>
+                        <span class="label">asked, not yet answered</span>
+                        <span class="note">{decisionNote}</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="card" data-tone={interpreterTone} onclick={goInterpreters}>
+                        <span class="n">{data.interpreters}</span>
+                        <span class="label">waiting on an interpreter</span>
+                        <span class="note">{interpreterNote}</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="card" data-tone={unreachedTone} onclick={goUnreached}>
+                        <span class="n">{data.unreached}</span>
+                        <span class="label">replies that did not arrive</span>
+                        <span class="note">{unreachedNote}</span>
+                    </button>
+                </li>
+            </ul>
+        </template>
+    </div>
+</template>

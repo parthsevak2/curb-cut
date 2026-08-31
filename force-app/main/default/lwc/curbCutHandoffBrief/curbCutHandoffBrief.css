@@ -1,0 +1,23 @@
+.brief { font-size: .94rem; line-height: 1.55; color: #14171a; }
+.h { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+     color: #5e6568; margin: 1.1rem 0 .35rem; }
+.status { font-weight: 700; margin: 0; padding: .55rem .7rem; border-radius: 5px;
+          border-left: 4px solid #8e949a; background: #f4f6f7; }
+.status[data-tone="urgent"] { border-left-color: #8c2f26; }
+.status[data-tone="live"]   { border-left-color: #8a5d0f; }
+.words { margin: 0; padding: .8rem .95rem; background: #fff; border: 1px solid #d8dde1;
+         border-left: 4px solid #1f5a4e; border-radius: 5px; font-size: 1.02rem; }
+.reach { margin: 0; font-weight: 700; font-size: 1.02rem; }
+.rule  { margin: .2rem 0 0; color: #4a4e4f; font-size: .86rem; }
+.flags { list-style: none; margin: .9rem 0 0; padding: 0; display: grid; gap: .4rem; }
+.flag  { padding: .5rem .7rem; border-radius: 5px; background: #f6dfdc;
+         border-left: 4px solid #8c2f26; font-weight: 600; }
+.soft  { color: #4a4e4f; font-size: .86rem; margin: .35rem 0 0; }
+.none  { margin: 0; color: #4a4e4f; }
+.take  { margin-top: 1rem; width: 100%; font: inherit; font-weight: 700; cursor: pointer;
+         min-height: 44px; padding: .65rem 1rem; border-radius: 5px;
+         background: #14171a; color: #fff; border: 2px solid #14171a; }
+.take:hover { opacity: .9; }
+.take:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }
+.taken { margin-top: 1rem; font-weight: 700; color: #1f5a4e; }
+.err   { color: #8c2f26; margin: 0; }

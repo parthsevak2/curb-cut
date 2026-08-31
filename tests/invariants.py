@@ -342,7 +342,14 @@ else:
 # 12. A page nobody can open is not a page. Every Visualforce page in the repo
 #     must be granted on the site guest profile, or it ships a 401 to the public
 #     and to any carrier reviewing the campaign.
-PROF = glob.glob(os.path.join(DEF, 'profiles', '*.profile-meta.xml'))
+# The site's guest profile by name, not "whichever profile file sorts first".
+# Adding an unrelated Admin profile once made this check read the wrong file and
+# report every public page as unreachable, which is the kind of false alarm that
+# teaches people to ignore the suite.
+PROF = [f for f in glob.glob(os.path.join(DEF, 'profiles', '*.profile-meta.xml'))
+        if 'CurbCut' in os.path.basename(f)]
+check('guest-profile-present', bool(PROF),
+      'no CurbCut guest profile in source; public page access is unverifiable')
 if PROF:
     prof = ET.parse(PROF[0]).getroot()
     granted = {(pa.find(f'{{{NS}}}apexPage').text or '').strip()
@@ -503,6 +510,51 @@ for cls in glob.glob(os.path.join(CLS, '*.cls')):
     for m in re.finditer(r"'([^'\n]*[Rr]eply STOP[^'\n]*)'", body):
         check('never-instructs-reply-stop', False,
               f'{os.path.basename(cls)} tells someone to reply STOP: "{m.group(1)[:60]}"')
+
+
+# 19. Every custom component a Lightning page names must exist in source, and
+#     every report a chart names must too. A missing one renders as nothing at
+#     all -- no error, no gap, just a page that quietly does less than it says.
+lwc_have = {os.path.basename(d) for d in glob.glob(os.path.join(DEF, 'lwc', '*'))
+            if os.path.isdir(d)}
+for fpf in glob.glob(os.path.join(DEF, 'flexipages', '*.flexipage-meta.xml')):
+    root = ET.parse(fpf).getroot()
+    for ci in root.iter(f'{{{NS}}}componentInstance'):
+        nm = ci.find(f'{{{NS}}}componentName')
+        name = (nm.text or '').strip() if nm is not None else ''
+        if not name or ':' in name:          # namespaced platform components
+            continue
+        check('flexipage-lwc-exists', name in lwc_have,
+              f'{os.path.basename(fpf)} places {name}, which is not in force-app/lwc')
+        props = {}
+        for pr in ci.findall(f'{{{NS}}}componentInstanceProperties'):
+            n = pr.find(f'{{{NS}}}name'); v = pr.find(f'{{{NS}}}value')
+            if n is not None and v is not None: props[n.text] = (v.text or '').strip()
+    for ci in root.iter(f'{{{NS}}}componentInstance'):
+        nm = ci.find(f'{{{NS}}}componentName')
+        if nm is None or nm.text != 'flexipage:reportChart':
+            continue
+        for pr in ci.findall(f'{{{NS}}}componentInstanceProperties'):
+            n = pr.find(f'{{{NS}}}name')
+            if n is not None and n.text == 'reportName':
+                want = (pr.find(f'{{{NS}}}value').text or '').strip()
+                check('flexipage-chart-report-exists',
+                      any(want == r.split('/')[-1] for r in reports_have),
+                      f'{os.path.basename(fpf)} charts report {want}, which is not in source')
+
+# Every LWC that calls Apex must call a class that exists, or it renders nothing.
+for js in glob.glob(os.path.join(DEF, 'lwc', '*', '*.js')):
+    for m in re.finditer(r"@salesforce/apex/([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)", open(js).read()):
+        cls_name, method = m.group(1), m.group(2)
+        path = os.path.join(CLS, cls_name + '.cls')
+        check('lwc-apex-class-exists', os.path.exists(path),
+              f'{os.path.basename(js)} imports {cls_name}.{method}, no such Apex class')
+        if os.path.exists(path):
+            body = open(path).read()
+            check('lwc-apex-method-is-exposed',
+                  re.search(r'@AuraEnabled[^\n]*\n\s*public\s+static[^\n]*\b' + method + r'\s*\(', body)
+                  is not None,
+                  f'{cls_name}.{method} is called from LWC but is not @AuraEnabled')
 
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
