@@ -18,11 +18,16 @@
 List<Access_Profile__c> oldProfiles =
     [SELECT Id FROM Access_Profile__c WHERE Person_Handle__c LIKE 'seed-%'];
 if (!oldProfiles.isEmpty()) { delete oldProfiles; }
-// Requests and handoffs that were created by earlier ad-hoc testing and carry
-// no words of anybody's are noise in every queue they appear in.
-List<Accommodation_Request__c> orphans =
+// Records created by earlier ad-hoc testing that carry no words of anybody's
+// are noise in every queue they appear in, and worse than noise on a handoff:
+// the brief tells whoever picks it up to read what the person already said, and
+// there is nothing there to read.
+List<Accommodation_Request__c> orphanRequests =
     [SELECT Id FROM Accommodation_Request__c WHERE Barrier_Report__c = null];
-if (!orphans.isEmpty()) { delete orphans; }
+if (!orphanRequests.isEmpty()) { delete orphanRequests; }
+List<Human_Handoff__c> orphanHandoffs =
+    [SELECT Id FROM Human_Handoff__c WHERE Barrier_Report__c = null];
+if (!orphanHandoffs.isEmpty()) { delete orphanHandoffs; }
 
 // ---- profiles: only for the people who chose to be known ------------------
 List<Access_Profile__c> profiles = new List<Access_Profile__c>{
