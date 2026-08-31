@@ -1,0 +1,54 @@
+/* Deliberately unlike everything else on the page. This should never be the
+   thing an operator reaches for by habit. */
+:host { display: block; }
+.wrap { margin-top: .5rem; }
+.toggle {
+    width: 100%; font: inherit; font-size: .84rem; font-weight: 700; cursor: pointer;
+    text-align: left; min-height: 38px; padding: .4rem .7rem; border-radius: 8px;
+    background: #fff; color: #8c2f26; border: 1px dashed #c98b84;
+    display: flex; align-items: center; gap: .5rem;
+}
+.toggle:hover { background: #fbeceb; }
+.toggle:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }
+.tri { width: .5rem; height: .5rem; border-radius: 50%; background: #8c2f26; flex: 0 0 auto; }
+.box {
+    margin-top: .5rem; padding: .8rem .85rem; border-radius: 10px;
+    background: #fdf7f6; border: 1px solid #ecd3d0; border-left: 4px solid #8c2f26;
+}
+.warn  { margin: 0 0 .6rem; font-size: .84rem; color: #4a4e4f; line-height: 1.5; }
+.block {
+    margin: 0 0 .6rem; padding: .55rem .7rem; border-radius: 7px;
+    background: #f6dfdc; border-left: 3px solid #8c2f26; font-size: .84rem; line-height: 1.5;
+}
+.open-note {
+    margin: 0 0 .6rem; padding: .5rem .7rem; border-radius: 7px;
+    background: #fbf2e1; border-left: 3px solid #8a5d0f; font-size: .84rem;
+}
+.lbl { display: block; font-weight: 700; font-size: .82rem; margin: .6rem 0 .25rem; }
+.ta, .inp {
+    width: 100%; font: inherit; font-size: .86rem; padding: .45rem .55rem;
+    border: 1px solid #c9d0d4; border-radius: 7px; background: #fff; color: #14171a;
+}
+.inp { min-height: 38px; }
+.hint { margin: .25rem 0 .5rem; font-size: .78rem; color: #6b7174; line-height: 1.45; }
+.go {
+    width: 100%; margin-top: .7rem; font: inherit; font-size: .86rem; font-weight: 700;
+    cursor: pointer; min-height: 42px; border-radius: 8px;
+    background: #8c2f26; color: #fff; border: 1px solid #8c2f26;
+}
+.go:disabled { opacity: .45; cursor: not-allowed; }
+.go:hover:not(:disabled) { background: #7a281f; }
+.done { margin: 0 0 .5rem; font-weight: 700; }
+.dial {
+    display: block; text-align: center; text-decoration: none; font-weight: 800;
+    font-size: 1rem; padding: .7rem; border-radius: 8px; margin-bottom: .55rem;
+    background: #8c2f26; color: #fff;
+}
+.dial:hover { background: #7a281f; color: #fff; }
+.ghost {
+    width: 100%; font: inherit; font-size: .82rem; font-weight: 700; cursor: pointer;
+    min-height: 36px; border-radius: 7px; background: transparent;
+    color: #14171a; border: 1px solid #14171a;
+}
+.go:focus-visible, .ghost:focus-visible, .dial:focus-visible,
+.ta:focus-visible, .inp:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }

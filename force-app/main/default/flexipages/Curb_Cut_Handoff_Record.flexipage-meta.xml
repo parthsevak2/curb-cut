@@ -50,6 +50,24 @@
                 <identifier>guide</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>safeguardingNumber</name>
+                    <value>+1 276 495 9311</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>accessTeamNumber</name>
+                    <value>+1 276 495 9311</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>hrDutyNumber</name>
+                    <value>+1 276 495 9311</value>
+                </componentInstanceProperties>
+                <componentName>curbCutEmergency</componentName>
+                <identifier>emergencyPanel</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>

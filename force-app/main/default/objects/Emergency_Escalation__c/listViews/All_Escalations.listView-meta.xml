@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Escalations</fullName>
+    <columns>NAME</columns>
+    <columns>Raised_At__c</columns>
+    <columns>Squad__c</columns>
+    <columns>Caller_Relationship__c</columns>
+    <columns>Person_Knows__c</columns>
+    <columns>Reason__c</columns>
+    <columns>Closed_At__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All escalations</label>
+</ListView>

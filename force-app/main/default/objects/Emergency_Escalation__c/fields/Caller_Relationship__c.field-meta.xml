@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Caller_Relationship__c</fullName>
+    <description>Who raised the concern, in relation to the person the record is about.</description>
+    <inlineHelpText>Who brought this to us. A family member acting out of worry is still someone speaking about a person who did not choose it, so record it honestly.</inlineHelpText>
+    <label>Raised By Whom</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>The person themselves</fullName><default>true</default><label>The person themselves</label></value>
+            <value><fullName>A family member</fullName><default>false</default><label>A family member</label></value>
+            <value><fullName>A colleague or manager</fullName><default>false</default><label>A colleague or manager</label></value>
+            <value><fullName>Someone else</fullName><default>false</default><label>Someone else</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

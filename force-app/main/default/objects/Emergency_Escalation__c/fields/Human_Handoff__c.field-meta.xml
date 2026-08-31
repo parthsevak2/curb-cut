@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Human_Handoff__c</fullName>
+    <description>The handoff this escalation came from.</description>
+    <inlineHelpText>The handoff this came from, so the escalation is never floating free of the person it concerns.</inlineHelpText>
+    <label>Human Handoff</label>
+    <referenceTo>Human_Handoff__c</referenceTo>
+    <relationshipLabel>Emergency Escalations</relationshipLabel>
+    <relationshipName>Emergency_Escalations</relationshipName>
+    <type>Lookup</type>
+</CustomField>

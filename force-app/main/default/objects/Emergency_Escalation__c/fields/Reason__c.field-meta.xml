@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <description>Why this exception was made. Mandatory, and the friction is the point.</description>
+    <inlineHelpText>Say what happened, in a sentence somebody reviewing this in six months could understand. Curb Cut does not route people to telephones, so every call needs a reason that survives being read back.</inlineHelpText>
+    <label>Reason</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

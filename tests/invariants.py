@@ -56,10 +56,37 @@ for o in objects():
         check('no-diagnosis-field', not FORBIDDEN.search(fn),
               f'{o}.{fn} names a medical concept')
 
-# 2. Every field must be in the permission set. The agent could not see the
+# 2. Every field must be in a permission set. The agent could not see the
 #    grounded library for an entire afternoon because of a permissions gap.
+#
+#    One object is deliberately NOT on the main permission set. Making that an
+#    explicit, argued exception rather than loosening the rule is the same
+#    pattern as VIEW_ALL_ALLOWED: if the list ever grows, somebody has to write
+#    down why.
+SQUAD_ONLY = {
+    'Emergency_Escalation__c':
+        'The telephone exception. Curb Cut promises nobody is ever routed to a '
+        'phone, so the ability to make an exception is held by a named squad '
+        'through Curb_Cut_Emergency rather than by everyone with a login. '
+        'Granting it to a person is a decision.',
+}
+SQUAD_PS = os.path.join(ROOT, 'force-app/main/default/permissionsets',
+                        'Curb_Cut_Emergency.permissionset-meta.xml')
+squad_ps = open(SQUAD_PS).read() if os.path.exists(SQUAD_PS) else ''
 ps = open(PS).read()
 for o in objects():
+    if o in SQUAD_ONLY:
+        # Still enforced - just against the squad's permission set instead.
+        for fn, t in fields(o).items():
+            if t.findtext(f'{{{NS}}}type') in ('AutoNumber','Formula','Summary'):
+                continue
+            check('squad-only-field-in-squad-permset',
+                  f'<field>{o}.{fn}</field>' in squad_ps,
+                  f'{o}.{fn} missing from Curb_Cut_Emergency')
+        check('squad-only-not-in-main-permset',
+              f'<object>{o}</object>' not in ps,
+              f'{o} is squad-only but appears on the main permission set')
+        continue
     for fn, t in fields(o).items():
         ftype = t.findtext(f'{{{NS}}}type')
         if ftype in ('AutoNumber','Formula','Summary'):
