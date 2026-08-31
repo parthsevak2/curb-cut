@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Squad__c</fullName>
+    <description>Which duty squad was raised.</description>
+    <inlineHelpText>Who you are reaching. This dials a colleague, never the person the record is about.</inlineHelpText>
+    <label>Squad</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Safeguarding lead</fullName><default>true</default><label>Safeguarding lead</label></value>
+            <value><fullName>Access team lead</fullName><default>false</default><label>Access team lead</label></value>
+            <value><fullName>HR duty officer</fullName><default>false</default><label>HR duty officer</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

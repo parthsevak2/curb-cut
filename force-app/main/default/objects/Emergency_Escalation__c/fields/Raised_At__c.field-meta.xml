@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Raised_At__c</fullName>
+    <description>When the escalation was raised.</description>
+    <inlineHelpText>When it was raised. The gap between this and Closed At is how long an unforeseen situation went unresolved.</inlineHelpText>
+    <label>Raised At</label>
+    <type>DateTime</type>
+</CustomField>

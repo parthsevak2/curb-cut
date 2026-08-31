@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Curb Cut emergency escalation</masterLabel>
+    <description>The narrow exception to the no-telephone promise, for a named squad, with the reason recorded before the number is shown.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="safeguardingNumber" type="String" label="Safeguarding lead number"
+                      description="A staff number. Never a number belonging to the person the record is about."/>
+            <property name="accessTeamNumber" type="String" label="Access team lead number"
+                      description="A staff number."/>
+            <property name="hrDutyNumber" type="String" label="HR duty officer number"
+                      description="A staff number."/>
+            <objects>
+                <object>Human_Handoff__c</object>
+            </objects>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

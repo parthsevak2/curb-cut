@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The squad, and nobody else.
+
+  A telephone call is the one thing this system promises never to make somebody
+  do, so the ability to make an exception is held by a named group rather than
+  by everyone with a login. Granting this to a person is a decision; that is the
+  reason it is a separate permission set rather than a checkbox on the main one.
+-->
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Emergency escalation squad. Can raise a call to a duty colleague when something unforeseen happens, and is accountable for the written reason.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Curb Cut Emergency Squad</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Emergency_Escalation__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Reason__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Squad__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Caller_Relationship__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Person_Knows__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Callback_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Raised_At__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Raised_By_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Closed_At__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Outcome__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Human_Handoff__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Emergency_Escalation__c.Barrier_Report__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <classAccesses>
+        <apexClass>CurbCutEmergency</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+</PermissionSet>

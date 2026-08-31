@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Still_Open</fullName>
+    <columns>NAME</columns>
+    <columns>Raised_At__c</columns>
+    <columns>Squad__c</columns>
+    <columns>Reason__c</columns>
+    <columns>Callback_Number__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Closed_At__c</field>
+        <operation>equals</operation>
+        <value></value>
+    </filters>
+    <label>Still open</label>
+</ListView>
