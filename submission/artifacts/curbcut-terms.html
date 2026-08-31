@@ -1,0 +1,217 @@
+<title>Curb Cut Terms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:#EFEFEB; --surface:#FAFAF7; --sunken:#E4E4DE;
+    --ink:#17191A; --ink-soft:#4A4E4F; --muted:#74797A;
+    --rule:#C9C9C1; --paint:#B57F1E; --paint-ink:#8A6115;
+    --verified:#2C6659; --void:#9E362C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#111314; --surface:#1A1D1E; --sunken:#0B0D0E;
+      --ink:#E9EAE6; --ink-soft:#B6BAB8; --muted:#868B8A;
+      --rule:#2E3335; --paint:#DFA847; --paint-ink:#EFC377;
+      --verified:#56A995; --void:#D2726A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#111314; --surface:#1A1D1E; --sunken:#0B0D0E;
+    --ink:#E9EAE6; --ink-soft:#B6BAB8; --muted:#868B8A;
+    --rule:#2E3335; --paint:#DFA847; --paint-ink:#EFC377;
+    --verified:#56A995; --void:#D2726A;
+  }
+  * { box-sizing:border-box; }
+  body {
+    background:var(--ground); color:var(--ink); margin:0;
+    font-family:"Source Serif 4",Georgia,serif; font-size:17px; line-height:1.62;
+    padding:0 clamp(18px,5vw,48px) 100px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1,h2,.eyebrow { font-family:Archivo,"Helvetica Neue",Arial,sans-serif; }
+  header { padding:clamp(48px,9vh,88px) 0 0; }
+  .eyebrow {
+    font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:20px;
+  }
+  h1 { font-size:clamp(34px,6vw,52px); font-weight:800; line-height:1; letter-spacing:-.03em; margin:0; text-wrap:balance; }
+  .lede { font-size:20px; line-height:1.45; color:var(--ink-soft); margin:22px 0 0; max-width:36ch; }
+  .rule { height:3px; background:var(--ink); margin:38px 0 0; opacity:.88; }
+  section { margin-top:46px; }
+  h2 { font-size:21px; font-weight:700; letter-spacing:-.01em; margin:0 0 .5em; text-wrap:balance; }
+  p { margin:0 0 1em; }
+  ul { margin:0 0 1em; padding-left:1.15em; }
+  li { margin-bottom:.5em; }
+  code, .kw {
+    font-family:"JetBrains Mono",monospace; font-size:.85em; background:var(--sunken);
+    padding:1.5px 5px; border-radius:2px; color:var(--ink-soft);
+  }
+  .facts { width:100%; border-collapse:collapse; margin:0 0 1em; font-size:16px; }
+  .facts th, .facts td { text-align:left; padding:12px 12px 12px 0; border-bottom:1px solid var(--rule); vertical-align:top; }
+  .facts th {
+    font-family:Archivo,sans-serif; font-size:12px; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); font-weight:600; width:38%;
+  }
+  .optout {
+    background:var(--surface); border:1px solid var(--rule);
+    border-left:3px solid var(--paint); border-radius:3px; padding:18px 20px; margin:0 0 1em;
+  }
+  .optout p:last-child { margin-bottom:0; }
+  .optout strong { font-weight:700; color:var(--ink); }
+  a { color:var(--paint-ink); }
+  footer {
+    margin-top:60px; padding-top:22px; border-top:3px solid var(--ink);
+    font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted); line-height:1.9;
+  }
+  :focus-visible { outline:2px solid var(--paint); outline-offset:3px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Curb Cut &middot; Terms and Conditions</div>
+    <h1>You text first. Nothing leaves without your yes.</h1>
+    <p class="lede">
+      Those two sentences are the whole agreement. Everything below is detail
+      the phone carriers require us to state plainly.
+    </p>
+    <div class="rule"></div>
+  </header>
+
+  <section>
+    <h2>The programme</h2>
+    <table class="facts">
+      <tbody>
+        <tr><th>Programme name</th><td>Curb Cut</td></tr>
+        <tr><th>Operated by</th><td>Parth Sevak, sole proprietor, Welland, Ontario, Canada</td></tr>
+        <tr><th>What it does</th>
+            <td>A workplace accessibility assistant. You text to find out what
+                adjustments you could ask for at work, and it can draft a request
+                and send it to your employer &mdash; but only if you approve it
+                first, in the conversation.</td></tr>
+        <tr><th>How you join</th>
+            <td>By sending the first message yourself, to the number printed on a
+                workplace poster. We never message anyone who has not messaged
+                first. There is no list, no upload, and no purchased data.</td></tr>
+        <tr><th>Message frequency</th>
+            <td>Varies. Messages are replies to your own messages, within a
+                conversation you started. There is no recurring or scheduled
+                messaging.</td></tr>
+        <tr><th>Cost</th>
+            <td><b>Message and data rates may apply.</b> Curb Cut charges you
+                nothing. Your mobile carrier may charge you for messages at your
+                normal rate.</td></tr>
+        <tr><th>Support</th>
+            <td>Reply <span class="kw">HELP</span> at any time, or email
+                <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a></td></tr>
+        <tr><th>Carriers</th>
+            <td>Mobile carriers are not liable for delayed or undelivered
+                messages.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Getting help and opting out</h2>
+    <div class="optout">
+      <p>
+        Reply <strong>HELP</strong> at any time for help and contact details.
+      </p>
+      <p>
+        Reply <strong>STOP</strong> at any time to stop receiving messages from
+        this number. You will receive one confirmation, and then nothing further.
+        You can rejoin later by texting the number again.
+      </p>
+    </div>
+    <p>
+      Four other words do something different. None of them stops the messages,
+      and they work the same way on every channel &mdash; text, email, Slack or
+      the web page:
+    </p>
+    <ul>
+      <li><span class="kw">HUMAN</span> &mdash; a real person takes over, on the
+          channel you are already using. You will not have to explain it again,
+          and nobody will ring you.</li>
+      <li><span class="kw">OFF</span> &mdash; turn off a standing preference you
+          previously saved. Immediate, and you will not be asked why. Send it
+          with the six-character code you were given when you saved it, like
+          <span class="kw">OFF 4KQ7MT</span>. We hold no account and no number
+          for you, so the code is the only way to find it.</li>
+      <li><span class="kw">DELETE</span> &mdash; discard a drafted request before
+          it is sent. This one only means something while a draft is open.</li>
+      <li><span class="kw">WHO</span> &mdash; see everyone who has been shown a
+          standing preference of yours.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What we promise</h2>
+    <ul>
+      <li><b>Nothing is sent to your employer without your explicit yes</b> in the
+          conversation. A hedge is not a yes. If you say "I guess so," the
+          assistant will ask again rather than send.</li>
+      <li><b>We never ask what condition you have</b>, and there is nowhere in the
+          system built to store one. If you mention it anyway, it is taken out of
+          the text before anything is saved, and you are told so in the same
+          reply. That removal runs against a list of conditions we recognise, and
+          no list covers every word in every language &mdash; it is a real
+          safeguard rather than a guarantee, and you should know which.</li>
+      <li><b>We never route you to a phone call.</b> If you need a person, you get
+          one by message.</li>
+      <li><b>We only describe adjustments from a sourced library.</b> If we do not
+          know, we say so rather than guess.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What this is not</h2>
+    <p>
+      Curb Cut is not a lawyer, a doctor, or your employer. It does not provide
+      legal or medical advice, it cannot guarantee that any request will be
+      granted, and it is not a substitute for your employer's own accommodation
+      process or for advice from a qualified professional. Cost figures come from
+      published Job Accommodation Network survey data and describe employers in
+      general, not your employer.
+    </p>
+    <p>
+      In an emergency, contact your local emergency services. This service is not
+      monitored continuously and must not be used to report an emergency.
+    </p>
+  </section>
+
+  <section>
+    <h2>Fair use and liability</h2>
+    <p>
+      Use the service for its purpose. Do not attempt to extract information about
+      other people, and do not use it to harass anyone. We may stop serving an
+      account that is used this way.
+    </p>
+    <p>
+      The service is provided as is. To the extent the law allows, the operator is
+      not liable for indirect or consequential loss arising from its use. Nothing
+      here limits any right you have that cannot be limited by law.
+    </p>
+    <p>
+      These terms are governed by the laws of the Province of Ontario, Canada.
+    </p>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <p>
+      What is collected, what is deliberately never collected, and who processes
+      it is set out in the Curb Cut Privacy Policy, which forms part of these
+      terms.
+    </p>
+  </section>
+
+  <footer>
+    Curb Cut &middot; accommodation without disclosure<br>
+    Parth Sevak, sole proprietor &middot; Welland, Ontario, Canada<br>
+    parth.sevak2@gmail.com &middot; Last updated 31 August 2026
+  </footer>
+</div>
+
+</body></html>
