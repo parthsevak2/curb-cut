@@ -33,6 +33,16 @@
     </classAccesses>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Human_Handoff__c.Return_Code_Hash__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Access_Preference__c.Claim_Code_Hash__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Access_Preference__c.Access_Profile__c</field>
         <readable>true</readable>
     </fieldPermissions>

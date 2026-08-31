@@ -177,6 +177,22 @@
 
     <div id="standingSaved" hidden="hidden">
       <div id="standingBox" class="doneBox"></div>
+
+      <!-- The code is the only thing connecting an anonymous person to what they
+           just saved. Close this tab without it and the preference cannot be
+           turned off from anywhere, which would leave someone able to switch a
+           disclosure on and not off. -->
+      <div id="codeBox" class="codeBox">
+        <p class="codeLabel">Your code</p>
+        <p id="codeValue" class="codeValue"></p>
+        <p class="codeHelp">
+          Write this down before you close this page. Send <strong>OFF</strong> and
+          your code &#8212; here, by text, or by email &#8212; and this is turned off.
+          Send <strong>WHO</strong> and your code to see everyone who has been shown it.
+          I cannot look you up, because I do not know who you are.
+        </p>
+      </div>
+
       <div class="actions">
         <button type="button" id="whoBtn" class="btn">Who has been shown this?</button>
         <button type="button" id="offBtn" class="btn">Turn it off</button>
@@ -377,6 +393,7 @@
         if (r.created) {
           prefId = r.preferenceId;
           stBox.textContent = text;
+          document.getElementById('codeValue').textContent = r.claimCode || '';
           show(stSaved);
           document.getElementById('standingHeading').setAttribute('tabindex', '-1');
         }

@@ -583,6 +583,84 @@ for js in glob.glob(os.path.join(DEF, 'lwc', '*', '*.js')):
                   is not None,
                   f'{cls_name}.{method} is called from LWC but is not @AuraEnabled')
 
+
+# ---------------------------------------------------------------------------
+# Every keyword we advertise must actually be routed.
+#
+# Six control words were printed in user-facing copy across three channels and
+# none of them was routed anywhere. HUMAN returned an ASL interpreter card.
+# PERSON returned "face the person when speaking". OFF - the word that withdraws
+# a standing disclosure - returned "I do not have good information on that",
+# so a withdrawal silently failed and the sharing stayed on.
+#
+# Every one of those passed every test in the suite, because nothing checked
+# that a promise made in a string was kept by a router. This does.
+# ---------------------------------------------------------------------------
+def read(p):
+    with open(p, encoding='utf-8') as fh:
+        return fh.read()
+
+kw_src = read(os.path.join(CLS, 'CurbCutKeyword.cls'))
+routed = set()
+for m in re.finditer(r"'([A-Z]+)'\s*=>\s*new Set<String>\{(.*?)\}", kw_src, re.S):
+    routed.add(m.group(1))
+    for phrase in re.findall(r"'([^']+)'", m.group(2)):
+        routed.add(phrase.upper())
+
+# Words the agent handles inside a draft exchange rather than the router: these
+# only mean anything while a draft is on the table.
+IN_DRAFT = {'YES', 'CHANGE', 'DELETE', 'NO'}
+
+advertised = {}
+sources = (glob.glob(os.path.join(CLS, '*.cls'))
+           + glob.glob(os.path.join(DEF, 'pages', '*.page'))
+           + glob.glob(os.path.join(ROOT, 'channels', '*.mjs')))
+for f in sources:
+    body = strip_apex_comments(read(f)) if f.endswith('.cls') else read(f)
+    for m in re.finditer(r'\b(?:[Rr]eply|[Ss]end|[Tt]ext)\s+(?:with\s+the\s+word\s+)?([A-Z]{2,12})\b', body):
+        advertised.setdefault(m.group(1), set()).add(os.path.basename(f))
+
+for word, where in sorted(advertised.items()):
+    if word in IN_DRAFT:
+        continue
+    check('advertised-keyword-is-routed', word in routed,
+          f'copy in {", ".join(sorted(where))} tells people to send {word}, '
+          f'but CurbCutKeyword does not route it')
+
+# The relay mirrors the control words so it can answer without a round trip.
+# Two lists that disagree is how this broke in the first place.
+relay = read(os.path.join(ROOT, 'channels', 'sms-relay.mjs'))
+m = re.search(r'const CONTROL_WORDS = new Set\(\[(.*?)\]\)', relay, re.S)
+check('relay-mirrors-control-words', m is not None,
+      'sms-relay.mjs has no CONTROL_WORDS mirror')
+if m:
+    mirrored = {w.upper() for w in re.findall(r"'([^']+)'", m.group(1))}
+    apex_control = set()
+    for intent in ('HUMAN', 'WHO', 'OFF'):
+        mm = re.search(r"'" + intent + r"'\s*=>\s*new Set<String>\{(.*?)\}", kw_src, re.S)
+        if mm:
+            for phrase in re.findall(r"'([^']+)'", mm.group(1)):
+                apex_control.add(phrase.replace(' ', '').upper())
+    missing = apex_control - mirrored
+    check('relay-control-words-cover-apex', not missing,
+          'sms-relay.mjs would send these to the agent instead of routing them: '
+          + ', '.join(sorted(missing)))
+
+# STOP belongs to the carrier and must never be offered as our own switch.
+for intent in ('OFF', 'WHO', 'HUMAN'):
+    mm = re.search(r"'" + intent + r"'\s*=>\s*new Set<String>\{(.*?)\}", kw_src, re.S)
+    if mm:
+        words = {w.upper() for w in re.findall(r"'([^']+)'", mm.group(1))}
+        check('control-word-not-carrier-reserved', 'STOP' not in words,
+              f'{intent} claims STOP, which the carrier owns and intercepts')
+
+# A handoff must never route anyone to a telephone.
+handoff_src = strip_apex_comments(read(os.path.join(CLS, 'CurbCutCreateHandoff.cls')))
+check('handoff-refuses-telephone',
+      "'phone'" in handoff_src and 'NEVER' in handoff_src,
+      'CurbCutCreateHandoff no longer refuses telephone as a reply channel')
+
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')

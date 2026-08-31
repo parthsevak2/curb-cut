@@ -158,6 +158,29 @@
           handed to a person rather than dropped.
         </p>
       </div>
+
+      <div class="card pending">
+        <span class="chip wait">Only in a direct message</span>
+        <h3>Slack</h3>
+        <p>
+          The easiest place to reach for, and the least private. Slack belongs to
+          your employer, and on most plans an owner can export direct messages.
+          So Curb Cut says that first, answers only in a DM, never in a channel,
+          and will not draft or send a request from there.
+        </p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <p>
+        <strong>Four words work on every one of these.</strong>
+        Send <span class="kw">HUMAN</span> at any point and a real person takes
+        over on the same channel &mdash; never a phone call.
+        <span class="kw">OFF</span> turns off anything you asked us to remember,
+        and <span class="kw">WHO</span> lists everyone who has been shown it.
+        <span class="kw">HELP</span> explains what this is. They mean the same
+        thing whichever door you came in by.
+      </p>
     </div>
 
     <div class="note" style="margin-top:1.4rem">

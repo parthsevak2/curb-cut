@@ -97,9 +97,14 @@ private class CurbCutWebTest {
         System.assert(!m.contains('call us') && !m.contains('call you')
                    && !m.contains('give us a call') && !m.contains('phone number'),
             'The web channel must never offer a phone route: ' + r.message);
-        System.assert(m.contains('message'),
-            'The handoff must say they will be reached by message: ' + r.message);
-        System.assertEquals('Text message',
+        // Not "they will reply by message" any more. A web visitor is anonymous,
+        // so there is no address to reply to, and saying otherwise was a promise
+        // the system could not keep. What it owes them instead is a way back.
+        System.assert(String.isNotBlank(r.claimCode),
+            'An anonymous person must be given a way to come back: ' + r.message);
+        System.assert(r.message.contains(r.claimCode),
+            'The code must actually be shown to them: ' + r.message);
+        System.assertEquals('Web chat',
             [SELECT Reachable_By__c FROM Human_Handoff__c LIMIT 1].Reachable_By__c);
     }
 
