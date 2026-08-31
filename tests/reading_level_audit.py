@@ -98,7 +98,8 @@ if os.path.exists(RELAY):
         check(f'sms {const}', grade(literal), 7.0)
 
 # --- the messages Apex hands to a person -----------------------------------
-for cls in ('CurbCutWeb', 'CurbCutMedia', 'CurbCutCreateRequest', 'CurbCutStanding'):
+for cls in ('CurbCutWeb', 'CurbCutMedia', 'CurbCutCreateRequest', 'CurbCutStanding',
+            'CurbCutKeyword', 'CurbCutChannelApi'):
     path = os.path.join(ROOT, 'force-app/main/default/classes', cls + '.cls')
     if not os.path.exists(path):
         continue
@@ -106,8 +107,15 @@ for cls in ('CurbCutWeb', 'CurbCutMedia', 'CurbCutCreateRequest', 'CurbCutStandi
     src = re.sub(r'/\*.*?\*/', '', src, flags=re.S)
     src = re.sub(r'//[^\n]*', '', src)
     said = []
-    for m in re.finditer(r"(?:res\.message|r\.message)\s*=\s*(.+?);", src, re.S):
+    for m in re.finditer(r"(?:res\.message|r\.message|a\.message)\s*=\s*(.+?);", src, re.S):
         said.extend(re.findall(r"'([^']*)'", m.group(1)))
+    # CurbCutKeyword speaks by returning wording rather than assigning a field,
+    # and it is the copy every channel shows first. Score it the same way.
+    for m in re.finditer(r"return\s+('(?:[^']|'')*'(?:\s*\+\s*'(?:[^']|'')*')*)\s*;", src):
+        lit = ' '.join(re.findall(r"'([^']*)'", m.group(1)))
+        # Skip bare identifiers and short mechanical returns.
+        if len(lit.split()) >= 8:
+            said.append(lit)
     if said:
         check(f'apex {cls} messages', grade(' '.join(said)), 6.0)
 

@@ -79,12 +79,37 @@ const TOOLS = [
       required: ['need'],
     },
   },
+  {
+    name: 'curbcut_reach_human',
+    description:
+      'Hand this person to a real human being, on the channel they are already using. ' +
+      'Use it the moment somebody asks for a person, or when you have misunderstood ' +
+      'them twice - do not make them ask three times. This creates a real handoff to a ' +
+      'named handler and returns a code they keep; it never routes anyone to a phone ' +
+      'call, because for some of the people this serves a phone call is a door that ' +
+      'does not open. Send only what they said was hard, never why.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        context: {
+          type: 'string',
+          description:
+            'What they said was hard, in their words, so they never have to explain it ' +
+            'twice. Never a diagnosis or condition.',
+        },
+      },
+      required: ['context'],
+    },
+  },
 ];
 
 async function apex(path, method = 'GET', body) {
-  return conn.requestPost
-    ? conn.request({ method, url: `/services/apexrest${path}`, body: body && JSON.stringify(body) })
-    : null;
+  return conn.request({
+    method,
+    url: `/services/apexrest${path}`,
+    body: body === undefined ? undefined : JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 /** The library lookup runs in the org, so the MCP surface and the phone get
@@ -181,6 +206,14 @@ function draft(need, option) {
 }
 
 async function callTool(name, args) {
+  if (name === 'curbcut_reach_human') {
+    const ctx = String(args.context ?? '');
+    if (FORBIDDEN.test(ctx)) {
+      return { refused: true, reason:
+        'That reads like a diagnosis or condition. There is nowhere in this system ' +
+        'to put one, and a handoff does not need it. Send what they said was hard.' };
+    }
+  }
   if (name === 'curbcut_find_options' || name === 'curbcut_draft_request') {
     const need = String(args?.need ?? '');
     if (FORBIDDEN.test(need)) {
@@ -219,6 +252,23 @@ async function callTool(name, args) {
           'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask or by texting ' +
           '+1 276 495 9311. A hedge is not a yes.',
       };
+    case 'curbcut_reach_human': {
+      /* Routed through the same Apex door as SMS, Slack and email, so an
+         assistant handing somebody over gets exactly the handoff a text message
+         would have created - not a polite sentence with nothing behind it. That
+         was the bug: every channel advertised a way out and none of them
+         routed it. */
+      const answer = await apex('/curbcut/v1/message/', 'POST', {
+        channel: 'External', text: 'human', handle: null,
+      });
+      return {
+        handedOff: Boolean(answer?.handedOff),
+        handler: answer?.handlerName ?? null,
+        note: answer?.message ??
+          'I could not reach a person just now, and will not pretend otherwise. ' +
+          'Tell them to write to parth.sevak2@gmail.com.',
+      };
+    }
     default:
       throw new Error(`no such tool: ${name}`);
   }

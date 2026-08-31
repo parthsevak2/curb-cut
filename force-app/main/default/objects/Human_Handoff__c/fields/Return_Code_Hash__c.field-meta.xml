@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Return_Code_Hash__c</fullName>
+    <description>Salted hash of the code the person keeps. A web visitor is anonymous, so there is no address to reply to. Rather than promise a reply we cannot deliver, we hand them a code and they come back with it, on any channel, to the same handler without explaining again.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Never shown to staff. The person's own copy is the only readable one.</inlineHelpText>
+    <label>Return Code Hash</label>
+    <length>64</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
