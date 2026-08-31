@@ -12,7 +12,11 @@
  */
 public with sharing class CurbCutCostBrief {
 
-    private static final String  JAN_SOURCE     = 'https://askjan.org/topics/costs.cfm';
+    // Named as well as linked. The Agent API redacts bare URLs in what it says,
+    // so a manager was being shown "Source: URL_Redacted" - a grounded figure
+    // that looked unsourced at the exact moment somebody was deciding with it.
+    private static final String  JAN_SOURCE     =
+        'the Job Accommodation Network employer survey through 2024, askjan.org/topics/costs.cfm';
     private static final Integer JAN_ZERO_COST_PCT = 61;
     private static final Integer JAN_MEDIAN_USD    = 300;
     private static final Integer INTERACTIVE_DAYS  = 10;
