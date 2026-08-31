@@ -113,4 +113,65 @@ public with sharing class CurbCutConsole {
             Handler_Name__c = String.isBlank(handlerName) ? UserInfo.getName() : handlerName,
             Picked_Up_At__c = System.now());
     }
+
+    public class Media {
+        @AuraEnabled public String  id        { get; set; }
+        @AuraEnabled public String  title     { get; set; }
+        @AuraEnabled public String  url       { get; set; }
+        @AuraEnabled public Boolean isVideo   { get; set; }
+        @AuraEnabled public Boolean isImage   { get; set; }
+        @AuraEnabled public String  arrivedAt { get; set; }
+        @AuraEnabled public Integer sizeKb    { get; set; }
+    }
+
+    /**
+     * What the person sent instead of typing.
+     *
+     * Deliberately returns the file and nothing else. No transcript, no caption,
+     * no generated alt text. A photo of somebody's workstation is evidence they
+     * chose to send; turning it into a machine's description of their body is
+     * the disclosure this whole system refuses to make on their behalf.
+     */
+    @AuraEnabled(cacheable=true)
+    public static List<Media> media(Id barrierId) {
+        List<Media> out = new List<Media>();
+        Set<Id> docIds = new Set<Id>();
+        for (ContentDocumentLink l : [
+                SELECT ContentDocumentId FROM ContentDocumentLink
+                WHERE LinkedEntityId = :barrierId]) {
+            docIds.add(l.ContentDocumentId);
+        }
+        if (docIds.isEmpty()) { return out; }
+
+        for (ContentVersion v : [
+                SELECT Id, Title, FileExtension, ContentSize, CreatedDate
+                FROM ContentVersion
+                WHERE ContentDocumentId IN :docIds AND IsLatest = true
+                ORDER BY CreatedDate DESC]) {
+            String ext = v.FileExtension == null ? '' : v.FileExtension.toLowerCase();
+            Media m = new Media();
+            m.id = v.Id;
+            m.title = v.Title;
+            m.url = '/sfc/servlet.shepherd/version/download/' + v.Id;
+            m.isVideo = new Set<String>{'mp4','mov','m4v','webm','avi','3gp'}.contains(ext);
+            m.isImage = new Set<String>{'png','jpg','jpeg','gif','heic','webp','bmp'}.contains(ext);
+            m.arrivedAt = v.CreatedDate.format('d MMMM yyyy, HH:mm');
+            m.sizeKb = v.ContentSize == null ? 0 : (Integer) (v.ContentSize / 1024);
+            out.add(m);
+        }
+        return out;
+    }
+
+    /**
+     * Books the interpreter. The gap between Requested At and this is the entire
+     * cost to the person, so it is one press rather than an edit page.
+     */
+    @AuraEnabled
+    public static void bookInterpreter(Id handoffId, String interpreterName) {
+        update new Human_Handoff__c(
+            Id = handoffId,
+            Interpreter_Name__c = String.isBlank(interpreterName)
+                ? UserInfo.getName() : interpreterName,
+            Interpreter_Booked_At__c = System.now());
+    }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Waiting_On_An_Interpreter</fullName>
+    <columns>NAME</columns>
+    <columns>Requested_At__c</columns>
+    <columns>Interpreter_Name__c</columns>
+    <columns>Interpreter_Booked_At__c</columns>
+    <columns>Barrier_Report__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Reachable_By__c</field>
+        <operation>equals</operation>
+        <value>Video</value>
+    </filters>
+    <filters>
+        <field>Interpreter_Booked_At__c</field>
+        <operation>equals</operation>
+        <value></value>
+    </filters>
+    <label>Waiting on an interpreter</label>
+</ListView>

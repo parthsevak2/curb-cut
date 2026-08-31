@@ -1,0 +1,37 @@
+<template>
+    <div class="wrap">
+        <h2 class="h">What they sent instead of typing</h2>
+
+        <template if:true={error}>
+            <p class="err" role="alert">{error}</p>
+        </template>
+
+        <template if:true={anyVideo}>
+            <p class="rule">
+                <strong>Do not machine translate this.</strong> Not with a caption tool,
+                not with a transcript service, not with anything. A person interprets it.
+                If that is going to take a while, say so to them now rather than later.
+            </p>
+        </template>
+
+        <template if:true={loaded}>
+            <template if:false={hasItems}>
+                <p class="none">Nothing was sent. They told us in words.</p>
+            </template>
+
+            <template for:each={items} for:item="m">
+                <div key={m.id} class={m.cls}>
+                    <p class="kind">{m.kind}</p>
+                    <template if:true={m.isImage}>
+                        <img src={m.url} alt={m.title} class="shot"/>
+                    </template>
+                    <template if:true={m.isVideo}>
+                        <video src={m.url} controls class="shot" preload="metadata"></video>
+                    </template>
+                    <p class="meta">{m.title} · {m.meta}</p>
+                    <a href={m.url} download class="dl">Download the original</a>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

@@ -478,6 +478,22 @@ select.picker {
   border:2px solid var(--line-firm); border-radius:5px; min-height:48px;
 }
 select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+
+/* ---------- showing instead of telling ---------- */
+.showme {
+  margin: 1.4rem 0 1.6rem; padding: 1.1rem 1.2rem 1.2rem;
+  background: var(--raised); border: 1px solid var(--line);
+  border-left: 5px solid var(--deep); border-radius: 6px;
+}
+.showme-h { margin: 0 0 .3rem; font-size: 1.05rem; }
+.uploads { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.upload input[type="file"] {
+  width: 100%; font: inherit; font-size: .95rem; padding: .55rem;
+  background: var(--ground); color: var(--ink);
+  border: 2px dashed var(--line-firm); border-radius: 5px; cursor: pointer;
+}
+.upload input[type="file"]:hover { border-color: var(--deep); }
+.upload input[type="file"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 </style>
 
 <a href="#main" class="skip">Skip to the main content</a>
