@@ -29,6 +29,9 @@ public with sharing class CurbCutIntake {
     }
 
     public class Result {
+        @InvocableVariable(label='True when a named condition was taken out before saving')
+        public Boolean redacted;
+
         @InvocableVariable(label='Id of the barrier report')
         public String barrierReportId;
 
@@ -59,6 +62,7 @@ public with sharing class CurbCutIntake {
         res.barrierReportId = '';
         res.anonymous = true;
         res.interpreterNeeded = false;
+        res.redacted = false;
 
         if (String.isBlank(req.functionalDescription)) {
             res.message = 'There is nothing to log yet.';
@@ -69,8 +73,17 @@ public with sharing class CurbCutIntake {
             ? req.inboundModality : 'Text';
         Boolean signed = (modality == 'Video');
 
+        // The condition comes out here, before the insert, on the one write path
+        // every channel shares. The agent was told not to record it; an
+        // instruction is not a control, and this text was being stored whole.
+        String described = req.functionalDescription;
+        if (CurbCutRedact.names(described)) {
+            described = CurbCutRedact.clean(described);
+            res.redacted = true;
+        }
+
         Barrier_Report__c br = new Barrier_Report__c(
-            Functional_Description__c = req.functionalDescription,
+            Functional_Description__c = described,
             Inbound_Modality__c       = modality,
             Interpreter_Needed__c     = signed,
             Anonymous__c              = true
@@ -93,9 +106,14 @@ public with sharing class CurbCutIntake {
             res.barrierReportId   = br.Id;
             res.anonymous         = br.Anonymous__c;
             res.interpreterNeeded = br.Interpreter_Needed__c;
-            res.message = signed
-                ? 'Got your video. A person will look at it, not a machine.'
-                : 'Noted, in your words.';
+            // When something was taken out, the action hands the agent the exact
+            // sentence to say. The instruction already required it; relying on
+            // the model to remember unprompted is what made this unreliable.
+            res.message = res.redacted
+                ? CurbCutRedact.notice()
+                : (signed
+                    ? 'Got your video. A person will look at it, not a machine.'
+                    : 'Noted, in your words.');
         } catch (DmlException e) {
             res.message = 'I could not log that, and that is my problem, not yours.';
         }

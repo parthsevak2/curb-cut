@@ -127,11 +127,12 @@ global with sharing class CurbCutChannelApi {
 
         a.options = opts.options;
         a.noMatch = opts.noMatch;
-        a.message = opts.noMatch
+        String took = intake.redacted == true ? CurbCutRedact.notice() + '\n\n' : '';
+        a.message = took + (opts.noMatch
             ? 'I do not have good information on that one, and I would rather say so '
               + 'than guess. Send HUMAN and a real person will pick it up instead.'
             : 'Here is what other people have asked for in situations like yours. You '
-              + 'can stop here. Knowing is allowed, and asking is optional.';
+              + 'can stop here. Knowing is allowed, and asking is optional.');
 
         CurbCutLog.record(channel, 'Outbound', 'Accepted', handle,
                           opts.noMatch ? 'no match' : 'options returned', a.barrierId);
