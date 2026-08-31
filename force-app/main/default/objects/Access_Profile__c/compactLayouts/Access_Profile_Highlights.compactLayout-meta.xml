@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Access_Profile_Highlights</fullName>
+    <fields>Name</fields>
+    <fields>Preferred_Modality__c</fields>
+    <fields>Never_Call__c</fields>
+    <fields>Active__c</fields>
+    <label>Access Profile highlights</label>
+</CompactLayout>

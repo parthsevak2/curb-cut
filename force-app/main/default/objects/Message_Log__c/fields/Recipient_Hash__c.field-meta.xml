@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Recipient_Hash__c</fullName>
+    <inlineHelpText>A one-way salted hash, never an address or a number. This log must never become a contact list.</inlineHelpText>
     <label>Recipient (hashed)</label>
     <type>Text</type><length>64</length>
     <description>Salted hash. The raw address or number is never stored, here or anywhere.</description>

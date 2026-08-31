@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Attempted_At__c</fullName>
+    <description>When the send was attempted.</description>
+    <inlineHelpText>When we tried. Note this is the attempt, not the arrival; the gap between those two is where people disappear.</inlineHelpText>
     <label>Attempted At</label>
     <type>DateTime</type>
 </CustomField>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayoutAssignment>Message_Log_Highlights</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Delivery ledger. Records THAT we tried to reach someone and whether it worked. Never records what they said, and never the raw address. CONTAINS NO MESSAGE CONTENT BY DESIGN.</description>
     <enableActivities>false</enableActivities>
