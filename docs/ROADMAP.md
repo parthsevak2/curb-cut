@@ -13,6 +13,12 @@ sounds. Everything in "Shipped" is verified live; everything below it is honest.
 | **Email** | No mobile plan; a shared phone; needing to compose slowly over days |
 | **Grounded library, 24 rows, every row cited** | Everyone — it is what stops the system inventing entitlements |
 | **Disclosure ledger** | Anyone whose preference travels ahead of them into a new team |
+| **Why-now argument** (`/curbcut/why`) | The reader who needs to know why this matters in 2026, not in the abstract |
+| **Opt-in programme page** (`/curbcut/messaging`) | Carrier reviewers, and anyone deciding whether to trust a number on a poster |
+| **Internal console** — On Duty queues, 5 reports, dashboard, record pages | The person answering. The escape hatch used to open onto nothing |
+| **MCP server**, 3 tools, no send tool | Anyone already inside another assistant, who should not have to come here |
+| **Agent-to-agent handover contract** | The person whose request reaches an employer's system rather than a human |
+| **SMS compliance layer** — disclosure, HELP, STOP, START | Everyone on the text channel; it is what makes the opt-in real |
 
 ## Blocked on something outside the code
 
@@ -37,37 +43,72 @@ leg is not dependable on this org.
 
 ## Next — buildable in this org today
 
-### 1. Image intake on the web  *(spec §3, the fourth modality)*
+### 1. Standing preferences on the web  *(principle 4, and it is currently stranded)*
+
+This is now the largest functional gap in the system, and it was hiding.
+
+`CurbCutStanding` exists, is tested, and is wired to the **agent**, so it is
+reachable by voice and — once the carrier clears it — by text. But the web front
+door does not go through the agent. `CurbCutWeb` exposes exactly four remote
+actions: `consult`, `draft`, `send`, `human`. None of them touch a preference.
+
+So the promise the whole project is named for — explain once, and never explain
+it again to the next manager — cannot be used by anyone arriving in a browser.
+The org bears this out: **0 `Access_Preference__c` rows and 0
+`Disclosure_Event__c` rows exist.** Two objects, a console tab, a disclosure
+ledger, and the WHO and OFF keywords are all built and all currently unreachable
+from the only channel that needs no phone.
+
+Needs: `save`, `revoke` and `who` remote actions on `CurbCutWeb`, and a section
+on `/ask` that offers to remember something after a request is sent. Guest write
+access already exists for create; revoke needs care, because the guest user
+cannot edit, so revocation has to be modelled as a new record rather than an
+update.
+
+### 2. Image intake on the web  *(spec §3, the fourth modality)*
 `ContentVersion` upload from the guest user, attached to the barrier report.
 "Here is a photo of my workstation" is often faster and less painful than
 describing a chair. Email already accepts image attachments and records the
 `Image` modality; the web does not yet.
 
-### 2. Signed-video intake and the interpreter queue
+### 3. Signed-video intake and the interpreter queue
 Upload, mark `Interpreter_Needed__c`, acknowledge in text **immediately**, route
 to a human. The refusal to machine-translate stays absolute. Today the agent
 routes correctly but nothing accepts the upload.
-
-### 3. Standing preferences on the web
-`CurbCutStanding` exists, is tested, and is wired to the agent. The web channel
-does not expose save/revoke yet, so principle 4 is SMS-only.
 
 ### 4. Manager brief as a shareable link
 `cost_brief` returns cost, precedent and the interactive-process clock. A manager
 should be able to open one page rather than converse. Refusals still apply.
 
-### 5. Extend the ledger to every channel
-`Message_Log__c` records email today. SMS, voice and web should write to it too,
-so one query answers "did we reach this person, on any channel, and if not why".
-Delivery status should also flow back from Twilio's status callback, which
-reports actual carrier delivery rather than acceptance.
+### 5. Finish the ledger, and learn the difference between accepted and delivered
+Email, SMS and voice now write to `Message_Log__c`. **The web does not.**
+`CurbCutWeb` never calls `CurbCutLog`, so the one channel anybody can use today
+is the one channel missing from the answer to "did we reach this person".
 
-### 6. Reading-level enforcement in CI
+Separately, every row currently says `Accepted`, which means a platform took the
+message, not that a person received it. Twilio's status callback reports actual
+carrier delivery. Until that is wired, the ledger can only prove we tried.
+
+### 6. A React client — a decision, not a task
+
+Asked for repeatedly, and not built. The reasoning is in
+[`AGENT-INTERFACES.md`](AGENT-INTERFACES.md): Force.com Sites is the only thing
+in this org that serves a page to an anonymous visitor with no login, which is
+the entire requirement, and a single-page app would add a build step and a
+hosting dependency without changing one thing a person can do.
+
+If it is wanted for the submission rather than for the user, say so and it gets
+built as `clients/react/` against the same `@RemoteAction` endpoints — roughly a
+day, honest about being a second front end rather than the front end. That is a
+legitimate reason. It is just a different reason, and it should be recorded as
+one.
+
+### 7. Reading-level enforcement in CI
 Run the agent's own instruction text and canned replies through a Flesch-Kincaid
 check and fail the build above grade 8. The system currently *asks* for grade 6
 and nothing verifies it.
 
-### 7. Accommodation outcome tracking
+### 8. Accommodation outcome tracking
 `Manager_Response__c` and `Decline_Reason__c` exist and nothing reports on them.
 Precedent counts are the one figure the agent refuses to invent — and they would
 become real the moment decisions are recorded.
