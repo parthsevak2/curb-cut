@@ -129,12 +129,34 @@
 
   <section>
     <h2>What you can do, any time</h2>
+    <p>
+      These work on the web page, by text, and by email. They mean the same thing
+      on all three.
+    </p>
     <ul class="kwlist">
-      <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours.</span></li>
-      <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate. You will not be asked why &mdash; there is nowhere to record a reason, so nobody can ask you for one later.</span></li>
+      <li><span class="kw">HUMAN</span><span>Hand this to a real person, on whichever channel you are already using. You will not be asked to explain it again, and nobody will ring you.</span></li>
+      <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours. Send it with your code, like <span class="kw">WHO 4KQ7MT</span>.</span></li>
+      <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate, and sent with your code the same way. You will not be asked why &mdash; there is nowhere to record a reason, so nobody can ask you for one later.</span></li>
       <li><span class="kw">DELETE</span><span>Throw away a drafted request before it is sent.</span></li>
       <li><span class="kw">STOP</span><span>Stop receiving messages from the number entirely.</span></li>
     </ul>
+
+    <div class="note">
+      <p>
+        <strong>Why there is a code.</strong> When you save a preference we give
+        you six characters and show them once. We keep only a scrambled version
+        of them, which cannot be turned back into the code.
+      </p>
+      <p>
+        That is the price of not holding a file on you. There is no account here,
+        no password, and no phone number on record, so there is nothing we could
+        look you up by &mdash; and the code is what lets you switch a disclosure
+        off from a text message without us ever knowing who you are. If you lose
+        it, send <span class="kw">HUMAN</span> and a person will sort it out with
+        you.
+      </p>
+    </div>
+
     <p>
       Or email <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
       to ask what is held about you, correct it, or have it deleted.
