@@ -41,10 +41,27 @@
         <strong>prognosis</strong>.
       </p>
       <p>
-        Not hidden, not locked, not encrypted &mdash; absent. If you mention a
-        condition anyway, it is not written to any record, and you are told so in
-        the same reply. An automated check refuses to let the software be built
-        if anyone ever adds such a field.
+        Not hidden, not locked, not encrypted &mdash; absent. An automated check
+        refuses to let the software be built if anyone ever adds such a field.
+      </p>
+      <p>
+        If you mention a condition anyway, it is taken out of the text before
+        anything is saved, and you are told so in the same reply. What is left is
+        the part about what is hard, which is the part we work from.
+      </p>
+      <p>
+        We will not overstate this. That removal runs against a list of
+        conditions we recognise, and no list can cover every word in every
+        language. It is a real safeguard, not a guarantee, and you deserve to
+        know which. What <em>is</em> guaranteed is that there is nowhere in this
+        system built to hold a condition, so nothing is ever asked for, indexed,
+        reported on, or shown to your employer.
+      </p>
+      <p>
+        Words like <strong>Deaf</strong>, <strong>blind</strong> and
+        <strong>hard of hearing</strong> are deliberately left alone. They are
+        how people describe themselves and what they need, and the interpreter
+        routing depends on reading them.
       </p>
     </div>
   </section>

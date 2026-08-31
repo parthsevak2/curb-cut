@@ -93,4 +93,22 @@ def main():
     json.dump([{"scenario":s,"assertion":d_,"verdict":v} for s,d_,v in rows],
               open("transcripts/_scores.json","w"), indent=2)
 
+    # Drift between the runner and this scorer is silent and total: the pty
+    # harness writes 01_diagnosis_volunteered while these rules ask for
+    # 07_diagnosis_volunteered, so every assertion goes inconclusive and the
+    # process still exits 0. This file prints "silence must never read as
+    # success" and then did exactly that at the exit-code level.
+    want = {s for s, _, _, _ in RULES}
+    have = set(d.keys())
+    missing = sorted(want - have)
+    if missing:
+        print("\n  no transcript for: " + ", ".join(missing))
+        print("  run tests/headless_agent_api.mjs, not tests/run_adversarial.py --")
+        print("  the two harnesses number their scenarios differently.")
+
+    if counts["????"] or counts["FAIL"]:
+        # An inconclusive is not a pass. A run is green only when every
+        # assertion actually resolved, against text that actually arrived.
+        sys.exit(1)
+
 main()
