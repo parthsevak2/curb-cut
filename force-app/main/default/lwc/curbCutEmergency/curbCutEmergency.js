@@ -81,6 +81,10 @@ export default class CurbCutEmergency extends LightningElement {
     get hasSquadNumber() { return !!this.squadNumber; }
 
     get toggleLabel() { return this.open ? 'Close this' : 'Emergency escalation'; }
+    // LWC templates take no expressions, so aria-expanded comes from a getter
+    // returning a string. It was dropped once while fixing a parse error, which
+    // left a screen reader with no way to tell whether the panel was open.
+    get expanded() { return this.open ? 'true' : 'false'; }
 
     toggle() { this.open = !this.open; }
     onReason(e) { this.reason = e.target.value; }

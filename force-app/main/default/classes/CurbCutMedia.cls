@@ -69,8 +69,9 @@ global with sharing class CurbCutMedia {
         Boolean isVideo = 'Video'.equalsIgnoreCase(kind);
         Boolean isImage = 'Image'.equalsIgnoreCase(kind);
         if (!isVideo && !isImage) {
-            r.message = 'I can take a photo or a video. I did not recognise that one, '
-                      + 'and I would rather say so than put it somewhere odd.';
+            r.message = 'I can take a photo or a video, and I did not recognise that one. '
+                      + 'I would rather say so than put it somewhere odd. Send a photo or '
+                      + 'a video instead, or just tell me in words, whichever is easier.';
             return r;
         }
         if (String.isBlank(base64)) {

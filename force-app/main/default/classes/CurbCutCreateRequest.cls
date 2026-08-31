@@ -68,7 +68,11 @@ public with sharing class CurbCutCreateRequest {
             return res;
         }
         if (String.isBlank(req.draft)) {
-            res.message = 'There is nothing drafted to send yet.';
+            // A bare statement of the problem is a dead end, and a dead end at the
+            // wrong moment is how somebody stops asking altogether.
+            res.message = 'There is nothing drafted to send yet. Tell me what is hard '
+                        + 'and I will write something for you to look at first. Nothing '
+                        + 'goes anywhere until you say so.';
             return res;
         }
 

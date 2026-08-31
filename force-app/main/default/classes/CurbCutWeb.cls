@@ -244,7 +244,8 @@ global with sharing class CurbCutWeb {
         ledger('Inbound', 'Accepted', 'standing: who', null);
 
         if (String.isBlank(preferenceId)) {
-            r.message = 'I do not have a preference to look up.';
+            r.message = 'I do not have a preference to look up yet. Save one first and '
+                      + 'you can ask me any time who has been shown it.';
             return r;
         }
 
