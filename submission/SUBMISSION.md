@@ -31,10 +31,11 @@ Every field below is written to be pasted as-is. Figures verified 31 August 2026
 > in the schema, the agent may only name accommodations a grounded Apex action
 > returned, and nothing reaches an employer without an explicit yes — a hedge is
 > refused. Observability is a delivery ledger that records every attempt on every
-> channel with a salted hash and never the message, plus 468 structural
-> invariants, 116 Apex tests and six auditors that fail the build — including one
-> that fails if an error message blames the user, and one that fails if our copy
-> tells somebody to send a word no channel actually routes.
+> channel with a salted hash and never the message, plus 486 structural
+> invariants, 121 Apex tests and six auditors that fail the build — including one
+> that fails if our copy tells somebody to send a word no channel actually
+> routes, and one that fails if the privacy page goes back to promising an
+> absolute the code cannot keep.
 
 ---
 
@@ -87,7 +88,10 @@ anonymous. Knowing is allowed; asking is optional.
 
 *There is no field for a diagnosis.* Not encrypted, not permission-restricted —
 absent. Diagnosis, condition, disability type, medical note, severity, prognosis
-exist nowhere in 59 fields across 9 objects. A manager who asks is refused
+exist nowhere in 61 fields across 9 objects. And because free text is still free
+text, a volunteered condition is stripped out before the insert on the one write
+path every channel shares — the privacy page used to promise that and the code
+did not do it. A manager who asks is refused
 because there is genuinely nothing to tell them, and an automated check fails the
 build if anyone adds such a field. The internal agent refuses staff in exactly
 the same words, and hands the operator the sentence to use on their own manager.
@@ -125,8 +129,8 @@ what they did.
 
 ## Tools used
 
-Agentforce (Agent Script, two agents: one public, one internal), Apex (17
-classes, 13 test classes), Lightning Web Components (5), Force.com Sites +
+Agentforce (Agent Script, two agents: one public, one internal), Apex (18
+classes, 14 test classes), Lightning Web Components (5), Force.com Sites +
 Visualforce for the anonymous public site, an authenticated Apex REST channel
 API that every non-web channel shares, Flows-free architecture, Salesforce
 Reports and Dashboards, Path, Twilio (SMS + voice relay over TwiML), Salesforce
