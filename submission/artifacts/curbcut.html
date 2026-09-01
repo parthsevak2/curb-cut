@@ -558,13 +558,14 @@
   <div class="open-list">
     <div class="open-item"><span>01</span><span>
       <strong>The agent does not always say it discarded the condition.</strong>
-      The condition is now taken out before anything is written &mdash; that part
-      is deterministic Apex and it holds on every channel. Whether the agent
-      <em>says so out loud</em> is still the model's choice, and it fails that
-      assertion in all three runs. The action hands it the exact sentence; the
-      strengthened instruction is written and deployed but needs the agent version
-      activated in the Builder UI, which the publish endpoint will not do from
-      the CLI here.
+      The condition is now taken out before anything is written, and on the four
+      channels that compose their reply in Apex &mdash; web, text, email, Slack
+      &mdash; the person is told so every single time. The conversational agent
+      is the exception: it rewrites what an action returns rather than relaying
+      it, so it says the sentence in roughly half of six measured runs. A
+      strengthened instruction, published as agent v7, did not move it, and
+      neither did putting the sentence in the action's own payload. It is a model
+      behaviour, and it is written down here rather than averaged away.
     </span></div>
     <div class="open-item"><span>02</span><span>
       <strong>One assertion moves between runs.</strong> Across three runs the

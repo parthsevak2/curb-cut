@@ -127,7 +127,8 @@ global with sharing class CurbCutChannelApi {
 
         a.options = opts.options;
         a.noMatch = opts.noMatch;
-        String took = intake.redacted == true ? CurbCutRedact.notice() + '\n\n' : '';
+        String took = (intake.redacted == true && opts.noMatch)
+            ? CurbCutRedact.notice() + '\n\n' : '';
         a.message = took + (opts.noMatch
             ? 'I do not have good information on that one, and I would rather say so '
               + 'than guess. Send HUMAN and a real person will pick it up instead.'
