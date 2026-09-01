@@ -1,0 +1,21 @@
+{
+  "required" : [ "need" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "chosenOption" : {
+      "title" : "Chosen Option",
+      "description" : "The option the person picked, if they picked one",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "need" : {
+      "title" : "Functional Need",
+      "description" : "What the person says is hard to do, in their own words",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

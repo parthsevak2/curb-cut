@@ -1,0 +1,38 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "message" : {
+      "title" : "Message",
+      "description" : "What to tell the person",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "ok" : {
+      "title" : "Ok",
+      "description" : "True when the operation succeeded",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "preferenceId" : {
+      "title" : "Preference Id",
+      "description" : "Id of the preference",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "sharedWith" : {
+      "title" : "Shared With",
+      "description" : "Who will be shown this preference",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

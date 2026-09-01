@@ -1,0 +1,30 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "created" : {
+      "title" : "Created",
+      "description" : "True when a handoff was created",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "handlerName" : {
+      "title" : "Handler Name",
+      "description" : "Name of the person picking this up",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "handoffId" : {
+      "title" : "Handoff Id",
+      "description" : "Id of the created handoff",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
