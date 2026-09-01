@@ -139,13 +139,14 @@
         </p>
       </div>
 
-      <div class="card pending">
-        <span class="chip wait">Awaiting carrier approval</span>
+      <div class="card open">
+        <span class="chip live">Open now</span>
         <h3>Voice</h3>
         <p>
           Call the same number and speak instead of typing. For anyone for whom
           typing is the hard part &mdash; tremor, pain, low vision, or a hand
-          that is simply not co-operating today.
+          that is simply not co-operating today. Carriers register text messaging,
+          not calls, so this one needed no registration and works today.
         </p>
       </div>
 
