@@ -21,6 +21,9 @@ const AGENT  = process.env.CURB_CUT_AGENT || 'Curb_Cut';
 // Optional. When set, inbound webhooks are verified as genuinely from Twilio.
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || '';
 const PUBLIC_URL        = process.env.PUBLIC_URL || '';
+/* Local testing without a token has to be a deliberate act, named out loud on
+   the command line, and it refuses to combine with a public URL. */
+const ALLOW_UNVERIFIED  = process.env.ALLOW_UNVERIFIED === '1' && !PUBLIC_URL;
 // Salt so a stored handle cannot be reversed to a phone number by rainbow table.
 const HANDLE_SALT = process.env.HANDLE_SALT || 'curb-cut-local-dev-salt';
 // The public site. Carriers require the opt-in flow to be verifiable at a URL,
@@ -174,8 +177,13 @@ async function needsDisclosure(handle) {
 }
 
 // Twilio signs each request with the auth token over URL + sorted params.
+/* Fails CLOSED. This used to return true when no token was configured, which
+   meant an empty TWILIO_AUTH_TOKEN - exactly what was sitting in channels/.env -
+   turned every unsigned request into a valid one. Anyone who learned the URL
+   could post a forged From and Body, drive the agent, create handoffs and write
+   to the ledger. An unverified webhook must refuse, not wave things through. */
 function signatureValid(url, params, header) {
-  if (!TWILIO_AUTH_TOKEN) return true;             // unverified mode, dev only
+  if (!TWILIO_AUTH_TOKEN) return false;
   const data = Object.keys(params).sort()
     .reduce((acc, k) => acc + k + params[k], url);
   const expected = createHmac('sha1', TWILIO_AUTH_TOKEN).update(Buffer.from(data,'utf-8')).digest('base64');
@@ -251,7 +259,8 @@ const server = createServer((req, res) => {
     const body = (params.Body || '').trim();
     const handle = handleFor(from);
 
-    if (PUBLIC_URL && !signatureValid(PUBLIC_URL + '/sms', params, req.headers['x-twilio-signature'])) {
+    if (!ALLOW_UNVERIFIED
+        && !signatureValid(PUBLIC_URL + '/sms', params, req.headers['x-twilio-signature'])) {
       // Never echo why. An attacker learns nothing from a bare 403.
       res.writeHead(403); return res.end();
     }
@@ -329,11 +338,20 @@ const server = createServer((req, res) => {
   });
 });
 
+if (!TWILIO_AUTH_TOKEN && !ALLOW_UNVERIFIED) {
+  console.error(
+    'Refusing to start: TWILIO_AUTH_TOKEN is not set, so no inbound request can\n' +
+    'be verified as coming from Twilio, and this relay will not accept unsigned\n' +
+    'webhooks. Set it in channels/.env, or run with ALLOW_UNVERIFIED=1 for local\n' +
+    'testing only (which refuses to combine with PUBLIC_URL).');
+  process.exit(1);
+}
+
 server.listen(PORT, () => {
   console.log(`Curb Cut SMS relay on :${PORT}`);
   console.log(`  org      ${ALIAS}`);
   console.log(`  agent    ${AGENT}`);
-  console.log(`  verify   ${TWILIO_AUTH_TOKEN ? 'on' : 'OFF — set TWILIO_AUTH_TOKEN'}`);
+  console.log(`  verify   ${TWILIO_AUTH_TOKEN ? 'on' : 'OFF — UNVERIFIED, local only'}`);
   console.log(`  POST /voice  ready now, no registration`);
   console.log(`  POST /sms    HELP/STOP/START handled here, disclosure on first reply`);
 });
