@@ -141,7 +141,10 @@ suite; GitHub Actions for CI.
 
 ## Future improvements
 
-Carrier approval for the text channel is with the reviewers. Email replies need a
+Carrier approval for the text channel is outstanding — US carriers require A2P
+10DLC registration before a 10-digit long code may send SMS, and that vetting is
+per-submission and paid. Voice runs on the same number and needs no registration,
+so the live phone channel in the demo is a real call. Email replies need a
 verified sending domain the project does not own. Twilio status callbacks would
 turn "accepted by the platform" into "actually delivered". Outcome tracking would
 make precedent counts real — the one figure the agent currently refuses to invent.
