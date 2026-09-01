@@ -142,19 +142,24 @@ speaking. The judges should read it themselves.
 
 ## 1:47 – 2:20 · One library, and the word that has to work everywhere
 
-**Screen.** Quick cuts: the site → the SMS relay answering a webhook in a terminal
-→ the MCP server listing its tools → the Slack app refusing to answer in a channel.
-When the SMS frame is up, put a plain caption on it:
+**Screen.** Quick cuts: the site → **a real phone call to the number, answered,
+with the spoken reply on screen** → the MCP server listing its tools → the Slack
+app refusing to answer in a channel.
 
-> `Carrier approval pending — relay shown responding locally`
+Voice is the live phone channel. Carriers register text messaging, not calls, so
+this one needs no A2P registration and works today — film an actual call. If you
+also show SMS, caption it plainly:
+
+> `Text messaging awaiting carrier registration — relay shown answering locally`
 
 Then the beat that matters. Save a standing preference on the **web** — the code
 appears on screen. Cut to a terminal and send `OFF <that code>` on a **different
 channel**. It turns off.
 
 **Narration.**
-> Web, text, voice, email, Slack, and a Model Context Protocol server. One
-> library behind all of it, so the answers cannot drift.
+> Web, voice, email, Slack, and a Model Context Protocol server — text is waiting
+> on carrier registration. One library behind all of it, so the answers cannot
+> drift.
 >
 > Including this word. OFF withdraws a disclosure, and it has to work wherever
 > you are — but we hold no account to look you up with. So you get a code, and we
