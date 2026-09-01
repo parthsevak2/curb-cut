@@ -132,7 +132,14 @@ public with sharing class CurbCutOptions {
             taken++;
         }
 
-        res.options = String.join(lines, '\n\n');
+        // The sentence rides inside the content the agent is required to relay.
+        // Asking a model to remember to say it produced it about half the time
+        // across six measured runs; putting it in the payload does not depend on
+        // the model remembering anything.
+        res.options = (CurbCutRedact.names(req.need)
+                        ? CurbCutRedact.notice() + '\n\n'
+                        : '')
+                    + String.join(lines, '\n\n');
         res.matchCount = taken;
         res.noMatch = false;
         return res;
