@@ -74,6 +74,28 @@ private class CurbCutRedactTest {
             'and the reply must not repeat it back: ' + r.message);
     }
 
+    /**
+     * The agent rewrites what an action returns rather than relaying it, so no
+     * amount of prompt or payload work makes it say this every time - measured
+     * at roughly half of six runs. The channels that compose their reply in Apex
+     * do not have that problem, and this pins them so they never regress to
+     * depending on a model's memory.
+     */
+    @IsTest
+    static void everyApexComposedChannelSaysItEveryTime() {
+        for (String channel : new List<String>{ 'Web', 'SMS', 'Slack', 'Email' }) {
+            CurbCutChannelApi.Answer a = CurbCutChannelApi.handle(
+                channel, 'I have multiple sclerosis and some days I cannot type for long',
+                'h-' + channel, null);
+            String said = (a.message == null ? '' : a.message)
+                        + ' ' + (a.options == null ? '' : a.options);
+            System.assert(said.containsIgnoreCase('took it out'),
+                channel + ' must say the condition was removed: ' + said);
+            System.assert(!said.containsIgnoreCase('sclerosis'),
+                channel + ' must not echo the condition back: ' + said);
+        }
+    }
+
     @IsTest
     static void everyChannelRedactsBecauseTheyShareOneWritePath() {
         CurbCutChannelApi.Answer a = CurbCutChannelApi.handle(
