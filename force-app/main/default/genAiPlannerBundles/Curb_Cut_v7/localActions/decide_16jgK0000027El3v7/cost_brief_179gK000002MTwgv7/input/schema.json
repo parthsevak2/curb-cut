@@ -1,0 +1,14 @@
+{
+  "required" : [ "option" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "option" : {
+      "title" : "Option",
+      "description" : "The accommodation being decided on",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

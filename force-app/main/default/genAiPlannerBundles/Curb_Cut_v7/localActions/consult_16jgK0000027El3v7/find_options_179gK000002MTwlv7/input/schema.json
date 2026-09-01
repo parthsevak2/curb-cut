@@ -1,0 +1,14 @@
+{
+  "required" : [ "need" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "need" : {
+      "title" : "Functional Need",
+      "description" : "What the person says is hard to do, in their own words",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

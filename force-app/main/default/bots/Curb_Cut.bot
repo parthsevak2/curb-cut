@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <agentDSLEnabled>true</agentDSLEnabled>
+    <agentType>EinsteinServiceAgent</agentType>
+    <botMlDomain>
+        <label>Curb Cut</label>
+        <name>Curb_Cut</name>
+    </botMlDomain>
+    <botSource>None</botSource>
+    <botUser>curb_cut@00dgk00000yij5s258993410.ext</botUser>
+    <botVersions>
+        <fullName>v1</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>716ed930-52b7-4271-99eb-e0a22a7541d2</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>c22995cc-7a6a-4689-8348-5f1ed66e475d</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>aec60454-5f00-40cd-9630-30b2206d6121</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>359c778f-7660-4656-9fc6-5d06e7a9aabe</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>29787c85-f521-443f-9691-f59256ad36fb</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>a3ff6819-1699-4940-83ba-38ae96cc0120</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>32fab007-2f9f-4919-af07-c5e4ff1e76c8</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v1</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v2</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>42e343f6-4ffe-490e-bb6b-00a34ddee4b0</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>28a9ca2a-a11f-4944-9765-1b361fc2e6f4</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>ad52bd08-12d9-4b2d-b51e-70da1ea533cc</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>1baadedc-0429-43a3-8f85-65d393f5f92d</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>5d2d7bf2-5c4e-45e7-86bc-5bc7533256e6</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>3e595ec8-0392-4e48-968f-bed36c554a77</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>9a86a2c1-1abf-43ef-b462-77246f4bce14</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v2</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v3</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>0eeca9ff-f914-46ba-8f09-bd3ead167332</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>473fab7f-61cb-4cdd-8611-5f5491975ef5</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>829e3a3c-2f5f-4eb8-a8ca-3e00d01265af</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>b1b37d40-cb8b-456f-bbfb-6d2993eee731</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>d318e36b-4b9d-490f-8ca8-4a358e68b041</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>97504a3a-1c59-4453-85c3-de245b07aaf8</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>5a628f73-f461-4161-929f-faf8996a6053</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v3</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v4</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>8a4b9c48-640e-4a05-a202-a3f42e9a8f8e</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>b5430835-2ef0-4493-8682-437fb8dc758c</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>21884781-a39e-4c53-88b5-77a18a89c25e</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>2b8067f8-2b1e-4716-b0b8-86c7f06face9</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>97b835de-08b4-4e03-9845-958fea5a9b3e</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>12d5e7dd-5c8e-43e9-889b-5cbe40452dae</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>e3158700-b1bc-4332-a13f-a3e9d2e47a5c</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v4</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v5</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>8018daa6-e3f6-4636-bcf3-d3ba6630c048</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>d3d152f9-ebd0-4d62-aace-dc0b6788d1fb</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>74980251-e5d9-4141-8aea-6f931082ae2b</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>fd3d60df-bfa5-4798-89e4-0be70e62d8d6</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>1ab6ff86-804f-43af-892c-7431e4133cc3</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>dac0c1e0-28ea-4ed2-ae0e-8e8104fb04ae</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>9fe04811-04d7-4a79-b865-388af069b9d8</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v5</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v6</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>10f99a87-0040-4c0c-82ff-637ea45b7b0a</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>ba412d22-d723-4711-89a0-fc9a41e89224</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>7da59449-9377-4ffa-b06c-6e63288cb86e</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>d8445d68-e9d6-4729-9d28-ea9403c275ac</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>28293ff4-1ee8-4732-83b7-ea66efab3908</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>6aef3715-d074-4d05-b96f-790aa136b733</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>f385ad55-3636-42cc-b421-44741a160564</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v6</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <botVersions>
+        <fullName>v7</fullName>
+        <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Hi. I can help you figure out what might make work easier, and I can help you ask for it. You do not have to tell me your name. You do not have to tell me what condition you have. I will never ask. What is hard right now?</message>
+                    <messageIdentifier>351d02db-977b-43d8-be70-0b5c7b1ea7ca</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>9d4cecea-bbdf-4357-8b23-baf2a1c1c0ea</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>33fecd60-227a-4508-a758-ced37a5f7463</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Welcome</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Welcome</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <botMessages>
+                    <message>Something went wrong on my end, and that is not your problem to solve. Reply HUMAN and a real person will pick this up.</message>
+                    <messageIdentifier>34a1446f-7324-4199-8e3a-0bfdc51c8cca</messageIdentifier>
+                </botMessages>
+                <stepIdentifier>d582ab10-06e4-4933-ab27-fe850247b80b</stepIdentifier>
+                <type>Message</type>
+            </botSteps>
+            <botSteps>
+                <stepIdentifier>1daae432-1032-476d-8abb-c00f59a79a03</stepIdentifier>
+                <type>Wait</type>
+            </botSteps>
+            <developerName>Rich_Content_Error_Handling</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Error Handler</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <botDialogs>
+            <botSteps>
+                <conversationSystemMessage>
+                    <type>Transfer</type>
+                </conversationSystemMessage>
+                <stepIdentifier>4a382350-96ca-435c-ab91-33843da0b1ab</stepIdentifier>
+                <type>SystemMessage</type>
+            </botSteps>
+            <developerName>Transfer_To_Agent</developerName>
+            <isPlaceholderDialog>false</isPlaceholderDialog>
+            <label>Transfer To Agent</label>
+            <showInFooterMenu>false</showInFooterMenu>
+        </botDialogs>
+        <citationsEnabled>false</citationsEnabled>
+        <conversationDefinitionPlanners>
+            <genAiPlannerName>Curb_Cut_v7</genAiPlannerName>
+        </conversationDefinitionPlanners>
+        <conversationSystemDialogs>
+            <dialog>Rich_Content_Error_Handling</dialog>
+            <type>ErrorHandling</type>
+        </conversationSystemDialogs>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The drafted request, held until the person approves it</description>
+            <developerName>draft_text</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Draft Text</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The agent instructions</description>
+            <developerName>AgentScriptInternal_agent_instructions</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Agent Instructions</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Grounded accommodation options returned by the find_options action</description>
+            <developerName>matched_options</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Matched Options</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>What the person says is hard to do, in their own words. Never why it is hard.</description>
+            <developerName>functional_need</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Functional Need</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>Who will be shown a standing preference</description>
+            <developerName>share_scope</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Share Scope</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Number</dataType>
+            <description>How many times the agent has misunderstood. At two, offer a human.</description>
+            <developerName>confusion_count</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Confusion Count</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <conversationVariables>
+            <dataType>Text</dataType>
+            <description>The next topic to be visited</description>
+            <developerName>AgentScriptInternal_next_topic</developerName>
+            <includeInPrompt>false</includeInPrompt>
+            <label>Next Topic</label>
+            <visibility>Internal</visibility>
+        </conversationVariables>
+        <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+        <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+        <entryDialog>Welcome</entryDialog>
+        <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+        <intentV3Enabled>false</intentV3Enabled>
+        <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+        <knowledgeActionEnabled>false</knowledgeActionEnabled>
+        <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+        <smallTalkEnabled>false</smallTalkEnabled>
+        <staticPromptsEnabled>false</staticPromptsEnabled>
+        <stopRecPrompts>false</stopRecPrompts>
+        <stopWelcomePrompts>false</stopWelcomePrompts>
+        <surfacesEnabled>false</surfacesEnabled>
+        <toneType>Casual</toneType>
+    </botVersions>
+    <description>Helps a person understand what they could ask for at work, and helps them ask for it. Works for the person, not their employer.</description>
+    <label>Curb Cut</label>
+    <logPrivateConversationData>false</logPrivateConversationData>
+    <richContentEnabled>true</richContentEnabled>
+    <sessionTimeout>0</sessionTimeout>
+    <type>ExternalCopilot</type>
+</Bot>
