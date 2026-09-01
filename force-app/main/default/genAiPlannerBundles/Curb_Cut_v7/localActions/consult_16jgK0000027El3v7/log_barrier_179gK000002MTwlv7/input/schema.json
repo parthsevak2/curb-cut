@@ -1,0 +1,21 @@
+{
+  "required" : [ "functionalDescription" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "functionalDescription" : {
+      "title" : "Functional Description",
+      "description" : "What is hard, in the person's own words. Never why.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "inboundModality" : {
+      "title" : "Inbound Modality",
+      "description" : "Text, Voice note, Video or Image. Defaults to Text.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

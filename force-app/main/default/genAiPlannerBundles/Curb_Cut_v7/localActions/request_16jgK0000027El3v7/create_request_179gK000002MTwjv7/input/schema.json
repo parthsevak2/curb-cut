@@ -1,0 +1,21 @@
+{
+  "required" : [ "draft", "approved" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "approved" : {
+      "title" : "Approved",
+      "description" : "True ONLY if the person said yes in this conversation. Silence, a question, or I think so is not a yes.",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "draft" : {
+      "title" : "Draft",
+      "description" : "The exact draft the person read and approved",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,42 @@
+{
+  "required" : [ "operation" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "operation" : {
+      "title" : "Operation",
+      "description" : "save or revoke",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "preferenceId" : {
+      "title" : "Preference Id",
+      "description" : "The preference to revoke",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "scope" : {
+      "title" : "Scope",
+      "description" : "Always, Meetings, This team or This manager",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "sharedWith" : {
+      "title" : "Shared With",
+      "description" : "Manager only, Meeting hosts or My team",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "statement" : {
+      "title" : "Statement",
+      "description" : "The preference in the person's exact words",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
