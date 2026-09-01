@@ -716,6 +716,29 @@ check('privacy-page-does-not-overclaim',
       'written down, which the redaction list cannot guarantee')
 
 
+
+# ---------------------------------------------------------------------------
+# The SMS webhook must fail closed.
+#
+# signatureValid() used to return true when no auth token was configured, and
+# channels/.env shipped with TWILIO_AUTH_TOKEN empty. Every unsigned request was
+# therefore treated as genuine: anyone who learned the URL could post a forged
+# From and Body, drive the agent, create handoffs and write to the ledger.
+# ---------------------------------------------------------------------------
+relay_src = read(os.path.join(ROOT, 'channels', 'sms-relay.mjs'))
+check('webhook-fails-closed-without-a-token',
+      'if (!TWILIO_AUTH_TOKEN) return false;' in relay_src,
+      'signatureValid no longer fails closed; an empty TWILIO_AUTH_TOKEN would '
+      'make every unsigned webhook look valid')
+check('webhook-refuses-to-start-unverified',
+      'Refusing to start' in relay_src,
+      'the relay no longer refuses to start without a token, so it can be run '
+      'accidentally in a mode that accepts forged messages')
+check('unverified-mode-cannot-be-public',
+      "=== '1' && !PUBLIC_URL" in relay_src,
+      'ALLOW_UNVERIFIED must refuse to combine with PUBLIC_URL')
+
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
