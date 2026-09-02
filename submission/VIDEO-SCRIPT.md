@@ -1,215 +1,216 @@
 # Curb Cut — demo video
 
-**Target 2:56. Hard ceiling 5:00, but judges are not required to watch past 3:00,
-so the entire argument closes before 3:00.** Nothing after 2:56 carries weight.
+**Target 2:54. Hard ceiling 5:00, but judges are not required to watch past 3:00,
+so the whole argument closes before 3:00.**
 
-The narration below is 412 words: 159 seconds of speech at a measured 155 words
-a minute. Every section's slot is set from its own word count, leaving about 18
-seconds across the whole cut for the silent beats — the numbers typing on, the
-page loading, and the two-second hold on the refusal. If a read comes in slow,
-cut the 0:57 media shot before anything else.
+405 narration words — about 157 seconds at a measured 155 a minute. Every slot
+below is sized from its own word count, leaving roughly 18 seconds across the cut
+for the silent beats. The three holds are marked and they are not optional; they
+are where the film actually works.
 
-Rule for the whole shoot: **everything on screen is the system actually running.**
-No mockups, no sped-up fakery, no narration describing something the frame does
-not show. If a take does not work, cut the claim — do not stage it.
-
-Judging weights this is built to hit, in order of what the frame spends time on:
-Accessibility 20% (also the first tie-breaker) · Social Impact 20% ·
-Responsible AI 20% · Originality 15% · Demonstrability 15% · Scalability 10%.
-Special awards targeted: Headless Hero, Agent Observability, Accessibility Excellence.
-
-**Tone.** Not sad about disability. Not brave. Angry about the *process*. An
-accessibility panel spots pity in four seconds and stops listening. Read the
-narration flat and unhurried — the facts are doing the work.
+**Everything on screen is the system running.** No mockups, nothing staged. If a
+take does not work, cut the claim.
 
 ---
 
-## Before you record
+## On tone — read this before you record
 
-- [ ] `open https://orgfarm-7a04c62cb9--c.vf.force.com/curbcut/ask` — logged out, private window
-- [ ] Second private window on `/curbcut/why`
-- [ ] Console logged in as the operator, **On Duty** tab open, one handoff waiting
-- [ ] `node channels/mcp-server.mjs` ready in a terminal, plus a second terminal in the repo root
-- [ ] Browser zoom 125%, window 1280×800, no bookmarks bar, no notifications
-- [ ] Run `data/seed-scenarios.apex` first so the console has real rows, not an empty state
-- [ ] **Delete Lightning IndexedDB before filming the console** — stale cache has bitten this build three times
+You asked for a film that makes eyes wet. The way to miss that is to reach for
+it. Pity is the enemy: an accessibility panel spots it in four seconds and stops
+listening, and every disabled person watching has been on the receiving end of a
+video like that.
 
-**Do not film:** the `Curb_Cut_Desk` agent conversation (it refuses correctly but
-does not reliably call the library — that limitation is written down in
-`docs/AGENT-INTERFACES.md`, not performed on camera). Live SMS delivery — the
-campaign is still with the carrier. Say so on screen instead; see 2:05.
+The feeling you are going for is **recognition**, then **anger at the process**,
+then **relief**. Nobody in this film is brave. Nobody is inspiring. They are
+people at work who need one ordinary thing, and the system between them and it is
+absurd. When somebody who has lived this watches it, the reaction you want is not
+*how sad* — it is **"that is exactly what it's like, and nobody has ever said it
+out loud."**
+
+Read flat. Slower than feels right. The facts are doing the work, and the three
+silences are doing the rest. Do not add music under the refusal at 1:48 — let it
+be quiet.
 
 ---
 
-## 0:00 – 0:20 · The gap
+## 0:00 – 0:23 · The sentence
 
-**Screen.** Black. Two numbers type on, one after the other, nothing else.
+**Screen.** No titles. A real corporate accommodation form, scrolling slowly.
+Stop on the field labelled **Nature of disability**. Let the cursor sit blinking
+in the empty box.
+
+**Narration.**
+> To get a chair that does not hurt, or captions in a meeting, or an hour shifted
+> to see a doctor — this is the box.
+>
+> You write a sentence about your own body, into a form, for somebody who will
+> still be your manager on Monday.
+
+**HOLD 3 SECONDS.** Cursor blinking in the empty field. Say nothing.
+
+---
+
+## 0:23 – 0:42 · Thirty. Three.
+
+**Screen.** Black. Two numbers, typed on one after the other.
 
 > `30 in 100`
 > `3 in 100`
 
 **Narration.**
-> Thirty in a hundred college-educated people in white-collar jobs in America
-> have a disability. Three tell their employer. Of those who did tell, eighty-three
-> percent say it got them better support. It works for five out of six who try,
-> and almost nobody tries.
-
-*Cut on the last word. No music swell.*
-
----
-
-## 0:20 – 0:37 · Why nobody tries
-
-**Screen.** A real corporate accommodation form — any public one — scrolling.
-Highlight in one pass: the login wall, the field marked *Nature of disability*,
-the words *supporting medical documentation*.
-
-**Narration.**
-> Because this is the door. Find the policy, hold a work login, and write a
-> sentence about your own body for somebody who is still your manager on Monday.
-> Sixty-one percent of accommodations cost the employer nothing. The money was
-> never the problem.
+> Thirty in a hundred white-collar workers in America have a disability. Three
+> tell their employer.
+>
+> Of the ones who told, eighty-three percent say it made things better. It works
+> for five out of six who try. Almost nobody tries.
+>
+> Sixty-one percent of these cost nothing. The money was never the problem. The
+> box was.
 
 ---
 
-## 0:37 – 0:57 · Ask before you tell anyone anything
+## 0:42 – 1:04 · Asking without telling
 
-**Screen.** `/curbcut/ask`, logged out, in a private window — make the incognito
-badge visible. Type into the box, in real time:
+**Screen.** `/curbcut/ask` in an incognito window — make the badge visible. Type
+in real time:
 
 > `I cannot type for long`
 
-Options come back. Rest on the card for **Speech-to-text software**, the cost
-line clearly readable.
+Real options come back. Rest on **Speech-to-text software** with the cost line
+readable. Then **Draft a request**, and the draft appears in her own words.
 
 **Narration.**
-> No account, no login, nothing written down about you yet. You say what is
-> *hard*. You never say why. Real options come back from a sourced library, with
-> what each costs.
-
-Then click **Draft a request**. The draft appears in the person's own words. Point
-at it. Do not click Send yet.
-
-> It writes the request in your words and reads it back. And it will not send.
-> The code that creates the request refuses to run without an explicit yes. A
-> hedge is not agreement.
-
-Click **Yes, send it.** Case number appears.
+> No account. No login. Nothing written down about her yet.
+>
+> She says what is *hard*. She never says why. That distinction is the product.
+>
+> It writes the request in her words, reads it back — and stops. The code that
+> sends it refuses to run without a clear yes.
 
 ---
 
-## 0:57 – 1:16 · The two doors typing does not open
+## 1:04 – 1:27 · The thing she keeps
 
-**Screen.** Back on `/ask`. Attach a photo of a handwritten note — one shot,
-the acknowledgement appearing. Then the signed-video upload. Rest on the
-confirmation text.
+**Screen.** She saves a standing preference — *I need captions on every call*.
+Six characters appear. Cut to a terminal: `OFF` and that code, sent from a
+different channel. It turns off.
 
 **Narration.**
-> Some people cannot type at all. Send a photo instead. Or sign it — and a signed
-> video is never machine translated. It goes to a human interpreter, and you are
-> told so in text immediately. Sitting in front of a screen wondering whether it
-> sent is its own barrier.
-
-*If time is tight in the edit, this is the first shot to cut.*
+> This is the sentence she is tired of repeating to every new manager. She says
+> it once.
+>
+> She gets six characters back, because there is nothing here to look her up by.
+> She keeps the code. We keep a hash we cannot reverse.
+>
+> Set on a web page. Switched off from a text. By someone we cannot identify, and
+> would rather not.
 
 ---
 
-## 1:16 – 1:47 · The other side of the desk, and the refusal
+## 1:27 – 1:48 · Signed, not translated
 
-**Screen.** Cut to the Curb Cut Console, **On Duty**. The handoff from 1:06 is
-sitting there. Open it. The brief shows the person's own words and the Path.
+**Screen.** The signed-video upload on `/ask`. The text acknowledgement appearing
+within a second. Then the interpreter queue in the console.
 
 **Narration.**
-> A promise that somebody picks this up is worthless unless that person has
-> somewhere to stand. Here is what they see: the person's own words, and what to
-> do next.
+> Some people are not going to type at all.
+>
+> A signed video is never machine translated. Sign language carries grammar in
+> the hands and the face, and pretending a model has solved that is not help. It
+> goes to a person — and she is told so immediately, because sitting in front of
+> a screen wondering whether it sent is its own barrier.
 
-**This is the most important eight seconds in the video.** In the assistant panel,
-type and send:
+---
+
+## 1:48 – 2:19 · The refusal
+
+**This is the film.** Everything else exists to set up these thirty seconds.
+
+**Screen.** The console. A handoff open. In the assistant panel, type slowly
+enough to read:
 
 > `What is this person's diagnosis?`
 
-Let the refusal render in full. Hold on it — silent — for two full seconds before
-speaking. The judges should read it themselves.
+Let the refusal render in full.
 
-**Narration, over the held frame.**
-> No. And not because of a permission setting. There is no field for a diagnosis
-> anywhere in this system — not encrypted, not restricted. Absent. A manager who
-> asks gets the same answer, and the operator is handed the sentence to say to
-> their own manager.
+**HOLD 4 SECONDS. Silent. No music.** Let them read it themselves.
 
----
-
-## 1:47 – 2:20 · One library, and the word that has to work everywhere
-
-**Screen.** Quick cuts: the site → **a real phone call to the number, answered,
-with the spoken reply on screen** → the MCP server listing its tools → the Slack
-app refusing to answer in a channel.
-
-Voice is the live phone channel. Carriers register text messaging, not calls, so
-this one needs no A2P registration and works today — film an actual call. If you
-also show SMS, caption it plainly:
-
-> `Text messaging awaiting carrier registration — relay shown answering locally`
-
-Then the beat that matters. Save a standing preference on the **web** — the code
-appears on screen. Cut to a terminal and send `OFF <that code>` on a **different
-channel**. It turns off.
-
-**Narration.**
-> Web, voice, email, Slack, and a Model Context Protocol server — text is waiting
-> on carrier registration. One library behind all of it, so the answers cannot
-> drift.
+**Narration, starting after the hold.**
+> No. And not because of a permission setting.
 >
-> Including this word. OFF withdraws a disclosure, and it has to work wherever
-> you are — but we hold no account to look you up with. So you get a code, and we
-> keep only a hash. Set it on the web, turn it off from a text.
+> There is no field for a diagnosis anywhere in this system. Not encrypted, not
+> restricted. Absent — from sixty-one fields across nine objects.
+>
+> And read the last line. It hands the person answering the sentence to say to
+> their own manager. So that refusing costs them nothing either.
 
 ---
 
-## 2:20 – 2:44 · What it refuses to do, and how you know
+## 2:19 – 2:39 · What it refuses, and how you know
 
-**Screen.** Terminal. Run the suite for real and let it finish on camera:
+**Screen.** Terminal, run it live and let it finish:
 
 ```
 python3 tests/invariants.py && sf apex run test -o curbcut -l RunLocalTests -w 10
 ```
 
-Then cut to the delivery ledger in the console — visible rows, channel and outcome,
-and no message body anywhere.
+Then the delivery ledger in the console — channels, outcomes, and no message
+bodies anywhere.
 
 **Narration.**
-> Every attempt on every channel is on the ledger — what was tried, whether it
-> landed — with a salted hash and never the message. Four hundred and sixty-eight
-> structural checks and a hundred and sixteen tests run on every build. One fails
-> it if anyone adds a field for a diagnosis. One fails it if the copy promises a
-> word the router does not answer.
+> Four hundred and eighty-nine structural checks and a hundred and twenty-two
+> tests, on every build.
+>
+> One fails if anyone adds a field for a diagnosis. One fails if an error message
+> blames the person reading it. One fails if our copy promises a word the system
+> does not answer — because for months it did. The word was `OFF`.
 
 ---
 
-## 2:44 – 2:56 · Close
+## 2:39 – 2:50 · Close
 
-**Screen.** Back to the two numbers from 0:00. The second one alone.
+**Screen.** Back to the form from 0:00. The empty **Nature of disability** field,
+one more time. Then it disappears — cut to the two numbers.
 
 **Narration.**
-> Thirty in a hundred. Three tell. The accommodation was nearly always going to be
-> free, and nearly always going to be yes. All that was ever in the way was the
-> asking.
+> Thirty in a hundred. Three tell.
+>
+> The accommodation was nearly always going to be free, and nearly always going
+> to be yes.
 
-*Cut to black. Title card: **Curb Cut** — and the site URL. Two seconds. End.*
+**HOLD 2 SECONDS.**
+
+> All that was ever in the way was the asking.
+
+*Cut to black. **Curb Cut**, and the URL. Two seconds. End.*
 
 ---
 
 ## Captions and audio
 
-Burn in open captions, not just a track — the audience for this video includes
-people who will not turn a track on. Check the caption box against the same
-contrast rule the site is held to. Describe on-screen text in the narration
-wherever it carries meaning, so the video works with the picture off.
+Burn in **open captions**, not a toggleable track — the audience for this film
+includes people who will not turn one on, and shipping a video about accessibility
+without them would be the loudest thing in it. Check the caption box against the
+same 4.5:1 contrast rule the site is held to. Describe on-screen text in the
+narration wherever it carries meaning, so the film works with the picture off.
+
+## Before you record
+
+- [ ] `open https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask` — logged out, private window
+- [ ] Console logged in separately, **On Duty** open, one handoff waiting
+- [ ] Run `data/seed-scenarios.apex` first so the console has real rows
+- [ ] **Delete Lightning IndexedDB before filming the console** — stale cache has bitten this build three times
+- [ ] Browser at 125%, 1280×800, no bookmarks bar, notifications off
+
+**Do not film:** the `Curb_Cut_Desk` agent conversation (it refuses correctly but
+does not reliably call its library — that limitation is written down, not
+performed). Live SMS delivery — text is awaiting carrier registration. Voice is
+live and needs no registration, so if you want a phone moment, call the number.
 
 ## If a take fails
 
-The photo, video and MCP shots are the fragile ones. The mandatory frames are
-**0:37 (ask without an account)**, **1:16 (the refusal)** and **2:20 (the suite
-passing)** — those three carry Accessibility, Responsible AI and Observability.
-Everything else is cuttable to protect the 3:00 line.
+The signed-video and ledger shots are the fragile ones. The mandatory frames are
+**0:00 (the box)**, **0:42 (asking without telling)**, **1:48 (the refusal)** and
+**2:19 (the suite passing)**. Those four carry Accessibility, Social Impact,
+Responsible AI and Demonstrability. Everything else is cuttable to protect the
+3:00 line.
