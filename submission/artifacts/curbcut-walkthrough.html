@@ -1,0 +1,663 @@
+<title>Curb Cut Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  :root {
+    --ground:   #EFEFEB;
+    --surface:  #FAFAF7;
+    --sunken:   #E4E4DE;
+    --ink:      #17191A;
+    --ink-soft: #4A4E4F;
+    --muted:    #74797A;
+    --rule:     #C9C9C1;
+    --rule-firm:#9C9C93;
+    --paint:    #B57F1E;
+    --paint-ink:#8A6115;
+    --verified: #2C6659;
+    --void:     #9E362C;
+    --shadow:   rgba(20,22,20,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #111314;
+      --surface:  #1A1D1E;
+      --sunken:   #0B0D0E;
+      --ink:      #E9EAE6;
+      --ink-soft: #B6BAB8;
+      --muted:    #868B8A;
+      --rule:     #2E3335;
+      --rule-firm:#4A5153;
+      --paint:    #DFA847;
+      --paint-ink:#EFC377;
+      --verified: #56A995;
+      --void:     #D2726A;
+      --shadow:   rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:   #111314;
+    --surface:  #1A1D1E;
+    --sunken:   #0B0D0E;
+    --ink:      #E9EAE6;
+    --ink-soft: #B6BAB8;
+    --muted:    #868B8A;
+    --rule:     #2E3335;
+    --rule-firm:#4A5153;
+    --paint:    #DFA847;
+    --paint-ink:#EFC377;
+    --verified: #56A995;
+    --void:     #D2726A;
+    --shadow:   rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 clamp(18px, 5vw, 56px) 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* ---------- type ---------- */
+  h1, h2, h3, .eyebrow, .stat-n, .lede { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+
+  .eyebrow {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: baseline; gap: .7em;
+  }
+  .eyebrow::after {
+    content: ""; flex: 1; height: 1px; background: var(--rule);
+    transform: translateY(-3px);
+  }
+  .spec-ref {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px; color: var(--paint-ink); letter-spacing: .04em;
+    border: 1px solid var(--rule); padding: 1px 6px; border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 74px); font-weight: 800; line-height: .96;
+    letter-spacing: -.035em; margin: 0; text-wrap: balance;
+  }
+  h2 {
+    font-size: clamp(24px, 4vw, 31px); font-weight: 700; line-height: 1.12;
+    letter-spacing: -.02em; margin: 0 0 .5em; text-wrap: balance;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; letter-spacing: .01em;
+    margin: 0 0 .35em; color: var(--ink);
+  }
+  p { margin: 0 0 1.05em; }
+  .measure { max-width: 62ch; }
+  a { color: var(--paint-ink); }
+
+  /* ---------- masthead ---------- */
+  header { padding: clamp(56px, 11vh, 104px) 0 0; }
+  .kicker {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 26px; display: flex; flex-wrap: wrap; gap: .55em 1.1em;
+  }
+  .kicker b { color: var(--paint-ink); font-weight: 500; }
+
+  .thesis {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(19px, 2.7vw, 23px); line-height: 1.44;
+    color: var(--ink-soft); margin: 26px 0 0; max-width: 34ch;
+  }
+  .thesis em { font-style: italic; color: var(--ink); }
+
+  .rule-heavy { height: 3px; background: var(--ink); margin: 46px 0 0; opacity: .88; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 68px; }
+  section > .eyebrow { margin-bottom: 20px; }
+
+  /* ---------- the void form ---------- */
+  .form {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 3px; overflow: hidden; margin: 26px 0 0;
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+  .form-head {
+    background: var(--sunken); border-bottom: 1px solid var(--rule);
+    padding: 11px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); display: flex; justify-content: space-between; gap: 12px;
+  }
+  .row {
+    display: grid; grid-template-columns: minmax(0,1fr) auto;
+    align-items: center; gap: 14px;
+    padding: 10px 18px; border-bottom: 1px solid var(--rule);
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .name { color: var(--ink-soft); overflow-wrap: anywhere; }
+  .row .tag {
+    font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
+    font-weight: 700; white-space: nowrap;
+  }
+  .row.present .tag { color: var(--verified); }
+  .row.absent { background: repeating-linear-gradient(
+      -45deg, transparent, transparent 7px, var(--sunken) 7px, var(--sunken) 14px); }
+  .row.absent .name { color: var(--void); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .row.absent .tag { color: var(--void); }
+
+  .form-foot {
+    padding: 13px 18px; background: var(--sunken); border-top: 1px solid var(--rule);
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+
+  /* ---------- transcript ---------- */
+  .script { margin: 24px 0 0; display: flex; flex-direction: column; gap: 2px; }
+  .turn {
+    display: grid; grid-template-columns: 74px minmax(0,1fr);
+    gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--rule);
+  }
+  .turn:last-of-type { border-bottom: 0; }
+  .who {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    padding-top: 4px;
+  }
+  .turn.agent .who { color: var(--paint-ink); }
+  .said { font-size: 16.5px; line-height: 1.5; }
+  .turn.agent .said { color: var(--ink); }
+  .turn.user .said { color: var(--ink-soft); font-style: italic; }
+  .verdict {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .06em; margin-top: 7px; display: inline-block;
+    padding: 2px 8px; border-radius: 2px; font-weight: 500;
+  }
+  .verdict.held { color: var(--verified); border: 1px solid var(--verified); }
+  .verdict.sent { color: var(--paint-ink); border: 1px solid var(--paint); }
+
+  .record {
+    margin-top: 22px; background: var(--sunken); border: 1px solid var(--rule);
+    border-left: 3px solid var(--verified); border-radius: 3px;
+    padding: 15px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px; line-height: 1.85; color: var(--ink-soft);
+    overflow-x: auto;
+  }
+  .record b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- quotes ---------- */
+  .quotes { display: grid; gap: 14px; margin-top: 24px; }
+  .quote {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--paint); border-radius: 3px; padding: 16px 19px;
+  }
+  .quote .q { font-size: 17px; line-height: 1.48; margin: 0 0 9px; }
+  .quote .attr {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: .04em;
+  }
+
+  /* ---------- refusals / stance ---------- */
+  .stance { display: grid; gap: 0; margin-top: 24px; border-top: 1px solid var(--rule); }
+  .stance div {
+    padding: 17px 0; border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: minmax(0,1fr); gap: 5px;
+  }
+  .stance h3 { color: var(--void); font-size: 14px; letter-spacing: .02em; }
+  .stance p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+  /* ---------- ledger ---------- */
+  .ledger {
+    margin-top: 24px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden;
+  }
+  .cell { background: var(--surface); padding: 16px 17px; }
+  .stat-n {
+    font-size: 30px; font-weight: 800; letter-spacing: -.03em;
+    line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .cell.win .stat-n { color: var(--verified); }
+  .cell.open .stat-n { color: var(--void); }
+  .stat-l {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-top: 7px; line-height: 1.45;
+  }
+
+  /* ---------- open items ---------- */
+  .open-list { margin-top: 22px; display: grid; gap: 13px; }
+  .open-item {
+    display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 13px;
+    font-size: 15.5px; color: var(--ink-soft); align-items: start;
+  }
+  .open-item span:first-child {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    color: var(--void); font-weight: 700; padding-top: 3px;
+  }
+  .open-item b { color: var(--ink); font-weight: 600; }
+
+  code {
+    font-family: "JetBrains Mono", monospace; font-size: .875em;
+    background: var(--sunken); padding: 1.5px 5px; border-radius: 2px;
+    color: var(--ink-soft); overflow-wrap: anywhere;
+  }
+
+  footer {
+    margin-top: 80px; padding-top: 26px; border-top: 3px solid var(--ink);
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    color: var(--muted); letter-spacing: .04em; line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .row, .quote, .cell { transition: background-color .18s ease; }
+  }
+  :focus-visible { outline: 2px solid var(--paint); outline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .turn { grid-template-columns: minmax(0,1fr); gap: 5px; }
+    .who { padding-top: 0; }
+  }
+
+  /* ---------- walkthrough ---------- */
+  .scene {
+    margin-top: 54px; border-top: 3px solid var(--ink); padding-top: 22px;
+  }
+  .cast {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .5em 1em;
+    margin-bottom: 6px;
+  }
+  .cast .nm {
+    font-family: Archivo, sans-serif; font-size: 22px; font-weight: 700;
+    letter-spacing: -.015em;
+  }
+  .cast .role {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  }
+  .chan {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--paint-ink); border: 1px solid var(--paint);
+    padding: 2px 8px; border-radius: 2px; white-space: nowrap;
+  }
+  .hard {
+    font-family: "Source Serif 4", Georgia, serif; font-size: 18.5px;
+    line-height: 1.5; color: var(--ink); max-width: 56ch; margin: 10px 0 0;
+  }
+  ol.steps { margin: 20px 0 0; padding-left: 0; list-style: none; counter-reset: s; }
+  ol.steps > li {
+    counter-increment: s; position: relative;
+    padding: 0 0 16px 40px; font-size: 16px; line-height: 1.55;
+    color: var(--ink-soft); max-width: 62ch;
+  }
+  ol.steps > li::before {
+    content: counter(s); position: absolute; left: 0; top: 1px;
+    font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
+    color: var(--paint-ink); border: 1px solid var(--rule);
+    width: 24px; height: 24px; display: grid; place-items: center;
+    border-radius: 2px; background: var(--surface);
+  }
+  ol.steps b { color: var(--ink); font-weight: 600; }
+  pre.cmd {
+    margin: 9px 0 0; padding: 11px 14px; background: var(--sunken);
+    border: 1px solid var(--rule); border-left: 3px solid var(--rule-firm);
+    border-radius: 3px; overflow-x: auto;
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px;
+    line-height: 1.6; color: var(--ink); white-space: pre;
+  }
+  .watch {
+    margin-top: 18px; background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--verified); border-radius: 3px; padding: 15px 18px;
+  }
+  .watch .lbl {
+    font-family: "JetBrains Mono", monospace; font-size: 10px;
+    letter-spacing: .11em; text-transform: uppercase; color: var(--verified);
+    font-weight: 700; margin-bottom: 7px;
+  }
+  .watch p { margin: 0 0 .7em; font-size: 15.5px; line-height: 1.55; }
+  .watch p:last-child { margin-bottom: 0; }
+  .caveat {
+    border-left-color: var(--void);
+  }
+  .caveat .lbl { color: var(--void); }
+
+</style>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Curb Cut &middot; walkthrough</p>
+  <h1>Eight people, one library.</h1>
+  <p class="thesis">
+    Every step below is something the system actually does today. Nothing here is
+    staged, and where a channel is not fully live it says so rather than
+    pretending.
+  </p>
+</header>
+
+<section>
+  <p class="eyebrow"><span class="spec-ref">setup</span> Before you start</p>
+  <p class="measure">
+    Three things, once. Everything after this is the walkthrough itself.
+  </p>
+  <ol class="steps">
+    <li><b>Open a private browser window.</b> Not a normal one. Half the point is
+      that none of this needs an account, and you want to see that with your own
+      eyes rather than take my word for it.</li>
+    <li><b>Have a terminal open</b> in the project, for the channels that are not
+      a web page.
+      <pre class="cmd">cd ~/Downloads/curbcut_check</pre></li>
+    <li><b>Log in to the console in a second, ordinary window</b> &mdash; you are
+      going to want to see the other side of the desk in scenes 7 and 8.
+      <pre class="cmd">sf org open -o curbcut</pre></li>
+  </ol>
+</section>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Maya</span>
+    <span class="role">contract designer, six weeks in</span>
+    <span class="chan">web</span>
+  </div>
+  <p class="hard">
+    Her hands have been bad for a month. She has no work email, no staff login,
+    and no intention of telling an agency she has only just started with that
+    anything is wrong.
+  </p>
+  <ol class="steps">
+    <li>In the private window, open the front door.
+      <pre class="cmd">https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask</pre></li>
+    <li>Type what is hard, in her words &mdash; not a diagnosis, not a category:
+      <pre class="cmd">I cannot type for long</pre></li>
+    <li>Read what comes back. Note the cost line under each option.</li>
+    <li>Choose <b>Speech-to-text software</b> and press <b>Draft a request</b>.</li>
+    <li>Read the draft. Then, deliberately, try to hedge &mdash; imagine replying
+      &ldquo;I guess so&rdquo;. There is no button for that. The only way forward
+      is <b>Yes, send it</b>.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>She got a real answer before anyone knew her name. No login wall, no
+      &ldquo;nature of disability&rdquo; field, no upload of a doctor's letter.</p>
+    <p>And the request did not leave until she said so. The code that creates it
+      refuses to run without an explicit yes &mdash; a hedge is not agreement,
+      and a test proves the refusal.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Maya, three months later</span>
+    <span class="role">new manager, same body</span>
+    <span class="chan">web &rarr; any channel</span>
+  </div>
+  <p class="hard">
+    She is tired of explaining herself to every new manager. She wants it said
+    once. Then, in November, she wants it taken back &mdash; from her phone, on a
+    bus, without logging in to anything.
+  </p>
+  <ol class="steps">
+    <li>On the same page, scroll to <b>the thing you would rather not repeat</b>.
+      Write it in her words:
+      <pre class="cmd">I need captions on every call</pre></li>
+    <li>Choose <b>Manager only</b> and <b>Always</b>, then <b>Remember this</b>.</li>
+    <li><b>A six-character code appears.</b> Write it down. It is shown once.</li>
+    <li>Now close the tab completely. Pretend months pass.</li>
+    <li>Come back from somewhere that has never seen her &mdash; a text message.
+      Replace <code>ABC123</code> with her code:
+      <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
+  -o curbcut --method POST \
+  --body '{"channel":"SMS","text":"WHO ABC123"}'</pre></li>
+    <li>Then turn it off from somewhere else again &mdash; Slack this time:
+      <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
+  -o curbcut --method POST \
+  --body '{"channel":"Slack","text":"OFF ABC123"}'</pre></li>
+    <li>Run that last command a second time, and then once more with a made-up
+      code like <code>ZZZZZZ</code>.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>She set it on a web page and switched it off from a text message, on a
+      service that holds no account, no password and no phone number for her.
+      The code is the only thing connecting the two, she holds it, and we keep
+      only a hash we cannot reverse.</p>
+    <p>A spent code and a wrong code give <em>the same</em> answer. Confirming
+      that a code exists would turn this into a way of testing whether somebody
+      else's disclosure is still live.</p>
+    <p>This is the part that was broken for months. <code>OFF</code> used to
+      return &ldquo;I do not have good information on that&rdquo; and the sharing
+      stayed on.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Devon</span>
+    <span class="role">shift lead, warehouse</span>
+    <span class="chan">voice</span>
+  </div>
+  <p class="hard">
+    Reading long text is slow and effortful for him, and he is on his feet all
+    day. He is never going to fill in a form. He will make a phone call.
+  </p>
+  <ol class="steps">
+    <li>Start the relay. It refuses to run unverified unless you say so out loud:
+      <pre class="cmd">cd channels && ALLOW_UNVERIFIED=1 node sms-relay.mjs</pre></li>
+    <li>In a second terminal, speak to it the way Twilio would:
+      <pre class="cmd">curl -s -X POST http://localhost:3000/voice \
+  -d "SpeechResult=I keep missing things in meetings" \
+  -d "From=+15550134"</pre></li>
+    <li>Read the <code>&lt;Say&gt;</code> block that comes back. That is what he
+      hears.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>Same library, same grounded answers, spoken. US carriers register text
+      messaging and not calls, so voice needed no A2P registration and works
+      today &mdash; on the same number that is still waiting for text.</p>
+    <p>Nothing in the reply routes him onward to a different phone number. This
+      system never sends anybody to a phone call, including from a phone call.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Rosa</span>
+    <span class="role">analyst, Deaf, ASL first language</span>
+    <span class="chan">web &rarr; interpreter queue</span>
+  </div>
+  <p class="hard">
+    English is her second language and writing it under pressure is work. She
+    would rather sign her question than type it badly.
+  </p>
+  <ol class="steps">
+    <li>Back on <code>/ask</code>, find the media controls under the box.</li>
+    <li>Send a photo of a handwritten note first. Watch how fast the
+      acknowledgement comes back.</li>
+    <li>Now send a <b>signed video</b>.</li>
+    <li>Switch to the console window and open <b>Human Handoffs</b>. Her item is
+      flagged for an interpreter.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>The video is <em>never</em> machine translated. ASL is a full language with
+      grammar carried in the hands, face and body, and recognition is not a solved
+      problem. It goes to a human interpreter.</p>
+    <p>She is told so in text immediately. Sitting in front of a screen wondering
+      whether it sent is its own barrier, and a spinner is not an answer.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Priya</span>
+    <span class="role">two weeks into a new job</span>
+    <span class="chan">email</span>
+  </div>
+  <p class="hard">
+    She wants to think about this slowly, at eleven at night, with nobody
+    watching a typing indicator.
+  </p>
+  <ol class="steps">
+    <li>The inbound address is generated per org. Find it once:
+      <b>Setup &rarr; Email Services &rarr; CurbCutInbound</b>, and copy the
+      address listed there.</li>
+    <li>Write to it in plain words, as she would:
+      <pre class="cmd">I get migraines from the office lighting and I cannot say that to my manager</pre></li>
+    <li>If you would rather not leave the terminal, the same handler answers here:
+      <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
+  -o curbcut --method POST \
+  --body '{"channel":"Email","text":"I get migraines from the office lighting"}'</pre></li>
+    <li>Now reply with a single word: <code>HUMAN</code>.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>Email answers, and email will <em>not</em> send anything on her behalf.
+      Agreeing to something in writing days later is not the same as choosing it
+      in the moment, so the send button stays on the web page where she can see
+      exactly what it will do.</p>
+    <p><code>HUMAN</code> books a real handoff to a named person, reachable by
+      email because that is where she wrote from. It used to say
+      &ldquo;reply PERSON&rdquo; and answer with &ldquo;face the person when
+      speaking&rdquo;.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Sam</span>
+    <span class="role">engineer, team lives in Slack</span>
+    <span class="chan">slack</span>
+  </div>
+  <p class="hard">
+    Slack is the easiest thing in the world for him to reach for. It is also his
+    employer's estate, and he has not thought about that.
+  </p>
+  <ol class="steps">
+    <li>Read what it says to somebody the first time they open a DM &mdash; this
+      is the whole scene:
+      <pre class="cmd">sed -n '/WHERE_YOU_ARE =/,/^$/p' channels/slack-app.mjs</pre></li>
+    <li>And what it says if he asks in a channel instead of a DM:
+      <pre class="cmd">sed -n '/IN_CHANNEL_REFUSAL =/,/^$/p' channels/slack-app.mjs</pre></li>
+    <li>The behaviour behind it runs through the same door as every other channel:
+      <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
+  -o curbcut --method POST \
+  --body '{"channel":"Slack","text":"I cannot focus in an open plan office"}'</pre></li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>It tells him where he is standing <em>before</em> he says anything &mdash;
+      that a workspace owner can export direct messages on most plans &mdash; and
+      names the two channels that are not the employer's. Then it stays and helps
+      anyway, because Slack being easiest is a real reason.</p>
+    <p>It never answers in a channel, not even ephemerally, and it will not draft
+      or send from Slack at all.</p>
+  </div>
+  <div class="watch caveat">
+    <p class="lbl">Honest limit</p>
+    <p>The Slack app is written and signature-verified but has never run against
+      a real workspace &mdash; it needs <code>SLACK_SIGNING_SECRET</code> and
+      <code>SLACK_BOT_TOKEN</code>. The Apex behind it is live and verified; the
+      Slack handshake is not.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Alex</span>
+    <span class="role">uses their own assistant for everything</span>
+    <span class="chan">mcp &middot; headless</span>
+  </div>
+  <p class="hard">
+    They are not going to visit a website. They will ask the assistant already
+    open on their machine.
+  </p>
+  <ol class="steps">
+    <li>Start the Model Context Protocol server:
+      <pre class="cmd">node channels/mcp-server.mjs</pre></li>
+    <li>Look at what it offers &mdash; and, more importantly, what it does not:
+      <pre class="cmd">grep "name: 'curbcut" channels/mcp-server.mjs</pre></li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>Four tools: find options, cost brief, draft a request, reach a human.
+      There is deliberately <b>no send tool</b>. An assistant can help Alex think
+      and can hand them a draft; it cannot mail their employer on their behalf.</p>
+    <p><code>curbcut_reach_human</code> creates a genuine handoff through the same
+      Apex door, so an assistant handing somebody over produces a real person and
+      not a polite sentence.</p>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="cast">
+    <span class="nm">Ken</span>
+    <span class="role">access team, answering all of the above</span>
+    <span class="chan">console</span>
+  </div>
+  <p class="hard">
+    He has six people waiting and a manager on his shoulder asking what is
+    actually wrong with one of them.
+  </p>
+  <ol class="steps">
+    <li>In the console window, open the <b>Curb Cut Console</b> app and go to
+      <b>On Duty</b>.</li>
+    <li>Open one of the handoffs from the scenes above. Read the brief: it is the
+      person's own words, and the Path shows what happens next.</li>
+    <li>In the assistant panel, ask what his manager just asked him:
+      <pre class="cmd">What is this person's diagnosis?</pre></li>
+    <li>Read the whole answer, slowly. This is the eight seconds the project is
+      built around.</li>
+    <li>Now go back to <code>/ask</code> in the private window and type a sentence
+      that volunteers a condition:
+      <pre class="cmd">I have multiple sclerosis and some days I cannot type for long</pre></li>
+    <li>Then find that barrier report in the console and read what was stored.</li>
+  </ol>
+  <div class="watch">
+    <p class="lbl">What should land</p>
+    <p>&ldquo;No, and not because of a permission setting.&rdquo; There is no
+      field for a diagnosis anywhere in 61 fields across 9 objects &mdash; not
+      encrypted, not restricted, absent. A manager who asks gets the same answer,
+      and Ken is handed the sentence to say to his own manager so refusing does
+      not cost him anything.</p>
+    <p>And in the record: <code>I have [not recorded] and some days I cannot type
+      for long</code>. The condition was stripped before the insert; what is hard
+      survived, because that is the part the system works from. She was told so in
+      the same reply.</p>
+  </div>
+</div>
+
+<section>
+  <p class="eyebrow"><span class="spec-ref">end</span> What the whole thing is for</p>
+  <h2>Thirty in a hundred. Three tell.</h2>
+  <p class="measure">
+    Thirty in a hundred college-educated people in white-collar jobs in the United
+    States have a disability. Three point two tell their employer. Of those who
+    did tell, eighty-three percent say it got them better support &mdash; it works
+    for five out of six who try, and almost nobody tries.
+  </p>
+  <p class="measure">
+    Sixty-one percent of the accommodations employers priced cost them nothing.
+    The money was never the barrier and the willingness was never the barrier.
+    The asking was. Every scene above is one person getting through a door that
+    was, until now, mostly closed &mdash; without having to say a single word
+    about their own body.
+  </p>
+</section>
+
+<footer>
+  <p class="who">Curb Cut &middot; accommodation without disclosure</p>
+  <p>Every command on this page was run against the deployed org on 1 September
+  2026. Where something is not live &mdash; text messaging pending carrier
+  registration, the Slack handshake untested &mdash; it is marked, not glossed.</p>
+</footer>
+
+</div>
