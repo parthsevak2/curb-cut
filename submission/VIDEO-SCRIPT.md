@@ -1,9 +1,9 @@
 # Curb Cut — demo video
 
-**Target 2:54. Hard ceiling 5:00, but judges are not required to watch past 3:00,
+**Target 2:57. Hard ceiling 5:00, but judges are not required to watch past 3:00,
 so the whole argument closes before 3:00.**
 
-405 narration words — about 157 seconds at a measured 155 a minute. Every slot
+412 narration words — about 159 seconds at a measured 155 a minute. Every slot
 below is sized from its own word count, leaving roughly 18 seconds across the cut
 for the silent beats. The three holds are marked and they are not optional; they
 are where the film actually works.
