@@ -295,6 +295,15 @@ footer.page a {
   display:inline-block; min-height:24px; line-height:24px;
   padding:2px 1px;
 }
+/* The same rule, generalised, because the footer was not the only place it
+   happened. A link alone in its own paragraph is a target rather than running
+   text, so 2.5.8's inline exception does not cover it. A keyboard walk of the
+   live home page measured "Go to the ask page" at 140x23: one pixel short, and
+   invisible to a static scan because height comes from line box and padding. */
+p > a:only-child {
+  display:inline-block; min-height:24px; line-height:24px; padding:2px 1px;
+}
+
 .fine { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.75rem; color:var(--ink-mute); letter-spacing:.03em; }
 
 /* ---------- hero call to action ---------- */
