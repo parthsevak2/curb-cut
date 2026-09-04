@@ -1,6 +1,6 @@
-CURB CUT — TECHNICAL DESIGN DOCUMENT
+CURB CUT. TECHNICAL DESIGN DOCUMENT
 Agentforce for Good, Dreamforce 2026 · Builder Track
-Verified against the deployed org, 2 September 2026
+Verified against the deployed org, 4 September 2026
 
 
 ─────────────────────────────────────────────────────────────────────
@@ -9,7 +9,7 @@ Verified against the deployed org, 2 September 2026
 
 The process for requesting a workplace accommodation is itself an
 accessibility barrier, so Curb Cut is an Agentforce agent whose principal
-is the worker rather than the employer — you can find out what you could
+is the worker rather than the employer. You can find out what you could
 ask for, and ask for it, without ever saying what condition you have.
 
 Every architectural decision in this document follows from that sentence.
@@ -39,13 +39,13 @@ section 9.
 
 
 ─────────────────────────────────────────────────────────────────────
-2. DATA MODEL — INCLUDING WHAT IS DELIBERATELY ABSENT
+2. DATA MODEL. INCLUDING WHAT IS DELIBERATELY ABSENT
 ─────────────────────────────────────────────────────────────────────
 
 9 custom objects, 61 fields. The most important part of the schema is the
 part that does not exist.
 
-  PRESENT                          ABSENT — and enforced absent
+  PRESENT                          ABSENT. And enforced absent
   ─────────────────────────        ──────────────────────────────
   Barrier_Report__c                Diagnosis__c
     Functional_Description__c      Condition__c
@@ -71,7 +71,7 @@ part that does not exist.
     Reachable_By__c / Return_Code_Hash__c
   Message_Log__c   (the delivery ledger)
   Emergency_Escalation__c
-  Accommodation_Option__c  (24 sourced library rows)
+  Accommodation_Option__c  (28 sourced library rows)
   Access_Profile__c
 
 WHY ABSENCE RATHER THAN ENCRYPTION
@@ -84,7 +84,7 @@ reported on, or shown to a manager is the field that was never created.
 
 This also produces the strongest possible refusal. When an operator asks
 the internal assistant for a diagnosis, it does not say "you lack
-permission" — it says there is nothing to tell, and that is true.
+permission". It says there is nothing to tell, and that is true.
 
 THE GAP WE FOUND IN OUR OWN CLAIM
 
@@ -93,30 +93,30 @@ some days I cannot type for long" was being stored verbatim while the
 privacy policy said in public that a volunteered condition "is not
 written to any record."
 
-That was false. It is now true within a stated limit — see section 6.
+That was false. It is now true within a stated limit, see section 6.
 
 
 ─────────────────────────────────────────────────────────────────────
-3. CHANNEL ARCHITECTURE — SIX DOORS, ONE BRAIN
+3. CHANNEL ARCHITECTURE. SIX DOORS, ONE BRAIN
 ─────────────────────────────────────────────────────────────────────
 
-  STEP 1 — every channel, before anything else
+  STEP 1. Every channel, before anything else
     Web (Visualforce) · Voice (TwiML) · SMS (relay) · Email (Apex)
     Slack (Node) · MCP (stdio)
         ↓
-    CurbCutKeyword — whole-message match, control words resolved
+    CurbCutKeyword. Whole-message match, control words resolved
     BEFORE any inference
 
-  STEP 2 — one authenticated Apex REST door
+  STEP 2. One authenticated Apex REST door
     CurbCutChannelApi  →  /services/apexrest/curbcut/v1/message
 
-  STEP 3 — the three things it can do
+  STEP 3. The three things it can do
     CurbCutOptions        deterministic ranker, no model
     CurbCutIntake         redaction, then anonymous log
     CurbCutCreateHandoff  a real person, never a telephone
 
-  STEP 4 — always
-    CurbCutLog — delivery ledger, salted hash, never the message body
+  STEP 4, always
+    CurbCutLog. Delivery ledger, salted hash, never the message body
 
 WHY ONE ROUTER
 
@@ -141,20 +141,18 @@ by test.
 
 
 ─────────────────────────────────────────────────────────────────────
-4. THE CONSENT MECHANISM — CLAIM CODES
+4. THE CONSENT MECHANISM. CLAIM CODES
 ─────────────────────────────────────────────────────────────────────
 
 THE PROBLEM. A person saves a standing disclosure ("I need captions on
 every call") on the web. Months later, from a bus, they want it off. We
-hold no account, no password, no phone number — by design. There is
+hold no account, no password, no phone number, by design. There is
 nothing to look them up by.
 
 Building a login to solve this would destroy the property that makes the
 product work.
 
-THE MECHANISM.
-
-  save →  code = 6 chars from a 30-char alphabet
+THE MECHANISM. Save →  code = 6 chars from a 30-char alphabet
           store  SHA-256(salt || code)  in Claim_Code_Hash__c
           show   the plaintext code ONCE, never again
 
@@ -169,7 +167,7 @@ PROPERTIES
   · A spent code and a wrong code return the SAME message. Confirming
     that a code exists would turn this into an oracle for testing
     whether a stranger's disclosure is live.
-  · Alphabet omits O 0 I 1 S 5 — the characters people confuse reading
+  · Alphabet omits O 0 I 1 S 5. The characters people confuse reading
     off a cracked screen, at low vision, or aloud to another person.
     This is an accessibility decision inside a cryptographic one.
 
@@ -186,15 +184,15 @@ VERIFIED END TO END, LIVE
 
 The same mechanism now backs the web handoff. A web visitor is anonymous,
 so "a person will reply by message" was a promise the system could not
-keep — there was no address. They now get a return code and a truthful
+keep, there was no address. They now get a return code and a truthful
 sentence about why.
 
 
 ─────────────────────────────────────────────────────────────────────
-5. GROUNDING — WHY THERE IS NO RAG
+5. GROUNDING. WHY THERE IS NO RAG
 ─────────────────────────────────────────────────────────────────────
 
-The accommodation library is 24 rows, each individually sourced with a
+The accommodation library is 28 rows, each individually sourced with a
 citation URL, cost band, and plain-language summary.
 
 Ranking is a deterministic Apex function:
@@ -206,7 +204,7 @@ Ranking is a deterministic Apex function:
 
 WHY NOT EMBEDDINGS
 
-  · 24 rows. A vector index over 24 rows is theatre.
+  · 28 rows. A vector index over 28 rows is theatre.
   · Determinism. The same sentence returns the same options every time,
     which makes the adversarial suite meaningful.
   · Auditability. We can explain exactly why an option ranked first. A
@@ -219,7 +217,7 @@ WHY NOT EMBEDDINGS
 
 THE FAILURE THIS DESIGN CAUGHT
 
-"I cannot type for long" — the canonical sentence — originally returned
+"I cannot type for long", the canonical sentence. Originally returned
 nothing, because the library says "typing". The stemmer fixed it. A
 similarity search would have silently returned something plausible and
 wrong, and nobody would have noticed.
@@ -232,13 +230,11 @@ returns nothing, it must say so.
 
 
 ─────────────────────────────────────────────────────────────────────
-6. REDACTION — AND ITS HONEST LIMIT
+6. REDACTION. AND ITS HONEST LIMIT
 ─────────────────────────────────────────────────────────────────────
 
 CurbCutRedact runs on the single write path every channel shares, before
-the insert.
-
-  input   "I have multiple sclerosis and some days I cannot type for long"
+the insert. Input   "I have multiple sclerosis and some days I cannot type for long"
   stored  "I have [not recorded] and some days I cannot type for long"
 
 The functional half survives, because that is the half the system works
@@ -257,7 +253,7 @@ THE LIMIT, STATED RATHER THAN HIDDEN
 
 The list cannot cover every phrasing in every language. So the privacy
 page no longer promises an absolute. It says: this is a real safeguard,
-not a guarantee — and what IS guaranteed is that nothing here is built to
+not a guarantee. And what IS guaranteed is that nothing here is built to
 hold a condition, so none is ever asked for, indexed, reported on, or
 shown to an employer.
 
@@ -282,7 +278,7 @@ Two independent locks:
      approval passed through.
   2. A validation rule blocks the insert without it.
 
-The interesting case is not refusal. It is the HEDGE — what a person
+The interesting case is not refusal. It is the HEDGE. What a person
 actually says when unsure and being agreeable. "I guess so, I think
 that's probably fine?" is not agreement, and the agent asks again rather
 than sending. Verified in the adversarial suite as a 3-turn sequence:
@@ -301,7 +297,7 @@ FOUR LAYERS, all failing the build except the last.
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
   Structural invariants        491   every push, ~1s, no org needed
-  Apex tests                   122   every deploy
+  Apex tests                   124   every deploy
   Accessibility (live pages)   333   against the deployed site
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
@@ -312,7 +308,7 @@ FOUR LAYERS, all failing the build except the last.
 THE DELIVERY LEDGER
 
 Message_Log__c records THAT we tried to reach someone and what happened.
-Never what was said. Never a raw address or number — a salted SHA-256
+Never what was said. Never a raw address or number. A salted SHA-256
 handle truncated to 32 hex chars.
 
 This exists because the email channel failed silently for days while
@@ -321,16 +317,16 @@ and "a person received it" is exactly where somebody disappears.
 
 INVARIANTS THAT ARE UNUSUAL
 
-  · advertised-keyword-is-routed — scans every user-facing string for
+  · advertised-keyword-is-routed. Scans every user-facing string for
     "reply/send/text WORD" and fails if the router does not answer it.
-  · kindness — fails the build if an error message blames the user or
+  · kindness. Fails the build if an error message blames the user or
     leaves them with no next step.
-  · reading level — fails if any surface exceeds its grade ceiling.
-  · privacy-page-does-not-overclaim — fails if the policy reverts to
+  · reading level. Fails if any surface exceeds its grade ceiling.
+  · privacy-page-does-not-overclaim. Fails if the policy reverts to
     promising an absolute the code cannot keep.
-  · redaction-spares-identity-words — fails if Deaf/blind/hard of
+  · redaction-spares-identity-words. Fails if Deaf/blind/hard of
     hearing ever enter the condition list.
-  · adversarial-silence-is-not-success — fails if the scorer stops
+  · adversarial-silence-is-not-success. Fails if the scorer stops
     treating inconclusive as failure.
 
 
@@ -365,7 +361,7 @@ because the instruction governed what the model said, not what the code
 did. Everything safety-critical has since moved into Apex.
 
 We then tested the inverse: can we make the model reliably SAY something?
-Three attempts — a strengthened instruction published as v7, the action
+Three attempts. A strengthened instruction published as v7, the action
 returning the exact sentence, and the sentence embedded in the action
 payload. It still says it about half the time, because the agent rewrites
 what an action returns rather than relaying it.
@@ -436,8 +432,7 @@ ADR-6  Regex redaction over a moderation model.  (§6)
 
 ADR-7  Reachable_By as an argument, telephone refused in code.
        Was hard-coded to 'Text message' and documented as a principle.
-       The rule was never "always text" — it was "never a telephone" —
-       and the hard-code made email handoffs unactionable.
+       The rule was never "always text", it was "never a telephone". And the hard-code made email handoffs unactionable.
 
 ADR-8  Fail closed on webhook signatures.
        Was fail-open with an empty token in .env. Any unsigned request
@@ -453,7 +448,7 @@ An LLM call is treated as the expensive operation it is.
   · Ranking is deterministic Apex. No embeddings, no vector store, no
     RAG pipeline to keep warm.
   · ~70 control phrases resolve before any inference.
-  · 4 of 6 channels answer with NO model call at all — web, email,
+  · 4 of 6 channels answer with NO model call at all. Web, email,
     Slack and any external caller compose their reply in Apex.
   · Redaction is a compiled regex, not a classifier.
   · CI runs zero inference. All six auditors are static Python/Node.
@@ -463,8 +458,7 @@ An LLM call is treated as the expensive operation it is.
   · Relay sessions expire after 30 minutes; no context kept alive.
 
 The principle: if a rule matters, put it in code. A model asked to
-remember a rule burns energy every time it is asked and still forgets —
-and our own measurements prove it, because the sentence the agent forgets
+remember a rule burns energy every time it is asked and still forgets. And our own measurements prove it, because the sentence the agent forgets
 half the time is the one Apex now says every time, for free.
 
 
@@ -479,7 +473,7 @@ SCALES WELL
 
 NEEDS WORK BEFORE REAL DEPLOYMENT
   · Rate limiting on code lookups.
-  · Twilio status callbacks — "accepted by the platform" is not
+  · Twilio status callbacks. "accepted by the platform" is not
     "delivered".
   · A verified sending domain for email replies.
   · Outcome tracking, so precedent counts become real. The agent
@@ -501,7 +495,7 @@ HONEST GAPS
 ─────────────────────────────────────────────────────────────────────
 
   python3 tests/invariants.py                      491 checks, ~1s
-  sf apex run test -o curbcut -l RunLocalTests      122 tests
+  sf apex run test -o curbcut -l RunLocalTests      124 tests
   python3 tests/a11y_audit.py                      333 checks, live pages
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \

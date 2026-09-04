@@ -12,7 +12,7 @@ words those promises named.
 |---|---|---|
 | `HUMAN` | a real person | "ASL interpreter booked in advance" |
 | `PERSON` | a real person | "Face the person when speaking" |
-| `OFF` | withdraw a disclosure | "I do not have good information on that" — and the sharing stayed on |
+| `OFF` | withdraw a disclosure | "I do not have good information on that". And the sharing stayed on |
 | `WHO` | who has seen it | the same dead end |
 | `CURB CUT` | the poster opt-in, the first thing anyone ever sends | fed to the library as if it described a barrier |
 
@@ -52,14 +52,14 @@ resubscribed to text messages.
 ## The code
 
 `OFF` and `WHO` need to know which preference. On the web the page holds an id.
-On a phone we hold nothing — no name, no number, no account, by design.
+On a phone we hold nothing, no name, no number, no account, by design.
 
 So when somebody saves a standing preference they are given a six-character
 code, shown once. We keep a salted hash; they keep the code. It is the only
 readable copy, and it is what lets a person turn off a disclosure from a text
 message on a channel where we genuinely cannot look them up.
 
-Codes avoid `O` `0` `I` `1` `S` `5` — the characters people confuse when
+Codes avoid `O` `0` `I` `1` `S` `5`. The characters people confuse when
 reading them off a cracked screen, at low vision, or aloud to somebody else.
 
 A wrong code and an already-spent code return **the same** answer. Confirming
@@ -67,8 +67,7 @@ that a code exists would turn this into a way to test whether somebody else's
 code is live.
 
 The same mechanism now backs the web handoff. A web visitor is anonymous, so
-the old message — "a person is picking this up, they will reply by message" —
-was a promise the system could not keep: there was no address to reply to. They
+the old message. "a person is picking this up, they will reply by message", was a promise the system could not keep: there was no address to reply to. They
 now get a code and a truthful sentence about why.
 
 ## Parity
@@ -76,10 +75,10 @@ now get a code and a truthful sentence about why.
 | | Web | SMS | Voice | Email | Slack | MCP |
 |---|---|---|---|---|---|---|
 | Grounded library | yes | yes | yes | yes | yes | yes |
-| Control words | yes | yes | — | yes | yes | `reach_human` |
-| Draft a request | yes | yes | — | no | no | yes |
-| Send a request | yes | yes | — | no | no | never |
-| Photo / signed video | yes | — | — | photo | no | no |
+| Control words | yes | yes |. | yes | yes | `reach_human` |
+| Draft a request | yes | yes |. | no | no | yes |
+| Send a request | yes | yes |. | no | no | never |
+| Photo / signed video | yes |, |. | photo | no | no |
 | Delivery ledger | yes | yes | yes | yes | yes | via Apex |
 | Works with no account | yes | yes | yes | yes | no | n/a |
 
@@ -96,7 +95,7 @@ behaves on a phone.
 
 So on Slack, and only on Slack:
 
-1. It never answers in a channel — not in a thread, not ephemerally. Asking
+1. It never answers in a channel, not in a thread, not ephemerally. Asking
    about accommodations in `#general` is a disclosure to everyone scrolling.
    In a channel it says one thing: come to a DM.
 2. On first contact it says out loud that Slack belongs to the employer, and
@@ -122,12 +121,12 @@ five-minute replay window before the body is parsed.
 
 Four invariants now fail the build:
 
-- `advertised-keyword-is-routed` — scans every user-facing string in Apex, the
+- `advertised-keyword-is-routed`. Scans every user-facing string in Apex, the
   Visualforce pages and the channel scripts for "reply/send/text WORD", and
   fails if `CurbCutKeyword` does not route it. This is the check that would
   have caught all six original bugs on the day they were written.
-- `relay-control-words-cover-apex` — the relay mirrors the word list so it can
+- `relay-control-words-cover-apex`. The relay mirrors the word list so it can
   answer without a round trip; two lists that disagree is how this broke.
-- `control-word-not-carrier-reserved` — nothing of ours may claim `STOP`.
-- `handoff-refuses-telephone` — a phone call is refused in code, not merely
+- `control-word-not-carrier-reserved`, nothing of ours may claim `STOP`.
+- `handoff-refuses-telephone`. A phone call is refused in code, not merely
   discouraged in a comment.
