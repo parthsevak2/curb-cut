@@ -20,7 +20,9 @@ Stripping a volunteered medical condition before storage runs against a compiled
 
 CI RUNS ZERO INFERENCE
 
-All six auditors. 494 invariants, accessibility, contrast, component, link and copy, reading level, are static Python and Node. They run in about a second on every push with no org and no model.
+All ten auditors are static Python and Node: 494 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+
+The two accessibility suites are worth naming, because the greener choice was also the better one. Sa11y runs axe-core over the rendered components, and the keyboard walk drives a real browser with real Tab presses. Both measure. Neither asks a model what it thinks the page looks like, which would be slower, less repeatable, and impossible to hand a judge as evidence.
 
 The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number. Repeated runs to chase a score are wasted energy, and we removed the incentive.
 

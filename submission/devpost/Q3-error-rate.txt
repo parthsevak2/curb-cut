@@ -34,11 +34,14 @@ The agent is one component. Everything around it is deterministic and gated on e
 - 124 Apex tests
 - 494 structural invariants (about one second, no org required)
 - 333 accessibility checks against the six live pages
-- 28 contrast checks in both themes
-- 16 reading-level checks
-- 54 link and copy checks
+- 131 Sa11y checks, Salesforce's own axe-core matcher, across 12 component states
+- 21 responsible-AI checks against Salesforce's five published guidelines
+- 28 contrast checks in both themes, 16 reading-level, 54 link and copy
+- 34 controls walked with real Tab presses on the live pages
 
-Six auditors fail the build. Among them: one fails if anyone adds a field for a diagnosis; one fails if an error message blames the person reading it; one fails if our own copy promises a word the router does not actually answer.
+Ten auditors fail the build. Among them: one fails if anyone adds a field for a diagnosis; one fails if an error message blames the person reading it; one fails if our own copy promises a word the router does not actually answer; and one fails if a number we publish about ourselves has gone stale, which it had, twice.
+
+Two of those suites deliberately break their own checks and assert each one goes red, because a suite that cannot fail proves nothing about the code it passes.
 
 HOW WE COUNT FAILURE
 
