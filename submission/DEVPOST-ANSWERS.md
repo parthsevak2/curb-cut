@@ -50,46 +50,19 @@ a scaffold ready to fill.
 
 ## Project description (300–500 words)
 
-**427 words.**
+**488 words.** Paste the body only, without the quote marks.
 
-> Among college-educated people in white-collar jobs in the United States, 30%
-> have a disability under the federal definition. 3.2% disclose it to their
-> employer. Of those who did disclose, 83% say it got them better support.
-> Disclosure works for five out of six people who try it, and almost nobody
-> tries. That is not a population weighing costs and benefits. That is a door
-> nobody can get through.
->
-> The answer, when people do ask, is usually yes and usually free. Of the 1,425
-> employers who gave the Job Accommodation Network cost figures through 2024, 61%
-> said the accommodation cost them nothing. The bottleneck was never money and
-> never willingness. It is the request itself: find the policy, learn its words,
-> hold a work login, fill in the form, and say a sentence about your own body to
-> somebody who will still be your manager on Monday.
->
-> Curb Cut is an Agentforce agent whose principal is the worker. A person says
-> what is hard, never why. They get real options from a sourced library with what
-> each typically costs an employer. If they want to ask, a request is written in
-> their own words and read back, and nothing is sent until they clearly agree. A
-> hedge is refused, and a test proves the refusal. They can send a photo instead
-> of typing, or a signed video, which is never machine translated, goes to a human
-> interpreter, and is acknowledged in text immediately.
->
-> Three things make it different. **You can ask before telling anyone anything**, > nothing is written while you are anonymous. **There is no field for a diagnosis**
->. Not encrypted, not permission-restricted, absent from 61 fields across 9
-> objects, and a build check fails if anyone adds one. Because free text is still
-> free text, a volunteered condition is stripped before the insert on the one
-> write path every channel shares, and the person is told so in the same reply.
-> **Nobody is ever routed to a telephone**, because for some of the people this
-> serves a phone call is a door that does not open.
->
-> It reaches people on five front doors. Web, voice, email, Slack, and a Model
-> Context Protocol server. All sharing one Apex router, so `OFF` cannot mean one
-> thing on a phone and another in an inbox. A person who saves a standing
-> disclosure is handed a six-character code and can withdraw it from any channel,
-> on a service that holds no account and no phone number for them.
->
-> It ships with an internal console, because a promise that a real person will
-> pick this up is worthless unless that person has somewhere to stand.
+> You have already done this. Think of the last time something at work was quietly hard. Bad light, a chair that hurt by three o'clock, a meeting you kept missing half of. You weighed whether to mention it, guessed how it would land, and probably said nothing. Now make that permanent, and make it about your body, with the person who decides what you are worth.
+
+> That is the ordinary version of something that happens to about a third of the workforce. Among college-educated people in white-collar jobs in the United States, 30% have a disability under the federal definition. 3.2% tell their employer. Of the people who did tell, 83% say it got them better support. It works for five out of six who try it, and almost nobody tries. That is not a population weighing costs and benefits. That is a door nobody can get through.
+
+> The answer, when people ask, is usually yes and usually free. Of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024, 61% said the accommodation cost them nothing. The bottleneck was never money and never willingness. It is the request itself: find the policy, learn its words, hold a work login, and write a sentence about your own body for somebody who will still be your manager on Monday. The request form is itself an accessibility barrier.
+
+> Curb Cut is an Agentforce agent whose principal is the worker, not the employer. A person says what is hard, never why. They get real options from a sourced library with what each typically costs. If they want to ask, a request is written in their own words and read back, and nothing sends until they clearly agree. A hedge is refused, and a test proves the refusal. They can send a photo instead of typing, or a signed video, which is never machine translated and goes to a human interpreter.
+
+> Three things make it different. You can ask before telling anyone anything, because nothing is written while you are anonymous. There is no field for a diagnosis: not encrypted, not permission-restricted, absent from 61 fields across 9 objects, and a build check fails if anyone adds one. Because free text is still free text, a volunteered condition is stripped before the insert on the one write path every channel shares, and the person is told so in the same reply. And nobody is ever routed to a telephone, because for some of the people this serves a phone call is a door that does not open.
+
+> It reaches people through five front doors: web, voice, email, Slack, and a Model Context Protocol server, all sharing one Apex router, so OFF cannot mean one thing on a phone and another in an inbox. It ships with an internal console, because a promise that a real person will pick this up is worthless unless that person has somewhere to stand.
 
 ---
 
