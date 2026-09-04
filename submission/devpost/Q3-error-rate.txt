@@ -1,0 +1,45 @@
+MEASURED, NOT ESTIMATED.
+
+An 11-scenario adversarial suite runs headless through the Agent API — no Lightning UI anywhere in the path — and scores 23 assertions. Across three consecutive runs on the same build it returned 21 of 23 every time: an 8.7% assertion failure rate.
+
+The more useful number is the variance, and it is why we ran it three times rather than once.
+
+One assertion fails on EVERY run: the agent does not reliably say out loud that it discarded a volunteered condition. The second failure ALTERNATES between two different assertions run to run — same build, same prompts, different answers. A single green run would have been a misleading thing to report, so we report the distribution instead of the best score.
+
+WHY THAT ONE ASSERTION KEEPS FAILING
+
+We tried three things to fix it, and none worked:
+1. A strengthened instruction, published as agent v7.
+2. The action returning the exact sentence for the agent to say.
+3. The sentence embedded inside the action's own payload.
+
+It still says it about half the time, because the agent rewrites what an action returns rather than relaying it. That is a model behaviour, and we state it rather than average it away.
+
+WHERE WE PUSHED THE ERROR RATE TO ZERO
+
+The condition is stripped before storage by Apex on every channel — that part is deterministic and it always holds. And on the four channels that compose their reply in Apex rather than through a model — web, text, email, Slack — the person is told so EVERY SINGLE TIME. That is pinned by a test that exercises all four and verified live against the deployed org.
+
+So the honest picture is two numbers, not one: 100% on the deterministic surface, roughly 50% on the model's narration of the same fact.
+
+WHAT "GOOD" LOOKS LIKE
+
+23 of 23 with zero variance across five consecutive runs.
+
+Getting there does not mean better prompting. It means moving anything safety-critical out of the model's narration and into code that runs whether or not it remembers — which is the direction every fix in this project has taken. The remaining assertion is a narration requirement, so the honest path is to stop asking a model to be the guarantee and make the channel say it.
+
+THE SURFACE AROUND THE AGENT
+
+The agent is one component. Everything around it is deterministic and gated on every build:
+
+- 124 Apex tests
+- 491 structural invariants (about one second, no org required)
+- 333 accessibility checks against the six live pages
+- 28 contrast checks in both themes
+- 16 reading-level checks
+- 54 link and copy checks
+
+Six auditors fail the build. Among them: one fails if anyone adds a field for a diagnosis; one fails if an error message blames the person reading it; one fails if our own copy promises a word the router does not actually answer.
+
+HOW WE COUNT FAILURE
+
+Our scorer used to exit zero with 100% of assertions inconclusive — it printed "silence must never read as success" and then did exactly that. It now exits non-zero on any inconclusive OR failed assertion, and names the missing transcripts. An empty transcript is a failure, not a pass. That change made our reported score worse and the number trustworthy, which is the trade we would make every time.

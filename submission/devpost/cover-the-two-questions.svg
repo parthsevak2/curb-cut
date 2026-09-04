@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Two ways of being asked the same thing. On the left, a form field labelled Nature of disability with an empty box and a cursor. On the right, Curb Cut asking what is hard right now, with the answer I cannot type for long.">
+  <rect width="1200" height="630" fill="#EFEFEB"/>
+
+  <!-- LEFT: the form -->
+  <text x="72" y="86" font-family="Courier New, monospace" font-size="15" letter-spacing="2.6" fill="#9E362C">THE FORM</text>
+  <line x1="72" y1="106" x2="500" y2="106" stroke="#C9C9C1" stroke-width="1"/>
+
+  <text x="72" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">To get a chair that does</text>
+  <text x="72" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt, first —</text>
+
+  <rect x="72" y="248" width="428" height="112" fill="#FAFAF7" stroke="#9E362C" stroke-width="2"/>
+  <text x="94" y="284" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4A4E4F">Nature of disability</text>
+  <line x1="94" y1="322" x2="478" y2="322" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="94" y="300" width="2" height="18" fill="#17191A"/>
+
+  <text x="72" y="408" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">Write a sentence about your own</text>
+  <text x="72" y="438" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">body, for somebody who will still</text>
+  <text x="72" y="468" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">be your manager on Monday.</text>
+
+  <!-- divider -->
+  <line x1="600" y1="72" x2="600" y2="558" stroke="#C9C9C1" stroke-width="1" stroke-dasharray="6 7"/>
+
+  <!-- RIGHT: Curb Cut -->
+  <text x="668" y="86" font-family="Courier New, monospace" font-size="15" letter-spacing="2.6" fill="#2C6659">CURB CUT</text>
+  <line x1="668" y1="106" x2="1128" y2="106" stroke="#C9C9C1" stroke-width="1"/>
+
+  <text x="668" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">To get a chair that does</text>
+  <text x="668" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt —</text>
+
+  <rect x="668" y="248" width="460" height="112" fill="#FAFAF7" stroke="#2C6659" stroke-width="2"/>
+  <text x="690" y="284" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4A4E4F">What is hard right now?</text>
+  <text x="690" y="326" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#17191A">My back hurts by the afternoon.</text>
+
+  <text x="668" y="408" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">That is the whole question. No name,</text>
+  <text x="668" y="438" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">no login, no diagnosis — because</text>
+  <text x="668" y="468" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">there is nowhere here to put one.</text>
+
+  <!-- footer -->
+  <line x1="72" y1="530" x2="1128" y2="530" stroke="#C9C9C1" stroke-width="1"/>
+  <text x="72" y="568" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#17191A">Thirty in a hundred have a disability. Three tell their employer.</text>
+  <text x="72" y="596" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#4A4E4F">Sixty-one percent of accommodations cost nothing. The money was never what stopped anyone.</text>
+</svg>

@@ -1,0 +1,35 @@
+Our approach is subtraction, and the honest version of this answer is that our own checks caught us breaking our own rules three times.
+
+BIAS
+
+The agent may only name accommodations a grounded Apex action returned from a sourced library of 28 individually cited rows. It cannot improvise one. If the library has no good match it must say so rather than guess, because a confident wrong suggestion costs somebody their single ask. It never invents a cost or a precedent count.
+
+We found this failing in exactly the way it was designed not to. "I get migraines from the office lighting" returned "special chair or back support", because the word 'office' appeared in that summary and one weak overlap was enough to qualify — and there was no lighting accommodation anywhere in the library. Two fixes: four lighting rows added (light is one of the most commonly adjusted barriers there is — migraine, photosensitive epilepsy, autism, low vision, dyslexia), and the ranker now weighs how much a word DISTINGUISHES rather than merely whether it appears.
+
+FAIRNESS
+
+The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in 61 fields across 9 objects. Not encrypted, not permission-restricted — absent. A build check fails if anyone adds one. So nothing can be scored, ranked, segmented or reported on by disability, and nothing is inferred about a person from their behaviour. Every signal in the system is one they set, in their own words.
+
+Encryption would not have achieved this. Encryption defends against outsiders; the adversary here is the organisation holding the data. A manager with legitimate access to an encrypted diagnosis field can still read the diagnosis. The only field that cannot be leaked, subpoenaed, reported on or shown to a manager is the field that was never created.
+
+TRANSPARENCY
+
+Every attempt on every channel lands in a delivery ledger — what was tried and whether it landed — with a salted hash and never the message body. A person can send WHO and see everyone who has been shown a standing disclosure of theirs. OFF withdraws it immediately with no reason asked, because there is nowhere to record a reason and so nobody can ever be asked for one later.
+
+CONSENT
+
+Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert without it. The interesting case is not refusal but the hedge — "I guess so, I think that's probably fine?" is what somebody actually says when unsure and being agreeable, and it is not agreement.
+
+THE THREE THINGS WE FOUND OURSELVES
+
+1. Six control words were printed in our user-facing copy and routed nowhere. HUMAN returned an ASL interpreter card. OFF — the word that withdraws a disclosure — returned "I do not have good information on that" while the sharing stayed live. For a product whose thesis is consent, a withdrawal that silently fails was the most serious defect it could have had.
+
+2. Our privacy policy said in public that a volunteered condition "is not written to any record". It was stored verbatim. Conditions are now stripped before the insert on the one write path every channel shares, and the claim is rewritten to state its limit rather than promise an absolute a word list cannot keep.
+
+3. Our adversarial scorer exited zero with 100% of assertions inconclusive. It printed "silence must never read as success" and then did exactly that at the exit-code level.
+
+Each now has a check that fails the build if it returns.
+
+THE LESSON WE WOULD PASS ON
+
+Instructions are not controls. We told the agent not to record a volunteered condition; it complied in its narration while the action recorded the text anyway. Everything safety-critical has since moved into code that runs whether or not a model remembers.
