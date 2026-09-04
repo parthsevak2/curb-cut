@@ -118,6 +118,32 @@ the element as well as the field.
 
 ---
 
+## What a keyboard found that neither tool could
+
+Sa11y runs in jsdom, which has no layout, so it cannot measure a target. A
+static scan cannot either: a link's height comes from its line box and padding
+at render time. So the live pages are walked with real Tab key events dispatched
+to a real browser, and each focused element is measured where it sits.
+
+`node tests/keyboard_walk.mjs`
+
+Thirty-four controls across the two main pages, every one reachable by keyboard,
+every one carrying `solid 3px rgb(11, 87, 199)`. Real key events, not a scripted
+`.focus()`, because `:focus-visible` does not match a programmatic focus call
+and that difference is what produced 26 imaginary defects in an earlier audit.
+
+It found one real thing. On the home page, *Go to the ask page* measured
+**140 by 23**, one pixel under the 24 by 24 that WCAG 2.5.8 asks for. It sits
+alone in its own paragraph, so the criterion's exception for links inline in
+running text does not cover it. The footer had the same defect and had been
+fixed one-off months earlier; the rule is now general, `p > a:only-child`, so
+the next standalone link cannot repeat it. Re-measured live at 28px.
+
+One caution learned the hard way, and written into `video/cdp.mjs`: the walk
+reads a real browser, and a real browser caches. The fix above was live and
+measuring correctly while the walk still reported the defect, because it was
+looking at a stale stylesheet. Auditing with the cache on audits the past.
+
 ## Proving the suite can fail
 
 A suite that cannot fail proves nothing, so `jest/__tests__/harness-control.a11y.test.js`

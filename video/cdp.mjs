@@ -46,6 +46,11 @@ export async function launch() {
 
   await send('Page.enable');
   await send('Runtime.enable');
+  // An audit that reads a cached page audits the past. This cost me one wrong
+  // conclusion: a fix was live and measured correct, while the walk still saw
+  // the stale stylesheet and reported the defect as unfixed.
+  await send('Network.enable');
+  await send('Network.setCacheDisabled', { cacheDisabled: true });
   await send('Emulation.setDeviceMetricsOverride',
              { width: W, height: H, deviceScaleFactor: 2, mobile: false });
 
