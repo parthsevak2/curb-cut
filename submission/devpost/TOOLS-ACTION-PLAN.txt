@@ -1,0 +1,79 @@
+THE TWO REQUIRED TOOLS: WHAT I NEED FROM YOU
+
+Both Builder Track questions ask what the tool FOUND. Nothing substitutes for a
+straight answer to that, so this is the last real blocker.
+
+
+WHAT I ALREADY TRIED, SO YOU DO NOT REPEAT IT
+
+  Searched for "AI Expert Suite", "Accessibility Expert Skill" and "RAI Self
+  Check" publicly. Not a public Salesforce product under any of those names.
+
+  Checked AgentExchange. Not listed.
+
+  Checked the provisioned org for installed packages. Only Salesforce Standard
+  Data Model and CDPAdvertising. Neither is it.
+
+  Checked the org for anything named like it in GenAiPlannerDefinition. Nothing.
+
+  Tried to read the Devpost hackathon resources page. It redirected to sign-in
+  and I cannot sign in as you.
+
+Conclusion: it is distributed to participants, almost certainly through the
+hackathon Slack sandbox or the Devpost resources page. It cannot be found from
+outside.
+
+
+STEP 1, TODAY, FIVE MINUTES. YOU
+
+Send the message in "Ask the organisers" to all three of these at once:
+
+  a. The hackathon Slack sandbox, in whatever channel is signposted for support
+  b. Devpost, hackathon page, Additional details, Support Channel & Resources
+  c. The organisers named on the page: Alexandra Iyer and Megan Alfaro
+
+Asking in parallel costs nothing and the deadline does not move. Do not wait for
+one to answer before trying the next.
+
+
+STEP 2, THE MOMENT YOU HAVE ANYTHING. ME
+
+Send me whichever of these you get and I will take it from there:
+
+  An install link or package ID     I install it into the org and run it
+  A Slack channel with the skill    Paste the skill's instructions to me and I
+                                    will run the audit it describes
+  A doc or PDF describing it        Same. I will follow it and produce the output
+  A URL it wants pointed at         /ask is the page to give it first
+  Its raw output                    I fix what is fixable before the deadline and
+                                    rewrite Q1 and Q2 around the real findings
+
+The most useful single thing is the skill's own instructions, in any form. If I
+can see what it checks, I can run it whether or not I can install it.
+
+
+STEP 3, IF NOTHING COMES BACK BY FRIDAY NIGHT
+
+Submit the fallback. It is already written and already fits the character limit.
+Q1 and Q2 open with one honest line saying we could not obtain the tool, that we
+asked, and that what follows is our own audit in the shape the question asks.
+
+That is a legitimate answer. The rubric says judges score engagement with the
+findings, not a perfect score, and our own audit found four defects a static scan
+could not see plus one we disproved. That is real engagement whether or not their
+tool ever runs.
+
+Do not leave either field blank, and do not imply the tools were run.
+
+
+WHAT TO POINT ANY TOOL AT
+
+  Public site      https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut
+  The page first   /curbcut/ask
+  Org              00DgK00000YIJ5SUAX
+  Agent            Curb_Cut, Active at v7
+  Internal agent   Curb_Cut_Desk, Active at v5
+  Console app      Curb Cut Console
+
+If the accessibility tool takes one URL, give it /ask. That is the page somebody
+uses on a hard day and it is where a finding matters most.
