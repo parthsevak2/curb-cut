@@ -29,7 +29,7 @@ Nothing reaches an employer without an explicit yes in the conversation, held by
 
 THE THREE THINGS WE FOUND OURSELVES
 
-1. Six control words were printed in our user-facing copy and routed nowhere. HUMAN returned an ASL interpreter card. OFF, the word that withdraws a disclosure. Returned "I do not have good information on that" while the sharing stayed live. For a product whose thesis is consent, a withdrawal that silently fails was the most serious defect it could have had.
+1. Six control words were printed in our user-facing copy and routed nowhere. HUMAN returned an ASL interpreter card. OFF, the word that withdraws a disclosure, returned "I do not have good information on that" while the sharing stayed live. For a product whose thesis is consent, a withdrawal that silently fails was the most serious defect it could have had.
 
 2. Our privacy policy said in public that a volunteered condition "is not written to any record". It was stored verbatim. Conditions are now stripped before the insert on the one write path every channel shares, and the claim is rewritten to state its limit rather than promise an absolute a word list cannot keep.
 
