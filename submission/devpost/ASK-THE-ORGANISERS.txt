@@ -1,0 +1,40 @@
+COPY THIS INTO THE HACKATHON SUPPORT CHANNEL OR SLACK SANDBOX
+Send it today. One reply unblocks the last required field.
+
+---
+
+Hi, quick question on a Builder Track requirement.
+
+The submission asks for outputs from the Accessibility Expert Skill and the RAI
+Self Check Skill from the AI Expert Suite. I can't find either one. They aren't
+installed in my provisioned org (00DgK00000YIJ5SUAX), they don't appear on
+AgentExchange, and I can't find them under that name anywhere public.
+
+Where do I get them? Specifically:
+
+  1. Are they a managed package I install into the provisioned org, an
+     Agentforce agent I invoke, or something I run in the Slack sandbox?
+  2. Is there an install link or a package ID?
+  3. Roughly how long does a run take, so I can plan around the Sunday deadline?
+
+If they aren't available to customer and partner participants, please say so and
+I'll describe my own accessibility and responsible-AI auditing in those fields
+instead, and label it clearly as such.
+
+Thanks.
+
+---
+
+WHY THIS WORKING IS URGENT
+
+Both fields are required and both ask what the tool FOUND. Nothing else in the
+submission can substitute for a straight answer to that.
+
+WHERE TO SEND IT, IN ORDER
+
+  1. The hackathon Slack sandbox, in whatever channel is signposted for support.
+  2. Devpost, the hackathon page, Additional details, Support Channel & Resources.
+  3. Failing both, the organisers listed on the hackathon page: Alexandra Iyer
+     and Megan Alfaro.
+
+Ask in more than one place at once. It costs nothing and the deadline does not move.

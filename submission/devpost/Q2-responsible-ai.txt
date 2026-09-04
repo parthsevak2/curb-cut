@@ -1,3 +1,10 @@
+IF YOU COULD NOT GET THE TOOL, PASTE THE LINE BELOW AT THE TOP OF YOUR ANSWER
+AND DELETE THIS WHOLE BLOCK. IF YOU DID GET IT, PASTE ITS FINDINGS INSTEAD.
+
+  We could not obtain this tool. It is not in the provisioned org, not on AgentExchange, and not locatable under that name. We asked the organisers and record that here rather than imply we ran it. Below is the audit we ran ourselves, in the shape the question asks: what was found, what we fixed, what we kept and why.
+
+---
+
 Our approach is subtraction, and the honest version of this answer is that our own checks caught us breaking our own rules three times.
 
 BIAS
@@ -10,7 +17,7 @@ FAIRNESS
 
 The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in 61 fields across 9 objects. Not encrypted, not permission-restricted, absent. A build check fails if anyone adds one. So nothing can be scored, ranked, segmented or reported on by disability, and nothing is inferred about a person from their behaviour. Every signal in the system is one they set, in their own words.
 
-Encryption would not have achieved this. Encryption defends against outsiders; the adversary here is the organisation holding the data. A manager with legitimate access to an encrypted diagnosis field can still read the diagnosis. The only field that cannot be leaked, subpoenaed, reported on or shown to a manager is the field that was never created.
+Encryption would not achieve this. It defends against outsiders; the adversary here is the organisation holding the data. A manager with legitimate access to an encrypted diagnosis field can still read it. The only field that cannot be leaked, subpoenaed or shown to a manager is the one that was never created.
 
 TRANSPARENCY
 
@@ -18,7 +25,7 @@ Every attempt on every channel lands in a delivery ledger: what was tried and wh
 
 CONSENT
 
-Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert without it. The interesting case is not refusal but the hedge, "I guess so, I think that's probably fine?" is what somebody actually says when unsure and being agreeable, and it is not agreement.
+Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert. The interesting case is not refusal but the hedge. "I guess so, I think that's probably fine?" is what somebody says when unsure and being agreeable, and it is not agreement.
 
 THE THREE THINGS WE FOUND OURSELVES
 

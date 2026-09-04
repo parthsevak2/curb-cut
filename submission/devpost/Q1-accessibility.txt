@@ -1,3 +1,10 @@
+IF YOU COULD NOT GET THE TOOL, PASTE THE LINE BELOW AT THE TOP OF YOUR ANSWER
+AND DELETE THIS WHOLE BLOCK. IF YOU DID GET IT, PASTE ITS FINDINGS INSTEAD.
+
+  We could not obtain this tool. It is not in the provisioned org, not on AgentExchange, and not locatable under that name. We asked the organisers and record that here rather than imply we ran it. Below is the audit we ran ourselves, in the shape the question asks: what was found, what we fixed, what we kept and why.
+
+---
+
 We ran our own audit continuously and hard: 333 automated accessibility checks against the six LIVE pages on every build, plus 28 contrast checks computed from the design tokens in both themes, and 16 reading-level checks. The build fails on any of them.
 
 The findings that mattered most, though, came from doing what a static scan cannot: driving the deployed page with a real browser and reading its accessibility tree.
@@ -17,8 +24,6 @@ WHAT THAT FOUND, AND WHAT WE DID
 WHAT WE KEPT, AND WHY
 
 Deaf, blind, hard of hearing and wheelchair user are deliberately never redacted from what a person writes, even though we strip volunteered medical conditions. They are identity and function, not medical detail; they are how people describe themselves; and the interpreter routing reads them. Stripping how somebody names themselves would be its own insult. A check fails the build if any of them enters the condition list.
-
-We also kept a deliberately plain Visualforce surface rather than a JS framework, so the page renders for older assistive technology.
 
 A FINDING WE DISPROVED
 
