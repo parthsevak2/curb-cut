@@ -79,10 +79,20 @@ the deadline does not move.
 instructions in any form: if I can see what it checks, I can run it whether or
 not I can install it.
 
-**If nothing comes back by Friday night,** `devpost/Q2-responsible-ai.txt` is
-written, fits at 3,994 characters, and opens by saying plainly that we could not
-find the tool, that we asked, and that what follows is our own audit. That audit
-found three places where we had broken our own rules. Do not leave the field
+**Meanwhile we ran the exercise anyway.** `tests/rai_self_check.py` audits Curb
+Cut against Salesforce's own five published guidelines for responsible agentic
+AI: Accuracy, Safety, Honesty, Empowerment, Sustainability. 21 checks, 19 pass,
+0 fail, 2 undecided, and `--selftest` breaks four of them on purpose to prove
+they can go red.
+
+It found a real defect on its first run: the seed file in this repository could
+no longer rebuild the deployed library. The org held 28 rows, the seed held 24,
+and the four missing ones were exactly the lighting rows added to fix an earlier
+bias defect. Anyone deploying from our code would have silently reintroduced it.
+Fixed, and a check now compares the two on every run.
+
+`devpost/Q2-responsible-ai.txt` is written around that finding, 3,697 characters.
+It still opens by saying we could not find the named tool. Do not leave the field
 blank and do not imply the tool was run.
 
 ---
