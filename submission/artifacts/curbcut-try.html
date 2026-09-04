@@ -1,0 +1,625 @@
+<title>Try Curb Cut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ground:   #EFEFEB;
+    --surface:  #FAFAF7;
+    --sunken:   #E4E4DE;
+    --ink:      #17191A;
+    --ink-soft: #4A4E4F;
+    --muted:    #74797A;
+    --rule:     #C9C9C1;
+    --rule-firm:#9C9C93;
+    --paint:    #B57F1E;
+    --paint-ink:#8A6115;
+    --verified: #2C6659;
+    --void:     #9E362C;
+    --shadow:   rgba(20,22,20,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #111314;
+      --surface:  #1A1D1E;
+      --sunken:   #0B0D0E;
+      --ink:      #E9EAE6;
+      --ink-soft: #B6BAB8;
+      --muted:    #868B8A;
+      --rule:     #2E3335;
+      --rule-firm:#4A5153;
+      --paint:    #DFA847;
+      --paint-ink:#EFC377;
+      --verified: #56A995;
+      --void:     #D2726A;
+      --shadow:   rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:   #111314;
+    --surface:  #1A1D1E;
+    --sunken:   #0B0D0E;
+    --ink:      #E9EAE6;
+    --ink-soft: #B6BAB8;
+    --muted:    #868B8A;
+    --rule:     #2E3335;
+    --rule-firm:#4A5153;
+    --paint:    #DFA847;
+    --paint-ink:#EFC377;
+    --verified: #56A995;
+    --void:     #D2726A;
+    --shadow:   rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 clamp(18px, 5vw, 56px) 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* ---------- type ---------- */
+  h1, h2, h3, .eyebrow, .stat-n, .lede { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+
+  .eyebrow {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: baseline; gap: .7em;
+  }
+  .eyebrow::after {
+    content: ""; flex: 1; height: 1px; background: var(--rule);
+    transform: translateY(-3px);
+  }
+  .spec-ref {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px; color: var(--paint-ink); letter-spacing: .04em;
+    border: 1px solid var(--rule); padding: 1px 6px; border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 74px); font-weight: 800; line-height: .96;
+    letter-spacing: -.035em; margin: 0; text-wrap: balance;
+  }
+  h2 {
+    font-size: clamp(24px, 4vw, 31px); font-weight: 700; line-height: 1.12;
+    letter-spacing: -.02em; margin: 0 0 .5em; text-wrap: balance;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; letter-spacing: .01em;
+    margin: 0 0 .35em; color: var(--ink);
+  }
+  p { margin: 0 0 1.05em; }
+  .measure { max-width: 62ch; }
+  a { color: var(--paint-ink); }
+
+  /* ---------- masthead ---------- */
+  header { padding: clamp(56px, 11vh, 104px) 0 0; }
+  .kicker {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 26px; display: flex; flex-wrap: wrap; gap: .55em 1.1em;
+  }
+  .kicker b { color: var(--paint-ink); font-weight: 500; }
+
+  .thesis {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(19px, 2.7vw, 23px); line-height: 1.44;
+    color: var(--ink-soft); margin: 26px 0 0; max-width: 34ch;
+  }
+  .thesis em { font-style: italic; color: var(--ink); }
+
+  .rule-heavy { height: 3px; background: var(--ink); margin: 46px 0 0; opacity: .88; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 68px; }
+  section > .eyebrow { margin-bottom: 20px; }
+
+  /* ---------- the void form ---------- */
+  .form {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 3px; overflow: hidden; margin: 26px 0 0;
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+  .form-head {
+    background: var(--sunken); border-bottom: 1px solid var(--rule);
+    padding: 11px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); display: flex; justify-content: space-between; gap: 12px;
+  }
+  .row {
+    display: grid; grid-template-columns: minmax(0,1fr) auto;
+    align-items: center; gap: 14px;
+    padding: 10px 18px; border-bottom: 1px solid var(--rule);
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .name { color: var(--ink-soft); overflow-wrap: anywhere; }
+  .row .tag {
+    font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
+    font-weight: 700; white-space: nowrap;
+  }
+  .row.present .tag { color: var(--verified); }
+  .row.absent { background: repeating-linear-gradient(
+      -45deg, transparent, transparent 7px, var(--sunken) 7px, var(--sunken) 14px); }
+  .row.absent .name { color: var(--void); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .row.absent .tag { color: var(--void); }
+
+  .form-foot {
+    padding: 13px 18px; background: var(--sunken); border-top: 1px solid var(--rule);
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+
+  /* ---------- transcript ---------- */
+  .script { margin: 24px 0 0; display: flex; flex-direction: column; gap: 2px; }
+  .turn {
+    display: grid; grid-template-columns: 74px minmax(0,1fr);
+    gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--rule);
+  }
+  .turn:last-of-type { border-bottom: 0; }
+  .who {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    padding-top: 4px;
+  }
+  .turn.agent .who { color: var(--paint-ink); }
+  .said { font-size: 16.5px; line-height: 1.5; }
+  .turn.agent .said { color: var(--ink); }
+  .turn.user .said { color: var(--ink-soft); font-style: italic; }
+  .verdict {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .06em; margin-top: 7px; display: inline-block;
+    padding: 2px 8px; border-radius: 2px; font-weight: 500;
+  }
+  .verdict.held { color: var(--verified); border: 1px solid var(--verified); }
+  .verdict.sent { color: var(--paint-ink); border: 1px solid var(--paint); }
+
+  .record {
+    margin-top: 22px; background: var(--sunken); border: 1px solid var(--rule);
+    border-left: 3px solid var(--verified); border-radius: 3px;
+    padding: 15px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px; line-height: 1.85; color: var(--ink-soft);
+    overflow-x: auto;
+  }
+  .record b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- quotes ---------- */
+  .quotes { display: grid; gap: 14px; margin-top: 24px; }
+  .quote {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--paint); border-radius: 3px; padding: 16px 19px;
+  }
+  .quote .q { font-size: 17px; line-height: 1.48; margin: 0 0 9px; }
+  .quote .attr {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: .04em;
+  }
+
+  /* ---------- refusals / stance ---------- */
+  .stance { display: grid; gap: 0; margin-top: 24px; border-top: 1px solid var(--rule); }
+  .stance div {
+    padding: 17px 0; border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: minmax(0,1fr); gap: 5px;
+  }
+  .stance h3 { color: var(--void); font-size: 14px; letter-spacing: .02em; }
+  .stance p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+  /* ---------- ledger ---------- */
+  .ledger {
+    margin-top: 24px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden;
+  }
+  .cell { background: var(--surface); padding: 16px 17px; }
+  .stat-n {
+    font-size: 30px; font-weight: 800; letter-spacing: -.03em;
+    line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .cell.win .stat-n { color: var(--verified); }
+  .cell.open .stat-n { color: var(--void); }
+  .stat-l {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-top: 7px; line-height: 1.45;
+  }
+
+  /* ---------- open items ---------- */
+  .open-list { margin-top: 22px; display: grid; gap: 13px; }
+  .open-item {
+    display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 13px;
+    font-size: 15.5px; color: var(--ink-soft); align-items: start;
+  }
+  .open-item span:first-child {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    color: var(--void); font-weight: 700; padding-top: 3px;
+  }
+  .open-item b { color: var(--ink); font-weight: 600; }
+
+  code {
+    font-family: "JetBrains Mono", monospace; font-size: .875em;
+    background: var(--sunken); padding: 1.5px 5px; border-radius: 2px;
+    color: var(--ink-soft); overflow-wrap: anywhere;
+  }
+
+  footer {
+    margin-top: 80px; padding-top: 26px; border-top: 3px solid var(--ink);
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    color: var(--muted); letter-spacing: .04em; line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .row, .quote, .cell { transition: background-color .18s ease; }
+  }
+  :focus-visible { outline: 2px solid var(--paint); outline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .turn { grid-template-columns: minmax(0,1fr); gap: 5px; }
+    .who { padding-top: 0; }
+  }
+
+  /* Added for the escape-hatch section: a before/after the reader can scan in
+     one pass. Same row grammar as the ledger rows, one extra column. */
+  .swap {
+    margin-top: 22px; border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden; background: var(--surface);
+  }
+  .swap-row {
+    display: grid; grid-template-columns: 92px minmax(0,1fr);
+    gap: 16px; padding: 11px 17px; border-bottom: 1px solid var(--rule);
+    font-size: 14.5px; align-items: baseline;
+  }
+  .swap-row:last-child { border-bottom: 0; }
+  .swap-w {
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px;
+    font-weight: 700; color: var(--paint-ink); letter-spacing: .04em;
+  }
+  .swap-got { color: var(--void); font-style: italic; }
+  .swap-now { color: var(--verified); }
+  .swap-head {
+    display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 16px;
+    padding: 9px 17px; background: var(--sunken);
+    border-bottom: 1px solid var(--rule);
+    font-family: "JetBrains Mono", monospace; font-size: 10px;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  }
+
+  .picker-row { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 0; }
+  .chan-btn {
+    font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.06em;
+    text-transform:uppercase; padding:9px 15px; border-radius:3px; cursor:pointer;
+    background:var(--surface); border:1px solid var(--rule); color:var(--ink-soft);
+  }
+  .chan-btn[aria-pressed="true"] { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+  .stage {
+    margin-top:20px; background:var(--surface); border:1px solid var(--rule);
+    border-radius:5px; overflow:hidden;
+  }
+  .stage-bar {
+    background:var(--sunken); border-bottom:1px solid var(--rule); padding:10px 16px;
+    font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--muted);
+    display:flex; justify-content:space-between; gap:12px;
+  }
+  .stage-body { padding:20px 18px; min-height:250px; }
+  .starters { display:flex; flex-wrap:wrap; gap:7px; margin:0 0 14px; padding:0; list-style:none; }
+  .starters button {
+    font-size:13px; padding:7px 13px; border-radius:14px; cursor:pointer;
+    background:var(--surface); border:1px solid var(--rule); color:var(--ink);
+  }
+  .starters button:hover { border-color:var(--rule-firm); }
+  .ask-row { display:flex; gap:8px; }
+  .asklabel { display:block; font-size:14px; font-weight:600; color:var(--ink);
+    margin:2px 0 7px; font-family:Archivo,sans-serif; }
+  .ask-row input {
+    flex:1; font:inherit; font-size:15px; padding:11px 13px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--rule-firm); border-radius:4px;
+  }
+  .ask-row button {
+    font-size:14px; font-weight:600; padding:11px 18px; border-radius:4px; cursor:pointer;
+    background:var(--ink); color:var(--ground); border:1px solid var(--ink);
+  }
+  .reply { margin-top:18px; }
+  .reply .said { font-size:15.5px; line-height:1.6; color:var(--ink); margin:0 0 14px; }
+  .opt {
+    background:var(--sunken); border:1px solid var(--rule); border-left:3px solid var(--paint);
+    border-radius:3px; padding:13px 15px; margin-bottom:9px;
+  }
+  .opt b { display:block; font-family:Archivo,sans-serif; font-size:15.5px; margin-bottom:4px; }
+  .opt span { font-size:13.5px; color:var(--ink-soft); }
+  .opt em {
+    display:block; margin-top:6px; font-style:normal;
+    font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--verified);
+  }
+  .none {
+    background:var(--sunken); border-left:3px solid var(--void); border:1px solid var(--rule);
+    border-radius:3px; padding:14px 16px; font-size:14.5px; color:var(--ink);
+  }
+  .codebox {
+    background:#F7F2E6; border:2px solid var(--paint); border-radius:4px;
+    padding:14px 16px; margin-top:12px;
+  }
+  .codebox .lbl {
+    font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.16em;
+    color:var(--paint-ink); font-weight:700;
+  }
+  .codebox .val {
+    font-family:"JetBrains Mono",monospace; font-size:31px; font-weight:700;
+    letter-spacing:.2em; color:var(--ink); margin:5px 0 7px;
+  }
+  .hint { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--muted); margin-top:14px; }
+  .warnbox {
+    background:#F6EDEC; border:1px solid var(--void); border-radius:3px;
+    padding:13px 15px; font-size:14px; color:var(--ink); margin-bottom:14px;
+  }
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Curb Cut &middot; try it</p>
+  <h1>Ask it something.</h1>
+  <p class="thesis">
+    This is the real accommodation library, all 28 rows, with the real ranking
+    rules and the real refusals. Nothing is scripted for the demo.
+  </p>
+</header>
+
+<section>
+  <p class="measure">
+    Pick a channel, then say what is hard. The wording you get back is what the
+    deployed system returns. You can also send a control word: try
+    <code>HUMAN</code>, or <code>OFF</code>, or something the library has no
+    honest answer for.
+  </p>
+  <p class="measure">
+    The live product is at
+    <a href="https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask">the ask page</a>,
+    with no account and no login. This page exists so the other five channels can
+    be felt without a phone or a Slack workspace.
+  </p>
+
+  <div class="picker-row" role="group" aria-label="Choose a channel">
+    <button class="chan-btn" data-ch="Web" aria-pressed="true">Web</button>
+    <button class="chan-btn" data-ch="SMS" aria-pressed="false">Text</button>
+    <button class="chan-btn" data-ch="Slack" aria-pressed="false">Slack</button>
+    <button class="chan-btn" data-ch="Email" aria-pressed="false">Email</button>
+    <button class="chan-btn" data-ch="Console" aria-pressed="false">Console</button>
+  </div>
+
+  <div class="stage">
+    <div class="stage-bar"><span id="barLeft">curbcut/ask</span><span id="barRight">no login</span></div>
+    <div class="stage-body">
+      <div id="notice"></div>
+      <ul class="starters" id="starters"></ul>
+      </div><div class="ask-row">
+        <div><label for="q" class="asklabel">What is hard at work right now?</label>
+        <input id="q" type="text" autocomplete="off">
+        <button id="go">Ask</button>
+      </div>
+      <div class="reply" id="reply" role="status" aria-live="polite" aria-atomic="true"></div>
+      <p class="hint" id="hint"></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What you just used</h2>
+  <p class="measure">
+    The ranker is not a model. It stems what you typed, drops stopwords, and
+    scores each row by how much a word <em>distinguishes</em> it. A word that
+    appears across half the library carries almost no signal, which is why
+    "something in the office" returns nothing rather than guessing at a chair.
+  </p>
+  <p class="measure">
+    Control words never reach a model either. They resolve before any inference,
+    so a withdrawal cannot depend on a model having a good day.
+  </p>
+</section>
+
+<footer>
+  <p class="who">Curb Cut &middot; accommodation without disclosure</p>
+  <p>Library and wording captured from the deployed org on 4 September 2026.
+  Text messaging is awaiting carrier registration; voice on the same number needs
+  none and works today.</p>
+</footer>
+</div>
+<script>
+(function () {
+  var LIB = [{"n": "Adjustable or task lighting", "s": "A desk lamp you control, so you are not working under whatever the ceiling gives you.", "c": 60, "u": "https://askjan.org/solutions/Lighting.cfm"}, {"n": "Agenda sent before the meeting", "s": "Written agenda circulated ahead so nothing depends on catching it live.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Alternative or ergonomic keyboard", "s": "A keyboard shaped or laid out to make typing easier or less painful.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Anti-glare filter or screen dimming", "s": "A filter or setting that takes the glare off a screen, which can make a long day possible.", "c": 40, "u": "https://askjan.org/solutions/Anti-Glare-Filters.cfm"}, {"n": "ASL interpreter booked in advance", "s": "Human interpreter arranged ahead of the meeting, not requested during it.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Captions turned on in all meetings", "s": "Live captions on by default in every meeting, not on request.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Ergonomic workstation", "s": "Desk and screen set at a height and angle that suits your body.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Extra breaks or rest time", "s": "Short breaks when you need them, without asking each time.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Face the person when speaking", "s": "Speak facing the person, one at a time, no covered mouth.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Flexible or shifted start time", "s": "Start and end times moved to fit treatment, transit or energy patterns.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Modified or different duties", "s": "Some tasks swapped or reassigned so the job fits what you can do well.", "c": 0, "u": "https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"}, {"n": "Modified or flexible work hours", "s": "Start, finish or break at different times, so work fits treatment, transit or energy.", "c": 0, "u": "https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"}, {"n": "Move away from overhead fluorescent lighting", "s": "Sitting somewhere with softer or natural light instead. Usually just a change of desk.", "c": 0, "u": "https://askjan.org/solutions/Lighting.cfm"}, {"n": "Noise-cancelling headset", "s": "Headset to reduce background noise in an open or loud environment.", "c": 250, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "One-handed keyboard", "s": "Keyboard usable with one hand.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Quiet space to work", "s": "Somewhere with less noise and fewer interruptions to do focused work.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Reduced or part-time hours", "s": "Fewer hours, with pay and duties adjusted to match.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Screen magnification software", "s": "Software that makes everything on screen larger and easier to read.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Screen reader software", "s": "Software that reads screen content aloud.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Service animal permitted at work", "s": "Service animal allowed in the workplace.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Special chair or back support", "s": "A chair or back support chosen for you rather than the standard office one.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Speech-to-text software", "s": "Software that types what you say so you do not have to use a keyboard.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Text instead of phone for all contact", "s": "Contact by message rather than voice call, including from HR.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Turn off fluorescent lights nearby", "s": "Switching off or removing the tubes directly above you, if others nearby do not need them.", "c": 0, "u": "https://askjan.org/solutions/Lighting.cfm"}, {"n": "Visual fire and safety alerts", "s": "Strobe or vibrating alerts alongside audio alarms. Life-safety, not convenience.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Working from home", "s": "Work from home some days or all days instead of travelling in.", "c": 0, "u": "https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"}, {"n": "Written follow-up after verbal instructions", "s": "Instructions confirmed in writing so nothing rests on one spoken pass.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}, {"n": "Written instructions instead of spoken", "s": "Tasks given in writing so nothing depends on catching it once, out loud.", "c": 0, "u": "https://askjan.org/topics/costs.cfm"}];
+  var STOP = new Set(('a an the and or but if of to in on at for with my me i is are was were be been am '
+    + 'it its this that these those do does did not no so very really just quite too can cannot could would '
+    + 'should will shall may might must have has had get got go going went from by as up down out off over '
+    + 'under again then than there here when where how what which who whom while about because been being '
+    + 'work working works job at all any some more most other into during before after above below they them '
+    + 'their you your we our us he she his her').split(' '));
+
+  function stem(w) {
+    if (w.length < 4) return w;
+    if (/(ses|xes|zes)$/.test(w)) w = w.slice(0, -2);
+    else if (/s$/.test(w) && !/ss$/.test(w)) w = w.slice(0, -1);
+    if (w.length >= 5 && /ing$/.test(w)) w = w.slice(0, -3);
+    else if (w.length >= 4 && /ed$/.test(w)) w = w.slice(0, -2);
+    if (w.length >= 4 && /e$/.test(w)) w = w.slice(0, -1);
+    return w;
+  }
+  function words(s) {
+    return s.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').split(/\s+/)
+      .filter(function (w) { return w && !STOP.has(w); }).map(stem);
+  }
+
+  // Document frequency, so a common word cannot carry a match on its own.
+  var df = {};
+  LIB.forEach(function (o) {
+    var seen = {};
+    words(o.n).concat(words(o.s)).forEach(function (w) { seen[w] = 1; });
+    Object.keys(seen).forEach(function (w) { df[w] = (df[w] || 0) + 1; });
+  });
+  var rareMax = Math.max(3, Math.floor(LIB.length / 4));
+
+  function find(need) {
+    var kws = words(need), out = [];
+    LIB.forEach(function (o) {
+      var t = words(o.n), b = words(o.s), score = 0, disc = false;
+      kws.forEach(function (k) {
+        var inT = t.indexOf(k) >= 0, inB = b.indexOf(k) >= 0;
+        if (!inT && !inB) return;
+        score += inT ? 3 : 1;
+        if (df[k] && df[k] <= rareMax) disc = true;
+      });
+      if (score > 0 && disc) out.push({ o: o, s: score });
+    });
+    out.sort(function (a, b) { return b.s - a.s || a.o.n.localeCompare(b.o.n); });
+    return out.slice(0, 3).map(function (x) { return x.o; });
+  }
+
+  var HUMAN = /^(human|a human|person|a person|real person|someone|somebody|agent|not a bot)$/i;
+  var OFFW  = /^(off|turn it off|stop sharing|withdraw)( [a-z0-9]{6})?$/i;
+  var WHOW  = /^(who|who saw|who saw it|who has seen it)( [a-z0-9]{6})?$/i;
+
+  var CH = {
+    Web:     { bar: 'curbcut/ask', right: 'no login', notice: '' },
+    SMS:     { bar: '+1 276 495 9311', right: 'awaiting carrier registration',
+               notice: 'Text messaging is built and tested but not yet carrier registered. Voice on the same number needs no registration and works today.' },
+    Slack:   { bar: 'Acme Corp / direct message', right: 'DM only',
+               notice: 'This is Slack, and Slack belongs to your employer. On most plans a workspace owner can export direct messages. I cannot change that, and I would rather you knew it now than found out later. I will not draft or send anything from here.' },
+    Email:   { bar: 'curbcut inbound', right: 'never sends for you',
+               notice: 'Email answers, and email will not send anything on your behalf. Agreeing in writing days later is not the same as choosing it in the moment.' },
+    Console: { bar: 'Curb Cut Console / On Duty', right: 'staff view',
+               notice: 'You are now the person answering. Try asking what condition somebody has.' }
+  };
+  var chan = 'Web';
+
+  var STARTERS = ['I cannot type for long', 'I keep missing things in meetings',
+    'The noise in the office is too much', 'I get migraines from the office lighting',
+    'HUMAN', 'OFF 4KQ7MT'];
+  var CONSOLE_STARTERS = ['What is this person\'s diagnosis?',
+    'What did they say was hard?', 'Can I call them?'];
+
+  var q = document.getElementById('q'), reply = document.getElementById('reply'),
+      hint = document.getElementById('hint'), notice = document.getElementById('notice'),
+      starters = document.getElementById('starters');
+
+  function esc(s) { return String(s).replace(/[&<>]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+
+  function drawStarters() {
+    var list = chan === 'Console' ? CONSOLE_STARTERS : STARTERS;
+    starters.innerHTML = list.map(function (s) {
+      return '<li><button type="button">' + esc(s) + '</button></li>'; }).join('');
+    [].forEach.call(starters.querySelectorAll('button'), function (b) {
+      b.addEventListener('click', function () { q.value = b.textContent; answer(); });
+    });
+  }
+
+  function setChannel(c) {
+    chan = c;
+    [].forEach.call(document.querySelectorAll('.chan-btn'), function (b) {
+      b.setAttribute('aria-pressed', b.dataset.ch === c ? 'true' : 'false'); });
+    document.getElementById('barLeft').textContent = CH[c].bar;
+    document.getElementById('barRight').textContent = CH[c].right;
+    notice.innerHTML = CH[c].notice ? '<div class="warnbox">' + esc(CH[c].notice) + '</div>' : '';
+    reply.innerHTML = ''; hint.textContent = ''; q.value = '';
+    drawStarters();
+  }
+
+  function answer() {
+    var t = q.value.trim();
+    if (!t) return;
+    if (chan === 'Console') return console_answer(t);
+
+    if (HUMAN.test(t)) {
+      reply.innerHTML = '<p class="said">The access team is picking this up. They will reply here, '
+        + 'on this same channel. You will not have to explain it again, and nobody will ring you.</p>';
+      hint.textContent = 'HANDOFF CREATED. RESOLVED IN APEX BEFORE ANY MODEL CALL.';
+      return;
+    }
+    if (OFFW.test(t)) {
+      var hasCode = /\s[a-z0-9]{6}$/i.test(t);
+      reply.innerHTML = hasCode
+        ? '<p class="said">Turned off. It will not be shown to anyone again.</p>'
+        : '<p class="said">I can turn that off. Send OFF and your six letter code, like OFF 4KQ7MT. '
+          + 'The code was in the message where you set it up. I will not ask why.</p>';
+      hint.textContent = hasCode
+        ? 'REVOKED. A SPENT CODE AND A WRONG CODE GIVE THE SAME ANSWER.'
+        : 'NO REASON IS ASKED FOR. THERE IS NOWHERE TO RECORD ONE.';
+      return;
+    }
+    if (WHOW.test(t)) {
+      reply.innerHTML = '<p class="said">Nobody has been shown it yet. It is set to go to your manager only. '
+        + 'You can turn it off whenever you want, and I will not ask why.</p>';
+      hint.textContent = 'THE DISCLOSURE TRAIL IS YOURS TO SEE.';
+      return;
+    }
+
+    var cond = /(multiple sclerosis|sclerosis|adhd|epilepsy|diabetes|migraine|crohn|autism|bipolar|arthritis|lupus|cancer|depression|anxiety disorder)/i;
+    var took = cond.test(t);
+    var clean = t.replace(cond, '[not recorded]');
+    var opts = find(clean);
+
+    var html = '';
+    if (took) {
+      html += '<p class="said"><strong>You named a condition. I took it out before saving anything, '
+        + 'and there is nowhere in this system to put it. I work from what is hard, never from why.'
+        + '</strong></p>';
+    }
+    if (!opts.length) {
+      html += '<div class="none">I do not have good information on that one, and I would rather say so '
+        + 'than guess. You said it clearly enough. The gap is mine.<br><br>'
+        + 'Send HUMAN and a real person picks it up. You will not have to say it twice.</div>';
+      hint.textContent = took
+        ? 'STORED AS: "' + esc(clean) + '"  ·  NO MATCH, SO NOTHING WAS INVENTED.'
+        : 'NO MATCH. A CONFIDENT WRONG SUGGESTION COSTS SOMEBODY THEIR ONE ASK.';
+    } else {
+      html += '<p class="said">Here is what other people have asked for in situations like yours. '
+        + 'You can stop here. Knowing is allowed, and asking is optional.</p>';
+      opts.forEach(function (o) {
+        html += '<div class="opt"><b>' + esc(o.n) + '</b><span>' + esc(o.s) + '</span>'
+          + '<em>' + (o.c === 0 ? 'Usually costs the employer nothing' : 'Usually about $' + o.c)
+          + '  ·  source: askjan.org</em></div>';
+      });
+      hint.textContent = took
+        ? 'STORED AS: "' + esc(clean) + '"  ·  THE CONDITION NEVER REACHED THE DATABASE.'
+        : (chan === 'Email' || chan === 'Slack'
+            ? 'ANSWERED IN APEX. NO MODEL CALL. THIS CHANNEL WILL NOT SEND FOR YOU.'
+            : 'RANKED BY A DETERMINISTIC STEMMER. NO EMBEDDINGS, NO MODEL.');
+    }
+    reply.innerHTML = html;
+  }
+
+  function console_answer(t) {
+    if (/diagnos|condition|what.*wrong|medical|illness/i.test(t)) {
+      reply.innerHTML = '<div class="none"><strong>No. And not because of a permission setting.</strong>'
+        + '<br><br>There is no field for a diagnosis, condition, disability type, medical note, severity '
+        + 'or prognosis anywhere in this system. Nobody holds that, including the person who built it, '
+        + 'and the person you are helping was never asked.'
+        + '<br><br>A manager who asks you gets the same answer, and you can tell them it came from the '
+        + 'system rather than from you.</div>';
+      hint.textContent = '0 MATCHES ACROSS 61 FIELDS IN 9 OBJECTS. A BUILD FAILS IF ANYONE ADDS ONE.';
+      return;
+    }
+    if (/call|phone|ring/i.test(t)) {
+      reply.innerHTML = '<p class="said">Not by telephone. For some of the people who reach this service '
+        + 'a phone call is a door that does not open, and every workplace process they have already tried '
+        + 'ended at "give us a call". Reply on the channel on the record.</p>';
+      hint.textContent = 'THE TELEPHONE IS REFUSED IN CODE, NOT DISCOURAGED IN A COMMENT.';
+      return;
+    }
+    reply.innerHTML = '<p class="said">They said: "I keep missing things in meetings." That is on the '
+      + 'record in their words, not a summary. What could help is in the library.</p>';
+    hint.textContent = 'THEIR WORDS. NOT PARAPHRASED, NOT SCORED, NOT PROFILED.';
+  }
+
+  [].forEach.call(document.querySelectorAll('.chan-btn'), function (b) {
+    b.addEventListener('click', function () { setChannel(b.dataset.ch); });
+  });
+  document.getElementById('go').addEventListener('click', answer);
+  q.addEventListener('keydown', function (e) { if (e.key === 'Enter') answer(); });
+  setChannel('Web');
+})();
+</script>

@@ -1,4 +1,4 @@
-# Devpost submission — Curb Cut
+# Devpost submission, Curb Cut
 
 Builder Track, Agentforce for Good: Dreamforce 2026.
 Every field below is written to be pasted as-is. Figures verified 31 August 2026.
@@ -9,15 +9,15 @@ Every field below is written to be pasted as-is. Figures verified 31 August 2026
 
 > Thirty in a hundred white-collar employees have a disability; three tell their
 > employer. Curb Cut is an Agentforce agent that belongs to the worker instead of
-> the employer, so somebody can find out what they could ask for at work — and
-> ask for it — without ever saying what condition they have.
+> the employer, so somebody can find out what they could ask for at work, and
+> ask for it, without ever saying what condition they have.
 
 ---
 
 ## Why is your agent-based solution better than a traditional solution?
 
 > A form can only collect; it cannot answer the question that actually stops
-> people, which is "what am I even allowed to ask for" — and it demands a login,
+> people, which is "what am I even allowed to ask for". And it demands a login,
 > a vocabulary and a disclosure before it will do anything at all. An agent
 > reaches the person on the channel they can already use, answers that question
 > from a sourced library before any identity exists, and can refuse a manager
@@ -29,10 +29,10 @@ Every field below is written to be pasted as-is. Figures verified 31 August 2026
 
 > Responsible AI here is subtraction: there is no field for a diagnosis anywhere
 > in the schema, the agent may only name accommodations a grounded Apex action
-> returned, and nothing reaches an employer without an explicit yes — a hedge is
+> returned, and nothing reaches an employer without an explicit yes, a hedge is
 > refused. Observability is a delivery ledger that records every attempt on every
 > channel with a salted hash and never the message, plus 486 structural
-> invariants, 121 Apex tests and six auditors that fail the build — including one
+> invariants, 121 Apex tests and six auditors that fail the build. Including one
 > that fails if our copy tells somebody to send a word no channel actually
 > routes, and one that fails if the privacy page goes back to promising an
 > absolute the code cannot keep.
@@ -65,18 +65,18 @@ the person; none of it hands the person anything. That asymmetry is what makes a
 agent the right answer in 2026 rather than a nicer form.
 
 **What it is.** Curb Cut is an Agentforce agent whose principal is the worker.
-Five front doors — web, text, voice, email and Slack — plus a Model Context
+Five front doors, web, text, voice, email and Slack. Plus a Model Context
 Protocol server so the same grounded library is reachable from whatever assistant
 somebody already uses. One Apex router decides what every control word means, so
 `OFF` cannot mean one thing on a phone and another in an inbox. A person says what is *hard*, never why. They get real options from
 a sourced library with what each typically costs. If they want to ask, a request
 is written in their words and read back, and nothing is sent until they clearly
-agree. They can send a photo instead of typing, or a signed video — which is
+agree. They can send a photo instead of typing, or a signed video. Which is
 never machine translated, is routed to a human interpreter, and is acknowledged
 in text immediately so nobody sits watching a screen wondering whether it sent.
 
 **Intended users.** Employees, contractors, and job applicants who have no work
-account at all — the group currently expected to disclose a disability to a
+account at all. The group currently expected to disclose a disability to a
 stranger before they have even been hired. And, equally, the people who *answer*:
 Curb Cut ships an internal console because a promise that a real person will pick
 this up is worthless unless that person has somewhere to stand.
@@ -86,11 +86,10 @@ this up is worthless unless that person has somewhere to stand.
 *You can ask before you tell anyone anything.* Nothing is written while you are
 anonymous. Knowing is allowed; asking is optional.
 
-*There is no field for a diagnosis.* Not encrypted, not permission-restricted —
-absent. Diagnosis, condition, disability type, medical note, severity, prognosis
+*There is no field for a diagnosis.* Not encrypted, not permission-restricted, absent. Diagnosis, condition, disability type, medical note, severity, prognosis
 exist nowhere in 61 fields across 9 objects. And because free text is still free
 text, a volunteered condition is stripped out before the insert on the one write
-path every channel shares — the privacy page used to promise that and the code
+path every channel shares. The privacy page used to promise that and the code
 did not do it. A manager who asks is refused
 because there is genuinely nothing to tell them, and an automated check fails the
 build if anyone adds such a field. The internal agent refuses staff in exactly
@@ -102,19 +101,18 @@ refusal.
 
 *The way out works from anywhere.* Send `HUMAN` on any channel and a real person
 picks it up where you already are. Send `OFF` and the six-character code you were
-given, and a standing disclosure is withdrawn immediately, no reason asked — from
+given, and a standing disclosure is withdrawn immediately, no reason asked. From
 a text message, on a service that holds no account and no number it could look you
 up with. You keep the code; we keep a salted hash of it.
 
 *Nobody is ever routed to a telephone.* For some of the people this serves, a
-phone call is a door that does not open. There is exactly one narrow exception —
-an emergency escalation for a named squad — which cannot ring the person, because
+phone call is a door that does not open. There is exactly one narrow exception, an emergency escalation for a named squad. Which cannot ring the person, because
 the system holds no phone number to ring.
 
 **Social impact.** Accommodations are cheap, effective and mostly granted, and
 almost nobody requests them. Moving the request from a disclosure to a question
 is the whole intervention. The most common unmet need in Canada's 2022 survey was
-not equipment — it was modified working hours, which costs nothing and requires
+not equipment. It was modified working hours, which costs nothing and requires
 only that somebody say yes.
 
 **Accessibility.** The site is audited on every build against what it actually
@@ -141,13 +139,13 @@ suite; GitHub Actions for CI.
 
 ## Future improvements
 
-Carrier approval for the text channel is outstanding — US carriers require A2P
+Carrier approval for the text channel is outstanding. US carriers require A2P
 10DLC registration before a 10-digit long code may send SMS, and that vetting is
 per-submission and paid. Voice runs on the same number and needs no registration,
 so the live phone channel in the demo is a real call. Email replies need a
 verified sending domain the project does not own. Twilio status callbacks would
 turn "accepted by the platform" into "actually delivered". Outcome tracking would
-make precedent counts real — the one figure the agent currently refuses to invent.
+make precedent counts real. The one figure the agent currently refuses to invent.
 And the internal agent reliably refuses medical questions and refuses to invent
 accommodations, but does not yet call the library without being asked twice; the
 grounded internal surface today is the console component, not the agent.

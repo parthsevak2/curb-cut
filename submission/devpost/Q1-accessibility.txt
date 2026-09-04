@@ -4,11 +4,11 @@ The findings that mattered most, though, came from doing what a static scan cann
 
 WHAT THAT FOUND, AND WHAT WE DID
 
-1. The claim code never took focus. Every asynchronous update on /ask moves focus to its heading — results, draft, sent. The standing-preference save set tabindex on the heading and then never called focus(). That is the single moment where a six-character code is shown once and cannot be recovered, and a screen-reader user was left exactly where they were. The one person who most needed telling was not told. FIXED: the code panel is now a real heading and takes focus, pinned by a static check.
+1. The claim code never took focus. Every asynchronous update on /ask moves focus to its heading: results, draft, sent. The standing-preference save set tabindex on the heading and then never called focus(). That is the single moment where a six-character code is shown once and cannot be recovered, and a screen-reader user was left exactly where they were. The one person who most needed telling was not told. FIXED: the code panel is now a real heading and takes focus, pinned by a static check.
 
 2. 46 unnamed <section> elements across six pages. An unnamed section is announced as an anonymous "region", so somebody navigating the home page by landmark heard "region" twelve times with nothing to tell them apart. FIXED: every section now points at its own heading, held by a live-page check.
 
-3. A 22px target on the footer mail link, under WCAG 2.5.8's 24x24. Inline links in running text are exempt, but this one sits alone and is the only way to reach a human by email — so it is a target and is now sized like one.
+3. A 22px target on the footer mail link, under WCAG 2.5.8's 24x24. Inline links in running text are exempt, but this one sits alone and is the only way to reach a human by email, so it is a target and is now sized like one.
 
 4. Status regions had no aria-atomic, so a rewritten message could be announced in fragments.
 
@@ -22,7 +22,7 @@ We also kept a deliberately plain Visualforce surface rather than a JS framework
 
 A FINDING WE DISPROVED
 
-Our first browser pass appeared to show 26 controls with no focus indicator. That would have been alarming. But :focus-visible does not match a programmatic .focus() — so we drove it with real Tab presses and got 3px solid rgb(11,87,199) at 3px offset, exactly as designed. The test method was wrong, not the site. We report that because a defect we did not have is worse to claim than one we missed.
+Our first browser pass appeared to show 26 controls with no focus indicator. That would have been alarming. But :focus-visible does not match a programmatic .focus(). So we drove it with real Tab presses and got 3px solid rgb(11,87,199) at 3px offset, exactly as designed. The test method was wrong, not the site. We report that because a defect we did not have is worse to claim than one we missed.
 
 CHECKS MOST TEAMS DO NOT HAVE
 

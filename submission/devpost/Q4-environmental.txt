@@ -1,4 +1,4 @@
-We treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a BETTER answer — not merely a comparable one. Every choice below is also a correctness choice, which is why they survived.
+We treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a BETTER answer, not merely a comparable one. Every choice below is also a correctness choice, which is why they survived.
 
 THE RANKER IS NOT INFERENCE
 
@@ -8,7 +8,7 @@ The library is 28 curated, individually sourced rows. A vector index over 28 row
 
 CONTROL WORDS NEVER REACH A MODEL
 
-Roughly 70 phrases — HUMAN, OFF, WHO, HELP, STOP and their natural variants — are matched in Apex before any inference happens. Somebody withdrawing consent gets an instant deterministic answer instead of a generation. That is greener, faster, and more reliable, in that order of importance reversed: we did it for reliability and got the efficiency free.
+Roughly 70 phrases. HUMAN, OFF, WHO, HELP, STOP and their natural variants. Are matched in Apex before any inference happens. Somebody withdrawing consent gets an instant deterministic answer instead of a generation. That is greener, faster, and more reliable, in that order of importance reversed: we did it for reliability and got the efficiency free.
 
 FOUR OF SIX CHANNELS MAKE NO MODEL CALL AT ALL
 
@@ -20,7 +20,7 @@ Stripping a volunteered medical condition before storage runs against a compiled
 
 CI RUNS ZERO INFERENCE
 
-All six auditors — 491 invariants, accessibility, contrast, component, link and copy, reading level — are static Python and Node. They run in about a second on every push with no org and no model.
+All six auditors. 491 invariants, accessibility, contrast, component, link and copy, reading level, are static Python and Node. They run in about a second on every push with no org and no model.
 
 The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number. Repeated runs to chase a score are wasted energy, and we removed the incentive.
 
@@ -36,6 +36,6 @@ THE PRINCIPLE UNDERNEATH ALL OF IT
 
 If a rule matters, put it in code. A model asked to remember a rule burns energy every single time it is asked, and still forgets.
 
-Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition — it says about half the time, across six measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
+Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition. It says about half the time, across six measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
 
 The greenest token is the one you never had to generate, and it is usually also the one you can actually depend on.

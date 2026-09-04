@@ -6,7 +6,7 @@
   <line x1="72" y1="106" x2="500" y2="106" stroke="#C9C9C1" stroke-width="1"/>
 
   <text x="72" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">To get a chair that does</text>
-  <text x="72" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt, first —</text>
+  <text x="72" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt, first -</text>
 
   <rect x="72" y="248" width="428" height="112" fill="#FAFAF7" stroke="#9E362C" stroke-width="2"/>
   <text x="94" y="284" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4A4E4F">Nature of disability</text>
@@ -25,14 +25,14 @@
   <line x1="668" y1="106" x2="1128" y2="106" stroke="#C9C9C1" stroke-width="1"/>
 
   <text x="668" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">To get a chair that does</text>
-  <text x="668" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt —</text>
+  <text x="668" y="206" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">not hurt -</text>
 
   <rect x="668" y="248" width="460" height="112" fill="#FAFAF7" stroke="#2C6659" stroke-width="2"/>
   <text x="690" y="284" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4A4E4F">What is hard right now?</text>
   <text x="690" y="326" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#17191A">My back hurts by the afternoon.</text>
 
   <text x="668" y="408" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">That is the whole question. No name,</text>
-  <text x="668" y="438" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">no login, no diagnosis — because</text>
+  <text x="668" y="438" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">no login, no diagnosis. Because</text>
   <text x="668" y="468" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic" fill="#4A4E4F">there is nowhere here to put one.</text>
 
   <!-- footer -->

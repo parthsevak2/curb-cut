@@ -62,7 +62,7 @@ flowchart LR
 
 **The web and email channels deliberately bypass the model.** They call exactly
 the same Apex actions the agent calls, in the same order, against the same
-library. For the highest-stakes step — creating a request — there is nothing to
+library. For the highest-stakes step, creating a request. There is nothing to
 hallucinate, and the approval gate is code rather than judgement. Someone on a
 library computer gets the *safest* version of the system, not the flakiest.
 
@@ -83,13 +83,13 @@ sequenceDiagram
   Apex-->>Agent: draft text (writes nothing)
   Agent-->>Person: reads the draft back
   Person->>Agent: "I guess so, probably fine?"
-  Note over Agent: LOCK 1 — the model judges<br/>a hedge is not a yes
+  Note over Agent: LOCK 1. The model judges<br/>a hedge is not a yes
   Agent-->>Person: I want to be sure before sending anything
   Person->>Agent: Yes, send it
   Agent->>Apex: create_request(approved = true)
-  Note over Apex: LOCK 2 — refuses unless<br/>approval passed through
+  Note over Apex: LOCK 2. Refuses unless<br/>approval passed through
   Apex->>Rule: insert
-  Note over Rule: LOCK 3 — validation rule blocks<br/>insert without Person_Approved__c
+  Note over Rule: LOCK 3. Validation rule blocks<br/>insert without Person_Approved__c
   Rule->>DB: 1 record
   DB-->>Person: Sent. You will hear back by 9 Sep.
 ```
@@ -118,7 +118,7 @@ flowchart TB
   CI["tests/invariants.py<br/>fails the build if one is added"] -.enforces.-> Absent
 ```
 
-A manager who asks is refused — not because the agent is discreet, but because
+A manager who asks is refused. Not because the agent is discreet, but because
 there is nothing to tell them.
 
 ## Platform constraints, honestly
@@ -141,7 +141,7 @@ Visualforce was not a preference. It was the only mechanism available.
 
 The site guest user is the most exposed identity in the system.
 
-- Holds **read and create only** — the platform maximum for a guest, and enforced by a CI invariant.
+- Holds **read and create only**. The platform maximum for a guest, and enforced by a CI invariant.
 - Holds **no View All** on anything.
-- Has **no access at all** to `Access_Profile__c` or `Disclosure_Event__c` — it can never see anything about a person.
+- Has **no access at all** to `Access_Profile__c` or `Disclosure_Event__c`, it can never see anything about a person.
 - Reads the public library through a narrow `without sharing` class that touches one object containing no personal information, with field-level security still enforced.

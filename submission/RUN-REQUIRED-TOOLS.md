@@ -10,7 +10,7 @@ better than a clean run. Do not tune for a green.
 
 ## Where to get them
 
-I could not reach them from here — they are not installed in the provisioned org,
+I could not reach them from here. They are not installed in the provisioned org,
 not a public Salesforce package, and not available as a skill in this
 environment. They are distributed to participants. Try in this order:
 
@@ -36,7 +36,7 @@ Have these ready so a run takes one pass:
 | Internal agent | `Curb_Cut_Desk`, Active at v5 |
 | Console app | Curb Cut Console |
 
-If the Accessibility skill takes a URL, give it `/ask` first — that is the page
+If the Accessibility skill takes a URL, give it `/ask` first. That is the page
 somebody uses on a hard day, and it is where a finding matters most. Then
 `/curbcut` and `/why`.
 
@@ -45,7 +45,7 @@ somebody uses on a hard day, and it is where a finding matters most. Then
 1. **Paste the raw findings** into `DEVPOST-ANSWERS.md` under the two scaffolded
    questions. Do not summarise them away.
 2. **For each finding, answer three things:** what it flagged, what we changed,
-   and — where we did not change it — why not. A defended decision is a real
+   and, where we did not change it, why not. A defended decision is a real
    answer; "fixed everything" is not.
 3. Send me the output and I will fix what is fixable and draft the responses.
 
@@ -54,7 +54,7 @@ somebody uses on a hard day, and it is where a finding matters most. Then
 Both tools will likely flag things we have already handled. Say so, and point at
 the evidence rather than asserting it:
 
-- Contrast, focus visibility, reflow at 320px, live-region announcements — all
+- Contrast, focus visibility, reflow at 320px, live-region announcements. All
   audited on every build against the live pages, 333 + 28 checks.
 - No diagnosis field anywhere; volunteered conditions stripped before storage.
 - Explicit-consent gate with two independent locks.
@@ -67,9 +67,9 @@ Be ready for these, and do not be defensive about them:
 - **No screen-reader user has tested this.** Machine-verified is not user-verified,
   and we say so on the evidence page already. We did, however, drive the live page
   with a real browser and read its accessibility tree, which found four defects a
-  source scan could not — including that the claim code, shown once and
+  source scan could not. Including that the claim code, shown once and
   unrecoverable, never took focus.
-- **The conversational agent's narration is nondeterministic** — 21 of 23
+- **The conversational agent's narration is nondeterministic**. 21 of 23
   assertions across three runs, with one failure that alternates.
 - **Colour and copy on the console** have had far less accessibility attention than
   the public site, because the public site is where somebody arrives on a bad day.

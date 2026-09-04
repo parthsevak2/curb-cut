@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" width="1500" height="900" role="img" aria-label="The same request, asked two ways. On the left a workplace form demanding the nature of your disability, with an empty box and a cursor. On the right Curb Cut asking only what is hard right now, answered My back hurts by the afternoon.">
+  <rect width="1500" height="900" fill="#EFEFEB"/>
+
+  <text x="90" y="96" font-family="Courier New, monospace" font-size="17" letter-spacing="3" fill="#9E362C">THE USUAL WAY</text>
+  <line x1="90" y1="120" x2="640" y2="120" stroke="#C9C9C1" stroke-width="1"/>
+
+  <text x="90" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#17191A">To get a chair that does not</text>
+  <text x="90" y="240" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#17191A">hurt, first tell them this:</text>
+
+  <rect x="90" y="288" width="550" height="150" fill="#FAFAF7" stroke="#9E362C" stroke-width="2.5"/>
+  <text x="118" y="332" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#4A4E4F">Nature of disability</text>
+  <line x1="118" y1="386" x2="612" y2="386" stroke="#C9C9C1" stroke-width="2"/>
+  <rect x="118" y="358" width="3" height="24" fill="#17191A"/>
+  <text x="118" y="420" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#9E362C">Required</text>
+
+  <text x="90" y="500" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">A sentence about your own body,</text>
+  <text x="90" y="536" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">written for somebody who will still</text>
+  <text x="90" y="572" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">be your manager on Monday.</text>
+
+  <line x1="750" y1="80" x2="750" y2="700" stroke="#C9C9C1" stroke-width="1" stroke-dasharray="7 8"/>
+
+  <text x="840" y="96" font-family="Courier New, monospace" font-size="17" letter-spacing="3" fill="#2C6659">CURB CUT</text>
+  <line x1="840" y1="120" x2="1410" y2="120" stroke="#C9C9C1" stroke-width="1"/>
+
+  <text x="840" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#17191A">To get a chair that does not</text>
+  <text x="840" y="240" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#17191A">hurt, tell them this:</text>
+
+  <rect x="840" y="288" width="570" height="150" fill="#FAFAF7" stroke="#2C6659" stroke-width="2.5"/>
+  <text x="868" y="332" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#4A4E4F">What is hard right now?</text>
+  <text x="868" y="390" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#17191A">My back hurts by the afternoon.</text>
+  <text x="868" y="420" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#2C6659">That is all of it</text>
+
+  <text x="840" y="500" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">No name, no login, no diagnosis,</text>
+  <text x="840" y="536" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">because there is nowhere in this</text>
+  <text x="840" y="572" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#4A4E4F">system to put one.</text>
+
+  <line x1="90" y1="700" x2="1410" y2="700" stroke="#17191A" stroke-width="2.5"/>
+
+  <text x="90" y="762" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="700" fill="#17191A">Thirty in a hundred have a disability. Three tell their employer.</text>
+  <text x="90" y="806" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#4A4E4F">Sixty-one percent of accommodations cost the employer nothing. The money was never</text>
+  <text x="90" y="838" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#4A4E4F">what stopped anyone. The asking was.</text>
+
+  <text x="1410" y="838" font-family="Courier New, monospace" font-size="15" fill="#8A6115" text-anchor="end">curbcut</text>
+</svg>
