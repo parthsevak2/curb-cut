@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" width="760" height="420" role="img" aria-label="Mockup: the console showing a signed video sent instead of typing. The video carries a note saying there are no captions and none will be generated, because it is waiting on a human interpreter.">
+  <rect width="760" height="420" fill="#EFEFEB"/>
+
+  <rect x="0" y="0" width="760" height="420" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="40" rx="8" fill="#032D60"/>
+  <rect x="0" y="32" width="760" height="8" fill="#032D60"/>
+  <text x="20" y="26" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Curb Cut Console</text>
+  <text x="150" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">Barrier Report</text>
+  <text x="252" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">BR-00117</text>
+
+  <text x="20" y="68" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#17191A">What they sent instead of typing</text>
+
+  <rect x="20" y="82" width="720" height="52" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="2"/>
+  <text x="34" y="104" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#17191A">Do not machine translate this.</text>
+  <text x="216" y="104" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">Not with a caption tool, not with a transcript service,</text>
+  <text x="34" y="122" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">not with anything. A person interprets it. If that is going to take a while, say so to them now rather than later.</text>
+
+  <rect x="20" y="150" width="720" height="196" rx="4" fill="#FFFFFF" stroke="#C9C9C1"/>
+  <text x="34" y="174" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.2" fill="#6B7174">SIGNED OR SPOKEN VIDEO</text>
+
+  <rect x="34" y="186" width="300" height="140" rx="6" fill="#20242A"/>
+  <circle cx="184" cy="252" r="26" fill="#F7F5EF" opacity="0.92"/>
+  <path d="M176 240 L200 252 L176 264 Z" fill="#20242A"/>
+  <rect x="34" y="312" width="300" height="14" rx="0" fill="#3B3F45"/>
+  <rect x="34" y="312" width="76" height="14" fill="#C9A227"/>
+  <text x="42" y="323" font-family="'Courier New', monospace" font-size="8.5" fill="#F7F5EF">0:12 / 0:48</text>
+
+  <text x="352" y="200" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#17191A">Signed description of the barrier</text>
+  <text x="352" y="220" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#4A4E4F">2 Sep &#183; 8100 KB</text>
+
+  <rect x="352" y="238" width="374" height="76" rx="4" fill="#F4F6F5" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="366" y="258" font-family="'Courier New', monospace" font-size="8.5" letter-spacing="1.2" fill="#2C6659">READ OUT BY A SCREEN READER</text>
+  <text x="366" y="278" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" fill="#17191A">No captions and no transcript, and none will be</text>
+  <text x="366" y="296" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" fill="#17191A">generated. This is waiting on a human interpreter.</text>
+
+  <text x="352" y="334" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#2C6659" text-decoration="underline">Download the original</text>
+
+  <line x1="20" y1="362" x2="740" y2="362" stroke="#C9C9C1"/>
+  <text x="20" y="386" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#17191A">Salesforce Sa11y returned &#8220;incomplete&#8221; here, not a pass: axe cannot inspect media.</text>
+  <text x="20" y="404" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#4A4E4F">A screen reader user could. So the silence is now explained out loud, to them, rather than left for them to discover.</text>
+</svg>

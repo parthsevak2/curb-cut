@@ -121,6 +121,19 @@ flowchart TB
 A manager who asks is refused. Not because the agent is discreet, but because
 there is nothing to tell them.
 
+### The component accessibility layer
+
+The Lightning Web Components are audited by Sa11y, Salesforce's own axe-core
+matcher, reached through the `lwc-experts` toolset in the Salesforce DX MCP
+server. Twelve component states, 131 checks, run by `npm run test:a11y`.
+
+Two properties make it worth trusting. The harness is proved able to fail: a
+control test plants an image with no alt text and asserts the matcher throws.
+And `incomplete` results, the ones axe cannot decide inside a test runner, are
+reported as undecided rather than counted as passes. Both are recorded in
+`docs/A11Y-SA11Y-REPORT.md`.
+
+
 ## Platform constraints, honestly
 
 Established by querying the org, not assumed:

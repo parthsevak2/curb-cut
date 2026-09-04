@@ -50,27 +50,43 @@ Abilityforce.
 
 ## Image
 
-`cover-the-two-questions.svg`, the same request, asked two ways. Open it in any
-browser and screenshot, or run it through any SVG-to-PNG converter. It is
-deliberately not a stock photograph of a person looking sad: the subject is the
-form, not the disabled person, and everyone who has filled that box in recognises
-it instantly.
+`hero-1500x900.svg` for the Devpost hero (5:3, above the 500x300 minimum), or
+`cover-the-two-questions.svg` for a 1200x630 social card. Both show the same
+request asked two ways. Open in any browser and screenshot, or run through any
+SVG-to-PNG converter. Deliberately not a stock photograph of somebody looking
+sad: the subject is the form, not the disabled person, and everyone who has
+filled that box in recognises it instantly.
+
+Eight screen mockups are in `mockups/`, every word captured from the deployed
+org. `08-signed-video-no-captions.svg` is the newest and the most worth showing:
+it is the accessibility fix the Salesforce tool prompted, drawn as the operator
+actually sees it.
 
 ## The four long answers
 
-- `Q1-accessibility.txt`, 3,640 characters
-- `Q2-responsible-ai.txt`, 3,974 characters
-- `Q3-error-rate.txt`, 3,206 characters
-- `Q4-environmental.txt`. 3,554 characters
+- `Q1-accessibility.txt`, 4,000 characters
+- `Q2-responsible-ai.txt`, 3,994 characters
+- `Q3-error-rate.txt`, 3,182 characters
+- `Q4-environmental.txt`, 3,536 characters
 
-**Q1 and Q2 have one honest gap.** Both questions ask what the Accessibility
-Expert Skill and RAI Self Check *found*. Those tools are not in the provisioned
-org, not public, and not reachable from here. The answers as written describe our
-own auditing in the same shape the questions ask for. What was found, what was
-fixed, what was kept and why, which is answerable and true. If you get the tools
-running, paste their findings at the top of each and I will rework the rest
-around them. If you cannot, say so plainly in one line rather than implying they
-were run.
+All four are paste-ready as-is. Do not add a heading or a preamble: each is
+already at or just under the 4,000 character limit, and Devpost counts
+everything you paste.
+
+**Q1 is now a real tool run.** There is no Salesforce product published as
+"Accessibility Expert Skill", but there is published Salesforce accessibility
+expert tooling and we found it: the `lwc-experts` toolset in the Salesforce DX
+MCP server (`@salesforce/mcp`), which stands up Sa11y, their own axe-core
+matcher. Twelve component states, 131 checks, zero WCAG violations, two real
+defects found and fixed. Q1 opens by naming exactly which tool was run, so a
+judge can check the claim. Full write-up in `docs/A11Y-SA11Y-REPORT.md`.
+
+**Q2 is still an honest gap.** There is no RAI Self Check under that name: not in
+the org, not on AgentExchange, and not among the DX MCP server's fifteen
+toolsets. Q2 says so in its first line, says we asked, and then gives our own
+responsible-AI audit in the shape the question asks. If the organisers send the
+tool, paste its findings to me and I will rework Q2 around them. Do not leave the
+field blank and do not imply it was run.
 
 ## AI Fluency Track fields
 

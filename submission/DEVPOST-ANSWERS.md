@@ -110,110 +110,100 @@ page and paste it in, so the answer names their prompt rather than paraphrasing.
 
 ## Builder Track: What did the Accessibility Expert Skill find?
 
-**NEEDS YOU, this tool must be run before submitting.** See `RUN-REQUIRED-TOOLS.md`.
+**Answered with a real run.** Paste `devpost/Q1-accessibility.txt` verbatim,
+4,000 characters, at the limit. Full write-up: `docs/A11Y-SA11Y-REPORT.md`.
 
-Scaffold, so filling it in takes five minutes once you have the output:
+---
 
-> **What it flagged:** _(paste each finding)_
->
-> **What we fixed:** _(per finding)_
->
-> **What we kept, and why:** _(per finding)_
+We could not find a Salesforce tool published as "Accessibility Expert Skill", and we asked the organisers rather than imply we ran one. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
 
-What we can already put beside their findings. Our own accessibility work, all
-machine-verified on every build:
+WHAT WE RAN
 
-- **333 accessibility checks against the six live pages**, not against source.
-- **Contrast computed from the design tokens in both themes**, 28 checks. Border
-  tokens were raised to `#C8C6BC` / `#87857B` specifically to clear WCAG 1.4.11
-  non-text contrast at 3:1, they had been decorative and failing.
-- **Reading level measured, 16 checks.** The page somebody uses while struggling
-  reads at grade 5.8. Every message the system says out loud is scored, and the
-  build fails above the ceiling.
-- **Reflow verified at 320px**; wide content scrolls in its own container.
-- **Every focusable element has a visible focus ring**; every state carries a word
-  or a shape as well as a colour.
-- **Reader controls for text size and contrast persist and announce what they
-  did** via a live region. They used to change silently, which is useless to a
-  screen-reader user.
-- **An auditor fails the build if an error message blames the user or leaves them
-  nowhere to go.** That check is the reason several dead ends were found.
-- **Deaf, blind, and hard of hearing are deliberately never redacted** from what a
-  person writes. They are identity and function, not medical detail, and the
-  interpreter routing reads them.
+Sa11y against all five Lightning Web Components in twelve states: 131 axe checks passed, 0 WCAG violations. We used the 100-rule "extended" preset, not the 64-rule "base" preset Sa11y applies by default. One rule, region, is excluded in one place with the reason beside it: it carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks.
 
-**What we found by driving the live page rather than scanning the source.** A
-browser-level pass over the accessibility tree found four defects static analysis
-could not see, all now fixed and pinned by new checks:
+Before trusting that, we planted an image with no alt text and asserted the matcher throws. It does. A suite that cannot fail proves nothing.
 
-1. **The claim code never took focus.** Every other async update on `/ask` moves
-   focus to its heading. The standing-preference save set the tabindex and then
-   never called `focus()`. At the single moment a code is shown once and cannot
-   be recovered.
-2. **46 unnamed `<section>` elements** across six pages, each announced as an
-   anonymous "region". Twelve of them on the home page alone.
-3. **A 22px target** on the footer mail link, under WCAG 2.5.8's 24×24. And it
-   is the only way to reach a human by email.
-4. **Status regions without `aria-atomic`**, so a rewritten message could be
-   announced in fragments.
+WHAT IT FOUND
 
-We also disproved one of our own findings: `:focus-visible` does not match a
-programmatic `.focus()`, so a first pass appeared to show 26 controls with no
-focus indicator. Driving it with real Tab presses showed the ring exactly as
-intended. The test method was wrong, not the site. And we would rather report
-that than a defect we did not have.
+1. A video that says nothing to the person who cannot watch it.
 
-**The honest gap:** no screen-reader user has tested this. Every claim above is
-machine-verified, which is not the same thing. One session with somebody who uses
-one daily would be worth more than the next five features.
+axe returned "incomplete", not pass, on video-caption (WCAG 1.2.2) for signed video in the console: it cannot inspect media. A screen reader user could.
+
+The obvious remedy is the forbidden one. That video is usually a Deaf person signing, and auto-captioning it would be a machine putting words in somebody's mouth about their own body and then filing them. Our operator banner said so. But the operator was the only one told: a person reaching the video element got silence, with no explanation of it.
+
+FIXED. Every video now carries an aria-describedby pointing at a note on the page for everyone: "No captions and no transcript, and none will be generated. This is waiting on a human interpreter." That does not satisfy 1.2.2 and we do not claim it does. It replaces an unexplained absence with a stated one, which is the honest position while an interpretation is pending.
+
+2. The emergency form kept the last emergency's words.
+
+The LWC compiler flagged LWC1057: value is not a valid attribute for textarea. A textarea holds its text as a child node, so the binding did nothing, and clearing the field in JavaScript left the words on screen. This is the one place in Curb Cut a telephone number comes out of, used when somebody may be at risk. Stale text there invites the next escalation to be raised on the last one's words.
+
+FIXED, and the element is now cleared alongside the field.
+
+WHAT THE TOOL COULD NOT DECIDE
+
+color-contrast came back "incomplete" in all twelve states, because axe measures contrast by painting to a canvas and jsdom has none. We report that rather than bank it as a pass. Contrast is measured separately, by computing WCAG relative luminance from the stylesheets: 28 checks, all passing. The note added above measures 10.59:1 where 4.5:1 is required.
+
+WHAT WAS ALREADY IN PLACE
+
+333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 491 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+
+A FINDING WE DISPROVED
+
+An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. The method was wrong, not the site. We report it because claiming a defect we did not have is worse than missing one.
+
+THE GAP WE HAVE NOT CLOSED
+
+No screen reader user has tested this. Everything above is machine- or browser-verified, which is not the same as somebody using it. One session with a person who uses a screen reader daily is worth more than the next five features, and we say so on the evidence page rather than letting the numbers imply otherwise.
 
 ---
 
 ## Builder Track: What did the RAI Self Check find?
 
-**NEEDS YOU, this tool must be run before submitting.** See `RUN-REQUIRED-TOOLS.md`.
+**Still needs the tool.** No RAI Self Check exists under that name: not in the
+org, not on AgentExchange, not among the DX MCP server’s fifteen toolsets. Send
+the message in `devpost/ASK-THE-ORGANISERS.txt`. Meanwhile paste
+`devpost/Q2-responsible-ai.txt` verbatim, 3,994 characters, which says so in its
+first line and then answers in the shape the question asks.
 
-> **What it flagged:** _(paste)_
->
-> **How we addressed bias, fairness and transparency:** _(per finding)_
+---
 
-What we can already put beside their findings:
+We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not locatable under that name. The Salesforce DX MCP server publishes accessibility, security and code-analysis experts, but no responsible-AI self check. We asked the organisers rather than imply we ran one. What follows is our own audit, in the shape the question asks.
 
-**Bias.** The agent may only name accommodations a grounded Apex action returned
-from a 24-row sourced library. It cannot improvise one, and if the library has no
-good match it says so rather than guessing. A confident wrong suggestion costs
-somebody their one ask. It never invents a cost or a precedent count.
+Our approach is subtraction, and the honest version is that our own checks caught us breaking our own rules three times.
 
-**Fairness.** The system holds no protected attribute to be unfair with. There is
-no diagnosis, condition, disability type, medical note, severity or prognosis
-anywhere in 61 fields across 9 objects, so nothing can be scored, ranked,
-segmented or reported on by disability. Nothing is inferred about a person from
-their behaviour.
+BIAS
 
-**Transparency.** Every attempt on every channel lands in a delivery ledger, what
-was tried, whether it landed, with a salted hash and never the message body. A
-person can ask `WHO` and see everyone who has been shown a standing disclosure of
-theirs, and `OFF` withdraws it immediately with no reason asked, because there is
-nowhere to record a reason and so nobody can be asked for one later.
+The agent may only name accommodations a grounded Apex action returned from a sourced library of 28 individually cited rows. It cannot improvise one. If the library has no good match it must say so rather than guess, because a confident wrong suggestion costs somebody their single ask. It never invents a cost or a precedent count.
 
-**Consent.** Nothing reaches an employer without an explicit yes in the
-conversation. Two independent locks: the Apex refuses to set `Person_Approved__c`
-without approval passed through, and a validation rule blocks the insert without
-it.
+We caught this failing in exactly the way it was designed not to. "I get migraines from the office lighting" returned "special chair or back support", because 'office' appeared in that summary and one weak overlap was enough to qualify. There was no lighting accommodation in the library at all. Two fixes: four lighting rows added, and the ranker now weighs how much a word DISTINGUISHES, not merely whether it appears.
 
-**What we found ourselves and fixed, rather than waiting to be told:**
+FAIRNESS
 
-1. Six control words, `HUMAN`, `PERSON`, `OFF`, `WHO`, `CURB CUT`. Were printed
-   in user-facing copy and routed nowhere. `OFF`, the word that withdraws a
-   disclosure, returned "I do not have good information on that" while the sharing
-   stayed on. For a product whose thesis is consent, that was the most serious
-   defect it could have had. One Apex router now owns them all, and an invariant
-   fails the build if copy promises a word no channel answers.
-2. The privacy policy said a volunteered condition "is not written to any record."
-   It was stored verbatim. Now stripped before the insert, with the claim rewritten
-   to state the limit rather than promise an absolute.
-3. The adversarial scorer exited 0 with 100% of assertions inconclusive. It
-   printed "silence must never read as success" and then did exactly that.
+The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis in 61 fields across 9 objects. Not encrypted, not permission-restricted, absent. A build check fails if anyone adds one. Nothing can be scored, ranked, segmented or reported on by disability, and nothing is inferred from behaviour. Every signal is one the person set, in their own words.
+
+Encryption would not achieve this. It defends against outsiders; the adversary here is the organisation holding the data. A manager with legitimate access to an encrypted diagnosis field can still read it. The only field that cannot be leaked, subpoenaed or shown to a manager is the one that was never created.
+
+TRANSPARENCY
+
+Every attempt on every channel lands in a delivery ledger: what was tried and whether it landed, with a salted hash and never the message body. A person can send WHO and see everyone shown a standing disclosure of theirs. OFF withdraws it immediately with no reason asked, because there is nowhere to record a reason and so nobody can ever be asked for one later.
+
+CONSENT
+
+Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert. The interesting case is not refusal but the hedge: "I guess so, I think that's probably fine?" is not agreement.
+
+THE THREE THINGS WE FOUND OURSELVES
+
+1. Six control words were printed in our user-facing copy and routed nowhere. HUMAN returned an ASL interpreter card. OFF, the word that withdraws a disclosure, returned "I do not have good information on that" while the sharing stayed live. For a product whose thesis is consent, a withdrawal that silently fails was the most serious defect it could have had.
+
+2. Our privacy policy said in public that a volunteered condition "is not written to any record". It was stored verbatim. Conditions are now stripped before the insert on the one write path every channel shares, and the claim is rewritten to state its limit rather than promise an absolute a word list cannot keep.
+
+3. Our adversarial scorer exited zero with 100% of assertions inconclusive. It printed "silence must never read as success", then did exactly that at the exit-code level.
+
+Each now has a check that fails the build if it returns.
+
+THE LESSON WE WOULD PASS ON
+
+Instructions are not controls. We told the agent not to record a volunteered condition; it complied in its narration while the action recorded the text anyway. Everything safety-critical now lives in code that runs whether or not a model remembers.
 
 ---
 
