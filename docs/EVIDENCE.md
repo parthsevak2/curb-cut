@@ -58,6 +58,31 @@ of telling somebody.
 
 ---
 
+## 1a. Why this needs arguing at all
+
+It should not take a dataset to establish that a person is worth an hour of
+flexibility. It does, so here is the dataset. But the argument underneath it is
+not statistical:
+
+- **One roadblock is not one bad day.** Nobody is dismissed for needing an hour
+  moved. They stop being considered, stop being staffed, stop being asked.
+- **It compounds.** A job lost is a reference lost, a gap on a record, a mortgage
+  refused. The roadblock lasts an afternoon. The consequence lasts a decade.
+- **It is almost always man-made.** Not the condition. The form, the login, the
+  policy nobody can find, the manager who wants proof.
+- **It reaches past the person.** Their family, their children, and the income
+  that would have paid for the thing that helped.
+
+We say everyone is equal. In a market, everyone is a transaction, and the people
+this affects are consistently priced as though they bring less. They are not
+abstractions. They are colleagues, friends, and members of the same communities
+as the people writing the policies.
+
+The rest of this document exists because that argument, on its own, has not been
+enough.
+
+---
+
 ## 1b. What it costs the person, in their own words
 
 Peer-reviewed, quotable, and attributable. We use real testimony rather than a
