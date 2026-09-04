@@ -185,6 +185,25 @@ def audit(page, raw):
           'no skip link; keyboard users walk the whole nav on every page')
     check('main-landmark', '<main' in raw, 'no <main> landmark')
 
+    # --- every section is a named landmark ---------------------------------
+    # A <section> with no accessible name is announced as an anonymous "region".
+    # Four of six on /ask were named and two were not, so somebody navigating by
+    # landmark heard "region" twice with nothing to tell them apart.
+    for m in re.finditer(r'<section\b([^>]*)>', raw):
+        attrs = m.group(1)
+        named = ('aria-label=' in attrs) or ('aria-labelledby=' in attrs)
+        check('section-is-named', named,
+              'a <section> has no aria-label or aria-labelledby, so it becomes '
+              'an unnamed region: <section' + attrs[:70] + '>')
+
+    # --- status regions replace their content wholesale --------------------
+    # Without aria-atomic a screen reader may announce only the changed
+    # fragment of a rewritten status line, which reads as nonsense.
+    for m in re.finditer(r'<[^>]*role="status"[^>]*>', raw):
+        check('status-is-atomic', 'aria-atomic' in m.group(0),
+              'a role="status" region has no aria-atomic, so a rewritten '
+              'message may be announced in fragments: ' + m.group(0)[:80])
+
     # --- viewport must not block zoom ---
     vp = re.search(r'<meta[^>]+name="viewport"[^>]*>', raw)
     if vp:

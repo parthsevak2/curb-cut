@@ -14,7 +14,7 @@
   heading="You text first. Nothing leaves without your yes."
   lede="That is the whole agreement. The rest is detail the phone companies require us to spell out.">
 
-  <section>
+  <section aria-labelledby="sec-the-programme">
     <div class="plain">
       <span class="tag">The short version</span>
       <p>
@@ -32,8 +32,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>The programme</h2>
+  <section aria-labelledby="sec-the-programme-2">
+    <h2 id="sec-the-programme-2">id="sec-the-programme">The programme</h2>
     <table class="facts">
       <tbody>
         <tr><th scope="row">Name</th><td>Curb Cut</td></tr>
@@ -68,8 +68,8 @@
     </table>
   </section>
 
-  <section>
-    <h2>Getting help, and stopping messages</h2>
+  <section aria-labelledby="sec-getting-help-and-stopping">
+    <h2 id="sec-getting-help-and-stopping">Getting help, and stopping messages</h2>
     <div class="note">
       <p>Reply <strong>HELP</strong> at any time for help and how to reach a person.</p>
       <p>
@@ -89,8 +89,8 @@
     </ul>
   </section>
 
-  <section>
-    <h2>What we promise</h2>
+  <section aria-labelledby="sec-what-we-promise">
+    <h2 id="sec-what-we-promise">What we promise</h2>
     <ul>
       <li><strong>Nothing reaches your employer without your clear yes.</strong>
           A maybe is not a yes. If you say &ldquo;I guess so&rdquo;, you will be
@@ -104,8 +104,8 @@
     </ul>
   </section>
 
-  <section>
-    <h2>What this is not</h2>
+  <section aria-labelledby="sec-what-this-is-not">
+    <h2 id="sec-what-this-is-not">What this is not</h2>
     <p>
       Curb Cut is not a lawyer, a doctor, or your employer. It does not give legal
       or medical advice. It cannot promise any request will be granted, and it does
@@ -121,8 +121,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>Fair use, and the legal bit</h2>
+  <section aria-labelledby="sec-fair-use-and-the">
+    <h2 id="sec-fair-use-and-the">Fair use, and the legal bit</h2>
     <p>
       Please use it for what it is for. Do not try to get information about other
       people through it, and do not use it to harass anyone. We may stop serving

@@ -14,7 +14,7 @@
   heading="You text first. That is the only way in."
   lede="Nobody is added to a list here. There is no list.">
 
-  <section>
+  <section aria-labelledby="sec-you-send-the-first">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
@@ -26,7 +26,7 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-you-send-the-first-2">
     <p class="sec-label">The programme</p>
     <table class="facts">
       <tbody>
@@ -53,9 +53,9 @@
     </table>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-you-send-the-first-3">
     <p class="sec-label">Opt-in, path one of one</p>
-    <h2>You send the first message, from this notice</h2>
+    <h2 id="sec-you-send-the-first-3">id="sec-you-send-the-first-2">id="sec-you-send-the-first">You send the first message, from this notice</h2>
     <p>
       There is exactly one way to start receiving messages from Curb Cut: you
       text the number yourself. The notice below is what is printed and put up
@@ -88,9 +88,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-the-exact-messages-as">
     <p class="sec-label">What actually arrives</p>
-    <h2>The exact messages, as sent</h2>
+    <h2 id="sec-the-exact-messages-as">The exact messages, as sent</h2>
     <p>
       These are quoted from the running code, not paraphrased. The first is sent
       once, immediately after your very first message, as a second message so
@@ -110,9 +110,9 @@
     <div class="sms">Curb Cut: you are back. Tell me what is hard at work right now. Message and data rates may apply. Reply HELP for help, STOP to stop.</div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-stop-works-immediately-and">
     <p class="sec-label">Stopping</p>
-    <h2>STOP works, immediately, and you are not asked why</h2>
+    <h2 id="sec-stop-works-immediately-and">STOP works, immediately, and you are not asked why</h2>
     <p>
       Reply <span class="kw">STOP</span> at any time. You get one confirmation
       and then nothing further, ever, unless you text again yourself. You will
@@ -139,9 +139,9 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-it-is-hashed-on">
     <p class="sec-label">What we do with your number</p>
-    <h2>It is hashed on arrival and never stored</h2>
+    <h2 id="sec-it-is-hashed-on">It is hashed on arrival and never stored</h2>
     <p>
       Your phone number is turned into a one-way salted hash the moment a
       message arrives, and it is that hash, never the number, that is written
@@ -152,8 +152,8 @@
     </p>
   </section>
 
-  <section>
-    <h2>Other ways in, if texting is not the one that works for you</h2>
+  <section aria-labelledby="sec-other-ways-in-if">
+    <h2 id="sec-other-ways-in-if">Other ways in, if texting is not the one that works for you</h2>
     <p>
       The same assistant answers on <a href="/ask">this website</a> with no
       phone involved at all, by email, and by voice on the same number for
