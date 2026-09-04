@@ -54,3 +54,25 @@ where the send button is visible.
 ## D10, The critique file ships
 `CRITIQUE.md` lists what is still broken, in public. A system claiming a perfect
 score against its own adversarial suite is telling you about its suite.
+
+## D11. The stated absence, instead of a machine caption
+Salesforce's own Sa11y run returned `incomplete` on `video-caption` (WCAG 1.2.2)
+for signed video: axe cannot inspect media, so it could not decide. A screen
+reader user could. The obvious remedy was the one thing this product promises
+never to do, because that video is usually a Deaf person signing and a machine
+caption puts words in somebody's mouth about their own body and then files them.
+Every video now carries an `aria-describedby` note saying there are no captions,
+none are coming, and a human interpreter is what it waits on. **Cost:** this does
+not satisfy 1.2.2, and the report says so rather than claiming otherwise.
+**Gain:** an unexplained silence becomes a stated one, for the person the silence
+was failing.
+
+## D12. The 100-rule preset, and one rule removed in the open
+Sa11y's matcher defaults to a 64-rule `base` preset. We assert against the
+100-rule `extended` preset instead, and remove exactly one rule: `region`, which
+carries no WCAG tag and fires only because a component mounted alone in a test
+has no page landmarks around it. It is removed in one file, with the reason
+written beside it. **Cost:** one rule genuinely not enforced at component level.
+**Gain:** the difference between a suite that is quiet because the code is right
+and one that is quiet because the rule was never run. For the same reason
+`incomplete` results are reported as undecided rather than counted as passes.
