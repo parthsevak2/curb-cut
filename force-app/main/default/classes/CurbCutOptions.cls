@@ -90,6 +90,35 @@ public with sharing class CurbCutOptions {
         // sharing, deliberately and only here.
         List<Accommodation_Option__c> all = new LibraryReader().all();
 
+        // How many options each word appears in. A word in half the library
+        // ('office', 'work', 'time') carries almost no signal; a word in one or
+        // two ('typing', 'lighting', 'interpreter') carries nearly all of it.
+        //
+        // A flat score threshold was tried first and was worse than the bug it
+        // fixed: raising the bar to a title hit threw away 'I cannot type for
+        // long', the sentence this whole project is built around, because
+        // 'typing' lives in the summary of 'Alternative or ergonomic keyboard'
+        // rather than its name. Rarity is the thing that actually separates a
+        // real match from a coincidence.
+        Map<String, Integer> docFreq = new Map<String, Integer>();
+        Map<Id, Set<String>> titleIdx = new Map<Id, Set<String>>();
+        Map<Id, Set<String>> bodyIdx  = new Map<Id, Set<String>>();
+        for (Accommodation_Option__c opt : all) {
+            Set<String> tw = stemAll(tokenize(opt.Option__c == null ? '' : opt.Option__c));
+            Set<String> bw = stemAll(tokenize(
+                opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c));
+            titleIdx.put(opt.Id, tw);
+            bodyIdx.put(opt.Id, bw);
+            Set<String> seen = new Set<String>();
+            seen.addAll(tw); seen.addAll(bw);
+            for (String w : seen) {
+                docFreq.put(w, (docFreq.containsKey(w) ? docFreq.get(w) : 0) + 1);
+            }
+        }
+        // A word carries signal when it appears in at most a quarter of the
+        // library, with a floor so a small library does not disqualify everything.
+        Integer rareMax = Math.max(3, all.size() / 4);
+
         List<ScoredOption> scored = new List<ScoredOption>();
         for (Accommodation_Option__c opt : all) {
             // Whole words only. Substring matching once offered visual fire alarms
@@ -101,19 +130,28 @@ public with sharing class CurbCutOptions {
             // explanation around it. So a hit on the name counts for more. Without
             // this, 'the noise in the office' ranked a chair above a quiet room,
             // because the chair's summary happens to mention an office.
-            Set<String> titleWords = stemAll(tokenize(
-                opt.Option__c == null ? '' : opt.Option__c
-            ));
-            Set<String> bodyWords = stemAll(tokenize(
-                opt.Plain_Language_Summary__c == null ? '' : opt.Plain_Language_Summary__c
-            ));
+            Set<String> titleWords = titleIdx.get(opt.Id);
+            Set<String> bodyWords  = bodyIdx.get(opt.Id);
 
             Integer score = 0;
+            Boolean discriminating = false;
             for (String kw : keywords) {
-                if (titleWords.contains(kw)) { score += TITLE_WEIGHT; }
-                else if (bodyWords.contains(kw)) { score += BODY_WEIGHT; }
+                Boolean inTitle = titleWords.contains(kw);
+                Boolean inBody  = bodyWords.contains(kw);
+                if (!inTitle && !inBody) { continue; }
+                score += inTitle ? TITLE_WEIGHT : BODY_WEIGHT;
+                Integer df = docFreq.containsKey(kw) ? docFreq.get(kw) : 0;
+                if (df > 0 && df <= rareMax) { discriminating = true; }
             }
-            if (score > 0) {
+            // At least one word that actually distinguishes this option.
+            //
+            // "I get migraines from the office lighting" used to return "special
+            // chair or back support", because the word 'office' appears in that
+            // summary and one brush was enough. The library had no lighting row
+            // at all, so the honest answer was that we did not know -- and a
+            // confident wrong suggestion is the one thing this must never do,
+            // because it costs somebody their single ask.
+            if (score > 0 && discriminating) {
                 scored.add(new ScoredOption(opt, score));
             }
         }
