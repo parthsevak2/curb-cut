@@ -761,6 +761,30 @@ check('focus-ring-works-on-any-ground',
       'the page ground but only 2.7:1 against a dark filled button beside it')
 
 
+# ---------------------------------------------------------------------------
+# The count in this file is quoted in the deck, in four Devpost answers and in
+# the technical design document. It has already drifted once: the suite grew and
+# every public claim silently became wrong. A number a judge can check is worth
+# nothing if it is stale, so the number checks itself.
+# ---------------------------------------------------------------------------
+CLAIM_FILES = [
+    'submission/TECHNICAL-DESIGN.md', 'submission/DEVPOST-ANSWERS.md',
+    'submission/devpost/Q1-accessibility.txt', 'submission/devpost/Q3-error-rate.txt',
+    'submission/devpost/Q4-environmental.txt',
+    'deck/build.js',
+]
+# Both orders: "494 structural invariants" and "Structural invariants   494".
+CLAIM = re.compile(r'(\d{3})\s+(?:structural\s+)?invariant|invariants?\s+(\d{3})', re.I)
+stale = []
+for rel in CLAIM_FILES:
+    for m in CLAIM.finditer(read(os.path.join(ROOT, rel))):
+        num = m.group(1) or m.group(2)
+        # +1 because this very check has not been counted yet when it runs
+        if int(num) != checks + 1:
+            stale.append(f'{rel} claims {num}')
+check('published-invariant-count-is-current', not stale,
+      f'the real count is {checks + 1}: ' + '; '.join(stale))
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
