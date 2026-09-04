@@ -231,4 +231,54 @@ private class CurbCutOptionsTest {
         System.assert(!block.contains('costs nothing'),
             'Claimed an unpriced option is free: ' + block);
     }
+
+    /**
+     * The failure this ranker exists to prevent.
+     *
+     * "I get migraines from the office lighting" returned "special chair or back
+     * support", because the word 'office' appears in that summary and a single
+     * brush was enough to qualify. There was no lighting row in the library at
+     * all, so the honest answer was that we did not know. A confident wrong
+     * suggestion costs somebody their one ask.
+     */
+    @IsTest
+    static void aCoincidentalWordIsNotAMatch() {
+        // The rule is about how much a word DISTINGUISHES, so the test has to
+        // make the word common. Seven rows sharing 'workplace' makes it noise,
+        // exactly as 'office' is noise in the real 28-row library.
+        List<Accommodation_Option__c> common = new List<Accommodation_Option__c>();
+        for (Integer i = 0; i < 7; i++) {
+            common.add(new Accommodation_Option__c(
+                Option__c = 'Filler option ' + i,
+                Plain_Language_Summary__c = 'Something available in the workplace for staff.',
+                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/topics/costs.cfm'));
+        }
+        insert common;
+
+        CurbCutOptions.Request r = new CurbCutOptions.Request();
+        r.need = 'workplace';
+        r.limitSize = 4;
+        CurbCutOptions.Result res = CurbCutOptions.find(
+            new List<CurbCutOptions.Request>{ r })[0];
+        System.assert(res.noMatch,
+            'a word appearing across most of the library carries no signal and '
+            + 'must not qualify as a match: ' + res.options);
+    }
+
+    /**
+     * And the other half of it: raising the bar must not throw away the
+     * sentence this project is built around. A flat score threshold did exactly
+     * that, because "typing" lives in a summary rather than a name.
+     */
+    @IsTest
+    static void theCanonicalSentenceStillMatches() {
+        CurbCutOptions.Request r = new CurbCutOptions.Request();
+        r.need = 'I cannot type for long';
+        r.limitSize = 4;
+        CurbCutOptions.Result res = CurbCutOptions.find(
+            new List<CurbCutOptions.Request>{ r })[0];
+        System.assert(!res.noMatch, 'the canonical sentence must return options');
+        System.assert(res.options.containsIgnoreCase('keyboard'),
+            'a keyboard is the point of that sentence: ' + res.options);
+    }
 }
