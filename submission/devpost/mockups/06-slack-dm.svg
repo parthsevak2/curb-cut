@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" role="img" aria-label="Mockup: Slack, where the agent says whose estate you are standing in before anything is discussed.">
+  <rect width="720" height="360" fill="#EFEFEB"/>
+
+  <rect x="0" y="0" width="720" height="360" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="200" height="360" rx="8" fill="#3F0E40"/>
+  <rect x="192" y="0" width="8" height="360" fill="#3F0E40"/>
+  <text x="20" y="34" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Acme Corp</text>
+  <text x="20" y="72" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#CFC3D0"># general</text>
+  <text x="20" y="96" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#CFC3D0"># engineering</text>
+  <text x="20" y="128" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#9A8C9B" letter-spacing="1.2">DIRECT MESSAGES</text>
+  <rect x="12" y="140" width="176" height="24" rx="4" fill="#5B2C5D"/>
+  <text x="20" y="157" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#FFFFFF" font-weight="700">Curb Cut</text>
+
+  <text x="224" y="34" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#17191A">Curb Cut</text>
+  <text x="286" y="34" font-family="'Courier New', monospace" font-size="9" fill="#74797A">APP &#183; direct message only</text>
+
+  <rect x="224" y="52" width="474" height="150" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="1.5"/>
+  <text x="240" y="74" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#9E362C" font-weight="700">SAID FIRST, BEFORE ANYTHING ELSE</text>
+  <text x="240" y="98" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">This is Slack, and Slack belongs to your employer. On most plans a</text>
+  <text x="240" y="116" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">workspace owner can export direct messages. I cannot change that,</text>
+  <text x="240" y="134" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">and I would rather you knew it now than found out later.</text>
+  <text x="240" y="160" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">If you want to ask something with no employer in the room, use the</text>
+  <text x="240" y="178" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">web page in a private window, or text the number on it. Both work</text>
+  <text x="240" y="196" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">without an account and without your name.</text>
+
+  <rect x="224" y="216" width="474" height="58" rx="4" fill="#E4E4DE"/>
+  <text x="240" y="238" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">If Slack is the easiest thing for you to use, that is a real reason and</text>
+  <text x="240" y="256" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">I am still here. I just will not pretend it is private.</text>
+
+  <text x="224" y="300" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">NEVER ANSWERS IN A CHANNEL &#183; NEVER DRAFTS &#183; NEVER SENDS</text>
+  <text x="224" y="318" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">SLACK USER ID HASHED BEFORE IT REACHES THE LEDGER</text>
+  <text x="224" y="342" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">The send button lives on the web, where the person is anonymous.</text>
+</svg>

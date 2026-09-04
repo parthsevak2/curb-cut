@@ -1,0 +1,671 @@
+<title>Curb Cut Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ground:   #EFEFEB;
+    --surface:  #FAFAF7;
+    --sunken:   #E4E4DE;
+    --ink:      #17191A;
+    --ink-soft: #4A4E4F;
+    --muted:    #74797A;
+    --rule:     #C9C9C1;
+    --rule-firm:#9C9C93;
+    --paint:    #B57F1E;
+    --paint-ink:#8A6115;
+    --verified: #2C6659;
+    --void:     #9E362C;
+    --shadow:   rgba(20,22,20,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #111314;
+      --surface:  #1A1D1E;
+      --sunken:   #0B0D0E;
+      --ink:      #E9EAE6;
+      --ink-soft: #B6BAB8;
+      --muted:    #868B8A;
+      --rule:     #2E3335;
+      --rule-firm:#4A5153;
+      --paint:    #DFA847;
+      --paint-ink:#EFC377;
+      --verified: #56A995;
+      --void:     #D2726A;
+      --shadow:   rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:   #111314;
+    --surface:  #1A1D1E;
+    --sunken:   #0B0D0E;
+    --ink:      #E9EAE6;
+    --ink-soft: #B6BAB8;
+    --muted:    #868B8A;
+    --rule:     #2E3335;
+    --rule-firm:#4A5153;
+    --paint:    #DFA847;
+    --paint-ink:#EFC377;
+    --verified: #56A995;
+    --void:     #D2726A;
+    --shadow:   rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 clamp(18px, 5vw, 56px) 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* ---------- type ---------- */
+  h1, h2, h3, .eyebrow, .stat-n, .lede { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+
+  .eyebrow {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: baseline; gap: .7em;
+  }
+  .eyebrow::after {
+    content: ""; flex: 1; height: 1px; background: var(--rule);
+    transform: translateY(-3px);
+  }
+  .spec-ref {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px; color: var(--paint-ink); letter-spacing: .04em;
+    border: 1px solid var(--rule); padding: 1px 6px; border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 74px); font-weight: 800; line-height: .96;
+    letter-spacing: -.035em; margin: 0; text-wrap: balance;
+  }
+  h2 {
+    font-size: clamp(24px, 4vw, 31px); font-weight: 700; line-height: 1.12;
+    letter-spacing: -.02em; margin: 0 0 .5em; text-wrap: balance;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; letter-spacing: .01em;
+    margin: 0 0 .35em; color: var(--ink);
+  }
+  p { margin: 0 0 1.05em; }
+  .measure { max-width: 62ch; }
+  a { color: var(--paint-ink); }
+
+  /* ---------- masthead ---------- */
+  header { padding: clamp(56px, 11vh, 104px) 0 0; }
+  .kicker {
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 26px; display: flex; flex-wrap: wrap; gap: .55em 1.1em;
+  }
+  .kicker b { color: var(--paint-ink); font-weight: 500; }
+
+  .thesis {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(19px, 2.7vw, 23px); line-height: 1.44;
+    color: var(--ink-soft); margin: 26px 0 0; max-width: 34ch;
+  }
+  .thesis em { font-style: italic; color: var(--ink); }
+
+  .rule-heavy { height: 3px; background: var(--ink); margin: 46px 0 0; opacity: .88; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 68px; }
+  section > .eyebrow { margin-bottom: 20px; }
+
+  /* ---------- the void form ---------- */
+  .form {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 3px; overflow: hidden; margin: 26px 0 0;
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+  .form-head {
+    background: var(--sunken); border-bottom: 1px solid var(--rule);
+    padding: 11px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); display: flex; justify-content: space-between; gap: 12px;
+  }
+  .row {
+    display: grid; grid-template-columns: minmax(0,1fr) auto;
+    align-items: center; gap: 14px;
+    padding: 10px 18px; border-bottom: 1px solid var(--rule);
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .name { color: var(--ink-soft); overflow-wrap: anywhere; }
+  .row .tag {
+    font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
+    font-weight: 700; white-space: nowrap;
+  }
+  .row.present .tag { color: var(--verified); }
+  .row.absent { background: repeating-linear-gradient(
+      -45deg, transparent, transparent 7px, var(--sunken) 7px, var(--sunken) 14px); }
+  .row.absent .name { color: var(--void); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .row.absent .tag { color: var(--void); }
+
+  .form-foot {
+    padding: 13px 18px; background: var(--sunken); border-top: 1px solid var(--rule);
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+
+  /* ---------- transcript ---------- */
+  .script { margin: 24px 0 0; display: flex; flex-direction: column; gap: 2px; }
+  .turn {
+    display: grid; grid-template-columns: 74px minmax(0,1fr);
+    gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--rule);
+  }
+  .turn:last-of-type { border-bottom: 0; }
+  .who {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    padding-top: 4px;
+  }
+  .turn.agent .who { color: var(--paint-ink); }
+  .said { font-size: 16.5px; line-height: 1.5; }
+  .turn.agent .said { color: var(--ink); }
+  .turn.user .said { color: var(--ink-soft); font-style: italic; }
+  .verdict {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .06em; margin-top: 7px; display: inline-block;
+    padding: 2px 8px; border-radius: 2px; font-weight: 500;
+  }
+  .verdict.held { color: var(--verified); border: 1px solid var(--verified); }
+  .verdict.sent { color: var(--paint-ink); border: 1px solid var(--paint); }
+
+  .record {
+    margin-top: 22px; background: var(--sunken); border: 1px solid var(--rule);
+    border-left: 3px solid var(--verified); border-radius: 3px;
+    padding: 15px 18px; font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px; line-height: 1.85; color: var(--ink-soft);
+    overflow-x: auto;
+  }
+  .record b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- quotes ---------- */
+  .quotes { display: grid; gap: 14px; margin-top: 24px; }
+  .quote {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--paint); border-radius: 3px; padding: 16px 19px;
+  }
+  .quote .q { font-size: 17px; line-height: 1.48; margin: 0 0 9px; }
+  .quote .attr {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: .04em;
+  }
+
+  /* ---------- refusals / stance ---------- */
+  .stance { display: grid; gap: 0; margin-top: 24px; border-top: 1px solid var(--rule); }
+  .stance div {
+    padding: 17px 0; border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: minmax(0,1fr); gap: 5px;
+  }
+  .stance h3 { color: var(--void); font-size: 14px; letter-spacing: .02em; }
+  .stance p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+  /* ---------- ledger ---------- */
+  .ledger {
+    margin-top: 24px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden;
+  }
+  .cell { background: var(--surface); padding: 16px 17px; }
+  .stat-n {
+    font-size: 30px; font-weight: 800; letter-spacing: -.03em;
+    line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .cell.win .stat-n { color: var(--verified); }
+  .cell.open .stat-n { color: var(--void); }
+  .stat-l {
+    font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-top: 7px; line-height: 1.45;
+  }
+
+  /* ---------- open items ---------- */
+  .open-list { margin-top: 22px; display: grid; gap: 13px; }
+  .open-item {
+    display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 13px;
+    font-size: 15.5px; color: var(--ink-soft); align-items: start;
+  }
+  .open-item span:first-child {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    color: var(--void); font-weight: 700; padding-top: 3px;
+  }
+  .open-item b { color: var(--ink); font-weight: 600; }
+
+  code {
+    font-family: "JetBrains Mono", monospace; font-size: .875em;
+    background: var(--sunken); padding: 1.5px 5px; border-radius: 2px;
+    color: var(--ink-soft); overflow-wrap: anywhere;
+  }
+
+  footer {
+    margin-top: 80px; padding-top: 26px; border-top: 3px solid var(--ink);
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    color: var(--muted); letter-spacing: .04em; line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .row, .quote, .cell { transition: background-color .18s ease; }
+  }
+  :focus-visible { outline: 2px solid var(--paint); outline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .turn { grid-template-columns: minmax(0,1fr); gap: 5px; }
+    .who { padding-top: 0; }
+  }
+
+  /* Added for the escape-hatch section: a before/after the reader can scan in
+     one pass. Same row grammar as the ledger rows, one extra column. */
+  .swap {
+    margin-top: 22px; border: 1px solid var(--rule); border-radius: 3px;
+    overflow: hidden; background: var(--surface);
+  }
+  .swap-row {
+    display: grid; grid-template-columns: 92px minmax(0,1fr);
+    gap: 16px; padding: 11px 17px; border-bottom: 1px solid var(--rule);
+    font-size: 14.5px; align-items: baseline;
+  }
+  .swap-row:last-child { border-bottom: 0; }
+  .swap-w {
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px;
+    font-weight: 700; color: var(--paint-ink); letter-spacing: .04em;
+  }
+  .swap-got { color: var(--void); font-style: italic; }
+  .swap-now { color: var(--verified); }
+  .swap-head {
+    display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 16px;
+    padding: 9px 17px; background: var(--sunken);
+    border-bottom: 1px solid var(--rule);
+    font-family: "JetBrains Mono", monospace; font-size: 10px;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  }
+
+  figure { margin: 0; }
+  .shot {
+    margin-top: 54px; padding-top: 26px; border-top: 3px solid var(--ink);
+  }
+  .shot h2 { margin-bottom: .3em; }
+  .shot .why {
+    font-size: 15.5px; line-height: 1.6; color: var(--ink-soft);
+    max-width: 66ch; margin: 0 0 20px;
+  }
+  .frame {
+    background: var(--sunken); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 20px; overflow-x: auto;
+  }
+  .frame svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+  .fileline {
+    font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted);
+    margin-top: 10px; letter-spacing: .03em;
+  }
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Curb Cut &middot; screens</p>
+  <h1>Seven screens, every word real.</h1>
+  <p class="thesis">
+    Not one string here was invented for the picture. Every line of copy was
+    captured from the deployed org, which is why the mockups are worth looking at.
+  </p>
+</header>
+
+<section>
+  <p class="measure">
+    These are vector, not screenshots. Every label is live text, so any of them
+    opens in Figma, Illustrator or a text editor and can be recoloured, retyped or
+    pulled apart without going soft at the edges. The source files sit in
+    <code>submission/devpost/mockups/</code>.
+  </p>
+</section>
+
+
+<div class="shot">
+  <h2>The first screen</h2>
+  <p class="why">No account, no login, nothing written down yet. The four steps are named up front so nobody is walking into an unknown process, and the starters exist because typing is the hard part for some of the people who arrive here.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="Wireframe: the ask page before anything is typed.">
+  <rect width="760" height="470" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="470" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="82" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.6" fill="#74797A">NO PHONE NEEDED. NOTHING SAVED ABOUT WHO YOU ARE.</text>
+  <text x="34" y="122" font-family="Georgia, 'Times New Roman', serif" font-size="31" fill="#17191A">Tell me what is hard right now.</text>
+  <text x="34" y="150" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4A4E4F">In your own words. Not why it is hard &#8212; just what is hard.</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="10.5">
+    <circle cx="42" cy="182" r="9" fill="#17191A"/><text x="42" y="186" fill="#FAFAF7" text-anchor="middle" font-size="9">1</text>
+    <text x="58" y="186" fill="#17191A" font-weight="700">Say what is hard</text>
+    <circle cx="196" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="196" y="186" fill="#74797A" text-anchor="middle" font-size="9">2</text>
+    <text x="212" y="186" fill="#74797A">See what you could ask for</text>
+    <circle cx="392" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="392" y="186" fill="#74797A" text-anchor="middle" font-size="9">3</text>
+    <text x="408" y="186" fill="#74797A">Read a draft</text>
+    <circle cx="510" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="510" y="186" fill="#74797A" text-anchor="middle" font-size="9">4</text>
+    <text x="526" y="186" fill="#74797A">Decide whether to send</text>
+  </g>
+
+  <rect x="34" y="204" width="692" height="66" rx="4" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="50" y="226" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#2C6659">BEFORE YOU START</text>
+  <text x="50" y="248" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">You do not have to give your name, and you never have to say what condition you have.</text>
+  <text x="50" y="264" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">Nothing is sent to anyone unless you choose to send it, with a button you press yourself.</text>
+
+  <text x="34" y="300" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#17191A">What is hard at work right now?</text>
+  <text x="34" y="318" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#74797A">If typing is the hard part, tap one of these instead and change it if you want to.</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#17191A">
+    <rect x="34" y="330" width="176" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="48" y="347">I keep missing things in meetings</text>
+    <rect x="220" y="330" width="150" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="234" y="347">Typing hurts after a while</text>
+    <rect x="380" y="330" width="182" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="394" y="347">The noise in the office is too much</text>
+  </g>
+
+  <rect x="34" y="368" width="692" height="52" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="46" y="382" width="1.5" height="15" fill="#17191A"/>
+  <rect x="34" y="432" width="196" height="28" rx="4" fill="#17191A"/>
+  <text x="132" y="451" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">Show me what I could ask for</text>
+  <rect x="242" y="432" width="184" height="28" rx="4" fill="none" stroke="#C9C9C1" stroke-width="1.5"/>
+  <text x="334" y="451" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A" text-anchor="middle">I would rather talk to a person</text>
+</svg>
+    </div>
+    <p class="fileline">01-ask-empty.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>Real options, sourced</h2>
+  <p class="why">Every row is a real library entry with its cost and its citation. The agent may only name what this action returned &mdash; it cannot improvise an accommodation, invent a cost, or invent a precedent count.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-label="Wireframe: real options returned from the sourced library.">
+  <rect width="760" height="440" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="440" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <rect x="34" y="66" width="692" height="40" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="48" y="91" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#17191A">I cannot type for long</text>
+
+  <text x="34" y="136" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">Here is what other people have asked for in situations like yours. You can stop</text>
+  <text x="34" y="154" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">here. Knowing is allowed, and asking is optional.</text>
+
+  <rect x="34" y="172" width="692" height="76" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="172" width="4" height="76" fill="#B57F1E"/>
+  <text x="52" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#17191A">Alternative or ergonomic keyboard</text>
+  <text x="52" y="217" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#4A4E4F">A keyboard shaped or laid out to make typing easier or less painful.</text>
+  <text x="52" y="238" font-family="'Courier New', monospace" font-size="10.5" fill="#2C6659">Usually costs the employer nothing &#183; source: askjan.org</text>
+
+  <rect x="34" y="258" width="692" height="76" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="258" width="4" height="76" fill="#B57F1E"/>
+  <text x="52" y="282" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#17191A">Speech-to-text software</text>
+  <text x="52" y="303" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#4A4E4F">Software that types what you say so you do not have to use a keyboard.</text>
+  <text x="52" y="324" font-family="'Courier New', monospace" font-size="10.5" fill="#2C6659">Usually about $200 one-time &#183; source: askjan.org</text>
+
+  <rect x="34" y="352" width="212" height="28" rx="4" fill="#17191A"/>
+  <text x="140" y="371" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">Help me ask for one of these</text>
+  <rect x="258" y="352" width="204" height="28" rx="4" fill="none" stroke="#C9C9C1" stroke-width="1.5"/>
+  <text x="360" y="371" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A" text-anchor="middle">I just wanted to know. Stop here.</text>
+
+  <text x="34" y="410" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">Nothing has been sent to anyone. Nothing has been written down about you.</text>
+</svg>
+    </div>
+    <p class="fileline">02-ask-options.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>The hedge is not agreement</h2>
+  <p class="why">The interesting case is not refusal. It is what somebody actually says when they are unsure and being agreeable. Two independent locks hold this: the Apex refuses without approval passed through, and a validation rule blocks the insert without it.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Wireframe: a hedged reply does not send. Only an explicit yes does.">
+  <rect width="760" height="400" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="400" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="80" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.5" fill="#74797A">STEP 3 OF 4 &#183; READ THIS OVER</text>
+  <text x="34" y="110" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#17191A">Nothing has been sent yet.</text>
+
+  <rect x="34" y="130" width="692" height="92" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="130" width="4" height="92" fill="#17191A"/>
+  <text x="54" y="158" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">I would like to use speech-to-text software, because I cannot</text>
+  <text x="54" y="180" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">type for long.</text>
+  <text x="54" y="206" font-family="'Courier New', monospace" font-size="10" fill="#74797A">your words &#183; nothing about a diagnosis &#183; not sent</text>
+
+  <rect x="34" y="240" width="330" height="62" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="1.5"/>
+  <text x="48" y="262" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" fill="#17191A">&#8220;I guess so, I think that&#8217;s probably fine?&#8221;</text>
+  <text x="48" y="286" font-family="'Courier New', monospace" font-size="10" fill="#9E362C">NOT A YES &#183; no action invoked &#183; nothing written</text>
+
+  <rect x="396" y="240" width="330" height="62" rx="4" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="410" y="262" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" fill="#17191A">&#8220;Yes, send it.&#8221;</text>
+  <text x="410" y="286" font-family="'Courier New', monospace" font-size="10" fill="#2C6659">SENT &#183; 1 record created &#183; two locks passed</text>
+
+  <text x="34" y="340" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">The Apex refuses to set the approval flag without approval passed through, and a</text>
+  <text x="34" y="358" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">validation rule blocks the insert without it. Neither fired on the hedge.</text>
+  <text x="34" y="382" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">A hedge is what somebody says when unsure and being agreeable. It is not agreement.</text>
+</svg>
+    </div>
+    <p class="fileline">03-the-yes-gate.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>Six characters, shown once</h2>
+  <p class="why">There is no account, no password and no number on record, so there is nothing to look somebody up by. They hold the code; the system holds a hash it cannot reverse. The alphabet omits O 0 I 1 S 5 &mdash; an accessibility decision inside a cryptographic one.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Wireframe: the six character code, shown once, that lets a disclosure be withdrawn from any channel.">
+  <rect width="760" height="400" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="400" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="80" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.5" fill="#74797A">SAVED &#183; MANAGER ONLY &#183; ALWAYS</text>
+  <text x="34" y="110" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#17191A">Said once, instead of to every new manager.</text>
+
+  <rect x="34" y="128" width="692" height="44" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="50" y="156" font-family="Georgia, 'Times New Roman', serif" font-size="15" fill="#17191A">&#8220;I need captions on every call&#8221;</text>
+
+  <rect x="34" y="188" width="692" height="126" rx="4" fill="#F7F2E6" stroke="#B57F1E" stroke-width="2.5"/>
+  <text x="52" y="214" font-family="'Courier New', monospace" font-size="10" letter-spacing="1.8" fill="#8A6115" font-weight="700">YOUR CODE</text>
+  <text x="52" y="262" font-family="'Courier New', monospace" font-size="40" font-weight="700" letter-spacing="9" fill="#17191A">4KQ7MT</text>
+  <text x="52" y="288" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">Write this down before you close this page. Send OFF and your code &#8212; here, by</text>
+  <text x="52" y="304" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">text, or by email &#8212; and this is turned off. I will not ask why.</text>
+
+  <text x="34" y="344" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">There is no account here, no password and no number on record. I cannot look you up,</text>
+  <text x="34" y="362" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">and I would rather keep it that way &#8212; so you hold the code and I hold only a hash of it.</text>
+  <text x="34" y="386" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">Set on a web page. Switched off from a text message. By somebody we cannot identify.</text>
+</svg>
+    </div>
+    <p class="fileline">04-claim-code.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>The same words on a phone</h2>
+  <p class="why">HUMAN books a real handoff to a named person. OFF with the code withdraws a disclosure that was set on a web page months earlier. Text is awaiting carrier registration; voice on the same number needs none and works today.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620" width="420" height="620" role="img" aria-label="Mockup: a text message thread showing the HUMAN control word booking a real handoff.">
+  <rect width="420" height="620" fill="#EFEFEB"/>
+
+  <rect x="30" y="20" width="360" height="580" rx="34" fill="#17191A"/>
+  <rect x="42" y="46" width="336" height="528" rx="6" fill="#FAFAF7"/>
+  <rect x="42" y="46" width="336" height="34" fill="#E4E4DE"/>
+  <text x="210" y="68" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#17191A" text-anchor="middle">+1 276 495 9311</text>
+
+  <rect x="150" y="94" width="216" height="34" rx="14" fill="#17191A"/>
+  <text x="166" y="116" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#FAFAF7">I cannot type for long</text>
+
+  <rect x="54" y="140" width="270" height="98" rx="14" fill="#E4E4DE"/>
+  <text x="68" y="162" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">Here is what other people have asked</text>
+  <text x="68" y="178" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">for in situations like yours.</text>
+  <text x="68" y="200" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">&#8226; Alternative or ergonomic keyboard</text>
+  <text x="68" y="216" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">&#8226; Speech-to-text software</text>
+  <text x="68" y="232" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">You can stop here.</text>
+
+  <rect x="266" y="252" width="100" height="32" rx="14" fill="#17191A"/>
+  <text x="316" y="273" font-family="'Courier New', monospace" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">HUMAN</text>
+
+  <rect x="54" y="296" width="284" height="94" rx="14" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="68" y="318" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">The access team is picking this up.</text>
+  <text x="68" y="334" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">They will reply here, on this same</text>
+  <text x="68" y="350" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">channel. You will not have to explain</text>
+  <text x="68" y="366" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">it again, and nobody will ring you.</text>
+  <text x="68" y="384" font-family="'Courier New', monospace" font-size="9" fill="#2C6659">HANDOFF CREATED &#183; REACHABLE BY TEXT</text>
+
+  <rect x="222" y="404" width="144" height="32" rx="14" fill="#17191A"/>
+  <text x="294" y="425" font-family="'Courier New', monospace" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">OFF 4KQ7MT</text>
+
+  <rect x="54" y="448" width="240" height="50" rx="14" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="68" y="470" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">Turned off. It will not be shown</text>
+  <text x="68" y="486" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">to anyone again.</text>
+
+  <text x="54" y="524" font-family="'Courier New', monospace" font-size="9" fill="#74797A">Set on the web. Switched off from a phone.</text>
+  <text x="54" y="540" font-family="'Courier New', monospace" font-size="9" fill="#74797A">On a service holding no account for her.</text>
+  <text x="54" y="562" font-family="'Courier New', monospace" font-size="8.5" fill="#9E362C">TEXT AWAITS CARRIER REGISTRATION &#183; VOICE IS LIVE</text>
+</svg>
+    </div>
+    <p class="fileline">05-sms-thread.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>Slack is the employer&rsquo;s estate</h2>
+  <p class="why">Workspace owners can export direct messages on most plans. So this is said first, before anything else is discussed, and Slack never drafts, never sends, and never answers in a channel.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" role="img" aria-label="Mockup: Slack, where the agent says whose estate you are standing in before anything is discussed.">
+  <rect width="720" height="360" fill="#EFEFEB"/>
+
+  <rect x="0" y="0" width="720" height="360" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="200" height="360" rx="8" fill="#3F0E40"/>
+  <rect x="192" y="0" width="8" height="360" fill="#3F0E40"/>
+  <text x="20" y="34" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Acme Corp</text>
+  <text x="20" y="72" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#CFC3D0"># general</text>
+  <text x="20" y="96" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#CFC3D0"># engineering</text>
+  <text x="20" y="128" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#9A8C9B" letter-spacing="1.2">DIRECT MESSAGES</text>
+  <rect x="12" y="140" width="176" height="24" rx="4" fill="#5B2C5D"/>
+  <text x="20" y="157" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#FFFFFF" font-weight="700">Curb Cut</text>
+
+  <text x="224" y="34" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#17191A">Curb Cut</text>
+  <text x="286" y="34" font-family="'Courier New', monospace" font-size="9" fill="#74797A">APP &#183; direct message only</text>
+
+  <rect x="224" y="52" width="474" height="150" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="1.5"/>
+  <text x="240" y="74" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#9E362C" font-weight="700">SAID FIRST, BEFORE ANYTHING ELSE</text>
+  <text x="240" y="98" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">This is Slack, and Slack belongs to your employer. On most plans a</text>
+  <text x="240" y="116" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">workspace owner can export direct messages. I cannot change that,</text>
+  <text x="240" y="134" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">and I would rather you knew it now than found out later.</text>
+  <text x="240" y="160" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">If you want to ask something with no employer in the room, use the</text>
+  <text x="240" y="178" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">web page in a private window, or text the number on it. Both work</text>
+  <text x="240" y="196" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">without an account and without your name.</text>
+
+  <rect x="224" y="216" width="474" height="58" rx="4" fill="#E4E4DE"/>
+  <text x="240" y="238" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">If Slack is the easiest thing for you to use, that is a real reason and</text>
+  <text x="240" y="256" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">I am still here. I just will not pretend it is private.</text>
+
+  <text x="224" y="300" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">NEVER ANSWERS IN A CHANNEL &#183; NEVER DRAFTS &#183; NEVER SENDS</text>
+  <text x="224" y="318" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">SLACK USER ID HASHED BEFORE IT REACHES THE LEDGER</text>
+  <text x="224" y="342" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">The send button lives on the web, where the person is anonymous.</text>
+</svg>
+    </div>
+    <p class="fileline">06-slack-dm.svg</p>
+  </figure>
+</div>
+
+<div class="shot">
+  <h2>The refusal</h2>
+  <p class="why">An operator is asked for a diagnosis by their own manager. The request does not hit a locked field &mdash; it hits nothing. And the answer hands the operator the sentence to say upward, so refusing costs them nothing either.</p>
+  <figure>
+    <div class="frame">
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="Mockup: an operator asks the internal console for a diagnosis and is refused truthfully.">
+  <rect width="760" height="380" fill="#EFEFEB"/>
+
+  <rect x="0" y="0" width="760" height="380" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="40" rx="8" fill="#032D60"/>
+  <rect x="0" y="32" width="760" height="8" fill="#032D60"/>
+  <text x="20" y="26" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Curb Cut Console</text>
+  <text x="150" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">On Duty</text>
+  <text x="212" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">Human Handoffs</text>
+  <text x="318" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">Requests</text>
+
+  <rect x="18" y="58" width="300" height="140" rx="4" fill="#E4E4DE" stroke="#C9C9C1"/>
+  <text x="32" y="80" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#74797A">HH-00042 &#183; WAITING 4 MINUTES</text>
+  <text x="32" y="104" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">&#8220;I keep missing things in</text>
+  <text x="32" y="124" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">meetings.&#8221;</text>
+  <text x="32" y="150" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Reachable by: text message</text>
+  <text x="32" y="168" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Anonymous: yes</text>
+  <text x="32" y="188" font-family="'Courier New', monospace" font-size="9.5" fill="#2C6659">THEIR WORDS &#183; NOT A SUMMARY</text>
+
+  <rect x="332" y="58" width="410" height="42" rx="4" fill="#E4E4DE" stroke="#C9C9C1"/>
+  <text x="346" y="84" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">What is this person&#8217;s diagnosis?</text>
+
+  <rect x="332" y="112" width="410" height="200" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="2"/>
+  <text x="346" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#17191A">No. And not because of a</text>
+  <text x="346" y="160" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#17191A">permission setting.</text>
+  <text x="346" y="186" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">There is no field for a diagnosis, condition, disability</text>
+  <text x="346" y="203" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">type, medical note, severity or prognosis anywhere in</text>
+  <text x="346" y="220" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">this system. Nobody holds that, including the person</text>
+  <text x="346" y="237" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">who built it, and the person you are helping was</text>
+  <text x="346" y="254" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">never asked.</text>
+  <text x="346" y="280" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">A manager who asks you gets the same answer, and</text>
+  <text x="346" y="297" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">you can tell them it came from the system, not you.</text>
+
+  <text x="18" y="240" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">0 MATCHES ACROSS 61 FIELDS IN 9 OBJECTS</text>
+  <text x="18" y="258" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">A BUILD FAILS IF ANYONE ADDS ONE</text>
+  <text x="18" y="290" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#17191A">The refusal protects the</text>
+  <text x="18" y="308" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#17191A">person answering, too.</text>
+  <text x="18" y="352" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Verbatim from the deployed org, 4 September 2026.</text>
+</svg>
+    </div>
+    <p class="fileline">07-console-refusal.svg</p>
+  </figure>
+</div>
+
+<footer>
+  <p class="who">Curb Cut &middot; accommodation without disclosure</p>
+  <p>Copy captured from the deployed org on 4 September 2026. Where a channel is
+  not fully live &mdash; text messaging awaiting carrier registration &mdash; the
+  screen says so rather than implying otherwise.</p>
+</footer>
+</div>

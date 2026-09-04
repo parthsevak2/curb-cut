@@ -12,6 +12,8 @@ it was proven to be a defect.
 | `curbcut-privacy.html` | https://claude.ai/code/artifact/7d520923-e7bb-490e-b158-063404c053bd |
 | `curbcut-terms.html` | https://claude.ai/code/artifact/742cd290-a320-45a5-bed6-bde0d256da9b |
 | `curbcut-walkthrough.html` | https://claude.ai/code/artifact/80443669-bf1c-4365-883d-b0d1238b474a |
+| `curbcut-diagrams.html` | https://claude.ai/code/artifact/a9157ad2-d803-46ab-ba5e-0ef3f0d13ef5 |
+| `curbcut-screens.html` | https://claude.ai/code/artifact/90a0e66f-4f89-4e06-8767-cf8536ec839c |
 
 Publish with the Artifact tool, passing the URL so it updates in place rather
 than creating a fourth page.

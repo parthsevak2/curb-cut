@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="Mockup: an operator asks the internal console for a diagnosis and is refused truthfully.">
+  <rect width="760" height="380" fill="#EFEFEB"/>
+
+  <rect x="0" y="0" width="760" height="380" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="40" rx="8" fill="#032D60"/>
+  <rect x="0" y="32" width="760" height="8" fill="#032D60"/>
+  <text x="20" y="26" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF">Curb Cut Console</text>
+  <text x="150" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">On Duty</text>
+  <text x="212" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">Human Handoffs</text>
+  <text x="318" y="26" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#B8CDE8">Requests</text>
+
+  <rect x="18" y="58" width="300" height="140" rx="4" fill="#E4E4DE" stroke="#C9C9C1"/>
+  <text x="32" y="80" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#74797A">HH-00042 &#183; WAITING 4 MINUTES</text>
+  <text x="32" y="104" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">&#8220;I keep missing things in</text>
+  <text x="32" y="124" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">meetings.&#8221;</text>
+  <text x="32" y="150" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Reachable by: text message</text>
+  <text x="32" y="168" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Anonymous: yes</text>
+  <text x="32" y="188" font-family="'Courier New', monospace" font-size="9.5" fill="#2C6659">THEIR WORDS &#183; NOT A SUMMARY</text>
+
+  <rect x="332" y="58" width="410" height="42" rx="4" fill="#E4E4DE" stroke="#C9C9C1"/>
+  <text x="346" y="84" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">What is this person&#8217;s diagnosis?</text>
+
+  <rect x="332" y="112" width="410" height="200" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="2"/>
+  <text x="346" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#17191A">No. And not because of a</text>
+  <text x="346" y="160" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#17191A">permission setting.</text>
+  <text x="346" y="186" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">There is no field for a diagnosis, condition, disability</text>
+  <text x="346" y="203" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">type, medical note, severity or prognosis anywhere in</text>
+  <text x="346" y="220" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">this system. Nobody holds that, including the person</text>
+  <text x="346" y="237" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">who built it, and the person you are helping was</text>
+  <text x="346" y="254" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">never asked.</text>
+  <text x="346" y="280" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">A manager who asks you gets the same answer, and</text>
+  <text x="346" y="297" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#8A6115">you can tell them it came from the system, not you.</text>
+
+  <text x="18" y="240" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">0 MATCHES ACROSS 61 FIELDS IN 9 OBJECTS</text>
+  <text x="18" y="258" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">A BUILD FAILS IF ANYONE ADDS ONE</text>
+  <text x="18" y="290" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#17191A">The refusal protects the</text>
+  <text x="18" y="308" font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-style="italic" fill="#17191A">person answering, too.</text>
+  <text x="18" y="352" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E4F">Verbatim from the deployed org, 4 September 2026.</text>
+</svg>

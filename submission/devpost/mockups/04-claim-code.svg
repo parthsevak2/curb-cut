@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Wireframe: the six character code, shown once, that lets a disclosure be withdrawn from any channel.">
+  <rect width="760" height="400" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="400" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="80" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.5" fill="#74797A">SAVED &#183; MANAGER ONLY &#183; ALWAYS</text>
+  <text x="34" y="110" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#17191A">Said once, instead of to every new manager.</text>
+
+  <rect x="34" y="128" width="692" height="44" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="50" y="156" font-family="Georgia, 'Times New Roman', serif" font-size="15" fill="#17191A">&#8220;I need captions on every call&#8221;</text>
+
+  <rect x="34" y="188" width="692" height="126" rx="4" fill="#F7F2E6" stroke="#B57F1E" stroke-width="2.5"/>
+  <text x="52" y="214" font-family="'Courier New', monospace" font-size="10" letter-spacing="1.8" fill="#8A6115" font-weight="700">YOUR CODE</text>
+  <text x="52" y="262" font-family="'Courier New', monospace" font-size="40" font-weight="700" letter-spacing="9" fill="#17191A">4KQ7MT</text>
+  <text x="52" y="288" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">Write this down before you close this page. Send OFF and your code &#8212; here, by</text>
+  <text x="52" y="304" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A">text, or by email &#8212; and this is turned off. I will not ask why.</text>
+
+  <text x="34" y="344" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">There is no account here, no password and no number on record. I cannot look you up,</text>
+  <text x="34" y="362" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">and I would rather keep it that way &#8212; so you hold the code and I hold only a hash of it.</text>
+  <text x="34" y="386" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">Set on a web page. Switched off from a text message. By somebody we cannot identify.</text>
+</svg>

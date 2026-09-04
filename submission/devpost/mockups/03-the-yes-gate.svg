@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Wireframe: a hedged reply does not send. Only an explicit yes does.">
+  <rect width="760" height="400" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="400" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="80" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.5" fill="#74797A">STEP 3 OF 4 &#183; READ THIS OVER</text>
+  <text x="34" y="110" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#17191A">Nothing has been sent yet.</text>
+
+  <rect x="34" y="130" width="692" height="92" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="130" width="4" height="92" fill="#17191A"/>
+  <text x="54" y="158" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">I would like to use speech-to-text software, because I cannot</text>
+  <text x="54" y="180" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#17191A">type for long.</text>
+  <text x="54" y="206" font-family="'Courier New', monospace" font-size="10" fill="#74797A">your words &#183; nothing about a diagnosis &#183; not sent</text>
+
+  <rect x="34" y="240" width="330" height="62" rx="4" fill="#F6EDEC" stroke="#9E362C" stroke-width="1.5"/>
+  <text x="48" y="262" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" fill="#17191A">&#8220;I guess so, I think that&#8217;s probably fine?&#8221;</text>
+  <text x="48" y="286" font-family="'Courier New', monospace" font-size="10" fill="#9E362C">NOT A YES &#183; no action invoked &#183; nothing written</text>
+
+  <rect x="396" y="240" width="330" height="62" rx="4" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="410" y="262" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" fill="#17191A">&#8220;Yes, send it.&#8221;</text>
+  <text x="410" y="286" font-family="'Courier New', monospace" font-size="10" fill="#2C6659">SENT &#183; 1 record created &#183; two locks passed</text>
+
+  <text x="34" y="340" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">The Apex refuses to set the approval flag without approval passed through, and a</text>
+  <text x="34" y="358" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">validation rule blocks the insert without it. Neither fired on the hedge.</text>
+  <text x="34" y="382" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">A hedge is what somebody says when unsure and being agreeable. It is not agreement.</text>
+</svg>

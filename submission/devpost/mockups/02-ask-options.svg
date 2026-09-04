@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-label="Wireframe: real options returned from the sourced library.">
+  <rect width="760" height="440" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="440" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <rect x="34" y="66" width="692" height="40" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="48" y="91" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#17191A">I cannot type for long</text>
+
+  <text x="34" y="136" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">Here is what other people have asked for in situations like yours. You can stop</text>
+  <text x="34" y="154" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#4A4E4F">here. Knowing is allowed, and asking is optional.</text>
+
+  <rect x="34" y="172" width="692" height="76" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="172" width="4" height="76" fill="#B57F1E"/>
+  <text x="52" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#17191A">Alternative or ergonomic keyboard</text>
+  <text x="52" y="217" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#4A4E4F">A keyboard shaped or laid out to make typing easier or less painful.</text>
+  <text x="52" y="238" font-family="'Courier New', monospace" font-size="10.5" fill="#2C6659">Usually costs the employer nothing &#183; source: askjan.org</text>
+
+  <rect x="34" y="258" width="692" height="76" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="34" y="258" width="4" height="76" fill="#B57F1E"/>
+  <text x="52" y="282" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#17191A">Speech-to-text software</text>
+  <text x="52" y="303" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#4A4E4F">Software that types what you say so you do not have to use a keyboard.</text>
+  <text x="52" y="324" font-family="'Courier New', monospace" font-size="10.5" fill="#2C6659">Usually about $200 one-time &#183; source: askjan.org</text>
+
+  <rect x="34" y="352" width="212" height="28" rx="4" fill="#17191A"/>
+  <text x="140" y="371" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">Help me ask for one of these</text>
+  <rect x="258" y="352" width="204" height="28" rx="4" fill="none" stroke="#C9C9C1" stroke-width="1.5"/>
+  <text x="360" y="371" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A" text-anchor="middle">I just wanted to know. Stop here.</text>
+
+  <text x="34" y="410" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-style="italic" fill="#8A6115">Nothing has been sent to anyone. Nothing has been written down about you.</text>
+</svg>

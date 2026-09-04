@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="Wireframe: the ask page before anything is typed.">
+  <rect width="760" height="470" fill="#EFEFEB"/>
+
+
+  <rect x="0" y="0" width="760" height="470" rx="8" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="42" rx="8" fill="#E4E4DE"/>
+  <rect x="0" y="34" width="760" height="8" fill="#E4E4DE"/>
+  <circle cx="22" cy="21" r="5" fill="#C9C9C1"/><circle cx="40" cy="21" r="5" fill="#C9C9C1"/>
+  <circle cx="58" cy="21" r="5" fill="#C9C9C1"/>
+  <rect x="80" y="11" width="600" height="21" rx="4" fill="#FAFAF7" stroke="#C9C9C1"/>
+  <text x="92" y="26" font-family="'Courier New', monospace" font-size="11" fill="#74797A">curbcut/ask</text>
+  <text x="696" y="26" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#2C6659">no login</text>
+  <line x1="1" y1="42" x2="759" y2="42" stroke="#C9C9C1"/>
+  <text x="34" y="82" font-family="'Courier New', monospace" font-size="9.5" letter-spacing="1.6" fill="#74797A">NO PHONE NEEDED. NOTHING SAVED ABOUT WHO YOU ARE.</text>
+  <text x="34" y="122" font-family="Georgia, 'Times New Roman', serif" font-size="31" fill="#17191A">Tell me what is hard right now.</text>
+  <text x="34" y="150" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4A4E4F">In your own words. Not why it is hard &#8212; just what is hard.</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="10.5">
+    <circle cx="42" cy="182" r="9" fill="#17191A"/><text x="42" y="186" fill="#FAFAF7" text-anchor="middle" font-size="9">1</text>
+    <text x="58" y="186" fill="#17191A" font-weight="700">Say what is hard</text>
+    <circle cx="196" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="196" y="186" fill="#74797A" text-anchor="middle" font-size="9">2</text>
+    <text x="212" y="186" fill="#74797A">See what you could ask for</text>
+    <circle cx="392" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="392" y="186" fill="#74797A" text-anchor="middle" font-size="9">3</text>
+    <text x="408" y="186" fill="#74797A">Read a draft</text>
+    <circle cx="510" cy="182" r="9" fill="none" stroke="#C9C9C1"/><text x="510" y="186" fill="#74797A" text-anchor="middle" font-size="9">4</text>
+    <text x="526" y="186" fill="#74797A">Decide whether to send</text>
+  </g>
+
+  <rect x="34" y="204" width="692" height="66" rx="4" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="50" y="226" font-family="'Courier New', monospace" font-size="9" letter-spacing="1.3" fill="#2C6659">BEFORE YOU START</text>
+  <text x="50" y="248" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">You do not have to give your name, and you never have to say what condition you have.</text>
+  <text x="50" y="264" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#17191A">Nothing is sent to anyone unless you choose to send it, with a button you press yourself.</text>
+
+  <text x="34" y="300" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#17191A">What is hard at work right now?</text>
+  <text x="34" y="318" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#74797A">If typing is the hard part, tap one of these instead and change it if you want to.</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#17191A">
+    <rect x="34" y="330" width="176" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="48" y="347">I keep missing things in meetings</text>
+    <rect x="220" y="330" width="150" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="234" y="347">Typing hurts after a while</text>
+    <rect x="380" y="330" width="182" height="26" rx="13" fill="#FAFAF7" stroke="#C9C9C1"/><text x="394" y="347">The noise in the office is too much</text>
+  </g>
+
+  <rect x="34" y="368" width="692" height="52" rx="4" fill="#FAFAF7" stroke="#C9C9C1" stroke-width="1.5"/>
+  <rect x="46" y="382" width="1.5" height="15" fill="#17191A"/>
+  <rect x="34" y="432" width="196" height="28" rx="4" fill="#17191A"/>
+  <text x="132" y="451" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">Show me what I could ask for</text>
+  <rect x="242" y="432" width="184" height="28" rx="4" fill="none" stroke="#C9C9C1" stroke-width="1.5"/>
+  <text x="334" y="451" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#17191A" text-anchor="middle">I would rather talk to a person</text>
+</svg>

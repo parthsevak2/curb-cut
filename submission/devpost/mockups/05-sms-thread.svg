@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620" width="420" height="620" role="img" aria-label="Mockup: a text message thread showing the HUMAN control word booking a real handoff.">
+  <rect width="420" height="620" fill="#EFEFEB"/>
+
+  <rect x="30" y="20" width="360" height="580" rx="34" fill="#17191A"/>
+  <rect x="42" y="46" width="336" height="528" rx="6" fill="#FAFAF7"/>
+  <rect x="42" y="46" width="336" height="34" fill="#E4E4DE"/>
+  <text x="210" y="68" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#17191A" text-anchor="middle">+1 276 495 9311</text>
+
+  <rect x="150" y="94" width="216" height="34" rx="14" fill="#17191A"/>
+  <text x="166" y="116" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#FAFAF7">I cannot type for long</text>
+
+  <rect x="54" y="140" width="270" height="98" rx="14" fill="#E4E4DE"/>
+  <text x="68" y="162" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">Here is what other people have asked</text>
+  <text x="68" y="178" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">for in situations like yours.</text>
+  <text x="68" y="200" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">&#8226; Alternative or ergonomic keyboard</text>
+  <text x="68" y="216" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">&#8226; Speech-to-text software</text>
+  <text x="68" y="232" font-family="'Courier New', monospace" font-size="9.5" fill="#74797A">You can stop here.</text>
+
+  <rect x="266" y="252" width="100" height="32" rx="14" fill="#17191A"/>
+  <text x="316" y="273" font-family="'Courier New', monospace" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">HUMAN</text>
+
+  <rect x="54" y="296" width="284" height="94" rx="14" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="68" y="318" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">The access team is picking this up.</text>
+  <text x="68" y="334" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">They will reply here, on this same</text>
+  <text x="68" y="350" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">channel. You will not have to explain</text>
+  <text x="68" y="366" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">it again, and nobody will ring you.</text>
+  <text x="68" y="384" font-family="'Courier New', monospace" font-size="9" fill="#2C6659">HANDOFF CREATED &#183; REACHABLE BY TEXT</text>
+
+  <rect x="222" y="404" width="144" height="32" rx="14" fill="#17191A"/>
+  <text x="294" y="425" font-family="'Courier New', monospace" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">OFF 4KQ7MT</text>
+
+  <rect x="54" y="448" width="240" height="50" rx="14" fill="#E8F0EC" stroke="#2C6659" stroke-width="1.5"/>
+  <text x="68" y="470" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">Turned off. It will not be shown</text>
+  <text x="68" y="486" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#17191A">to anyone again.</text>
+
+  <text x="54" y="524" font-family="'Courier New', monospace" font-size="9" fill="#74797A">Set on the web. Switched off from a phone.</text>
+  <text x="54" y="540" font-family="'Courier New', monospace" font-size="9" fill="#74797A">On a service holding no account for her.</text>
+  <text x="54" y="562" font-family="'Courier New', monospace" font-size="8.5" fill="#9E362C">TEXT AWAITS CARRIER REGISTRATION &#183; VOICE IS LIVE</text>
+</svg>
