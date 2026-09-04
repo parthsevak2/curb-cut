@@ -10,7 +10,20 @@ sf project retrieve start --metadata "GenAiPlannerBundle:$P" --target-org curbcu
 python3 - "$P" <<'PY'
 import base64,re,sys
 p=sys.argv[1]
-live=base64.b64decode(open(f'.check/genAiPlannerBundles/{p}/agentScript/{p}_definition.agent','rb').read()).decode('utf-8','replace')
+# The retrieve returns the agentScript base64-encoded, and for some versions
+# double-encoded. Decoding a fixed number of times produced garbage and reported
+# every action missing -- a checker crying wolf is as useless as one that stays
+# quiet. Decode until the plaintext appears, then stop.
+raw=open(f'.check/genAiPlannerBundles/{p}/agentScript/{p}_definition.agent','rb').read()
+live=None
+for _ in range(4):
+    try: raw=base64.b64decode(raw)
+    except Exception: break
+    txt=raw.decode('utf-8','replace')
+    if 'instructions:' in txt or 'apex://' in txt:
+        live=txt; break
+if live is None:
+    print('could not decode the live agent script'); raise SystemExit(1)
 src=open('force-app/main/default/aiAuthoringBundles/Curb_Cut/Curb_Cut.agent').read()
 lt=sorted(set(re.findall(r'apex://[A-Za-z]+',live))); st=sorted(set(re.findall(r'apex://[A-Za-z]+',src)))
 print(f"live actions   : {len(lt)}  (source has {len(st)})")

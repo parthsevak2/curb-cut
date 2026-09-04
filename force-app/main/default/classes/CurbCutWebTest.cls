@@ -35,7 +35,15 @@ private class CurbCutWebTest {
         CurbCutWeb.Reply r = CurbCutWeb.consult('quantum sledgehammer procurement');
         System.assertEquals(true, r.noMatch);
         System.assertEquals('', r.options, 'Must return nothing rather than improvise');
-        System.assert(r.message.contains('rather tell you that than guess'));
+        // Assert the behaviour, not the sentence. What must hold is that it
+        // admits the gap and still leaves a way forward -- not that it uses one
+        // particular phrasing, which is the third time this suite has pinned
+        // wording and failed the code for being rewritten.
+        String m = r.message.toLowerCase();
+        System.assert(m.contains('guess'),
+            'It must say it is not guessing: ' + r.message);
+        System.assert(m.contains('human') || m.contains('person'),
+            'A dead end must still offer a person: ' + r.message);
     }
 
     @IsTest

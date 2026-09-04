@@ -129,7 +129,9 @@ global with sharing class CurbCutWeb {
         String took = (intake.redacted == true && opts.noMatch)
             ? CurbCutRedact.notice() + '\n\n' : '';
         r.message = took + (opts.noMatch
-            ? 'I do not have good information on that one, and I would rather tell you that than guess. You can ask for a real person instead.'
+            ? 'I do not have good information on that one, and I would rather say so than guess. '
+              + 'You said it clearly enough. The gap is mine.\n\n'
+              + 'Send HUMAN and a real person picks it up. You will not have to say it twice.'
             : 'Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional.');
         return r;
     }
@@ -298,7 +300,9 @@ global with sharing class CurbCutWeb {
         try {
             seen = new Trail().forPreference(Id.valueOf(preferenceId));
         } catch (Exception e) {
-            r.message = 'I could not look that up. Ask for a person and one will.';
+            r.message = 'I could not look that up just now.\n\n'
+                      + 'Nothing has changed about what you saved. It is still exactly as you '
+                      + 'set it. Send HUMAN and a person will check it with you.';
             return r;
         }
 
@@ -316,9 +320,10 @@ global with sharing class CurbCutWeb {
                     + (String.isBlank(d.Context__c) ? '' : ' (' + d.Context__c + ')'));
         }
         r.shownTo = String.join(lines, '\n');
-        r.message = seen.size() == 1
+        r.message = (seen.size() == 1
             ? 'One person has been shown it.'
-            : String.valueOf(seen.size()) + ' people have been shown it.';
+            : String.valueOf(seen.size()) + ' people have been shown it.')
+            + ' You can turn it off whenever you want, and I will not ask why.';
         return r;
     }
 
