@@ -118,7 +118,7 @@ color-contrast came back "incomplete" in all twelve states, because axe measures
 
 WHAT WAS ALREADY IN PLACE
 
-333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 491 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 494 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
 
 A FINDING WE DISPROVED
 
@@ -208,7 +208,7 @@ Instructions are not controls. We told the agent not to record a volunteered con
 > this project has taken.
 >
 > Around the agent, the deterministic surface is already there: **124 Apex tests,
-> 491 structural invariants, 333 accessibility checks, 28 contrast checks and 16
+> 494 structural invariants, 333 accessibility checks, 28 contrast checks and 16
 > reading-level checks, all passing, all on every build.** Six auditors fail the
 > build, including one that fails if an error message blames the user and one that
 > fails if anyone adds a field for a diagnosis.

@@ -20,3 +20,9 @@ channels/.env
 # Jest + Sa11y accessibility harness
 node_modules/
 package-lock.json
+
+# generated film assets
+video/frames/
+video/cards/
+video/clips/
+*.mp4

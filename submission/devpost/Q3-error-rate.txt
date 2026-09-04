@@ -32,7 +32,7 @@ THE SURFACE AROUND THE AGENT
 The agent is one component. Everything around it is deterministic and gated on every build:
 
 - 124 Apex tests
-- 491 structural invariants (about one second, no org required)
+- 494 structural invariants (about one second, no org required)
 - 333 accessibility checks against the six live pages
 - 28 contrast checks in both themes
 - 16 reading-level checks

@@ -20,7 +20,7 @@ Stripping a volunteered medical condition before storage runs against a compiled
 
 CI RUNS ZERO INFERENCE
 
-All six auditors. 491 invariants, accessibility, contrast, component, link and copy, reading level, are static Python and Node. They run in about a second on every push with no org and no model.
+All six auditors. 494 invariants, accessibility, contrast, component, link and copy, reading level, are static Python and Node. They run in about a second on every push with no org and no model.
 
 The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number. Repeated runs to chase a score are wasted energy, and we removed the incentive.
 

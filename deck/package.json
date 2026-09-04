@@ -1,0 +1,7 @@
+{
+  "name": "curb-cut-deck",
+  "private": true,
+  "description": "Generates submission/Curb-Cut.pptx. See README.md.",
+  "scripts": { "build": "node build.js", "qa": "python3 qa.py && python3 overlap.py" },
+  "dependencies": { "pptxgenjs": "^3.12.0" }
+}
