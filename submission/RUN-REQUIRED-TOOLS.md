@@ -55,7 +55,7 @@ Both tools will likely flag things we have already handled. Say so, and point at
 the evidence rather than asserting it:
 
 - Contrast, focus visibility, reflow at 320px, live-region announcements — all
-  audited on every build against the live pages, 276 + 28 checks.
+  audited on every build against the live pages, 333 + 28 checks.
 - No diagnosis field anywhere; volunteered conditions stripped before storage.
 - Explicit-consent gate with two independent locks.
 - Delivery ledger with hashed handles and no message bodies.
@@ -65,7 +65,10 @@ the evidence rather than asserting it:
 Be ready for these, and do not be defensive about them:
 
 - **No screen-reader user has tested this.** Machine-verified is not user-verified,
-  and we say so on the evidence page already.
+  and we say so on the evidence page already. We did, however, drive the live page
+  with a real browser and read its accessibility tree, which found four defects a
+  source scan could not — including that the claim code, shown once and
+  unrecoverable, never took focus.
 - **The conversational agent's narration is nondeterministic** — 21 of 23
   assertions across three runs, with one failure that alternates.
 - **Colour and copy on the console** have had far less accessibility attention than

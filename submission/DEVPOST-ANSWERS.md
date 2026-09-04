@@ -124,7 +124,7 @@ Scaffold, so filling it in takes five minutes once you have the output:
 What we can already put beside their findings — our own accessibility work, all
 machine-verified on every build:
 
-- **276 accessibility checks against the six live pages**, not against source.
+- **333 accessibility checks against the six live pages**, not against source.
 - **Contrast computed from the design tokens in both themes**, 28 checks. Border
   tokens were raised to `#C8C6BC` / `#87857B` specifically to clear WCAG 1.4.11
   non-text contrast at 3:1 — they had been decorative and failing.
@@ -142,6 +142,27 @@ machine-verified on every build:
 - **Deaf, blind, and hard of hearing are deliberately never redacted** from what a
   person writes. They are identity and function, not medical detail, and the
   interpreter routing reads them.
+
+**What we found by driving the live page rather than scanning the source.** A
+browser-level pass over the accessibility tree found four defects static analysis
+could not see, all now fixed and pinned by new checks:
+
+1. **The claim code never took focus.** Every other async update on `/ask` moves
+   focus to its heading. The standing-preference save set the tabindex and then
+   never called `focus()` — at the single moment a code is shown once and cannot
+   be recovered.
+2. **46 unnamed `<section>` elements** across six pages, each announced as an
+   anonymous "region". Twelve of them on the home page alone.
+3. **A 22px target** on the footer mail link, under WCAG 2.5.8's 24×24 — and it
+   is the only way to reach a human by email.
+4. **Status regions without `aria-atomic`**, so a rewritten message could be
+   announced in fragments.
+
+We also disproved one of our own findings: `:focus-visible` does not match a
+programmatic `.focus()`, so a first pass appeared to show 26 controls with no
+focus indicator. Driving it with real Tab presses showed the ring exactly as
+intended. The test method was wrong, not the site — and we would rather report
+that than a defect we did not have.
 
 **The honest gap:** no screen-reader user has tested this. Every claim above is
 machine-verified, which is not the same thing. One session with somebody who uses
@@ -226,7 +247,7 @@ it.
 > this project has taken.
 >
 > Around the agent, the deterministic surface is already there: **122 Apex tests,
-> 489 structural invariants, 276 accessibility checks, 28 contrast checks and 16
+> 491 structural invariants, 333 accessibility checks, 28 contrast checks and 16
 > reading-level checks, all passing, all on every build.** Six auditors fail the
 > build, including one that fails if an error message blames the user and one that
 > fails if anyone adds a field for a diagnosis.

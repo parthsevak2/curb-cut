@@ -300,9 +300,9 @@ FOUR LAYERS, all failing the build except the last.
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        489   every push, ~1s, no org needed
+  Structural invariants        491   every push, ~1s, no org needed
   Apex tests                   122   every deploy
-  Accessibility (live pages)   276   against the deployed site
+  Accessibility (live pages)   333   against the deployed site
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
   Link and copy                 54   every user-facing string
@@ -500,9 +500,9 @@ HONEST GAPS
 14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT
 ─────────────────────────────────────────────────────────────────────
 
-  python3 tests/invariants.py                      489 checks, ~1s
+  python3 tests/invariants.py                      491 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      122 tests
-  python3 tests/a11y_audit.py                      276 checks, live pages
+  python3 tests/a11y_audit.py                      333 checks, live pages
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \
     && python3 tests/score_adversarial.py          21/23

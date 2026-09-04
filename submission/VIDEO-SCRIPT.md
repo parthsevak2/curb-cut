@@ -158,7 +158,7 @@ Then the delivery ledger in the console — channels, outcomes, and no message
 bodies anywhere.
 
 **Narration.**
-> Four hundred and eighty-nine structural checks and a hundred and twenty-two
+> Four hundred and ninety-one structural checks and a hundred and twenty-two
 > tests, on every build.
 >
 > One fails if anyone adds a field for a diagnosis. One fails if an error message

@@ -501,9 +501,9 @@
   <p class="eyebrow"><span class="spec-ref">&sect;7</span> Evidence ledger</p>
   <h2>What is actually verified.</h2>
   <div class="ledger">
-    <div class="cell"><div class="stat-n">116</div><div class="stat-l">Apex tests<br>all passing</div></div>
-    <div class="cell"><div class="stat-n">468</div><div class="stat-l">CI invariants<br>all holding</div></div>
-    <div class="cell"><div class="stat-n">276</div><div class="stat-l">Accessibility checks<br>against live pages</div></div>
+    <div class="cell"><div class="stat-n">122</div><div class="stat-l">Apex tests<br>all passing</div></div>
+    <div class="cell"><div class="stat-n">491</div><div class="stat-l">CI invariants<br>all holding</div></div>
+    <div class="cell"><div class="stat-n">333</div><div class="stat-l">Accessibility checks<br>against live pages</div></div>
     <div class="cell"><div class="stat-n">28</div><div class="stat-l">Contrast checks<br>light and dark</div></div>
     <div class="cell"><div class="stat-n">16</div><div class="stat-l">Reading level<br>checks</div></div>
     <div class="cell"><div class="stat-n">24</div><div class="stat-l">Grounded library<br>rows, each cited</div></div>
@@ -585,9 +585,12 @@
     </span></div>
     <div class="open-item"><span>04</span><span>
       <strong>No screen-reader user has tested this.</strong> Every accessibility
-      claim on this page is machine-verified, which is not the same thing. One
-      session with somebody who uses one daily would be worth more than the next
-      five features.
+      claim on this page is machine-verified, which is not the same thing. Driving
+      the live page with a real browser and reading its accessibility tree did
+      find four defects a source scan could not &mdash; the worst being that the
+      claim code, shown once and unrecoverable, never took focus &mdash; but a
+      browser is not a person. One session with somebody who uses a screen reader
+      daily would still be worth more than the next five features.
     </span></div>
     <div class="open-item"><span>05</span><span>
       <strong>Text messaging is not carrier-registered.</strong> US carriers
