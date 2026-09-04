@@ -739,6 +739,28 @@ check('unverified-mode-cannot-be-public',
       'ALLOW_UNVERIFIED must refuse to combine with PUBLIC_URL')
 
 
+
+# ---------------------------------------------------------------------------
+# The claim code is shown exactly once. Focus must land on it.
+#
+# Every other async update on /ask moves focus to its heading. The standing-
+# preference save set tabindex on the heading and then never called focus(), so
+# the single moment that matters most - a code somebody has to write down before
+# they close the page - left a screen-reader user exactly where they were.
+# ---------------------------------------------------------------------------
+ask_src = read(os.path.join(DEF, 'pages', 'ask.page'))
+check('code-panel-takes-focus',
+      "codeH.focus()" in ask_src and 'id="codeHeading"' in ask_src,
+      'saving a standing preference no longer moves focus to the claim code, '
+      'which is shown once and cannot be recovered')
+
+check('focus-ring-works-on-any-ground',
+      'box-shadow:0 0 0 3px var(--ground)' in read(
+          os.path.join(DEF, 'components', 'CurbCutShell.component')),
+      'the focus indicator lost its second ring; a single blue ring is 5.7:1 on '
+      'the page ground but only 2.7:1 against a dark filled button beside it')
+
+
 print(f'{checks - len(fails)}/{checks} invariants hold')
 for f in fails:
     print(f'  FAIL  {f}')
