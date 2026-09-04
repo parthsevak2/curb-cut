@@ -244,7 +244,7 @@ it.
 > code that runs whether or not it remembers. Which is the direction every fix in
 > this project has taken.
 >
-> Around the agent, the deterministic surface is already there: **122 Apex tests,
+> Around the agent, the deterministic surface is already there: **124 Apex tests,
 > 491 structural invariants, 333 accessibility checks, 28 contrast checks and 16
 > reading-level checks, all passing, all on every build.** Six auditors fail the
 > build, including one that fails if an error message blames the user and one that
@@ -260,8 +260,8 @@ it.
 > **The library lookup is not inference.** Ranking accommodations against what
 > somebody said is a deterministic Apex stemmer with title-weighted scoring and a
 > tie-break. No model, no embeddings, no vector store, no RAG pipeline to keep
-> warm. The library is 24 curated, individually sourced rows. A keyword ranker over
-> 24 rows is a SOQL query and some string work; the equivalent embedding search
+> warm. The library is 28 curated, individually sourced rows. A keyword ranker over
+> 28 rows is a SOQL query and some string work; the equivalent embedding search
 > would cost more energy and give worse-sourced answers.
 >
 > **Control words never reach a model.** Roughly 70 phrases. `HUMAN`, `OFF`,

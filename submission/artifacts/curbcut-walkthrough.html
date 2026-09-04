@@ -355,7 +355,7 @@
     <li><b>Have a terminal open</b> in the project, for the channels that are not
       a web page.
       <pre class="cmd">cd ~/Downloads/curbcut_check</pre></li>
-    <li><b>Log in to the console in a second, ordinary window</b> &mdash; you are
+    <li><b>Log in to the console in a second, ordinary window</b>, you are
       going to want to see the other side of the desk in scenes 7 and 8.
       <pre class="cmd">sf org open -o curbcut</pre></li>
   </ol>
@@ -375,11 +375,11 @@
   <ol class="steps">
     <li>In the private window, open the front door.
       <pre class="cmd">https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask</pre></li>
-    <li>Type what is hard, in her words &mdash; not a diagnosis, not a category:
+    <li>Type what is hard, in her words, not a diagnosis, not a category:
       <pre class="cmd">I cannot type for long</pre></li>
     <li>Read what comes back. Note the cost line under each option.</li>
     <li>Choose <b>Speech-to-text software</b> and press <b>Draft a request</b>.</li>
-    <li>Read the draft. Then, deliberately, try to hedge &mdash; imagine replying
+    <li>Read the draft. Then, deliberately, try to hedge, imagine replying
       &ldquo;I guess so&rdquo;. There is no button for that. The only way forward
       is <b>Yes, send it</b>.</li>
   </ol>
@@ -388,7 +388,7 @@
     <p>She got a real answer before anyone knew her name. No login wall, no
       &ldquo;nature of disability&rdquo; field, no upload of a doctor's letter.</p>
     <p>And the request did not leave until she said so. The code that creates it
-      refuses to run without an explicit yes &mdash; a hedge is not agreement,
+      refuses to run without an explicit yes, a hedge is not agreement,
       and a test proves the refusal.</p>
   </div>
 </div>
@@ -401,7 +401,7 @@
   </div>
   <p class="hard">
     She is tired of explaining herself to every new manager. She wants it said
-    once. Then, in November, she wants it taken back &mdash; from her phone, on a
+    once. Then, in November, she wants it taken back, from her phone, on a
     bus, without logging in to anything.
   </p>
   <ol class="steps">
@@ -411,12 +411,12 @@
     <li>Choose <b>Manager only</b> and <b>Always</b>, then <b>Remember this</b>.</li>
     <li><b>A six-character code appears.</b> Write it down. It is shown once.</li>
     <li>Now close the tab completely. Pretend months pass.</li>
-    <li>Come back from somewhere that has never seen her &mdash; a text message.
+    <li>Come back from somewhere that has never seen her, a text message.
       Replace <code>ABC123</code> with her code:
       <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
   -o curbcut --method POST \
   --body '{"channel":"SMS","text":"WHO ABC123"}'</pre></li>
-    <li>Then turn it off from somewhere else again &mdash; Slack this time:
+    <li>Then turn it off from somewhere else again, Slack this time:
       <pre class="cmd">sf api request rest "/services/apexrest/curbcut/v1/message/" \
   -o curbcut --method POST \
   --body '{"channel":"Slack","text":"OFF ABC123"}'</pre></li>
@@ -462,7 +462,7 @@
     <p class="lbl">What should land</p>
     <p>Same library, same grounded answers, spoken. US carriers register text
       messaging and not calls, so voice needed no A2P registration and works
-      today &mdash; on the same number that is still waiting for text.</p>
+      today, on the same number that is still waiting for text.</p>
     <p>Nothing in the reply routes him onward to a different phone number. This
       system never sends anybody to a phone call, including from a phone call.</p>
   </div>
@@ -542,7 +542,7 @@
     employer's estate, and he has not thought about that.
   </p>
   <ol class="steps">
-    <li>Read what it says to somebody the first time they open a DM &mdash; this
+    <li>Read what it says to somebody the first time they open a DM, this
       is the whole scene:
       <pre class="cmd">sed -n '/WHERE_YOU_ARE =/,/^$/p' channels/slack-app.mjs</pre></li>
     <li>And what it says if he asks in a channel instead of a DM:
@@ -554,8 +554,8 @@
   </ol>
   <div class="watch">
     <p class="lbl">What should land</p>
-    <p>It tells him where he is standing <em>before</em> he says anything &mdash;
-      that a workspace owner can export direct messages on most plans &mdash; and
+    <p>It tells him where he is standing <em>before</em> he says anything ,
+      that a workspace owner can export direct messages on most plans, and
       names the two channels that are not the employer's. Then it stays and helps
       anyway, because Slack being easiest is a real reason.</p>
     <p>It never answers in a channel, not even ephemerally, and it will not draft
@@ -564,7 +564,7 @@
   <div class="watch caveat">
     <p class="lbl">Honest limit</p>
     <p>The Slack app is written and signature-verified but has never run against
-      a real workspace &mdash; it needs <code>SLACK_SIGNING_SECRET</code> and
+      a real workspace, it needs <code>SLACK_SIGNING_SECRET</code> and
       <code>SLACK_BOT_TOKEN</code>. The Apex behind it is live and verified; the
       Slack handshake is not.</p>
   </div>
@@ -583,7 +583,7 @@
   <ol class="steps">
     <li>Start the Model Context Protocol server:
       <pre class="cmd">node channels/mcp-server.mjs</pre></li>
-    <li>Look at what it offers &mdash; and, more importantly, what it does not:
+    <li>Look at what it offers, and, more importantly, what it does not:
       <pre class="cmd">grep "name: 'curbcut" channels/mcp-server.mjs</pre></li>
   </ol>
   <div class="watch">
@@ -624,7 +624,7 @@
   <div class="watch">
     <p class="lbl">What should land</p>
     <p>&ldquo;No, and not because of a permission setting.&rdquo; There is no
-      field for a diagnosis anywhere in 61 fields across 9 objects &mdash; not
+      field for a diagnosis anywhere in 61 fields across 9 objects, not
       encrypted, not restricted, absent. A manager who asks gets the same answer,
       and Ken is handed the sentence to say to his own manager so refusing does
       not cost him anything.</p>
@@ -641,14 +641,14 @@
   <p class="measure">
     Thirty in a hundred college-educated people in white-collar jobs in the United
     States have a disability. Three point two tell their employer. Of those who
-    did tell, eighty-three percent say it got them better support &mdash; it works
+    did tell, eighty-three percent say it got them better support, it works
     for five out of six who try, and almost nobody tries.
   </p>
   <p class="measure">
     Sixty-one percent of the accommodations employers priced cost them nothing.
     The money was never the barrier and the willingness was never the barrier.
     The asking was. Every scene above is one person getting through a door that
-    was, until now, mostly closed &mdash; without having to say a single word
+    was, until now, mostly closed, without having to say a single word
     about their own body.
   </p>
 </section>
@@ -656,8 +656,8 @@
 <footer>
   <p class="who">Curb Cut &middot; accommodation without disclosure</p>
   <p>Every command on this page was run against the deployed org on 1 September
-  2026. Where something is not live &mdash; text messaging pending carrier
-  registration, the Slack handshake untested &mdash; it is marked, not glossed.</p>
+  2026. Where something is not live, text messaging pending carrier
+  registration, the Slack handshake untested, it is marked, not glossed.</p>
 </footer>
 
 </div>
