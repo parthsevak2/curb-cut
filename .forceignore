@@ -1,0 +1,5 @@
+
+# Jest lives beside the component by Salesforce convention, but it is not
+# metadata and the platform compiler rejects it.
+**/__tests__/**
+**/*.test.js

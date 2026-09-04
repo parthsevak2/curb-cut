@@ -19,3 +19,11 @@
 .dl   { display: inline-block; margin-top: .3rem; font-size: .82rem; font-weight: 700; }
 .none { margin: 0; color: #4a4e4f; }
 .err  { margin: 0; color: #8c2f26; }
+
+/* Said plainly to somebody who cannot watch the video, not hidden as a tooltip. */
+.nocap {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #3B3F45;
+}
