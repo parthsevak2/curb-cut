@@ -100,6 +100,14 @@ Human-Computer Interaction, 2021. Eight interview participants with invisible
 chronic conditions, plus analysed forum posts.
 <https://pmc.ncbi.nlm.nih.gov/articles/PMC8297988/>
 
+**On the date.** 2021 is the most recent open-access study we could find with
+participant testimony verifiable word for word. The 2026 qualitative work on
+workplace disclosure is paywalled, and we will not quote what we cannot check.
+The age matters less than it appears: Statistics Canada measured the same gap in
+2022, the US Bureau of Labor Statistics measured it again in 2025, and it has not
+closed. The testimony describes a condition the government data confirms is
+current.
+
 **Why these two.** The first is what a person actually wants: to be believed
 without having to prove it. The second is the exact burden the standing
 preference exists to remove, and it is the reason "say it once" is a feature

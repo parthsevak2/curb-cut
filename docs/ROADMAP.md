@@ -11,7 +11,7 @@ sounds. Everything in "Shipped" is verified live; everything below it is honest.
 | **SMS** (pending carrier approval) | Anyone with a basic phone and no smartphone, no data, no app |
 | **Voice, speech in and out** | Motor disability, dyslexia, low literacy, blindness. Anyone for whom speaking beats typing |
 | **Email** | No mobile plan; a shared phone; needing to compose slowly over days |
-| **Grounded library, 24 rows, every row cited** | Everyone. It is what stops the system inventing entitlements |
+| **Grounded library, 28 rows, every row cited** | Everyone. It is what stops the system inventing entitlements |
 | **Disclosure ledger** | Anyone whose preference travels ahead of them into a new team |
 | **Why-now argument** (`/curbcut/why`) | The reader who needs to know why this matters in 2026, not in the abstract |
 | **Opt-in programme page** (`/curbcut/messaging`) | Carrier reviewers, and anyone deciding whether to trust a number on a poster |
