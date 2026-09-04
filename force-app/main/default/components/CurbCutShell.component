@@ -94,6 +94,10 @@ body {
 /* A focus ring you cannot miss, on any background. */
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   outline:3px solid var(--focus); outline-offset:3px; border-radius:2px;
+  /* Second ring. The blue alone is 5.7:1 on the page ground but only 2.7:1
+     against a dark filled button it sits beside; the pale inner ring keeps the
+     indicator visible whatever it lands on. */
+  box-shadow:0 0 0 3px var(--ground);
 }
 
 .wrap { max-width:calc(var(--measure) + 8rem); margin:0 auto; padding:0 clamp(1rem,5vw,3rem); }
@@ -284,6 +288,13 @@ footer.page .stand {
   max-width:46ch; margin-bottom:1.4rem; text-wrap:pretty;
 }
 footer.page p { margin-bottom:.6rem; }
+/* WCAG 2.5.8 target size. Measured 22px high on the live page; inline links in
+   running text are exempt, but this one sits on its own line as the only way to
+   reach a human by email, so it is a target and it is sized like one. */
+footer.page a {
+  display:inline-block; min-height:24px; line-height:24px;
+  padding:2px 1px;
+}
 .fine { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:.75rem; color:var(--ink-mute); letter-spacing:.03em; }
 
 /* ---------- hero call to action ---------- */
@@ -547,7 +558,7 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
          going from larger to largest announced "pressed" twice and nothing
          about the size. Someone using these controls is, by definition, likely
          to be someone who cannot see the change. So it gets said out loud. -->
-    <p id="readerSaid" class="vh" role="status" aria-live="polite"></p>
+    <p id="readerSaid" class="vh" role="status" aria-live="polite" aria-atomic="true"></p>
   </div>
 </div>
 

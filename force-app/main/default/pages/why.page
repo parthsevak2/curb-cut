@@ -14,9 +14,9 @@
   heading="One side of this conversation got an agent. The other side got a form."
   lede="That asymmetry is new. It is the whole reason for building this in 2026 rather than admiring the problem for another decade.">
 
-  <section>
+  <section aria-labelledby="sec-the-thing-that-works">
     <p class="sec-label">The finding everything rests on</p>
-    <h2>The thing that works is the thing almost nobody does</h2>
+    <h2 id="sec-the-thing-that-works">The thing that works is the thing almost nobody does</h2>
     <p>
       Among college-educated people working in white-collar jobs in the United
       States, <strong>30% have a disability</strong> under the federal
@@ -53,9 +53,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-meanwhile-the-employer-s">
     <p class="sec-label">What changed</p>
-    <h2>Meanwhile, the employer's side of it was quietly automated</h2>
+    <h2 id="sec-meanwhile-the-employer-s">Meanwhile, the employer's side of it was quietly automated</h2>
     <p>
       At an EEOC public hearing in January 2023, the estimate put on the record
       was that <strong>as many as 83% of employers, and up to 99% of the
@@ -88,7 +88,7 @@
     </ul>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-every-rule-so-far">
     <p class="thesis">
       So the disabled person now negotiates with a system, <em>using a PDF.</em>
     </p>
@@ -102,9 +102,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-every-rule-so-far-2">
     <p class="sec-label">Why regulation is not the whole answer</p>
-    <h2>Every rule so far governs their machine. None of them gives you one.</h2>
+    <h2 id="sec-every-rule-so-far-2">id="sec-every-rule-so-far">Every rule so far governs their machine. None of them gives you one.</h2>
     <p>
       California's rules on automated decision systems in employment took effect
       on 1 October 2025. The EEOC has kept algorithmic bias in its sights
@@ -127,9 +127,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-an-agent-pointed-the">
     <p class="sec-label">What this is</p>
-    <h2>An agent pointed the other way</h2>
+    <h2 id="sec-an-agent-pointed-the">An agent pointed the other way</h2>
     <p>
       Curb Cut belongs to the person, not to the employer. It knows a sourced
       library of adjustments and what they typically cost. It will write the
@@ -146,9 +146,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-what-an-agent-built">
     <p class="sec-label">The uncomfortable part</p>
-    <h2>What an agent built for disabled people could do to them</h2>
+    <h2 id="sec-what-an-agent-built">What an agent built for disabled people could do to them</h2>
     <p>
       Pointing a capable agent at this problem creates new ways to hurt the
       people it is for. These are not hypotheticals we are being careful about.
@@ -199,9 +199,9 @@
     </table>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-it-is-thursday">
     <p class="sec-label">Who this is actually for</p>
-    <h2>It is Thursday</h2>
+    <h2 id="sec-it-is-thursday">It is Thursday</h2>
     <p>
       You have not slept properly since Sunday, because the new seating plan put
       you under a light that hums. You already know what would fix it. You have
@@ -226,8 +226,8 @@
     </p>
   </section>
 
-  <section>
-    <h2>Where the numbers come from</h2>
+  <section aria-labelledby="sec-where-the-numbers-come">
+    <h2 id="sec-where-the-numbers-come">Where the numbers come from</h2>
     <p>
       Every figure on this page is recorded with its source, its date and its
       denominator, including the ones that weaken the argument. That file is in

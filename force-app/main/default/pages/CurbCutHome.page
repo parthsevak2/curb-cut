@@ -23,7 +23,7 @@
     and nothing reaches your employer unless you say yes first.
   </p>
 
-  <section>
+  <section aria-labelledby="sec-sixty-one-employers-in">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
@@ -35,9 +35,9 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-sixty-one-employers-in-2">
     <p class="sec-label">The number this is built on</p>
-    <h2>Sixty-one employers in a hundred paid nothing</h2>
+    <h2 id="sec-sixty-one-employers-in-2">id="sec-sixty-one-employers-in">Sixty-one employers in a hundred paid nothing</h2>
     <p>
       The Job Accommodation Network surveyed 26,028 employers who had contacted
       it for accommodation guidance between January 2019 and December 2024.
@@ -79,9 +79,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-thirty-in-a-hundred">
     <p class="sec-label">The gap</p>
-    <h2>Thirty in a hundred have one. Three tell anyone.</h2>
+    <h2 id="sec-thirty-in-a-hundred">Thirty in a hundred have one. Three tell anyone.</h2>
     <p>
       Among college-educated people in white-collar jobs in the United States,
       <strong>30% have a disability</strong> under the federal definition.
@@ -98,7 +98,7 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-reach-it-however-you">
     <p class="thesis">The money was never the barrier. <em>The process is.</em></p>
     <p class="thesis-sub">
       To get help you first have to find the policy, learn its words, hold a work
@@ -109,9 +109,9 @@
     </p>
   </section>
 
-  <section id="doors">
+  <section id="doors" aria-labelledby="sec-reach-it-however-you-2">
     <p class="sec-label">Four front doors</p>
-    <h2>Reach it however you are able to</h2>
+    <h2 id="sec-reach-it-however-you-2">id="sec-reach-it-however-you">Reach it however you are able to</h2>
     <p>
       These are four doors into the same assistant, not a main route with
       fallbacks bolted on. You get an answer back the same way you asked.
@@ -194,9 +194,9 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-five-steps-and-you">
     <p class="sec-label">What happens</p>
-    <h2>Five steps, and you can stop after any of them</h2>
+    <h2 id="sec-five-steps-and-you">Five steps, and you can stop after any of them</h2>
     <ol class="steps">
       <li>
         <div>
@@ -248,9 +248,9 @@
     </ol>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-what-cannot-happen-here">
     <p class="sec-label">Guarantees, not intentions</p>
-    <h2>What cannot happen here</h2>
+    <h2 id="sec-what-cannot-happen-here">What cannot happen here</h2>
     <p>
       Each of these is prevented by the way the system is built, not by a
       promise to behave. The difference matters, because a promise can be
@@ -289,9 +289,9 @@
     </ul>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-every-promise-on-this">
     <p class="sec-label">Checkable</p>
-    <h2>Every promise on this page is enforced somewhere</h2>
+    <h2 id="sec-every-promise-on-this">Every promise on this page is enforced somewhere</h2>
     <p>
       A commitment that lives only in a policy document is an intention, and
       intentions are not load bearing. These run before any change ships. Every
@@ -307,9 +307,9 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-this-is-not-a">
     <p class="sec-label">Prior art</p>
-    <h2>This is not a new idea. It is an unfinished one.</h2>
+    <h2 id="sec-this-is-not-a">This is not a new idea. It is an unfinished one.</h2>
     <p>
       The Government of Canada already built this principle. Its Workplace
       Accessibility Passport records what someone needs once, belongs to the
@@ -326,9 +326,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="sec-the-ramp-cut-into">
     <p class="sec-label">Where the name comes from</p>
-    <h2>The ramp cut into the kerb was fought for by wheelchair users</h2>
+    <h2 id="sec-the-ramp-cut-into">The ramp cut into the kerb was fought for by wheelchair users</h2>
     <p>
       It is now used by anyone pushing a pram, dragging a suitcase, riding a
       bike, or walking with a knee that hurts. Nobody thinks of it as
@@ -342,8 +342,8 @@
     </p>
   </section>
 
-  <section>
-    <h2>If you want to try it</h2>
+  <section aria-labelledby="sec-if-you-want-to">
+    <h2 id="sec-if-you-want-to">If you want to try it</h2>
     <div class="cta">
       <a class="btn primary" href="/ask">Start on this page <span class="arrow">&rarr;</span></a>
     </div>
@@ -357,8 +357,8 @@
     </p>
   </section>
 
-  <section>
-    <h2>This page, too</h2>
+  <section aria-labelledby="sec-this-page-too">
+    <h2 id="sec-this-page-too">This page, too</h2>
     <p>
       A site arguing that process shuts people out should not shut anyone out.
       Text size and contrast controls are at the top and remember your choice.

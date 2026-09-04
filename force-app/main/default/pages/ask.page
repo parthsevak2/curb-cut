@@ -26,9 +26,9 @@
     <span id="sentinelText">Nothing has been sent to anyone.</span>
   </p>
 
-  <section>
+  <section aria-labelledby="beforeYouStart">
     <div class="plain">
-      <span class="tag">Before you start</span>
+      <span class="tag" id="beforeYouStart">Before you start</span>
       <p>
         You do not have to give your name, and you never have to say what
         condition you have. Nothing is sent to anyone unless you choose to send
@@ -37,7 +37,8 @@
     </div>
   </section>
 
-  <section>
+  <section aria-labelledby="askHeading">
+    <h2 id="askHeading" class="vh">Say what is hard</h2>
     <form id="askForm" onsubmit="return false;">
       <label for="need" class="fieldLabel">What is hard at work right now?</label>
       <p id="needHelp" class="fieldHelp">
@@ -89,7 +90,7 @@
         and so does simply telling me in words.
       </p>
 
-      <div id="mediaStatus" role="status" aria-live="polite" class="statusLine"></div>
+      <div id="mediaStatus" role="status" aria-live="polite" aria-atomic="true" class="statusLine"></div>
     </div>
 
       <div class="actions">
@@ -99,7 +100,7 @@
     </form>
 
     <!-- Announced to screen readers as it changes, without stealing focus. -->
-    <div id="status" role="status" aria-live="polite" class="statusLine"></div>
+    <div id="status" role="status" aria-live="polite" aria-atomic="true" class="statusLine"></div>
   </section>
 
   <section id="results" hidden="hidden" aria-labelledby="resultsHeading">
@@ -173,7 +174,7 @@
       </div>
     </form>
 
-    <div id="standingStatus" role="status" aria-live="polite" class="statusLine"></div>
+    <div id="standingStatus" role="status" aria-live="polite" aria-atomic="true" class="statusLine"></div>
 
     <div id="standingSaved" hidden="hidden">
       <div id="standingBox" class="doneBox"></div>
@@ -183,7 +184,7 @@
            turned off from anywhere, which would leave someone able to switch a
            disclosure on and not off. -->
       <div id="codeBox" class="codeBox">
-        <p class="codeLabel">Your code</p>
+        <h3 class="codeLabel" id="codeHeading">Your code</h3>
         <p id="codeValue" class="codeValue"></p>
         <p class="codeHelp">
           Write this down before you close this page. Send <strong>OFF</strong> and
@@ -395,7 +396,13 @@
           stBox.textContent = text;
           document.getElementById('codeValue').textContent = r.claimCode || '';
           show(stSaved);
-          document.getElementById('standingHeading').setAttribute('tabindex', '-1');
+          /* Every other async update moves focus to its heading. This one set the
+             tabindex and then never called focus(), so the single moment that
+             matters most -- a code shown exactly once, which somebody has to
+             write down -- left a screen-reader user exactly where they were. */
+          var codeH = document.getElementById('codeHeading');
+          codeH.setAttribute('tabindex', '-1');
+          codeH.focus();
         }
       });
   });
