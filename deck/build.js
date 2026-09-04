@@ -239,15 +239,15 @@ divider('03','The build','An agent whose principal is the worker, not the employ
            ['DOOR','CurbCutChannelApi. One authenticated Apex REST endpoint every channel shares.'],
            ['LOGIC','Options ranker  ·  Redaction  ·  Consent gate  ·  Handoff  ·  Standing preference'],
            ['RECORD','9 objects, 61 fields, a delivery ledger, and no field for a diagnosis.']];
-  L.forEach(([n,d],i)=>{ const y=1.95+i*0.92;
-    s.addShape(p.ShapeType.rect,{x:ML,y,w:1.5,h:0.72,
+  L.forEach(([n,d],i)=>{ const y=1.94+i*0.85;
+    s.addShape(p.ShapeType.rect,{x:ML,y,w:1.5,h:0.68,
       fill:{color:i===4?SUNK:INK},line:{color:i===4?LINE:INK,width:1}});
     T(s,{t:n,o:{x:ML,y:y+0.22,w:1.5,h:0.3,fontSize:10,bold:true,fontFace:M,
       color:i===4?INK:PAPER,align:'center',charSpacing:1.2}});
-    s.addShape(p.ShapeType.rect,{x:2.45,y,w:10.0,h:0.72,fill:{color:SURF},
+    s.addShape(p.ShapeType.rect,{x:2.45,y,w:10.0,h:0.68,fill:{color:SURF},
       line:{color:LINE,width:1.25}});
     T(s,{t:d,o:{x:2.68,y:y+0.22,w:9.6,h:0.35,fontSize:12.5,fontFace:B,color:INK}});
-    if(i<4) arrow(s,3.4,y+0.72,0,0.2);
+    if(i<4) arrow(s,3.4,y+0.68,0,0.17);
   });
   kicker(s,'The model sits inside LOGIC and nowhere else. It may choose an action and phrase a reply. It may not invent an accommodation, a cost, or a precedent.');
 }
@@ -260,16 +260,16 @@ divider('03','The build','An agent whose principal is the worker, not the employ
               ['3','RANK','Weighted by how much a word DISTINGUISHES, not whether it appears. A word in a quarter of rows scores nothing.'],
               ['4','SOQL','28 rows. Every one carries a source URL. No embeddings, no index, no vector store.'],
               ['5','PHRASE','The model may word the reply. It may not add a row, a cost, or a precedent.']];
-  step.forEach(([n,k,d],i)=>{ const y=1.98+i*0.92;
-    s.addShape(p.ShapeType.rect,{x:ML,y,w:0.55,h:0.74,fill:{color:i===4?GOLDFILL:INK},
+  step.forEach(([n,k,d],i)=>{ const y=1.96+i*0.85;
+    s.addShape(p.ShapeType.rect,{x:ML,y,w:0.55,h:0.68,fill:{color:i===4?GOLDFILL:INK},
       line:{color:i===4?GOLDFILL:INK,width:1}});
     T(s,{t:n,o:{x:ML,y:y+0.2,w:0.55,h:0.32,fontSize:13,bold:true,fontFace:M,
       color:i===4?INK:PAPER,align:'center'}});
     T(s,{t:k,o:{x:1.55,y:y+0.21,w:1.5,h:0.32,fontSize:10.5,bold:true,fontFace:M,
       color:i===4?GOLD:MUTED,charSpacing:1.1}});
-    s.addShape(p.ShapeType.rect,{x:3.15,y,w:9.3,h:0.74,fill:{color:SURF},line:{color:LINE,width:1.25}});
+    s.addShape(p.ShapeType.rect,{x:3.15,y,w:9.3,h:0.68,fill:{color:SURF},line:{color:LINE,width:1.25}});
     T(s,{t:d,o:{x:3.38,y:y+0.2,w:8.9,h:0.4,fontSize:12,fontFace:B,color:INK}});
-    if(i<4) arrow(s,1.12,y+0.74,0,0.18);
+    if(i<4) arrow(s,1.12,y+0.68,0,0.17);
   });
   kicker(s,'Steps one to four contain no inference at all. The cheapest system is the one that does not ask a model a question it already knows the answer to.');
 }
@@ -512,7 +512,7 @@ divider('05','The offer','Why this has not happened, and why that is over.');
     o:{x:7.17,y:2.62,w:5.0,h:2.7,fontSize:12.5,fontFace:B,color:INK,paraSpaceAfter:9}});
 
   T(s,{t:'We are not asking for a case study or a logo. Those five things are what actually makes an accommodation arrive, and an organisation unwilling to do them would not have got value from the software either.',
-    o:{x:ML,y:5.66,w:11.6,h:0.66,fontSize:13.5,fontFace:B,color:SOFT}});
+    o:{x:ML,y:5.56,w:11.6,h:0.62,fontSize:13.5,fontFace:B,color:SOFT}});
   kicker(s,'Sixty-one in a hundred cost nothing. The first ten will find that out on their own data, in public, and then nobody gets to say it was the money.');
 }
 
