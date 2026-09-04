@@ -299,11 +299,40 @@ FOUR LAYERS, all failing the build except the last.
   Structural invariants        491   every push, ~1s, no org needed
   Apex tests                   124   every deploy
   Accessibility (live pages)   333   against the deployed site
+  Sa11y / axe-core             131   Salesforce's own matcher, 12 states
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
   Link and copy                 54   every user-facing string
   Reading level                 16   Flesch-Kincaid, per surface
   Adversarial assertions     21/23   headless Agent API, deliberate
+
+THE SA11Y LAYER, AND WHAT IT CANNOT SEE
+
+Sa11y is Salesforce's own accessibility matcher, obtained through the
+lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp).
+It runs axe-core over the rendered DOM of every Lightning Web Component.
+
+Three deliberate choices make the number mean something.
+
+  The ruleset is the 100-rule "extended" preset, not the 64-rule "base"
+  preset Sa11y applies by default. Exactly one rule is removed, "region",
+  in one place with the reason beside it: it carries no WCAG tag and
+  fires only because a component mounted alone in a test has no page
+  landmarks around it. Landmarks are checked on the real pages by the
+  333-check live suite.
+
+  The harness is proved able to fail. jest/__tests__/harness-control.a11y.test.js
+  plants an image with no alt text and asserts the matcher throws. A
+  suite that cannot fail proves nothing about the code it passes.
+
+  Incomplete results are reported, not banked. axe returns "incomplete"
+  rather than "pass" when it cannot decide. color-contrast comes back
+  incomplete in all twelve states because axe measures contrast by
+  painting to a canvas and jsdom has none; video-caption comes back
+  incomplete because axe cannot inspect media. Both are recorded as
+  undecided in docs/a11y-sa11y-findings.json. Counting an incomplete as
+  a pass is the easiest way to buy a clean accessibility score, and it
+  is the one this project will not do.
 
 THE DELIVERY LEDGER
 
@@ -497,6 +526,8 @@ HONEST GAPS
   python3 tests/invariants.py                      491 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      124 tests
   python3 tests/a11y_audit.py                      333 checks, live pages
+  npm run test:a11y                                131 Sa11y checks, 12 states
+  python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \
     && python3 tests/score_adversarial.py          21/23
