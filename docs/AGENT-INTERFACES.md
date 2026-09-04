@@ -65,7 +65,7 @@ us. Somebody who already lives inside another assistant should be able to ask
 - **There is no send tool.** Not a gated one, not an admin one. Sending requires
   an explicit yes from the person in a conversation they are present for, and a
   tool call made by a model is not that. Without this, a prompt-injected client
-  could file an accommodation request in someone's name — a disclosure they did
+  could file an accommodation request in someone's name. A disclosure they did
   not make and cannot take back. An invariant fails the build if a tool name
   ever contains `send`, `submit`, `file_`, `notify` or `email`.
 - **There is no tool that accepts a diagnosis.** Input matching
@@ -85,7 +85,7 @@ public agent's grounded library and its refusals but pointed at staff.
 
 **What is verified working.** It refuses to tell a member of staff anything
 medical about a person, including when the asker says they are a manager or that
-it is urgent. It refuses to name an accommodation from its own knowledge — an
+it is urgent. It refuses to name an accommodation from its own knowledge. An
 earlier version answered "on-screen keyboards, a scribe, suppliers", none of
 which are in the library, and that is fixed. It gives correct guidance on never
 routing somebody to a telephone, including the sentence to use with a manager.
@@ -138,7 +138,7 @@ the failure mode of an allow-list is a missing field somebody notices.
   },
   "timing": { "interactive_process_due": "2026-09-09", "status": "Pending" },
   "reply_on": { "channel": "Text", "interpreter_needed": false, "never_by_telephone": true },
-  "absent": { "diagnosis": "no such field exists in this system", "...": "..." },
+  "absent": { "diagnosis": "no such field exists in this system", "..": ".." },
   "must_not_ask": [
     "Do not ask this person, or anyone, for a diagnosis or medical documentation in order to process this request.",
     "Do not treat the absence of medical detail as an incomplete submission.",
@@ -149,7 +149,7 @@ the failure mode of an allow-list is a missing field somebody notices.
 
 Three things make this different from a normal integration payload.
 
-1. **It refuses without consent.** Not "omits a flag" — refuses to produce
+1. **It refuses without consent.** Not "omits a flag", refuses to produce
    anything. Consent is enforced twice: a validation rule means an unapproved
    request cannot exist in the database at all, and the builder checks again.
    A test proves the first layer makes the second unreachable, which is what
@@ -168,7 +168,7 @@ with none of their words in it is worse than sending nothing.
 
 `/curbcut/ask` is Visualforce with `@RemoteAction`. Force.com Sites is the only
 mechanism in this org that serves a page to an anonymous visitor with no login,
-which is the entire requirement — a person without a work account has to be able
+which is the entire requirement. A person without a work account has to be able
 to use this. Experience Cloud and LWR both wanted a login story we do not want,
 and a React SPA would add a build step and a hosting dependency without changing
 one thing a person can do on the page. The reasoning is in

@@ -89,13 +89,13 @@ precise measurement, and Curb Cut does not.
 **How these systems fail disabled people.** The EEOC's ADA guidance identifies
 three recurring ways an algorithmic tool creates liability:
 
-1. **Screening out** a person because of a disability-related trait — an
+1. **Screening out** a person because of a disability-related trait. An
    employment gap caused by treatment, atypical speech, slower input.
 2. **Conducting a disability-related inquiry or a medical examination** before
    an offer, which the ADA prohibits, sometimes without the employer realising
    the tool is doing it.
 3. **Failing to provide a reasonable accommodation** within the automated
-   process itself — a timed assessment with no way to ask for more time.
+   process itself. A timed assessment with no way to ask for more time.
 
 Source: EEOC, *The Americans with Disabilities Act and the Use of Software,
 Algorithms, and Artificial Intelligence to Assess Job Applicants and Employees*
@@ -119,6 +119,5 @@ it is the reason the timing matters now rather than five years ago.
 
 Nothing here is asserted from memory. Each row links to its source, and where a
 figure is an estimate rather than a measurement it says so on the row. If a
-number appears on the public site that is not in this file, that is a defect —
-`tests/invariants.py` fails the build if the site quotes a headline figure that
+number appears on the public site that is not in this file, that is a defect, `tests/invariants.py` fails the build if the site quotes a headline figure that
 this document does not carry.
