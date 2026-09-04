@@ -56,7 +56,7 @@ converts uploads to Google types and a converted deck is not the deck.
   every claim in it.
 - `DEVPOST-ANSWERS.md`. Every form field paste-ready, including the error-rate
   and environmental answers.
-- `VIDEO-SCRIPT.md`, 2:57, shot by shot, three marked silences.
+- `VIDEO-SCRIPT.md`, 2:43, shot by shot, three marked silences.
 - `RUN-REQUIRED-TOOLS.md`, the two tools that gate the submission. One is now
   done with a real run; one still needs a message sent.
 - `Curb-Cut.pptx`, 32 slides in six sections, editable, speaker notes throughout.

@@ -135,7 +135,7 @@ No screen reader user has tested this. Everything above is machine- or browser-v
 **Still needs the tool.** No RAI Self Check exists under that name: not in the
 org, not on AgentExchange, not among the DX MCP server’s fifteen toolsets. Send
 the message in `devpost/ASK-THE-ORGANISERS.txt`. Meanwhile paste
-`devpost/Q2-responsible-ai.txt` verbatim, 3,994 characters, which says so in its
+`devpost/Q2-responsible-ai.txt` verbatim, 3,697 characters, which says so in its
 first line and then answers in the shape the question asks.
 
 ---
