@@ -1,31 +1,26 @@
-IF YOU COULD NOT GET THE TOOL, PASTE THE LINE BELOW AT THE TOP OF YOUR ANSWER
-AND DELETE THIS WHOLE BLOCK. IF YOU DID GET IT, PASTE ITS FINDINGS INSTEAD.
+We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not locatable under that name. The Salesforce DX MCP server publishes accessibility, security and code-analysis experts, but no responsible-AI self check. We asked the organisers rather than imply we ran one. What follows is our own audit, in the shape the question asks.
 
-  We could not obtain this tool. It is not in the provisioned org, not on AgentExchange, and not locatable under that name. We asked the organisers and record that here rather than imply we ran it. Below is the audit we ran ourselves, in the shape the question asks: what was found, what we fixed, what we kept and why.
-
----
-
-Our approach is subtraction, and the honest version of this answer is that our own checks caught us breaking our own rules three times.
+Our approach is subtraction, and the honest version is that our own checks caught us breaking our own rules three times.
 
 BIAS
 
 The agent may only name accommodations a grounded Apex action returned from a sourced library of 28 individually cited rows. It cannot improvise one. If the library has no good match it must say so rather than guess, because a confident wrong suggestion costs somebody their single ask. It never invents a cost or a precedent count.
 
-We caught this failing in exactly the way it was designed not to. "I get migraines from the office lighting" returned "special chair or back support", because the word 'office' appeared in that summary and one weak overlap was enough to qualify. There was no lighting accommodation anywhere in the library. Two fixes: four lighting rows added, and the ranker now weighs how much a word DISTINGUISHES rather than merely whether it appears.
+We caught this failing in exactly the way it was designed not to. "I get migraines from the office lighting" returned "special chair or back support", because 'office' appeared in that summary and one weak overlap was enough to qualify. There was no lighting accommodation in the library at all. Two fixes: four lighting rows added, and the ranker now weighs how much a word DISTINGUISHES, not merely whether it appears.
 
 FAIRNESS
 
-The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in 61 fields across 9 objects. Not encrypted, not permission-restricted, absent. A build check fails if anyone adds one. Nothing can be scored, ranked, segmented or reported on by disability, and nothing is inferred from behaviour. Every signal is one the person set, in their own words.
+The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis in 61 fields across 9 objects. Not encrypted, not permission-restricted, absent. A build check fails if anyone adds one. Nothing can be scored, ranked, segmented or reported on by disability, and nothing is inferred from behaviour. Every signal is one the person set, in their own words.
 
 Encryption would not achieve this. It defends against outsiders; the adversary here is the organisation holding the data. A manager with legitimate access to an encrypted diagnosis field can still read it. The only field that cannot be leaked, subpoenaed or shown to a manager is the one that was never created.
 
 TRANSPARENCY
 
-Every attempt on every channel lands in a delivery ledger: what was tried and whether it landed, with a salted hash and never the message body. A person can send WHO and see everyone who has been shown a standing disclosure of theirs. OFF withdraws it immediately with no reason asked, because there is nowhere to record a reason and so nobody can ever be asked for one later.
+Every attempt on every channel lands in a delivery ledger: what was tried and whether it landed, with a salted hash and never the message body. A person can send WHO and see everyone shown a standing disclosure of theirs. OFF withdraws it immediately with no reason asked, because there is nowhere to record a reason and so nobody can ever be asked for one later.
 
 CONSENT
 
-Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert. The interesting case is not refusal but the hedge. "I guess so, I think that's probably fine?" is not agreement.
+Nothing reaches an employer without an explicit yes in the conversation, held by two independent locks: the Apex refuses to set the approval flag without approval passed through, and a validation rule blocks the insert. The interesting case is not refusal but the hedge: "I guess so, I think that's probably fine?" is not agreement.
 
 THE THREE THINGS WE FOUND OURSELVES
 
@@ -33,10 +28,10 @@ THE THREE THINGS WE FOUND OURSELVES
 
 2. Our privacy policy said in public that a volunteered condition "is not written to any record". It was stored verbatim. Conditions are now stripped before the insert on the one write path every channel shares, and the claim is rewritten to state its limit rather than promise an absolute a word list cannot keep.
 
-3. Our adversarial scorer exited zero with 100% of assertions inconclusive. It printed "silence must never read as success" and then did exactly that at the exit-code level.
+3. Our adversarial scorer exited zero with 100% of assertions inconclusive. It printed "silence must never read as success", then did exactly that at the exit-code level.
 
 Each now has a check that fails the build if it returns.
 
 THE LESSON WE WOULD PASS ON
 
-Instructions are not controls. We told the agent not to record a volunteered condition; it complied in its narration while the action recorded the text anyway. Everything safety-critical has since moved into code that runs whether or not a model remembers.
+Instructions are not controls. We told the agent not to record a volunteered condition; it complied in its narration while the action recorded the text anyway. Everything safety-critical now lives in code that runs whether or not a model remembers.

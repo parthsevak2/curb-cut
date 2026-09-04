@@ -1,69 +1,83 @@
-THE TWO REQUIRED TOOLS: WHAT I NEED FROM YOU
+THE TWO REQUIRED TOOLS: WHERE THINGS STAND
 
-Both Builder Track questions ask what the tool FOUND. Nothing substitutes for a
-straight answer to that, so this is the last real blocker.
-
-
-WHAT I ALREADY TRIED, SO YOU DO NOT REPEAT IT
-
-  Searched for "AI Expert Suite", "Accessibility Expert Skill" and "RAI Self
-  Check" publicly. Not a public Salesforce product under any of those names.
-
-  Checked AgentExchange. Not listed.
-
-  Checked the provisioned org for installed packages. Only Salesforce Standard
-  Data Model and CDPAdvertising. Neither is it.
-
-  Checked the org for anything named like it in GenAiPlannerDefinition. Nothing.
-
-  Tried to read the Devpost hackathon resources page. It redirected to sign-in
-  and I cannot sign in as you.
-
-Conclusion: it is distributed to participants, almost certainly through the
-hackathon Slack sandbox or the Devpost resources page. It cannot be found from
-outside.
+Both Builder Track questions ask what the tool FOUND. One is now answered with a
+real run. One is not, and cannot be from outside.
 
 
-STEP 1, TODAY, FIVE MINUTES. YOU
+TOOL 1, ACCESSIBILITY: SOLVED. NOTHING NEEDED FROM YOU.
 
-Send the message in "Ask the organisers" to all three of these at once:
+There is no public Salesforce product called "Accessibility Expert Skill", but
+Salesforce does publish accessibility expert tooling, and we found it, installed
+it and ran it.
 
-  a. The hackathon Slack sandbox, in whatever channel is signposted for support
+  Where it lives   The Salesforce DX MCP server, npm package @salesforce/mcp,
+                   in its "lwc-experts" toolset. Public, installable, GA.
+  Tools used       guide_component_accessibility
+                   run_lwc_accessibility_jest_tests
+  What they set up Sa11y, Salesforce's own axe-core accessibility matcher.
+
+WHAT WE RAN AND WHAT IT FOUND
+
+  12 component states audited, 131 axe checks passed, 0 WCAG violations,
+  against the 100-rule "extended" preset rather than the 64-rule default.
+
+  Two real defects found and both fixed and deployed:
+
+  1. Signed video in the console had no captions and, worse, no explanation of
+     why. Auto-captioning is the one thing this product promises never to do,
+     so every video now carries a description saying so out loud to the person
+     who cannot watch it.
+
+  2. LWC1057. The emergency form's textarea used an attribute that does nothing,
+     so closing an escalation left the previous emergency's words on screen. On
+     the one screen that produces a telephone number. Fixed.
+
+  Full write-up: docs/A11Y-SA11Y-REPORT.md
+  Raw findings:  docs/a11y-sa11y-findings.json
+  Re-run it:     npm run test:a11y
+
+Q1 on Devpost has been rewritten around these findings.
+
+
+TOOL 2, RAI SELF CHECK: STILL MISSING. ONE THING NEEDED FROM YOU.
+
+Searched thoroughly. There is no "RAI Self Check Skill" in the provisioned org,
+none on AgentExchange, and none published under that name. The DX MCP server has
+fifteen toolsets covering accessibility, security, code analysis, mobile and
+DevOps. There is no responsible-AI self check among them.
+
+Conclusion: if it exists, it is distributed to participants directly, through the
+hackathon Slack sandbox or the Devpost resources page, both of which need your
+login.
+
+STEP 1, FIVE MINUTES, YOU
+
+Send the message in ASK-THE-ORGANISERS.txt to all three at once:
+
+  a. The hackathon Slack sandbox, in the channel signposted for support
   b. Devpost, hackathon page, Additional details, Support Channel & Resources
   c. The organisers named on the page: Alexandra Iyer and Megan Alfaro
 
-Asking in parallel costs nothing and the deadline does not move. Do not wait for
-one to answer before trying the next.
+Ask in parallel. It costs nothing and the deadline does not move.
 
+STEP 2, THE MOMENT ANYTHING COMES BACK, ME
 
-STEP 2, THE MOMENT YOU HAVE ANYTHING. ME
-
-Send me whichever of these you get and I will take it from there:
-
-  An install link or package ID     I install it into the org and run it
-  A Slack channel with the skill    Paste the skill's instructions to me and I
-                                    will run the audit it describes
-  A doc or PDF describing it        Same. I will follow it and produce the output
-  A URL it wants pointed at         /ask is the page to give it first
-  Its raw output                    I fix what is fixable before the deadline and
-                                    rewrite Q1 and Q2 around the real findings
+  An install link or package ID     I install it and run it
+  A Slack channel with the skill    Paste its instructions to me and I run it
+  A doc or PDF describing it        Same. I follow it and produce the output
+  Its raw output                    I fix what is fixable and rewrite Q2
 
 The most useful single thing is the skill's own instructions, in any form. If I
 can see what it checks, I can run it whether or not I can install it.
 
-
 STEP 3, IF NOTHING COMES BACK BY FRIDAY NIGHT
 
-Submit the fallback. It is already written and already fits the character limit.
-Q1 and Q2 open with one honest line saying we could not obtain the tool, that we
-asked, and that what follows is our own audit in the shape the question asks.
+Q2 is already written and already fits, and it opens by saying plainly that we
+could not find the tool, that we asked, and that what follows is our own audit.
+That audit found three places where we had broken our own rules. That is real
+engagement with findings whether or not their tool ever runs.
 
-That is a legitimate answer. The rubric says judges score engagement with the
-findings, not a perfect score, and our own audit found four defects a static scan
-could not see plus one we disproved. That is real engagement whether or not their
-tool ever runs.
-
-Do not leave either field blank, and do not imply the tools were run.
+Do not leave the field blank, and do not imply the tool was run.
 
 
 WHAT TO POINT ANY TOOL AT
@@ -73,7 +87,3 @@ WHAT TO POINT ANY TOOL AT
   Org              00DgK00000YIJ5SUAX
   Agent            Curb_Cut, Active at v7
   Internal agent   Curb_Cut_Desk, Active at v5
-  Console app      Curb Cut Console
-
-If the accessibility tool takes one URL, give it /ask. That is the page somebody
-uses on a hard day and it is where a finding matters most.

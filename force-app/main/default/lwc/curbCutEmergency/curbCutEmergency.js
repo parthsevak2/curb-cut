@@ -87,6 +87,11 @@ export default class CurbCutEmergency extends LightningElement {
     get expanded() { return this.open ? 'true' : 'false'; }
 
     toggle() { this.open = !this.open; }
+    clearWritten() {
+        const ta = this.template.querySelector('.ta');
+        if (ta) { ta.value = ''; }
+    }
+
     onReason(e) { this.reason = e.target.value; }
     onSquad(e)  { this.squad = e.detail.value; }
     onWho(e)    { this.raisedByWhom = e.detail.value; }
@@ -125,6 +130,11 @@ export default class CurbCutEmergency extends LightningElement {
             await closeIt({ escalationId: this.raised.Id, outcome: 'Closed from the console.' });
             this.raised = undefined;
             this.reason = ''; this.callback = '';
+            // A textarea holds its text as a child node, not a value attribute,
+            // so clearing the field means clearing the element as well. Getting
+            // this wrong leaves the last emergency's words sitting in the box
+            // for the next one.
+            this.clearWritten();
             await refreshApex(this.wiredCtx);
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Closed',

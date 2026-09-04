@@ -1,40 +1,39 @@
-IF YOU COULD NOT GET THE TOOL, PASTE THE LINE BELOW AT THE TOP OF YOUR ANSWER
-AND DELETE THIS WHOLE BLOCK. IF YOU DID GET IT, PASTE ITS FINDINGS INSTEAD.
+We could not find a Salesforce tool published as "Accessibility Expert Skill", and we asked the organisers rather than imply we ran one. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
 
-  We could not obtain this tool. It is not in the provisioned org, not on AgentExchange, and not locatable under that name. We asked the organisers and record that here rather than imply we ran it. Below is the audit we ran ourselves, in the shape the question asks: what was found, what we fixed, what we kept and why.
+WHAT WE RAN
 
----
+Sa11y against all five Lightning Web Components in twelve states: 131 axe checks passed, 0 WCAG violations. We used the 100-rule "extended" preset, not the 64-rule "base" preset Sa11y applies by default. One rule, region, is excluded in one place with the reason beside it: it carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks.
 
-We ran our own audit continuously and hard: 333 automated accessibility checks against the six LIVE pages on every build, plus 28 contrast checks computed from the design tokens in both themes, and 16 reading-level checks. The build fails on any of them.
+Before trusting that, we planted an image with no alt text and asserted the matcher throws. It does. A suite that cannot fail proves nothing.
 
-The findings that mattered most, though, came from doing what a static scan cannot: driving the deployed page with a real browser and reading its accessibility tree.
+WHAT IT FOUND
 
-WHAT THAT FOUND, AND WHAT WE DID
+1. A video that says nothing to the person who cannot watch it.
 
-1. The claim code never took focus. Every asynchronous update on /ask moves focus to its heading: results, draft, sent. The standing-preference save set tabindex on the heading and then never called focus(). That is the single moment where a six-character code is shown once and cannot be recovered, and a screen-reader user was left exactly where they were. The one person who most needed telling was not told. FIXED: the code panel is now a real heading and takes focus, pinned by a static check.
+axe returned "incomplete", not pass, on video-caption (WCAG 1.2.2) for signed video in the console: it cannot inspect media. A screen reader user could.
 
-2. 46 unnamed <section> elements across six pages. An unnamed section is announced as an anonymous "region", so somebody navigating the home page by landmark heard "region" twelve times with nothing to tell them apart. FIXED: every section now points at its own heading, held by a live-page check.
+The obvious remedy is the forbidden one. That video is usually a Deaf person signing, and auto-captioning it would be a machine putting words in somebody's mouth about their own body and then filing them. Our operator banner said so. But the operator was the only one told: a person reaching the video element got silence, with no explanation of it.
 
-3. A 22px target on the footer mail link, under WCAG 2.5.8's 24x24. Inline links in running text are exempt, but this one sits alone and is the only way to reach a human by email, so it is a target and is now sized like one.
+FIXED. Every video now carries an aria-describedby pointing at a note on the page for everyone: "No captions and no transcript, and none will be generated. This is waiting on a human interpreter." That does not satisfy 1.2.2 and we do not claim it does. It replaces an unexplained absence with a stated one, which is the honest position while an interpretation is pending.
 
-4. Status regions had no aria-atomic, so a rewritten message could be announced in fragments.
+2. The emergency form kept the last emergency's words.
 
-5. The focus ring is 5.7:1 against the page ground but only 2.7:1 against a dark filled button beside it. It now carries a second pale ring so the indicator survives whatever it lands on.
+The LWC compiler flagged LWC1057: value is not a valid attribute for textarea. A textarea holds its text as a child node, so the binding did nothing, and clearing the field in JavaScript left the words on screen. This is the one place in Curb Cut a telephone number comes out of, used when somebody may be at risk. Stale text there invites the next escalation to be raised on the last one's words.
 
-WHAT WE KEPT, AND WHY
+FIXED, and the element is now cleared alongside the field.
 
-Deaf, blind, hard of hearing and wheelchair user are deliberately never redacted from what a person writes, even though we strip volunteered medical conditions. They are identity and function, not medical detail; they are how people describe themselves; and the interpreter routing reads them. Stripping how somebody names themselves would be its own insult. A check fails the build if any of them enters the condition list.
+WHAT THE TOOL COULD NOT DECIDE
+
+color-contrast came back "incomplete" in all twelve states, because axe measures contrast by painting to a canvas and jsdom has none. We report that rather than bank it as a pass. Contrast is measured separately, by computing WCAG relative luminance from the stylesheets: 28 checks, all passing. The note added above measures 10.59:1 where 4.5:1 is required.
+
+WHAT WAS ALREADY IN PLACE
+
+333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 491 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
 
 A FINDING WE DISPROVED
 
-Our first browser pass appeared to show 26 controls with no focus indicator. That would have been alarming. But :focus-visible does not match a programmatic .focus(). So we drove it with real Tab presses and got 3px solid rgb(11,87,199) at 3px offset, exactly as designed. The test method was wrong, not the site. We report that because a defect we did not have is worse to claim than one we missed.
-
-CHECKS MOST TEAMS DO NOT HAVE
-
-- Reading level is measured on every surface. The page somebody uses while struggling reads at grade 5.8, and the build fails above its ceiling.
-- One auditor fails the build if an error message blames the person reading it or leaves them with no next step.
-- One fails if our own copy tells somebody to send a word the system does not actually answer. It exists because for months our copy said "reply OFF" and nothing routed it.
+An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. The method was wrong, not the site. We report it because claiming a defect we did not have is worse than missing one.
 
 THE GAP WE HAVE NOT CLOSED
 
-No screen-reader user has tested this. Every claim above is machine-verified or browser-verified, which is not the same thing as a person using it. A browser is not a person. One session with somebody who uses a screen reader daily would be worth more than the next five features, and we say so on the evidence page rather than letting the numbers imply otherwise.
+No screen reader user has tested this. Everything above is machine- or browser-verified, which is not the same as somebody using it. One session with a person who uses a screen reader daily is worth more than the next five features, and we say so on the evidence page rather than letting the numbers imply otherwise.

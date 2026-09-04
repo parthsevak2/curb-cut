@@ -16,3 +16,7 @@ transcripts/
 # Local channel config — never commit
 .env
 channels/.env
+
+# Jest + Sa11y accessibility harness
+node_modules/
+package-lock.json

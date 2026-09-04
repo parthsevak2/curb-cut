@@ -19,6 +19,11 @@ export default class CurbCutMediaViewer extends LightningElement {
             this.items = data.map(m => ({
                 ...m,
                 cls: m.isVideo ? 'item video' : 'item',
+                // Tied to the video with aria-describedby. WCAG 1.2.2 wants
+                // captions; there are none and there must not be auto-generated
+                // ones, so the honest thing is to say that out loud to the
+                // person who cannot watch it, rather than leave silence.
+                noteId: `nocap-${m.id}`,
                 kind: m.isVideo ? 'Signed or spoken video' : (m.isImage ? 'Photo' : 'File'),
                 meta: `${m.arrivedAt} · ${m.sizeKb} KB`
             }));
