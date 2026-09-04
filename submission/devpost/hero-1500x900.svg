@@ -1,68 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" width="1500" height="900" role="img" aria-label="Two ways to ask for the same chair. On the left, a three page HR accommodation form: employee number, the manager who will read it, a required box headed Nature of your disability with the cursor waiting, and a required attachment of physician documentation. On the right, Curb Cut asks what is hard right now, and the whole answer is: my back hurts by the afternoon.">
-  <defs>
-    <clipPath id="cut"><rect x="0" y="0" width="1500" height="900"/></clipPath>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" width="1500" height="900" role="img" aria-label="Curb Cut. A curb cut is cut for one person and used by everyone. Six barriers, each with the door Curb Cut opens: if you cannot type, send a photo or a video; if you are Deaf, sign it and a person interprets it, never a machine; if you use a screen reader, every channel is text first; if a phone call is not possible, nobody is ever routed to a telephone; if you have no work login, there is no account to make; if you do not want to say why, you are never asked. Six ways in: web, voice, text message, email, Slack and any AI assistant. Voice and text work on a basic phone with no internet at all. Thirty in a hundred have a disability. Three tell their employer.">
   <rect width="1500" height="900" fill="#F2F3F4"/>
 
-  <!-- ═══ LEFT. The form. Cold, numbered, three pages long. ═══ -->
-  <rect x="70" y="72" width="620" height="602" fill="#FFFFFF" stroke="#D6D9DC" stroke-width="1"/>
-  <rect x="70.5" y="72.5" width="619" height="45" fill="#EDEFF1"/>
-  <text x="94" y="101" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="0.6" fill="#5A6068">ACCOMMODATION REQUEST</text>
-  <text x="560" y="101" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5A6068">Page 1 of 3</text>
+  <!-- ═══ The ramp. A kerb with a cut in it, in profile. ═══ -->
+  <g>
+    <rect x="1128" y="140" width="132" height="52" fill="#C6CACE"/>
+    <path d="M1260 140 L1362 192 L1260 192 Z" fill="#1C5245"/>
+    <rect x="1128" y="192" width="252" height="9" fill="#9AA0A6"/>
+    <line x1="1260" y1="140" x2="1362" y2="192" stroke="#12362D" stroke-width="2"/>
+  </g>
+  <text x="1128" y="232" font-family="Helvetica, Arial, sans-serif" font-size="12.5" letter-spacing="1.4" fill="#5A6068">THE CUT IS THE WHOLE IDEA</text>
 
-  <text x="94" y="150" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#5A6068">Employee number</text>
-  <rect x="94" y="160" width="240" height="34" fill="#F7F8F9" stroke="#D6D9DC"/>
-  <text x="106" y="183" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#16181A">004871</text>
+  <!-- ═══ Headline ═══ -->
+  <text x="70" y="88" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3.4" fill="#1C5245">CURB CUT</text>
+  <text x="70" y="176" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700" fill="#16181A">Cut for one person.</text>
+  <text x="70" y="248" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700" fill="#1C5245">Used by everyone.</text>
+  <text x="70" y="300" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#42474C">So we cut one into the accommodation request.</text>
 
-  <text x="380" y="150" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#5A6068">This request will be read by</text>
-  <rect x="380" y="160" width="286" height="34" fill="#F7F8F9" stroke="#D6D9DC"/>
-  <text x="392" y="183" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#16181A">your line manager</text>
+  <line x1="70" y1="342" x2="1430" y2="342" stroke="#16181A" stroke-width="2.5"/>
 
-  <text x="94" y="238" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#16181A">Nature of your disability</text>
-  <text x="290" y="238" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#A32B22">*</text>
-  <rect x="94" y="252" width="572" height="196" fill="#FFFFFF" stroke="#A32B22" stroke-width="1.5"/>
-  <rect x="112" y="278" width="2" height="22" fill="#16181A"/>
-  <text x="112" y="330" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#6E747C">Describe your condition and how it limits</text>
-  <text x="112" y="354" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#6E747C">one or more major life activities.</text>
-  <text x="112" y="424" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6E747C">0 / 500 characters</text>
+  <!-- ═══ Six barriers, six doors ═══ -->
+  <text x="70" y="378" font-family="Helvetica, Arial, sans-serif" font-size="12.5" letter-spacing="1.6" fill="#8A2F24">WHAT USUALLY STOPS SOMEBODY</text>
+  <text x="560" y="378" font-family="Helvetica, Arial, sans-serif" font-size="12.5" letter-spacing="1.6" fill="#1C5245">WHAT HAPPENS HERE INSTEAD</text>
 
-  <text x="94" y="486" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#16181A">Supporting documentation from a physician</text>
-  <text x="470" y="486" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#A32B22">*</text>
-  <rect x="94" y="500" width="572" height="52" fill="#F7F8F9" stroke="#D6D9DC" stroke-dasharray="5 4"/>
-  <text x="112" y="532" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#6E747C">No file chosen</text>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="70" y="424" font-size="21" fill="#16181A">You cannot type</text>
+    <text x="500" y="424" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="424" font-size="21" fill="#16181A">Send a photo, or a video</text>
 
-  <text x="94" y="586" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#A32B22">All fields marked * are required.</text>
+    <text x="70" y="480" font-size="21" fill="#16181A">You are Deaf</text>
+    <text x="500" y="480" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="480" font-size="21" fill="#16181A">Sign it. A person interprets it, never a machine</text>
 
-  <rect x="94" y="612" width="150" height="42" fill="#DDE0E3"/>
-  <text x="132" y="639" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#8B9199">Continue</text>
-  <text x="262" y="639" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#6E747C">Two more pages after this one.</text>
+    <text x="70" y="536" font-size="21" fill="#16181A">You use a screen reader</text>
+    <text x="500" y="536" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="536" font-size="21" fill="#16181A">Every channel is text first</text>
 
-  <!-- ═══ RIGHT. Curb Cut. One question, one answer, done. ═══ -->
-  <rect x="810" y="72" width="620" height="230" fill="#FFFFFF" stroke="#1C5245" stroke-width="1.5"/>
-  <rect x="811.5" y="73.5" width="617" height="44" fill="#F1F6F4"/>
-  <text x="834" y="101" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="0.6" fill="#1C5245">CURB CUT</text>
-  <text x="1310" y="101" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1C5245">One page</text>
+    <text x="70" y="592" font-size="21" fill="#16181A">A phone call is not possible</text>
+    <text x="500" y="592" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="592" font-size="21" fill="#16181A">Nobody is ever routed to a telephone</text>
 
-  <text x="834" y="158" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#16181A">What is hard right now?</text>
-  <rect x="834" y="172" width="572" height="60" fill="#FFFFFF" stroke="#D6D9DC"/>
-  <text x="850" y="210" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#16181A">My back hurts by the afternoon.</text>
-  <text x="834" y="268" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1C5245">That is the whole form. No name, no login, no diagnosis,</text>
-  <text x="834" y="288" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1C5245">because there is nowhere in this system to put one.</text>
+    <text x="70" y="648" font-size="21" fill="#16181A">You have no work login</text>
+    <text x="500" y="648" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="648" font-size="21" fill="#16181A">There is no account to make</text>
 
-  <line x1="810" y1="348" x2="1430" y2="348" stroke="#C9CDD1"/>
-  <text x="810" y="392" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#16181A">Same chair. Same cost.</text>
-  <text x="810" y="430" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#16181A">Same person doing the same job.</text>
-  <text x="810" y="486" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-style="italic" fill="#42474C">Only one of them asks you to explain</text>
-  <text x="810" y="520" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-style="italic" fill="#42474C">your body to the person who decides</text>
-  <text x="810" y="554" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-style="italic" fill="#42474C">what you are worth on Monday.</text>
+    <text x="70" y="704" font-size="21" fill="#16181A">You do not want to say why</text>
+    <text x="500" y="704" font-size="21" fill="#C6CACE">&#8594;</text>
+    <text x="560" y="704" font-size="21" fill="#16181A">You are never asked</text>
+  </g>
 
-  <line x1="810" y1="606" x2="1430" y2="606" stroke="#C9CDD1"/>
-  <text x="810" y="650" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#42474C">Sixty-one percent of accommodations cost the employer</text>
-  <text x="810" y="676" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#42474C">nothing at all. The money was never what stopped anyone.</text>
+  <line x1="70" y1="742" x2="1430" y2="742" stroke="#C6CACE"/>
 
-  <!-- ═══ The line the whole thing rests on ═══ -->
-  <rect x="70" y="756" width="1360" height="3" fill="#16181A"/>
-  <text x="70" y="818" font-family="Georgia, 'Times New Roman', serif" font-size="35" font-weight="700" fill="#16181A">Thirty in a hundred have a disability. Three tell their employer.</text>
-  <text x="70" y="860" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#42474C">The asking was the barrier. So we rebuilt the asking.</text>
-  <text x="1430" y="860" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8A6115" text-anchor="end">curbcut</text>
+  <!-- ═══ Six ways in ═══ -->
+  <text x="70" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Web</text>
+  <text x="172" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Voice</text>
+  <text x="278" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Text message</text>
+  <text x="470" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Email</text>
+  <text x="576" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Slack</text>
+  <text x="676" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#16181A">Any AI assistant</text>
+  <text x="920" y="784" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1C5245">Two of them work on a basic phone, with no internet at all.</text>
+
+  <line x1="70" y1="818" x2="1430" y2="818" stroke="#16181A" stroke-width="2.5"/>
+  <text x="70" y="866" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#16181A">Thirty in a hundred have a disability. Three tell their employer.</text>
+  <text x="1430" y="866" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#8A6115" text-anchor="end">The asking was the barrier.</text>
 </svg>
