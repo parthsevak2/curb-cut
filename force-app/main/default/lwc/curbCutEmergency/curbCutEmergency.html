@@ -31,7 +31,7 @@
 
                     <template if:false={raised}>
                         <label class="lbl" for="why">Why is this happening?</label>
-                        <textarea id="why" class="ta" rows="3" value={reason} oninput={onReason}
+                        <textarea id="why" class="ta" rows="3" oninput={onReason}
                                   placeholder="A family member rang, worried they have not heard anything and cannot reach them."></textarea>
                         <p class="hint">{reasonHint}</p>
 

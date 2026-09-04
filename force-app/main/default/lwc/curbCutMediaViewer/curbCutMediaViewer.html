@@ -26,7 +26,12 @@
                         <img src={m.url} alt={m.title} class="shot"/>
                     </template>
                     <template if:true={m.isVideo}>
-                        <video src={m.url} controls class="shot" preload="metadata"></video>
+                        <video src={m.url} controls class="shot" preload="metadata"
+                               aria-describedby={m.noteId}></video>
+                        <p id={m.noteId} class="nocap">
+                            No captions and no transcript, and none will be generated.
+                            This is waiting on a human interpreter.
+                        </p>
                     </template>
                     <p class="meta">{m.title} · {m.meta}</p>
                     <a href={m.url} download class="dl">Download the original</a>

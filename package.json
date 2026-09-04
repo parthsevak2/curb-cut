@@ -1,0 +1,13 @@
+{
+  "name": "curb-cut-a11y",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Accessibility test harness for Curb Cut LWC components (Salesforce Sa11y).",
+  "scripts": {
+    "test:a11y": "sfdx-lwc-jest -- --testMatch=\"**/*.a11y.test.js\""
+  },
+  "devDependencies": {
+    "@salesforce/sfdx-lwc-jest": "^7.0.1",
+    "@sa11y/jest": "^7.0.0"
+  }
+}

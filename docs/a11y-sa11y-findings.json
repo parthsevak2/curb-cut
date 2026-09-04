@@ -1,0 +1,341 @@
+[
+  {
+    "state": "triage / loading",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<c-curb-cut-triage lwc-55d0oidqn5o-host=\"\"></c-curb-cut-triage>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 5
+  },
+  {
+    "state": "triage / loaded, queues busy",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<h2 class=\"board-title\" lwc-55d0oidqn5o=\"\">Where things stand right now</h2>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 10
+  },
+  {
+    "state": "triage / loaded, all empty",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<h2 class=\"board-title\" lwc-55d0oidqn5o=\"\">Where things stand right now</h2>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 10
+  },
+  {
+    "state": "triage / queues unreadable",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<h2 class=\"board-title\" lwc-55d0oidqn5o=\"\">Where things stand right now</h2>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 9
+  },
+  {
+    "state": "mediaViewer / nothing sent",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<c-curb-cut-media-viewer lwc-193ml55d23t-host=\"\"></c-curb-cut-media-viewer>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 5
+  },
+  {
+    "state": "mediaViewer / a photo",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<c-curb-cut-media-viewer lwc-193ml55d23t-host=\"\"></c-curb-cut-media-viewer>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 12
+  },
+  {
+    "state": "mediaViewer / a signed video",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 1,
+        "html": "<c-curb-cut-media-viewer lwc-193ml55d23t-host=\"\"></c-curb-cut-media-viewer>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-valid-attr-value",
+        "impact": "critical",
+        "help": "ARIA attributes must conform to valid values",
+        "reason": "Ensure all ARIA attributes have valid values"
+      },
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      },
+      {
+        "id": "video-caption",
+        "impact": "critical",
+        "help": "<video> elements must have captions",
+        "reason": "Ensure <video> elements have captions"
+      }
+    ],
+    "passes": 14
+  },
+  {
+    "state": "handoffBrief / waiting, nobody picked up",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 8,
+        "html": "<p class=\"status\" lwc-3lhm1o92afd=\"\" data-tone=\"urgent\">Nobody has this yet. They have been waiting 1 day.</p>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 11
+  },
+  {
+    "state": "handoffBrief / needs an interpreter",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 9,
+        "html": "<p class=\"status\" lwc-3lhm1o92afd=\"\" data-tone=\"urgent\">Sam has this. They waited 2 days.</p>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 11
+  },
+  {
+    "state": "assist / a plan with steps and a result",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 11,
+        "html": "<h2 class=\"title\" lwc-45t9j577mnl=\"\">Assistant</h2>"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 16
+  },
+  {
+    "state": "emergency / collapsed",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 12
+  },
+  {
+    "state": "emergency / open, cannot take a call",
+    "violations": [
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "wcag": [],
+        "nodes": 8,
+        "html": "<p class=\"warn\" lwc-54os0p2o7qj=\"\">Curb Cut promises nobody is ever routed to a telephone. This is the exception, for something unforeseen — a family member rea"
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "color-contrast-enhanced",
+        "impact": null,
+        "help": "Elements must meet enhanced color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AAA enhanced contrast ratio thresholds"
+      },
+      {
+        "id": "color-contrast",
+        "impact": null,
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+      }
+    ],
+    "passes": 16
+  }
+]
