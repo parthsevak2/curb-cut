@@ -58,6 +58,36 @@ of telling somebody.
 
 ---
 
+## 1b. What it costs the person, in their own words
+
+Peer-reviewed, quotable, and attributable. We use real testimony rather than a
+composite persona, because a made-up person on a conference stage is the one
+thing that would deserve to sink this.
+
+| Quote | Speaker |
+|---|---|
+| "I wish we had a percent sick number on our forehead so others could have something tangible to understand what we are going through" | Participant F-206 |
+| "having to sit down and explain it six times a day to 20 different people adds to that exhaustion" | Participant P1 |
+
+**Source.** Ganesh, S. and Lazar, A., *The Work of Workplace Disclosure: Invisible
+Chronic Conditions and Opportunities for Design*, Proceedings of the ACM on
+Human-Computer Interaction, 2021. Eight interview participants with invisible
+chronic conditions, plus analysed forum posts.
+<https://pmc.ncbi.nlm.nih.gov/articles/PMC8297988/>
+
+**Why these two.** The first is what a person actually wants: to be believed
+without having to prove it. The second is the exact burden the standing
+preference exists to remove, and it is the reason "say it once" is a feature
+rather than a convenience.
+
+**What we do not do.** We do not put photographs of disabled people in the deck.
+Stock photography of disability is a well-documented trope that the people it
+depicts consistently object to, and we have no consent from anyone real. Large,
+quiet typography of a real sentence carries more than a posed picture, and costs
+nobody their likeness.
+
+---
+
 ## 2. The accommodation gap, from a national statistics office
 
 This is the strongest evidence in the project, and it is government data.
