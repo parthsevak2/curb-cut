@@ -34,7 +34,7 @@ flowchart LR
   end
 
   subgraph Data
-    LIB[("Accommodation_Option__c<br/>24 rows, every row cited")]
+    LIB[("Accommodation_Option__c<br/>28 rows, every row cited")]
     BR[("Barrier_Report__c<br/>what is hard, never why")]
     AR[("Accommodation_Request__c<br/>only on explicit approval")]
     PREF[("Access_Preference__c")]
