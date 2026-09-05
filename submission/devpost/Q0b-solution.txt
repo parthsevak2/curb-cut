@@ -1,19 +1,19 @@
 Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation have asked for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
-There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
+There's no field for a diagnosis anywhere. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
 
-Six doors, one path, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So the parts that keep somebody safe never depend on a model remembering a rule.
+Six doors, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So safety never depends on a model remembering a rule.
 - Web, no login, no account.
 - Text CURB CUT to +1 276 495 9311, on any phone.
 - Voice on the same number.
-- Email, for anyone with only a personal address.
-- Slack, private message only. It says up front that Slack belongs to your employer.
-- Any assistant you already use, through tools that can find and draft but never send.
+- Email.
+- Slack, private message only, and it says up front that Slack belongs to your employer.
+- Any assistant you already use, through tools that can't send.
 
-Ask once, not forever: a standing preference in your words travels ahead of you, and you can withdraw it any time.
+Ask once, not forever: a standing preference travels ahead of you, and you can withdraw it any time.
 
-It may look like a heavy build. It isn't: Agentforce made the ambitious part ordinary, and the rest was intention.
+Agentforce made the ambitious part ordinary; the rest was intention.
 
-This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see.
+This is for the colleague who never asks and the person whose condition nobody can see.
 
-Try it now, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask
+Try it, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask

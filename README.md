@@ -78,7 +78,7 @@ quoted anywhere in the submission stops matching the artefact it describes.
 
 ```
 137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-509 structural invariants      python3 tests/invariants.py            ~1s, no org
+510 structural invariants      python3 tests/invariants.py            ~1s, no org
 331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
