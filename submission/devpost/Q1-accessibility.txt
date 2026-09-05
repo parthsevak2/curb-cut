@@ -10,7 +10,7 @@ WHAT IT FOUND
 
 1. A video that says nothing to the person who cannot watch it.
 
-axe returned "incomplete", not pass, on video-caption (WCAG 1.2.2) for signed video in the console: it cannot inspect media. A screen reader user could.
+axe came back "incomplete" on video-caption (WCAG 1.2.2) for signed video in the console, which isn't a pass: it can't inspect media, so it left the question open. A person using a screen reader would still land on that video.
 
 The usual fix is auto-captioning, and that's the one thing we won't do here: that video is usually a Deaf person signing, and a machine would be putting words in their mouth about their own body, then filing them. Our operator banner said so. But the operator was the only one told: a person reaching the video element got silence, with no explanation of it.
 
@@ -32,8 +32,8 @@ WHAT WAS ALREADY IN PLACE
 
 A FINDING WE DISPROVED
 
-An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. Our test method was wrong; the site was fine. We'd rather report a false alarm we caught ourselves than have a judge find it.
+An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. Our test method was wrong; the site was fine. We're leaving the false alarm in here rather than quietly dropping it.
 
 THE GAP WE HAVE NOT CLOSED
 
-A script checked all of this. No one who uses a screen reader every day has. One session with a person who uses a screen reader daily is worth more than the next five features, and we say so in the judge guide rather than letting the numbers imply otherwise.
+Everything above was checked by a script, and not yet by anyone who uses a screen reader every day. Before the next five features, we want to sit with one person who uses a screen reader daily and watch them use this, and we say so in the judge guide rather than letting the numbers imply otherwise.

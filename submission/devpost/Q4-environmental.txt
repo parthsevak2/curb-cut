@@ -1,8 +1,8 @@
-We treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a BETTER answer, not merely a comparable one. Every choice below is also a correctness choice, which is why they survived.
+The people on the other end of this are asking about accommodations, sometimes while telling us about a medical condition, and what they need from us is a reliable answer. So we treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a better answer, not just a comparable one. Every choice below is also a correctness choice, which is why each of them survived.
 
 THE RANKER IS NOT INFERENCE
 
-Matching what somebody said against the accommodation library is a deterministic Apex function: tokenise, drop stopwords, a light stemmer, then score by how much each word distinguishes an option. No embeddings, no vector store, no RAG pipeline to keep warm, no re-indexing job.
+Matching what somebody said against the accommodation library is a deterministic Apex function: tokenise, drop stopwords, a light stemmer, then score by how much each word distinguishes an option. It doesn't need embeddings, a vector store, a RAG pipeline kept warm, or a re-indexing job.
 
 The library is 28 curated, individually sourced rows, so a SOQL query and keyword scoring is enough. An embedding search would burn an inference per message and give worse-sourced answers, because a cosine similarity cannot be explained to somebody who was given bad advice and a cited row can.
 
@@ -16,7 +16,7 @@ Web, email, Slack and any external caller go through one authenticated Apex REST
 
 WHY WE STRIP CONDITIONS WITH A PATTERN LIST, NOT A MODEL
 
-Stripping a volunteered medical condition before storage runs against a compiled pattern list. A moderation model was the obvious reach and would have cost an inference on EVERY message, added latency to the one path that must never be slow, and produced a probabilistic answer to a question that deserves a deterministic one.
+Stripping a volunteered medical condition before storage runs against a compiled pattern list. A moderation model was the obvious reach, and it would have cost an inference on every message, added latency to the one path that must never be slow, and given a probabilistic answer to a question that deserves a deterministic one.
 
 CI RUNS ZERO INFERENCE
 
@@ -32,10 +32,10 @@ The relay holds one conversation per hashed handle with a 30-minute TTL. No cont
 
 THE AGENT'S JOB IS NARROW
 
-The agent's job is deliberately narrow: choose an action and phrase a reply at a grade-six reading level. It does not summarise documents, does not retrieve, does not reason over long context. The heavy lifting is a database query.
+The agent's job is deliberately narrow: choose an action and phrase a reply at a grade-six reading level. It doesn't summarise documents, retrieve anything, or reason over long context. The heavy lifting is a database query.
 
 THE PRINCIPLE UNDERNEATH ALL OF IT
 
-If a rule matters, put it in code. A model asked to remember a rule burns energy every time it is asked, and still forgets.
+Underneath all of this is one habit: when a rule matters, we put it in code rather than asking a model to remember it, because the model spends energy every time it's asked and, in our own runs, still forgot about half the time.
 
 Our own measurements prove that rather than assert it: the sentence the agent is supposed to say when it discards a volunteered condition, it says about half the time, across three measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.

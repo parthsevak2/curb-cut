@@ -7,7 +7,7 @@ your disability. Find the policy. Learn its vocabulary. Hold a corporate login.
 Complete a form. And disclose something you may be afraid to disclose, to a
 stranger, in writing, in a language that may not be your first.
 
-The money was never the barrier.
+Cost usually isn't the barrier.
 
 The film, 4 minutes 59 seconds, with every channel shown live: <https://youtu.be/L5sVEw5H3U4>
 
