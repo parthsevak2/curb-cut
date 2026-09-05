@@ -119,7 +119,7 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
     }
 
     private String greeting() {
-        return 'Hi.\n\n'
+        return 'Hi. I am automated, not a person; reply HUMAN for one.\n\n'
              + 'I can help you work out what might make work easier, and help you ask for it.\n\n'
              + 'You do not have to tell me your name. You do not have to tell me what condition '
              + 'you have. I will never ask.\n\n'

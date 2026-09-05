@@ -13,6 +13,9 @@
             <value><fullName>SMS</fullName><default>false</default><label>SMS</label></value>
             <value><fullName>Voice</fullName><default>false</default><label>Voice</label></value>
             <value><fullName>Web</fullName><default>false</default><label>Web</label></value>
+            <value><fullName>Slack</fullName><default>false</default><label>Slack</label></value>
+            <value><fullName>External</fullName><default>false</default><label>External</label></value>
+            <value><fullName>MCP</fullName><default>false</default><label>MCP</label></value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

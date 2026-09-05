@@ -16,7 +16,7 @@ import sys, re, os, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut"
-PAGES = ["", "ask", "why", "messaging", "privacy", "terms"]
+PAGES = ["", "ask", "why", "messaging", "privacy", "terms", "docs"]
 
 fails, checks = [], 0
 def check(ok, detail):
@@ -35,7 +35,7 @@ for p in PAGES:
         check(False, f'{p or "/"} could not be fetched: {e}')
 
 # ---- every internal link resolves to a page that exists -------------------
-known = {'/', '/ask', '/why', '/messaging', '/privacy', '/terms'}
+known = {'/', '/ask', '/why', '/messaging', '/privacy', '/terms', '/docs'}
 for p, body in bodies.items():
     for href in set(re.findall(r'href="(/[^"#?]*)"', body)):
         h = href.rstrip('/') or '/'

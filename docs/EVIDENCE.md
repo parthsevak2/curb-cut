@@ -121,7 +121,7 @@ nobody their likeness.
 
 ---
 
-## 1a. It is not a white-collar problem
+## 1c. It is not a white-collar problem
 
 The disclosure study above asked white-collar workers because that is where the
 question had never been asked. The newest figures, from 2025 and 2026, say who
@@ -130,8 +130,9 @@ actually holds the jobs and how few of them tell anyone.
 | Figure | Value | Population and definition | Source |
 |---|---|---|---|
 | Median share of employees who self-identified a disability to their employer, 2025 | **3.5%** (new hires: 4%), and it did not rise in 2025 | 655 submissions from large employers across eight countries | Disability:IN, *2025 Disability Index Report*, https://disabilityin.org/resource/2025-disability-index-report/ |
-| Employers reporting flexible or remote accommodations, 2026 | **98%**, while the report names persistent gaps in disclosure | 421 organisations, 627 submissions, released 27 July 2026 | Disability:IN, *2026 Disability Index Results and Insights*, https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights |
+| Employers reporting flexible or remote accommodations, 2026 | **98%**; the report's own "disclosure gap" is board and governance disclosure (25% include disability in board disclosures), not employee self-identification, which the 2026 index does not report | 421 organisations, 627 submissions, released 27 July 2026 | Disability:IN, *2026 Disability Index Results and Insights*, https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights |
 | Persons with disabilities who require workplace accommodations, Canada, 2022 | **39.3%** | employed persons with disabilities | Statistics Canada, *International Day of Persons with Disabilities, 2025*, released 3 December 2025, https://www150.statcan.gc.ca/n1/daily-quotidien/251203/dq251203a-eng.htm |
+| Persons with disabilities who require workplace accommodations (StatCan Plus framing, averaged across need types), Canada, 2022 | **35.4%** need one; 35.4% have an unmet need | see section 2 | Statistics Canada Plus article, section 2 |
 | Refused a job because of a disability, Canada, 2022 | **9.7%** (down from 11.7% in 2017) | persons with disabilities | same |
 | US adults with a disability | **more than 1 in 4** | All US adults, CDC definition | CDC, *Disability Impacts All of Us*, https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html |
 | Canadians with a disability | **27%**, 8.0 million | Canadians aged 15+, 2022 | Statistics Canada, *Canadian Survey on Disability*, 2022, https://www150.statcan.gc.ca/n1/daily-quotidien/231201/dq231201b-eng.htm |
@@ -140,7 +141,6 @@ actually holds the jobs and how few of them tell anyone.
 | Usually work part time, US, 2025 | **about 30%** vs about 17% | employed people with vs without a disability | same |
 | In service occupations, US, 2025 | **20.0%** vs 16.5% | employed people with vs without a disability | same |
 | In production, transportation and material moving, US, 2025 | **13.8%** vs 12.0% | same | same |
-| In management and professional occupations, US, 2025 | **37.9%** vs 44.1% | same | same |
 | Self-employed, US, 2025 | **9.1%** vs 5.9% | same | same |
 | Employed, Canada, 2022 | **62%** vs 78% | persons aged 25 to 64 with vs without disabilities | Statistics Canada, *A demographic, employment and income profile of persons with disabilities*, 2022 CSD, https://www150.statcan.gc.ca/n1/pub/89-654-x/89-654-x2024001-eng.htm |
 | Below the poverty line, Canada, 2022 | **10%** vs 7% | persons aged 15+ with vs without disabilities, 2018-base Market Basket Measure | same |
@@ -148,6 +148,8 @@ actually holds the jobs and how few of them tell anyone.
 | Employed, Canada, 2024 | **46.4%** vs 66.2% | persons with vs without disabilities, Labour Force Survey | Statistics Canada, *Labour market characteristics of persons with and without disabilities, 2024*, https://www150.statcan.gc.ca/n1/pub/71-222-x/71-222-x2025001-eng.htm |
 | Part-time, Canada, 2024 | **21.3%** vs 17.4% | workers with vs without disabilities | same |
 | Hourly wage, Canada, 2024 | **93.8%** of the average hourly wage of employees without disabilities, a gap of **$2.22** an hour | employees with disabilities | same |
+
+**Two StatCan products, two framings.** The Daily release of 3 December 2025 reports 39.3% of employed persons with disabilities requiring accommodations. The StatCan Plus article quoted in section 2 averages across need types and arrives at 35.4% needing one and more than a third with an unmet need. We quote the Daily figure as the headline and the Plus figures where a per-need breakdown is the point.
 
 **What this says.** The people this affects are more likely to be paid by the
 hour, to work part time, and to hold service, production and transport jobs
