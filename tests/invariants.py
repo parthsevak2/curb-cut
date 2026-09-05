@@ -762,6 +762,24 @@ check('focus-ring-works-on-any-ground',
 
 
 # ---------------------------------------------------------------------------
+# A disclosure is only a disclosure if somebody can be shown it.
+#
+# Disclosure_Event__c existed, WHO read from it, and nothing in production
+# ever wrote a row. "Travels ahead of you" was save and revoke. WHO could only
+# ever answer that nobody had been shown it, which was true, and useless. So
+# some non-test class must construct the ledger row, or the feature is a
+# promise with nothing behind it again.
+# ---------------------------------------------------------------------------
+ledger_writers = sorted(
+    os.path.basename(c) for c in glob.glob(os.path.join(CLS, '*.cls'))
+    if not c.endswith('Test.cls')
+    and 'new Disclosure_Event__c' in strip_apex_comments(read(c)))
+check('disclosure-event-has-a-production-writer', bool(ledger_writers),
+      'no non-test Apex class writes a Disclosure_Event__c, so no preference '
+      'can be shown to anyone and WHO can never name a person')
+
+
+# ---------------------------------------------------------------------------
 # The count in this file is quoted in the deck, in four Devpost answers and in
 # the technical design document. It has already drifted once: the suite grew and
 # every public claim silently became wrong. A number a judge can check is worth
