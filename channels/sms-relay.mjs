@@ -113,7 +113,10 @@ const CONTROL_WORDS = new Set([
   'whoseesit','whowastold','withdraw','withdrawit',
 ]);
 const STOP_WORDS  = new Set(['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']);
-const START_WORDS = new Set(['start', 'yes', 'unstop']);
+const START_WORDS = new Set(['start', 'yes', 'unstop', 'curb cut', 'curbcut', 'curb', 'hello', 'hi', 'hey']);
+/* The options a person was last shown, by handle, so a bare "2" in reply means
+   the second one. Kept in memory with the session and forgotten with it. */
+const picks = new Map();
 
 /* One normalisation for every door on this relay. Text and voice used to
    disagree here: text squashed "Turn it off." to "turnitoff" and matched, and
@@ -393,9 +396,46 @@ const server = createServer((req, res) => {
     // Only on the very first reply this person has ever had from us.
     const disclose = await needsDisclosure(key) ? DISCLOSURE : null;
 
+    /* A bare number answers the list this person was last shown. The agent
+       then writes the request in their words and waits for a clear yes. */
+    let said = body;
+    const pick = body.trim().match(/^([1-9])$/);
+    if (pick && picks.has(handle)) {
+      const title = picks.get(handle)[Number(pick[1]) - 1];
+      if (title) {
+        said = `I would like to ask for this: ${title}. Please write the request in my own words and read it back to me before anything is sent.`;
+      }
+    }
+
+    /* The shared Apex door first, the same one the web, email and Slack use.
+       It ranks the sourced library without a model, so the first reply is the
+       same on every channel and never depends on a model remembering to call
+       its own action. The agent takes over only to draft, and only once the
+       person has chosen. */
+    if (!pick) {
+      try {
+        const answer = await connection.apex.post('/curbcut/v1/message/', {
+          channel: 'SMS', text: body, handle: key,
+        });
+        const titles = (answer.options || '').split('\n').filter(l => l.startsWith('- ')).map(l => l.slice(2).trim());
+        if (!answer.noMatch && titles.length) {
+          picks.set(handle, titles);
+          const numbered = (answer.options || '').split('\n').map(l => {
+            const i = titles.indexOf(l.startsWith('- ') ? l.slice(2).trim() : null);
+            return i >= 0 ? `${i + 1}. ${titles[i]}` : l;
+          }).join('\n');
+          const text = `${answer.message}\n\n${numbered}\n\nReply with a number and I will write the request in your words, and nothing is sent until you say yes. Or reply HUMAN for a person.`;
+          await ledger('SMS', 'Outbound', 'Accepted', key, disclose ? 'options + disclosure' : 'options');
+          return xml(text, disclose);
+        }
+      } catch (e) {
+        console.error('[sms] door failed, falling back to the agent:', e?.message);
+      }
+    }
+
     try {
       const agent = await agentFor(handle);
-      const reply = await agent.preview.send(body);
+      const reply = await agent.preview.send(said);
       const text = (reply?.messages ?? []).map(m => m.message).filter(Boolean).join('\n\n')
         || 'I did not catch that. Say it again however you like.';
       await ledger('SMS', 'Outbound', 'Accepted', key, disclose ? 'reply + disclosure' : 'reply');
