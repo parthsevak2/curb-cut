@@ -1,4 +1,4 @@
-Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what other people in your situation have asked for, from a library of real accommodations, each with its source and usual cost. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
+Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation have asked for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
 There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
 
@@ -10,11 +10,9 @@ Six doors, one path, all live today. An Agentforce agent written in Agent Script
 - Slack, private message only. It says up front that Slack belongs to your employer.
 - Any assistant you already use, through tools that can find and draft but never send.
 
-Ask once, not forever: a standing preference in your words travels ahead of you to the people you choose, and you can withdraw it any time.
+Ask once, not forever: a standing preference in your words travels ahead of you, and you can withdraw it any time.
 
 It may look like a heavy build. It isn't: Agentforce made the ambitious part ordinary, and the rest was intention.
-
-The four answers below carry the numbers, including what failed.
 
 This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see.
 

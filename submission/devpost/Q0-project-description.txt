@@ -2,15 +2,15 @@ Curb Cut: a workplace accommodation system whose principal is the worker. An Age
 
 PROBLEM TO SOLVE
 
-Thirty in a hundred white-collar workers have a disability. Three tell their employer. The rest do the maths: what would asking for the chair, the lamp, the hour cost me on Monday? Most decide it isn't worth it and carry on hurting quietly.
+One in four adults in the United States and Canada has a disability. Fewer than one in four is employed, and the ones who work are twice as likely to be part-time and more likely to be in service, production and transport jobs: the shift worker, the cleaner, the minimum-wage hire with no work email and no HR desk. Nobody has measured how many of them tell their employer; the one study that asked white-collar workers found three in a hundred. The rest do the maths: what would asking cost me on Monday? Most decide it isn't worth it and carry on hurting quietly.
 
-The form is the barrier. To get help you must find the policy, learn its words, hold a work login, and explain your body to the person who decides what you're worth. For a contractor, a temp, someone who is Deaf, someone whose first language isn't English, or someone with a condition nobody can see, that form is a door that doesn't open.
+The form is the barrier. To get help you must find the policy, learn its words, hold a work login, and explain your body to the person who decides what you're worth. For a temp, someone who is Deaf, or someone with a condition nobody can see, that form is a door that doesn't open.
 
 The money was never the barrier: 61% of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024 said the accommodation cost them nothing. The asking was.
 
 OUR SOLUTION
 
-Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what other people in your situation have asked for, from a library of real accommodations, each with its source and usual cost. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
+Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation have asked for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
 There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
 
@@ -22,11 +22,9 @@ Six doors, one path, all live today. An Agentforce agent written in Agent Script
 - Slack, private message only. It says up front that Slack belongs to your employer.
 - Any assistant you already use, through tools that can find and draft but never send.
 
-Ask once, not forever: a standing preference in your words travels ahead of you to the people you choose, and you can withdraw it any time.
+Ask once, not forever: a standing preference in your words travels ahead of you, and you can withdraw it any time.
 
 It may look like a heavy build. It isn't: Agentforce made the ambitious part ordinary, and the rest was intention.
-
-The four answers below carry the numbers, including what failed.
 
 This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see.
 
