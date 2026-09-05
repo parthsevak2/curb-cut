@@ -18,8 +18,8 @@ That is the whole product.
 | Web, anonymous | **Live** | Yes, right now, no credential |
 | Web on a phone | **Live** | Yes, same link |
 | Any AI assistant, MCP, or a relay | **Live** | Yes, with org credentials |
-| Voice | Built, wired to a real number | Yes, by ringing it |
-| Text message | Built, **not carrier registered** | Through the shared door, below |
+| Voice | **Live** on a real number | Yes, by ringing it |
+| Text message | **Live** | Yes, text CURB CUT to the number |
 | Slack | Live in one workspace, DM only, never sends | Through the shared door, below |
 | Inbound email | Built, service active | Needs the address from Setup |
 | Operator console | Live | Yes, with org credentials |
@@ -103,14 +103,15 @@ section 3 is the same path without the phone.
 
 ## 5. Slack and inbound email
 
-Both are built and both route through the same Apex as everything else, so you
-can exercise their exact behaviour through section 3 by setting `channel` to
-`Slack` or `Email`.
+Both route through the same Apex as everything else, so you can exercise their
+exact behaviour through section 3 by setting `channel` to `Slack` or `Email`.
 
-What has **not** happened: the Slack app has never been installed in a real
-workspace, so the handshake is unproven even though the logic behind it is
-tested. The inbound email service is active, but its address is generated in
-Setup rather than stored in metadata: **Setup, Email Services, CurbCutInbound**.
+Slack is installed in one workspace and answers over Socket Mode. A direct
+message and the `/curbcut` command both return real options through the shared
+door, and in a channel the command refuses to post anything anyone else could
+see. It runs on the same laptop as the text and voice relay. The inbound email
+service is active, but its address is generated in Setup rather than stored in
+metadata: **Setup, Email Services, CurbCutInbound**.
 
 ## 6. The operator console
 
