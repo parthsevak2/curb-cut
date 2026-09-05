@@ -22,6 +22,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>docs</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>why</apexPage>
         <enabled>true</enabled>
     </pageAccesses>

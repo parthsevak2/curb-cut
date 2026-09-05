@@ -42,10 +42,10 @@ public with sharing class CurbCutDraftRequest {
             return '';
         }
         String body = 'I am asking for a change to how I work.\n\n'
-                    + 'What is hard right now: ' + req.need.trim();
+                    + 'What is hard right now: ' + CurbCutRedact.clean(req.need.trim());
 
         if (String.isNotBlank(req.chosenOption)) {
-            body += '\n\nWhat would help: ' + req.chosenOption.trim();
+            body += '\n\nWhat would help: ' + CurbCutRedact.clean(req.chosenOption.trim());
         }
 
         body += '\n\nI am not sharing a diagnosis, and I am not required to. '

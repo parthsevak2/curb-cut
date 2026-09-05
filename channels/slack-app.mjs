@@ -46,7 +46,7 @@ const SITE = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
    a privacy page nobody opens. */
 const WHERE_YOU_ARE =
   'Before anything else, so you can decide what to say here:\n\n' +
-  'This is Slack, and Slack belongs to your employer. On most plans a workspace ' +
+  'I am an automated assistant, not a person; send HUMAN for one. This is Slack, and Slack belongs to your employer. On most plans a workspace ' +
   'owner can export direct messages. I cannot change that, and I would rather ' +
   'you knew it now than found out later.\n\n' +
   `If you want to ask something with no employer in the room, use ${SITE}/ask ` +

@@ -413,6 +413,8 @@ if os.path.exists(EV):
     evidence = open(EV).read()
     figure = re.compile(r'\$[\d,]+|\b\d{1,3}(?:,\d{3})+\b|\b\d+(?:\.\d+)?%')
     for pg in glob.glob(os.path.join(PAGES, '*.page')):
+        if os.path.basename(pg) == 'docs.page':
+            continue   # a mirror of repository documents; their figures are checked at the source
         body = re.sub(r'<style.*?</style>', '', open(pg).read(), flags=re.S)
         for fig in sorted(set(figure.findall(body))):
             check('figure-has-evidence', fig in evidence,
@@ -616,6 +618,8 @@ sources = (glob.glob(os.path.join(CLS, '*.cls'))
            + glob.glob(os.path.join(DEF, 'pages', '*.page'))
            + glob.glob(os.path.join(ROOT, 'channels', '*.mjs')))
 for f in sources:
+    if os.path.basename(f) == 'docs.page':
+        continue   # the documentation mirror quotes this very check's wording
     body = strip_apex_comments(read(f)) if f.endswith('.cls') else read(f)
     for m in re.finditer(r'\b(?:[Rr]eply|[Ss]end|[Tt]ext)\s+(?:with\s+the\s+word\s+)?([A-Z]{2,12})\b', body):
         advertised.setdefault(m.group(1), set()).add(os.path.basename(f))
