@@ -280,13 +280,19 @@ const server = createServer((req, res) => {
           });
           await ledger('Voice', 'Outbound', 'Accepted', key,
                        crisis ? 'routed: crisis, handoff requested' : 'routed: control word');
-          /* The router promises a reply on the same channel. On a call we hold
-             no number and we never ring anyone, so we say what is true. */
-          const truth = answer.handedOff
-            ? ' One thing I have to be honest about. I hold no number for you, so nobody can ' +
-              'call you back. If you want to hear from them, write to parth.sevak2@gmail.com.'
-            : '';
-          return res.end(gather((answer.message || '') + truth));
+          /* The router's handoff reply promises an answer on the same channel.
+             On a call we hold no number and never ring anyone, so on voice that
+             sentence is replaced, not followed by a correction. */
+          let spokenReply = answer.message || '';
+          if (answer.handedOff) {
+            spokenReply = spokenReply
+              .replace(/They will reply here, on this same channel\.?/i, '')
+              .replace(/\s+nobody will ring you\.?/i, '.')
+              .replace(/\s{2,}/g, ' ').trim() +
+              ' I hold no number for you, so nobody can ring you back. To reach them again, ' +
+              'call this number and say human, or write to parth.sevak2@gmail.com.';
+          }
+          return res.end(gather(spokenReply));
         } catch (e) {
           console.error('[voice] control word failed:', e?.message);
           await ledger('Voice', 'Outbound', 'Escalated', key, `control word failed: ${e?.message}`);
