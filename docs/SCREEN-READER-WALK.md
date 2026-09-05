@@ -2,14 +2,14 @@
 
 This transcript was produced by a script, not by a person who uses a screen reader. It reads the same accessibility tree that NVDA, JAWS and VoiceOver read, drives the page with real key and click events, and records what a screen reader would be given at each step: where focus lands, what the live regions announce, and the order things are read. It cannot tell you what it is like to use. One session with a daily screen-reader user still comes before the next five features.
 
-Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 20:16 UTC.
+Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 21:29 UTC.
 
 ### Step 0: the page loads
 
 - Focus is on: body
 - Live regions announce: nothing new
 
-Reading order, on load (45 of 56 nodes):
+Reading order, on load (45 of 58 nodes):
 
 - link "Skip to the main content"
 - main (no name)
@@ -30,6 +30,7 @@ Reading order, on load (45 of 56 nodes):
 - link "Privacy"
 - link "Terms"
 - link "Messaging"
+- link "Docs"
 - paragraph (no name)
 - heading "Tell me what's hard right now." level 1
 - paragraph (no name)
@@ -55,7 +56,6 @@ Reading order, on load (45 of 56 nodes):
 - DisclosureTriangle "Something that'll still be true next month? Say it once, instead of to every new manager"
 - strong (no name)
 - link "parth.sevak2@gmail.com"
-- listitem (no name) level 1
 
 ### Step 1: six presses of Tab from the top
 
@@ -71,7 +71,7 @@ Reading order, on load (45 of 56 nodes):
 - Focus is on: h2#resultsHeading "What other people have asked for"
 - Live regions announce: "Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional."
 
-Reading order, the options that arrived (30 of 61 nodes):
+Reading order, the options that arrived (30 of 63 nodes):
 
 - link "Skip to the main content"
 - main (no name)
@@ -93,6 +93,7 @@ Reading order, the options that arrived (30 of 61 nodes):
 - link "Privacy"
 - link "Terms"
 - link "Messaging"
+- link "Docs"
 - paragraph (no name)
 - heading "Tell me what's hard right now." level 1
 - paragraph (no name)
@@ -102,14 +103,13 @@ Reading order, the options that arrived (30 of 61 nodes):
 - listitem (no name) level 1
 - heading "Say what's hard" level 2
 - form (no name)
-- status (no name)
 
 ### Step 3: after pressing "Help me ask for one of these"
 
 - Focus is on: h2#draftHeading "Read this over"
 - Live regions announce: "Read this over. Nothing is sent until you choose to send it."
 
-Reading order, the draft (25 of 66 nodes):
+Reading order, the draft (25 of 68 nodes):
 
 - link "Skip to the main content"
 - main (no name)
@@ -132,10 +132,10 @@ Reading order, the draft (25 of 66 nodes):
 - link "Privacy"
 - link "Terms"
 - link "Messaging"
+- link "Docs"
 - paragraph (no name)
 - heading "Tell me what's hard right now." level 1
 - paragraph (no name)
-- listitem (no name) level 1
 
 ### What this transcript can and cannot tell you
 

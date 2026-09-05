@@ -93,3 +93,16 @@ something the person can find out about. An invariant now fails the build if
 no production class writes the ledger, so it cannot quietly go back to being a
 promise.
 
+## D14. The first text is answered by the door, not the model
+The relay used to hand every text straight to the agent, and the first thing
+many people sent was a shout, "CURB CUT", or one hard sentence about the
+lights. The agent answered the shout with a question and the sentence with
+nothing it could ground. Now the relay puts each message through the same
+Apex door the web page uses. If the library has options, the reply is a
+numbered list, and a bare digit is turned into a sentence in the person's
+words and handed to the agent to draft. Only when the door has nothing does
+the agent get a free turn.
+**Cost:** the text channel is less conversational than a chat window, and a
+person who wants to talk it through has to say so.
+**Gain:** the first reply on a basic phone is grounded every time, costs no
+model call, and reads the same as what the console shows the desk.
