@@ -24,3 +24,15 @@
 
 .take.book { background:#8c2f26; border-color:#8c2f26; }
 .take.book:hover { background:#7a281f; }
+
+.asrow { display: grid; gap: .3rem; margin-top: .6rem; }
+.lbl   { font-weight: 700; }
+.pick  { font: inherit; min-height: 44px; padding: .5rem .6rem; border-radius: 5px;
+         border: 2px solid #5e6568; background: #fff; color: #14171a; }
+.pick:focus-visible { outline: 3px solid #0b57c7; outline-offset: 2px; }
+.take.ask { background: #1f5a4e; border-color: #1f5a4e; margin-top: .6rem; }
+.take.ask:hover { background: #17463d; }
+.take:disabled { opacity: .6; cursor: default; }
+.record { margin: .35rem 0 0; font-weight: 700; color: #4a4e4f; font-size: .86rem; }
+.said  { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.saidItem { margin: 0; }
