@@ -1,6 +1,6 @@
 We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not among the Salesforce DX MCP server's fifteen toolsets. We asked the organisers rather than imply we ran one.
 
-So we ran the same exercise against Salesforce's own five published guidelines for responsible agentic AI, as a harness anyone can execute: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks four of the checks on purpose and asserts each one goes red, because a check that cannot fail proves nothing.
+So we ran the same exercise against Salesforce's own five published guidelines for responsible agentic AI, as a harness anyone can execute: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks five of the checks on purpose and asserts each one goes red, because a check that cannot fail proves nothing.
 
 WHAT IT FOUND ON THE FIRST RUN
 
@@ -18,7 +18,7 @@ The agent cannot improvise an accommodation, a cost, or a precedent count. Optio
 
 FAIRNESS
 
-The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis in 61 fields across 9 objects. Not encrypted, absent. Encryption defends against outsiders, and the adversary here is the organisation holding the data: a manager with legitimate access to an encrypted diagnosis field can still read it. The only field that cannot be leaked or subpoenaed is the one that was never created. Volunteered conditions are stripped before the insert on the one write path every channel shares. Deaf, blind, hard of hearing and wheelchair user are never stripped, because those are identity, not medical detail.
+The system holds no protected attribute to be unfair with. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis in 61 fields across 9 objects. Not encrypted, absent. Encryption defends against outsiders, and the adversary here is the organisation holding the data: a manager with legitimate access to an encrypted diagnosis field can still read it. The only field that cannot be leaked or subpoenaed is the one that was never created. Volunteered conditions are stripped before the insert on the one write path every channel shares, and again on standing preferences, the text built to be shown to managers. Deaf, blind, hard of hearing, wheelchair user, autistic, ADHD and dyslexic are never stripped, because those are identity, not medical detail.
 
 TRANSPARENCY
 

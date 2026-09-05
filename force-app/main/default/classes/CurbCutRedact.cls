@@ -20,6 +20,22 @@
  *   routing depends on reading them. Redacting how somebody names themselves
  *   would be its own insult.
  *
+ *   Autistic, ADHD, dyslexic, dyspraxic and neurodivergent are on the same
+ *   list, and were not at first. We had them down as conditions, so "I'm
+ *   autistic and the open office is unbearable" came back as "I'm
+ *   [not recorded] and the open office is unbearable". For many people those
+ *   words are who they are, not what a clinic said. They stay.
+ *
+ *   Bare "aids", "pots" and "als" are gone from the condition list. "I wear
+ *   hearing aids" was being stored as "I wear hearing [not recorded]", which
+ *   removed the one word the person needed read. The multi-word forms
+ *   ("HIV/AIDS", "POTS syndrome") are still caught.
+ *
+ * What it now catches beyond single names: a clause that reads as a diagnosis,
+ * such as "diagnosed with ...", "medication for ..." or "my condition is ...".
+ * The clause is taken out up to the next punctuation or joining word, so the
+ * functional half of the sentence survives.
+ *
  * And it cannot catch every phrasing in every language. So the copy now says
  * what this actually does rather than promising an absolute the code cannot
  * deliver. Overclaiming on a privacy page is worse than the gap it hides.
@@ -27,6 +43,19 @@
 public with sharing class CurbCutRedact {
 
     public static final String MARK = '[not recorded]';
+
+    /**
+     * Words we never strip, written down so that the choice is a decision and
+     * not an accident. tests/invariants.py reads this class and goes red if any
+     * of these turns up in CONDITIONS again. CurbCutRedactTest asserts that
+     * names() is false for every one of them.
+     */
+    public static final List<String> IDENTITY = new List<String>{
+        'deaf', 'blind', 'hard of hearing', 'wheelchair user',
+        'autism', 'autistic', 'aspergers', 'asperger\'s', 'adhd',
+        'dyslexia', 'dyslexic', 'dyspraxia', 'dyscalculia',
+        'neurodivergent', 'neurodiverse'
+    };
 
     /**
      * Named conditions. Longest first, so "multiple sclerosis" is taken before
@@ -39,21 +68,38 @@ public with sharing class CurbCutRedact {
         'motor neurone disease', 'traumatic brain injury', 'spinal cord injury',
         'borderline personality disorder', 'obsessive compulsive disorder',
         'post traumatic stress disorder', 'bipolar disorder', 'eating disorder',
-        'panic disorder', 'anxiety disorder', 'autism spectrum disorder',
+        'panic disorder', 'anxiety disorder', 'pots syndrome', 'down syndrome',
         'crohns disease', 'crohn s disease', 'sickle cell', 'long covid',
         'kidney disease', 'heart failure', 'brain injury', 'spina bifida',
-        'cystic fibrosis', 'parkinsons', 'parkinson s', 'alzheimers',
-        'alzheimer s', 'huntingtons', 'huntington s', 'endometriosis',
+        'cystic fibrosis', 'chronic pain', 'parkinsons', 'parkinson s',
+        'alzheimers', 'alzheimer s', 'huntingtons', 'huntington s',
+        'tourette s', 'tourettes', 'tourette', 'endometriosis',
         'fibromyalgia', 'schizophrenia', 'epilepsy', 'epileptic', 'diabetes',
         'diabetic', 'arthritis', 'psoriasis', 'narcolepsy', 'sleep apnea',
         'sleep apnoea', 'concussion', 'aneurysm', 'dementia', 'hepatitis',
         'dialysis', 'chemotherapy', 'lymphoma', 'leukemia', 'leukaemia',
         'melanoma', 'glaucoma', 'tinnitus', 'migraines', 'migraine', 'lupus',
-        'asthma', 'cancer', 'stroke', 'crohns', 'colitis', 'dyslexia',
-        'dyspraxia', 'dyscalculia', 'depression', 'depressive', 'psychosis',
-        'anorexia', 'bulimia', 'autism', 'autistic', 'aspergers', 'asperger s',
-        'adhd', 'ptsd', 'ocd', 'copd', 'pots', 'hiv', 'aids', 'als', 'ibs',
-        'tbi', 'bpd', 'me cfs'
+        'asthma', 'cancer', 'stroke', 'crohns', 'colitis', 'seizures',
+        'seizure', 'bipolar', 'depression', 'depressive', 'psychosis',
+        'anorexia', 'bulimia', 'hiv aids', 'ptsd', 'ocd', 'copd', 'hiv',
+        'ibs', 'tbi', 'bpd', 'me cfs'
+    };
+
+    /**
+     * A clause that reads as a diagnosis, whatever comes after it. Each one runs
+     * to the next full stop, comma or semicolon, or to a joining word, and is
+     * capped so a runaway match cannot eat a paragraph. "I was diagnosed with
+     * ADHD and I lose track in long meetings" becomes "I was [not recorded] and
+     * I lose track in long meetings". The identity list does not protect a word
+     * used inside one of these: a person who writes "diagnosed with" is quoting
+     * a clinic, and we take the quote out whole.
+     */
+    private static final String STOP_AT_JOIN =
+        '(?:(?! and | so | but | which | because )[^.,;])';
+    private static final List<String> CLAUSES = new List<String>{
+        '\\bdiagnosed with ' + STOP_AT_JOIN + '{1,60}',
+        '\\bmedication for ' + STOP_AT_JOIN + '{1,40}',
+        '\\bmy (?:condition|illness|disease) is ' + STOP_AT_JOIN + '{1,40}'
     };
 
     private static List<Pattern> compiled;
@@ -61,6 +107,11 @@ public with sharing class CurbCutRedact {
     private static List<Pattern> patterns() {
         if (compiled != null) { return compiled; }
         compiled = new List<Pattern>();
+        // Clauses first, so "diagnosed with epilepsy" is one removal and not a
+        // hole with "diagnosed with" left standing in front of it.
+        for (String c : CLAUSES) {
+            compiled.add(Pattern.compile('(?i)' + c));
+        }
         for (String c : CONDITIONS) {
             // Tolerate any punctuation or spacing between the words, so
             // "Crohn's disease" and "crohns disease" are both caught.
