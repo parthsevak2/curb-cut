@@ -1,46 +1,59 @@
-# One table. It drives the cut, the narration and the timings, so they cannot
-# disagree with each other. Duration is set from the line at an unhurried
-# 140 words per minute plus two seconds of air, or the minimum hold, whichever
-# is longer. A card that already carries its sentence is left silent on purpose:
-# reading a slide aloud to somebody who is reading it is how a film loses them.
-WPM, BREATH, XF = 140.0, 2.0, 0.6
+# One table. It cuts the film, writes the narration and the captions, and times
+# the voice, so none of them can disagree. Each scene's hold is set from its line
+# at a slow, unhurried 130 words a minute plus two seconds of air, or the
+# minimum hold, whichever is longer.
+#
+# The voice this is written for is calm, soft and close. Read it to one person,
+# not a room. Where a direction says silence, leave the silence.
+WPM, BREATH, XF = 130.0, 2.0, 0.6
 
 SCENES = [
- # The product first. A judge with ninety seconds should see it working before
- # they are told what it is. One continuous take of the live site: a sentence
- # typed letter by letter, the options arriving, the draft written in her words.
- ('rec/flow.mp4', 24, 0,
-    "This is Curb Cut. One question: what is hard at work right now. Never why. She types it. The options come from a sourced library, not a model. Then it writes the request in her words.",
-    "Silence for the first four seconds while the cursor moves. Then plain."),
- ('frames/04-draft.png', 10, 0,
-    "I am not sharing a diagnosis, and I am not required to.",
-    "The line the whole thing turns on. Slow down."),
- ('cards/c03.png', 9, 0, "That is the whole form. Here is the usual one.",
-    "Flat. No indignation. Let them read the card."),
- ('cards/c01.png', 7, 0, "Curb Cut. An Agentforce agent whose principal is the worker.",
+ # The product first, before anyone is told what it is. One continuous take of
+ # the live site: a sentence typed letter by letter, the options arriving, the
+ # request written in her words. Four seconds of quiet before the first word.
+ ('rec/flow.mp4', 27, 0,
+    "This is Curb Cut. It's for anyone who has something at work that's quietly hard, and who has never asked for help, because asking meant explaining their body to their manager. Here, you just say what's getting in the way. You never have to say why.",
+    "Four seconds of silence while the cursor moves. Then close and calm, like you're sitting beside her."),
+ ('frames/04-draft.png', 14, 0,
+    "The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to.",
+    "Slow down on the last sentence. Let it settle."),
+ ('cards/c03.png', 9, 0, "That's the whole form. This is the one most people get instead.",
+    "Gentle. No edge on it."),
+ ('cards/c01.png', 7, 0, "Curb Cut. An Agentforce agent that's on the worker's side.", ""),
+ ('cards/c02.png', 16, 0,
+    "You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
+    "This is the one paragraph that has to land. Give it room."),
+ ('frames/10-home.png', 8, 0, "Thirty in a hundred of us have a disability. Three tell their employer.", ""),
+ ('cards/c04.png', 6, 0, "", "Silence. The card says it."),
+ ('cards/c06.png', 9, 0, "Nothing is sent until she clearly says yes. If she hedges, it waits.", ""),
+ ('frames/05-sent.png', 7, 0, "Sent, with a date she can hold them to.", ""),
+ ('cards/c07.png', 19, 0,
+    "It's there wherever she is. On the web, by voice, by text, by email, in Slack, or through any assistant she already uses. Two of those work on a basic phone with no internet at all.",
     ""),
- ('cards/c02.png', 13, 0,
-    "Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
-    "Slow. This is the only paragraph that has to land."),
- ('frames/10-home.png', 8, 0, "Thirty in a hundred have a disability. Three tell their employer.", ""),
- ('cards/c04.png', 6, 0, "", "Silent. The card says it."),
- ('cards/c06.png', 7, 0, "A hedge is refused, and a test proves the refusal.", ""),
- ('frames/05-sent.png', 6, 0, "Sent, with a date she can hold them to.", ""),
- ('cards/c07.png', 8, 0, "Two of them work on a basic phone, with no internet.", ""),
- ('frames/14-mobile-ask.png', 5, 1, "", "Silent."),
- ('frames/13-messaging.png', 5, 0, "She texts first. It never rings her.", ""),
- ('cards/c08.png', 6, 0, "", "Silent. Let them read it."),
- ('frames/12-privacy.png', 9, 0,
-    "Absent, not encrypted. The only field that cannot leak is the one that was never created.", ""),
- ('frames/20-console-refusal.png', 9, 0,
-    "So when her manager asks what is wrong with her, it refuses.", "Second emotional beat. Let it sit."),
- ('frames/21-signed-video.png', 8, 0,
-    "If she signs instead of typing, a person interprets it. Never a machine.", ""),
- ('frames/11-why.png', 7, 0, "One side got an agent. The other side got a form.", "Let this hang."),
- ('cards/c09.png', 7, 0, "", "Silent."),
- ('cards/c10.png', 9, 0,
-    "Free for the first ten who will name an owner and answer within five days.", ""),
- ('cards/c11.png', 9, 0, "They only have to be able to ask.", "Then silence to the end."),
+ ('frames/14-mobile-ask.png', 5, 1, "", "Silence."),
+ ('frames/13-messaging.png', 6, 0, "She texts first. It never rings her.", ""),
+ ('cards/c08.png', 6, 0, "", "Silence. Let them read it."),
+ ('frames/12-privacy.png', 18, 0,
+    "There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later.",
+    ""),
+ ('frames/20-console-refusal.png', 15, 0,
+    "So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find.",
+    "Quiet. This is the second moment that matters."),
+ ('frames/21-signed-video.png', 15, 0,
+    "If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it.",
+    ""),
+ ('frames/11-why.png', 12, 0,
+    "One side of this conversation got an agent. The other side got a form. We built the other side one too.",
+    "Let this one hang for a moment."),
+ ('cards/c09.png', 14, 0,
+    "We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.",
+    ""),
+ ('cards/c10.png', 14, 0,
+    "If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.",
+    ""),
+ ('cards/c11.png', 14, 0,
+    "Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is.",
+    "Then silence to the end."),
 ]
 
 def fits():
@@ -49,7 +62,7 @@ def fits():
         if not line: continue
         need = len(line.split()) / WPM * 60 + BREATH
         if need > secs + 0.05:
-            bad.append((src, secs, need))
+            bad.append((src, secs, round(need, 1)))
     return bad
 
 def total():

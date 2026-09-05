@@ -12,14 +12,14 @@
 <c:CurbCutShell pageTitle="Curb Cut" current="home"
   eyebrow="Accommodation without disclosure"
   heading="Find out what could make work easier. Then ask for it."
-  lede="No form. No login. And you never have to say what condition you have.">
+  lede="No form. No login. And you never have to say what condition you've.">
 
   <div class="cta">
     <a class="btn primary" href="/ask">Ask now <span class="arrow">&rarr;</span></a>
     <a class="btn" href="#doors">Other ways to reach it</a>
   </div>
   <p class="cta-note">
-    You can stop at any point. Nothing is written down while you are anonymous,
+    You can stop at any point. Nothing is written down while you're anonymous,
     and nothing reaches your employer unless you say yes first.
   </p>
 
@@ -65,7 +65,7 @@
 
     <p>
       Two thirds of employers called the adjustment very or extremely effective.
-      <strong>Twelve per cent said it did not work</strong>, and that belongs on
+      <strong>Twelve per cent said it didn't work</strong>, and that belongs on
       this page too, because a page that quotes only the two thirds is selling
       something. Everyone in this survey had already contacted JAN for help, so
       these are employers who were already trying.
@@ -90,7 +90,7 @@
     </p>
     <p>
       Disclosure works for five out of six people who try it, and almost nobody
-      tries. That is not a population weighing costs and benefits. That is a
+      tries. That isn't a population weighing costs and benefits. That's a
       door nobody can get through.
     </p>
     <div class="cta">
@@ -103,7 +103,7 @@
     <p class="thesis-sub">
       To get help you first have to find the policy, learn its words, hold a work
       login, fill in a form, and tell a stranger something you may not want to
-      tell anyone. That is a lot to ask of someone who is already having a hard
+      tell anyone. That's a lot to ask of someone who is already having a hard
       week. The request process for a disability accommodation is, itself, an
       accessibility barrier.
     </p>
@@ -111,7 +111,7 @@
 
   <section id="doors" aria-labelledby="sec-reach-it-however-you-2">
     <p class="sec-label">Four front doors</p>
-    <h2 id="sec-reach-it-however-you-2">id="sec-reach-it-however-you">Reach it however you are able to</h2>
+    <h2 id="sec-reach-it-however-you-2">id="sec-reach-it-however-you">Reach it however you're able to</h2>
     <p>
       These are four doors into the same assistant, not a main route with
       fallbacks bolted on. You get an answer back the same way you asked.
@@ -134,7 +134,7 @@
         <h3>Text message</h3>
         <p>
           Text <span class="kw">+1 276 495 9311</span> and say what is hard. No
-          app to install, and it works on a phone that cannot run anything else.
+          app to install, and it works on a phone that can't run anything else.
           Registration with the mobile carriers is under review.
         </p>
       </div>
@@ -145,7 +145,7 @@
         <p>
           Call the same number and speak instead of typing. For anyone for whom
           typing is the hard part &mdash; tremor, pain, low vision, or a hand
-          that is simply not co-operating today. Carriers register text messaging,
+          that's simply not co-operating today. Carriers register text messaging,
           not calls, so this one needed no registration and works today.
         </p>
       </div>
@@ -155,7 +155,7 @@
         <h3>Email</h3>
         <p>
           Write in your own time, in your own words, with no one waiting on the
-          other end of a cursor. If a reply cannot be delivered, the message is
+          other end of a cursor. If a reply can't be delivered, the message is
           handed to a person rather than dropped.
         </p>
       </div>
@@ -167,7 +167,7 @@
           The easiest place to reach for, and the least private. Slack belongs to
           your employer, and on most plans an owner can export direct messages.
           So Curb Cut says that first, answers only in a DM, never in a channel,
-          and will not draft or send a request from there.
+          and won't draft or send a request from there.
         </p>
       </div>
     </div>
@@ -187,8 +187,8 @@
     <div class="note" style="margin-top:1.4rem">
       <p>
         <strong>Sign language goes to a human being.</strong> Signed video is
-        never machine translated. It is passed to a person, and you get a text
-        straight away so you are not left waiting in silence, wondering whether
+        never machine translated. It's passed to a person, and you get a text
+        straight away so you aren't left waiting in silence, wondering whether
         it arrived.
       </p>
     </div>
@@ -202,9 +202,9 @@
         <div>
           <h3>You say what is hard</h3>
           <p>
-            In your own words. &ldquo;I cannot type for long.&rdquo; &ldquo;The
-            open office is unbearable by two o'clock.&rdquo; You are never asked
-            why, and there is nowhere to record why.
+            In your own words. &ldquo;I can't type for long.&rdquo; &ldquo;The
+            open office is unbearable by two o'clock.&rdquo; You're never asked
+            why, and there's nowhere to record why.
           </p>
         </div>
       </li>
@@ -213,7 +213,7 @@
           <h3>You get real options</h3>
           <p>
             Drawn from a sourced library of adjustments, with what each one
-            typically costs. If there is nothing good to say, you are told that
+            typically costs. If there's nothing good to say, you're told that
             rather than given a guess.
           </p>
         </div>
@@ -223,7 +223,7 @@
           <h3>You decide whether to ask at all</h3>
           <p>
             Knowing is allowed. Asking is optional. Plenty of people only ever
-            want to find out what exists, and that is a complete use of this.
+            want to find out what exists, and that's a complete use of this.
           </p>
         </div>
       </li>
@@ -240,7 +240,7 @@
         <div>
           <h3>Nothing is sent until you clearly agree</h3>
           <p>
-            &ldquo;I guess so&rdquo; is not agreement. A hedge gets you asked
+            &ldquo;I guess so&rdquo; isn't agreement. A hedge gets you asked
             again, not a sent request.
           </p>
         </div>
@@ -250,7 +250,7 @@
 
   <section aria-labelledby="sec-what-cannot-happen-here">
     <p class="sec-label">Guarantees, not intentions</p>
-    <h2 id="sec-what-cannot-happen-here">What cannot happen here</h2>
+    <h2 id="sec-what-cannot-happen-here">What can't happen here</h2>
     <p>
       Each of these is prevented by the way the system is built, not by a
       promise to behave. The difference matters, because a promise can be
@@ -258,14 +258,14 @@
     </p>
     <ul class="negs">
       <li>
-        <b>Your diagnosis cannot be stored, because there is nowhere to put it.</b>
-        There is no field for a diagnosis, condition, disability type, medical
+        <b>Your diagnosis can't be stored, because there's nowhere to put it.</b>
+        There's no field for a diagnosis, condition, disability type, medical
         note, severity or prognosis anywhere in the system. Not encrypted &mdash;
         absent. An automated check fails the build if anyone adds one.
       </li>
       <li>
-        <b>A manager cannot be told what you have.</b> Not because access is
-        restricted, but because there is genuinely nothing to tell them.
+        <b>A manager can't be told what you've.</b> Not because access is
+        restricted, but because there's genuinely nothing to tell them.
       </li>
       <li>
         <b>Nothing can be sent to your employer without your explicit yes.</b>
@@ -273,17 +273,17 @@
         proves the refusal.
       </li>
       <li>
-        <b>You cannot be told to phone someone.</b> Every workplace process
-        seems to end at &ldquo;give us a call.&rdquo; If you cannot use a phone,
-        that is a locked door. A person here always reaches you by message.
+        <b>You can't be told to phone someone.</b> Every workplace process
+        seems to end at &ldquo;give us a call.&rdquo; If you can't use a phone,
+        that's a locked door. A person here always reaches you by message.
       </li>
       <li>
-        <b>You cannot be asked why you turned something off.</b> Withdrawing a
+        <b>You can't be asked why you turned something off.</b> Withdrawing a
         standing preference takes no reason, because the system has nowhere to
         record one, so nobody can ask you for one later.
       </li>
       <li>
-        <b>You cannot be profiled.</b> Nothing about you is inferred, scored or
+        <b>You can't be profiled.</b> Nothing about you is inferred, scored or
         predicted. Every signal in the system is one you set, in your own words.
       </li>
     </ul>
@@ -294,7 +294,7 @@
     <h2 id="sec-every-promise-on-this">Every promise on this page is enforced somewhere</h2>
     <p>
       A commitment that lives only in a policy document is an intention, and
-      intentions are not load bearing. These run before any change ships. Every
+      intentions aren't load bearing. These run before any change ships. Every
       figure on this site is recorded with its source, its date and its
       denominator in <span class="kw">docs/EVIDENCE.md</span>, including the
       ones that weaken the argument.
@@ -309,7 +309,7 @@
 
   <section aria-labelledby="sec-this-is-not-a">
     <p class="sec-label">Prior art</p>
-    <h2 id="sec-this-is-not-a">This is not a new idea. It is an unfinished one.</h2>
+    <h2 id="sec-this-is-not-a">This isn't a new idea. It's an unfinished one.</h2>
     <p>
       The Government of Canada already built this principle. Its Workplace
       Accessibility Passport records what someone needs once, belongs to the
@@ -318,9 +318,9 @@
       manager.
     </p>
     <p>
-      It works. It is also only available if you happen to work for the federal
+      It works. It's also only available if you happen to work for the federal
       public service. Curb Cut takes the same principle to everyone else &mdash;
-      including contractors, and applicants who do not have a work account at all
+      including contractors, and applicants who don't have a work account at all
       and are currently expected to disclose a disability to a stranger before
       they have even been hired.
     </p>
@@ -330,15 +330,15 @@
     <p class="sec-label">Where the name comes from</p>
     <h2 id="sec-the-ramp-cut-into">The ramp cut into the kerb was fought for by wheelchair users</h2>
     <p>
-      It is now used by anyone pushing a pram, dragging a suitcase, riding a
+      It's now used by anyone pushing a pram, dragging a suitcase, riding a
       bike, or walking with a knee that hurts. Nobody thinks of it as
-      accommodation any more. It is just how the pavement works.
+      accommodation any more. It's just how the pavement works.
     </p>
     <p>
       A process that lets someone ask for what they need without first
       explaining their body to a stranger is the same shape of thing. Built
-      because some people cannot get up the kerb, and better for everyone once
-      it is there.
+      because some people can't get up the kerb, and better for everyone once
+      it's there.
     </p>
   </section>
 
@@ -349,7 +349,7 @@
     </div>
     <p>
       Or text <span class="kw">+1 276 495 9311</span> and say what is hard, once
-      carrier registration clears. That is the whole thing.
+      carrier registration clears. That's the whole thing.
     </p>
     <p class="cta-note">
       Message and data rates may apply. Reply <span class="kw">HELP</span> for
@@ -365,7 +365,7 @@
       Nothing here relies on colour alone to tell you something &mdash; every
       state also carries a word or a shape. Body text is set for AAA contrast
       rather than AA. It works by keyboard, it works with a screen reader, and
-      it holds still if you have asked your device to reduce motion.
+      it holds still if you've asked your device to reduce motion.
     </p>
   </section>
 

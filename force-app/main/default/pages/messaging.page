@@ -11,17 +11,18 @@
 <body>
 <c:CurbCutShell pageTitle="Messaging" current="messaging"
   eyebrow="The text message programme"
-  heading="You text first. That is the only way in."
-  lede="Nobody is added to a list here. There is no list.">
+  heading="You text first. That's the only way in."
+  lede="Nobody is added to a list here. There's no list.">
 
   <section aria-labelledby="sec-you-send-the-first">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
-        Curb Cut is a workplace accessibility assistant. You text it to find out
-        what adjustments you could ask for at work, and it can draft a request
-        and send it to your employer &mdash; but only if you approve it first,
-        in the conversation. It never messages anyone who has not messaged it.
+        Curb Cut is for anyone who has something at work that's quietly hard, and who
+        has never asked for help. You text it, in your own words, and it tells you what
+        you could ask for. If you want, it writes the request for you and sends it, but
+        only once you've read it and said yes. It never messages anyone who hasn't
+        messaged it first.
       </p>
     </div>
   </section>
@@ -33,16 +34,16 @@
         <tr><th>Programme name</th><td>Curb Cut</td></tr>
         <tr><th>Operated by</th><td>Parth Sevak, Welland, Ontario, Canada</td></tr>
         <tr><th>Number</th><td><span class="kw">+1 276 495 9311</span></td></tr>
-        <tr><th>Who it is for</th>
-            <td>Employees, contractors and applicants who want to know what
-                workplace adjustments exist and how to ask for one.</td></tr>
+        <tr><th>Who it's for</th>
+            <td>Anyone at work, or trying to get work, who wants to know what
+                could make it easier and how to ask, without explaining themselves.</td></tr>
         <tr><th>Message type</th>
             <td>Conversational replies only. Every message you receive answers a
-                message you sent. There is no marketing, no promotion, and no
+                message you sent. There's no marketing, no promotion, and no
                 recurring or scheduled messaging of any kind.</td></tr>
         <tr><th>Message frequency</th>
-            <td>Varies, and is entirely determined by you. If you stop texting,
-                the messages stop.</td></tr>
+            <td>That's up to you. Every message you get answers one you sent. If you stop
+                texting, the messages stop.</td></tr>
         <tr><th>Cost</th>
             <td><b>Message and data rates may apply.</b> Curb Cut charges you
                 nothing.</td></tr>
@@ -57,10 +58,9 @@
     <p class="sec-label">Opt-in, path one of one</p>
     <h2 id="sec-you-send-the-first-3">id="sec-you-send-the-first-2">id="sec-you-send-the-first">You send the first message, from this notice</h2>
     <p>
-      There is exactly one way to start receiving messages from Curb Cut: you
-      text the number yourself. The notice below is what is printed and put up
-      in workplaces, break rooms and union offices. It is reproduced here
-      word for word, including the consent line.
+      There's exactly one way to start: you text the number yourself. The notice below
+      is the one we print and put up in break rooms and union offices. It's here word
+      for word, including the consent line.
     </p>
 
     <div class="poster">
@@ -68,8 +68,8 @@
       <p class="poster-do">Text CURB CUT to</p>
       <p class="poster-num">+1 276 495 9311</p>
       <p class="poster-why">
-        Find out what you could ask for. You do not need an account, a work
-        login, or a reason. You never have to say what condition you have.
+        Find out what you could ask for, in your own words. You don't need an account,
+        a work login, or a reason, and you never have to say what condition you've.
       </p>
       <p class="poster-legal">
         By texting this number you agree to receive text messages from Curb Cut
@@ -81,10 +81,9 @@
     </div>
 
     <p style="margin-top:1.4rem">
-      That is the whole opt-in. There is no web form, no imported list, no
-      purchased data, no third-party lead source, and no box that anyone can
-      tick on your behalf. If you have not texted the number, the number will
-      never text you.
+      That's the whole opt-in. There's no web form, no imported list, no bought data,
+      and no box anyone can tick on your behalf. If you haven't texted the number,
+      the number will never text you.
     </p>
   </section>
 
@@ -92,33 +91,32 @@
     <p class="sec-label">What actually arrives</p>
     <h2 id="sec-the-exact-messages-as">The exact messages, as sent</h2>
     <p>
-      These are quoted from the running code, not paraphrased. The first is sent
-      once, immediately after your very first message, as a second message so
-      that the answer you asked for arrives before the small print.
+      These are copied from the running code, not paraphrased. The first one is sent
+      once, right after your very first message, as a second message, so the answer
+      you asked for arrives before the small print does.
     </p>
 
     <p class="sms-label">Sent once, on your first message</p>
-    <div class="sms">Curb Cut: you texted first, so you will get replies from this number. Message frequency varies and replies only follow your own messages. Message and data rates may apply. Reply HELP for help, STOP to stop. Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms Privacy https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/privacy</div>
+    <div class="sms">Curb Cut: you texted first, so you'll get replies from this number. Message frequency varies and replies only follow your own messages. Message and data rates may apply. Reply HELP for help, STOP to stop. Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms Privacy https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/privacy</div>
 
     <p class="sms-label">If you reply HELP or INFO</p>
-    <div class="sms">Curb Cut helps you find out what could make work easier at work, and ask for it, without ever saying what condition you have. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms</div>
+    <div class="sms">Curb Cut helps you find out what could make work easier at work, and ask for it, without ever saying what condition you've. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms</div>
 
     <p class="sms-label">If you reply STOP, STOPALL, UNSUBSCRIBE, CANCEL, END or QUIT</p>
-    <div class="sms">Curb Cut: you will not get any more messages from this number. Reply START if you ever want to come back. Nothing about you is kept.</div>
+    <div class="sms">Curb Cut: you won't get any more messages from this number. Reply START if you ever want to come back. Nothing about you is kept.</div>
 
     <p class="sms-label">If you later reply START, YES or UNSTOP</p>
-    <div class="sms">Curb Cut: you are back. Tell me what is hard at work right now. Message and data rates may apply. Reply HELP for help, STOP to stop.</div>
+    <div class="sms">Curb Cut: you're back. Tell me what is hard at work right now. Message and data rates may apply. Reply HELP for help, STOP to stop.</div>
   </section>
 
   <section aria-labelledby="sec-stop-works-immediately-and">
     <p class="sec-label">Stopping</p>
-    <h2 id="sec-stop-works-immediately-and">STOP works, immediately, and you are not asked why</h2>
+    <h2 id="sec-stop-works-immediately-and">STOP works, immediately, and you aren't asked why</h2>
     <p>
-      Reply <span class="kw">STOP</span> at any time. You get one confirmation
-      and then nothing further, ever, unless you text again yourself. You will
-      not be asked to confirm twice, given a reason to reconsider, or asked what
-      went wrong. The system has nowhere to record a reason, so nobody can ask
-      you for one later.
+      Reply <span class="kw">STOP</span> at any time. You get one confirmation and then nothing more, ever, unless
+      you text again yourself. You won't be asked to confirm twice, or given a reason
+      to reconsider, or asked what went wrong. There's nowhere to record a reason,
+      so nobody can ask you for one later.
     </p>
     <div class="note">
       <p>
@@ -130,9 +128,9 @@
         and <span class="kw">WHO</span> lists everyone who has been shown it
         &mdash; both take the six-character code you were given when you saved
         it, like <span class="kw">OFF 4KQ7MT</span>, because we hold no record of
-        who you are and cannot look you up.
+        who you're and can't look you up.
         Inside a conversation, <span class="kw">DELETE</span> discards a drafted
-        request before it is sent. The assistant is specifically instructed never
+        request before it's sent. The assistant is specifically instructed never
         to tell you to reply STOP for any of these, because STOP belongs to you
         and to your carrier, not to us.
       </p>
@@ -141,19 +139,18 @@
 
   <section aria-labelledby="sec-it-is-hashed-on">
     <p class="sec-label">What we do with your number</p>
-    <h2 id="sec-it-is-hashed-on">It is hashed on arrival and never stored</h2>
+    <h2 id="sec-it-is-hashed-on">It's hashed on arrival and never stored</h2>
     <p>
-      Your phone number is turned into a one-way salted hash the moment a
-      message arrives, and it is that hash, never the number, that is written
-      down. It exists so your conversation stays continuous across messages.
-      Numbers are never sold, never shared for anyone else's purposes, never
-      used for marketing, and never handed to a data broker or an advertiser.
+      The moment a message arrives, your number is turned into a one-way salted hash,
+      and it's that hash, never the number, that gets written down. It's there so your
+      conversation can carry on from one message to the next. Your number is never
+      sold, never shared, never used for marketing, and never handed to anyone.
       The full detail is in the <a href="/privacy">Privacy Policy</a>.
     </p>
   </section>
 
   <section aria-labelledby="sec-other-ways-in-if">
-    <h2 id="sec-other-ways-in-if">Other ways in, if texting is not the one that works for you</h2>
+    <h2 id="sec-other-ways-in-if">Other ways in, if texting isn't the one that works for you</h2>
     <p>
       The same assistant answers on <a href="/ask">this website</a> with no
       phone involved at all, by email, and by voice on the same number for

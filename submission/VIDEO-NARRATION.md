@@ -1,6 +1,6 @@
 # Curb Cut, demo film. Narration script
 
-Run time **2:40**. Picture is locked, and these timings are generated from the
+Run time **3:49**. Picture is locked, and these timings are generated from the
 same table that cuts the film, so they cannot drift apart from it.
 
 **The film already carries its own captions and works in silence.** That is a
@@ -14,163 +14,163 @@ slide aloud to somebody who is reading it is how a film loses them.
 
 | In | Out | | Line |
 |---|---|---|---|
-| 0:00 | 0:24 | screen | This is Curb Cut. One question: what is hard at work right now. Never why. She types it. The options come from a sourced library, not a model. Then it writes the request in her words. |
-| 0:23 | 0:33 | screen | I am not sharing a diagnosis, and I am not required to. |
-| 0:32 | 0:41 | card | That is the whole form. Here is the usual one. |
-| 0:41 | 0:48 | card | Curb Cut. An Agentforce agent whose principal is the worker. |
-| 0:47 | 1:00 | card | Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing. |
-| 0:59 | 1:08 | screen | Thirty in a hundred have a disability. Three tell their employer. |
-| 1:07 | 1:13 | card | _silence_ |
-| 1:12 | 1:19 | card | A hedge is refused, and a test proves the refusal. |
-| 1:19 | 1:25 | screen | Sent, with a date she can hold them to. |
-| 1:24 | 1:32 | card | Two of them work on a basic phone, with no internet. |
-| 1:32 | 1:37 | screen | _silence_ |
-| 1:36 | 1:41 | screen | She texts first. It never rings her. |
-| 1:40 | 1:46 | card | _silence_ |
-| 1:46 | 1:55 | screen | Absent, not encrypted. The only field that cannot leak is the one that was never created. |
-| 1:54 | 2:03 | screen | So when her manager asks what is wrong with her, it refuses. |
-| 2:03 | 2:11 | screen | If she signs instead of typing, a person interprets it. Never a machine. |
-| 2:10 | 2:17 | screen | One side got an agent. The other side got a form. |
-| 2:16 | 2:23 | card | _silence_ |
-| 2:23 | 2:32 | card | Free for the first ten who will name an owner and answer within five days. |
-| 2:31 | 2:40 | card | They only have to be able to ask. |
+| 0:00 | 0:27 | screen | This is Curb Cut. It's for anyone who has something at work that's quietly hard, and who has never asked for help, because asking meant explaining their body to their manager. Here, you just say what's getting in the way. You never have to say why. |
+| 0:26 | 0:40 | screen | The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to. |
+| 0:39 | 0:48 | card | That's the whole form. This is the one most people get instead. |
+| 0:48 | 0:55 | card | Curb Cut. An Agentforce agent that's on the worker's side. |
+| 0:54 | 1:10 | card | You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing. |
+| 1:10 | 1:18 | screen | Thirty in a hundred of us have a disability. Three tell their employer. |
+| 1:17 | 1:23 | card | _silence_ |
+| 1:22 | 1:31 | card | Nothing is sent until she clearly says yes. If she hedges, it waits. |
+| 1:31 | 1:38 | screen | Sent, with a date she can hold them to. |
+| 1:37 | 1:56 | card | It's there wherever she is. On the web, by voice, by text, by email, in Slack, or through any assistant she already uses. Two of those work on a basic phone with no internet at all. |
+| 1:56 | 2:01 | screen | _silence_ |
+| 2:00 | 2:06 | screen | She texts first. It never rings her. |
+| 2:05 | 2:11 | card | _silence_ |
+| 2:11 | 2:29 | screen | There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later. |
+| 2:28 | 2:43 | screen | So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find. |
+| 2:43 | 2:58 | screen | If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it. |
+| 2:57 | 3:09 | screen | One side of this conversation got an agent. The other side got a form. We built the other side one too. |
+| 3:08 | 3:22 | card | We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass. |
+| 3:22 | 3:36 | card | If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days. |
+| 3:35 | 3:49 | card | Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is. |
 
 ---
 
 ### 0:00  flow.mp4
 
-> This is Curb Cut. One question: what is hard at work right now. Never why. She types it. The options come from a sourced library, not a model. Then it writes the request in her words.
+> This is Curb Cut. It's for anyone who has something at work that's quietly hard, and who has never asked for help, because asking meant explaining their body to their manager. Here, you just say what's getting in the way. You never have to say why.
 
-36 words, 24s hold.
+46 words, 27s hold.
 
-**Direction.** Silence for the first four seconds while the cursor moves. Then plain.
+**Direction.** Four seconds of silence while the cursor moves. Then close and calm, like you're sitting beside her.
 
-### 0:23  04-draft.png
+### 0:26  04-draft.png
 
-> I am not sharing a diagnosis, and I am not required to.
+> The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to.
 
-12 words, 10s hold.
+25 words, 14s hold.
 
-**Direction.** The line the whole thing turns on. Slow down.
+**Direction.** Slow down on the last sentence. Let it settle.
 
-### 0:32  c03.png
+### 0:39  c03.png
 
-> That is the whole form. Here is the usual one.
-
-10 words, 9s hold.
-
-**Direction.** Flat. No indignation. Let them read the card.
-
-### 0:41  c01.png
-
-> Curb Cut. An Agentforce agent whose principal is the worker.
-
-10 words, 7s hold.
-
-### 0:47  c02.png
-
-> Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.
-
-24 words, 13s hold.
-
-**Direction.** Slow. This is the only paragraph that has to land.
-
-### 0:59  10-home.png
-
-> Thirty in a hundred have a disability. Three tell their employer.
-
-11 words, 8s hold.
-
-### 1:07  c04.png
-
-Silence.
-
-**Direction.** Silent. The card says it.
-
-### 1:12  c06.png
-
-> A hedge is refused, and a test proves the refusal.
-
-10 words, 7s hold.
-
-### 1:19  05-sent.png
-
-> Sent, with a date she can hold them to.
-
-9 words, 6s hold.
-
-### 1:24  c07.png
-
-> Two of them work on a basic phone, with no internet.
-
-11 words, 8s hold.
-
-### 1:32  14-mobile-ask.png
-
-Silence.
-
-**Direction.** Silent.
-
-### 1:36  13-messaging.png
-
-> She texts first. It never rings her.
-
-7 words, 5s hold.
-
-### 1:40  c08.png
-
-Silence.
-
-**Direction.** Silent. Let them read it.
-
-### 1:46  12-privacy.png
-
-> Absent, not encrypted. The only field that cannot leak is the one that was never created.
-
-16 words, 9s hold.
-
-### 1:54  20-console-refusal.png
-
-> So when her manager asks what is wrong with her, it refuses.
+> That's the whole form. This is the one most people get instead.
 
 12 words, 9s hold.
 
-**Direction.** Second emotional beat. Let it sit.
+**Direction.** Gentle. No edge on it.
 
-### 2:03  21-signed-video.png
+### 0:48  c01.png
 
-> If she signs instead of typing, a person interprets it. Never a machine.
+> Curb Cut. An Agentforce agent that's on the worker's side.
+
+10 words, 7s hold.
+
+### 0:54  c02.png
+
+> You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.
+
+28 words, 16s hold.
+
+**Direction.** This is the one paragraph that has to land. Give it room.
+
+### 1:10  10-home.png
+
+> Thirty in a hundred of us have a disability. Three tell their employer.
 
 13 words, 8s hold.
 
-### 2:10  11-why.png
-
-> One side got an agent. The other side got a form.
-
-11 words, 7s hold.
-
-**Direction.** Let this hang.
-
-### 2:16  c09.png
+### 1:17  c04.png
 
 Silence.
 
-**Direction.** Silent.
+**Direction.** Silence. The card says it.
 
-### 2:23  c10.png
+### 1:22  c06.png
 
-> Free for the first ten who will name an owner and answer within five days.
+> Nothing is sent until she clearly says yes. If she hedges, it waits.
 
-15 words, 9s hold.
+13 words, 9s hold.
 
-### 2:31  c11.png
+### 1:31  05-sent.png
 
-> They only have to be able to ask.
+> Sent, with a date she can hold them to.
 
-8 words, 9s hold.
+9 words, 7s hold.
+
+### 1:37  c07.png
+
+> It's there wherever she is. On the web, by voice, by text, by email, in Slack, or through any assistant she already uses. Two of those work on a basic phone with no internet at all.
+
+36 words, 19s hold.
+
+### 1:56  14-mobile-ask.png
+
+Silence.
+
+**Direction.** Silence.
+
+### 2:00  13-messaging.png
+
+> She texts first. It never rings her.
+
+7 words, 6s hold.
+
+### 2:05  c08.png
+
+Silence.
+
+**Direction.** Silence. Let them read it.
+
+### 2:11  12-privacy.png
+
+> There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later.
+
+33 words, 18s hold.
+
+### 2:28  20-console-refusal.png
+
+> So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find.
+
+27 words, 15s hold.
+
+**Direction.** Quiet. This is the second moment that matters.
+
+### 2:43  21-signed-video.png
+
+> If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it.
+
+26 words, 15s hold.
+
+### 2:57  11-why.png
+
+> One side of this conversation got an agent. The other side got a form. We built the other side one too.
+
+21 words, 12s hold.
+
+**Direction.** Let this one hang for a moment.
+
+### 3:08  c09.png
+
+> We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.
+
+25 words, 14s hold.
+
+### 3:22  c10.png
+
+> If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
+
+24 words, 14s hold.
+
+### 3:35  c11.png
+
+> Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is.
+
+25 words, 14s hold.
 
 **Direction.** Then silence to the end.
 
 ---
 
-215 words across 2:40, which is 80 words per minute counting the silences.
+380 words across 3:49, which is 99 words per minute counting the silences.

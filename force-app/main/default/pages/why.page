@@ -12,7 +12,7 @@
 <c:CurbCutShell pageTitle="Why now" current="why"
   eyebrow="Why this, and why now"
   heading="One side of this conversation got an agent. The other side got a form."
-  lede="That asymmetry is new. It is the whole reason for building this in 2026 rather than admiring the problem for another decade.">
+  lede="That asymmetry is new. It's the whole reason for building this in 2026 rather than admiring the problem for another decade.">
 
   <section aria-labelledby="sec-the-thing-that-works">
     <p class="sec-label">The finding everything rests on</p>
@@ -23,12 +23,12 @@
       definition. <strong>3.2% tell their employer.</strong>
     </p>
     <p>
-      That gap is not caused by the outcome being bad. Of the people who did
+      That gap isn't caused by the outcome being bad. Of the people who did
       disclose, <strong>83% said it got them better support</strong>. Disclosure
       works. It works for five out of six people who try it.
     </p>
     <p>
-      So this is not a population making a cost-benefit calculation and landing
+      So this isn't a population making a cost-benefit calculation and landing
       on no. Something is stopping people at the door, before the calculation.
       What is stopping them is the asking itself: finding the policy, learning
       its words, holding a work login, filling in the form, and saying a
@@ -41,7 +41,7 @@
         free.</strong> Of the employers who gave the Job Accommodation Network
         cost figures, 61% said the accommodation cost them nothing. A third
         reported a one-time cost with a median of $300. Two thirds called it
-        very or extremely effective. Twelve per cent said it did not work, which
+        very or extremely effective. Twelve per cent said it didn't work, which
         is worth stating, because a page that only quotes the two thirds is
         selling something.
       </p>
@@ -60,8 +60,8 @@
       At an EEOC public hearing in January 2023, the estimate put on the record
       was that <strong>as many as 83% of employers, and up to 99% of the
       Fortune 500, use some automated tool to screen or rank candidates</strong>.
-      Treat that as an estimate rather than a measurement &mdash; it is quoted
-      as one. It is still enough to say that at a large employer, something
+      Treat that as an estimate rather than a measurement &mdash; it's quoted
+      as one. It's still enough to say that at a large employer, something
       automated reads you before a person does.
     </p>
     <p>
@@ -93,7 +93,7 @@
       So the disabled person now negotiates with a system, <em>using a PDF.</em>
     </p>
     <p class="thesis-sub">
-      This is the part that is genuinely new. For most of the history of this
+      This is the part that's genuinely new. For most of the history of this
       problem, both sides of an accommodation conversation were people, moving
       at the speed of people. Now one side runs at machine scale, applies the
       same rule to fifty thousand applicants before lunch, and never gets tired.
@@ -103,7 +103,7 @@
   </section>
 
   <section aria-labelledby="sec-every-rule-so-far-2">
-    <p class="sec-label">Why regulation is not the whole answer</p>
+    <p class="sec-label">Why regulation isn't the whole answer</p>
     <h2 id="sec-every-rule-so-far-2">id="sec-every-rule-so-far">Every rule so far governs their machine. None of them gives you one.</h2>
     <p>
       California's rules on automated decision systems in employment took effect
@@ -112,14 +112,14 @@
       This is real progress and it should continue.
     </p>
     <p>
-      But look at what all of it does. It constrains the system that is pointed
+      But look at what all of it does. It constrains the system that's pointed
       <em>at</em> you. It makes the screening fairer, the audit more likely, the
       liability clearer. What none of it does is hand you anything. After every
-      one of those rules lands, the person who cannot type for long still has to
+      one of those rules lands, the person who can't type for long still has to
       find the policy, learn its words, and say the sentence.
     </p>
     <p>
-      <strong>There is no reason the capability should only run in one
+      <strong>There's no reason the capability should only run in one
       direction.</strong> The same technology that reads fifty thousand
       applicants can sit on the other side of the table and know the answer to
       "what am I even allowed to ask for" &mdash; which is the question almost
@@ -133,15 +133,15 @@
     <p>
       Curb Cut belongs to the person, not to the employer. It knows a sourced
       library of adjustments and what they typically cost. It will write the
-      request in your words. It will not send it until you say yes, and a hedge
-      is not a yes.
+      request in your words. It won't send it until you say yes, and a hedge
+      isn't a yes.
     </p>
     <p>
-      And it never asks what you have. Not as a courtesy &mdash; there is no
+      And it never asks what you've. Not as a courtesy &mdash; there's no
       field for a diagnosis anywhere in the system, so a manager who asks is
       told that nobody knows and nobody can find out. The 3.2% number at the top
       of this page is a measurement of how much people fear that question. The
-      correct response to it is not to promise discretion. It is to make the
+      correct response to it isn't to promise discretion. It's to make the
       question unanswerable.
     </p>
   </section>
@@ -151,7 +151,7 @@
     <h2 id="sec-what-an-agent-built">What an agent built for disabled people could do to them</h2>
     <p>
       Pointing a capable agent at this problem creates new ways to hurt the
-      people it is for. These are not hypotheticals we are being careful about.
+      people it's for. These aren't hypotheticals we're being careful about.
       Each one is a specific harm with a specific thing built to prevent it, and
       each is enforced somewhere a reader can check.
     </p>
@@ -159,8 +159,8 @@
       <tbody>
         <tr>
           <th>It becomes a new place to disclose</th>
-          <td>An assistant that is easy to talk to collects more than a form
-              does. So there is no field for a diagnosis, condition, disability
+          <td>An assistant that's easy to talk to collects more than a form
+              does. So there's no field for a diagnosis, condition, disability
               type, medical note, severity or prognosis. Not restricted &mdash;
               absent. An automated check fails the build if anyone adds one.</td>
         </tr>
@@ -168,17 +168,17 @@
           <th>It guesses, confidently</th>
           <td>A fluent wrong answer to "what could I ask for" sends someone to
               their manager with a bad request and costs them the ask. Options
-              come from a sourced library or not at all; when there is no match
+              come from a sourced library or not at all; when there's no match
               it says so rather than improvising.</td>
         </tr>
         <tr>
           <th>It acts on an ambiguous yes</th>
-          <td>"I guess so" is how people agree to things they do not want. The
+          <td>"I guess so" is how people agree to things they don't want. The
               code that creates a request refuses to run without explicit
               approval, and a test proves the refusal.</td>
         </tr>
         <tr>
-          <th>It becomes another thing you cannot escape</th>
+          <th>It becomes another thing you can't escape</th>
           <td>Being stuck with a machine is the specific failure mode disabled
               people already know from phone trees. A person is always
               reachable, and always reaches you by message, never by telephone.</td>
@@ -201,28 +201,28 @@
 
   <section aria-labelledby="sec-it-is-thursday">
     <p class="sec-label">Who this is actually for</p>
-    <h2 id="sec-it-is-thursday">It is Thursday</h2>
+    <h2 id="sec-it-is-thursday">It's Thursday</h2>
     <p>
-      You have not slept properly since Sunday, because the new seating plan put
+      You haven't slept properly since Sunday, because the new seating plan put
       you under a light that hums. You already know what would fix it. You have
       known for three weeks.
     </p>
     <p>
-      What you do not know is how to say it. Not the words &mdash; the
+      What you don't know is how to say it. Not the words &mdash; the
       consequence. Whether it goes in a file. Whether it comes up in March.
       Whether the person you tell is the person who decides about the promotion,
       and whether they will remember you as someone who needed something.
     </p>
     <p>
       So you do the arithmetic everybody in this position does, and you decide
-      you will manage, because managing is a known quantity and asking is not.
+      you'll manage, because managing is a known quantity and asking isn't.
       Then the form asks you to describe your limitations in the box provided.
     </p>
     <p>
       <strong>Curb Cut is built for that Thursday.</strong> Not for the policy,
       not for the audit, and not for the employer's compliance position. For the
-      forty seconds in which somebody decides it is not worth it, and is right,
-      because the way we have built this has made them right.
+      forty seconds in which somebody decides it isn't worth it, and is right,
+      because the way we've built this has made them right.
     </p>
   </section>
 
@@ -232,7 +232,7 @@
       Every figure on this page is recorded with its source, its date and its
       denominator, including the ones that weaken the argument. That file is in
       the repository as <span class="kw">docs/EVIDENCE.md</span>, and it exists
-      because a claim you cannot check is not evidence, it is decoration.
+      because a claim you can't check isn't evidence, it's decoration.
     </p>
     <div class="cta">
       <a class="btn primary" href="/ask">Try it <span class="arrow">&rarr;</span></a>
