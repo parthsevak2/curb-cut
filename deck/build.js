@@ -71,20 +71,20 @@ function arrow(s,x,y,w,h,c){
     bold:true,fontFace:H,color:PAPER}});
   T(s,{t:'Think of the last time something at work was quietly hard. The chair. The light. A meeting at the wrong hour for your body.',
     o:{x:ML,y:2.75,w:10.9,h:1.0,fontSize:21,fontFace:B,color:'D8DAD6'}});
-  T(s,{t:'You worked out what it would take to ask. Who you would have to tell. How it would sound. And you decided it was not worth the conversation.',
+  T(s,{t:'You worked out what it would take to ask. Who you would have to tell. How it would sound. And you decided it wasn\'t worth the conversation.',
     o:{x:ML,y:3.95,w:10.9,h:1.1,fontSize:21,fontFace:B,color:'D8DAD6'}});
   T(s,{t:'Now make it permanent, and make the conversation about your body.',
     o:{x:ML,y:5.35,w:10.9,h:0.8,fontSize:26,fontFace:H,italic:true,color:GOLDLT}});
   T(s,{t:'That is the whole problem. Everyone in this room has felt the small version of it.',
     o:{x:ML,y:6.45,w:11,h:0.5,fontSize:12.5,fontFace:M,color:DIMTX}});
-  s.addNotes('Say the first line, then pause. Let people actually remember. Do not rush to the second line. Nobody needs a citation for this one because everybody has lived it.');
+  s.addNotes('Say the first line, then pause. Let people actually remember. Don\'t rush to the second line. Nobody needs a citation for this one because everybody has lived it.');
 }
 
 /* ------------------------------------------------------- 3 WHAT SHE ASKS FOR */
 { const s=light(); chip(s,'WHAT YOU DECIDED NOT TO DO');
   title(s,'Now imagine the form was mandatory.');
   T(s,{t:[{text:'You did that calculation privately and moved on.',options:{breakLine:true,bold:true}},
-    {text:'For roughly three in ten people at work, that calculation is not occasional. It is a standing condition of the job, and the price of getting it wrong is not an awkward moment. It is being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
+    {text:'For roughly three in ten people at work, that calculation isn\'t occasional. It is a standing condition of the job, and the price of getting it wrong isn\'t an awkward moment. It is being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
     {text:'And the way through is almost never a conversation. It is this.',options:{bold:true}}],
     o:{x:ML,y:1.95,w:6.9,h:2.7,fontSize:16,fontFace:B,color:INK,paraSpaceAfter:12}});
   s.addShape(p.ShapeType.rect,{x:8.2,y:1.95,w:4.25,h:2.45,fill:{color:SURF},line:{color:RED,width:2}});
@@ -94,15 +94,15 @@ function arrow(s,x,y,w,h,c){
   T(s,{t:'Required',o:{x:8.5,y:3.38,w:3.6,h:0.3,fontSize:11,fontFace:B,color:RED}});
   T(s,{t:'Everything after this slide is about that box.',o:{x:8.5,y:3.75,w:3.7,h:0.5,
     fontSize:11.5,fontFace:H,italic:true,color:SOFT}});
-  kicker(s,'It does not want to understand her. It wants a diagnosis, in writing, for somebody who will still be her manager on Monday.');
+  kicker(s,'It doesn\'t want to understand her. It wants a diagnosis, in writing, for somebody who will still be her manager on Monday.');
 }
 
 /* ------------------------------------------------------------- 4 THE STAKES */
 { const s=light(); chip(s,'WHY THIS IS NOT A SMALL THING');
-  title(s,'One roadblock is not one bad day.');
+  title(s,'One roadblock isn\'t one bad day.');
   const c=[['It ends careers quietly','Nobody is fired for needing an hour moved. They just stop being considered, stop being staffed, stop being asked.'],
            ['It compounds','A job lost is a reference lost, a gap on a CV, a mortgage refused. The roadblock is one afternoon. The consequence is a decade.'],
-           ['It is almost always man-made','Not the condition. The form, the login, the policy nobody can find, the manager who needs proof.'],
+           ['It\'s almost always man-made','Not the condition itself, but the form, the login, the policy nobody can find, and the manager who needs proof.'],
            ['It reaches past the person','Their family. Their kids. The income that pays for the thing that would have helped.']];
   c.forEach(([t,d],i)=>{ const x=0.85+(i%2)*6.0, y=1.95+Math.floor(i/2)*1.75;
     s.addShape(p.ShapeType.roundRect,{x,y,w:5.6,h:1.5,rectRadius:0.05,
@@ -110,8 +110,8 @@ function arrow(s,x,y,w,h,c){
     T(s,{t,o:{x:x+0.22,y:y+0.16,w:5.2,h:0.35,fontSize:15,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:x+0.22,y:y+0.58,w:5.2,h:0.85,fontSize:12,fontFace:B,color:SOFT}});
   });
-  kicker(s,'We say everyone is equal. In a market, everyone is a transaction. It should not take a dataset to argue that a person is worth an hour of flexibility. Here is the dataset anyway.');
-  s.addNotes('This is the moral argument. Do not rush it and do not soften it.');
+  kicker(s,'We say everyone is equal. In a market, everyone is a transaction. It shouldn\'t take a dataset to argue that a person is worth an hour of flexibility. Here is the dataset anyway.');
+  s.addNotes('This is the moral argument. Don\'t rush it and don\'t soften it.');
 }
 
 /* ---------------------------------------------------------------- 5 AGENDA */
@@ -119,9 +119,9 @@ function arrow(s,x,y,w,h,c){
   title(s,'Five things, and an appendix.');
   const rows=[['01','The cost of telling','What disclosure takes out of a person, in their own words'],
               ['02','The evidence','WHO, Statistics Canada, US Bureau of Labor Statistics, and the study that measures the gap directly'],
-              ['03','The build','Reference architecture, the channel layer, the grounding path, and the three rules the system will not break'],
+              ['03','The build','Reference architecture, the channel layer, the grounding path, and the three rules the system won\'t break'],
               ['04','The honest part','What we shipped wrong, what two audits found, and what still fails'],
-              ['05','The offer','Why good employers have not done this, and what we will give the first ten who will'],
+              ['05','The offer','Why good employers haven\'t done this, and what we will give the first ten who will'],
               ['A','Appendix','Every figure with its source, and the command that proves each one']];
   rows.forEach(([n,t,d],i)=>{ const y=1.88+i*0.72;
     T(s,{t:n,o:{x:ML,y,w:0.8,h:0.44,fontSize:19,bold:true,fontFace:M,color:GOLD}});
@@ -137,8 +137,8 @@ divider('01','The cost of telling');
 /* ------------------------------------------------------------- 7 VOICE TWO */
 voice('...having to sit down and explain it six times a day to twenty different people adds to that exhaustion.',
  'Interview participant, workplace disclosure study, Proceedings of the ACM on\nHuman-Computer Interaction. One of eight people with invisible chronic conditions.',
- 'This is the sentence the standing preference exists for. Call back to it later. If asked about the date: the gap it describes was measured again by Statistics Canada in 2022 and by the US Bureau of Labor Statistics in 2025, and it has not closed.',33,
- 'Measured again in 2022 and 2025. It has not closed.');
+ 'This is the sentence the standing preference exists for. Call back to it later. If asked about the date: the gap it describes was measured again by Statistics Canada in 2022 and by the US Bureau of Labor Statistics in 2025, and it hasn\'t closed.',33,
+ 'Measured again in 2022 and 2025. It hasn\'t closed.');
 
 /* --------------------------------------------------------- 8 THE REPEAT TAX */
 { const s=light(); chip(s,'01  THE COST OF TELLING');
@@ -225,7 +225,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:n,o:{x,y:5.38,w:3.7,h:0.32,fontSize:12.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x,y:5.72,w:3.7,h:0.5,fontSize:10.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'The gap is not a spending gap. It is a process gap, which is cheaper to close and harder to sell, because no budget line says "the asking was too hard".');
+  kicker(s,'The gap isn\'t a spending gap. It is a process gap, which is cheaper to close and harder to sell, because no budget line says "the asking was too hard".');
 }
 
 /* ----------------------------------------------------------- 12 DIVIDER 03 */
@@ -263,7 +263,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
     T(s,{t:items.map((t,j)=>({text:t,options:{bullet:true,breakLine:j<items.length-1}})),
       o:{x:x+0.27,y:2.6,w:5.1,h:2.2,fontSize:12.5,fontFace:B,color:INK,paraSpaceAfter:7}});
   });
-  T(s,{t:'Six classes write to it. None can write a body, because there is no field for one. Five reports and one dashboard sit on top of it for the person on duty: who is waiting, what did not arrive, who needs an interpreter.',
+  T(s,{t:'Six classes write to it. None can write a body, because there\'s no field for one. Five reports and one dashboard sit on top of it for the person on duty: who is waiting, what didn\'t arrive, who needs an interpreter.',
     o:{x:ML,y:5.08,w:11.6,h:0.9,fontSize:13.5,fontFace:B,color:SOFT}});
   kicker(s,'Telemetry that would let an employer read a conversation is surveillance with a dashboard. This one measures the system and protects the person.');
   src(s,'Message_Log__c   ·   9 fields, no body   ·   How_People_Reach_Us, Messages_That_Did_Not_Arrive, Who_Is_Waiting, Needs_An_Interpreter, Awaiting_A_Decision');
@@ -288,7 +288,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
     T(s,{t:d,o:{x:3.38,y:y+0.2,w:8.9,h:0.4,fontSize:12,fontFace:B,color:INK}});
     if(i<4) arrow(s,1.12,y+0.68,0,0.17);
   });
-  kicker(s,'Steps one to four contain no inference at all. The cheapest system is the one that does not ask a model a question it already knows the answer to.');
+  kicker(s,'Steps one to four contain no inference at all. The cheapest system is the one that doesn\'t ask a model a question it already knows the answer to.');
 }
 
 /* ------------------------------------------------------- 14 SWIM LANES */
@@ -319,7 +319,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
         line:{color:LINE,width:2}}); }
     });
   });
-  kicker(s,'Email and Slack deliberately will not send. Agreeing in writing days later is not the same as choosing in the moment.');
+  kicker(s,'Email and Slack deliberately won\'t send. Agreeing in writing days later isn\'t the same as choosing in the moment.');
 }
 
 /* --------------------------------------------------------- 15 SAID ONCE */
@@ -346,7 +346,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
 
 /* --------------------------------------------------------- 16 THE ABSENCE */
 { const s=light(); chip(s,'03  THE BUILD  |  RESPONSIBLE AI');
-  title(s,'There is no field for a diagnosis.');
+  title(s,'There\'s no field for a diagnosis.');
   T(s,{t:'Not encrypted. Not permission-restricted. Absent.',
     o:{x:ML,y:1.75,w:11.5,h:0.4,fontSize:16.5,fontFace:H,italic:true,color:GOLD}});
   s.addShape(p.ShapeType.roundRect,{x:ML,y:2.3,w:5.5,h:2.6,rectRadius:0.05,
@@ -372,7 +372,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
     o:{x:ML,y:1.0,w:11.5,h:0.5,fontSize:15.5,fontFace:B,color:DIMTX}});
   T(s,{t:'"No. And not because of a permission setting."',
     o:{x:ML,y:1.7,w:11.5,h:0.9,fontSize:31,bold:true,fontFace:H,color:PAPER}});
-  T(s,{t:'There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in this system. Nobody holds that, including the person who built it, and the person you are helping was never asked.',
+  T(s,{t:'There\'s no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in this system. Nobody holds that, including the person who built it, and the person you are helping was never asked.',
     o:{x:ML,y:2.85,w:11.3,h:1.5,fontSize:15.5,fontFace:B,color:'D8DAD6'}});
   T(s,{t:'"A manager who asks you gets the same answer, and you can tell them it came from the system rather than from you."',
     o:{x:ML,y:4.6,w:11.3,h:1.0,fontSize:18.5,fontFace:H,italic:true,color:GOLDLT}});
@@ -387,8 +387,8 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 /* -------------------------------------------------- 19 THREE THINGS WRONG */
 { const s=light(); chip(s,'04  THE HONEST PART',RED);
   title(s,'Three things we shipped that were wrong.');
-  const f=[['OFF did nothing.','Six control words were printed in our own copy and routed nowhere. The word that withdraws a disclosure returned "I do not have good information on that", and the sharing stayed on.'],
-           ['The privacy policy was false.','It said a volunteered condition "is not written to any record". It was stored word for word. Now stripped before the insert, with the claim rewritten to state its limit.'],
+  const f=[['OFF did nothing.','Six control words were printed in our own copy and routed nowhere. The word that withdraws a disclosure returned "I don\'t have good information on that", and the sharing stayed on.'],
+           ['The privacy policy was false.','It said a volunteered condition "isn\'t written to any record". It was stored word for word. Now stripped before the insert, with the claim rewritten to state its limit.'],
            ['Silence read as success.','Our adversarial scorer exited zero with every assertion inconclusive. It printed "silence must never read as success" and then did exactly that.']];
   f.forEach(([t,d],i)=>{ const y=1.95+i*1.42;
     s.addShape(p.ShapeType.rect,{x:ML,y,w:0.06,h:1.15,fill:{color:RED},line:{color:RED,width:0}});
@@ -400,7 +400,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 
 /* ------------------------------------------------- 19b THE REQUIRED TOOL */
 { const s=light(); chip(s,'04  THE HONEST PART');
-  title(s,'The tool could not decide the thing that mattered.');
+  title(s,'The tool couldn\'t decide the thing that mattered.');
 
   s.addShape(p.ShapeType.roundRect,{x:ML,y:1.92,w:5.75,h:2.15,rectRadius:0.05,
     fill:{color:SURF},line:{color:GREEN,width:1.5}});
@@ -413,22 +413,22 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     fill:{color:SURF},line:{color:RED,width:1.5}});
   T(s,{t:'What it returned instead',o:{x:7.28,y:2.12,w:4.9,h:0.36,fontSize:14.5,
     bold:true,fontFace:H,color:RED}});
-  T(s,{t:'On the signed video, WCAG 1.2.2 came back incomplete, not pass. Inside a test runner axe cannot inspect media. So it could not settle it. A person using a screen reader would have settled it immediately.',
+  T(s,{t:'On the signed video, WCAG 1.2.2 came back incomplete, not pass. Inside a test runner axe can\'t inspect media. So it couldn\'t settle it. A person using a screen reader would have settled it immediately.',
     o:{x:7.28,y:2.58,w:4.9,h:1.3,fontSize:12,fontFace:B,color:INK}});
 
-  T(s,{t:'The obvious remedy was the forbidden one. That video is usually a Deaf person signing, and a machine caption would put words in somebody\u2019s mouth about their own body, then file them. So the video now says so itself, to the person who cannot watch it:',
+  T(s,{t:'The obvious remedy was the forbidden one. That video is usually a Deaf person signing, and a machine caption would put words in somebody\u2019s mouth about their own body, then file them. So the video now says so itself, to the person who can\'t watch it:',
     o:{x:ML,y:4.32,w:11.6,h:0.88,fontSize:13.5,fontFace:B,color:SOFT}});
   s.addShape(p.ShapeType.rect,{x:ML,y:5.32,w:0.06,h:0.72,fill:{color:GOLDFILL},
     line:{color:GOLDFILL,width:0}});
   T(s,{t:'\u201cNo captions and no transcript, and none will be generated. This is waiting on a human interpreter.\u201d',
     o:{x:1.13,y:5.32,w:11.3,h:0.72,fontSize:16,fontFace:H,italic:true,color:INK}});
 
-  kicker(s,'An incomplete is not a pass. Reporting it as one would have been the easiest lie in the submission.');
+  kicker(s,'An incomplete isn\'t a pass. Reporting it as one would have been the easiest lie in the submission.');
 }
 
 /* ----------------------------------------------- 19c THE RAI SELF CHECK */
 { const s=light(); chip(s,'04  THE HONEST PART');
-  title(s,'Our own repository could not rebuild us.');
+  title(s,'Our own repository couldn\'t rebuild us.');
   T(s,{t:'No Salesforce tool is published as an RAI Self Check, so we ran the same exercise against Salesforce\u2019s own five guidelines for responsible agentic AI, as something anybody can execute and disagree with.',
     o:{x:ML,y:1.88,w:11.6,h:0.72,fontSize:13.5,fontFace:B,color:SOFT}});
 
@@ -446,7 +446,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
   T(s,{t:'The org held 28 library rows. The seed in our repository held 24. The four missing ones were the lighting rows added to fix the bias defect on the previous slide. Anyone deploying from our code would have rebuilt the agent with that defect back in, and every claim we make about fixing it would have been false on their org.',
     o:{x:1.13,y:4.5,w:11.1,h:0.9,fontSize:12.5,fontFace:B,color:INK}});
 
-  T(s,{t:'It also produced a finding we withdrew. A check demanded every row state a cost; nine do not. But the code was already right: it says it has no figure and refuses to estimate one. We corrected the check, not the code, and left it in the file with a note that it was wrong the first time.',
+  T(s,{t:'It also produced a finding we withdrew. A check demanded every row state a cost; nine don\'t. But the code was already right: it says it has no figure and refuses to estimate one. We corrected the check, not the code, and left it in the file with a note that it was wrong the first time.',
     o:{x:ML,y:5.62,w:11.6,h:0.62,fontSize:12.5,fontFace:B,color:SOFT}});
   kicker(s,'A check that lies to you is worse than no check. So --selftest breaks four of them on purpose and asserts each one goes red.');
   src(s,'python3 tests/rai_self_check.py   ·   python3 tests/rai_self_check.py --selftest');
@@ -456,7 +456,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 { const s=light(); chip(s,'04  THE HONEST PART');
   title(s,'21 of 23. Three runs. Same score every time.');
   T(s,{t:[{text:'One assertion fails on every run',options:{bullet:true,breakLine:true,bold:true}},
-    {text:'the agent does not reliably say out loud that it discarded a volunteered condition',options:{breakLine:true}},
+    {text:'the agent doesn\'t reliably say out loud that it discarded a volunteered condition',options:{breakLine:true}},
     {text:'The second failure alternates',options:{bullet:true,breakLine:true,bold:true}},
     {text:'same build, same prompts, different answers, run to run',options:{}}],
     o:{x:ML,y:1.95,w:6.1,h:2.4,fontSize:14,fontFace:B,color:INK,paraSpaceAfter:8}});
@@ -475,10 +475,10 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 /* --------------------------------------------------------- 21 STILL WRONG */
 { const s=light(); chip(s,'04  THE HONEST PART');
   title(s,'What is still wrong.');
-  const o=[['No screen-reader user has tested this.','Every accessibility claim is machine or browser verified, which is not the same as a person using it. One session with somebody who uses one daily is worth more than the next five features.'],
-           ['The agent’s narration is nondeterministic.','It rewrites what an action returns rather than relaying it. Three separate fixes did not move it.'],
-           ['Text messaging is not carrier registered.','A2P 10DLC gates SMS from a ten digit number. Voice on the same number needs none and works today.'],
-           ['The Slack app has never met a real workspace.','The Apex behind it is live and verified. The handshake is not.']];
+  const o=[['No screen-reader user has tested this.','Every accessibility claim is machine or browser verified, which isn\'t the same as a person using it. One session with somebody who uses one daily is worth more than the next five features.'],
+           ['The agent’s narration is nondeterministic.','It rewrites what an action returns rather than relaying it. Three separate fixes didn\'t move it.'],
+           ['Text messaging isn\'t carrier registered.','A2P 10DLC gates SMS from a ten digit number. Voice on the same number needs none and works today.'],
+           ['The Slack app has never met a real workspace.','The Apex behind it is live and verified. The handshake isn\'t.']];
   o.forEach(([t,d],i)=>{ const y=1.95+i*1.05;
     T(s,{t,o:{x:ML,y,w:4.5,h:0.45,fontSize:13.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:5.5,y,w:6.95,h:0.95,fontSize:11.5,fontFace:B,color:SOFT}});
@@ -486,14 +486,14 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
   kicker(s,'A system that claims a perfect score against its own adversarial suite is telling you about its suite, not its agent.');
 }
 
-divider('05','The offer','Why this has not happened, and why that is over.');
+divider('05','The offer','Why this hasn\'t happened, and why that is over.');
 
 /* ------------------------------------------------------- 22a THE REASONS */
 { const s=light(); chip(s,'05  THE OFFER');
-  title(s,'Why good employers have not done this.');
-  const R=[['No budget line says "the asking was too hard."','The cost is real and has never been priced, so it has never been funded. You cannot get money for a problem with no line item.'],
+  title(s,'Why good employers haven\'t done this.');
+  const R=[['No budget line says "the asking was too hard."','The cost is real and has never been priced, so it has never been funded. You can\'t get money for a problem with no line item.'],
            ['Nobody owns it.','HR owns the policy. IT owns the systems. The manager owns the person. The request falls in the gap between three desks and waits there.'],
-           ['Caution looks like safety.','Handling a disclosure badly carries legal risk, so doing nothing feels safest. It is not safer. It is only quieter.'],
+           ['Caution looks like safety.','Handling a disclosure badly carries legal risk, so doing nothing feels safest. It isn\'t safer. It is only quieter.'],
            ['The demand is invisible by design.','Three people in a hundred tell you. An empty queue reads as a solved problem, and the silence is taken as evidence.'],
            ['Every tool assumed disclosure first.','HR systems start from a diagnosis field. Building one without it meant building something new, and nobody had.']];
   R.forEach(([t,d],i)=>{ const y=1.90+i*0.85;
@@ -528,7 +528,7 @@ divider('05','The offer','Why this has not happened, and why that is over.');
           {text:'Tell us what broke',options:{bullet:true}}],
     o:{x:7.17,y:2.62,w:5.0,h:2.7,fontSize:12.5,fontFace:B,color:INK,paraSpaceAfter:9}});
 
-  T(s,{t:'We are not asking for a case study or a logo. Those five things are what actually makes an accommodation arrive, and an organisation unwilling to do them would not have got value from the software either.',
+  T(s,{t:'We aren\'t asking for a case study or a logo. Those five things are what actually makes an accommodation arrive, and an organisation unwilling to do them wouldn\'t have got value from the software either.',
     o:{x:ML,y:5.56,w:11.6,h:0.62,fontSize:13.5,fontFace:B,color:SOFT}});
   kicker(s,'Sixty-one in a hundred cost nothing. The first ten will find that out on their own data, in public, and then nobody gets to say it was the money.');
 }
@@ -555,7 +555,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
 
 /* -------------------------------------------------------- 22d HOW TO CHECK */
 { const s=light(); chip(s,'APPENDIX  |  VERIFICATION');
-  title(s,'Do not take any of it on trust.');
+  title(s,'Don\'t take any of it on trust.');
   const cmd=[['508','structural invariants','python3 tests/invariants.py'],
              ['124','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
              ['333','accessibility checks, live pages','python3 tests/a11y_audit.py'],
