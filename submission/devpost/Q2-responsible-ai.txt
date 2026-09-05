@@ -26,4 +26,4 @@ Every delivery attempt lands in a ledger that holds a salted hash, never the mes
 
 THE LESSON WE WOULD PASS ON
 
-We told the agent not to record a volunteered condition. It complied in its narration while the action stored the text anyway. So everything safety-critical now runs in Apex, on every request, where the model's memory doesn't matter.
+We told the agent not to record a volunteered condition. It complied in its narration while the action stored the text. So everything safety-critical now runs in Apex, on every request, where the model's memory doesn't matter.
