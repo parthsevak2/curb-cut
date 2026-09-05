@@ -76,3 +76,20 @@ written beside it. **Cost:** one rule genuinely not enforced at component level.
 **Gain:** the difference between a suite that is quiet because the code is right
 and one that is quiet because the rule was never run. For the same reason
 `incomplete` results are reported as undecided rather than counted as passes.
+
+## D13. A disclosure is only a disclosure if somebody can be shown it
+The ledger object shipped in week one and `WHO` read from it, but nothing ever
+wrote a row. No console view, component or flow showed a standing preference
+to anyone, so "travels ahead of you" meant save and revoke, and `WHO` could
+only ever answer "Nobody has been shown it yet". True, and useless. Now
+`CurbCutShow` is the one place a preference is shown. The viewer says who they
+are reading as, and we show only what the person chose for that audience. The
+ledger row is written before a word is returned; if the write fails, nothing is
+shown. The person can read the ledger back with `WHO` and get a name and a date.
+**Cost:** a viewer can name an audience they are not. We record what they
+claimed, next to their real name, so the person can see it and ask.
+**Gain:** the feature this project is named for exists, and every showing is
+something the person can find out about. An invariant now fails the build if
+no production class writes the ledger, so it cannot quietly go back to being a
+promise.
+

@@ -68,7 +68,15 @@ public with sharing class CurbCutConsole {
         @AuraEnabled public String  barrierId       { get; set; }
     }
 
-    /** The handoff, plus the thing behind the lookup that nobody clicks. */
+    /**
+     * The handoff, plus the thing behind the lookup that nobody clicks.
+     *
+     * What the person asked to be known ahead of them is deliberately not in
+     * here. Showing a standing preference is a disclosure, and every showing
+     * must be written to Disclosure_Event__c before a word is returned. This
+     * method is cacheable and cannot write, so the brief component asks
+     * CurbCutShow.forRecord for that, only when the viewer presses the button.
+     */
     @AuraEnabled(cacheable=true)
     public static Brief brief(Id handoffId) {
         Human_Handoff__c h = [
