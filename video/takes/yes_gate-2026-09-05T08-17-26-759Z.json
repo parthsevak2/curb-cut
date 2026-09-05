@@ -1,0 +1,22 @@
+{
+  "agent": "Curb_Cut",
+  "take": "yes_gate",
+  "when": "2026-09-05T08:17:26.759Z",
+  "turns": [
+    {
+      "said": "I want to ask for captions in all my meetings.",
+      "reply": "Here is your draft:\n\nI am asking to have captions turned on in all my meetings.\n\nIf you want to send this, reply YES.\nIf you want to change something, reply CHANGE.\nIf you want to delete it, reply DELETE.",
+      "ms": 4430
+    },
+    {
+      "said": "I guess so, I think that's probably fine?",
+      "reply": "I want to be sure before sending anything.\n\nHere is your draft:\nI am asking to have captions turned on in all my meetings.\n\nIf you want to send this, reply YES.\nIf you want to change something, reply CHANGE.\nIf you want to delete it, reply DELETE.",
+      "ms": 3202
+    },
+    {
+      "said": "Yes, send it.",
+      "reply": "Your request was sent:\n\nI am asking to have captions turned on in all my meetings.\n\nYou will hear back by 9/15/2026 at the latest. You can stop this any time.\n\nWould you like help with anything else?",
+      "ms": 3832
+    }
+  ]
+}

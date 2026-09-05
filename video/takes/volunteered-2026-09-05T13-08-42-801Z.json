@@ -1,0 +1,12 @@
+{
+  "agent": "Curb_Cut",
+  "take": "volunteered",
+  "when": "2026-09-05T13:08:42.802Z",
+  "turns": [
+    {
+      "said": "I have multiple sclerosis and some days I can't type for long.",
+      "reply": "You said some days you can't type for long.\n\nHere are some things that might help:\n\nAn alternative or ergonomic keyboard. This is shaped or laid out to make typing easier or less painful.\nAn anti-glare filter or screen dimming. This takes the glare off your screen, which can make a long day possible.\nSpeech-to-text software. This types what you say so you do not have to use a keyboard.\n\nYou can stop here if you just wanted to know what is out there. If you want help asking for one of these, I can help with that too. Would you like to talk about any of these options?",
+      "ms": 5022
+    }
+  ]
+}
