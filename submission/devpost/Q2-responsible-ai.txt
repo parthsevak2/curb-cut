@@ -1,6 +1,6 @@
 This check is for the people who volunteer a condition while asking for an accommodation, and for the managers later shown their standing preferences. We looked for a Salesforce tool published as "RAI Self Check Skill" in the provisioned org, on AgentExchange and among the Salesforce DX MCP server's fifteen toolsets, and couldn't find one. Rather than imply we ran one, we built the check ourselves against the published guidelines and say so.
 
-So we ran the same exercise against Salesforce's own five published guidelines for responsible agentic AI, as a harness anyone can execute: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks five of the checks on purpose and asserts each one goes red.
+So we ran the same exercise against Salesforce's five published guidelines for responsible agentic AI, as a harness anyone can run: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks five checks on purpose and asserts each goes red.
 
 WHAT IT FOUND ON THE FIRST RUN
 
