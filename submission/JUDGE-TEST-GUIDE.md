@@ -127,7 +127,7 @@ It will refuse, and the refusal is the feature:
 ## Check the numbers rather than trusting them
 
 ```bash
-python3 tests/invariants.py        # 495 structural invariants
+python3 tests/invariants.py        # 496 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 124 Apex tests
 python3 tests/a11y_audit.py        # 333 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
