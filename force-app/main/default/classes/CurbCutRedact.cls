@@ -65,13 +65,13 @@ public with sharing class CurbCutRedact {
         'ehlers danlos syndrome', 'ehlers-danlos', 'chronic fatigue syndrome',
         'myalgic encephalomyelitis', 'multiple sclerosis', 'muscular dystrophy',
         'rheumatoid arthritis', 'ulcerative colitis', 'cerebral palsy',
-        'motor neurone disease', 'traumatic brain injury', 'spinal cord injury',
+        'motor neurone disease', 'amyotrophic lateral sclerosis', 'traumatic brain injury', 'spinal cord injury',
         'borderline personality disorder', 'obsessive compulsive disorder',
         'post traumatic stress disorder', 'bipolar disorder', 'eating disorder',
         'panic disorder', 'anxiety disorder', 'pots syndrome', 'down syndrome',
         'crohns disease', 'crohn s disease', 'sickle cell', 'long covid',
         'kidney disease', 'heart failure', 'brain injury', 'spina bifida',
-        'cystic fibrosis', 'chronic pain', 'parkinsons', 'parkinson s',
+        'cystic fibrosis', 'parkinsons', 'parkinson s',
         'alzheimers', 'alzheimer s', 'huntingtons', 'huntington s',
         'tourette s', 'tourettes', 'tourette', 'endometriosis',
         'fibromyalgia', 'schizophrenia', 'epilepsy', 'epileptic', 'diabetes',
@@ -90,9 +90,9 @@ public with sharing class CurbCutRedact {
      * to the next full stop, comma or semicolon, or to a joining word, and is
      * capped so a runaway match cannot eat a paragraph. "I was diagnosed with
      * ADHD and I lose track in long meetings" becomes "I was [not recorded] and
-     * I lose track in long meetings". The identity list does not protect a word
-     * used inside one of these: a person who writes "diagnosed with" is quoting
-     * a clinic, and we take the quote out whole.
+     * I lose track in long meetings". A clause that names an identity word,
+     * "my condition is that I am deaf", is left alone: the identity list wins
+     * everywhere, inside a clause as much as on its own.
      */
     private static final String STOP_AT_JOIN =
         '(?:(?! and | so | but | which | because )[^.,;])';
@@ -102,29 +102,53 @@ public with sharing class CurbCutRedact {
         '\\bmy (?:condition|illness|disease) is ' + STOP_AT_JOIN + '{1,40}'
     };
 
-    private static List<Pattern> compiled;
+    private static List<Pattern> clausePatterns;
+    private static List<Pattern> conditionPatterns;
 
-    private static List<Pattern> patterns() {
-        if (compiled != null) { return compiled; }
-        compiled = new List<Pattern>();
-        // Clauses first, so "diagnosed with epilepsy" is one removal and not a
-        // hole with "diagnosed with" left standing in front of it.
+    private static void compile() {
+        if (clausePatterns != null) { return; }
+        clausePatterns = new List<Pattern>();
+        conditionPatterns = new List<Pattern>();
         for (String c : CLAUSES) {
-            compiled.add(Pattern.compile('(?i)' + c));
+            clausePatterns.add(Pattern.compile('(?i)' + c));
         }
         for (String c : CONDITIONS) {
             // Tolerate any punctuation or spacing between the words, so
             // "Crohn's disease" and "crohns disease" are both caught.
             String body = c.replaceAll(' ', '[^a-zA-Z0-9]{1,3}');
-            compiled.add(Pattern.compile('(?i)\\b' + body + '\\b'));
+            conditionPatterns.add(Pattern.compile('(?i)\\b' + body + '\\b'));
         }
-        return compiled;
+    }
+
+    /** A clause that names how somebody describes themselves is not a diagnosis. */
+    private static Boolean saysWhoTheyAre(String clause) {
+        String low = clause.toLowerCase();
+        for (String w : IDENTITY) {
+            if (low.contains(w)) { return true; }
+        }
+        return false;
+    }
+
+    /** Clause matches that are actually diagnoses, as [start, end] pairs. */
+    private static List<List<Integer>> clauseSpans(String text) {
+        List<List<Integer>> spans = new List<List<Integer>>();
+        for (Pattern p : clausePatterns) {
+            Matcher m = p.matcher(text);
+            while (m.find()) {
+                if (!saysWhoTheyAre(m.group())) {
+                    spans.add(new List<Integer>{ m.start(), m.end() });
+                }
+            }
+        }
+        return spans;
     }
 
     /** True when the text names something we would refuse to store. */
     public static Boolean names(String text) {
         if (String.isBlank(text)) { return false; }
-        for (Pattern p : patterns()) {
+        compile();
+        if (!clauseSpans(text).isEmpty()) { return true; }
+        for (Pattern p : conditionPatterns) {
             if (p.matcher(text).find()) { return true; }
         }
         return false;
@@ -138,8 +162,22 @@ public with sharing class CurbCutRedact {
      */
     public static String clean(String text) {
         if (String.isBlank(text)) { return text; }
+        compile();
+        // Clauses first, so "diagnosed with epilepsy" is one removal and not a
+        // hole with "diagnosed with" left standing in front of it. Spans are
+        // removed from the end so earlier offsets stay valid.
         String out = text;
-        for (Pattern p : patterns()) {
+        List<List<Integer>> spans = clauseSpans(out);
+        for (Integer i = spans.size() - 1; i >= 0; i--) {
+            Integer a = spans[i][0], b = spans[i][1];
+            Boolean overlapped = false;
+            for (Integer j = 0; j < i; j++) {
+                if (spans[j][1] > a && spans[j][0] < b) { overlapped = true; }
+            }
+            if (overlapped) { continue; }
+            out = out.substring(0, a) + MARK + out.substring(b);
+        }
+        for (Pattern p : conditionPatterns) {
             out = p.matcher(out).replaceAll(MARK);
         }
         // Collapse a run of markers so three redactions do not read as noise.

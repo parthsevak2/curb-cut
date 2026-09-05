@@ -65,7 +65,7 @@ actually sees it.
 ## The four long answers
 
 - `Q1-accessibility.txt`, 4,000 characters
-- `Q2-responsible-ai.txt`, 3,697 characters
+- `Q2-responsible-ai.txt`, 3,798 characters
 - `Q3-error-rate.txt`, 3,997 characters
 - `Q4-environmental.txt`, 3,988 characters
 

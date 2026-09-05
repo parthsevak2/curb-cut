@@ -91,7 +91,7 @@ and the four missing ones were exactly the lighting rows added to fix an earlier
 bias defect. Anyone deploying from our code would have silently reintroduced it.
 Fixed, and a check now compares the two on every run.
 
-`devpost/Q2-responsible-ai.txt` is written around that finding, 3,697 characters.
+`devpost/Q2-responsible-ai.txt` is written around that finding, 3,798 characters.
 It still opens by saying we could not find the named tool. Do not leave the field
 blank and do not imply the tool was run.
 

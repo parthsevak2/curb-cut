@@ -110,6 +110,7 @@ export default class CurbCutHandoffBrief extends LightningElement {
      * see who looked.
      */
     async reveal() {
+        if (this.asking) { return; }   // a second press while busy does nothing, and the button keeps focus
         this.asking = true;
         this.showError = undefined;
         try {
