@@ -121,6 +121,43 @@ nobody their likeness.
 
 ---
 
+## 1a. It is not a white-collar problem
+
+The disclosure study above asked white-collar workers because that is where the
+question had never been asked. The national statistics say who actually holds
+the jobs.
+
+| Figure | Value | Population and definition | Source |
+|---|---|---|---|
+| US adults with a disability | **more than 1 in 4** | All US adults, CDC definition | CDC, *Disability Impacts All of Us*, https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html |
+| Canadians with a disability | **27%**, 8.0 million | Canadians aged 15+, 2022 | Statistics Canada, *Canadian Survey on Disability*, 2022, https://www150.statcan.gc.ca/n1/daily-quotidien/231201/dq231201b-eng.htm |
+| Employed, US, 2025 | **22.8%** vs 65.2% | People 16+ with vs without a disability, employment-population ratio | US BLS, *People with a Disability: Labor Force Characteristics 2025*, https://www.bls.gov/news.release/disabl.nr0.htm |
+| Unemployment rate, US, 2025 | **8.3%** vs 4.1% | same | same |
+| Usually work part time, US, 2025 | **about 30%** vs about 17% | employed people with vs without a disability | same |
+| In service occupations, US, 2025 | **20.0%** vs 16.5% | employed people with vs without a disability | same |
+| In production, transportation and material moving, US, 2025 | **13.8%** vs 12.0% | same | same |
+| In management and professional occupations, US, 2025 | **37.9%** vs 44.1% | same | same |
+| Self-employed, US, 2025 | **9.1%** vs 5.9% | same | same |
+| Employed, Canada, 2022 | **62%** vs 78% | persons aged 25 to 64 with vs without disabilities | Statistics Canada, *A demographic, employment and income profile of persons with disabilities*, 2022 CSD, https://www150.statcan.gc.ca/n1/pub/89-654-x/89-654-x2024001-eng.htm |
+| Below the poverty line, Canada, 2022 | **10%** vs 7% | persons aged 15+ with vs without disabilities, 2018-base Market Basket Measure | same |
+| Not employed but with work potential, Canada, 2022 | **42%**, 741,280 people | persons with disabilities aged 25 to 64 who were not employed | same |
+| Employed, Canada, 2024 | **46.4%** vs 66.2% | persons with vs without disabilities, Labour Force Survey | Statistics Canada, *Labour market characteristics of persons with and without disabilities, 2024*, https://www150.statcan.gc.ca/n1/pub/71-222-x/71-222-x2025001-eng.htm |
+| Part-time, Canada, 2024 | **21.3%** vs 17.4% | workers with vs without disabilities | same |
+| Hourly wage, Canada, 2024 | **93.8%** of the average hourly wage of employees without disabilities, a gap of **$2.22** an hour | employees with disabilities | same |
+
+**What this says.** The people this affects are more likely to be paid by the
+hour, to work part time, and to hold service, production and transport jobs
+than to sit at a desk. That is the shift worker, the cleaner, the warehouse
+picker, the minimum-wage hire with no work email and no HR desk. Nobody has
+measured how many of them tell their employer. The only study that measured
+telling at all asked white-collar workers and found three in a hundred.
+
+**Why Curb Cut's doors look the way they do.** Text and voice on a basic phone,
+no work login, no account, and never a telephone call back: those are the
+doors a person on a shift can use from a break room.
+
+---
+
 ## 2. The accommodation gap, from a national statistics office
 
 This is the strongest evidence in the project, and it is government data.
