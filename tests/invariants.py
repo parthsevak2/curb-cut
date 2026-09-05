@@ -702,11 +702,24 @@ check('intake-redacts-before-insert',
       'verbatim in Functional_Description__c')
 
 redact = read(os.path.join(CLS, 'CurbCutRedact.cls'))
-for identity in ('deaf', 'blind', 'hard of hearing', 'wheelchair'):
+# Only the CONDITIONS list counts. The class also carries an IDENTITY list of
+# the words it must never strip, and quoting a word there is not a defect.
+conditions_list = re.search(r'CONDITIONS\s*=\s*new\s+List<String>\s*\{(.*?)\};',
+                            redact, re.S)
+conditions_block = conditions_list.group(1).lower() if conditions_list else ''
+# Autistic, ADHD, dyslexic and the rest were on the condition list until a
+# judge pointed out that for many people they are identity, not diagnosis.
+# "I'm autistic and the open office is unbearable" was stored as
+# "I'm [not recorded] and the open office is unbearable".
+for identity in ('deaf', 'blind', 'hard of hearing', 'wheelchair',
+                 'autism', 'autistic', 'aspergers', 'adhd',
+                 'dyslexia', 'dyslexic', 'dyspraxia',
+                 'neurodivergent', 'neurodiverse'):
     check('redaction-spares-identity-words',
-          f"'{identity}'" not in redact.lower().split('CONDITIONS')[-1].split('};')[0],
-          f'"{identity}" is how people describe themselves and the interpreter '
-          f'routing reads it; it must never be redacted')
+          bool(conditions_list)
+          and not re.search(rf"'{identity}\b", conditions_block),
+          f'"{identity}" is how people describe themselves; it must never be '
+          f'redacted, and the interpreter routing reads some of these words')
 
 # The privacy page must not go back to promising an absolute the code cannot keep.
 priv = read(os.path.join(DEF, 'pages', 'privacy.page'))
