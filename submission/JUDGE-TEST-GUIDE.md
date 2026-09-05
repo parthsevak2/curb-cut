@@ -119,6 +119,8 @@ channel, `/curbcut` refuses, and it only ever replies to you.
 This is what came back on 5 September 2026 at 6:06 pm, to a real direct message
 from a real Slack client. Nothing was edited.
 
+![The same exchange as a screenshot of the Slack client: the disclosure, three lighting options, and the refusal to send](https://raw.githubusercontent.com/parthsevak2/curb-cut/main/submission/images/slack-live.png)
+
 > **You:** The lights give me headaches
 >
 > **Curb Cut:** Before anything else, so you can decide what to say here:
