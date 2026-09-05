@@ -11,6 +11,8 @@ The money was never the barrier.
 
 | Evidence | Source |
 |---|---|
+| Across **655** large employers in 2025 the median share of staff who told their employer about a disability was **3.5%**, and it did not rise. By 2026, **98%** of them report accommodation programmes. | [Disability:IN 2025 Disability Index](https://disabilityin.org/resource/2025-disability-index-report/) and [2026 results](https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights) |
+| In 2025, **22.8%** of Americans with a disability were employed against 65.2% without, and **30%** of those working were part time against 17%. | [US BLS, People with a Disability 2025](https://www.bls.gov/news.release/disabl.nr0.htm), released 3 March 2026 |
 | **61 of every 100** accommodations cost the employer nothing. Median one-time cost of the rest: **$300**. | [JAN employer survey](https://askjan.org/topics/costs.cfm), 5,406 employers, Jan 2019 to Dec 2024 |
 | **More than a third** of employed Canadians with a disability had an accommodation need **go unmet** in 2022. | [Statistics Canada](https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity), Canadian Survey on Disability |
 | The **GC Workplace Accessibility Passport** already implements "ask once, not forever", and only for federal public servants. | [Government of Canada](https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html) |
@@ -78,7 +80,7 @@ quoted anywhere in the submission stops matching the artefact it describes.
 
 ```
 137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-510 structural invariants      python3 tests/invariants.py            ~1s, no org
+512 structural invariants      python3 tests/invariants.py            ~1s, no org
 331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed

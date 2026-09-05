@@ -163,10 +163,10 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
 /* --------------------------------------------------------- 10 THE FOUR LENS */
 { const s=light(); chip(s,'02  THE EVIDENCE');
   title(s,'How many people, and by whose count.');
-  const rows=[['1.3bn','16% of the world','significant disability','WHO, 2022'],
-              ['27%','of Canadians 15+','one or more disabilities','Statistics Canada, 2022'],
-              ['22.8%','employed, against 65.2%','all people with a disability','US BLS, 2025'],
-              ['30%','of US white-collar','broad federal definition','Coqual']];
+  const rows=[['1 in 4','US adults','CDC definition','CDC; Statistics Canada 27%, 2022'],
+              ['22.8%','employed, against 65.2%','all people with a disability, 2025','US BLS, released March 2026'],
+              ['30%','usually work part time, against 17%','employed people with a disability, 2025','US BLS, released March 2026'],
+              ['3.5%','told their employer','median across 655 large employers, 2025','Disability:IN 2025 index']];
   rows.forEach(([n,l,def,st],i)=>{ const x=0.85+i*3.0;
     s.addShape(p.ShapeType.roundRect,{x,y:1.95,w:2.75,h:2.6,rectRadius:0.05,
       fill:{color:SURF},line:{color:LINE,width:1.25}});
@@ -175,10 +175,10 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:def,o:{x:x+0.2,y:3.3,w:2.4,h:0.6,fontSize:11,fontFace:B,color:SOFT}});
     T(s,{t:st,o:{x:x+0.2,y:4.0,w:2.4,h:0.35,fontSize:9.5,fontFace:M,color:MUTED}});
   });
-  T(s,{t:'They disagree because they count different things. WHO measures significant disability. The national definitions are broader.',
+  T(s,{t:'The people this affects are more likely to be paid by the hour, to work part time, and to be in service, production and transport jobs. The programmes exist at 98% of large employers (2026 index); the telling has not moved.',
     o:{x:ML,y:4.75,w:11.7,h:0.5,fontSize:14,fontFace:B,color:INK}});
   kicker(s,'That gap is the argument, not a flaw in it. The wider the definition, the more people find they are counted, and the more of them have never told anyone at work.');
-  src(s,'who.int  |  statcan.gc.ca Canadian Survey on Disability 2022  |  bls.gov Current Population Survey, about 60,000 households monthly  |  coqual.org');
+  src(s,'cdc.gov  |  bls.gov People with a Disability 2025, released 3 March 2026  |  disabilityin.org 2025 and 2026 Disability Index  |  statcan.gc.ca  |  coqual.org');
 }
 
 /* ------------------------------------------------------- 11 THE UNMET NEED */
@@ -468,7 +468,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
   T(s,{t:'"Good" is 23 of 23 with zero variance across five runs. Getting there means moving anything safety critical out of the model’s narration and into code that runs whether or not it remembers.',
     o:{x:ML,y:4.6,w:11.5,h:0.9,fontSize:14.5,fontFace:H,italic:true,color:INK}});
-  T(s,{t:'137 Apex   |   510 invariants   |   331 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
+  T(s,{t:'137 Apex   |   512 invariants   |   331 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
     o:{x:ML,y:5.7,w:11.7,h:0.5,fontSize:12,fontFace:M,color:SOFT}});
 }
 
@@ -541,9 +541,9 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   const rows=[['1.3 billion, 16% of the world','WHO, Global report on health equity for persons with disabilities, 2022'],
               ['27% of Canadians aged 15+','Statistics Canada, Canadian Survey on Disability'],
               ['35.4% have an unmet need','Statistics Canada, the strongest single figure in this deck'],
-              ['22.8% employed, against 65.2%','US Bureau of Labor Statistics, 2025'],
-              ['30% have one, 3.2% tell','Coqual, US college-educated white-collar workers'],
-              ['83% of those who told say it helped','Coqual, same study'],
+              ['22.8% employed, 30% part time','US Bureau of Labor Statistics, 2025 data, released March 2026'],
+              ['3.5% told their employer, 2025','Disability:IN 2025 index, 655 employer submissions; Coqual found 3.2% among white-collar workers'],
+              ['98% of employers have the programmes','Disability:IN 2026 index, 421 organisations; the disclosure gap persists'],
               ['61% of accommodations cost nothing','Job Accommodation Network, 1,425 employers through 2024']];
   rows.forEach(([f,src_],i)=>{ const y=1.92+i*0.60;
     s.addShape(p.ShapeType.rect,{x:ML,y,w:4.5,h:0.52,fill:{color:SUNK},line:{color:LINE,width:1}});
