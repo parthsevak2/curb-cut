@@ -1,5 +1,7 @@
 Curb Cut: a workplace accommodation system whose principal is the worker. An Agentforce agent, a deterministic safety layer, six live channels, and a console for the human on the other end.
 
+[image: one-in-four]
+
 PROBLEM TO SOLVE
 
 One in four adults has a disability. In 2025, fewer than one in four Americans with a disability was employed, and the ones who work are nearly twice as likely to be part-time and more often in service, production and transport jobs: the shift worker, the cleaner, the minimum-wage hire with no work email and no HR desk. Across 655 submissions from large employers in 2025, the median share of staff who told their employer was 3.5%, and it didn't rise. Most decide asking isn't worth it and carry on hurting quietly.
@@ -12,20 +14,46 @@ OUR SOLUTION
 
 Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation could ask for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
-There's no field for a diagnosis anywhere. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
+[image: ask-no-login]
+
+There's no field for a diagnosis anywhere. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored. When a manager asks the console what's wrong with someone, it answers that nobody knows and nobody can find out.
+
+[image: console-refusal]
 
 Six doors, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So safety never depends on a model remembering a rule.
 - Web, no login, no account.
-- Text CURB CUT to +1 276 495 9311, on any phone.
-- Voice on the same number.
-- Email.
-- Slack, private message only, and it says up front that Slack belongs to your employer.
+- Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page, with numbered options you answer with one digit.
+- Voice on the same number. It never rings you back.
+- Email, answered from the same door.
+- Slack, private message only. It says up front that Slack belongs to your employer, and it refuses to send anything from there.
 - Any assistant you already use, through tools that can't send.
 
-Ask once, not forever: a standing preference travels ahead of you, and you can withdraw it any time.
+[image: slack-live]
 
-The employer's side of this conversation already had an agent. Now the worker's side does too. Agentforce made the ambitious part ordinary; the rest was intention.
+[image: on-a-phone]
 
-This is for the colleague who never asks and the person whose condition nobody can see.
+WHAT HAPPENS AFTER YOU PRESS SEND
+
+The request goes to the access desk of the organisation running the page, in your words. No manager is told. You get a claim code, a date the desk has committed to answer by, and the words "you can stop this any time". The desk sees a queue, a wait time and a request. It never sees a condition, because there isn't one to see. If you'd rather talk to a person, say HUMAN on any channel and one picks it up.
+
+WHAT WE CAN SHOW, NOT JUST SAY
+
+We ran Salesforce's own accessibility checks (Sa11y, 131 checks across twelve component states) and our own: more than five hundred accessibility checks on seven public pages, 137 Apex tests, 512 structural invariants, 21 responsible-AI checks against Salesforce's published guidelines, and an 11-scenario adversarial suite through the Agent API. That suite scores 21 of 23 on every run, and we publish the two it fails rather than the best run. Every number in the film and on the site has its source and its denominator on the evidence page.
+
+WHAT WE GOT WRONG, AND FIXED IN THE OPEN
+
+"I get migraines from the office lighting" once returned "special chair or back support", because the word office appeared in that row. The ranker now weighs how much a word distinguishes, and four lighting rows were added. The agent was told never to record a volunteered condition; it agreed in words while the action stored the text anyway. So every safety rule moved into Apex, where the model's memory doesn't matter. And because the agent says "I discarded that" only about half the time, on four channels the code says it every time.
+
+WHAT ISN'T DONE
+
+No one who uses a screen reader every day has tested this yet. A scripted walk of the ask page is published in its place, and one session with a real person comes before the next five features. Text and voice run through a relay on a laptop today. Delivery callbacks from the carrier aren't wired, so "accepted" isn't yet "delivered".
+
+WHO THIS IS FOR
+
+The colleague who never asks. The person whose condition nobody can see. The cleaner on a break with a phone and no work email. The new hire who doesn't know what's allowed. The employer's side of this conversation already had an agent. Now the worker's side does too. Agentforce made the ambitious part ordinary; the rest was intention.
+
+Watch the film, 4:59, every channel live: https://youtu.be/L5sVEw5H3U4
 
 Try it, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask
+
+Everything else, evidence included: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/docs. Code, MIT: github.com/parthsevak2/curb-cut
