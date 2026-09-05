@@ -56,14 +56,14 @@
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
 <pre>137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 512 structural invariants      python3 tests/invariants.py            ~1s, no org
-331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+527 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
  21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
  28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
  16 reading-level checks       python3 tests/reading_level_audit.py
- 54 link and copy checks       python3 tests/link_and_copy_audit.py
+ 76 link and copy checks       python3 tests/link_and_copy_audit.py
  11 consistency checks         python3 tests/submission_consistency.py
 21/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
 <p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial score is 21 of 23 on purpose: one assertion fails on every run and one alternates, and both are reported rather than averaged away.</p>
@@ -126,7 +126,7 @@ curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
 <h3>Check the numbers rather than trusting them</h3>
 <pre>python3 tests/invariants.py        # 512 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
-python3 tests/a11y_audit.py        # 331 accessibility checks, against the live pages
+python3 tests/a11y_audit.py        # 527 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks
 python3 tests/rai_self_check.py --selftest   # proves those checks can fail
@@ -735,7 +735,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   about them. The agent is the same technology the employer's side
   already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      508 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      137 tests
-  python3 tests/a11y_audit.py                      331 checks, live pages
+  python3 tests/a11y_audit.py                      527 checks, live pages
   npm run test:a11y                                131 Sa11y checks, 12 states
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed

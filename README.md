@@ -83,14 +83,14 @@ quoted anywhere in the submission stops matching the artefact it describes.
 ```
 137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 512 structural invariants      python3 tests/invariants.py            ~1s, no org
-331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+527 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
  21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
  28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
  16 reading-level checks       python3 tests/reading_level_audit.py
- 54 link and copy checks       python3 tests/link_and_copy_audit.py
+ 76 link and copy checks       python3 tests/link_and_copy_audit.py
  11 consistency checks         python3 tests/submission_consistency.py
 21/23 adversarial assertions   node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 ```

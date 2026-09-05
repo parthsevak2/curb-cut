@@ -583,7 +583,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   T(s,{t:'They only have to be able to ask.',o:{x:ML,y:4.2,w:10.5,h:0.7,fontSize:25,
     fontFace:H,italic:true,color:GOLDLT}});
   T(s,{t:'Verify anything in this deck:',o:{x:ML,y:5.3,w:6,h:0.35,fontSize:11.5,fontFace:M,color:DIMTX}});
-  T(s,{t:'python3 tests/invariants.py          508 checks\nsf apex run test -l RunLocalTests     137 tests\npython3 tests/a11y_audit.py          331 checks, against the live pages',
+  T(s,{t:'python3 tests/invariants.py          508 checks\nsf apex run test -l RunLocalTests     137 tests\npython3 tests/a11y_audit.py          527 checks, against the live pages',
     o:{x:ML,y:5.62,w:8.5,h:1.0,fontSize:10.5,fontFace:M,color:'D8DAD6'}});
   T(s,{t:'orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut',o:{x:ML,y:6.75,w:11,h:0.35,
     fontSize:11.5,fontFace:M,color:DIMTX}});
