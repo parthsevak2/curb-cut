@@ -77,12 +77,8 @@ beside it, and `tests/submission_consistency.py` fails the build if any number
 quoted anywhere in the submission stops matching the artefact it describes.
 
 ```
-124 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-<<<<<<< HEAD
+137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 508 structural invariants      python3 tests/invariants.py            ~1s, no org
-=======
-508 structural invariants      python3 tests/invariants.py            ~1s, no org
->>>>>>> wave1/disclosure
 333 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed

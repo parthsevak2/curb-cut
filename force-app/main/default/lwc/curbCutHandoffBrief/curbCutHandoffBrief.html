@@ -12,23 +12,23 @@
                 <blockquote class="words">{data.theirWords}</blockquote>
             </template>
             <template if:false={data.theirWords}>
-                <p class="none">No words are attached to this handoff. Do not ask them to
+                <p class="none">No words are attached to this handoff. Don't ask them to
                    start again if you can avoid it.</p>
             </template>
 
             <h2 class="h">What this person asked you to know</h2>
-            <p class="soft">If they saved something to travel ahead of them, they chose who
-               may see it. Say who you are reading this as. We show only what they chose
-               for that audience.</p>
+            <p class="soft">If they saved something to travel ahead of them, they chose who's
+               allowed to see it. Tell us who you're reading this as, and you'll see only
+               what they chose for that audience.</p>
             <div class="asrow">
                 <label class="lbl" for="readingAs">I am reading this as</label>
-                <select id="readingAs" class="pick" onchange={roleChanged} disabled={asking}>
+                <select id="readingAs" class="pick" onchange={roleChanged}>
                     <template for:each={roleOptions} for:item="o">
                         <option key={o.value} value={o.value} selected={o.selected}>{o.label}</option>
                     </template>
                 </select>
             </div>
-            <button class="take ask" onclick={reveal} disabled={asking}>
+            <button class="take ask" onclick={reveal} aria-busy={asking}>
                 Show me what they asked me to know
             </button>
             <p class="record">Reading this here is recorded. They can see that you saw it.</p>
