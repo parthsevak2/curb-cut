@@ -182,7 +182,7 @@ Instructions are not controls. We told the agent not to record a volunteered con
 
 ## Builder Track: What's your agent's current error rate, and what would "good" look like?
 
-**Paste `devpost/Q3-error-rate.txt` verbatim,** 3,996 characters. Now carries the Telemetry reflection the rules require.
+**Paste `devpost/Q3-error-rate.txt` verbatim,** 3,997 characters. Now carries the Telemetry reflection the rules require.
 
 ---
 
@@ -242,7 +242,7 @@ Our scorer used to exit zero with 100% of assertions inconclusive. It printed "s
 
 ## Environmental impact
 
-**Paste `devpost/Q4-environmental.txt` verbatim,** 3,987 characters.
+**Paste `devpost/Q4-environmental.txt` verbatim,** 3,988 characters.
 
 ---
 
