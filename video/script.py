@@ -6,24 +6,24 @@
 WPM, BREATH, XF = 140.0, 2.0, 0.6
 
 SCENES = [
- ('cards/c01.png', 6, 0, "Curb Cut.",
-    "Two seconds of nothing first."),
- ('cards/c02.png', 13, 0,
-    "Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
-    "Slow. This is the only paragraph that has to land."),
- ('cards/c03.png', 9, 0, "Now make that permanent, and make it about your body.",
-    "Flat. No indignation. Let them read the rest."),
- ('frames/10-home.png', 8, 0, "Thirty in a hundred have a disability. Three tell their employer.", ""),
- ('cards/c04.png', 6, 0, "", "Silent. The card says it."),
- # The real thing, recorded: typing appears letter by letter, the options
- # arrive, the draft is written, she presses yes. One continuous take of the
- # live site, not a sequence of stills. 21 seconds of footage held to 24.
+ # The product first. A judge with ninety seconds should see it working before
+ # they are told what it is. One continuous take of the live site: a sentence
+ # typed letter by letter, the options arriving, the draft written in her words.
  ('rec/flow.mp4', 24, 0,
-    "One question, never why. She types it. The options are not generated: twenty-eight rows, each with its source. Then it writes the request in her words.",
-    "Let the typing land before you speak. Pause on 'in her words'."),
+    "This is Curb Cut. One question: what is hard at work right now. Never why. She types it. The options come from a sourced library, not a model. Then it writes the request in her words.",
+    "Silence for the first four seconds while the cursor moves. Then plain."),
  ('frames/04-draft.png', 10, 0,
     "I am not sharing a diagnosis, and I am not required to.",
     "The line the whole thing turns on. Slow down."),
+ ('cards/c03.png', 9, 0, "That is the whole form. Here is the usual one.",
+    "Flat. No indignation. Let them read the card."),
+ ('cards/c01.png', 7, 0, "Curb Cut. An Agentforce agent whose principal is the worker.",
+    ""),
+ ('cards/c02.png', 13, 0,
+    "Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
+    "Slow. This is the only paragraph that has to land."),
+ ('frames/10-home.png', 8, 0, "Thirty in a hundred have a disability. Three tell their employer.", ""),
+ ('cards/c04.png', 6, 0, "", "Silent. The card says it."),
  ('cards/c06.png', 7, 0, "A hedge is refused, and a test proves the refusal.", ""),
  ('frames/05-sent.png', 6, 0, "Sent, with a date she can hold them to.", ""),
  ('cards/c07.png', 8, 0, "Two of them work on a basic phone, with no internet.", ""),

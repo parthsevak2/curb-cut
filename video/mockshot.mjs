@@ -15,7 +15,9 @@ for (const [file,out] of [['07-console-refusal.svg','frames/20-console-refusal.p
   const html = `<!doctype html><meta charset="utf-8">
 <style>html,body{margin:0;height:100%;background:#F2F3F4}
 body{display:flex;align-items:center;justify-content:center}
-svg{width:${W-PAD*2}px;height:auto;max-height:${H-PAD*2}px}</style>${svg}`;
+svg{width:${W-PAD*2}px;height:auto;max-height:${H-PAD*2-60}px}
+.tag{position:absolute;left:0;right:0;bottom:0;height:54px;background:#16181A;color:#F7F5EF;font:500 20px Helvetica,Arial,sans-serif;display:flex;align-items:center;justify-content:center;letter-spacing:.3px}</style>${svg}
+<div class="tag">Illustration of the operator console, drawn from the deployed org. Every sentence on it is what the system said.</div>`;
   writeFileSync('tmp.html', html);
   execFileSync(CH,['--headless','--disable-gpu','--no-sandbox','--hide-scrollbars',
     `--screenshot=${out}`,`--window-size=${W},${H}`,'--force-device-scale-factor=1',

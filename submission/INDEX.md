@@ -10,7 +10,7 @@ converts uploads to Google types and a converted deck is not the deck.
 
 | Drive folder | What belongs in it |
 |---|---|
-| 01, Submission | `DEVPOST-ANSWERS.md`, `VIDEO-SCRIPT.md`, `RUN-REQUIRED-TOOLS.md` |
+| 01, Submission | `DEVPOST-ANSWERS.md`, `VIDEO-NARRATION.md`, `RUN-REQUIRED-TOOLS.md` |
 | 02, Technical Design | `TECHNICAL-DESIGN.md` |
 | 03, Deck and Visuals | `Curb-Cut.pptx` |
 | 04. Evidence and Test Output | audit output, adversarial run scores, `A11Y-SA11Y-REPORT.md` |
@@ -56,7 +56,7 @@ converts uploads to Google types and a converted deck is not the deck.
   every claim in it.
 - `DEVPOST-ANSWERS.md`. Every form field paste-ready, including the error-rate
   and environmental answers.
-- `VIDEO-SCRIPT.md`, 2:43, shot by shot, three marked silences.
+- `VIDEO-NARRATION.md`, the film's narration with timecodes, generated from the same table that cuts it.
 - `RUN-REQUIRED-TOOLS.md`, the two tools that gate the submission. One is now
   done with a real run; one still needs a message sent.
 - `Curb-Cut.pptx`, 33 slides in six sections, editable, speaker notes throughout.
@@ -72,6 +72,6 @@ converts uploads to Google types and a converted deck is not the deck.
    organisers, all at once. The accessibility half is done: Salesforce's own
    Sa11y tooling was found, installed and run, and Q1 is written around what it
    found. Q2 has a written fallback if nothing comes back.
-2. **Record the video** against `VIDEO-SCRIPT.md`.
+2. **Upload the film**, and record your voice over it against `VIDEO-NARRATION.md` if you want one.
 3. **Flip the repo public** and paste the link.
 4. **Upload the files** into the Drive folders, or re-authorise Drive for me.

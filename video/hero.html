@@ -1,0 +1,41 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Curb Cut hero</title>
+<style>
+  /* 1500 x 900. Left: the real product at the moment that matters, a screenshot
+     of the deployed page, not a drawing. Right: what it is, in one line a judge
+     can read at tile size. Cold grey for the ground, warm green for the way out,
+     same as everything else this project ships. */
+  html,body{margin:0;width:1500px;height:900px;background:#F2F3F4;overflow:hidden;font-family:Helvetica,Arial,sans-serif}
+  .wrap{position:relative;width:1500px;height:900px}
+  .shot{position:absolute;left:0;top:0;width:825px;height:900px;overflow:hidden;background:#FFFFFF;border-right:1px solid #C6CACE}
+  /* zoom into the page's centre column so the draft box fills the panel; the
+     source is 3200 wide with the column between x=995 and x=2205 */
+  .shot img{position:absolute;left:-480px;top:-150px;width:1780px;height:auto}
+  .shot .veil{position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(to bottom,rgba(242,243,244,0),#F2F3F4 55%)}
+  .live{position:absolute;left:40px;bottom:34px;background:#1C5245;color:#F7F5EF;font-size:15px;letter-spacing:2.6px;padding:9px 15px;border-radius:3px}
+  .txt{position:absolute;left:880px;top:0;width:560px;height:900px}
+  .eyebrow{position:absolute;top:96px;font-size:15px;letter-spacing:3.6px;color:#1C5245;font-weight:700}
+  h1{position:absolute;top:150px;margin:0;font-family:Georgia,'Times New Roman',serif;font-size:92px;line-height:0.98;color:#16181A;font-weight:700;letter-spacing:-1px}
+  h1 em{font-style:normal;color:#1C5245}
+  .sub{position:absolute;top:448px;font-size:34px;line-height:1.28;color:#42474C;width:560px}
+  .sub b{color:#16181A;font-weight:700}
+  .rule{position:absolute;top:656px;width:560px;height:3px;background:#16181A}
+  .stat{position:absolute;top:688px;font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:1.22;color:#16181A;font-weight:700;width:580px}
+  .foot{position:absolute;top:796px;font-size:20px;color:#8A6115;width:560px}
+</style>
+<div class="wrap">
+  <div class="shot">
+    <img src="frames/04-draft.png" alt="">
+    <div class="veil"></div>
+    <div class="live">LIVE  ·  NO LOGIN</div>
+  </div>
+  <div class="txt">
+    <div class="eyebrow">CURB CUT  ·  AN AGENTFORCE AGENT</div>
+    <h1>Say what<br>is hard.<br><em>Never why.</em></h1>
+    <div class="sub">Ask for a workplace accommodation with <b>no login</b>, <b>no account</b>, and <b>no diagnosis field</b>, because there is nowhere in this system to put one.</div>
+    <div class="rule"></div>
+    <div class="stat">Thirty in a hundred have a disability.<br>Three tell their employer.</div>
+    <div class="foot">The asking was the barrier. So we rebuilt the asking.</div>
+  </div>
+</div>
