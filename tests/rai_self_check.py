@@ -126,10 +126,29 @@ for o in sorted(d for d in os.listdir(OBJ) if os.path.isdir(os.path.join(OBJ, d)
 ok(P, 'no-protected-attribute-field-exists', not bad_fields, ', '.join(bad_fields))
 
 everything = all_cls()
-redact_users = [n for n, s in everything.items()
-                if 'CurbCutRedact' in s and not n.endswith('Test') and n != 'CurbCutRedact']
-ok(P, 'conditions-are-stripped-before-any-insert', len(redact_users) >= 3,
-   f'only {redact_users} strip volunteered conditions; every write path must')
+
+# The write paths that must strip a volunteered condition, by name.
+#
+# This used to count classes that referenced CurbCutRedact and pass at three.
+# Three classes did reference it, and none of them was CurbCutStanding, the one
+# that stores the text built to be shown to managers and meeting hosts. A count
+# cannot see which class is missing; a named set can.
+#
+# CurbCutCreateRequest is expected to join this set from a separate change.
+# Add it to REDACTING_WRITE_PATHS the moment it calls CurbCutRedact.
+REDACTING_WRITE_PATHS = {'CurbCutIntake', 'CurbCutStanding'}
+
+def redacts(src):
+    """A comment naming CurbCutRedact is not a control. The class has to call
+    both halves: names() to decide and clean() to act."""
+    return 'CurbCutRedact.names(' in src and 'CurbCutRedact.clean(' in src
+
+redact_users = {n for n, s in everything.items()
+                if redacts(s) and not n.endswith('Test') and n != 'CurbCutRedact'}
+missing_redaction = sorted(REDACTING_WRITE_PATHS - redact_users)
+ok(P, 'conditions-are-stripped-before-any-insert', not missing_redaction,
+   f'{missing_redaction} write person-facing text without calling '
+   f'CurbCutRedact.names() and clean(); every named write path must')
 
 red = cls('CurbCutRedact')
 identity = ['deaf', 'blind', 'hard of hearing', 'wheelchair']
@@ -230,6 +249,10 @@ if '--selftest' in sys.argv:
                      for r in seed_rows + [{'Source_URL__c': ''}])),
         ('no-protected-attribute-field-exists',
          lambda: not FORBIDDEN.search('Diagnosis__c')),
+        # Take CurbCutStanding's reference away in memory; the named set must
+        # notice. A count of three would not have.
+        ('conditions-are-stripped-before-any-insert',
+         lambda: not (REDACTING_WRITE_PATHS - (redact_users - {'CurbCutStanding'}))),
         ('identity-words-are-never-stripped',
          lambda: all(w in '' for w in identity)),
         ('the-delivery-ledger-holds-no-message-body',
