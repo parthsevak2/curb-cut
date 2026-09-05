@@ -42,6 +42,9 @@ public with sharing class CurbCutStanding {
         @InvocableVariable(label='What to tell the person')
         public String message;
 
+        @InvocableVariable(label='True when a named condition was taken out before saving')
+        public Boolean redacted;
+
         /**
          * Shown once, at save, and never again. We keep only a hash, so this is
          * the person's copy and the only readable one. It is what lets somebody
@@ -94,15 +97,27 @@ public with sharing class CurbCutStanding {
 
     private static Result save(Request req) {
         Result res = new Result();
-        res.ok = false; res.preferenceId = '';
+        res.ok = false; res.preferenceId = ''; res.redacted = false;
 
         if (String.isBlank(req.statement)) {
             res.message = 'There is nothing to save yet.';
             return res;
         }
 
+        // The condition comes out here, before the insert, the same way it does
+        // in CurbCutIntake. Statement__c is the one text built to be shown to a
+        // manager or a meeting host, so "I have epilepsy, no strobing slides"
+        // stored whole would travel further than anything else we hold. We keep
+        // "no strobing slides". That is the part they need to read.
+        String statement = req.statement;
+        res.redacted = false;
+        if (CurbCutRedact.names(statement)) {
+            statement = CurbCutRedact.clean(statement);
+            res.redacted = true;
+        }
+
         Access_Preference__c p = new Access_Preference__c(
-            Statement__c   = req.statement,
+            Statement__c   = statement,
             Scope__c       = String.isNotBlank(req.scope) ? req.scope : 'Always',
             Shared_With__c = String.isNotBlank(req.sharedWith) ? req.sharedWith : 'Manager only',
             Auto_Apply__c  = req.autoApply == true
@@ -120,7 +135,11 @@ public with sharing class CurbCutStanding {
             // us. Someone told to reply STOP to turn off one preference would lose
             // the whole service and keep the preference, which is the exact
             // opposite of what they asked for. OFF is ours; STOP is not.
-            res.message = 'Saved. ' + p.Shared_With__c + ' will see it.\n\n'
+            //
+            // When something was taken out, the notice goes first, in the same
+            // reply, so the person is told before they read back what was kept.
+            res.message = (res.redacted ? CurbCutRedact.notice() + '\n\n' : '')
+                        + 'Saved. ' + p.Shared_With__c + ' will see it.\n\n'
                         + 'Your code is ' + code + '. Keep it somewhere you can find it.\n\n'
                         + 'Send WHO ' + code + ' to see everyone who has been shown this. '
                         + 'Send OFF ' + code + ' to turn it off. I will not ask why. '
