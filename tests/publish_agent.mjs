@@ -3,11 +3,25 @@
  * underlying error surfaced. `sf agent publish` swallows the cause as
  * "fetch failed".
  */
-import { Org, SfProject } from '/Users/drashtipathak/.nvm/versions/node/v22.22.2/lib/node_modules/@salesforce/cli/node_modules/@salesforce/core/lib/index.js';
-import { ScriptAgent } from '/Users/drashtipathak/.nvm/versions/node/v22.22.2/lib/node_modules/@salesforce/cli/node_modules/@salesforce/agents/lib/index.js';
+import { execSync } from 'node:child_process';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const org = await Org.create({ aliasOrUsername: 'curbcut' });
-const project = await SfProject.resolve('/Users/drashtipathak/Downloads/curbcut_check');
+// The Salesforce CLI bundles @salesforce/core and @salesforce/agents. Find
+// them where the CLI is installed, not where one laptop happened to keep them.
+// SF_CLI_MODULES overrides the lookup when the CLI lives somewhere unusual.
+const SF_CLI_MODULES = process.env.SF_CLI_MODULES
+  || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
+          '@salesforce', 'cli', 'node_modules', '@salesforce');
+const { Org, SfProject } = await import(join(SF_CLI_MODULES, 'core',   'lib', 'index.js'));
+const { ScriptAgent }    = await import(join(SF_CLI_MODULES, 'agents', 'lib', 'index.js'));
+
+// The project is the folder above tests/, wherever this checkout lives.
+const PROJECT_DIR = fileURLToPath(new URL('..', import.meta.url));
+const ALIAS = process.env.SF_ORG_ALIAS || 'curbcut';
+
+const org = await Org.create({ aliasOrUsername: ALIAS });
+const project = await SfProject.resolve(PROJECT_DIR);
 const agent = new ScriptAgent({
   connection: org.getConnection(),
   project,
