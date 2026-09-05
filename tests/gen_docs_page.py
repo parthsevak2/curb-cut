@@ -8,7 +8,7 @@ import re, html, os
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def inline(t):
     t=html.escape(t, quote=False)
-    t=re.sub(r'!\[([^\]]*)\]\((https?://[^)]+)\)', r'<img src="\2" alt="\1" loading="lazy">', t)
+    t=re.sub(r'!\[([^\]]*)\]\((https?://[^)]+)\)', r'<img src="\2" alt="\1" loading="lazy" />', t)
     t=re.sub(r'&lt;(https?://[^&]+)&gt;', r'<a href="\1">\1</a>', t)
     t=re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)', r'<a href="\2">\1</a>', t)
     t=re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', t)
