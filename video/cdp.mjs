@@ -51,6 +51,12 @@ export async function launch() {
   // the stale stylesheet and reported the defect as unfixed.
   await send('Network.enable');
   await send('Network.setCacheDisabled', { cacheDisabled: true });
+  // The site honours prefers-color-scheme, and a headless profile can report
+  // dark. One screencast came out on a near-black ground while every still
+  // was light. Pin it, so a film and its stills agree with each other and
+  // with the deck.
+  await send('Emulation.setEmulatedMedia',
+             { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
   await send('Emulation.setDeviceMetricsOverride',
              { width: W, height: H, deviceScaleFactor: 2, mobile: false });
 

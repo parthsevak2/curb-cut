@@ -1,0 +1,52 @@
+{
+  "_comment": "Paste this at api.slack.com/apps -> Create New App -> From a manifest, in your own workspace. Socket Mode is on, so the relay needs no public URL and no tunnel: it dials out to Slack. After installing, put the Bot User OAuth Token (xoxb-), the App-Level Token (xapp-, scope connections:write) and the Signing Secret into channels/.env. Never paste them anywhere else.",
+  "display_information": {
+    "name": "Curb Cut",
+    "description": "Find out what could make work easier. Then decide whether to ask. Never in a channel, never sends from here.",
+    "long_description": "Curb Cut is a workplace accessibility assistant whose principal is the worker, not the employer. In Slack it answers only in a direct message, tells you on first contact that Slack belongs to your employer and names the two channels that do not, and never drafts or sends a request from here. The send button lives on the web, where you are anonymous. Nothing you write is stored; your Slack user id is hashed before it touches any record.",
+    "background_color": "#1c5245"
+  },
+  "features": {
+    "app_home": {
+      "home_tab_enabled": false,
+      "messages_tab_enabled": true,
+      "messages_tab_read_only_enabled": false
+    },
+    "bot_user": {
+      "display_name": "Curb Cut",
+      "always_online": true
+    },
+    "slash_commands": [
+      {
+        "command": "/curbcut",
+        "description": "Ask what could make work easier. Answers only you can see.",
+        "usage_hint": "what is hard right now, in your own words",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "chat:write",
+        "commands",
+        "im:history",
+        "im:read",
+        "im:write"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "bot_events": [
+        "message.im"
+      ]
+    },
+    "interactivity": {
+      "is_enabled": false
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": true,
+    "token_rotation_enabled": false
+  }
+}

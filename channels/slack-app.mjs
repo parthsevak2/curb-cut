@@ -148,39 +148,70 @@ const server = http.createServer((req, res) => {
   });
 });
 
+/* The two handlers know nothing about how the message arrived. The HTTP server
+   and the socket below are just two ways of delivering the same payloads, and
+   the rules (DM only, never sends, says where you are standing) live in one
+   place regardless of transport. */
+
 /* /curbcut — always ephemeral, and refused outright in a channel. */
-async function slashCommand(body, res) {
+async function slashPayload(body) {
   const inChannel = body.channel_name && body.channel_name !== 'directmessage';
-  if (inChannel) {
-    return respond(res, { response_type: 'ephemeral', text: IN_CHANNEL_REFUSAL });
-  }
+  if (inChannel) return { response_type: 'ephemeral', text: IN_CHANNEL_REFUSAL };
   const text = (body.text || '').trim();
-  if (!text) {
-    return respond(res, { response_type: 'ephemeral', text: WHERE_YOU_ARE });
-  }
+  if (!text)     return { response_type: 'ephemeral', text: WHERE_YOU_ARE };
   const first = !seenUsers.has(body.user_id);
   seenUsers.add(body.user_id);
   const answer = await ask(text, body.user_id);
-  return respond(res, {
-    response_type: 'ephemeral',
-    text: first ? WHERE_YOU_ARE + '\n\n———\n\n' + answer : answer,
-  });
+  return { response_type: 'ephemeral',
+           text: first ? WHERE_YOU_ARE + '\n\n———\n\n' + answer : answer };
 }
+async function slashCommand(body, res) { respond(res, await slashPayload(body)); }
 
 /* Direct messages to the app. Channel messages are ignored entirely - not
    answered quietly, ignored - except to say where to find me. */
-async function event(body, res) {
-  respond(res, { ok: true });          // acknowledge inside Slack's 3s window
-  const e = body.event || {};
-  if (e.type !== 'message' || e.bot_id || e.subtype) return;
-
-  const isDm = e.channel_type === 'im';
-  if (!isDm) return;                    // never speak in a channel, at all
-
+async function handleDm(e) {
+  if (!e || e.type !== 'message' || e.bot_id || e.subtype) return;
+  if (e.channel_type !== 'im') return;  // never speak in a channel, at all
   const first = !seenUsers.has(e.user);
   seenUsers.add(e.user);
   const answer = await ask(e.text || '', e.user);
   await post(e.channel, first ? WHERE_YOU_ARE + '\n\n———\n\n' + answer : answer);
+}
+async function event(body, res) {
+  respond(res, { ok: true });          // acknowledge inside Slack's 3s window
+  await handleDm(body.event);
+}
+
+/* Socket Mode. The relay dials out to Slack over a websocket instead of Slack
+   dialling in to a public URL, so a laptop behind a home router can run it
+   with no tunnel and nothing exposed. Slack signs nothing on this path because
+   nothing arrives unsolicited: the app-level token opened the socket. Each
+   envelope must be acknowledged by id, and a slash command's ack carries the
+   reply itself. Node 22 has a native WebSocket, so this needs no dependency. */
+async function socketMode(appToken) {
+  const open = await fetch('https://slack.com/api/apps.connections.open', {
+    method: 'POST', headers: { authorization: `Bearer ${appToken}` },
+  }).then(r => r.json());
+  if (!open.ok) { console.error('[slack] socket open failed:', open.error); return; }
+
+  const ws = new WebSocket(open.url);
+  ws.onopen = () => console.log('  socket    connected, listening for DMs and /curbcut');
+  ws.onclose = () => { console.log('  socket    closed, reconnecting in 3s'); setTimeout(() => socketMode(appToken), 3000); };
+  ws.onerror = (e) => console.error('[slack] socket error', e?.message || e);
+  ws.onmessage = async (m) => {
+    let env; try { env = JSON.parse(m.data); } catch { return; }
+    if (env.type === 'hello' || env.type === 'disconnect') return;
+    const ack = (payload) => ws.send(JSON.stringify(
+      payload === undefined ? { envelope_id: env.envelope_id } : { envelope_id: env.envelope_id, payload }));
+    try {
+      if (env.type === 'slash_commands') { ack(await slashPayload(env.payload)); return; }
+      if (env.type === 'events_api')     { ack(); await handleDm(env.payload?.event); return; }
+      ack();
+    } catch (e) {
+      console.error('[slack]', e?.message);
+      ack();
+    }
+  };
 }
 
 async function post(channel, text) {
@@ -200,4 +231,6 @@ server.listen(PORT, () => {
   console.log(`  reply     ${process.env.SLACK_BOT_TOKEN ? 'on' : 'OFF — set SLACK_BOT_TOKEN'}`);
   console.log(`  POST /slack/command   /curbcut, ephemeral only, refused in channels`);
   console.log(`  POST /slack/events    direct messages only`);
+  if (process.env.SLACK_APP_TOKEN) socketMode(process.env.SLACK_APP_TOKEN);
+  else console.log(`  socket    OFF — set SLACK_APP_TOKEN (xapp-…) to run without a public URL`);
 });
