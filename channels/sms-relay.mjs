@@ -12,8 +12,17 @@
  */
 import { createServer } from 'node:http';
 import { createHmac, createHash } from 'node:crypto';
-import { Org } from '/Users/drashtipathak/.nvm/versions/node/v22.22.2/lib/node_modules/@salesforce/cli/node_modules/@salesforce/core/lib/index.js';
-import { ProductionAgent } from '/Users/drashtipathak/.nvm/versions/node/v22.22.2/lib/node_modules/@salesforce/cli/node_modules/@salesforce/agents/lib/index.js';
+import { execSync } from 'node:child_process';
+import { join } from 'node:path';
+
+// The Salesforce CLI bundles @salesforce/core and @salesforce/agents. Find
+// them where the CLI is installed, not where one laptop happened to keep them.
+// SF_CLI_MODULES overrides the lookup when the CLI lives somewhere unusual.
+const SF_CLI_MODULES = process.env.SF_CLI_MODULES
+  || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
+          '@salesforce', 'cli', 'node_modules', '@salesforce');
+const { Org }             = await import(join(SF_CLI_MODULES, 'core',   'lib', 'index.js'));
+const { ProductionAgent } = await import(join(SF_CLI_MODULES, 'agents', 'lib', 'index.js'));
 
 const PORT   = Number(process.env.PORT || 3000);
 const ALIAS  = process.env.SF_ORG_ALIAS || 'curbcut';

@@ -762,6 +762,35 @@ check('focus-ring-works-on-any-ground',
 
 
 # ---------------------------------------------------------------------------
+# Nothing in channels/ or tests/ may name the laptop it was written on.
+#
+# Every relay and every test runner imported the CLI's bundled @salesforce
+# packages by their absolute path under one person's home directory, and the
+# adversarial runner wrote its transcripts there too. They ran for months and
+# would have failed on the first machine that was not that one. Paths come from
+# the file's own location, from `npm root -g`, or from a documented variable.
+# video/ is left out: it is film tooling, not the product.
+# ---------------------------------------------------------------------------
+# Spelled in two halves so this file does not trip its own check.
+HOME_LITERAL = '/' + 'Users/'
+homes = []
+for sub in ('channels', 'tests'):
+    for dp, dns, fns in os.walk(os.path.join(ROOT, sub)):
+        dns[:] = [d for d in dns if d != 'node_modules']
+        for fn in fns:
+            p = os.path.join(dp, fn)
+            try:
+                body = read(p)
+            except (UnicodeDecodeError, OSError):
+                continue
+            for i, line in enumerate(body.splitlines(), 1):
+                if HOME_LITERAL in line:
+                    homes.append(f'{os.path.relpath(p, ROOT)}:{i}')
+check('no-home-directory-literal', not homes,
+      'these lines only work on one laptop: ' + ', '.join(homes))
+
+
+# ---------------------------------------------------------------------------
 # The count in this file is quoted in the deck, in four Devpost answers and in
 # the technical design document. It has already drifted once: the suite grew and
 # every public claim silently became wrong. A number a judge can check is worth
