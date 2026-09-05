@@ -29,7 +29,7 @@
       It isn't a white-collar problem. In 2025, people with a disability in the
       United States were twice as likely to work part time and more often in
       service, production and transport jobs. By 2026, 98% of large employers
-      report accommodation programmes. The programmes exist. The asking doesn't.
+      report flexible accommodations. The programmes exist. The asking doesn't.
     </p>
     <p>
       That gap isn't caused by the outcome being bad. Of the people who did
@@ -69,7 +69,7 @@
       At an EEOC public hearing in January 2023, the estimate put on the record
       was that <strong>as many as 83% of employers, and up to 99% of the
       Fortune 500, use some automated tool to screen or rank candidates</strong>.
-      Treat that as an estimate rather than a measurement &mdash; it's quoted
+      Treat that as an estimate rather than a measurement, because it's quoted
       as one. It's still enough to say that at a large employer, something
       automated reads you before a person does.
     </p>
@@ -97,7 +97,7 @@
     </ul>
   </section>
 
-  <section aria-labelledby="sec-every-rule-so-far">
+  <section aria-labelledby="sec-every-rule-so-far-2">
     <p class="thesis">
       So the disabled person now negotiates with a system, <em>using a PDF.</em>
     </p>
@@ -113,7 +113,7 @@
 
   <section aria-labelledby="sec-every-rule-so-far-2">
     <p class="sec-label">Why regulation isn't the whole answer</p>
-    <h2 id="sec-every-rule-so-far-2">id="sec-every-rule-so-far">Every rule so far governs their machine. None of them gives you one.</h2>
+    <h2 id="sec-every-rule-so-far-2">Every rule so far governs their machine. None of them gives you one.</h2>
     <p>
       California's rules on automated decision systems in employment took effect
       on 1 October 2025. The EEOC has kept algorithmic bias in its sights
@@ -131,7 +131,7 @@
       <strong>There's no reason the capability should only run in one
       direction.</strong> The same technology that reads fifty thousand
       applicants can sit on the other side of the table and know the answer to
-      "what am I even allowed to ask for" &mdash; which is the question almost
+      "what am I even allowed to ask for", which is the question almost
       nobody can answer, and the reason almost nobody asks.
     </p>
   </section>
@@ -146,9 +146,9 @@
       isn't a yes.
     </p>
     <p>
-      And it never asks what you've. Not as a courtesy &mdash; there's no
+      And it never asks what you have. Not as a courtesy: there's no
       field for a diagnosis anywhere in the system, so a manager who asks is
-      told that nobody knows and nobody can find out. The 3.2% number at the top
+      told that nobody knows and nobody can find out. The three-in-a-hundred number at the top
       of this page is a measurement of how much people fear that question. The
       correct response to it isn't to promise discretion. It's to make the
       question unanswerable.
@@ -170,7 +170,7 @@
           <th>It becomes a new place to disclose</th>
           <td>An assistant that's easy to talk to collects more than a form
               does. So there's no field for a diagnosis, condition, disability
-              type, medical note, severity or prognosis. Not restricted &mdash;
+              type, medical note, severity or prognosis. Not restricted, simply
               absent. An automated check fails the build if anyone adds one.</td>
         </tr>
         <tr>
@@ -217,7 +217,7 @@
       known for three weeks.
     </p>
     <p>
-      What you don't know is how to say it. Not the words &mdash; the
+      What you don't know is how to say it. Not the words, the
       consequence. Whether it goes in a file. Whether it comes up in March.
       Whether the person you tell is the person who decides about the promotion,
       and whether they will remember you as someone who needed something.

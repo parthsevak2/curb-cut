@@ -75,11 +75,11 @@
 
 *, *::before, *::after { box-sizing:border-box; }
 
-html { -webkit-text-size-adjust:100%; }
+html { -webkit-text-size-adjust:100%; font-size:calc(100% * var(--step)); }
 body {
   margin:0; background:var(--ground); color:var(--ink);
   font-family:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
-  font-size:calc(1.125rem * var(--step));
+  font-size:1.125rem;
   line-height:1.65; -webkit-font-smoothing:antialiased;
 }
 
@@ -558,6 +558,7 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
       <a href="/privacy" aria-current="{!IF(current == 'privacy', 'page', 'false')}">Privacy</a>
       <a href="/terms" aria-current="{!IF(current == 'terms', 'page', 'false')}">Terms</a>
       <a href="/messaging" aria-current="{!IF(current == 'messaging', 'page', 'false')}">Messaging</a>
+      <a href="/docs" aria-current="{!IF(current == 'docs', 'page', 'false')}">Docs</a>
     </nav>
     <div class="tools">
       <button type="button" id="tsize" aria-pressed="false" title="Make the text bigger">A+</button>
@@ -587,9 +588,10 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
 
   <footer class="page">
     <p class="stand">
-      Thirty in a hundred white-collar employees have a disability. Three tell
-      their employer. Of the ones who did, five in six say it got them better
-      support. Curb Cut is built for the twenty-seven who decided it was not
+      One in four adults has a disability. Across 655 employer submissions in
+      2025, the median share of staff who told their employer was 3.5%. Of the
+      ones who did, in the one study that asked, five in six say it got them
+      better support. Curb Cut is built for everyone who decided it was not
       worth finding out.
     </p>
     <p>
@@ -609,7 +611,7 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
       Disclosure figures: Coqual, Disabilities and Inclusion &middot; coqual.org<br/>
       Unmet-need figures: Statistics Canada, Canadian Survey on Disability, 2022
       &middot; statcan.gc.ca<br/>
-      Every figure, with its denominator and its caveats: docs/EVIDENCE.md
+      Every figure, with its denominator and its caveats: <a href="/docs#doc-4">the evidence page</a>
     </p>
   </footer>
 </main>

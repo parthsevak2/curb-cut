@@ -171,7 +171,7 @@ public with sharing class CurbCutAssist {
         List<String> lines = new List<String>();
         lines.add(plain
             ? 'Hello. A person is looking at this now. You do not need to do anything.'
-            : 'Hello - a real person has picked this up and is looking at it now. '
+            : 'Hello, a real person has picked this up and is looking at it now. '
               + 'You do not need to do anything or explain it again.');
         if (interp) {
             lines.add(plain

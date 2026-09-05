@@ -14,7 +14,7 @@
   heading="What we hold, and what does not exist."
   lede="The safest way to protect something is not to collect it. Most of this is about what there is nowhere to put.">
 
-  <section aria-labelledby="sec-what-does-not-exist">
+  <section aria-labelledby="sec-what-does-not-exist-2">
     <div class="plain">
       <span class="tag">The short version</span>
       <p>
@@ -32,7 +32,7 @@
   </section>
 
   <section aria-labelledby="sec-what-does-not-exist-2">
-    <h2 id="sec-what-does-not-exist-2">id="sec-what-does-not-exist">What does not exist here</h2>
+    <h2 id="sec-what-does-not-exist-2">What does not exist here</h2>
     <div class="note absent">
       <p>
         There is no field anywhere in this system for a <strong>diagnosis</strong>,
@@ -41,7 +41,7 @@
         <strong>prognosis</strong>.
       </p>
       <p>
-        Not hidden, not locked, not encrypted &mdash; absent. An automated check
+        Not hidden, not locked, not encrypted, simply absent. An automated check
         refuses to let the software be built if anyone ever adds such a field.
       </p>
       <p>
@@ -110,7 +110,7 @@
       <li><strong>Your mobile information stays here.</strong> No mobile
           information, phone number, or text-message opt-in consent is shared
           with, sold to, or rented to any third party or affiliate for their
-          marketing or promotional purposes &mdash; not ever, and not in any
+          marketing or promotional purposes, not ever, and not in any
           form. The only parties that touch it are the carrier that delivers the
           message and the platform that runs the assistant, both named below,
           and both only in order to deliver the reply you asked for.</li>
@@ -146,7 +146,7 @@
     </p>
     <p>
       Information is stored on Salesforce infrastructure in the United States. We
-      give it to no one else, except where the law compels it &mdash; and there is
+      give it to no one else, except where the law compels it, and there is
       no medical information in the system to give.
     </p>
   </section>
@@ -160,7 +160,7 @@
     <ul class="kwlist">
       <li><span class="kw">HUMAN</span><span>Hand this to a real person, on whichever channel you are already using. You will not be asked to explain it again, and nobody will ring you.</span></li>
       <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours. Send it with your code, like <span class="kw">WHO 4KQ7MT</span>.</span></li>
-      <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate, and sent with your code the same way. You will not be asked why &mdash; there is nowhere to record a reason, so nobody can ask you for one later.</span></li>
+      <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate, and sent with your code the same way. You will not be asked why, because there is nowhere to record a reason, so nobody can ask you for one later.</span></li>
       <li><span class="kw">DELETE</span><span>Throw away a drafted request before it is sent.</span></li>
       <li><span class="kw">STOP</span><span>Stop receiving messages from the number entirely.</span></li>
     </ul>
@@ -174,7 +174,7 @@
       <p>
         That is the price of not holding a file on you. There is no account here,
         no password, and no phone number on record, so there is nothing we could
-        look you up by &mdash; and the code is what lets you switch a disclosure
+        look you up by, and the code is what lets you switch a disclosure
         off from a text message without us ever knowing who you are. If you lose
         it, send <span class="kw">HUMAN</span> and a person will sort it out with
         you.

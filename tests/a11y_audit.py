@@ -13,7 +13,7 @@ import sys, re, urllib.request, html
 from html.parser import HTMLParser
 
 SITE = "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut"
-PAGES = ["", "ask", "why", "messaging", "privacy", "terms"]
+PAGES = ["", "ask", "why", "messaging", "privacy", "terms", "docs"]
 
 errors, warnings, checked = [], [], 0
 
@@ -132,6 +132,10 @@ def audit(page, raw):
             for ref in a['aria-describedby'].split():
                 check('describedby-resolves', ref in d.ids,
                       f'<{tag}> aria-describedby="{ref}" points at nothing')
+        if a.get('aria-labelledby'):
+            for ref in a['aria-labelledby'].split():
+                check('labelledby-resolves', ref in d.ids,
+                      f'<{tag}> aria-labelledby="{ref}" points at nothing')
 
     for f, text in d.labels:
         if f:

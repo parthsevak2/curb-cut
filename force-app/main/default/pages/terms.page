@@ -14,7 +14,7 @@
   heading="You text first. Nothing leaves without your yes."
   lede="That is the whole agreement. The rest is detail the phone companies require us to spell out.">
 
-  <section aria-labelledby="sec-the-programme">
+  <section aria-labelledby="sec-the-programme-2">
     <div class="plain">
       <span class="tag">The short version</span>
       <p>
@@ -33,12 +33,12 @@
   </section>
 
   <section aria-labelledby="sec-the-programme-2">
-    <h2 id="sec-the-programme-2">id="sec-the-programme">The programme</h2>
+    <h2 id="sec-the-programme-2">The programme</h2>
     <table class="facts">
       <tbody>
         <tr><th scope="row">Name</th><td>Curb Cut</td></tr>
         <tr><th scope="row">Number</th>
-            <td><span class="kw">+1 276 495 9311</span> &mdash; the number these
+            <td><span class="kw">+1 276 495 9311</span>, the number these
                 terms are about. If a message reaches you from anywhere else, it
                 is not us.</td></tr>
         <tr><th scope="row">Made by</th>

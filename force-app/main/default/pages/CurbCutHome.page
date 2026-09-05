@@ -19,16 +19,16 @@
     <a class="btn" href="#doors">Other ways to reach it</a>
   </div>
   <p class="cta-note">
-    You can stop at any point. Nothing is written down while you're anonymous,
-    and nothing reaches your employer unless you say yes first.
+    You can stop at any point. Nothing that could identify you is written down
+    while you're anonymous, and nothing reaches your employer unless you say yes first.
   </p>
 
-  <section aria-labelledby="sec-sixty-one-employers-in">
+  <section aria-labelledby="sec-sixty-one-employers-in-2">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
         Say what is hard at work and get real answers about what you could ask
-        for &mdash; anonymously, if you want. If you decide to ask for something,
+        for, anonymously if you want. If you decide to ask for something,
         a request is written for you and read back, and nothing is sent until
         you agree.
       </p>
@@ -74,7 +74,7 @@
       And yet in 2022, Statistics Canada found that
       <strong>more than a third of employed Canadians with a disability had an
       accommodation need that went unmet</strong>. The most common thing people
-      needed was not equipment. It was modified working hours &mdash; a change
+      needed was not equipment. It was modified working hours, a change
       that costs nothing and requires only that somebody say yes.
     </p>
   </section>
@@ -106,7 +106,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="sec-reach-it-however-you">
+  <section aria-labelledby="sec-reach-it-however-you-2">
     <p class="thesis">The money was never the barrier. <em>The process is.</em></p>
     <p class="thesis-sub">
       To get help you first have to find the policy, learn its words, hold a work
@@ -118,10 +118,10 @@
   </section>
 
   <section id="doors" aria-labelledby="sec-reach-it-however-you-2">
-    <p class="sec-label">Five front doors</p>
+    <p class="sec-label">Six front doors</p>
     <h2 id="sec-reach-it-however-you-2">Reach it however you're able to</h2>
     <p>
-      These are five doors into the same assistant, not a main route with
+      These are six doors into the same assistant, not a main route with
       fallbacks bolted on. You get an answer back the same way you asked.
       Status below is the live truth, not a plan.
     </p>
@@ -132,7 +132,7 @@
         <h3>This website</h3>
         <p>
           Type what is hard, read what you could ask for, approve a request or
-          close the tab. No account, and nothing kept unless you ask for it.
+          close the tab. No account, and nothing kept about who you are.
         </p>
         <p><a href="/ask">Go to the ask page &rarr;</a></p>
       </div>
@@ -153,7 +153,7 @@
         <h3>Voice</h3>
         <p>
           Call the same number and speak instead of typing. For anyone for whom
-          typing is the hard part &mdash; tremor, pain, low vision, or a hand
+          typing is the hard part: tremor, pain, low vision, or a hand
           that's simply not co-operating today. Carriers register text messaging,
           not calls, so this one needed no registration and works today.
         </p>
@@ -179,13 +179,22 @@
           and won't draft or send a request from there.
         </p>
       </div>
+      <div class="card open">
+        <span class="chip live">Open now</span>
+        <h3>Your own assistant</h3>
+        <p>
+          Any AI assistant that can use tools can ask on your behalf through
+          our MCP server. It can find options and draft a request. It can never
+          send one.
+        </p>
+      </div>
     </div>
 
     <div class="note" style="margin-top:1.4rem">
       <p>
         <strong>Four words work on every one of these.</strong>
         Send <span class="kw">HUMAN</span> at any point and a real person takes
-        over on the same channel &mdash; never a phone call.
+        over on the same channel, never a phone call.
         <span class="kw">OFF</span> turns off anything you asked us to remember,
         and <span class="kw">WHO</span> lists everyone who has been shown it.
         <span class="kw">HELP</span> explains what this is. They mean the same
@@ -240,7 +249,7 @@
         <div>
           <h3>A request is written and read back to you</h3>
           <p>
-            In your words, describing what would help &mdash; never a condition.
+            In your words, describing what would help, never a condition.
             You can change it, or throw it away.
           </p>
         </div>
@@ -269,11 +278,11 @@
       <li>
         <b>Your diagnosis can't be stored, because there's nowhere to put it.</b>
         There's no field for a diagnosis, condition, disability type, medical
-        note, severity or prognosis anywhere in the system. Not encrypted &mdash;
+        note, severity or prognosis anywhere in the system. Not encrypted, simply
         absent. An automated check fails the build if anyone adds one.
       </li>
       <li>
-        <b>A manager can't be told what you've.</b> Not because access is
+        <b>A manager can't be told what you have.</b> Not because access is
         restricted, but because there's genuinely nothing to tell them.
       </li>
       <li>
@@ -309,9 +318,9 @@
       ones that weaken the argument.
     </p>
     <div class="proof">
-      <div><b>126</b><span>structural checks that must hold before anything ships</span></div>
-      <div><b>45</b><span>automated tests against the rules above</span></div>
-      <div><b>0</b><span>of the 46 fields in the system hold anything medical</span></div>
+      <div><b>512</b><span>structural checks that must hold before anything ships</span></div>
+      <div><b>137</b><span>Apex tests against the rules above</span></div>
+      <div><b>0</b><span>of the 61 fields in the system hold anything medical</span></div>
       <div><b>10</b><span>adversarial scenarios the assistant is scored against</span></div>
     </div>
   </section>
@@ -328,7 +337,7 @@
     </p>
     <p>
       It works. It's also only available if you happen to work for the federal
-      public service. Curb Cut takes the same principle to everyone else &mdash;
+      public service. Curb Cut takes the same principle to everyone else,
       including contractors, and applicants who don't have a work account at all
       and are currently expected to disclose a disability to a stranger before
       they have even been hired.
@@ -371,7 +380,7 @@
     <p>
       A site arguing that process shuts people out should not shut anyone out.
       Text size and contrast controls are at the top and remember your choice.
-      Nothing here relies on colour alone to tell you something &mdash; every
+      Nothing here relies on colour alone to tell you something, and every
       state also carries a word or a shape. Body text is set for AAA contrast
       rather than AA. It works by keyboard, it works with a screen reader, and
       it holds still if you've asked your device to reduce motion.

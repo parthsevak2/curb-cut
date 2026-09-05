@@ -111,6 +111,8 @@ In descending order of how often it is the real reason:
 
 ---
 
+**Once it is sent, the employer holds it.** The request contains no diagnosis, every word in it is the person's own, and OFF withdraws a standing preference at once. None of that stops a manager reacting badly. The interactive-process duty is why the same record can also protect the person: it shows they asked, in writing, on a date.
+
 ## Sources
 
 - Disability:IN network size — <https://disabilityin.org/>
