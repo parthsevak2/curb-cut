@@ -5,7 +5,7 @@ Every field below is written to be pasted as-is. Figures verified 31 August 2026
 
 ---
 
-## 1–2 sentence pitch
+## One or two sentence pitch
 
 > Thirty in a hundred white-collar employees have a disability; three tell their
 > employer. Curb Cut is an Agentforce agent that belongs to the worker instead of

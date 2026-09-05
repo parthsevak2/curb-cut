@@ -48,7 +48,7 @@ a scaffold ready to fill.
 
 ---
 
-## Project description (300–500 words)
+## Project description (300 to 500 words)
 
 **488 words.** Paste the body only, without the quote marks.
 

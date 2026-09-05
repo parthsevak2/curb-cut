@@ -11,7 +11,7 @@ The money was never the barrier.
 
 | Evidence | Source |
 |---|---|
-| **61 of every 100** accommodations cost the employer nothing. Median one-time cost of the rest: **$300**. | [JAN employer survey](https://askjan.org/topics/costs.cfm), 5,406 employers, Jan 2019, Dec 2024 |
+| **61 of every 100** accommodations cost the employer nothing. Median one-time cost of the rest: **$300**. | [JAN employer survey](https://askjan.org/topics/costs.cfm), 5,406 employers, Jan 2019 to Dec 2024 |
 | **More than a third** of employed Canadians with a disability had an accommodation need **go unmet** in 2022. | [Statistics Canada](https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity), Canadian Survey on Disability |
 | The **GC Workplace Accessibility Passport** already implements "ask once, not forever", and only for federal public servants. | [Government of Canada](https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html) |
 
@@ -66,7 +66,7 @@ and nobody can find out.
 ## What is deliberately not built
 
 - **No automated sign language.** ASL is a complete language; recognition is unsolved. Signed video routes to a human, with immediate text acknowledgement so nobody waits in silence.
-- **No diagnosis field.** Not encrypted, not restricted, absent. CI fails the build if anyone adds one.
+- **No diagnosis field.** It isn't encrypted or restricted. It's absent. CI fails the build if anyone adds one.
 - **No phone fallback, ever.** `Reachable_By__c` is hard-coded to message.
 - **No inference.** Nothing is profiled or predicted. Every signal is one the person set.
 
