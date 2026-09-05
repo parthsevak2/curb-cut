@@ -60,7 +60,7 @@ const SITE = process.env.CURB_CUT_SITE ||
 // Sent once, the first time we ever reply to someone. Program name, frequency,
 // rates, HELP, STOP, and both policy links - the full required set.
 const DISCLOSURE =
-  'Curb Cut: you texted first, so you will get replies from this number. ' +
+  'Curb Cut is automated, not a person; reply HUMAN for one. You texted first, so you will get replies from this number. ' +
   'Message frequency varies and replies only follow your own messages. ' +
   'Message and data rates may apply. Reply HELP for help, STOP to stop. ' +
   `Terms ${SITE}/terms Privacy ${SITE}/privacy`;

@@ -14,7 +14,7 @@
   heading="You text first. That's the only way in."
   lede="Nobody is added to a list here. There's no list.">
 
-  <section aria-labelledby="sec-you-send-the-first">
+  <section aria-label="In one sentence">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
@@ -27,7 +27,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="sec-you-send-the-first-2">
+  <section aria-label="The programme">
     <p class="sec-label">The programme</p>
     <table class="facts">
       <tbody>
@@ -56,7 +56,7 @@
 
   <section aria-labelledby="sec-you-send-the-first-3">
     <p class="sec-label">Opt-in, path one of one</p>
-    <h2 id="sec-you-send-the-first-3">id="sec-you-send-the-first-2">id="sec-you-send-the-first">You send the first message, from this notice</h2>
+    <h2 id="sec-you-send-the-first-3">You send the first message, from this notice</h2>
     <p>
       There's exactly one way to start: you text the number yourself. The notice below
       is the one we print and put up in break rooms and union offices. It's here word
@@ -69,7 +69,7 @@
       <p class="poster-num">+1 276 495 9311</p>
       <p class="poster-why">
         Find out what you could ask for, in your own words. You don't need an account,
-        a work login, or a reason, and you never have to say what condition you've.
+        a work login, or a reason, and you never have to say what condition you have.
       </p>
       <p class="poster-legal">
         By texting this number you agree to receive text messages from Curb Cut
@@ -100,7 +100,7 @@
     <div class="sms">Curb Cut: you texted first, so you'll get replies from this number. Message frequency varies and replies only follow your own messages. Message and data rates may apply. Reply HELP for help, STOP to stop. Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms Privacy https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/privacy</div>
 
     <p class="sms-label">If you reply HELP or INFO</p>
-    <div class="sms">Curb Cut helps you find out what could make work easier at work, and ask for it, without ever saying what condition you've. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms</div>
+    <div class="sms">Curb Cut helps you find out what could make work easier, and ask for it, without ever saying what condition you've. Message and data rates may apply. Reply STOP to stop. Help: parth.sevak2@gmail.com Terms https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/terms</div>
 
     <p class="sms-label">If you reply STOP, STOPALL, UNSUBSCRIBE, CANCEL, END or QUIT</p>
     <div class="sms">Curb Cut: you won't get any more messages from this number. Reply START if you ever want to come back. Nothing about you is kept.</div>
@@ -125,8 +125,8 @@
         <span class="kw">HUMAN</span> hands you to a real person, on this same
         channel, at any point.
         <span class="kw">OFF</span> turns off a standing preference you saved,
-        and <span class="kw">WHO</span> lists everyone who has been shown it
-        &mdash; both take the six-character code you were given when you saved
+        and <span class="kw">WHO</span> lists everyone who has been shown it.
+        Both take the six-character code you were given when you saved
         it, like <span class="kw">OFF 4KQ7MT</span>, because we hold no record of
         who you're and can't look you up.
         Inside a conversation, <span class="kw">DELETE</span> discards a drafted

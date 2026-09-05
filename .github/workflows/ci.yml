@@ -102,9 +102,7 @@ jobs:
         if: steps.auth.outputs.authed == 'true'
         run: |
           sf apex run test --target-org curbcut --wait 20 \
-            --class-names CurbCutOptionsTest \
-            --class-names CurbCutActionsTest \
-            --class-names CurbCutSpecTest \
+            --test-level RunLocalTests \
             --result-format human --code-coverage
 
       # Compiles the Agent Script server-side. This is the only syntax check

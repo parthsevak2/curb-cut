@@ -12,7 +12,7 @@ Roughly 70 phrases (HUMAN, OFF, WHO, HELP, STOP and their variants) are matched 
 
 FOUR OF SIX CHANNELS MAKE NO MODEL CALL AT ALL
 
-Web, email, Slack and any external caller go through one authenticated Apex REST door that composes its reply in code. Only the conversational agent path invokes a model. Most traffic through this system will never touch inference.
+Web, email, Slack and any external caller go through one authenticated Apex REST door that composes its reply in code. Text answers its first message through the same door. Only the conversational agent path invokes a model. Most traffic through this system will never touch inference.
 
 WHY WE STRIP CONDITIONS WITH A PATTERN LIST, NOT A MODEL
 

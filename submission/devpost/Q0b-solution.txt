@@ -1,4 +1,4 @@
-Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation have asked for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
+Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what people in your situation could ask for, from a sourced library with usual costs. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
 There's no field for a diagnosis anywhere. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored.
 
@@ -12,7 +12,7 @@ Six doors, all live today. An Agentforce agent written in Agent Script decides w
 
 Ask once, not forever: a standing preference travels ahead of you, and you can withdraw it any time.
 
-Agentforce made the ambitious part ordinary; the rest was intention.
+The employer's side of this conversation already had an agent. Now the worker's side does too. Agentforce made the ambitious part ordinary; the rest was intention.
 
 This is for the colleague who never asks and the person whose condition nobody can see.
 

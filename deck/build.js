@@ -84,7 +84,7 @@ function arrow(s,x,y,w,h,c){
 { const s=light(); chip(s,'WHAT YOU DECIDED NOT TO DO');
   title(s,'Now imagine the form was mandatory.');
   T(s,{t:[{text:'You did that calculation privately and moved on.',options:{breakLine:true,bold:true}},
-    {text:'For roughly three in ten people at work, that calculation isn\'t occasional. It\'s a standing condition of the job, and the price of getting it wrong isn\'t an awkward moment. It\'s being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
+    {text:'For about one in four adults, that calculation isn\'t occasional. It\'s a standing condition of the job, and the price of getting it wrong isn\'t an awkward moment. It\'s being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
     {text:'And the way through is almost never a conversation. It\'s this.',options:{bold:true}}],
     o:{x:ML,y:1.95,w:6.9,h:2.7,fontSize:16,fontFace:B,color:INK,paraSpaceAfter:12}});
   s.addShape(p.ShapeType.rect,{x:8.2,y:1.95,w:4.25,h:2.45,fill:{color:SURF},line:{color:RED,width:2}});
@@ -175,7 +175,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:def,o:{x:x+0.2,y:3.3,w:2.4,h:0.6,fontSize:11,fontFace:B,color:SOFT}});
     T(s,{t:st,o:{x:x+0.2,y:4.0,w:2.4,h:0.35,fontSize:9.5,fontFace:M,color:MUTED}});
   });
-  T(s,{t:'The people this affects are more likely to be paid by the hour, to work part time, and to be in service, production and transport jobs. The programmes exist at 98% of large employers (2026 index); the telling has not moved.',
+  T(s,{t:'The people this affects are more likely to be paid by the hour, to work part time, and to be in service, production and transport jobs. By 2026, 98% of participating employers report flexible or remote accommodations; the latest self-identification rate, 2025, did not rise.',
     o:{x:ML,y:4.75,w:11.7,h:0.5,fontSize:14,fontFace:B,color:INK}});
   kicker(s,'That gap is the argument, not a flaw in it. The wider the definition, the more people find they are counted, and the more of them have never told anyone at work.');
   src(s,'cdc.gov  |  bls.gov People with a Disability 2025, released 3 March 2026  |  disabilityin.org 2025 and 2026 Disability Index  |  statcan.gc.ca  |  coqual.org');
@@ -208,7 +208,8 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
   title(s,'The person asking pays nothing. The employer or a deployer group runs it.');
   T(s,{t:'The moment somebody has to be inside a licence to get help, the people who need it most are the ones excluded. So the primary user needs no account, no employer relationship with us, and nobody to have bought anything.',
     o:{x:ML,y:1.8,w:11.7,h:0.75,fontSize:14,fontFace:B,color:INK}});
-  const who=[['Contractors, temps, gig workers','no work login, no HR relationship, still expected to disclose'],
+  const who=[['Hourly, shift and minimum-wage workers','nearly twice as likely to be part time; no work email, no desk, no HR office on the floor'],
+               ['Contractors, temps, gig workers','no work login, no HR relationship, still expected to disclose'],
              ['People with invisible conditions','62% of disabled employees. Believed less, asked to prove more'],
              ['Deaf and hard-of-hearing workers','almost every escalation path ends at "give us a call"'],
              ['Anyone in their first weeks','least social capital, highest perceived cost of asking']];
@@ -495,7 +496,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
            ['Nobody owns it.','HR owns the policy. IT owns the systems. The manager owns the person. The request falls in the gap between three desks and waits there.'],
            ['Caution looks like safety.','Handling a disclosure badly carries legal risk, so doing nothing feels safest. It isn\'t safer, only quieter.'],
            ['The demand is invisible by design.','Three people in a hundred tell you. An empty queue reads as a solved problem, and the silence is taken as evidence.'],
-           ['Every tool assumed disclosure first.','HR systems start from a diagnosis field. Building one without it meant building something new, and nobody had.']];
+           ['Every tool started from the diagnosis.','HR systems have a field for it, and the newer accommodation platforms hold it on the employee\'s behalf. Building one with no field at all meant building something new.']];
   R.forEach(([t,d],i)=>{ const y=1.90+i*0.85;
     s.addShape(p.ShapeType.rect,{x:ML,y,w:0.055,h:0.70,fill:{color:GOLDFILL},line:{color:GOLDFILL,width:0}});
     T(s,{t,o:{x:1.1,y:y+0.02,w:4.7,h:0.58,fontSize:13,bold:true,fontFace:H,color:INK}});
@@ -543,7 +544,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
               ['35.4% have an unmet need','Statistics Canada, the strongest single figure in this deck'],
               ['22.8% employed, 30% part time','US Bureau of Labor Statistics, 2025 data, released March 2026'],
               ['3.5% told their employer, 2025','Disability:IN 2025 index, 655 employer submissions; Coqual found 3.2% among white-collar workers'],
-              ['98% of employers have the programmes','Disability:IN 2026 index, 421 organisations; the disclosure gap persists'],
+              ['98% report flexible or remote accommodations','Disability:IN 2026 index, 421 organisations'],
               ['61% of accommodations cost nothing','Job Accommodation Network, 1,425 employers through 2024']];
   rows.forEach(([f,src_],i)=>{ const y=1.92+i*0.60;
     s.addShape(p.ShapeType.rect,{x:ML,y,w:4.5,h:0.52,fill:{color:SUNK},line:{color:LINE,width:1}});

@@ -17,7 +17,7 @@ It still says it about half the time, because the agent rewrites what an action 
 
 WHERE WE PUSHED THE ERROR RATE TO ZERO
 
-The condition is stripped before storage by Apex on every channel. That part is deterministic and it always holds. And on the four channels that compose their reply in Apex rather than through a model, web, text, email, Slack, the person is told so EVERY SINGLE TIME. Pinned by a test that exercises all four, and verified live against the deployed org.
+The condition is stripped before storage by Apex on every channel. That part is deterministic and it always holds. And on the four channels that compose their reply in Apex rather than through a model, web, text, email, Slack, the person is told so every time the reply comes from Apex. Pinned by a test that drives all four through the shared door, and verified live against the deployed org.
 
 So there are two numbers: 100% on the deterministic surface, roughly 50% on the model's narration of the same fact.
 
