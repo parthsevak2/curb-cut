@@ -1,10 +1,10 @@
 1
-00:00:00,400 --> 00:00:22,600
-This is Curb Cut. It's for the thirty in a hundred of us who have something at work that's quietly hard, and who never asked, because asking meant explaining our bodies to a manager. Here, you just say what's getting in the way. You never have to say why.
+00:00:00,400 --> 00:00:22,171
+This is Curb Cut. It's for the one in four of us who has something at work that's quietly hard, and who never asked, because asking meant explaining our bodies to a manager. Here, you just say what's getting in the way. You never have to say why.
 
 2
-00:00:26,800 --> 00:00:41,714
-Thirty in a hundred isn't a number on a slide. It's your sister. The colleague who never asks. The person beside you on the bus. We don't get to look past them.
+00:00:26,800 --> 00:00:41,286
+One in four isn't a number on a slide. It's your sister. The colleague who never asks. The person beside you on the bus. We don't get to look past them.
 
 3
 00:00:43,200 --> 00:00:55,114
@@ -19,69 +19,69 @@ That's the whole form. This is the one most people get instead.
 You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.
 
 6
-00:01:20,400 --> 00:01:27,171
-Thirty in a hundred of us have a disability. Three tell their employer.
+00:01:20,400 --> 00:01:28,029
+One in four of us has a disability. Three in a hundred tell their employer.
 
 7
-00:01:33,200 --> 00:01:39,971
+00:01:34,200 --> 00:01:40,971
 Nothing is sent until she clearly says yes. If she hedges, it waits.
 
 8
-00:01:41,600 --> 00:01:51,800
+00:01:42,600 --> 00:01:52,800
 Here it is, live, in the agent. She hedges, and it waits. She says yes, and only then does it move.
 
 9
-00:01:54,000 --> 00:01:59,057
+00:01:55,000 --> 00:02:00,057
 Sent, with a date she can hold them to.
 
 10
-00:02:00,400 --> 00:02:11,886
+00:02:01,400 --> 00:02:12,886
 And it's there wherever she is: on the web, by voice, by text, by email, in Slack, or through any assistant she already uses.
 
 11
-00:02:13,800 --> 00:02:33,857
+00:02:14,800 --> 00:02:34,857
 The same thing by text, on a basic phone with no internet. She texts CURB CUT, says what's hard, and real options come back with what they usually cost. She picks one. It writes the request in her words, and waits for her yes.
 
 12
-00:02:37,200 --> 00:02:44,829
+00:02:38,200 --> 00:02:45,829
 Or she rings the same number and just says it. It never rings her back.
 
 13
-00:02:46,600 --> 00:02:53,800
+00:02:47,600 --> 00:02:54,800
 By email, the answer comes from the same door, so it's the same answer.
 
 14
-00:02:55,000 --> 00:03:00,914
+00:02:56,000 --> 00:03:01,914
 In Slack, it's a private message. It can't post anywhere else.
 
 15
-00:03:02,400 --> 00:03:13,457
+00:03:03,400 --> 00:03:14,457
 And any assistant she already uses can ask on her behalf, through a tool that can find and draft, but can never send.
 
 16
-00:03:20,200 --> 00:03:35,543
+00:03:21,200 --> 00:03:36,543
 There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later.
 
 17
-00:03:37,600 --> 00:03:50,371
+00:03:38,600 --> 00:03:51,371
 So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find.
 
 18
-00:03:52,000 --> 00:04:04,343
+00:03:53,000 --> 00:04:05,343
 If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it.
 
 19
-00:04:06,400 --> 00:04:16,600
+00:04:07,400 --> 00:04:17,600
 One side of this conversation got an agent. The other side got a form. We built the other side one too.
 
 20
-00:04:17,800 --> 00:04:29,714
+00:04:18,800 --> 00:04:30,714
 We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.
 
 21
-00:04:31,200 --> 00:04:42,686
+00:04:32,200 --> 00:04:43,686
 If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
 
 22
-00:04:44,600 --> 00:04:56,514
+00:04:45,600 --> 00:04:57,514
 Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is.
