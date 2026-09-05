@@ -12,5 +12,6 @@
   },
   "dependencies": {
     "jsforce": "^3.10.25"
-  }
+  },
+  "license": "MIT"
 }

@@ -12,7 +12,7 @@
 <c:CurbCutShell pageTitle="Curb Cut" current="home"
   eyebrow="Accommodation without disclosure"
   heading="Find out what could make work easier. Then ask for it."
-  lede="No form. No login. And you never have to say what condition you've.">
+  lede="No form. No login. And you never have to say what condition you have.">
 
   <div class="cta">
     <a class="btn primary" href="/ask">Ask now <span class="arrow">&rarr;</span></a>
@@ -37,7 +37,7 @@
 
   <section aria-labelledby="sec-sixty-one-employers-in-2">
     <p class="sec-label">The number this is built on</p>
-    <h2 id="sec-sixty-one-employers-in-2">id="sec-sixty-one-employers-in">Sixty-one employers in a hundred paid nothing</h2>
+    <h2 id="sec-sixty-one-employers-in-2">Sixty-one employers in a hundred paid nothing</h2>
     <p>
       The Job Accommodation Network surveyed 26,028 employers who had contacted
       it for accommodation guidance between January 2019 and December 2024.
@@ -110,10 +110,10 @@
   </section>
 
   <section id="doors" aria-labelledby="sec-reach-it-however-you-2">
-    <p class="sec-label">Four front doors</p>
-    <h2 id="sec-reach-it-however-you-2">id="sec-reach-it-however-you">Reach it however you're able to</h2>
+    <p class="sec-label">Five front doors</p>
+    <h2 id="sec-reach-it-however-you-2">Reach it however you're able to</h2>
     <p>
-      These are four doors into the same assistant, not a main route with
+      These are five doors into the same assistant, not a main route with
       fallbacks bolted on. You get an answer back the same way you asked.
       Status below is the live truth, not a plan.
     </p>
@@ -129,13 +129,14 @@
         <p><a href="/ask">Go to the ask page &rarr;</a></p>
       </div>
 
-      <div class="card pending">
-        <span class="chip wait">Awaiting carrier approval</span>
+      <div class="card open">
+        <span class="chip live">Open now</span>
         <h3>Text message</h3>
         <p>
-          Text <span class="kw">+1 276 495 9311</span> and say what is hard. No
-          app to install, and it works on a phone that can't run anything else.
-          Registration with the mobile carriers is under review.
+          Text <span class="kw">CURB CUT</span> to <span class="kw">+1 276 495 9311</span>
+          and say what's hard. No app to install, and it works on a phone that
+          can't run anything else. You text first, and every reply follows your
+          own messages.
         </p>
       </div>
 
@@ -249,7 +250,7 @@
   </section>
 
   <section aria-labelledby="sec-what-cannot-happen-here">
-    <p class="sec-label">Guarantees, not intentions</p>
+    <p class="sec-label">What is enforced</p>
     <h2 id="sec-what-cannot-happen-here">What can't happen here</h2>
     <p>
       Each of these is prevented by the way the system is built, not by a

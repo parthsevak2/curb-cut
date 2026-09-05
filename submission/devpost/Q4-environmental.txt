@@ -4,23 +4,23 @@ THE RANKER IS NOT INFERENCE
 
 Matching what somebody said against the accommodation library is a deterministic Apex function: tokenise, drop stopwords, a light stemmer, then score by how much each word distinguishes an option. No embeddings, no vector store, no RAG pipeline to keep warm, no re-indexing job.
 
-The library is 28 curated, individually sourced rows. A vector index over 28 rows is theatre. The keyword ranker is a SOQL query and some string work; the equivalent embedding search would burn an inference per message and give worse-sourced answers, because a cosine similarity cannot be explained to somebody who was given bad advice and a cited row can.
+The library is 28 curated, individually sourced rows, so a SOQL query and keyword scoring is enough. An embedding search would burn an inference per message and give worse-sourced answers, because a cosine similarity cannot be explained to somebody who was given bad advice and a cited row can.
 
 CONTROL WORDS NEVER REACH A MODEL
 
-Roughly 70 phrases. HUMAN, OFF, WHO, HELP, STOP and their natural variants. Are matched in Apex before any inference happens. Somebody withdrawing consent gets an instant deterministic answer instead of a generation. That is greener, faster, and more reliable, in that order of importance reversed: we did it for reliability and got the efficiency free.
+Roughly 70 phrases (HUMAN, OFF, WHO, HELP, STOP and their variants) are matched in Apex before any inference happens. Somebody withdrawing consent gets an instant deterministic answer instead of a generation. We did this for reliability. It also means STOP, OFF and HUMAN never cost an inference.
 
 FOUR OF SIX CHANNELS MAKE NO MODEL CALL AT ALL
 
 Web, email, Slack and any external caller go through one authenticated Apex REST door that composes its reply in code. Only the conversational agent path invokes a model. Most traffic through this system will never touch inference.
 
-REDACTION IS A REGEX, NOT A CLASSIFIER
+WHY WE STRIP CONDITIONS WITH A PATTERN LIST, NOT A MODEL
 
 Stripping a volunteered medical condition before storage runs against a compiled pattern list. A moderation model was the obvious reach and would have cost an inference on EVERY message, added latency to the one path that must never be slow, and produced a probabilistic answer to a question that deserves a deterministic one.
 
 CI RUNS ZERO INFERENCE
 
-All ten auditors are static Python and Node: 508 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+All ten auditors are static Python and Node: 509 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
 
 The two accessibility suites are worth naming, because the greener choice was also the better one. Sa11y runs axe-core over the rendered components, and the keyboard walk drives a real browser with real Tab presses. Both measure. Neither asks a model what it thinks the page looks like, which would be slower, less repeatable, and impossible to hand a judge as evidence.
 
@@ -30,14 +30,14 @@ SESSIONS EXPIRE
 
 The relay holds one conversation per hashed handle with a 30-minute TTL. No context is kept alive longer than the conversation that needs it.
 
-WE PICKED THE SMALL MODEL PATH BY DEFAULT
+THE AGENT'S JOB IS NARROW
 
 The agent's job is deliberately narrow: choose an action and phrase a reply at a grade-six reading level. It does not summarise documents, does not retrieve, does not reason over long context. The heavy lifting is a database query.
 
 THE PRINCIPLE UNDERNEATH ALL OF IT
 
-If a rule matters, put it in code. A model asked to remember a rule burns energy every single time it is asked, and still forgets.
+If a rule matters, put it in code. A model asked to remember a rule burns energy every time it is asked, and still forgets.
 
-Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition. It says about half the time, across six measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
+Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition. It says about half the time, across three measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
 
-The greenest token is the one you never had to generate, and it is usually also the one you can actually depend on.
+Four channels say the sentence every time with no model call; the agent says it about half the time.

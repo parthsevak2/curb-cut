@@ -110,7 +110,7 @@ function arrow(s,x,y,w,h,c){
     T(s,{t,o:{x:x+0.22,y:y+0.16,w:5.2,h:0.35,fontSize:15,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:x+0.22,y:y+0.58,w:5.2,h:0.85,fontSize:12,fontFace:B,color:SOFT}});
   });
-  kicker(s,'We say everyone is equal. In a market, everyone is a transaction. It shouldn\'t take a dataset to argue that a person is worth an hour of flexibility. Here is the dataset anyway.');
+  kicker(s,'It shouldn\'t take a dataset to argue that a person is worth an hour of flexibility. Here is the dataset anyway.');
   s.addNotes('This is the moral argument. Don\'t rush it and don\'t soften it.');
 }
 
@@ -205,7 +205,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
 
 /* ------------------------------------------------- 11b WHO THIS IS FOR */
 { const s=light(); chip(s,'02  THE EVIDENCE  |  WHO THIS IS FOR');
-  title(s,'The user buys nothing. That\'s deliberate.');
+  title(s,'The person asking pays nothing. The employer or a deployer group runs it.');
   T(s,{t:'The moment somebody has to be inside a licence to get help, the people who need it most are the ones excluded. So the primary user needs no account, no employer relationship with us, and nobody to have bought anything.',
     o:{x:ML,y:1.8,w:11.7,h:0.75,fontSize:14,fontFace:B,color:INK}});
   const who=[['Contractors, temps, gig workers','no work login, no HR relationship, still expected to disclose'],
@@ -225,7 +225,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:n,o:{x,y:5.38,w:3.7,h:0.32,fontSize:12.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x,y:5.72,w:3.7,h:0.5,fontSize:10.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'The gap isn\'t a spending gap. It\'s a process gap, which is cheaper to close and harder to sell, because no budget line says "the asking was too hard".');
+  kicker(s,'Employers aren\'t short of money for this. They\'re short of a process, and no budget line says "the asking was too hard".');
 }
 
 /* ----------------------------------------------------------- 12 DIVIDER 03 */
@@ -233,7 +233,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
 
 /* --------------------------------------------- 13 REFERENCE ARCHITECTURE */
 { const s=light(); chip(s,'03  THE BUILD  |  REFERENCE ARCHITECTURE');
-  title(s,'Five layers. One of them is deliberately empty.');
+  title(s,'Five layers. The data layer has no diagnosis field.');
   const L=[['PEOPLE','Anonymous web  ·  Voice  ·  Text  ·  Email  ·  Slack DM  ·  Any MCP assistant'],
            ['CONTROL','CurbCutKeyword. About 70 phrases resolved before any inference happens.'],
            ['DOOR','CurbCutChannelApi. One authenticated Apex REST endpoint every channel shares.'],
@@ -265,7 +265,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
   });
   T(s,{t:'Six classes write to it. None can write a body, because there\'s no field for one. Five reports and one dashboard sit on top of it for the person on duty: who is waiting, what didn\'t arrive, who needs an interpreter.',
     o:{x:ML,y:5.08,w:11.6,h:0.9,fontSize:13.5,fontFace:B,color:SOFT}});
-  kicker(s,'Telemetry that would let an employer read a conversation is surveillance with a dashboard. This one measures the system and protects the person.');
+  kicker(s,'The ledger records delivery, never the message, so an employer can\'t use it to read a conversation.');
   src(s,'Message_Log__c   ·   9 fields, no body   ·   How_People_Reach_Us, Messages_That_Did_Not_Arrive, Who_Is_Waiting, Needs_An_Interpreter, Awaiting_A_Decision');
 }
 
@@ -288,7 +288,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
     T(s,{t:d,o:{x:3.38,y:y+0.2,w:8.9,h:0.4,fontSize:12,fontFace:B,color:INK}});
     if(i<4) arrow(s,1.12,y+0.68,0,0.17);
   });
-  kicker(s,'Steps one to four contain no inference at all. The cheapest system is the one that doesn\'t ask a model a question it already knows the answer to.');
+  kicker(s,'Steps one to four are Apex. The model only phrases the reply.');
 }
 
 /* ------------------------------------------------------- 14 SWIM LANES */
@@ -340,7 +340,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
   });
   T(s,{t:'A spent code and a wrong code return the same answer, so nobody can use this to test whether a stranger’s disclosure is still live.',
     o:{x:ML,y:5.0,w:11.7,h:0.5,fontSize:13.5,fontFace:B,color:INK}});
-  kicker(s,'The alphabet leaves out O 0 I 1 S 5, the characters people confuse on a cracked screen or read aloud. An accessibility decision inside a cryptographic one.');
+  kicker(s,'The code alphabet leaves out O 0 I 1 S 5, so it survives a cracked screen or being read aloud.');
   s.addNotes('Verified live: set on the web, queried over SMS, revoked from Slack.');
 }
 
@@ -395,7 +395,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     T(s,{t,o:{x:1.15,y,w:3.4,h:0.5,fontSize:15,bold:true,fontFace:H,color:RED}});
     T(s,{t:d,o:{x:4.75,y,w:7.7,h:1.18,fontSize:12,fontFace:B,color:INK}});
   });
-  kicker(s,'Each one now has a check that fails the build if it ever comes back.');
+  kicker(s,'Five checks now fail the build if any of these comes back: advertised-keyword-is-routed, kindness, privacy-page-does-not-overclaim, redaction-spares-identity-words, adversarial-silence-is-not-success.');
 }
 
 /* ------------------------------------------------- 19b THE REQUIRED TOOL */
@@ -423,7 +423,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
   T(s,{t:'\u201cNo captions and no transcript, and none will be generated. This is waiting on a human interpreter.\u201d',
     o:{x:1.13,y:5.32,w:11.3,h:0.72,fontSize:16,fontFace:H,italic:true,color:INK}});
 
-  kicker(s,'An incomplete isn\'t a pass. Reporting it as one would have been the easiest lie in the submission.');
+  kicker(s,'axe returned incomplete on colour contrast because jsdom has no canvas. We measured contrast ourselves instead: 28 pairs, all passing.');
 }
 
 /* ----------------------------------------------- 19c THE RAI SELF CHECK */
@@ -448,7 +448,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 
   T(s,{t:'It also produced a finding we withdrew. A check demanded every row state a cost; nine don\'t. But the code was already right: it says it has no figure and refuses to estimate one. We corrected the check, not the code, and left it in the file with a note that it was wrong the first time.',
     o:{x:ML,y:5.62,w:11.6,h:0.62,fontSize:12.5,fontFace:B,color:SOFT}});
-  kicker(s,'A check that lies to you is worse than no check. So --selftest breaks four of them on purpose and asserts each one goes red.');
+  kicker(s,'--selftest breaks five checks on purpose and asserts each one goes red.');
   src(s,'python3 tests/rai_self_check.py   ·   python3 tests/rai_self_check.py --selftest');
 }
 
@@ -468,7 +468,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
   T(s,{t:'"Good" is 23 of 23 with zero variance across five runs. Getting there means moving anything safety critical out of the model’s narration and into code that runs whether or not it remembers.',
     o:{x:ML,y:4.6,w:11.5,h:0.9,fontSize:14.5,fontFace:H,italic:true,color:INK}});
-  T(s,{t:'137 Apex   |   508 invariants   |   333 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
+  T(s,{t:'137 Apex   |   509 invariants   |   331 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
     o:{x:ML,y:5.7,w:11.7,h:0.5,fontSize:12,fontFace:M,color:SOFT}});
 }
 
@@ -483,7 +483,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     T(s,{t,o:{x:ML,y,w:4.5,h:0.45,fontSize:13.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:5.5,y,w:6.95,h:0.95,fontSize:11.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'A system that claims a perfect score against its own adversarial suite is telling you about its suite, not its agent.');
+  kicker(s,'We score 21 of 23. The two failures are named above, with the transcripts.');
 }
 
 divider('05','The offer','Why this hasn\'t happened, and why that is over.');
@@ -515,7 +515,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
           {text:'The code, and the library with every row\u2019s source',options:{bullet:true,breakLine:true}},
           {text:'The deployment into your own org, which holds your data, not ours',options:{bullet:true,breakLine:true}},
           {text:'Both audits, so you can check us rather than trust us',options:{bullet:true,breakLine:true}},
-          {text:'No licence, no seat count, no lock-in',options:{bullet:true}}],
+          {text:'MIT licence, no seat count, no lock-in',options:{bullet:true}}],
     o:{x:1.12,y:2.62,w:5.0,h:2.7,fontSize:12.5,fontFace:B,color:INK,paraSpaceAfter:9}});
 
   s.addShape(p.ShapeType.roundRect,{x:6.9,y:1.92,w:5.55,h:3.55,rectRadius:0.05,
@@ -557,8 +557,8 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
 { const s=light(); chip(s,'APPENDIX  |  VERIFICATION');
   title(s,'Don\'t take any of it on trust.');
   const cmd=[['508','structural invariants','python3 tests/invariants.py'],
-             ['124','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
-             ['333','accessibility checks, live pages','python3 tests/a11y_audit.py'],
+             ['137','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
+             ['331','accessibility checks, live pages','python3 tests/a11y_audit.py'],
              ['131','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
              ['21','responsible AI checks','python3 tests/rai_self_check.py'],
              ['28','contrast checks, both themes','python3 tests/contrast_audit.py'],
@@ -569,7 +569,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
     s.addShape(p.ShapeType.rect,{x:6.35,y,w:6.1,h:0.48,fill:{color:SUNK},line:{color:LINE,width:1}});
     T(s,{t:c,o:{x:6.52,y:y+0.15,w:5.8,h:0.3,fontSize:10.5,fontFace:M,color:INK}});
   });
-  kicker(s,'Nothing in this deck is asserted from memory. Every figure was read from the deployed org, or from the run that produced it.');
+  kicker(s,'Every figure in this deck was read from the deployed org or from the run that produced it. The commands are on this slide.');
   src(s,'Org 00DgK00000YIJ5SUAX   ·   Curb_Cut v7 and Curb_Cut_Desk v5, both Active   ·   github.com/parthsevak2/curb-cut');
 }
 
@@ -582,7 +582,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   T(s,{t:'They only have to be able to ask.',o:{x:ML,y:4.2,w:10.5,h:0.7,fontSize:25,
     fontFace:H,italic:true,color:GOLDLT}});
   T(s,{t:'Verify anything in this deck:',o:{x:ML,y:5.3,w:6,h:0.35,fontSize:11.5,fontFace:M,color:DIMTX}});
-  T(s,{t:'python3 tests/invariants.py          508 checks\nsf apex run test -l RunLocalTests     137 tests\npython3 tests/a11y_audit.py          333 checks, against the live pages',
+  T(s,{t:'python3 tests/invariants.py          508 checks\nsf apex run test -l RunLocalTests     137 tests\npython3 tests/a11y_audit.py          331 checks, against the live pages',
     o:{x:ML,y:5.62,w:8.5,h:1.0,fontSize:10.5,fontFace:M,color:'D8DAD6'}});
   T(s,{t:'orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut',o:{x:ML,y:6.75,w:11,h:0.35,
     fontSize:11.5,fontFace:M,color:DIMTX}});

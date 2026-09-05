@@ -4,7 +4,7 @@ WHAT WE RAN
 
 Sa11y against all five Lightning Web Components in twelve states: 131 axe checks passed, 0 WCAG violations. We used the 100-rule "extended" preset, not the 64-rule "base" preset Sa11y applies by default. One rule, region, is excluded in one place with the reason beside it: it carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks.
 
-Before trusting that, we planted an image with no alt text and asserted the matcher throws. It does. A suite that cannot fail proves nothing.
+Before trusting that, we planted an image with no alt text and asserted the matcher throws. It does.
 
 WHAT IT FOUND
 
@@ -12,9 +12,9 @@ WHAT IT FOUND
 
 axe returned "incomplete", not pass, on video-caption (WCAG 1.2.2) for signed video in the console: it cannot inspect media. A screen reader user could.
 
-The obvious remedy is the forbidden one. That video is usually a Deaf person signing, and auto-captioning it would be a machine putting words in somebody's mouth about their own body and then filing them. Our operator banner said so. But the operator was the only one told: a person reaching the video element got silence, with no explanation of it.
+The usual fix is auto-captioning, and that's the one thing we won't do here: that video is usually a Deaf person signing, and a machine would be putting words in their mouth about their own body, then filing them. Our operator banner said so. But the operator was the only one told: a person reaching the video element got silence, with no explanation of it.
 
-FIXED. Every video now carries an aria-describedby pointing at a note on the page for everyone: "No captions and no transcript, and none will be generated. This is waiting on a human interpreter." That does not satisfy 1.2.2 and we do not claim it does. It replaces an unexplained absence with a stated one, which is the honest position while an interpretation is pending.
+FIXED. Every video now carries an aria-describedby pointing at a note on the page for everyone: "No captions and no transcript, and none will be generated. This is waiting on a human interpreter." That does not satisfy 1.2.2 and we do not claim it does. Until a human interpreter has worked on the video, a screen-reader user now hears why there are no captions instead of hearing nothing.
 
 2. The emergency form kept the last emergency's words.
 
@@ -28,12 +28,12 @@ color-contrast came back "incomplete" in all twelve states, because axe measures
 
 WHAT WAS ALREADY IN PLACE
 
-333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 508 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+331 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 509 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
 
 A FINDING WE DISPROVED
 
-An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. The method was wrong, not the site. We report it because claiming a defect we did not have is worse than missing one.
+An early browser pass appeared to show 26 controls with no focus indicator. But :focus-visible does not match a programmatic .focus(). Driven with real Tab presses it is 3px solid rgb(11,87,199), as designed. Our test method was wrong; the site was fine. We'd rather report a false alarm we caught ourselves than have a judge find it.
 
 THE GAP WE HAVE NOT CLOSED
 
-No screen reader user has tested this. Everything above is machine- or browser-verified, which is not the same as somebody using it. One session with a person who uses a screen reader daily is worth more than the next five features, and we say so on the evidence page rather than letting the numbers imply otherwise.
+A script checked all of this. No one who uses a screen reader every day has. One session with a person who uses a screen reader daily is worth more than the next five features, and we say so in the judge guide rather than letting the numbers imply otherwise.

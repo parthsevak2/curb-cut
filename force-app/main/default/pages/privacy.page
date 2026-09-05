@@ -74,7 +74,7 @@
           <th scope="row">A scrambled phone number</th>
           <td>So your conversation carries on across messages. Your number is
               turned into an irreversible code the moment it arrives. The number
-              itself is never saved and never written to a log.</td>
+              itself is never saved and never written to our ledger.</td>
         </tr>
         <tr>
           <th scope="row">What you say is hard</th>
@@ -137,6 +137,13 @@
           handles your phone number to deliver them, as any phone company must.</li>
       <li><strong>Salesforce</strong> hosts the database and the assistant.</li>
     </ul>
+    <p>
+      Three places hold what you typed for a while, and we cannot make them not:
+      Salesforce keeps the agent conversation as session data under its own
+      retention, Twilio keeps text and voice logs on its side for texts and
+      calls, and our relay holds a conversation in memory for thirty minutes.
+      What Curb Cut itself saves never includes a condition or a phone number.
+    </p>
     <p>
       Information is stored on Salesforce infrastructure in the United States. We
       give it to no one else, except where the law compels it &mdash; and there is
