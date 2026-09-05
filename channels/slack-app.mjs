@@ -96,6 +96,16 @@ function signatureValid(rawBody, headers) {
 }
 
 const seenUsers = new Set();
+/* Slack retries an envelope it thinks was not acknowledged. Each event carries
+   an event_id, so a retry is answered once, not twice. */
+const seenEvents = new Set();
+function fresh(id) {
+  if (!id) return true;
+  if (seenEvents.has(id)) return false;
+  seenEvents.add(id);
+  if (seenEvents.size > 500) seenEvents.delete(seenEvents.values().next().value);
+  return true;
+}
 
 async function ask(text, slackUserId) {
   const handle = handleFor(slackUserId);
@@ -186,6 +196,7 @@ async function handleDm(e) {
 }
 async function event(body, res) {
   respond(res, { ok: true });          // acknowledge inside Slack's 3s window
+  if (!fresh(body.event_id)) return;
   await handleDm(body.event);
 }
 
@@ -212,7 +223,14 @@ async function socketMode(appToken) {
       payload === undefined ? { envelope_id: env.envelope_id } : { envelope_id: env.envelope_id, payload }));
     try {
       if (env.type === 'slash_commands') { ack(await slashPayload(env.payload)); return; }
-      if (env.type === 'events_api')     { ack(); await handleDm(env.payload?.event); return; }
+      if (env.type === 'events_api') {
+        ack();
+        const id = env.payload?.event_id;
+        console.log(`  event     ${id || '(no id)'} retry=${env.retry_attempt || 0}${env.retry_reason ? ' ' + env.retry_reason : ''}`);
+        if (!fresh(id)) return;
+        await handleDm(env.payload?.event);
+        return;
+      }
       ack();
     } catch (e) {
       console.error('[slack]', e?.message);
