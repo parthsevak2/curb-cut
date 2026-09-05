@@ -1,4 +1,4 @@
-We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not among the Salesforce DX MCP server's fifteen toolsets. We asked the organisers rather than imply we ran one.
+We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not among the Salesforce DX MCP server's fifteen toolsets. Rather than imply we ran one, we built the check ourselves against the published guidelines and say so.
 
 So we ran the same exercise against Salesforce's own five published guidelines for responsible agentic AI, as a harness anyone can execute: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks five of the checks on purpose and asserts each one goes red.
 

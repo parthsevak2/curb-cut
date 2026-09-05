@@ -25,7 +25,7 @@ SCENES = [
  ('cards/c02.png', 16, 0,
     "You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
     "This is the one paragraph that has to land. Give it room."),
- ('frames/10-home.png', 8, 0, "One in four of us has a disability. Three in a hundred tell their employer.", ""),
+ ('frames/10-home.png', 9, 0, "One in four of us has a disability. Three in a hundred tell their employer.", ""),
  ('cards/c04.png', 6, 0, "", "Silence. The card says it."),
  ('cards/c06.png', 9, 0, "Nothing is sent until she clearly says yes. If she hedges, it waits.", ""),
  ('frames/agent-yes_gate-3.png', 13, 0,

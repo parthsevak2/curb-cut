@@ -88,7 +88,7 @@ page and paste it in, so the answer names their prompt rather than paraphrasing.
 
 ---
 
-We could not find a Salesforce tool published as "Accessibility Expert Skill", and we asked the organisers rather than imply we ran one. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
+We could not find a Salesforce tool published as "Accessibility Expert Skill" in the provisioned org, on AgentExchange or in the Salesforce DX MCP server, so rather than imply we ran one, we ran the closest thing Salesforce ships and say so. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
 
 WHAT WE RAN
 
@@ -140,7 +140,7 @@ first line and then answers in the shape the question asks.
 
 ---
 
-We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not locatable under that name. The Salesforce DX MCP server publishes accessibility, security and code-analysis experts, but no responsible-AI self check. We asked the organisers rather than imply we ran one. What follows is our own audit, in the shape the question asks.
+We could not find a Salesforce tool published as "RAI Self Check Skill": not in the provisioned org, not on AgentExchange, not locatable under that name. The Salesforce DX MCP server publishes accessibility, security and code-analysis experts, but no responsible-AI self check.What follows is our own audit, in the shape the question asks.
 
 Our approach is subtraction, and the honest version is that our own checks caught us breaking our own rules three times.
 

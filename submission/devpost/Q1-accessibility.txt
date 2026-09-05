@@ -1,4 +1,4 @@
-We could not find a Salesforce tool published as "Accessibility Expert Skill", and we asked the organisers rather than imply we ran one. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
+We could not find a Salesforce tool published as "Accessibility Expert Skill" in the provisioned org, on AgentExchange or in the Salesforce DX MCP server, so rather than imply we ran one, we ran the closest thing Salesforce ships and say so. What we did find and run is Salesforce's own accessibility expert tooling: the lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp), specifically guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
 
 WHAT WE RAN
 
