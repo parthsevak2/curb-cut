@@ -1,6 +1,6 @@
 CURB CUT. TECHNICAL DESIGN DOCUMENT
 Agentforce for Good, Dreamforce 2026 · Builder Track
-Verified against the deployed org, 4 September 2026
+Verified against the deployed org, 5 September 2026
 
 
 ─────────────────────────────────────────────────────────────────────
@@ -27,12 +27,12 @@ ordinary choice.
 
   Ordinary system            Curb Cut
   ──────────────────────     ───────────────────────────────────────
-  Identify the user          Refuse to. There is no account.
-  Store the case detail      Store what is hard. Never why.
+  Identify the user          Refuse to; there is no account.
+  Store the case detail      Store what is hard, and never why.
   Log for support            Log the attempt, never the content.
   Personalise from history   Infer nothing. Every signal is set by hand.
-  Escalate to a phone call   Never. For some users that door does not open.
-  Ask the model to comply    Put the rule in code. Models forget.
+  Escalate to a phone call   Never, because for some users that door does not open.
+  Ask the model to comply    Put the rule in code, because models forget.
 
 The last row is the one that took longest to learn and it is the spine of
 section 9.
