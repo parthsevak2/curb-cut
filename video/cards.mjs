@@ -52,7 +52,7 @@ const CARDS = [
  ['c03', {kicker:'THE USUAL WAY', accent:RED,
    lines:['To get a chair that doesn\u2019t hurt,','first tell them what\u2019s wrong with you.'], big:64,
    sub:['Nature of your disability, required.','A letter from a doctor, required. And that\u2019s page one of three.'],
-   foot:'Thirty in a hundred have a disability. Three tell their employer.'}],
+   foot:'One in four adults has a disability. Three in a hundred tell their employer.'}],
 
  ['c04', {kicker:'THE WHOLE FORM',
    lines:['You say what\u2019s hard.','You never have to say why.'],

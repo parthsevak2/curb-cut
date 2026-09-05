@@ -21,6 +21,7 @@ badly the usual process fails them:
 
 | Group | Why the usual process fails them |
 |---|---|
+| Hourly, shift and minimum-wage workers | In 2025, US workers with a disability were twice as likely to be part time (30% against 17%) and more often in service, production and transport jobs (BLS, released March 2026). No work email, no desk, no HR office on the floor, and no time during a shift to fill in a form. Text and voice on a basic phone exist for them |
 | Contractors, temps, agency and gig workers | Often have no work login and no HR relationship at all, yet are expected to disclose to get anything |
 | People with invisible conditions | 62% of disabled employees in the Coqual study; they are believed less and asked to prove more |
 | Deaf and hard-of-hearing workers | Every escalation path in most systems ends at "give us a call" |

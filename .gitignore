@@ -29,3 +29,5 @@ video/clips/
 
 # Claude Code session state and workflow worktrees; never part of the project
 .claude/
+logs/
+channels/launchd/

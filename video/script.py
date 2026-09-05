@@ -12,10 +12,10 @@ SCENES = [
  # the live site: a sentence typed letter by letter, the options arriving, the
  # request written in her words. Four seconds of quiet before the first word.
  ('rec/flow.mp4', 27, 0,
-    "This is Curb Cut. It's for the thirty in a hundred of us who have something at work that's quietly hard, and who never asked, because asking meant explaining our bodies to a manager. Here, you just say what's getting in the way. You never have to say why.",
+    "This is Curb Cut. It's for the one in four of us who has something at work that's quietly hard, and who never asked, because asking meant explaining our bodies to a manager. Here, you just say what's getting in the way. You never have to say why.",
     "Four seconds of silence while the cursor moves. Then close and calm, like you're sitting beside her."),
  ('mocks/people.png', 17, 0,
-    "Thirty in a hundred isn't a number on a slide. It's your sister. The colleague who never asks. The person beside you on the bus. We don't get to look past them.",
+    "One in four isn't a number on a slide. It's your sister. The colleague who never asks. The person beside you on the bus. We don't get to look past them.",
     "Slow. This is the one that has to land."),
  ('frames/04-draft.png', 14, 0,
     "The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to.",
@@ -25,7 +25,7 @@ SCENES = [
  ('cards/c02.png', 16, 0,
     "You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.",
     "This is the one paragraph that has to land. Give it room."),
- ('frames/10-home.png', 8, 0, "Thirty in a hundred of us have a disability. Three tell their employer.", ""),
+ ('frames/10-home.png', 8, 0, "One in four of us has a disability. Three in a hundred tell their employer.", ""),
  ('cards/c04.png', 6, 0, "", "Silence. The card says it."),
  ('cards/c06.png', 9, 0, "Nothing is sent until she clearly says yes. If she hedges, it waits.", ""),
  ('frames/agent-yes_gate-3.png', 13, 0,
