@@ -115,6 +115,33 @@ const CONTROL_WORDS = new Set([
 const STOP_WORDS  = new Set(['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']);
 const START_WORDS = new Set(['start', 'yes', 'unstop']);
 
+/* One normalisation for every door on this relay. Text and voice used to
+   disagree here: text squashed "Turn it off." to "turnitoff" and matched, and
+   voice matched nothing at all, because it never looked. */
+const keyword = (text) => text.toLowerCase().replace(/[^a-z]/g, '');
+// A code travelling with the word: "off 4KQ7MT". Shared so the two paths agree.
+const CODE_COMMAND = /^(off|who)\s+[a-z0-9]{6}$/i;
+
+/* Somebody on a call saying one of these is not describing a barrier, and a
+   language model is the wrong thing to answer them. They go to the router as a
+   request for a person, so a real handoff exists before anything else is said.
+   Substring on purpose: "I think I want to die" must match, and the router's
+   six-word cap on control phrases must not apply. We have no crisis line to
+   offer on a call, and docs/CHANNELS.md says so rather than pretending. */
+const CRISIS_PHRASES = ['kill myself', 'suicid', 'end my life', 'want to die', 'hurt myself'];
+
+/* Spoken aloud, a code arrives as letters with spaces: "off 4 K Q 7 M T". Put
+   it back together so the router's whole-token code match can see it. Only
+   letters from the code alphabet count (CurbCutKeyword.CODE_ALPHABET, which has
+   no O 0 I 1 S 5), and a whole control phrase like "who can see" is never
+   touched. Returns the text unchanged when there is nothing to rebuild. */
+function rebuildSpokenCode(text) {
+  if (CONTROL_WORDS.has(keyword(text))) return text;
+  const spoken = text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const m = spoken.match(/^(off|who)\s+((?:[abcdefghjklmnpqrtuvwxyz2346789]\s*){6})$/);
+  return m ? `${m[1]} ${m[2].replace(/\s+/g, '')}` : text;
+}
+
 const org = await Org.create({ aliasOrUsername: ALIAS });
 const connection = org.getConnection();
 
@@ -237,16 +264,47 @@ const server = createServer((req, res) => {
       }
 
       console.log(`[voice] ${handle.slice(0,8)}… ${said.length} chars`);
-      await ledger('Voice', 'Inbound', 'Accepted', safeHandle(handle), `${said.length} chars`);
+      const key = safeHandle(handle);
+      await ledger('Voice', 'Inbound', 'Accepted', key, `${said.length} chars`);
+
+      /* Same router as text, before the agent ever hears it. Until this lane
+         existed a caller who said "human" or "off" got a model, and the promise
+         on every poster, one set of words on every door, was false for voice. */
+      const heard  = rebuildSpokenCode(said);
+      const spoken = heard.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      const crisis = CRISIS_PHRASES.some(p => spoken.includes(p));
+      if (crisis || CONTROL_WORDS.has(keyword(said)) || CODE_COMMAND.test(heard.trim())) {
+        try {
+          const answer = await connection.apex.post('/curbcut/v1/message/', {
+            channel: 'Voice', text: crisis ? 'human' : heard, handle: key,
+          });
+          await ledger('Voice', 'Outbound', 'Accepted', key,
+                       crisis ? 'routed: crisis, handoff requested' : 'routed: control word');
+          /* The router promises a reply on the same channel. On a call we hold
+             no number and we never ring anyone, so we say what is true. */
+          const truth = answer.handedOff
+            ? ' One thing I have to be honest about. I hold no number for you, so nobody can ' +
+              'call you back. If you want to hear from them, write to parth.sevak2@gmail.com.'
+            : '';
+          return res.end(gather((answer.message || '') + truth));
+        } catch (e) {
+          console.error('[voice] control word failed:', e?.message);
+          await ledger('Voice', 'Outbound', 'Escalated', key, `control word failed: ${e?.message}`);
+          return res.end(gather(
+            'I could not do that just now, and I am not going to pretend I did. ' +
+            'Write to parth.sevak2@gmail.com and a person will sort it out.'));
+        }
+      }
+
       try {
         const agent = await agentFor(handle);
         const reply = await agent.preview.send(said);
         const text  = (reply?.messages ?? []).map(m => m.message).filter(Boolean).join(' ');
-        await ledger('Voice', 'Outbound', 'Accepted', safeHandle(handle), 'spoken reply');
+        await ledger('Voice', 'Outbound', 'Accepted', key, 'spoken reply');
         return res.end(gather(text || 'I did not catch that. Say it again however you like.'));
       } catch (e) {
         console.error('[voice] agent error:', e?.message);
-        await ledger('Voice', 'Outbound', 'Escalated', safeHandle(handle), `agent error: ${e?.message}`);
+        await ledger('Voice', 'Outbound', 'Escalated', key, `agent error: ${e?.message}`);
         sessions.delete(handle);
         return res.end(gather(
           'Something went wrong on my end, and that is not your problem to solve. ' +
@@ -278,7 +336,7 @@ const server = createServer((req, res) => {
     // finds hard is not ops telemetry.
     console.log(`[sms] ${handle.slice(0,8)}… ${body.length} chars`);
     const key  = safeHandle(handle);
-    const word = body.toLowerCase().replace(/[^a-z]/g, '');
+    const word = keyword(body);
     const xml  = (...m) => {
       res.writeHead(200, {'content-type':'text/xml'});
       res.end(twiml(...m));
@@ -310,7 +368,7 @@ const server = createServer((req, res) => {
        may travel with the word - "off 4KQ7MT" - which is how somebody turns a
        standing disclosure off from a phone when we deliberately have no idea
        who they are. */
-    if (CONTROL_WORDS.has(word) || /^(off|who)\s+[a-z0-9]{6}$/i.test(body.trim())) {
+    if (CONTROL_WORDS.has(word) || CODE_COMMAND.test(body.trim())) {
       try {
         const answer = await connection.apex.post('/curbcut/v1/message/', {
           channel: 'SMS', text: body, handle: key,
@@ -361,6 +419,6 @@ server.listen(PORT, () => {
   console.log(`  org      ${ALIAS}`);
   console.log(`  agent    ${AGENT}`);
   console.log(`  verify   ${TWILIO_AUTH_TOKEN ? 'on' : 'OFF — UNVERIFIED, local only'}`);
-  console.log(`  POST /voice  ready now, no registration`);
+  console.log(`  POST /voice  ready now, no registration; control words and crisis go to the router`);
   console.log(`  POST /sms    HELP/STOP/START handled here, disclosure on first reply`);
 });

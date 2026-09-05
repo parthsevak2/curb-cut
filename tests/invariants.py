@@ -738,6 +738,22 @@ check('unverified-mode-cannot-be-public',
       "=== '1' && !PUBLIC_URL" in relay_src,
       'ALLOW_UNVERIFIED must refuse to combine with PUBLIC_URL')
 
+# The voice door must use the same router as every other door.
+#
+# /sms checked CONTROL_WORDS and asked /curbcut/v1/message. /voice passed the
+# transcript straight to the agent. A caller who said "human" got a model, and
+# a caller who said "off" was told the system had no good information, with
+# the sharing left on. "One router, every door" was false for the one door
+# that works without carrier registration. This looks inside the /voice
+# handler alone, so moving the check into the text path does not satisfy it.
+voice_block = re.search(r"startsWith\('/voice'\)(.*?)startsWith\('/sms'\)", relay_src, re.S)
+voice_src = voice_block.group(1) if voice_block else ''
+check('voice-uses-the-shared-router',
+      'CONTROL_WORDS' in voice_src and '/curbcut/v1/message' in voice_src,
+      'the /voice handler in sms-relay.mjs no longer checks CONTROL_WORDS and '
+      'asks /curbcut/v1/message; a caller saying HUMAN or OFF would get the '
+      'agent instead of the router')
+
 
 
 # ---------------------------------------------------------------------------

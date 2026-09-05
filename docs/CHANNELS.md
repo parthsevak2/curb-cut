@@ -75,16 +75,65 @@ now get a code and a truthful sentence about why.
 | | Web | SMS | Voice | Email | Slack | MCP |
 |---|---|---|---|---|---|---|
 | Grounded library | yes | yes | yes | yes | yes | yes |
-| Control words | yes | yes |. | yes | yes | `reach_human` |
-| Draft a request | yes | yes |. | no | no | yes |
-| Send a request | yes | yes |. | no | no | never |
-| Photo / signed video | yes |, |. | photo | no | no |
+| Control words | yes | yes | yes, spoken | yes | yes | `reach_human` |
+| Draft a request | yes | yes | not verified | no | no | yes |
+| Send a request | yes | yes | not verified | no | no | never |
+| Photo / signed video | yes | no | no | photo | no | no |
 | Delivery ledger | yes | yes | yes | yes | yes | via Apex |
 | Works with no account | yes | yes | yes | yes | no | n/a |
 
 Email and Slack deliberately do not send. Agreeing to something in writing days
 later is not the same as choosing it in the moment, so the send button stays
 where the person can see exactly what it will do.
+
+## Voice
+
+For most of this project's life the voice column above was blank, and the
+blank was hiding a bug. `/voice` handed every transcript to the agent. `/sms`
+asked the router first. So "one set of words on every door" was true for text
+and false for the one door that works today without carrier registration. A
+caller who said "human" got a model. A caller who said "off" was told there
+was no good information on that, and the sharing stayed on.
+
+Now the relay normalises speech the same way it normalises a text. It asks
+the same Apex router before the agent hears anything:
+
+- A whole-message control word (`human`, `off`, `who` and the same variants
+  as text) goes to `/curbcut/v1/message` with `channel: Voice`. The router's
+  wording is read back aloud, so the answer is identical to text and email.
+- A code said letter by letter, "off 4 K Q 7 M T", is put back together
+  before it goes to the router. Only letters from the code alphabet count, so
+  "who can see" is still a control phrase and never mistaken for a code.
+- Five crisis phrases (`kill myself`, `suicid`, `end my life`, `want to die`,
+  `hurt myself`) match as substrings, not whole messages. They go to the
+  router as a request for a person, so a real handoff exists before anything
+  else is said. A language model is the wrong thing to answer these.
+
+Everything else still goes to the agent, exactly as before.
+
+What voice still cannot do, said plainly:
+
+- Nobody can be called back. We hold no number, and a call is refused by
+  `CurbCutCreateHandoff` in code. So after a handoff the relay adds one honest
+  sentence: nobody will ring you, and to hear from the handler you have to
+  write in. The router's own wording still promises a reply "on this same
+  channel", because `CurbCutChannelApi.REPLY_ON` does not yet know `Voice`
+  and treats it as `External`, which means text message. That is a known gap
+  in the Apex, not in the relay.
+- We have no crisis line to offer on a call, and we do not pretend to. A
+  crisis phrase gets a person, not a hotline number, because this product
+  never routes anyone to a telephone. Whether to speak a text-based crisis
+  service is a decision the team has not made yet.
+- Codes read aloud are only as good as the speech recogniser. "Four kay
+  queue" is not rebuilt; only single letters and digits are. We have not
+  tested this on a live call.
+- No photo, no signed video. Speech in, speech out, nothing else.
+- `STOP` and `HELP` are carrier words for text. On a call no carrier is
+  listening, so the relay does not answer them itself. They reach the router
+  as whole words like any other.
+- None of the above has been exercised on the live number since it was
+  written. The code is syntax-checked and the router lane is asserted by an
+  invariant, and that is the whole of the evidence.
 
 ## Slack is the employer's estate
 
@@ -119,7 +168,7 @@ five-minute replay window before the body is parsed.
 
 ## The guard
 
-Four invariants now fail the build:
+Five invariants now fail the build:
 
 - `advertised-keyword-is-routed`. Scans every user-facing string in Apex, the
   Visualforce pages and the channel scripts for "reply/send/text WORD", and
@@ -130,3 +179,7 @@ Four invariants now fail the build:
 - `control-word-not-carrier-reserved`, nothing of ours may claim `STOP`.
 - `handoff-refuses-telephone`. A phone call is refused in code, not merely
   discouraged in a comment.
+- `voice-uses-the-shared-router`. Looks inside the `/voice` handler alone and
+  fails unless it checks `CONTROL_WORDS` and asks `/curbcut/v1/message`. The
+  text path already did both, so a check over the whole file would have passed
+  while voice was still wrong.
