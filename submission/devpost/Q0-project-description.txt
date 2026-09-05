@@ -22,10 +22,10 @@ There's no field for a diagnosis anywhere. It simply isn't there, and a build ch
 
 Six doors, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So safety never depends on a model remembering a rule.
 - Web, no login, no account.
-- Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page, with numbered options you answer with one digit.
+- Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page, with numbered options.
 - Voice on the same number. It never rings you back.
-- Email, answered from the same door.
-- Slack, private message only. It says up front that Slack belongs to your employer, and it refuses to send anything from there.
+- Email.
+- Slack, private message only. It says up front that Slack belongs to your employer.
 - Any assistant you already use, through tools that can't send.
 
 [image: slack-live]
@@ -34,7 +34,7 @@ Six doors, all live today. An Agentforce agent written in Agent Script decides w
 
 WHAT HAPPENS AFTER YOU PRESS SEND
 
-The request goes to the access desk of the organisation running the page, in your words. No manager is told. You get a claim code, a date the desk has committed to answer by, and the words "you can stop this any time". The desk sees a queue, a wait time and a request. It never sees a condition, because there isn't one to see. If you'd rather talk to a person, say HUMAN on any channel and one picks it up.
+The request goes to the access desk of the organisation running the page, in your words. No manager is told. You get a claim code, a date the desk has committed to answer by, and the words "you can stop this any time". If you'd rather talk to a person, say HUMAN on any channel and one picks it up.
 
 WHAT WE CAN SHOW, NOT JUST SAY
 
@@ -42,11 +42,11 @@ We ran Salesforce's own accessibility checks (Sa11y, 131 checks) and our own: mo
 
 WHAT WE GOT WRONG, AND FIXED IN THE OPEN
 
-"I get migraines from the office lighting" once returned "special chair or back support", because the word office appeared in that row. The ranker now weighs how much a word distinguishes, and four lighting rows were added. The agent was told never to record a volunteered condition; it agreed in words while the action stored the text anyway. So every safety rule moved into Apex. And because the agent says "I discarded that" only about half the time, on four channels the code says it every time.
+"I get migraines from the office lighting" once returned "special chair or back support", because the word office appeared in that row. The ranker now weighs how much a word distinguishes. The agent was told never to record a volunteered condition; it agreed in words while the action stored the text anyway. So every safety rule moved into Apex. And because the agent says "I discarded that" only about half the time, on four channels the code says it every time.
 
 WHAT ISN'T DONE
 
-No one who uses a screen reader every day has tested this yet. A scripted walk of the ask page is published in its place, and one session with a real person comes before the next feature. Text and voice run through a relay on a laptop today. Delivery callbacks from the carrier aren't wired, so "accepted" isn't yet "delivered".
+No one who uses a screen reader every day has tested this yet. A scripted walk of the ask page is published in its place, and one session with a real person comes before the next feature. Text and voice run through a relay on a laptop today.
 
 WHO THIS IS FOR
 
