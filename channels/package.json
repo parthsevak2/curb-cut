@@ -1,0 +1,22 @@
+{
+  "name": "curb-cut-channels",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The non-web front doors for Curb Cut: SMS and voice relay, Slack app, MCP server. Each one talks to the same authenticated REST contract.",
+  "scripts": {
+    "sms": "node sms-relay.mjs",
+    "slack": "node slack-app.mjs",
+    "mcp": "node mcp-server.mjs"
+  },
+  "dependencies": {
+    "jsforce": "3.10.25"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "x-notes": [
+    "sms-relay.mjs and mcp-server.mjs import @salesforce/core and @salesforce/agents from the globally installed Salesforce CLI (npm root -g). They are not listed here on purpose: the CLI is the one that holds the org login, and it is already required. Set SF_CLI_MODULES if the CLI is installed somewhere unusual.",
+    "slack-app.mjs and sms-relay.mjs read the org login from the CLI too, so no credential lives in this folder."
+  ]
+}

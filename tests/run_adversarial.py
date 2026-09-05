@@ -11,6 +11,10 @@ import os, pty, sys, time, select, fcntl, termios, struct, subprocess, re, json,
 
 AGENT = "Curb_Cut"
 ORG   = "curbcut"
+# Transcripts land beside the checkout, wherever it lives. CURBCUT_TRANSCRIPTS
+# points them somewhere else.
+ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRANSCRIPTS = os.environ.get("CURBCUT_TRANSCRIPTS") or os.path.join(ROOT, "transcripts")
 COLS, ROWS = 140, 45
 QUIET   = 12.0   # the TUI redraws a spinner, so silence must be generous
 MAX_TURN = 210.0 # hard cap per utterance
@@ -96,9 +100,8 @@ if __name__ == "__main__":
         except Exception as e:
             text = f"HARNESS ERROR: {e}"
         out[name] = {"utterances": utts, "transcript": text}
-        d = "/Users/drashtipathak/Downloads/curbcut_check/transcripts"
-        os.makedirs(d, exist_ok=True)
-        open(f"{d}/{name}.txt","w").write(
+        os.makedirs(TRANSCRIPTS, exist_ok=True)
+        open(os.path.join(TRANSCRIPTS, f"{name}.txt"),"w").write(
             "UTTERANCES:\n" + "\n".join(f"  - {u}" for u in utts) + "\n\n" + text)
-    json.dump(out, open("/Users/drashtipathak/Downloads/curbcut_check/transcripts/_all.json","w"), indent=2)
+    json.dump(out, open(os.path.join(TRANSCRIPTS, "_all.json"),"w"), indent=2)
     sys.stderr.write("[done]\n")
