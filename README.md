@@ -27,7 +27,7 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Ask (full journey, no phone) | `/curbcut/ask` | live |
 | Privacy | `/curbcut/privacy` | live |
 | Terms | `/curbcut/terms` | live |
-| SMS | +1 276 495 9311 | built; awaiting A2P 10DLC approval |
+| SMS | +1 276 495 9311 | live, through a relay we run beside the org |
 | Voice | +1 276 495 9311 | built, speech in and out |
 | Email | inbound service `CurbCutInbound`, address in Setup → Email Services | live |
 | Slack | `node channels/slack-app.mjs`, Socket Mode, DM only, never sends | built; manifest in `channels/slack-manifest.json` |

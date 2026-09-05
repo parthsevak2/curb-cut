@@ -513,8 +513,8 @@ HONEST GAPS
   · No screen-reader user has tested this. Every accessibility claim is
     machine-verified, which is not the same thing.
   · The Slack app has never run against a real workspace.
-  · Text messaging awaits A2P 10DLC carrier registration. Voice on the
-    same number needs none and works today.
+  · Text and voice depend on a relay that runs beside the org, and today
+    that relay runs on a laptop. When it is down, the number goes quiet.
   · The internal agent does not reliably call its own library; the
     grounded internal surface is the console component, not the agent.
 
