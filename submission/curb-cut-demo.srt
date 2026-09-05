@@ -1,67 +1,87 @@
 1
-00:00:00,400 --> 00:00:21,314
-This is Curb Cut. It's for anyone who has something at work that's quietly hard, and who has never asked for help, because asking meant explaining their body to their manager. Here, you just say what's getting in the way. You never have to say why.
+00:00:00,400 --> 00:00:22,600
+This is Curb Cut. It's for the thirty in a hundred of us who have something at work that's quietly hard, and who never asked, because asking meant explaining our bodies to a manager. Here, you just say what's getting in the way. You never have to say why.
 
 2
-00:00:26,800 --> 00:00:38,714
-The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to.
+00:00:26,800 --> 00:00:41,714
+Thirty in a hundred isn't a number on a slide. It's your sister. The colleague who never asks. The person beside you on the bus. We don't get to look past them.
 
 3
-00:00:40,200 --> 00:00:46,543
-That's the whole form. This is the one most people get instead.
+00:00:43,200 --> 00:00:55,114
+The request is written in her words. And this line is in every single one: I'm not sharing a diagnosis, and I'm not required to.
 
 4
-00:00:48,600 --> 00:00:54,086
-Curb Cut. An Agentforce agent that's on the worker's side.
+00:00:56,600 --> 00:01:02,943
+That's the whole form. This is the one most people get instead.
 
 5
-00:00:54,1000 --> 00:01:08,200
+00:01:05,000 --> 00:01:18,200
 You've done this yourself. Think of the last time something at work was quietly hard. You worked out what it would cost to ask, and you said nothing.
 
 6
-00:01:10,400 --> 00:01:17,171
+00:01:20,400 --> 00:01:27,171
 Thirty in a hundred of us have a disability. Three tell their employer.
 
 7
-00:01:23,200 --> 00:01:29,971
+00:01:33,200 --> 00:01:39,971
 Nothing is sent until she clearly says yes. If she hedges, it waits.
 
 8
-00:01:31,600 --> 00:01:36,657
-Sent, with a date she can hold them to.
+00:01:41,600 --> 00:01:51,800
+Here it is, live, in the agent. She hedges, and it waits. She says yes, and only then does it move.
 
 9
-00:01:38,000 --> 00:01:54,629
-It's there wherever she is. On the web, by voice, by text, by email, in Slack, or through any assistant she already uses. Two of those work on a basic phone with no internet at all.
+00:01:54,000 --> 00:01:59,057
+Sent, with a date she can hold them to.
 
 10
-00:02:00,800 --> 00:02:05,000
-She texts first. It never rings her.
+00:02:00,400 --> 00:02:11,886
+And it's there wherever she is: on the web, by voice, by text, by email, in Slack, or through any assistant she already uses.
 
 11
-00:02:11,600 --> 00:02:26,943
-There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later.
+00:02:13,800 --> 00:02:33,857
+The same thing by text, on a basic phone with no internet. She texts CURB CUT, says what's hard, and real options come back with what they usually cost. She picks one. It writes the request in her words, and waits for her yes.
 
 12
-00:02:29,000 --> 00:02:41,771
-So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find.
+00:02:37,200 --> 00:02:44,829
+Or she rings the same number and just says it. It never rings her back.
 
 13
-00:02:43,400 --> 00:02:55,743
-If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it.
+00:02:46,600 --> 00:02:53,800
+By email, the answer comes from the same door, so it's the same answer.
 
 14
-00:02:57,800 --> 00:03:08,000
-One side of this conversation got an agent. The other side got a form. We built the other side one too.
+00:02:55,000 --> 00:03:00,914
+In Slack, it's a private message. It can't post anywhere else.
 
 15
-00:03:09,200 --> 00:03:21,114
-We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.
+00:03:02,400 --> 00:03:13,457
+And any assistant she already uses can ask on her behalf, through a tool that can find and draft, but can never send.
 
 16
-00:03:22,600 --> 00:03:34,086
-If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
+00:03:20,200 --> 00:03:35,543
+There's no field for a diagnosis anywhere in this system. It isn't locked away. It simply isn't there, so it can never be leaked, or shown to a manager, or asked for later.
 
 17
-00:03:36,000 --> 00:03:47,914
+00:03:37,600 --> 00:03:50,371
+So when her manager asks the system what's wrong with her, it says no. Not because of a permission setting, but because there's nothing there to find.
+
+18
+00:03:52,000 --> 00:04:04,343
+If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it.
+
+19
+00:04:06,400 --> 00:04:16,600
+One side of this conversation got an agent. The other side got a form. We built the other side one too.
+
+20
+00:04:17,800 --> 00:04:29,714
+We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.
+
+21
+00:04:31,200 --> 00:04:42,686
+If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
+
+22
+00:04:44,600 --> 00:04:56,514
 Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is.
