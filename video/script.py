@@ -15,12 +15,14 @@ SCENES = [
     "Flat. No indignation. Let them read the rest."),
  ('frames/10-home.png', 8, 0, "Thirty in a hundred have a disability. Three tell their employer.", ""),
  ('cards/c04.png', 6, 0, "", "Silent. The card says it."),
- ('frames/01-ask-empty.png', 7, 0, "One question. Never why.", "Then let them read the page."),
- ('frames/02-said.png', 6, 0, "That is the whole of it.", ""),
- ('cards/c05.png', 8, 0, "The options are not generated. Twenty-eight rows, each with its source.", ""),
- ('frames/03-options.png', 7, 0, "With what it usually costs an employer.", ""),
- ('frames/04-draft.png', 12, 0,
-    "Then it writes the request in her words. I am not sharing a diagnosis, and I am not required to.",
+ # The real thing, recorded: typing appears letter by letter, the options
+ # arrive, the draft is written, she presses yes. One continuous take of the
+ # live site, not a sequence of stills. 21 seconds of footage held to 24.
+ ('rec/flow.mp4', 24, 0,
+    "One question, never why. She types it. The options are not generated: twenty-eight rows, each with its source. Then it writes the request in her words.",
+    "Let the typing land before you speak. Pause on 'in her words'."),
+ ('frames/04-draft.png', 10, 0,
+    "I am not sharing a diagnosis, and I am not required to.",
     "The line the whole thing turns on. Slow down."),
  ('cards/c06.png', 7, 0, "A hedge is refused, and a test proves the refusal.", ""),
  ('frames/05-sent.png', 6, 0, "Sent, with a date she can hold them to.", ""),
