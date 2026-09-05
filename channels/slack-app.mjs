@@ -32,7 +32,7 @@
 
 import http from 'node:http';
 import { createHmac, timingSafeEqual, createHash } from 'node:crypto';
-import jsforce from 'jsforce';
+import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 
 const PORT           = Number(process.env.SLACK_PORT || 3100);
@@ -63,18 +63,19 @@ const IN_CHANNEL_REFUSAL =
 
 const NO_SENDING =
   '\n\nI will not write or send a request from Slack. When you want to actually ' +
-  `ask for something, do it at ${SITE}/ask — there you are anonymous, and you ` +
+  `ask for something, do it at ${SITE}/ask, where you are anonymous and you ` +
   'press send yourself.';
 
-const conn = new jsforce.Connection(orgAuth());
-
-function orgAuth() {
-  // Same pattern as the SMS relay: the CLI already holds the credential, so
-  // nothing here needs its own secret on disk.
-  const org = JSON.parse(
-    execSync(`sf org display -o ${ALIAS} --json`, { encoding: 'utf8' })).result;
-  return { instanceUrl: org.instanceUrl, accessToken: org.accessToken };
-}
+/* Same pattern as the SMS relay: the CLI already holds the credential, so
+   nothing here needs its own secret on disk. The connection comes from
+   @salesforce/core, which refreshes the access token when it expires; a raw
+   token copied out of `sf org display` goes stale after a few hours and the
+   app would start answering everyone with an apology. */
+const SF_CLI_MODULES = process.env.SF_CLI_MODULES
+  || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
+          '@salesforce', 'cli', 'node_modules', '@salesforce');
+const { Org } = await import(join(SF_CLI_MODULES, 'core', 'lib', 'index.js'));
+const conn = (await Org.create({ aliasOrUsername: ALIAS })).getConnection();
 
 const handleFor = (id) =>
   createHash('sha256').update(HANDLE_SALT + id).digest('hex').slice(0, 32);
