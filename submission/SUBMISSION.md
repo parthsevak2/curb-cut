@@ -116,7 +116,7 @@ not equipment. It was modified working hours, which costs nothing and requires
 only that somebody say yes.
 
 **Accessibility.** The site is audited on every build against what it actually
-serves: 275 checks across six live pages, contrast computed from the design
+serves: 275 checks across seven live pages, contrast computed from the design
 tokens in both themes, reading level measured (the page somebody uses while
 struggling reads at grade 5.8), reflow verified at 320px, every focusable element
 covered by a visible focus ring, and every state carried by a word or a shape as

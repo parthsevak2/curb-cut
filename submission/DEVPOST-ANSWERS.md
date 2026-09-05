@@ -118,7 +118,7 @@ color-contrast came back "incomplete" in all twelve states, because axe measures
 
 WHAT WAS ALREADY IN PLACE
 
-333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 512 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+333 accessibility checks against the seven live pages every build, plus 28 contrast, 16 reading-level and 512 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
 
 A FINDING WE DISPROVED
 
@@ -221,10 +221,10 @@ The agent is one component. Everything around it is deterministic and gated on e
 
 - 137 Apex tests
 - 512 structural invariants (about one second, no org required)
-- 333 accessibility checks against the six live pages
+- 333 accessibility checks against the seven live pages
 - 131 Sa11y checks, Salesforce's own axe-core matcher, across 12 component states
 - 21 responsible-AI checks against Salesforce's five published guidelines
-- 28 contrast, 16 reading-level, 54 link and copy, 34 controls walked by real Tab presses
+- 28 contrast, 16 reading-level, 76 link and copy, 34 controls walked by real Tab presses
 
 Ten auditors fail the build: one if anyone adds a field for a diagnosis; one if an error message blames the person reading it; one if our copy promises a word the router does not answer; one if a number we publish about ourselves has gone stale, which it had, twice.
 
