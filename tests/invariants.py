@@ -782,8 +782,8 @@ check('focus-ring-works-on-any-ground',
 #
 # Every relay and every test runner imported the CLI's bundled @salesforce
 # packages by their absolute path under one person's home directory, and the
-# adversarial runner wrote its transcripts there too. They ran for months and
-# would have failed on the first machine that was not that one. Paths come from
+# adversarial runner wrote its transcripts there too. They worked on this one
+# machine and would have failed on any other. Paths now come from
 # the file's own location, from `npm root -g`, or from a documented variable.
 # video/ is left out: it is film tooling, not the product.
 # ---------------------------------------------------------------------------

@@ -296,7 +296,7 @@ FOUR LAYERS, all failing the build except the last.
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        495   every push, ~1s, no org needed
+  Structural invariants        496   every push, ~1s, no org needed
   Apex tests                   124   every deploy
   Accessibility (live pages)   333   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states

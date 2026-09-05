@@ -128,9 +128,10 @@ What voice still cannot do, said plainly:
   queue" is not rebuilt; only single letters and digits are. We have not
   tested this on a live call.
 - No photo, no signed video. Speech in, speech out, nothing else.
-- `STOP` and `HELP` are carrier words for text. On a call no carrier is
-  listening, so the relay does not answer them itself. They reach the router
-  as whole words like any other.
+- `STOP` and `HELP` are carrier words for text, and the relay answers them
+  itself on text because the carrier requires it. On a call they are treated
+  the same way, by the relay, and never reach the router. That is deliberate:
+  the carrier words belong to the carrier, on every channel.
 - None of the above has been exercised on the live number since it was
   written. The code is syntax-checked and the router lane is asserted by an
   invariant, and that is the whole of the evidence.
