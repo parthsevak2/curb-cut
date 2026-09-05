@@ -26,3 +26,6 @@ video/frames/
 video/cards/
 video/clips/
 *.mp4
+
+# Claude Code session state and workflow worktrees; never part of the project
+.claude/
