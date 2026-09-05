@@ -75,7 +75,7 @@ function arrow(s,x,y,w,h,c){
     o:{x:ML,y:3.95,w:10.9,h:1.1,fontSize:21,fontFace:B,color:'D8DAD6'}});
   T(s,{t:'Now make it permanent, and make the conversation about your body.',
     o:{x:ML,y:5.35,w:10.9,h:0.8,fontSize:26,fontFace:H,italic:true,color:GOLDLT}});
-  T(s,{t:'That is the whole problem. Everyone in this room has felt the small version of it.',
+  T(s,{t:'That\'s the whole problem. Everyone in this room has felt the small version of it.',
     o:{x:ML,y:6.45,w:11,h:0.5,fontSize:12.5,fontFace:M,color:DIMTX}});
   s.addNotes('Say the first line, then pause. Let people actually remember. Don\'t rush to the second line. Nobody needs a citation for this one because everybody has lived it.');
 }
@@ -84,8 +84,8 @@ function arrow(s,x,y,w,h,c){
 { const s=light(); chip(s,'WHAT YOU DECIDED NOT TO DO');
   title(s,'Now imagine the form was mandatory.');
   T(s,{t:[{text:'You did that calculation privately and moved on.',options:{breakLine:true,bold:true}},
-    {text:'For roughly three in ten people at work, that calculation isn\'t occasional. It is a standing condition of the job, and the price of getting it wrong isn\'t an awkward moment. It is being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
-    {text:'And the way through is almost never a conversation. It is this.',options:{bold:true}}],
+    {text:'For roughly three in ten people at work, that calculation isn\'t occasional. It\'s a standing condition of the job, and the price of getting it wrong isn\'t an awkward moment. It\'s being seen as difficult, or fragile, or not worth staffing.',options:{breakLine:true}},
+    {text:'And the way through is almost never a conversation. It\'s this.',options:{bold:true}}],
     o:{x:ML,y:1.95,w:6.9,h:2.7,fontSize:16,fontFace:B,color:INK,paraSpaceAfter:12}});
   s.addShape(p.ShapeType.rect,{x:8.2,y:1.95,w:4.25,h:2.45,fill:{color:SURF},line:{color:RED,width:2}});
   T(s,{t:'Nature of disability',o:{x:8.5,y:2.25,w:3.6,h:0.35,fontSize:13,bold:true,fontFace:B,color:SOFT}});
@@ -205,7 +205,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
 
 /* ------------------------------------------------- 11b WHO THIS IS FOR */
 { const s=light(); chip(s,'02  THE EVIDENCE  |  WHO THIS IS FOR');
-  title(s,'The user buys nothing. That is deliberate.');
+  title(s,'The user buys nothing. That\'s deliberate.');
   T(s,{t:'The moment somebody has to be inside a licence to get help, the people who need it most are the ones excluded. So the primary user needs no account, no employer relationship with us, and nobody to have bought anything.',
     o:{x:ML,y:1.8,w:11.7,h:0.75,fontSize:14,fontFace:B,color:INK}});
   const who=[['Contractors, temps, gig workers','no work login, no HR relationship, still expected to disclose'],
@@ -225,7 +225,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:n,o:{x,y:5.38,w:3.7,h:0.32,fontSize:12.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x,y:5.72,w:3.7,h:0.5,fontSize:10.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'The gap isn\'t a spending gap. It is a process gap, which is cheaper to close and harder to sell, because no budget line says "the asking was too hard".');
+  kicker(s,'The gap isn\'t a spending gap. It\'s a process gap, which is cheaper to close and harder to sell, because no budget line says "the asking was too hard".');
 }
 
 /* ----------------------------------------------------------- 12 DIVIDER 03 */
@@ -254,7 +254,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
 
 /* ------------------------------------------------------ 13a TELEMETRY */
 { const s=light(); chip(s,'03  THE BUILD  |  TELEMETRY');
-  title(s,'It can say it is failing somebody. Not what they said.');
+  title(s,'It can say it\'s failing somebody, without ever knowing what they said.');
   const cols=[['WHAT THE LEDGER HOLDS',GREEN,['When the attempt was made','Which channel, which direction','Whether it arrived, and why not','A salted hash of the handle','How much of today’s quota is spent']],
               ['WHAT IT CANNOT HOLD',RED,['The message','A raw phone number or address','A name','Anything about a body','A reason for turning a disclosure off']]];
   cols.forEach(([h,c,items],i)=>{ const x=ML+i*5.95;
@@ -347,7 +347,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
 /* --------------------------------------------------------- 16 THE ABSENCE */
 { const s=light(); chip(s,'03  THE BUILD  |  RESPONSIBLE AI');
   title(s,'There\'s no field for a diagnosis.');
-  T(s,{t:'Not encrypted. Not permission-restricted. Absent.',
+  T(s,{t:'It isn\'t encrypted or locked behind a permission. It simply isn\'t there.',
     o:{x:ML,y:1.75,w:11.5,h:0.4,fontSize:16.5,fontFace:H,italic:true,color:GOLD}});
   s.addShape(p.ShapeType.roundRect,{x:ML,y:2.3,w:5.5,h:2.6,rectRadius:0.05,
     fill:{color:SURF},line:{color:GREEN,width:1.5}});
@@ -462,7 +462,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:ML,y:1.95,w:6.1,h:2.4,fontSize:14,fontFace:B,color:INK,paraSpaceAfter:8}});
   s.addShape(p.ShapeType.roundRect,{x:7.4,y:1.95,w:5.05,h:2.4,rectRadius:0.05,
     fill:{color:SURF},line:{color:GREEN,width:1.5}});
-  T(s,{t:'Where it is deterministic, it is 100%',o:{x:7.68,y:2.18,w:4.5,h:0.5,
+  T(s,{t:'Where it\'s deterministic, it\'s 100%',o:{x:7.68,y:2.18,w:4.5,h:0.5,
     fontSize:14.5,bold:true,fontFace:H,color:GREEN}});
   T(s,{t:'The four channels that compose their reply in Apex, web, text, email and Slack, say it every single time. Pinned by a test that exercises all four.',
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
@@ -493,7 +493,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
   title(s,'Why good employers haven\'t done this.');
   const R=[['No budget line says "the asking was too hard."','The cost is real and has never been priced, so it has never been funded. You can\'t get money for a problem with no line item.'],
            ['Nobody owns it.','HR owns the policy. IT owns the systems. The manager owns the person. The request falls in the gap between three desks and waits there.'],
-           ['Caution looks like safety.','Handling a disclosure badly carries legal risk, so doing nothing feels safest. It isn\'t safer. It is only quieter.'],
+           ['Caution looks like safety.','Handling a disclosure badly carries legal risk, so doing nothing feels safest. It isn\'t safer, only quieter.'],
            ['The demand is invisible by design.','Three people in a hundred tell you. An empty queue reads as a solved problem, and the silence is taken as evidence.'],
            ['Every tool assumed disclosure first.','HR systems start from a diagnosis field. Building one without it meant building something new, and nobody had.']];
   R.forEach(([t,d],i)=>{ const y=1.90+i*0.85;
@@ -501,7 +501,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
     T(s,{t,o:{x:1.1,y:y+0.02,w:4.7,h:0.58,fontSize:13,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:6.05,y:y+0.02,w:6.4,h:0.68,fontSize:11.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'None of this is malice. All of it was a reason. From today none of it is an excuse, because the thing exists, it is open, and it costs nothing to try.');
+  kicker(s,'None of this was malice, and each one was a reason. From today, none of them is an excuse, because the thing exists, it\'s open, and it costs nothing to try.');
 }
 
 /* --------------------------------------------------------- 22b THE OFFER */
