@@ -112,9 +112,15 @@ async function ask(text, slackUserId) {
    acknowledged first and answered afterwards, and a person watching a spinner
    is a person being made to wait for no reason. */
 function respond(res, payload) {
+  if (res.headersSent || res.writableEnded) { return; }   // already acknowledged; never answer twice
   res.writeHead(200, { 'content-type': 'application/json' });
   res.end(JSON.stringify(payload));
 }
+
+/* A failed reply to one person must never take the app down for everyone
+   else. Log it, keep the socket open, keep listening. */
+process.on('uncaughtException', e => console.error('[slack] uncaught:', e?.message));
+process.on('unhandledRejection', e => console.error('[slack] unhandled:', e?.message || e));
 
 const server = http.createServer((req, res) => {
   if (req.method !== 'POST') { res.writeHead(405); return res.end(); }
