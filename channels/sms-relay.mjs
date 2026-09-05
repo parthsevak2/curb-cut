@@ -79,6 +79,10 @@ const STOP_REPLY =
   'Curb Cut: you will not get any more messages from this number. ' +
   'Reply START if you ever want to come back. Nothing about you is kept.';
 
+const FIRST_REPLY =
+  'Curb Cut here. Tell me what is hard at work right now, in your own words. ' +
+  'You do not need an account, and you never have to say what condition you have. ' +
+  'I will show you what other people have asked for, and only write a request if you want one.';
 const START_REPLY =
   'Curb Cut: you are back. Tell me what is hard at work right now. ' +
   'Message and data rates may apply. Reply HELP for help, STOP to stop.';
@@ -367,8 +371,10 @@ const server = createServer((req, res) => {
     }
     if (START_WORDS.has(word) && !sessions.has(handle)) {
       greeted.delete(handle);
-      await ledger('SMS', 'Outbound', 'Accepted', key, 'start reply');
-      return xml(START_REPLY);
+      // A first hello gets a welcome and the disclosure; a return after STOP gets the shorter reply.
+      const first = await needsDisclosure(key);
+      await ledger('SMS', 'Outbound', 'Accepted', key, first ? 'start reply + disclosure' : 'start reply');
+      return xml(first ? FIRST_REPLY : START_REPLY, first ? DISCLOSURE : null);
     }
 
     /* Our own control words. Answered by the shared Apex router rather than by
