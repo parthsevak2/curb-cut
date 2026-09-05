@@ -52,7 +52,7 @@ WHO THIS IS FOR
 
 It's for the colleague who never asks, for the person whose condition nobody can see, for the cleaner on a break with a phone and no work email, and for the new hire who doesn't yet know what's allowed. The employer's side of this conversation already had an agent. Now the worker's side does too. The hard technical part, an agent that understands what someone means, is what Agentforce gave us. The rest was deciding, carefully, what it must never do.
 
-Watch the film, 4:59, every channel live: https://youtu.be/L5sVEw5H3U4
+Watch the film, 4:59, every channel live: https://youtu.be/yleHLiwWRKA
 
 Try it, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask
 
