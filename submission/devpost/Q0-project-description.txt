@@ -1,9 +1,31 @@
-Curb Cut is for anyone who has something at work that's quietly hard, and who has never asked for help with it. A chair that hurts by three o'clock. A light that brings on a headache by lunch. A meeting you keep missing half of. Most people work out what it would cost to ask, and say nothing, because asking means explaining your body to the person who decides what you're worth.
+Curb Cut: an Agentforce agent that's on the worker's side.
 
-Curb Cut is an Agentforce agent that's on the worker's side. You tell it what's getting in the way, in your own words, and you never have to say why. It shows you what other people have asked for, drawn from a library of real accommodations that each carry the source they came from, along with what each one usually costs. If you want to ask, it writes the request in your words and reads it back, and nothing is sent until you clearly say yes. A hedge is refused, and a test proves the refusal. If typing is the hard part, you can send a photo. If you sign, you can send a video, and a person interprets it, never a machine.
+PROBLEM TO SOLVE
 
-Here's the size of it. Among college-educated people in white-collar jobs in the United States, thirty in a hundred have a disability under the federal definition. Three tell their employer. Of the people who did tell, most say it got them better support. So it works for nearly everyone who tries, and almost nobody tries. The answer, when people ask, is usually yes and usually free: of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024, 61% said the accommodation cost them nothing. The money was never the barrier. The asking was.
+Thirty in a hundred white-collar workers have a disability. Three tell their employer. The rest do the maths every day: what would it cost to ask for the chair, the lamp, the agenda, the hour? Who would I have to tell, and what would they think of me on Monday? Most decide it isn't worth it, and carry on hurting quietly.
 
-Three things make Curb Cut different. You can ask before telling anyone anything, because nothing is written down while you're anonymous. There's no field for a diagnosis, anywhere: it isn't encrypted or hidden behind a permission, it simply doesn't exist in 61 fields across 9 objects, and a build check fails if anyone adds one. If you name a condition anyway, it's taken out before anything is stored, and you're told so in the same reply. And nobody is ever routed to a telephone, because for some of the people this serves, a phone call is a door that doesn't open.
+The form is the barrier. To get help you must find the policy, learn its words, hold a work login, and explain your body, in writing, to the person who decides what you're worth. For a contractor, a temp, someone who is Deaf, someone whose first language isn't English, or someone with a condition nobody can see, that form is a door that doesn't open.
 
-Six doors share one Apex router: web, voice, text, email, Slack and MCP. Web, voice, text, email, Slack and MCP are all live today. Two of those doors work on a basic phone with no internet at all. It also ships with a console for the person on the other end, because a promise that a real human will pick this up is worth nothing unless that human has somewhere to stand.
+The money was never the barrier. Of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024, 61% said the accommodation cost them nothing. The asking was the barrier.
+
+OUR SOLUTION
+
+Curb Cut turns asking into one sentence. You say what's hard, in your own words. You never have to say why. It shows you what other people in your situation have asked for, from a library of real accommodations that each carry the source they came from and what they usually cost. Knowing is allowed, and asking is optional. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes. A hedge is refused, and a test proves the refusal.
+
+There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there: 61 fields across 9 objects, and a build check that fails if anyone adds one. If you name a condition anyway, it's stripped before anything is stored, and you're told so in the same reply. Nobody is ever routed to a telephone.
+
+Six doors, one router, all live today. Every door answers through the same Apex code, so the first answer is the same everywhere and never depends on a model remembering to call its own action.
+- Web, with no login and no account, because the people who need this most are the ones outside the system.
+- Text CURB CUT to +1 276 495 9311, because a basic phone with no data plan is still a phone.
+- Voice on the same number, for anyone who can't type. It never rings you back.
+- Email, for the person who only has a personal address.
+- Slack, as a private message only. It tells you up front that Slack belongs to your employer, names the two doors that don't, and never posts to a channel or sends a request from there.
+- Any assistant you already use, through MCP tools that can find and draft but can never send.
+
+Ask once, not forever. A standing preference, in your words, travels ahead of you to the people you choose. WHO shows you everyone who has seen it, and OFF withdraws it with no reason asked.
+
+Checked, not claimed: 137 Apex tests, 508 structural invariants, 333 live accessibility checks, 131 Sa11y checks (Salesforce's own matcher), 21 responsible-AI checks against Salesforce's five guidelines, a keyboard walk with real Tab presses, and a 21-of-23 adversarial score we report rather than average away.
+
+This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see. It also ships a console for the human on the other end, because a promise that a real person will pick this up is worth nothing unless that person has somewhere to stand.
+
+Try it now, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask
