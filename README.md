@@ -29,12 +29,14 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Terms | `/curbcut/terms` | live |
 | SMS | +1 276 495 9311 | built; awaiting A2P 10DLC approval |
 | Voice | +1 276 495 9311 | built, speech in and out |
-| Email | `curbcut@…apex.salesforce.com` (see `channels/.env.example`) | live |
-| Agent | Curb Cut v6 | active |
+| Email | inbound service `CurbCutInbound`, address in Setup → Email Services | live |
+| Slack | `node channels/slack-app.mjs`, Socket Mode, DM only, never sends | built; manifest in `channels/slack-manifest.json` |
+| Agent | `Curb_Cut` v7, `Curb_Cut_Desk` v5 | both active |
 | Console (internal) | `/lightning/app/Curb_Cut_Console` | live |
 | Why now | `/curbcut/why` | live |
 | Messaging programme | `/curbcut/messaging` | live |
 | MCP server | `node channels/mcp-server.mjs` | 3 tools, none of which can send |
+| Any relay or assistant | `POST /services/apexrest/curbcut/v1/message/` | one door every channel above shares |
 
 The console is the half of this that nobody demos. Every promise the assistant
 makes about a person reaching a human being is worthless unless a human being
@@ -70,34 +72,49 @@ and nobody can find out.
 
 ## Verification
 
+Nothing below is asserted from memory. Each number is the output of the command
+beside it, and `tests/submission_consistency.py` fails the build if any number
+quoted anywhere in the submission stops matching the artefact it describes.
+
 ```
-42+ Apex tests           100% pass, 89% org-wide coverage
-110 CI invariants        every one proven to fail on violation
-23 adversarial assertions  run headless against the live agent
+124 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
+494 structural invariants      python3 tests/invariants.py            ~1s, no org
+333 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
+ 34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
+ 34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
+ 21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
+ 28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
+ 16 reading-level checks       python3 tests/reading_level_audit.py
+ 54 link and copy checks       python3 tests/link_and_copy_audit.py
+ 11 consistency checks         python3 tests/submission_consistency.py
+21/23 adversarial assertions   node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 ```
 
-```bash
-python3 tests/invariants.py                 # ~1s, no org needed
-sf apex run test --test-level RunLocalTests --target-org curbcut
-node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
-```
+Two of those suites break their own checks on purpose and assert each one goes
+red (`--selftest`). A suite that cannot fail proves nothing about the code it
+passes. The adversarial score is 21 of 23 on purpose: one assertion fails on
+every run and one alternates, and both are reported rather than averaged away.
 
 ## Repository map
 
 | Path | What |
 |---|---|
-| `force-app/main/default/objects/` | 8 objects, 46 fields, 5 triage list views |
-| `force-app/main/default/classes/` | 11 Apex classes + 6 test classes, 56 tests |
-| `force-app/main/default/aiAuthoringBundles/` | the Agent Script |
-| `force-app/main/default/pages/` `components/` `sites/` | the public site |
+| `force-app/main/default/objects/` | 9 objects, 61 fields, 31 list views, and no field for a diagnosis |
+| `force-app/main/default/classes/` | 18 Apex classes + 14 test classes |
+| `force-app/main/default/lwc/` | 5 Lightning Web Components, each with a Sa11y suite beside it |
+| `force-app/main/default/aiAuthoringBundles/` | two Agent Scripts: `Curb_Cut` public, `Curb_Cut_Desk` internal |
+| `force-app/main/default/pages/` `components/` `sites/` | the public site, six pages, anonymous |
 | `force-app/main/default/emailservices/` | inbound email channel |
 | `force-app/main/default/applications/` `tabs/` `flexipages/` | the internal console |
-| `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard |
-| `channels/` | SMS + voice relay, MCP server, Twilio configuration and A2P copy |
-| `tests/` | invariants, adversarial suite, headless runner, scorer |
-| `submission/` | shot list, submission text |
+| `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard, no names anywhere |
+| `channels/` | SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration |
+| `tests/` | the twelve suites above |
+| `deck/` | the deck as source; `submission/Curb-Cut.pptx` is generated from it |
+| `video/` | the demo film as source: screencast recorder, caption cards, one scene table |
+| `submission/` | every Devpost field paste-ready, the judge test guide, the technical design |
 | `legal/` | privacy and terms source |
-| `docs/` | architecture, BRD, roadmap, decisions |
+| `docs/` | architecture, BRD, evidence, audience, decisions, the two audit reports |
 
 Start with [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), then
 [`CRITIQUE.md`](CRITIQUE.md) — which is where the honest list of what is still
