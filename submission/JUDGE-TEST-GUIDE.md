@@ -9,6 +9,9 @@ otherwise.
 sentence about something that is hard at work. No login, no account, no name.
 That is the whole product.
 
+If you would rather watch first, the film is 4 minutes 59 seconds and shows every
+channel working: <https://youtu.be/L5sVEw5H3U4>
+
 ---
 
 ## What works, and how you check it

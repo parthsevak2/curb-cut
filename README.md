@@ -9,6 +9,8 @@ stranger, in writing, in a language that may not be your first.
 
 The money was never the barrier.
 
+The film, 4 minutes 59 seconds, with every channel shown live: <https://youtu.be/L5sVEw5H3U4>
+
 | Evidence | Source |
 |---|---|
 | Across **655** large employers in 2025 the median share of staff who told their employer about a disability was **3.5%**, and it did not rise. By 2026, **98%** of them report accommodation programmes. | [Disability:IN 2025 Disability Index](https://disabilityin.org/resource/2025-disability-index-report/) and [2026 results](https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights) |
