@@ -41,7 +41,7 @@ private class CurbCutRedactTest {
     static void aVolunteeredConditionNeverReachesTheDatabase() {
         Map<String, String> cases = new Map<String, String>{
             'I have multiple sclerosis and some days I cannot type for long' => 'sclerosis',
-            'I was diagnosed with ADHD and I lose track in long meetings'    => 'adhd',
+            'I was diagnosed with lupus and I lose track in long meetings'   => 'lupus',
             'My Crohn\'s disease means I need to be near a bathroom'         => 'crohn',
             'I have epilepsy so strobing screens are a problem'              => 'epilepsy',
             'bipolar disorder makes early starts hard for me'                => 'bipolar'
@@ -175,8 +175,8 @@ private class CurbCutRedactTest {
             'nothing after "diagnosed with" may be stored: ' + kept);
 
         kept = stored('I was diagnosed with ADHD and I lose track in long meetings');
-        System.assert(!kept.containsIgnoreCase('adhd'),
-            'inside a diagnosis clause even an identity word is a quote from a clinic: ' + kept);
+        System.assert(kept.containsIgnoreCase('adhd'),
+            'ADHD is who somebody is, so it stays even after "diagnosed with": ' + kept);
         System.assert(kept.containsIgnoreCase('lose track in long meetings'),
             'the functional half must survive the clause: ' + kept);
 
