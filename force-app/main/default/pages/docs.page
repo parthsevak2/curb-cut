@@ -22,13 +22,13 @@
 <c:CurbCutShell pageTitle="Documentation" current="docs"
   eyebrow="For judges and adopters"
   heading="The documentation, published from the repository."
-  lede="Seven documents, exactly as they sit in the code, so nothing here can drift from what is deployed.">
+  lede="Eight documents, exactly as they sit in the code, so nothing here can drift from what is deployed.">
 <div class="docs">
-<nav aria-label="Documents on this page"><ol><li><a href="#doc-0">README</a></li><li><a href="#doc-1">Test it yourself</a></li><li><a href="#doc-2">Technical design</a></li><li><a href="#doc-3">Evidence</a></li><li><a href="#doc-4">Who this is for</a></li><li><a href="#doc-5">Accessibility audit</a></li><li><a href="#doc-6">Decisions</a></li></ol></nav><section aria-labelledby="doc-0"><h2 id="doc-0">README</h2><p class="mute">What this is, what is live, how to verify it. Source: <code>README.md</code></p><h2>Curb Cut</h2>
+<nav aria-label="Documents on this page"><ol><li><a href="#doc-0">README</a></li><li><a href="#doc-1">Test it yourself</a></li><li><a href="#doc-2">What a screen reader is handed</a></li><li><a href="#doc-3">Technical design</a></li><li><a href="#doc-4">Evidence</a></li><li><a href="#doc-5">Who this is for</a></li><li><a href="#doc-6">Accessibility audit</a></li><li><a href="#doc-7">Decisions</a></li></ol></nav><section aria-labelledby="doc-0"><h2 id="doc-0">README</h2><p class="mute">What this is, what is live, how to verify it. Source: <code>README.md</code></p><h2>Curb Cut</h2>
 <p><strong>The process for requesting a disability accommodation is itself an accessibility barrier.</strong></p>
 <p>To get help you must first navigate a system designed by and for people without your disability. Find the policy. Learn its vocabulary. Hold a corporate login. Complete a form. And disclose something you may be afraid to disclose, to a stranger, in writing, in a language that may not be your first.</p>
 <p>The money was never the barrier.</p>
-<table><thead><tr><th>Evidence</th><th>Source</th></tr></thead><tbody><tr><td><strong>61 of every 100</strong> accommodations cost the employer nothing. Median one-time cost of the rest: <strong>$300</strong>.</td><td><a href="https://askjan.org/topics/costs.cfm">JAN employer survey</a>, 5,406 employers, Jan 2019 to Dec 2024</td></tr><tr><td><strong>More than a third</strong> of employed Canadians with a disability had an accommodation need <strong>go unmet</strong> in 2022.</td><td><a href="https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity">Statistics Canada</a>, Canadian Survey on Disability</td></tr><tr><td>The <strong>GC Workplace Accessibility Passport</strong> already implements "ask once, not forever", and only for federal public servants.</td><td><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html">Government of Canada</a></td></tr></tbody></table>
+<table><thead><tr><th>Evidence</th><th>Source</th></tr></thead><tbody><tr><td>Across <strong>655</strong> large employers in 2025 the median share of staff who told their employer about a disability was <strong>3.5%</strong>, and it did not rise. By 2026, <strong>98%</strong> of them report accommodation programmes.</td><td><a href="https://disabilityin.org/resource/2025-disability-index-report/">Disability:IN 2025 Disability Index</a> and <a href="https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights">2026 results</a></td></tr><tr><td>In 2025, <strong>22.8%</strong> of Americans with a disability were employed against 65.2% without, and <strong>30%</strong> of those working were part time against 17%.</td><td><a href="https://www.bls.gov/news.release/disabl.nr0.htm">US BLS, People with a Disability 2025</a>, released 3 March 2026</td></tr><tr><td><strong>61 of every 100</strong> accommodations cost the employer nothing. Median one-time cost of the rest: <strong>$300</strong>.</td><td><a href="https://askjan.org/topics/costs.cfm">JAN employer survey</a>, 5,406 employers, Jan 2019 to Dec 2024</td></tr><tr><td><strong>More than a third</strong> of employed Canadians with a disability had an accommodation need <strong>go unmet</strong> in 2022.</td><td><a href="https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity">Statistics Canada</a>, Canadian Survey on Disability</td></tr><tr><td>The <strong>GC Workplace Accessibility Passport</strong> already implements "ask once, not forever", and only for federal public servants.</td><td><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html">Government of Canada</a></td></tr></tbody></table>
 <p>Curb Cut is an Agentforce agent whose principal is <strong>the worker, not the employer</strong>.</p>
 <hr/>
 <h3>Live now</h3>
@@ -53,7 +53,7 @@
 <h3>Verification</h3>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
 <pre>137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-508 structural invariants      python3 tests/invariants.py            ~1s, no org
+512 structural invariants      python3 tests/invariants.py            ~1s, no org
 331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
@@ -66,7 +66,7 @@
 21/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
 <p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial score is 21 of 23 on purpose: one assertion fails on every run and one alternates, and both are reported rather than averaged away.</p>
 <h3>Repository map</h3>
-<table><thead><tr><th>Path</th><th>What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>18 Apex classes + 14 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above</td></tr><tr><td><code>deck/</code></td><td>the deck as source; <code>submission/Curb-Cut.pptx</code> is generated from it</td></tr><tr><td><code>video/</code></td><td>the demo film as source: screencast recorder, caption cards, one scene table</td></tr><tr><td><code>submission/</code></td><td>every Devpost field paste-ready, the judge test guide, the technical design</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table>
+<table><thead><tr><th>Path</th><th>What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>18 Apex classes + 14 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above, plus <code>screen_reader_walk.mjs</code>, which writes docs/SCREEN-READER-WALK.md</td></tr><tr><td><code>deck/</code></td><td>the deck as source; <code>submission/Curb-Cut.pptx</code> is generated from it</td></tr><tr><td><code>video/</code></td><td>the demo film as source: screencast recorder, caption cards, one scene table</td></tr><tr><td><code>submission/</code></td><td>every Devpost field paste-ready, the judge test guide, the technical design</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table>
 <p>Start with [<code>docs/ARCHITECTURE.md</code>](docs/ARCHITECTURE.md), then [<code>CRITIQUE.md</code>](CRITIQUE.md), which is where the honest list of what is still weak lives.</p>
 <h3>Documentation</h3>
 <table><thead><tr><th>Document</th><th>Purpose</th></tr></thead><tbody><tr><td>[<code>docs/ARCHITECTURE.md</code>](docs/ARCHITECTURE.md)</td><td>How it fits together, with diagrams</td></tr><tr><td>[<code>docs/BRD.md</code>](docs/BRD.md)</td><td>Business requirements and traceability</td></tr><tr><td>[<code>docs/ROADMAP.md</code>](docs/ROADMAP.md)</td><td>What is next, and what was rejected</td></tr><tr><td>[<code>docs/DECISIONS.md</code>](docs/DECISIONS.md)</td><td>Every significant call and why</td></tr><tr><td>[<code>docs/EVIDENCE.md</code>](docs/EVIDENCE.md)</td><td>Every public figure, with source, denominator and caveat</td></tr><tr><td>[<code>docs/AGENT-INTERFACES.md</code>](docs/AGENT-INTERFACES.md)</td><td>Headless, MCP, agent-to-agent, and the profile we will not build</td></tr><tr><td>[<code>CRITIQUE.md</code>](CRITIQUE.md)</td><td>What is still wrong</td></tr><tr><td>[<code>SPEC-CONFORMANCE.md</code>](SPEC-CONFORMANCE.md)</td><td>Build spec conformance</td></tr><tr><td>[<code>FINDINGS.md</code>](FINDINGS.md)</td><td>Adversarial run results</td></tr><tr><td>[<code>CI.md</code>](CI.md)</td><td>Pipeline and invariants</td></tr><tr><td>[<code>DEPLOY.md</code>](DEPLOY.md)</td><td>Deployment</td></tr><tr><td>[<code>TESTING.md</code>](TESTING.md)</td><td>Test strategy</td></tr></tbody></table>
@@ -122,7 +122,7 @@ curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
 <blockquote><p>No. And not because of a permission setting. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in this system.</p></blockquote>
 <hr/>
 <h3>Check the numbers rather than trusting them</h3>
-<pre>python3 tests/invariants.py        # 508 structural invariants
+<pre>python3 tests/invariants.py        # 512 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
 python3 tests/a11y_audit.py        # 331 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
@@ -132,11 +132,152 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <p>Two of those deliberately break their own checks to prove the suite can go red. A suite that cannot fail proves nothing about the code it passes.</p>
 <h3>What we would rather you found than we hid</h3>
 <ul>
-<li>No screen reader user has tested this. Machine-verified is not user-verified.</li>
+<li>No screen reader user has tested this. A script checked all of it; a person who uses a screen reader every day has not. What a screen reader is handed at each step of /ask is written down, step by step, in docs/SCREEN-READER-WALK.md, and it says on its first line that it is not a person.</li>
 <li>The agent's narration is nondeterministic: 21 of 23 adversarial assertions, with one failure that alternates between runs.</li>
 <li>The console has had less accessibility attention than the public site, because the public site is where somebody arrives on a bad day.</li>
 </ul></section>
-<section aria-labelledby="doc-2"><h2 id="doc-2">Technical design</h2><p class="mute">How it fits together, verified against the org. Source: <code>submission/TECHNICAL-DESIGN.md</code></p><pre class="tdd">CURB CUT. TECHNICAL DESIGN DOCUMENT
+<section aria-labelledby="doc-2"><h2 id="doc-2">What a screen reader is handed</h2><p class="mute">A scripted walk of the ask page, step by step, and what it cannot tell you. Source: <code>docs/SCREEN-READER-WALK.md</code></p><h2>What a screen reader is handed on /ask, step by step</h2>
+<p>This transcript was produced by a script, not by a person who uses a screen reader. It reads the same accessibility tree that NVDA, JAWS and VoiceOver read, drives the page with real key and click events, and records what a screen reader would be given at each step: where focus lands, what the live regions announce, and the order things are read. It cannot tell you what it is like to use. One session with a daily screen-reader user still comes before the next five features.</p>
+<p>Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 20:16 UTC.</p>
+<h4>Step 0: the page loads</h4>
+<ul>
+<li>Focus is on: body</li>
+<li>Live regions announce: nothing new</li>
+</ul>
+<p>Reading order, on load (45 of 56 nodes):</p>
+<ul>
+<li>link "Skip to the main content"</li>
+<li>main (no name)</li>
+<li>link "Curb Cut"</li>
+<li>navigation "Site"</li>
+<li>button "Text size: normal. Press to change." described as "Make the text bigger"</li>
+<li>button "Higher contrast is off. Press to turn it on." described as "Increase contrast"</li>
+<li>status (no name)</li>
+<li>sectionheader (no name)</li>
+<li>list "Where you are"</li>
+<li>paragraph (no name)</li>
+<li>region "Say what's hard"</li>
+<li>region "Something that'll still be true next month? Say it once, instead of to every new manager"</li>
+<li>sectionfooter (no name)</li>
+<li>link "Home"</li>
+<li>link "Ask"</li>
+<li>link "Why now"</li>
+<li>link "Privacy"</li>
+<li>link "Terms"</li>
+<li>link "Messaging"</li>
+<li>paragraph (no name)</li>
+<li>heading "Tell me what's hard right now." level 1</li>
+<li>paragraph (no name)</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>heading "Say what's hard" level 2</li>
+<li>form (no name)</li>
+<li>group (no name)</li>
+<li>group (no name)</li>
+<li>paragraph (no name)</li>
+<li>paragraph (no name)</li>
+<li>paragraph (no name)</li>
+<li>paragraph (no name)</li>
+<li>LabelText (no name)</li>
+<li>paragraph (no name)</li>
+<li>list "Common starting points. Choosing one fills the box, and you can change it."</li>
+<li>textbox "What's hard at work right now?" described as "Tap one of these, or write your own. You can change it after."</li>
+<li>button "Show me what I could ask for"</li>
+<li>button "I'd rather talk to a person"</li>
+<li>DisclosureTriangle "Can't put it into words? Send a photo or a short video instead"</li>
+<li>DisclosureTriangle "Something that'll still be true next month? Say it once, instead of to every new manager"</li>
+<li>strong (no name)</li>
+<li>link "parth.sevak2@gmail.com"</li>
+<li>listitem (no name) level 1</li>
+</ul>
+<h4>Step 1: six presses of Tab from the top</h4>
+<ol>
+<li>a "Skip to the main content"</li>
+<li>a "Curb Cut"</li>
+<li>a "Home"</li>
+<li>a "Ask"</li>
+<li>a "Why now"</li>
+<li>a "Privacy"</li>
+</ol>
+<h4>Step 2: after typing what is hard and pressing Enter</h4>
+<ul>
+<li>Focus is on: h2#resultsHeading "What other people have asked for"</li>
+<li>Live regions announce: "Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional."</li>
+</ul>
+<p>Reading order, the options that arrived (30 of 61 nodes):</p>
+<ul>
+<li>link "Skip to the main content"</li>
+<li>main (no name)</li>
+<li>link "Curb Cut"</li>
+<li>navigation "Site"</li>
+<li>button "Text size: normal. Press to change." described as "Make the text bigger"</li>
+<li>button "Higher contrast is off. Press to turn it on." described as "Increase contrast"</li>
+<li>status (no name)</li>
+<li>sectionheader (no name)</li>
+<li>list "Where you are"</li>
+<li>paragraph (no name)</li>
+<li>region "Say what's hard"</li>
+<li>region "What other people have asked for"</li>
+<li>region "Something that'll still be true next month? Say it once, instead of to every new manager"</li>
+<li>sectionfooter (no name)</li>
+<li>link "Home"</li>
+<li>link "Ask"</li>
+<li>link "Why now"</li>
+<li>link "Privacy"</li>
+<li>link "Terms"</li>
+<li>link "Messaging"</li>
+<li>paragraph (no name)</li>
+<li>heading "Tell me what's hard right now." level 1</li>
+<li>paragraph (no name)</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>listitem (no name) level 1</li>
+<li>heading "Say what's hard" level 2</li>
+<li>form (no name)</li>
+<li>status (no name)</li>
+</ul>
+<h4>Step 3: after pressing "Help me ask for one of these"</h4>
+<ul>
+<li>Focus is on: h2#draftHeading "Read this over"</li>
+<li>Live regions announce: "Read this over. Nothing is sent until you choose to send it."</li>
+</ul>
+<p>Reading order, the draft (25 of 66 nodes):</p>
+<ul>
+<li>link "Skip to the main content"</li>
+<li>main (no name)</li>
+<li>link "Curb Cut"</li>
+<li>navigation "Site"</li>
+<li>button "Text size: normal. Press to change." described as "Make the text bigger"</li>
+<li>button "Higher contrast is off. Press to turn it on." described as "Increase contrast"</li>
+<li>status (no name)</li>
+<li>sectionheader (no name)</li>
+<li>list "Where you are"</li>
+<li>paragraph (no name)</li>
+<li>region "Say what's hard"</li>
+<li>region "What other people have asked for"</li>
+<li>region "Read this over"</li>
+<li>region "Something that'll still be true next month? Say it once, instead of to every new manager"</li>
+<li>sectionfooter (no name)</li>
+<li>link "Home"</li>
+<li>link "Ask"</li>
+<li>link "Why now"</li>
+<li>link "Privacy"</li>
+<li>link "Terms"</li>
+<li>link "Messaging"</li>
+<li>paragraph (no name)</li>
+<li>heading "Tell me what's hard right now." level 1</li>
+<li>paragraph (no name)</li>
+<li>listitem (no name) level 1</li>
+</ul>
+<h4>What this transcript can and cannot tell you</h4>
+<ul>
+<li>It can show that every control has a name, that focus moves to the new heading after each step, and that the status line announces what happened.</li>
+<li>It cannot show whether the wording is clear when heard rather than read, whether the pace is right, or what a person would do when confused. Only a person can.</li>
+</ul></section>
+<section aria-labelledby="doc-3"><h2 id="doc-3">Technical design</h2><p class="mute">How it fits together, verified against the org. Source: <code>submission/TECHNICAL-DESIGN.md</code></p><pre class="tdd">CURB CUT. TECHNICAL DESIGN DOCUMENT
 Agentforce for Good, Dreamforce 2026 · Builder Track
 Verified against the deployed org, 5 September 2026
 
@@ -434,7 +575,7 @@ FOUR LAYERS, all failing the build except the last.
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        508   every push, ~1s, no org needed
+  Structural invariants        512   every push, ~1s, no org needed
   Apex tests                   137   every deploy
   Accessibility (live pages)   333   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states
@@ -674,7 +815,7 @@ HONEST GAPS
 Nothing in this document is asserted from memory. Every figure was read
 from the deployed org or the test run that produced it.
 </pre></section>
-<section aria-labelledby="doc-3"><h2 id="doc-3">Evidence</h2><p class="mute">Every public figure, its source, its denominator and its caveat. Source: <code>docs/EVIDENCE.md</code></p><h2>Evidence</h2>
+<section aria-labelledby="doc-4"><h2 id="doc-4">Evidence</h2><p class="mute">Every public figure, its source, its denominator and its caveat. Source: <code>docs/EVIDENCE.md</code></p><h2>Evidence</h2>
 <p>Every figure Curb Cut states in public, with its source, its population, its date, and what it does not say. Nothing here is asserted from memory.</p>
 <p>Read the population line before quoting a number. Most disagreements about disability statistics are really disagreements about who was counted.</p>
 <hr/>
@@ -709,6 +850,12 @@ from the deployed org or the test run that produced it.
 <p><strong>Why these two.</strong> The first is what a person actually wants: to be believed without having to prove it. The second is the exact burden the standing preference exists to remove, and it is the reason "say it once" is a feature rather than a convenience.</p>
 <p><strong>What we do not do.</strong> We do not put photographs of disabled people in the deck. Stock photography of disability is a well-documented trope that the people it depicts consistently object to, and we have no consent from anyone real. Large, quiet typography of a real sentence carries more than a posed picture, and costs nobody their likeness.</p>
 <hr/>
+<h3>1a. It is not a white-collar problem</h3>
+<p>The disclosure study above asked white-collar workers because that is where the question had never been asked. The newest figures, from 2025 and 2026, say who actually holds the jobs and how few of them tell anyone.</p>
+<table><thead><tr><th>Figure</th><th>Value</th><th>Population and definition</th><th>Source</th></tr></thead><tbody><tr><td>Median share of employees who self-identified a disability to their employer, 2025</td><td><strong>3.5%</strong> (new hires: 4%), and it did not rise in 2025</td><td>655 submissions from large employers across eight countries</td><td>Disability:IN, <em>2025 Disability Index Report</em>, https://disabilityin.org/resource/2025-disability-index-report/</td></tr><tr><td>Employers reporting flexible or remote accommodations, 2026</td><td><strong>98%</strong>, while the report names persistent gaps in disclosure</td><td>421 organisations, 627 submissions, released 27 July 2026</td><td>Disability:IN, <em>2026 Disability Index Results and Insights</em>, https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights</td></tr><tr><td>Persons with disabilities who require workplace accommodations, Canada, 2022</td><td><strong>39.3%</strong></td><td>employed persons with disabilities</td><td>Statistics Canada, <em>International Day of Persons with Disabilities, 2025</em>, released 3 December 2025, https://www150.statcan.gc.ca/n1/daily-quotidien/251203/dq251203a-eng.htm</td></tr><tr><td>Refused a job because of a disability, Canada, 2022</td><td><strong>9.7%</strong> (down from 11.7% in 2017)</td><td>persons with disabilities</td><td>same</td></tr><tr><td>US adults with a disability</td><td><strong>more than 1 in 4</strong></td><td>All US adults, CDC definition</td><td>CDC, <em>Disability Impacts All of Us</em>, https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html</td></tr><tr><td>Canadians with a disability</td><td><strong>27%</strong>, 8.0 million</td><td>Canadians aged 15+, 2022</td><td>Statistics Canada, <em>Canadian Survey on Disability</em>, 2022, https://www150.statcan.gc.ca/n1/daily-quotidien/231201/dq231201b-eng.htm</td></tr><tr><td>Employed, US, 2025</td><td><strong>22.8%</strong> vs 65.2%</td><td>People 16+ with vs without a disability, employment-population ratio</td><td>US BLS, <em>People with a Disability: Labor Force Characteristics 2025</em>, released 3 March 2026, https://www.bls.gov/news.release/disabl.nr0.htm</td></tr><tr><td>Unemployment rate, US, 2025</td><td><strong>8.3%</strong> vs 4.1%</td><td>same</td><td>same</td></tr><tr><td>Usually work part time, US, 2025</td><td><strong>about 30%</strong> vs about 17%</td><td>employed people with vs without a disability</td><td>same</td></tr><tr><td>In service occupations, US, 2025</td><td><strong>20.0%</strong> vs 16.5%</td><td>employed people with vs without a disability</td><td>same</td></tr><tr><td>In production, transportation and material moving, US, 2025</td><td><strong>13.8%</strong> vs 12.0%</td><td>same</td><td>same</td></tr><tr><td>In management and professional occupations, US, 2025</td><td><strong>37.9%</strong> vs 44.1%</td><td>same</td><td>same</td></tr><tr><td>Self-employed, US, 2025</td><td><strong>9.1%</strong> vs 5.9%</td><td>same</td><td>same</td></tr><tr><td>Employed, Canada, 2022</td><td><strong>62%</strong> vs 78%</td><td>persons aged 25 to 64 with vs without disabilities</td><td>Statistics Canada, <em>A demographic, employment and income profile of persons with disabilities</em>, 2022 CSD, https://www150.statcan.gc.ca/n1/pub/89-654-x/89-654-x2024001-eng.htm</td></tr><tr><td>Below the poverty line, Canada, 2022</td><td><strong>10%</strong> vs 7%</td><td>persons aged 15+ with vs without disabilities, 2018-base Market Basket Measure</td><td>same</td></tr><tr><td>Not employed but with work potential, Canada, 2022</td><td><strong>42%</strong>, 741,280 people</td><td>persons with disabilities aged 25 to 64 who were not employed</td><td>same</td></tr><tr><td>Employed, Canada, 2024</td><td><strong>46.4%</strong> vs 66.2%</td><td>persons with vs without disabilities, Labour Force Survey</td><td>Statistics Canada, <em>Labour market characteristics of persons with and without disabilities, 2024</em>, https://www150.statcan.gc.ca/n1/pub/71-222-x/71-222-x2025001-eng.htm</td></tr><tr><td>Part-time, Canada, 2024</td><td><strong>21.3%</strong> vs 17.4%</td><td>workers with vs without disabilities</td><td>same</td></tr><tr><td>Hourly wage, Canada, 2024</td><td><strong>93.8%</strong> of the average hourly wage of employees without disabilities, a gap of <strong>$2.22</strong> an hour</td><td>employees with disabilities</td><td>same</td></tr></tbody></table>
+<p><strong>What this says.</strong> The people this affects are more likely to be paid by the hour, to work part time, and to hold service, production and transport jobs than to sit at a desk. That is the shift worker, the cleaner, the warehouse picker, the minimum-wage hire with no work email and no HR desk. Across 655 large employers in 2025 the median share of staff who told their employer was 3.5%, the same three in a hundred the older white-collar study found, and the 2026 index says the programmes now exist at 98% of those employers while the disclosure gap has not moved. The programmes are there. The asking is not.</p>
+<p><strong>Why Curb Cut's doors look the way they do.</strong> Text and voice on a basic phone, no work login, no account, and never a telephone call back: those are the doors a person on a shift can use from a break room.</p>
+<hr/>
 <h3>2. The accommodation gap, from a national statistics office</h3>
 <p>This is the strongest evidence in the project, and it is government data.</p>
 <table><thead><tr><th>Figure</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Employed Canadians with disabilities who needed a workplace accommodation</td><td><strong>35.4%</strong></td><td>Statistics Canada, <em>Canadian Survey on Disability</em>, 2022</td></tr><tr><td>Employed Canadians with disabilities with an <strong>unmet</strong> accommodation need</td><td><strong>35.4%</strong></td><td>same</td></tr><tr><td>Most common need: <strong>modified work hours</strong></td><td>16.3%</td><td>same</td></tr><tr><td>Then modified or different duties</td><td>11.6%</td><td>same</td></tr><tr><td>Then working from home</td><td>10.9%</td><td>same</td></tr><tr><td>Then modified or ergonomic workstation</td><td>10.7%</td><td>same</td></tr><tr><td>Then a special chair or back support</td><td>10.3%</td><td>same</td></tr></tbody></table>
@@ -737,14 +884,14 @@ from the deployed org or the test run that produced it.
 <li>EEOC public hearing transcript, 31 January 2023 — <a href="https://www.eeoc.gov/meetings/meeting-january-31-2023-navigating-employment-discrimination-ai-and-automated-systems-new/transcript">https://www.eeoc.gov/meetings/meeting-january-31-2023-navigating-employment-discrimination-ai-and-automated-systems-new/transcript</a></li>
 </ul>
 <p>Each row above links to its source. Where a figure is an estimate rather than a measurement, it is labelled as one at the point of use, not only here.</p></section>
-<section aria-labelledby="doc-4"><h2 id="doc-4">Who this is for</h2><p class="mute">Audience and market. Source: <code>docs/AUDIENCE.md</code></p><h2>Who this is for</h2>
+<section aria-labelledby="doc-5"><h2 id="doc-5">Who this is for</h2><p class="mute">Audience and market. Source: <code>docs/AUDIENCE.md</code></p><h2>Who this is for</h2>
 <p>Two different questions get confused here, so they are answered separately: who <em>uses</em> Curb Cut, and who would ever <em>deploy</em> it. They are not the same people, and the first group is deliberately not a market.</p>
 <hr/>
 <h3>1. The user, who buys nothing</h3>
 <p>The primary user is a working person who needs one ordinary adjustment and has not asked for it.</p>
 <p>They need no account, no employer relationship with us, and no organisation to have bought anything on their behalf. That is a product decision, not a gap in the business model: the moment a person has to be inside somebody's licence to get help, the population who needs help most is the population excluded.</p>
 <p><strong>Who specifically.</strong> Four groups the current design serves, in order of how badly the usual process fails them:</p>
-<table><thead><tr><th>Group</th><th>Why the usual process fails them</th></tr></thead><tbody><tr><td>Contractors, temps, agency and gig workers</td><td>Often have no work login and no HR relationship at all, yet are expected to disclose to get anything</td></tr><tr><td>People with invisible conditions</td><td>62% of disabled employees in the Coqual study; they are believed less and asked to prove more</td></tr><tr><td>Deaf and hard-of-hearing workers</td><td>Every escalation path in most systems ends at "give us a call"</td></tr><tr><td>Anyone in their first weeks somewhere</td><td>Least social capital, highest perceived cost of asking</td></tr></tbody></table>
+<table><thead><tr><th>Group</th><th>Why the usual process fails them</th></tr></thead><tbody><tr><td>Hourly, shift and minimum-wage workers</td><td>In 2025, US workers with a disability were twice as likely to be part time (30% against 17%) and more often in service, production and transport jobs (BLS, released March 2026). No work email, no desk, no HR office on the floor, and no time during a shift to fill in a form. Text and voice on a basic phone exist for them</td></tr><tr><td>Contractors, temps, agency and gig workers</td><td>Often have no work login and no HR relationship at all, yet are expected to disclose to get anything</td></tr><tr><td>People with invisible conditions</td><td>62% of disabled employees in the Coqual study; they are believed less and asked to prove more</td></tr><tr><td>Deaf and hard-of-hearing workers</td><td>Every escalation path in most systems ends at "give us a call"</td></tr><tr><td>Anyone in their first weeks somewhere</td><td>Least social capital, highest perceived cost of asking</td></tr></tbody></table>
 <hr/>
 <h3>2. Who would deploy it</h3>
 <p>Three buyer types exist, and they want it for different reasons.</p>
@@ -786,7 +933,7 @@ from the deployed org or the test run that produced it.
 <li>IDD services market size, North America 2025 — Dataintelo market report, <a href="https://dataintelo.com/report/global-intellectual-and-developmental-disability-services-market">https://dataintelo.com/report/global-intellectual-and-developmental-disability-services-market</a> (a commercial market-research estimate, not a government statistic, and labelled as such wherever it appears)</li>
 <li>Unmet accommodation need, retention and cost figures — see <code>EVIDENCE.md</code></li>
 </ul></section>
-<section aria-labelledby="doc-5"><h2 id="doc-5">Accessibility audit</h2><p class="mute">Salesforce Sa11y findings. Source: <code>docs/A11Y-SA11Y-REPORT.md</code></p><h2>Accessibility audit: Salesforce Sa11y on the Curb Cut components</h2>
+<section aria-labelledby="doc-6"><h2 id="doc-6">Accessibility audit</h2><p class="mute">Salesforce Sa11y findings. Source: <code>docs/A11Y-SA11Y-REPORT.md</code></p><h2>Accessibility audit: Salesforce Sa11y on the Curb Cut components</h2>
 <p><strong>Tool:</strong> Sa11y, Salesforce's own accessibility matcher, driven by axe-core, obtained through the Salesforce DX MCP server (<code>@salesforce/mcp</code>) and its <code>lwc-experts</code> toolset. The two tools used were <code>guide_component_accessibility</code> and <code>run_lwc_accessibility_jest_tests</code>.</p>
 <p><strong>Ruleset:</strong> the 100-rule <code>extended</code> preset, minus one rule, stated below. Not the 64-rule <code>base</code> preset that Sa11y applies by default.</p>
 <p><strong>Scope:</strong> all five Lightning Web Components, in twelve states. <strong>Run:</strong> <code>npm run test:a11y</code></p>
@@ -839,7 +986,7 @@ from the deployed org or the test run that produced it.
 <li>jsdom is not a browser. Focus order, contrast as rendered, and media are checked by other means or not at all.</li>
 <li>The Visualforce public pages are outside Sa11y's reach; they have their own static suite.</li>
 </ul></section>
-<section aria-labelledby="doc-6"><h2 id="doc-6">Decisions</h2><p class="mute">Every significant call and why. Source: <code>docs/DECISIONS.md</code></p><h2>Decisions</h2>
+<section aria-labelledby="doc-7"><h2 id="doc-7">Decisions</h2><p class="mute">Every significant call and why. Source: <code>docs/DECISIONS.md</code></p><h2>Decisions</h2>
 <p>Each entry: what was decided, and what it cost.</p>
 <h3>D1. Absence over encryption</h3>
 <p>There is no diagnosis field. Encryption protects data that exists; the stronger control is not to hold it. <strong>Cost:</strong> the agent cannot personalise on condition, and never will. That is the point.</p>

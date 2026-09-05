@@ -79,8 +79,8 @@ One side of this conversation got an agent. The other side got a form. We built 
 We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.
 
 21
-00:04:32,200 --> 00:04:43,686
-If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
+00:04:32,200 --> 00:04:44,114
+The code is open. Any organisation can run it in its own org, at no cost. What it needs is one person who will answer.
 
 22
 00:04:45,600 --> 00:04:57,514

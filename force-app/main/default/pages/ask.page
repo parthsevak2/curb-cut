@@ -17,8 +17,8 @@
       border-radius: 6px; background: var(--surface, #fff); font-weight: 700; color: var(--ink, #14171A);
     }
     details.fold > summary::-webkit-details-marker { display: none; }
-    details.fold > summary::before { content: "+"; font-family: ui-monospace, monospace; font-size: 1.2rem; line-height: 1; width: 1.1rem; text-align: center; }
-    details.fold[open] > summary::before { content: "\2013"; }
+    details.fold > summary::before { content: "+" / ""; font-family: ui-monospace, monospace; font-size: 1.2rem; line-height: 1; width: 1.1rem; text-align: center; }
+    details.fold[open] > summary::before { content: "\2013" / ""; }
     details.fold > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--ground, #F5F3ED); }
     details.fold > .foldBody { padding: 1rem .2rem 0; }
     .copyRow { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; margin-top: .5rem; }

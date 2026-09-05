@@ -121,7 +121,7 @@ function arrow(s,x,y,w,h,c){
               ['02','The evidence','WHO, Statistics Canada, US Bureau of Labor Statistics, and the study that measures the gap directly'],
               ['03','The build','Reference architecture, the channel layer, the grounding path, and the three rules the system won\'t break'],
               ['04','The honest part','What we shipped wrong, what two audits found, and what still fails'],
-              ['05','The offer','Why good employers haven\'t done this, and what we will give the first ten who will'],
+              ['05','The offer','Why good employers haven\'t done this, and what it needs from the ones who will'],
               ['A','Appendix','Every figure with its source, and the command that proves each one']];
   rows.forEach(([n,t,d],i)=>{ const y=1.88+i*0.72;
     T(s,{t:n,o:{x:ML,y,w:0.8,h:0.44,fontSize:19,bold:true,fontFace:M,color:GOLD}});
@@ -506,7 +506,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
 
 /* --------------------------------------------------------- 22b THE OFFER */
 { const s=light(); chip(s,'05  THE OFFER');
-  title(s,'Free for the first ten. Here is the price.');
+  title(s,'Open to any organisation. Here is what it needs.');
 
   s.addShape(p.ShapeType.roundRect,{x:ML,y:1.92,w:5.55,h:3.55,rectRadius:0.05,
     fill:{color:SURF},line:{color:GREEN,width:1.5}});
@@ -520,7 +520,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
 
   s.addShape(p.ShapeType.roundRect,{x:6.9,y:1.92,w:5.55,h:3.55,rectRadius:0.05,
     fill:{color:SURF},line:{color:INK,width:1.5}});
-  T(s,{t:'What we ask instead of money',o:{x:7.17,y:2.12,w:5.0,h:0.36,fontSize:15,bold:true,fontFace:H,color:INK}});
+  T(s,{t:'What it needs to work',o:{x:7.17,y:2.12,w:5.0,h:0.36,fontSize:15,bold:true,fontFace:H,color:INK}});
   T(s,{t:[{text:'Name one owner. A person, not a department',options:{bullet:true,breakLine:true}},
           {text:'Answer within five working days. The wait is the cost',options:{bullet:true,breakLine:true}},
           {text:'Publish what you said yes to, in aggregate, with no names',options:{bullet:true,breakLine:true}},
@@ -530,7 +530,7 @@ divider('05','The offer','Why this hasn\'t happened, and why that is over.');
 
   T(s,{t:'We aren\'t asking for a case study or a logo. Those five things are what actually makes an accommodation arrive, and an organisation unwilling to do them wouldn\'t have got value from the software either.',
     o:{x:ML,y:5.56,w:11.6,h:0.62,fontSize:13.5,fontFace:B,color:SOFT}});
-  kicker(s,'Sixty-one in a hundred cost nothing. The first ten will find that out on their own data, in public, and then nobody gets to say it was the money.');
+  kicker(s,'Sixty-one in a hundred cost nothing. An organisation that runs this will find that out on its own data, and then nobody gets to say it was the money.');
 }
 
 divider('A','Appendix','Every figure, its source, and the command that proves it.');
