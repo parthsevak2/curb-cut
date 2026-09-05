@@ -213,7 +213,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
              ['People with invisible conditions','62% of disabled employees. Believed less, asked to prove more'],
              ['Deaf and hard-of-hearing workers','almost every escalation path ends at "give us a call"'],
              ['Anyone in their first weeks','least social capital, highest perceived cost of asking']];
-  who.forEach(([n,d],i)=>{ const y=2.62+i*0.58;
+  who.forEach(([n,d],i)=>{ const y=2.62+i*0.48;
     s.addShape(p.ShapeType.rect,{x:ML,y:y+0.1,w:0.06,h:0.4,fill:{color:GOLDFILL},line:{color:GOLDFILL,width:0}});
     T(s,{t:n,o:{x:1.15,y,w:4.3,h:0.4,fontSize:13.5,bold:true,fontFace:B,color:INK}});
     T(s,{t:d,o:{x:5.7,y:y+0.03,w:6.8,h:0.4,fontSize:12,fontFace:B,color:SOFT}});
