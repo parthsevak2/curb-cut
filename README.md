@@ -111,7 +111,7 @@ every run and one alternates, and both are reported rather than averaged away.
 | `force-app/main/default/applications/` `tabs/` `flexipages/` | the internal console |
 | `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard, no names anywhere |
 | `channels/` | SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration |
-| `tests/` | the twelve suites above |
+| `tests/` | the twelve suites above, plus `screen_reader_walk.mjs`, which writes docs/SCREEN-READER-WALK.md |
 | `deck/` | the deck as source; `submission/Curb-Cut.pptx` is generated from it |
 | `video/` | the demo film as source: screencast recorder, caption cards, one scene table |
 | `submission/` | every Devpost field paste-ready, the judge test guide, the technical design |
