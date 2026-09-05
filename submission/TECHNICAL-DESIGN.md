@@ -512,7 +512,8 @@ NEEDS WORK BEFORE REAL DEPLOYMENT
 HONEST GAPS
   · No screen-reader user has tested this. Every accessibility claim is
     machine-verified, which is not the same thing.
-  · The Slack app has never run against a real workspace.
+  · The Slack app runs on the same laptop as the relay. When that laptop
+    sleeps, Slack goes quiet along with text and voice.
   · Text and voice depend on a relay that runs beside the org, and today
     that relay runs on a laptop. When it is down, the number goes quiet.
   · The internal agent does not reliably call its own library; the
