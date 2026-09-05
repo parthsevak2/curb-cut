@@ -176,7 +176,7 @@ divider('02','The evidence','Four sources. They narrow rather than contradict.')
     T(s,{t:st,o:{x:x+0.2,y:4.0,w:2.4,h:0.35,fontSize:9.5,fontFace:M,color:MUTED}});
   });
   T(s,{t:'The people this affects are more likely to be paid by the hour, to work part time, and to be in service, production and transport jobs. By 2026, 98% of participating employers report flexible or remote accommodations; the latest self-identification rate, 2025, did not rise.',
-    o:{x:ML,y:4.75,w:11.7,h:0.5,fontSize:14,fontFace:B,color:INK}});
+    o:{x:ML,y:4.7,w:11.7,h:0.6,fontSize:12.5,fontFace:B,color:INK}});
   kicker(s,'That gap is the argument, not a flaw in it. The wider the definition, the more people find they are counted, and the more of them have never told anyone at work.');
   src(s,'cdc.gov  |  bls.gov People with a Disability 2025, released 3 March 2026  |  disabilityin.org 2025 and 2026 Disability Index  |  statcan.gc.ca  |  coqual.org');
 }
