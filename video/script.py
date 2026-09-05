@@ -61,7 +61,7 @@ SCENES = [
     "We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass.",
     ""),
  ('cards/c10.png', 14, 0,
-    "If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.",
+    "The code is open. Any organisation can run it in its own org, at no cost. What it needs is one person who will answer.",
     ""),
  ('cards/c11.png', 14, 0,
     "Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is.",

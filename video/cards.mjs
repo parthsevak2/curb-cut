@@ -90,8 +90,8 @@ const CARDS = [
    foot:'We don\u2019t count an undecided check as a pass.'}],
 
  ['c10', {dark:true, kicker:'THE OFFER',
-   lines:['Free for the first ten.'], big:82,
-   sub:['Name one owner. Answer in five working days.',
+   lines:['Open to any organisation.'], big:82,
+   sub:['MIT licence. Runs in your own org. Costs nothing.',
         'Publish what you said yes to. Let a disabled employee test it first.'],
    foot:'Sixty-one in a hundred cost nothing. After that, nobody can say it was the money.'}],
 

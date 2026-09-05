@@ -36,7 +36,7 @@ slide aloud to somebody who is reading it is how a film loses them.
 | 3:52 | 4:07 | screen | If she signs instead of typing, a person interprets it, never a machine. And the video says so, out loud, to anyone who can't watch it. |
 | 4:07 | 4:19 | screen | One side of this conversation got an agent. The other side got a form. We built the other side one too. |
 | 4:18 | 4:32 | card | We ran Salesforce's own accessibility and responsible AI checks on it, and we say what they couldn't decide instead of counting it as a pass. |
-| 4:31 | 4:45 | card | If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days. |
+| 4:31 | 4:45 | card | The code is open. Any organisation can run it in its own org, at no cost. What it needs is one person who will answer. |
 | 4:45 | 4:59 | card | Nobody should have to prove anything to get an hour, or a chair. They only have to be able to ask. That's all this is. |
 
 ---
@@ -191,9 +191,9 @@ Silence.
 
 ### 4:31  c10.png
 
-> If this wins, it's free for the first ten organisations that will name one person to own it and answer within five working days.
+> The code is open. Any organisation can run it in its own org, at no cost. What it needs is one person who will answer.
 
-24 words, 14s hold.
+25 words, 14s hold.
 
 ### 4:45  c11.png
 
@@ -205,4 +205,4 @@ Silence.
 
 ---
 
-514 words across 4:59, which is 103 words per minute counting the silences.
+515 words across 4:59, which is 103 words per minute counting the silences.

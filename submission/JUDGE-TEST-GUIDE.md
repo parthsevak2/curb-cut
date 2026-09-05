@@ -143,7 +143,7 @@ A suite that cannot fail proves nothing about the code it passes.
 
 ## What we would rather you found than we hid
 
-- No screen reader user has tested this. Machine-verified is not user-verified.
+- No screen reader user has tested this. A script checked all of it; a person who uses a screen reader every day has not. What a screen reader is handed at each step of /ask is written down, step by step, in docs/SCREEN-READER-WALK.md, and it says on its first line that it is not a person.
 - The agent's narration is nondeterministic: 21 of 23 adversarial assertions,
   with one failure that alternates between runs.
 - The console has had less accessibility attention than the public site, because
