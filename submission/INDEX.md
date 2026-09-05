@@ -59,7 +59,7 @@ converts uploads to Google types and a converted deck is not the deck.
 - `VIDEO-SCRIPT.md`, 2:43, shot by shot, three marked silences.
 - `RUN-REQUIRED-TOOLS.md`, the two tools that gate the submission. One is now
   done with a real run; one still needs a message sent.
-- `Curb-Cut.pptx`, 32 slides in six sections, editable, speaker notes throughout.
+- `Curb-Cut.pptx`, 33 slides in six sections, editable, speaker notes throughout.
 - `docs/A11Y-SA11Y-REPORT.md`, the Salesforce Sa11y audit: what it passed, what
   it could not decide, and the two defects it found.
 
