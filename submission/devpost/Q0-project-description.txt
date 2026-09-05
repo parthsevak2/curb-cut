@@ -6,28 +6,28 @@ Thirty in a hundred white-collar workers have a disability. Three tell their emp
 
 The form is the barrier. To get help you must find the policy, learn its words, hold a work login, and explain your body, in writing, to the person who decides what you're worth. For a contractor, a temp, someone who is Deaf, someone whose first language isn't English, or someone with a condition nobody can see, that form is a door that doesn't open.
 
-The money was never the barrier. Of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024, 61% said the accommodation cost them nothing. The asking was the barrier.
+The money was never the barrier. Of the 1,425 employers who gave the Job Accommodation Network cost figures through 2024, 61% said the accommodation cost them nothing. The asking was.
 
 OUR SOLUTION
 
-Curb Cut turns asking into one sentence. You say what's hard, in your own words. You never have to say why. It shows you what other people in your situation have asked for, from a library of real accommodations that each carry the source they came from and what they usually cost. Knowing is allowed, and asking is optional. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes. A hedge is refused, and a test proves the refusal.
+Curb Cut turns asking into one sentence. You say what's hard, in your own words, and you never have to say why. It shows you what other people in your situation have asked for, from a library of real accommodations, each with its source and what it usually costs. Knowing is allowed, and asking is optional. If you do want to ask, it writes the request in your words, reads it back, and sends nothing until you clearly say yes.
 
-There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there: 61 fields across 9 objects, and a build check that fails if anyone adds one. If you name a condition anyway, it's stripped before anything is stored, and you're told so in the same reply. Nobody is ever routed to a telephone.
+There's no field for a diagnosis anywhere. It isn't encrypted or hidden behind a permission. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored, and you're told so.
 
-Six doors, one router, all live today. Behind every door is the same short path. An Agentforce agent, written in Agent Script, decides what to say. A deterministic layer decides what may be true: it ranks a sourced library, strips any condition before storage, and holds the consent gate. So the first answer is the same whichever door you come through, and the parts that keep somebody safe never depend on a model remembering a rule.
-- Web, with no login and no account, because the people who need this most are the ones outside the system.
-- Text CURB CUT to +1 276 495 9311, because a basic phone with no data plan is still a phone.
+Six doors, one path, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So the answer is the same whichever door you use, and the parts that keep somebody safe never depend on a model remembering a rule.
+- Web, no login, no account, for the people outside the system.
+- Text CURB CUT to +1 276 495 9311, because a basic phone is still a phone.
 - Voice on the same number, for anyone who can't type. It never rings you back.
-- Email, for the person who only has a personal address.
-- Slack, as a private message only. It tells you up front that Slack belongs to your employer, names the two doors that don't, and never posts to a channel or sends a request from there.
-- Any assistant you already use, through MCP tools that can find and draft but can never send.
+- Email, for the person with only a personal address.
+- Slack, private message only. It says up front that Slack belongs to your employer, and never posts to a channel.
+- Any assistant you already use, through tools that can find and draft but never send.
 
-Ask once, not forever. A standing preference, in your words, travels ahead of you to the people you choose. WHO shows you everyone who has seen it, and OFF withdraws it with no reason asked.
+Ask once, not forever. A standing preference in your words travels ahead of you to the people you choose. WHO shows you who has seen it. OFF withdraws it, no reason asked.
 
-Checked, not claimed: 137 Apex tests, 508 structural invariants, 333 live accessibility checks, 131 Sa11y checks (Salesforce's own matcher), 21 responsible-AI checks against Salesforce's five guidelines, a keyboard walk with real Tab presses, and a 21-of-23 adversarial score we report rather than average away.
+It may look like a heavy build. It isn't. Agentforce made the ambitious part ordinary. What it took was intention: building for the person on the wrong side of the form, and saying no to a diagnosis field even when it was the easy default.
 
-It may look like a heavy build. It isn't. Agentforce made the ambitious part ordinary: the agent, the grounded actions, the guardrails, one door every channel shares, and a public site that needs no login. What it took was intention: the willingness to build for the person on the wrong side of the form, and to say no to a diagnosis field even when it was the easy default.
+We tested it the way we'd want to be tested, and wrote down what failed as carefully as what passed. The four answers below carry the numbers.
 
-This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see. It also ships a console for the human on the other end, because a promise that a real person will pick this up is worth nothing unless that person has somewhere to stand.
+This is for the colleague who never asks, the contractor with no HR to go to, and the person whose condition nobody can see.
 
 Try it now, no login: orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask
