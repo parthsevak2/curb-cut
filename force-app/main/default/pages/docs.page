@@ -138,13 +138,13 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 </ul></section>
 <section aria-labelledby="doc-2"><h2 id="doc-2">What a screen reader is handed</h2><p class="mute">A scripted walk of the ask page, step by step, and what it cannot tell you. Source: <code>docs/SCREEN-READER-WALK.md</code></p><h3>What a screen reader is handed on /ask, step by step</h3>
 <p>This transcript was produced by a script, not by a person who uses a screen reader. It reads the same accessibility tree that NVDA, JAWS and VoiceOver read, drives the page with real key and click events, and records what a screen reader would be given at each step: where focus lands, what the live regions announce, and the order things are read. It cannot tell you what it is like to use. One session with a daily screen-reader user still comes before the next five features.</p>
-<p>Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 20:16 UTC.</p>
+<p>Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 21:29 UTC.</p>
 <h4>Step 0: the page loads</h4>
 <ul>
 <li>Focus is on: body</li>
 <li>Live regions announce: nothing new</li>
 </ul>
-<p>Reading order, on load (45 of 56 nodes):</p>
+<p>Reading order, on load (45 of 58 nodes):</p>
 <ul>
 <li>link "Skip to the main content"</li>
 <li>main (no name)</li>
@@ -165,6 +165,7 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>link "Privacy"</li>
 <li>link "Terms"</li>
 <li>link "Messaging"</li>
+<li>link "Docs"</li>
 <li>paragraph (no name)</li>
 <li>heading "Tell me what's hard right now." level 1</li>
 <li>paragraph (no name)</li>
@@ -190,7 +191,6 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>DisclosureTriangle "Something that'll still be true next month? Say it once, instead of to every new manager"</li>
 <li>strong (no name)</li>
 <li>link "parth.sevak2@gmail.com"</li>
-<li>listitem (no name) level 1</li>
 </ul>
 <h4>Step 1: six presses of Tab from the top</h4>
 <ol>
@@ -206,7 +206,7 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>Focus is on: h2#resultsHeading "What other people have asked for"</li>
 <li>Live regions announce: "Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional."</li>
 </ul>
-<p>Reading order, the options that arrived (30 of 61 nodes):</p>
+<p>Reading order, the options that arrived (30 of 63 nodes):</p>
 <ul>
 <li>link "Skip to the main content"</li>
 <li>main (no name)</li>
@@ -228,6 +228,7 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>link "Privacy"</li>
 <li>link "Terms"</li>
 <li>link "Messaging"</li>
+<li>link "Docs"</li>
 <li>paragraph (no name)</li>
 <li>heading "Tell me what's hard right now." level 1</li>
 <li>paragraph (no name)</li>
@@ -237,14 +238,13 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>listitem (no name) level 1</li>
 <li>heading "Say what's hard" level 2</li>
 <li>form (no name)</li>
-<li>status (no name)</li>
 </ul>
 <h4>Step 3: after pressing "Help me ask for one of these"</h4>
 <ul>
 <li>Focus is on: h2#draftHeading "Read this over"</li>
 <li>Live regions announce: "Read this over. Nothing is sent until you choose to send it."</li>
 </ul>
-<p>Reading order, the draft (25 of 66 nodes):</p>
+<p>Reading order, the draft (25 of 68 nodes):</p>
 <ul>
 <li>link "Skip to the main content"</li>
 <li>main (no name)</li>
@@ -267,10 +267,10 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>link "Privacy"</li>
 <li>link "Terms"</li>
 <li>link "Messaging"</li>
+<li>link "Docs"</li>
 <li>paragraph (no name)</li>
 <li>heading "Tell me what's hard right now." level 1</li>
 <li>paragraph (no name)</li>
-<li>listitem (no name) level 1</li>
 </ul>
 <h4>What this transcript can and cannot tell you</h4>
 <ul>
@@ -698,7 +698,40 @@ HONEST GAPS
   · Text and voice depend on a relay that runs beside the org, and today
     that relay runs on a laptop. When it is down, the number goes quiet.
   · The internal agent does not reliably call its own library; the
-    grounded internal surface is the console component, not the agent.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      508 checks, ~1s
+    grounded internal surface is the console component, not the agent.
+
+OUTCOME MEASURES FOR A PILOT
+  What we would count, and what we would refuse to count.
+  · Requests started against requests sent. A high share of people who
+    stop at "what could I ask for" is a success, not a leak. Knowing
+    was the point.
+  · Time from "send" to the first human reply, against the target the
+    desk committed to, reported to the person and not only to the desk.
+  · Share of requests that arrived with no identity attached, and how
+    many were later claimed. The claim step is where a person decides
+    the cost is worth it.
+  · WHO lookups and OFF revocations per saved preference. Each one is a
+    person checking that the promise held.
+  · The count of diagnosis or condition fields. The build keeps it at
+    zero; the pilot reports the number anyway so it can be seen to stay
+    there.
+  Never counted: who the person is, what they have, or which manager
+  said no.
+
+PRIOR ART, AND WHAT IS DIFFERENT HERE
+  · The Job Accommodation Network (askjan.org) is the best public
+    library of accommodations and the source this one is built on. It
+    answers "what exists" for a person who already knows to look.
+  · HR service platforms (ServiceNow, Workday, and employee service on
+    Salesforce itself) handle accommodation as a case type. The worker
+    is the requester; the system belongs to the employer.
+  · Specialist accommodation tools, Disclo for example, manage the
+    employer's process and hold the disclosure on the employer's side.
+  Curb Cut starts from the other side. The person is the principal,
+  there is no account, the diagnosis field does not exist, and the
+  employer sees a request in the person's words rather than a record
+  about them. The agent is the same technology the employer's side
+  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      508 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      137 tests
   python3 tests/a11y_audit.py                      331 checks, live pages
   npm run test:a11y                                131 Sa11y checks, 12 states
@@ -906,7 +939,9 @@ from the deployed org or the test run that produced it.</pre></section>
 <h3>D12. The 100-rule preset, and one rule removed in the open</h3>
 <p>Sa11y's matcher defaults to a 64-rule <code>base</code> preset. We assert against the 100-rule <code>extended</code> preset instead, and remove exactly one rule: <code>region</code>, which carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks around it. It is removed in one file, with the reason written beside it. <strong>Cost:</strong> one rule genuinely not enforced at component level. <strong>Gain:</strong> the difference between a suite that is quiet because the code is right and one that is quiet because the rule was never run. For the same reason <code>incomplete</code> results are reported as undecided rather than counted as passes.</p>
 <h3>D13. A disclosure is only a disclosure if somebody can be shown it</h3>
-<p>The ledger object shipped in week one and <code>WHO</code> read from it, but nothing ever wrote a row. No console view, component or flow showed a standing preference to anyone, so "travels ahead of you" meant save and revoke, and <code>WHO</code> could only ever answer "Nobody has been shown it yet". True, and useless. Now <code>CurbCutShow</code> is the one place a preference is shown. The viewer says who they are reading as, and we show only what the person chose for that audience. The ledger row is written before a word is returned; if the write fails, nothing is shown. The person can read the ledger back with <code>WHO</code> and get a name and a date. <strong>Cost:</strong> a viewer can name an audience they are not. We record what they claimed, next to their real name, so the person can see it and ask. <strong>Gain:</strong> the feature this project is named for exists, and every showing is something the person can find out about. An invariant now fails the build if no production class writes the ledger, so it cannot quietly go back to being a promise.</p></section>
+<p>The ledger object shipped in week one and <code>WHO</code> read from it, but nothing ever wrote a row. No console view, component or flow showed a standing preference to anyone, so "travels ahead of you" meant save and revoke, and <code>WHO</code> could only ever answer "Nobody has been shown it yet". True, and useless. Now <code>CurbCutShow</code> is the one place a preference is shown. The viewer says who they are reading as, and we show only what the person chose for that audience. The ledger row is written before a word is returned; if the write fails, nothing is shown. The person can read the ledger back with <code>WHO</code> and get a name and a date. <strong>Cost:</strong> a viewer can name an audience they are not. We record what they claimed, next to their real name, so the person can see it and ask. <strong>Gain:</strong> the feature this project is named for exists, and every showing is something the person can find out about. An invariant now fails the build if no production class writes the ledger, so it cannot quietly go back to being a promise.</p>
+<h3>D14. The first text is answered by the door, not the model</h3>
+<p>The relay used to hand every text straight to the agent, and the first thing many people sent was a shout, "CURB CUT", or one hard sentence about the lights. The agent answered the shout with a question and the sentence with nothing it could ground. Now the relay puts each message through the same Apex door the web page uses. If the library has options, the reply is a numbered list, and a bare digit is turned into a sentence in the person's words and handed to the agent to draft. Only when the door has nothing does the agent get a free turn. <strong>Cost:</strong> the text channel is less conversational than a chat window, and a person who wants to talk it through has to say so. <strong>Gain:</strong> the first reply on a basic phone is grounded every time, costs no model call, and reads the same as what the console shows the desk.</p></section>
 </div>
 </c:CurbCutShell>
 </body>

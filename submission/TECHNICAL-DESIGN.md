@@ -519,6 +519,41 @@ HONEST GAPS
   · The internal agent does not reliably call its own library; the
     grounded internal surface is the console component, not the agent.
 
+OUTCOME MEASURES FOR A PILOT
+  What we would count, and what we would refuse to count.
+  · Requests started against requests sent. A high share of people who
+    stop at "what could I ask for" is a success, not a leak. Knowing
+    was the point.
+  · Time from "send" to the first human reply, against the target the
+    desk committed to, reported to the person and not only to the desk.
+  · Share of requests that arrived with no identity attached, and how
+    many were later claimed. The claim step is where a person decides
+    the cost is worth it.
+  · WHO lookups and OFF revocations per saved preference. Each one is a
+    person checking that the promise held.
+  · The count of diagnosis or condition fields. The build keeps it at
+    zero; the pilot reports the number anyway so it can be seen to stay
+    there.
+  Never counted: who the person is, what they have, or which manager
+  said no.
+
+PRIOR ART, AND WHAT IS DIFFERENT HERE
+  · The Job Accommodation Network (askjan.org) is the best public
+    library of accommodations and the source this one is built on. It
+    answers "what exists" for a person who already knows to look.
+  · HR service platforms (ServiceNow, Workday, and employee service on
+    Salesforce itself) handle accommodation as a case type. The worker
+    is the requester; the system belongs to the employer.
+  · Specialist accommodation tools, Disclo for example, manage the
+    employer's process and hold the disclosure on the employer's side.
+  Curb Cut starts from the other side. The person is the principal,
+  there is no account, the diagnosis field does not exist, and the
+  employer sees a request in the person's words rather than a record
+  about them. The agent is the same technology the employer's side
+  already runs. The difference is who it works for.
+
+
+
 
 ─────────────────────────────────────────────────────────────────────
 14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT
