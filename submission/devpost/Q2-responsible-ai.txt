@@ -1,12 +1,12 @@
 This check is for the people who volunteer a condition while asking for an accommodation, and for the managers later shown their standing preferences. We looked for a Salesforce tool published as "RAI Self Check Skill" in the provisioned org, on AgentExchange and among the Salesforce DX MCP server's fifteen toolsets, and couldn't find one. Rather than imply we ran one, we built the check ourselves against the published guidelines and say so.
 
-So we ran the same exercise against Salesforce's five published guidelines for responsible agentic AI, as a harness anyone can run: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided is never counted as a pass. --selftest breaks five checks on purpose and asserts each goes red.
+So we ran the same exercise against Salesforce's five published guidelines for responsible agentic AI, as a harness anyone can run: python3 tests/rai_self_check.py. 21 checks across Accuracy, Safety, Honesty, Empowerment and Sustainability. 19 pass, 0 fail, 2 undecided. Undecided never counts as a pass. --selftest breaks five checks on purpose and asserts each goes red.
 
 WHAT IT FOUND ON THE FIRST RUN
 
 The seed file could no longer rebuild the deployed library. The agent may only name accommodations that a grounded Apex action returned from a sourced library. The org held 28 rows. The seed in the repository held 24. The four missing rows were the lighting ones added to fix an earlier bias defect, where "I get migraines from the office lighting" returned "special chair or back support" because the word office appeared in that summary.
 
-So anyone deploying from our repository would have silently reintroduced the defect we fixed, and our claims about that fix would have been false on their org. The seed is regenerated from the org, and a check now compares the two on every run.
+So anyone deploying from our repository would have silently reintroduced the defect we fixed, and our claims about that fix would have been false on their org. The seed is now regenerated from the org, and a check compares the two on every run.
 
 A FINDING WE WITHDREW
 
