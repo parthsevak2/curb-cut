@@ -19,7 +19,7 @@
     details.fold > summary::-webkit-details-marker { display: none; }
     details.fold > summary::before { content: "+"; font-family: ui-monospace, monospace; font-size: 1.2rem; line-height: 1; width: 1.1rem; text-align: center; }
     details.fold[open] > summary::before { content: "\2013"; }
-    details.fold > summary:focus-visible { outline: 3px solid #0B57C7; outline-offset: 3px; box-shadow: 0 0 0 3px var(--ground, #F5F3ED); }
+    details.fold > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--ground, #F5F3ED); }
     details.fold > .foldBody { padding: 1rem .2rem 0; }
     .copyRow { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; margin-top: .5rem; }
   </style>
@@ -167,7 +167,7 @@
                disclosure on and not off. -->
           <div id="codeBox" class="codeBox">
             <h3 class="codeLabel" id="codeHeading">Your code</h3>
-            <p id="codeValue" class="codeValue"></p>
+            <p id="codeValue" class="codeValue"><span id="codeShown" aria-hidden="true"></span><span id="codeSpoken" class="vh"></span></p>
             <div class="copyRow">
               <button type="button" id="copyCode" class="btn">Copy the code</button>
             </div>
@@ -390,10 +390,12 @@
           stBox.textContent = text;
           var code = r.claimCode || '';
           var cv = document.getElementById('codeValue');
-          cv.textContent = code;
           /* A screen reader reads a six letter code as a word. Letter by letter is
-             what somebody needs in order to write it down. */
-          cv.setAttribute('aria-label', 'Your code, letter by letter: ' + code.split('').join(' '));
+             what somebody needs in order to write it down. An aria-label on a
+             paragraph is ignored by NVDA, JAWS and VoiceOver, so the spoken form
+             is real text, visually hidden, beside the visible one. */
+          document.getElementById('codeShown').textContent = code;
+          document.getElementById('codeSpoken').textContent = 'Your code, letter by letter: ' + code.split('').join(', ') + '.';
           show(stSaved);
           /* Every other async update moves focus to its heading. This one set the
              tabindex and then never called focus(), so the single moment that
@@ -407,14 +409,14 @@
   });
 
   document.getElementById('copyCode').addEventListener('click', function () {
-    var code = document.getElementById('codeValue').textContent || '';
+    var code = document.getElementById('codeShown').textContent || '';
     if (!code) { return; }
     var done = function () { saySt('Copied. Your code is ' + code.split('').join(' ') + '.'); };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(code).then(done, function () { fallback(); });
     } else { fallback(); }
     function fallback() {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('codeValue'));
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('codeShown'));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
       try { document.execCommand('copy'); done(); } catch (e) { saySt('Select the code and copy it yourself.'); }
     }

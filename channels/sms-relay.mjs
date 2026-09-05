@@ -80,7 +80,7 @@ const STOP_REPLY =
   'Reply START if you ever want to come back. Nothing about you is kept.';
 
 const FIRST_REPLY =
-  'Curb Cut here. Tell me what is hard at work right now, in your own words. ' +
+  'Curb Cut here. I am automated, not a person; reply HUMAN for one. Tell me what is hard at work right now, in your own words. ' +
   'You do not need an account, and you never have to say what condition you have. ' +
   'I will show you what other people have asked for, and only write a request if you want one.';
 const START_REPLY =
@@ -265,7 +265,7 @@ const server = createServer((req, res) => {
         // First leg of the call, or nothing was understood.
         console.log(`[voice] ${handle.slice(0,8)}… opening`);
         return res.end(gather(
-          'Hi. I can help you work out what might make work easier, and help you ask for it. ' +
+          'This is Curb Cut, an automated line. Say human at any time to reach a person. I can help you work out what might make work easier, and help you ask for it. ' +
           'You do not have to tell me your name. You do not have to tell me what condition you have. ' +
           'I will never ask. Tell me what is hard right now.'));
       }

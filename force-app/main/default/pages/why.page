@@ -232,7 +232,7 @@
       Every figure on this page is recorded with its source, its date and its
       denominator, including the ones that weaken the argument. That file is in
       the repository as <span class="kw">docs/EVIDENCE.md</span>, and it exists
-      because a claim you can't check isn't evidence, it's decoration.
+      because every claim on this page links to the code or the run that backs it.
     </p>
     <div class="cta">
       <a class="btn primary" href="/ask">Try it <span class="arrow">&rarr;</span></a>

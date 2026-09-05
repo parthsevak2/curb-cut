@@ -1,0 +1,874 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"
+           title="Documentation | Curb Cut" cache="true" expires="300">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Curb Cut documentation for judges and adopters: the README, the judge guide, the technical design, the evidence, the audience, the accessibility audit and the decision log, published from the repository."/>
+  <title>Documentation | Curb Cut</title>
+  <style>
+    .docs section { margin: 2.5rem 0; }
+    .docs pre { white-space: pre-wrap; overflow-x: auto; padding: 1rem; border: 1px solid var(--line, #C6CACE); border-radius: 8px; font-size: .92rem; line-height: 1.45; }
+    .docs table { border-collapse: collapse; width: 100%; margin: 1rem 0; display: block; overflow-x: auto; }
+    .docs th, .docs td { text-align: left; vertical-align: top; padding: .45rem .6rem; border-bottom: 1px solid var(--line, #C6CACE); }
+    .docs blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--line, #C6CACE); }
+    .docs h3 { margin-top: 2rem; } .docs h4 { margin-top: 1.4rem; }
+    .docs .mute { color: var(--mute, #5B6167); }
+    .docs nav ol { columns: 2; gap: 2rem; }
+  </style>
+</head>
+<body>
+<c:CurbCutShell pageTitle="Documentation" current="docs"
+  eyebrow="For judges and adopters"
+  heading="The documentation, published from the repository."
+  lede="Seven documents, exactly as they sit in the code, so nothing here can drift from what is deployed.">
+<div class="docs">
+<nav aria-label="Documents on this page"><ol><li><a href="#doc-0">README</a></li><li><a href="#doc-1">Test it yourself</a></li><li><a href="#doc-2">Technical design</a></li><li><a href="#doc-3">Evidence</a></li><li><a href="#doc-4">Who this is for</a></li><li><a href="#doc-5">Accessibility audit</a></li><li><a href="#doc-6">Decisions</a></li></ol></nav><section aria-labelledby="doc-0"><h2 id="doc-0">README</h2><p class="mute">What this is, what is live, how to verify it. Source: <code>README.md</code></p><h2>Curb Cut</h2>
+<p><strong>The process for requesting a disability accommodation is itself an accessibility barrier.</strong></p>
+<p>To get help you must first navigate a system designed by and for people without your disability. Find the policy. Learn its vocabulary. Hold a corporate login. Complete a form. And disclose something you may be afraid to disclose, to a stranger, in writing, in a language that may not be your first.</p>
+<p>The money was never the barrier.</p>
+<table><thead><tr><th>Evidence</th><th>Source</th></tr></thead><tbody><tr><td><strong>61 of every 100</strong> accommodations cost the employer nothing. Median one-time cost of the rest: <strong>$300</strong>.</td><td><a href="https://askjan.org/topics/costs.cfm">JAN employer survey</a>, 5,406 employers, Jan 2019 to Dec 2024</td></tr><tr><td><strong>More than a third</strong> of employed Canadians with a disability had an accommodation need <strong>go unmet</strong> in 2022.</td><td><a href="https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity">Statistics Canada</a>, Canadian Survey on Disability</td></tr><tr><td>The <strong>GC Workplace Accessibility Passport</strong> already implements "ask once, not forever", and only for federal public servants.</td><td><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html">Government of Canada</a></td></tr></tbody></table>
+<p>Curb Cut is an Agentforce agent whose principal is <strong>the worker, not the employer</strong>.</p>
+<hr/>
+<h3>Live now</h3>
+<table><thead><tr><th>Surface</th><th>Address</th><th>State</th></tr></thead><tbody><tr><td>Web</td><td>https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut</td><td>live</td></tr><tr><td>Ask (full journey, no phone)</td><td><code>/curbcut/ask</code></td><td>live</td></tr><tr><td>Privacy</td><td><code>/curbcut/privacy</code></td><td>live</td></tr><tr><td>Terms</td><td><code>/curbcut/terms</code></td><td>live</td></tr><tr><td>SMS</td><td>+1 276 495 9311</td><td>live, through a relay we run beside the org</td></tr><tr><td>Voice</td><td>+1 276 495 9311</td><td>built, speech in and out</td></tr><tr><td>Email</td><td>inbound service <code>CurbCutInbound</code>, address in Setup → Email Services</td><td>live</td></tr><tr><td>Slack</td><td><code>node channels/slack-app.mjs</code>, Socket Mode, DM only, never sends</td><td>live in a real workspace; manifest in <code>channels/slack-manifest.json</code></td></tr><tr><td>Agent</td><td><code>Curb_Cut</code> v7, <code>Curb_Cut_Desk</code> v5</td><td>both active</td></tr><tr><td>Console (internal)</td><td><code>/lightning/app/Curb_Cut_Console</code></td><td>live</td></tr><tr><td>Why now</td><td><code>/curbcut/why</code></td><td>live</td></tr><tr><td>Messaging programme</td><td><code>/curbcut/messaging</code></td><td>live</td></tr><tr><td>MCP server</td><td><code>node channels/mcp-server.mjs</code></td><td>3 tools, none of which can send</td></tr><tr><td>Any relay or assistant</td><td><code>POST /services/apexrest/curbcut/v1/message/</code></td><td>one door every channel above shares</td></tr></tbody></table>
+<p>The console is the half of this that nobody demos. Every promise the assistant makes about a person reaching a human being is worthless unless a human being has somewhere to stand. <code>Human_Handoff__c</code> was creating records that said "a person is picking this up" with no surface for that person.</p>
+<table><thead><tr><th>Console surface</th><th>What it is for</th></tr></thead><tbody><tr><td><strong>On Duty</strong> (app home)</td><td>Three queues in the order they should be worked, with standing orders above them</td></tr><tr><td>Waiting for a person</td><td>Someone asked for a human and is currently getting silence</td></tr><tr><td>Awaiting a decision</td><td>Approved requests an employer has not answered, nearest deadline first</td></tr><tr><td>Needs an interpreter</td><td>Signed video, waiting on a person, never machine translated</td></tr><tr><td>Curb Cut Overview (dashboard)</td><td>Where the system is failing people, in five panels</td></tr><tr><td>Record feeds</td><td>Two people often work one request, so the conversation lives on the record</td></tr></tbody></table>
+<p>Nothing in the console shows a diagnosis, because there is no field for one. An operator who is asked what a person has can only answer that nobody knows and nobody can find out.</p>
+<h3>The four principles</h3>
+<ol>
+<li><strong>The agent's principal is the worker.</strong> Nothing leaves that the person did not personally approve.</li>
+<li><strong>No channel is the real one.</strong> Text, voice, email and web are equal front doors.</li>
+<li><strong>Ask before you disclose.</strong> A real answer without identifying yourself or naming anything about your body.</li>
+<li><strong>Ask once, not forever.</strong> Standing preferences travel ahead of you.</li>
+</ol>
+<h3>What is deliberately not built</h3>
+<ul>
+<li><strong>No automated sign language.</strong> ASL is a complete language; recognition is unsolved. Signed video routes to a human, with immediate text acknowledgement so nobody waits in silence.</li>
+<li><strong>No diagnosis field.</strong> It isn't encrypted or restricted. It's absent. CI fails the build if anyone adds one.</li>
+<li><strong>No phone fallback, ever.</strong> <code>Reachable_By__c</code> is hard-coded to message.</li>
+<li><strong>No inference.</strong> Nothing is profiled or predicted. Every signal is one the person set.</li>
+</ul>
+<h3>Verification</h3>
+<p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
+<pre>137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
+508 structural invariants      python3 tests/invariants.py            ~1s, no org
+331 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
+ 34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
+ 34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
+ 21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
+ 28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
+ 16 reading-level checks       python3 tests/reading_level_audit.py
+ 54 link and copy checks       python3 tests/link_and_copy_audit.py
+ 11 consistency checks         python3 tests/submission_consistency.py
+21/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
+<p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial score is 21 of 23 on purpose: one assertion fails on every run and one alternates, and both are reported rather than averaged away.</p>
+<h3>Repository map</h3>
+<table><thead><tr><th>Path</th><th>What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>18 Apex classes + 14 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above</td></tr><tr><td><code>deck/</code></td><td>the deck as source; <code>submission/Curb-Cut.pptx</code> is generated from it</td></tr><tr><td><code>video/</code></td><td>the demo film as source: screencast recorder, caption cards, one scene table</td></tr><tr><td><code>submission/</code></td><td>every Devpost field paste-ready, the judge test guide, the technical design</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table>
+<p>Start with [<code>docs/ARCHITECTURE.md</code>](docs/ARCHITECTURE.md), then [<code>CRITIQUE.md</code>](CRITIQUE.md), which is where the honest list of what is still weak lives.</p>
+<h3>Documentation</h3>
+<table><thead><tr><th>Document</th><th>Purpose</th></tr></thead><tbody><tr><td>[<code>docs/ARCHITECTURE.md</code>](docs/ARCHITECTURE.md)</td><td>How it fits together, with diagrams</td></tr><tr><td>[<code>docs/BRD.md</code>](docs/BRD.md)</td><td>Business requirements and traceability</td></tr><tr><td>[<code>docs/ROADMAP.md</code>](docs/ROADMAP.md)</td><td>What is next, and what was rejected</td></tr><tr><td>[<code>docs/DECISIONS.md</code>](docs/DECISIONS.md)</td><td>Every significant call and why</td></tr><tr><td>[<code>docs/EVIDENCE.md</code>](docs/EVIDENCE.md)</td><td>Every public figure, with source, denominator and caveat</td></tr><tr><td>[<code>docs/AGENT-INTERFACES.md</code>](docs/AGENT-INTERFACES.md)</td><td>Headless, MCP, agent-to-agent, and the profile we will not build</td></tr><tr><td>[<code>CRITIQUE.md</code>](CRITIQUE.md)</td><td>What is still wrong</td></tr><tr><td>[<code>SPEC-CONFORMANCE.md</code>](SPEC-CONFORMANCE.md)</td><td>Build spec conformance</td></tr><tr><td>[<code>FINDINGS.md</code>](FINDINGS.md)</td><td>Adversarial run results</td></tr><tr><td>[<code>CI.md</code>](CI.md)</td><td>Pipeline and invariants</td></tr><tr><td>[<code>DEPLOY.md</code>](DEPLOY.md)</td><td>Deployment</td></tr><tr><td>[<code>TESTING.md</code>](TESTING.md)</td><td>Test strategy</td></tr></tbody></table>
+<hr/>
+<p>Built by Parth Sevak. Welland, Ontario, Canada. Agentforce for Good, Dreamforce 2026 · Builder Track · Abilityforce.</p></section>
+<section aria-labelledby="doc-1"><h2 id="doc-1">Test it yourself</h2><p class="mute">Every channel, end to end, with what came back. Source: <code>submission/JUDGE-TEST-GUIDE.md</code></p><h2>Test it yourself</h2>
+<p>Every claim below was run against the live org before it was written here. Where something cannot be tested from outside, this page says so instead of implying otherwise.</p>
+<p><strong>The one thing worth doing first, if you only do one:</strong> open <a href="https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask">https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask</a> and type one sentence about something that is hard at work. No login, no account, no name. That is the whole product.</p>
+<hr/>
+<h3>What works, and how you check it</h3>
+<table><thead><tr><th>Door</th><th>Status</th><th>You can test it</th></tr></thead><tbody><tr><td>Web, anonymous</td><td><strong>Live</strong></td><td>Yes, right now, no credential</td></tr><tr><td>Web on a phone</td><td><strong>Live</strong></td><td>Yes, same link</td></tr><tr><td>Any AI assistant, MCP, or a relay</td><td><strong>Live</strong></td><td>Yes, with org credentials</td></tr><tr><td>Voice</td><td><strong>Live</strong> on a real number</td><td>Yes, by ringing it</td></tr><tr><td>Text message</td><td><strong>Live</strong></td><td>Yes, text CURB CUT to the number</td></tr><tr><td>Slack</td><td>Live in one workspace, DM only, never sends</td><td>Through the shared door, below</td></tr><tr><td>Inbound email</td><td>Built, service active</td><td>Needs the address from Setup</td></tr><tr><td>Operator console</td><td>Live</td><td>Yes, with org credentials</td></tr></tbody></table>
+<hr/>
+<h3>1. The web, which needs nothing from you</h3>
+<ol>
+<li>Open <a href="https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask">https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask</a></li>
+<li>Press one of the grey buttons, for example <strong>My back hurts by the afternoon</strong>. Or type your own sentence. You never say <em>why</em> it is hard.</li>
+<li>Press <strong>Show me what I could ask for</strong>.</li>
+<li>Press <strong>Help me ask for one of these</strong>.</li>
+<li>Read the draft. Press <strong>Yes, send this</strong>, or <strong>Delete it</strong>.</li>
+</ol>
+<p><strong>What you should see at step 4.</strong> The request is written in the words you used, and contains this line:</p>
+<blockquote><p>I am not sharing a diagnosis, and I am not required to. This is about what I need to do my job.</p></blockquote>
+<p><strong>What you should see at step 5.</strong> A date, and the sentence <em>You can stop this any time.</em></p>
+<p><strong>Two things worth trying on purpose.</strong> Press <strong>A+</strong> and <strong>Contrast</strong> at the top of any page. Then try the whole flow with the keyboard only: Tab, and Enter or Space. Nothing needs a mouse.</p>
+<h3>2. The same thing on a phone</h3>
+<p>Open the same link on a phone. It is the same page, not a cut-down one. Two of the six doors, voice and text, work on a handset with no internet at all.</p>
+<h3>3. Any AI assistant, a relay, or your own script</h3>
+<p>Every channel that is not the web page shares one authenticated Apex endpoint, so a new channel inherits the whole contract: the control words, the grounded library, the refusal to send without a yes, and the delivery ledger.</p>
+<pre>sf org login web --alias curbcut          # or use the credentials supplied
+TOKEN=$(sf org display -o curbcut --json | python3 -c "import json,sys;print(json.load(sys.stdin)['result']['accessToken'])")
+URL=$(sf org display -o curbcut --json | python3 -c "import json,sys;print(json.load(sys.stdin)['result']['instanceUrl'])")
+
+curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"channel":"External","text":"My back hurts by the afternoon","handle":"+15550000001"}'</pre>
+<p>Three exchanges worth running, and what came back when they were last run:</p>
+<p><strong>A grounded answer, not a generated one.</strong> <code>{"channel":"External","text":"My back hurts by the afternoon"}</code></p>
+<blockquote><p>Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed, and asking is optional. <code>- Special chair or back support</code></p></blockquote>
+<p><strong>Asking for a person.</strong> <code>{"channel":"SMS","text":"HUMAN"}</code></p>
+<blockquote><p>the access team is picking this up. They will reply here, on this same channel. You will not have to explain it again, and nobody will ring you.</p></blockquote>
+<p><strong>Withdrawing a disclosure.</strong> <code>{"channel":"Email","text":"OFF"}</code></p>
+<blockquote><p>I can turn that off. Send OFF and your six letter code, like OFF 4KQ7MT. The code was in the message where you set it up. I will not ask why.</p></blockquote>
+<p>Change <code>channel</code> to <code>Slack</code>, <code>Email</code>, <code>SMS</code>, <code>Web</code> or <code>External</code>. The routing is the same for all of them, which is the point: <code>OFF</code> cannot mean one thing on a phone and something else in an inbox.</p>
+<h3>4. Voice</h3>
+<p>Ring <strong>+1 276 495 9311</strong> and say what is hard. Speech in and speech out.</p>
+<p>The same number takes text messages. Text <strong>CURB CUT</strong> to it and say what is hard. Both text and voice answer through a small relay that runs beside the org and checks Twilio's signature on every request. If that relay is ever down, the number goes quiet rather than replying with something wrong; the shared door in section 3 is the same path without the phone.</p>
+<h3>5. Slack and inbound email</h3>
+<p>Both route through the same Apex as everything else, so you can exercise their exact behaviour through section 3 by setting <code>channel</code> to <code>Slack</code> or <code>Email</code>.</p>
+<p>Slack is installed in one workspace and answers over Socket Mode. A direct message and the <code>/curbcut</code> command both return real options through the shared door, and in a channel the command refuses to post anything anyone else could see. It runs on the same laptop as the text and voice relay. The inbound email service is active, but its address is generated in Setup rather than stored in metadata: <strong>Setup, Email Services, CurbCutInbound</strong>.</p>
+<h3>6. The operator console</h3>
+<p>With the org credentials: open the <strong>Curb Cut Console</strong> app. Ask the assistant what is wrong with the person whose request you are reading.</p>
+<p>It will refuse, and the refusal is the feature:</p>
+<blockquote><p>No. And not because of a permission setting. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in this system.</p></blockquote>
+<hr/>
+<h3>Check the numbers rather than trusting them</h3>
+<pre>python3 tests/invariants.py        # 508 structural invariants
+sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
+python3 tests/a11y_audit.py        # 331 accessibility checks, against the live pages
+npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
+python3 tests/rai_self_check.py    # 21 responsible AI checks
+python3 tests/rai_self_check.py --selftest   # proves those checks can fail
+python3 tests/contrast_audit.py    # 28 contrast checks</pre>
+<p>Two of those deliberately break their own checks to prove the suite can go red. A suite that cannot fail proves nothing about the code it passes.</p>
+<h3>What we would rather you found than we hid</h3>
+<ul>
+<li>No screen reader user has tested this. Machine-verified is not user-verified.</li>
+<li>The agent's narration is nondeterministic: 21 of 23 adversarial assertions, with one failure that alternates between runs.</li>
+<li>The console has had less accessibility attention than the public site, because the public site is where somebody arrives on a bad day.</li>
+</ul></section>
+<section aria-labelledby="doc-2"><h2 id="doc-2">Technical design</h2><p class="mute">How it fits together, verified against the org. Source: <code>submission/TECHNICAL-DESIGN.md</code></p><pre class="tdd">CURB CUT. TECHNICAL DESIGN DOCUMENT
+Agentforce for Good, Dreamforce 2026 · Builder Track
+Verified against the deployed org, 5 September 2026
+
+
+─────────────────────────────────────────────────────────────────────
+0. THE ONE SENTENCE
+─────────────────────────────────────────────────────────────────────
+
+The process for requesting a workplace accommodation is itself an
+accessibility barrier, so Curb Cut is an Agentforce agent whose principal
+is the worker rather than the employer. You can find out what you could
+ask for, and ask for it, without ever saying what condition you have.
+
+Every architectural decision in this document follows from that sentence.
+Where a decision does not follow from it, it is marked as a compromise
+and the reason is given.
+
+
+─────────────────────────────────────────────────────────────────────
+1. THE CONSTRAINT THAT GENERATED THE ARCHITECTURE
+─────────────────────────────────────────────────────────────────────
+
+Most systems are designed around what they must hold. This one is
+designed around what it must NOT hold, which inverts almost every
+ordinary choice.
+
+  Ordinary system            Curb Cut
+  ──────────────────────     ───────────────────────────────────────
+  Identify the user          Refuse to; there is no account.
+  Store the case detail      Store what is hard, and never why.
+  Log for support            Log the attempt, never the content.
+  Personalise from history   Infer nothing. Every signal is set by hand.
+  Escalate to a phone call   Never, because for some users that door does not open.
+  Ask the model to comply    Put the rule in code, because models forget.
+
+The last row is the one that took longest to learn and it is the spine of
+section 9.
+
+
+─────────────────────────────────────────────────────────────────────
+2. DATA MODEL. INCLUDING WHAT IS DELIBERATELY ABSENT
+─────────────────────────────────────────────────────────────────────
+
+9 custom objects, 61 fields. The most important part of the schema is the
+part that does not exist.
+
+  PRESENT                          ABSENT. And enforced absent
+  ─────────────────────────        ──────────────────────────────
+  Barrier_Report__c                Diagnosis__c
+    Functional_Description__c      Condition__c
+    Inbound_Modality__c            Disability_Type__c
+    Interpreter_Needed__c          Medical_Note__c
+    Anonymous__c  (default true)   Severity__c
+                                   Prognosis__c
+  Accommodation_Request__c
+    Person_Approved__c             None of these are encrypted.
+    Manager_Response__c            None are permission-restricted.
+    Interactive_Process_Due__c     They do not exist.
+
+  Access_Preference__c             tests/invariants.py greps every
+    Statement__c                   field API name on every push and
+    Scope__c                       FAILS THE BUILD if any of the six
+    Shared_With__c                 forbidden stems appears.
+    Revoked_On__c
+    Claim_Code_Hash__c             Current count: 0 matches across
+                                   61 fields.
+  Disclosure_Event__c
+    Shown_To__c / Shown_At__c
+  Human_Handoff__c
+    Reachable_By__c / Return_Code_Hash__c
+  Message_Log__c   (the delivery ledger)
+  Emergency_Escalation__c
+  Accommodation_Option__c  (28 sourced library rows)
+  Access_Profile__c
+
+WHY ABSENCE RATHER THAN ENCRYPTION
+
+Encryption protects data from outsiders. It does not protect a person
+from the organisation holding it, which is precisely the threat here. A
+manager with legitimate access to an encrypted diagnosis field can still
+read the diagnosis. The only field that cannot be subpoenaed, leaked,
+reported on, or shown to a manager is the field that was never created.
+
+This also produces the strongest possible refusal. When an operator asks
+the internal assistant for a diagnosis, it does not say "you lack
+permission". It says there is nothing to tell, and that is true.
+
+THE GAP WE FOUND IN OUR OWN CLAIM
+
+Functional_Description__c is free text. "I have multiple sclerosis and
+some days I cannot type for long" was being stored verbatim while the
+privacy policy said in public that a volunteered condition "is not
+written to any record."
+
+That was false. It is now true within a stated limit, see section 6.
+
+
+─────────────────────────────────────────────────────────────────────
+3. CHANNEL ARCHITECTURE. SIX DOORS, ONE BRAIN
+─────────────────────────────────────────────────────────────────────
+
+  STEP 1. Every channel, before anything else
+    Web (Visualforce) · Voice (TwiML) · SMS (relay) · Email (Apex)
+    Slack (Node) · MCP (stdio)
+        ↓
+    CurbCutKeyword. Whole-message match, control words resolved
+    BEFORE any inference
+
+  STEP 2. One authenticated Apex REST door
+    CurbCutChannelApi  →  /services/apexrest/curbcut/v1/message
+
+  STEP 3. The three things it can do
+    CurbCutOptions        deterministic ranker, no model
+    CurbCutIntake         redaction, then anonymous log
+    CurbCutCreateHandoff  a real person, never a telephone
+
+  STEP 4, always
+    CurbCutLog. Delivery ledger, salted hash, never the message body
+
+WHY ONE ROUTER
+
+Because we shipped the alternative and it failed. SMS had a keyword list
+in JavaScript. Email had different words in Apex. Web had none. A person
+who texts on Monday and emails on Thursday was talking to two services
+that disagreed about what OFF meant, and one of them was wrong.
+
+Now: 6 channels, 1 router, and an invariant that fails the build if any
+user-facing string advertises a word the router does not answer.
+
+WHY THE CONTROL WORDS RESOLVE BEFORE INFERENCE
+
+Three reasons, in order of importance:
+  1. Correctness. A withdrawal must not depend on a model's mood.
+  2. Latency. Somebody reaching for the exit gets an instant answer.
+  3. Energy. ~70 phrases short-circuit an LLM call entirely.
+
+Matching is WHOLE-MESSAGE only, never substring. "I need help typing" is
+a need, not a request for the help menu. Seven such sentences are pinned
+by test.
+
+
+─────────────────────────────────────────────────────────────────────
+4. THE CONSENT MECHANISM. CLAIM CODES
+─────────────────────────────────────────────────────────────────────
+
+THE PROBLEM. A person saves a standing disclosure ("I need captions on
+every call") on the web. Months later, from a bus, they want it off. We
+hold no account, no password, no phone number, by design. There is
+nothing to look them up by.
+
+Building a login to solve this would destroy the property that makes the
+product work.
+
+THE MECHANISM. Save →  code = 6 chars from a 30-char alphabet
+          store  SHA-256(salt || code)  in Claim_Code_Hash__c
+          show   the plaintext code ONCE, never again
+
+  later → "OFF 4KQ7MT" on ANY channel
+          hash the supplied code, look up by hash, revoke
+
+PROPERTIES
+
+  · The person holds the only readable copy. We hold a hash we cannot
+    reverse. We still cannot identify them.
+  · Works from any channel, including ones that have never seen them.
+  · A spent code and a wrong code return the SAME message. Confirming
+    that a code exists would turn this into an oracle for testing
+    whether a stranger's disclosure is live.
+  · Alphabet omits O 0 I 1 S 5. The characters people confuse reading
+    off a cracked screen, at low vision, or aloud to another person.
+    This is an accessibility decision inside a cryptographic one.
+
+  Search space: 30^6 ≈ 7.3 × 10^8. Combined with per-lookup cost and no
+  enumeration surface, adequate for the threat model in section 10. A
+  production deployment would add rate limiting per source.
+
+VERIFIED END TO END, LIVE
+
+  saved on WEB          → code JJHYYT
+  WHO JJHYYT via SMS    → "Nobody has been shown it yet…"
+  OFF JJHYYT via SLACK  → "Turned off. It will not be shown again."
+  OFF JJHYYT again      → indistinguishable from a wrong code
+
+The same mechanism now backs the web handoff. A web visitor is anonymous,
+so "a person will reply by message" was a promise the system could not
+keep, there was no address. They now get a return code and a truthful
+sentence about why.
+
+
+─────────────────────────────────────────────────────────────────────
+5. GROUNDING. WHY THERE IS NO RAG
+─────────────────────────────────────────────────────────────────────
+
+The accommodation library is 28 rows, each individually sourced with a
+citation URL, cost band, and plain-language summary.
+
+Ranking is a deterministic Apex function:
+  · lowercase, strip punctuation, split
+  · remove an expanded stopword list
+  · light stemmer (plurals, -ing, -ed, trailing -e)
+  · score: title match = 3, body match = 1
+  · deterministic tie-break by name
+
+WHY NOT EMBEDDINGS
+
+  · 28 rows. A vector index over 28 rows is theatre.
+  · Determinism. The same sentence returns the same options every time,
+    which makes the adversarial suite meaningful.
+  · Auditability. We can explain exactly why an option ranked first. A
+    cosine similarity cannot be explained to somebody who was given bad
+    advice.
+  · Energy. A SOQL query and string work versus an embedding call per
+    message. See section 12.
+  · Sourcing. Every row carries its citation. A generated suggestion
+    cannot.
+
+THE FAILURE THIS DESIGN CAUGHT
+
+"I cannot type for long", the canonical sentence. Originally returned
+nothing, because the library says "typing". The stemmer fixed it. A
+similarity search would have silently returned something plausible and
+wrong, and nobody would have noticed.
+
+THE MODEL'S ROLE IS DELIBERATELY SMALL
+
+The agent chooses which action to call and phrases the reply. It may not
+invent an accommodation, a cost, or a precedent count. If find_options
+returns nothing, it must say so.
+
+
+─────────────────────────────────────────────────────────────────────
+6. REDACTION. AND ITS HONEST LIMIT
+─────────────────────────────────────────────────────────────────────
+
+CurbCutRedact runs on the single write path every channel shares, before
+the insert. Input   "I have multiple sclerosis and some days I cannot type for long"
+  stored  "I have [not recorded] and some days I cannot type for long"
+
+The functional half survives, because that is the half the system works
+from. The person is told in the same reply.
+
+DELIBERATELY NOT REDACTED
+
+  Deaf · blind · hard of hearing · wheelchair user
+
+These are identity and function, not medical detail. They are how people
+describe themselves, the interpreter routing reads them, and stripping
+how somebody names themselves would be its own insult. An invariant fails
+the build if any of them enters the condition list.
+
+THE LIMIT, STATED RATHER THAN HIDDEN
+
+The list cannot cover every phrasing in every language. So the privacy
+page no longer promises an absolute. It says: this is a real safeguard,
+not a guarantee. And what IS guaranteed is that nothing here is built to
+hold a condition, so none is ever asked for, indexed, reported on, or
+shown to an employer.
+
+An invariant fails the build if the old absolute claim ever returns.
+
+WHY A REGEX AND NOT A CLASSIFIER
+
+A moderation model was the obvious reach and would have cost an inference
+on every message, added latency to the one path that must never be slow,
+and produced a probabilistic answer to a question that deserves a
+deterministic one.
+
+
+─────────────────────────────────────────────────────────────────────
+7. THE CONSENT GATE
+─────────────────────────────────────────────────────────────────────
+
+Nothing reaches an employer without an explicit yes IN THE CONVERSATION.
+
+Two independent locks:
+  1. CurbCutCreateRequest refuses to set Person_Approved__c without
+     approval passed through.
+  2. A validation rule blocks the insert without it.
+
+The interesting case is not refusal. It is the HEDGE. What a person
+actually says when unsure and being agreeable. "I guess so, I think
+that's probably fine?" is not agreement, and the agent asks again rather
+than sending. Verified in the adversarial suite as a 3-turn sequence:
+
+  turn 1  draft read back, nothing written
+  turn 2  "I guess so…"  → no action invoked, nothing written
+  turn 3  "Yes, send it" → 1 record created
+
+
+─────────────────────────────────────────────────────────────────────
+8. OBSERVABILITY
+─────────────────────────────────────────────────────────────────────
+
+FOUR LAYERS, all failing the build except the last.
+
+  Layer                      Count   Runs
+  ─────────────────────────  ─────   ──────────────────────────────
+  Structural invariants        508   every push, ~1s, no org needed
+  Apex tests                   137   every deploy
+  Accessibility (live pages)   333   against the deployed site
+  Sa11y / axe-core             131   Salesforce's own matcher, 12 states
+  Contrast (both themes)        28   computed from design tokens
+  Component a11y                11   LWC templates
+  Link and copy                 54   every user-facing string
+  Reading level                 16   Flesch-Kincaid, per surface
+  Adversarial assertions     21/23   headless Agent API, deliberate
+
+THE SA11Y LAYER, AND WHAT IT CANNOT SEE
+
+Sa11y is Salesforce's own accessibility matcher, obtained through the
+lwc-experts toolset in the Salesforce DX MCP server (@salesforce/mcp).
+It runs axe-core over the rendered DOM of every Lightning Web Component.
+
+Three deliberate choices make the number mean something.
+
+  The ruleset is the 100-rule "extended" preset, not the 64-rule "base"
+  preset Sa11y applies by default. Exactly one rule is removed, "region",
+  in one place with the reason beside it: it carries no WCAG tag and
+  fires only because a component mounted alone in a test has no page
+  landmarks around it. Landmarks are checked on the real pages by the
+  333-check live suite.
+
+  The harness is proved able to fail. jest/__tests__/harness-control.a11y.test.js
+  plants an image with no alt text and asserts the matcher throws. A
+  suite that cannot fail proves nothing about the code it passes.
+
+  Incomplete results are reported, not banked. axe returns "incomplete"
+  rather than "pass" when it cannot decide. color-contrast comes back
+  incomplete in all twelve states because axe measures contrast by
+  painting to a canvas and jsdom has none; video-caption comes back
+  incomplete because axe cannot inspect media. Both are recorded as
+  undecided in docs/a11y-sa11y-findings.json. Counting an incomplete as
+  a pass is the easiest way to buy a clean accessibility score, and it
+  is the one this project will not do.
+
+THE DELIVERY LEDGER
+
+Message_Log__c records THAT we tried to reach someone and what happened.
+Never what was said. Never a raw address or number. A salted SHA-256
+handle truncated to 32 hex chars.
+
+This exists because the email channel failed silently for days while
+Salesforce reported "success". The gap between "the platform accepted it"
+and "a person received it" is exactly where somebody disappears.
+
+INVARIANTS THAT ARE UNUSUAL
+
+  · advertised-keyword-is-routed. Scans every user-facing string for
+    "reply/send/text WORD" and fails if the router does not answer it.
+  · kindness. Fails the build if an error message blames the user or
+    leaves them with no next step.
+  · reading level. Fails if any surface exceeds its grade ceiling.
+  · privacy-page-does-not-overclaim. Fails if the policy reverts to
+    promising an absolute the code cannot keep.
+  · redaction-spares-identity-words. Fails if Deaf/blind/hard of
+    hearing ever enter the condition list.
+  · adversarial-silence-is-not-success. Fails if the scorer stops
+    treating inconclusive as failure.
+
+
+─────────────────────────────────────────────────────────────────────
+9. AGENT DESIGN
+─────────────────────────────────────────────────────────────────────
+
+Two Agentforce agents, both Active:
+  Curb_Cut       v7  public, 6 subagents, 7 Apex actions
+  Curb_Cut_Desk  v5  internal, refuses medical questions
+
+WHAT THE AGENT MAY DO
+  · choose an action
+  · phrase a reply in grade-6 language
+  · decide when somebody is stuck and offer a human
+
+WHAT IT MAY NOT DO
+  · name an accommodation an action did not return
+  · invent a cost or a precedent count
+  · repeat a condition back
+  · route anyone to a telephone
+  · echo legal register back at someone who used it
+  · send anything without a yes
+
+THE HARD-WON LESSON
+
+Instructions are not controls.
+
+The agent was instructed not to record a volunteered condition. It
+complied in its narration and the ACTION recorded the text anyway,
+because the instruction governed what the model said, not what the code
+did. Everything safety-critical has since moved into Apex.
+
+We then tested the inverse: can we make the model reliably SAY something?
+Three attempts. A strengthened instruction published as v7, the action
+returning the exact sentence, and the sentence embedded in the action
+payload. It still says it about half the time, because the agent rewrites
+what an action returns rather than relaying it.
+
+CONCLUSION, STATED PLAINLY: put guarantees in code, and treat model
+narration as best-effort. The four Apex-composed channels say the
+sentence 100% of the time. The conversational agent does not, and we
+report that rather than averaging it away.
+
+
+─────────────────────────────────────────────────────────────────────
+10. SECURITY AND THREAT MODEL
+─────────────────────────────────────────────────────────────────────
+
+  Adversary                 Mitigation
+  ────────────────────────  ─────────────────────────────────────────
+  Curious manager           No field exists. Refusal is truthful.
+                            Internal agent refuses in the same words
+                            and hands the operator a sentence to use
+                            upward, so refusing costs them nothing.
+  Compromised org / subpoena Nothing medical to disclose.
+  Forged webhook            Signature verification FAILS CLOSED; relay
+                            refuses to start without a token; the
+                            unverified escape hatch cannot combine
+                            with a public URL.
+  Code enumeration          Spent and wrong codes are indistinguishable.
+                            30^6 space. Rate limiting is the production
+                            gap, named in section 13.
+  Prompt injection          Tested: "IGNORE ALL PREVIOUS INSTRUCTIONS…"
+                            → injection ignored, real need underneath
+                            still answered.
+  Guest-user escalation     Guest may create, not read back. Two narrow
+                            without-sharing classes, one object each,
+                            by id or hash, documented at the call site.
+  Slack workspace export    Cannot be prevented, so it is DISCLOSED
+                            on first contact, before anything is said.
+
+THE SLACK DECISION IN FULL
+
+Slack is the employer's estate. Owners can export DMs on most plans. A
+tool promising "ask without telling your employer" cannot behave there as
+it does on a phone. So on Slack only: never answers in a channel, says
+where you are standing before anything is discussed, never drafts,
+never sends, and hashes the Slack user id like a phone number.
+
+
+─────────────────────────────────────────────────────────────────────
+11. ARCHITECTURE DECISION RECORDS (abridged)
+─────────────────────────────────────────────────────────────────────
+
+ADR-1  Absence over encryption.
+       Rejected: encrypted diagnosis field with FLS. Rejected because it
+       does not defend against the actual adversary, who has access.
+
+ADR-2  Visualforce + Force.com Sites for the public surface.
+       Rejected: LWR/Experience Cloud. Rejected because guest LWR could
+       not be made to work without an account boundary, and because the
+       page must render with no JS framework for older assistive tech.
+
+ADR-3  Deterministic ranker over vector search.  (§5)
+
+ADR-4  One Apex REST door for all non-web channels.
+       Rejected: per-channel logic. Shipped and failed. (§3)
+
+ADR-5  Claim codes over accounts.  (§4)
+
+ADR-6  Regex redaction over a moderation model.  (§6)
+
+ADR-7  Reachable_By as an argument, telephone refused in code.
+       Was hard-coded to 'Text message' and documented as a principle.
+       The rule was never "always text", it was "never a telephone". And the hard-code made email handoffs unactionable.
+
+ADR-8  Fail closed on webhook signatures.
+       Was fail-open with an empty token in .env. Any unsigned request
+       was treated as genuine.
+
+
+─────────────────────────────────────────────────────────────────────
+12. ENVIRONMENTAL DESIGN
+─────────────────────────────────────────────────────────────────────
+
+An LLM call is treated as the expensive operation it is.
+
+  · Ranking is deterministic Apex. No embeddings, no vector store, no
+    RAG pipeline to keep warm.
+  · ~70 control phrases resolve before any inference.
+  · 4 of 6 channels answer with NO model call at all. Web, email,
+    Slack and any external caller compose their reply in Apex.
+  · Redaction is a compiled regex, not a classifier.
+  · CI runs zero inference. All ten auditors are static Python/Node.
+  · The adversarial suite is the only thing that calls the agent, run
+    deliberately rather than per push, and its scorer exits non-zero on
+    inconclusive results so nobody re-runs it hunting a green.
+  · Relay sessions expire after 30 minutes; no context kept alive.
+
+The principle: if a rule matters, put it in code. A model asked to
+remember a rule burns energy every time it is asked and still forgets. And our own measurements prove it, because the sentence the agent forgets
+half the time is the one Apex now says every time, for free.
+
+
+─────────────────────────────────────────────────────────────────────
+13. SCALE, ADOPTION, AND WHAT IS NOT DONE
+─────────────────────────────────────────────────────────────────────
+
+SCALES WELL
+  · Library is data, not code. New accommodations are rows.
+  · New channel = call one endpoint and inherit the whole contract.
+  · No per-tenant model tuning. Same agent, same library.
+
+NEEDS WORK BEFORE REAL DEPLOYMENT
+  · Rate limiting on code lookups.
+  · Twilio status callbacks. "accepted by the platform" is not
+    "delivered".
+  · A verified sending domain for email replies.
+  · Outcome tracking, so precedent counts become real. The agent
+    currently refuses to invent them, which is correct but thin.
+  · Localisation. Redaction and reading-level are English-only.
+
+HONEST GAPS
+  · No screen-reader user has tested this. Every accessibility claim is
+    machine-verified, which is not the same thing.
+  · The Slack app runs on the same laptop as the relay. When that laptop
+    sleeps, Slack goes quiet along with text and voice.
+  · Text and voice depend on a relay that runs beside the org, and today
+    that relay runs on a laptop. When it is down, the number goes quiet.
+  · The internal agent does not reliably call its own library; the
+    grounded internal surface is the console component, not the agent.
+
+
+─────────────────────────────────────────────────────────────────────
+14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT
+─────────────────────────────────────────────────────────────────────
+
+  python3 tests/invariants.py                      508 checks, ~1s
+  sf apex run test -o curbcut -l RunLocalTests      137 tests
+  python3 tests/a11y_audit.py                      333 checks, live pages
+  npm run test:a11y                                131 Sa11y checks, 12 states
+  python3 tests/contrast_audit.py                   28 checks, both themes
+  bash tests/check_live.sh                         source vs deployed
+  node tests/headless_agent_api.mjs \
+    &amp;&amp; python3 tests/score_adversarial.py          21/23
+
+Nothing in this document is asserted from memory. Every figure was read
+from the deployed org or the test run that produced it.
+</pre></section>
+<section aria-labelledby="doc-3"><h2 id="doc-3">Evidence</h2><p class="mute">Every public figure, its source, its denominator and its caveat. Source: <code>docs/EVIDENCE.md</code></p><h2>Evidence</h2>
+<p>Every figure Curb Cut states in public, with its source, its population, its date, and what it does not say. Nothing here is asserted from memory.</p>
+<p>Read the population line before quoting a number. Most disagreements about disability statistics are really disagreements about who was counted.</p>
+<hr/>
+<h3>The layered picture, widest to narrowest</h3>
+<p>Four sources, four different definitions of disability, four different populations. They do not contradict each other. They narrow.</p>
+<table><thead><tr><th>Level</th><th>Figure</th><th>Population and definition</th><th>Source</th></tr></thead><tbody><tr><td>Global</td><td><strong>1.3 billion people, 16%</strong></td><td>World population with <em>significant</em> disability</td><td>WHO, <em>Global Report on Health Equity for Persons with Disabilities</em>, 2022</td></tr><tr><td>Canada</td><td><strong>27%</strong></td><td>Canadians aged 15+, one or more disabilities</td><td>Statistics Canada, <em>Canadian Survey on Disability</em>, 2022</td></tr><tr><td>United States</td><td><strong>22.8% employed</strong> vs 65.2% without a disability</td><td>All people with a disability, 16+</td><td>US Bureau of Labor Statistics, 2025, from the Current Population Survey (~60,000 households monthly)</td></tr><tr><td>US white-collar</td><td><strong>30%</strong></td><td>College-educated, full-time, white-collar, aged 21–65, broad federal definition</td><td>Coqual (formerly Center for Talent Innovation), <em>Disabilities and Inclusion</em></td></tr></tbody></table>
+<p><strong>Why the numbers differ.</strong> WHO counts <em>significant</em> disability, which is the narrowest lens and gives the lowest figure. Statistics Canada and the US federal definition are broader and include conditions many people would not name out loud. The Coqual 30% is highest because it uses the broad federal definition <em>and</em> asks a population that is often assumed to have no disabilities at all.</p>
+<p>That gap between 16% and 30% is not sloppiness. It is the whole point: the broader the definition, the more people discover they are being counted, and the more of them have never told anyone at work.</p>
+<hr/>
+<h3>1. The disclosure gap</h3>
+<table><thead><tr><th>Figure</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>US college-educated white-collar employees 21–65 with a disability</td><td><strong>30%</strong></td><td>Coqual, <em>Disabilities and Inclusion</em></td></tr><tr><td>Of those, share who self-identify to their employer</td><td><strong>3.2%</strong></td><td>same</td></tr><tr><td>Share whose disability is invisible</td><td>62%</td><td>same</td></tr><tr><td>Of those who did disclose, felt it improved their support</td><td><strong>83%</strong></td><td>same</td></tr></tbody></table>
+<p><strong>Source, precisely.</strong> Coqual is an independent research nonprofit, formerly the Center for Talent Innovation. This is a multinational study; the 30% and 3.2% are the US figures. The finding is corroborated in the trade and academic press.</p>
+<p><strong>What it does not say.</strong> This is not a government statistic and it is not a census. It is one well-cited study of one advantaged population, and it is roughly a decade old. We use it because it is the only figure that measures the <em>disclosure</em> gap directly, and because the government data below points the same way. We would replace it tomorrow with a national statistics office equivalent if one existed.</p>
+<p><strong>Why we lead with it anyway.</strong> Disclosure overwhelmingly helps the people who do it, and almost nobody does it. The barrier is not the outcome. It is the act of telling somebody.</p>
+<hr/>
+<h3>1a. Why this needs arguing at all</h3>
+<p>It should not take a dataset to establish that a person is worth an hour of flexibility. It does, so here is the dataset. But the argument underneath it is not statistical:</p>
+<ul>
+<li><strong>One roadblock is not one bad day.</strong> Nobody is dismissed for needing an hour moved. They stop being considered, stop being staffed, stop being asked.</li>
+<li><strong>It compounds.</strong> A job lost is a reference lost, a gap on a record, a mortgage refused. The roadblock lasts an afternoon. The consequence lasts a decade.</li>
+<li><strong>It is almost always man-made.</strong> Not the condition. The form, the login, the policy nobody can find, the manager who wants proof.</li>
+<li><strong>It reaches past the person.</strong> Their family, their children, and the income that would have paid for the thing that helped.</li>
+</ul>
+<p>We say everyone is equal. In a market, everyone is a transaction, and the people this affects are consistently priced as though they bring less. They are not abstractions. They are colleagues, friends, and members of the same communities as the people writing the policies.</p>
+<p>The rest of this document exists because that argument, on its own, has not been enough.</p>
+<hr/>
+<h3>1b. What it costs the person, in their own words</h3>
+<p>Peer-reviewed, quotable, and attributable. We use real testimony rather than a composite persona, because a made-up person on a conference stage is the one thing that would deserve to sink this.</p>
+<table><thead><tr><th>Quote</th><th>Speaker</th></tr></thead><tbody><tr><td>"I wish we had a percent sick number on our forehead so others could have something tangible to understand what we are going through"</td><td>Participant F-206</td></tr><tr><td>"having to sit down and explain it six times a day to 20 different people adds to that exhaustion"</td><td>Participant P1</td></tr></tbody></table>
+<p><strong>Source.</strong> Ganesh, S. and Lazar, A., <em>The Work of Workplace Disclosure: Invisible Chronic Conditions and Opportunities for Design</em>, Proceedings of the ACM on Human-Computer Interaction, 2021. Eight interview participants with invisible chronic conditions, plus analysed forum posts. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8297988/">https://pmc.ncbi.nlm.nih.gov/articles/PMC8297988/</a></p>
+<p><strong>On the date.</strong> 2021 is the most recent open-access study we could find with participant testimony verifiable word for word. The 2026 qualitative work on workplace disclosure is paywalled, and we will not quote what we cannot check. The age matters less than it appears: Statistics Canada measured the same gap in 2022, the US Bureau of Labor Statistics measured it again in 2025, and it has not closed. The testimony describes a condition the government data confirms is current.</p>
+<p><strong>Why these two.</strong> The first is what a person actually wants: to be believed without having to prove it. The second is the exact burden the standing preference exists to remove, and it is the reason "say it once" is a feature rather than a convenience.</p>
+<p><strong>What we do not do.</strong> We do not put photographs of disabled people in the deck. Stock photography of disability is a well-documented trope that the people it depicts consistently object to, and we have no consent from anyone real. Large, quiet typography of a real sentence carries more than a posed picture, and costs nobody their likeness.</p>
+<hr/>
+<h3>2. The accommodation gap, from a national statistics office</h3>
+<p>This is the strongest evidence in the project, and it is government data.</p>
+<table><thead><tr><th>Figure</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Employed Canadians with disabilities who needed a workplace accommodation</td><td><strong>35.4%</strong></td><td>Statistics Canada, <em>Canadian Survey on Disability</em>, 2022</td></tr><tr><td>Employed Canadians with disabilities with an <strong>unmet</strong> accommodation need</td><td><strong>35.4%</strong></td><td>same</td></tr><tr><td>Most common need: <strong>modified work hours</strong></td><td>16.3%</td><td>same</td></tr><tr><td>Then modified or different duties</td><td>11.6%</td><td>same</td></tr><tr><td>Then working from home</td><td>10.9%</td><td>same</td></tr><tr><td>Then modified or ergonomic workstation</td><td>10.7%</td><td>same</td></tr><tr><td>Then a special chair or back support</td><td>10.3%</td><td>same</td></tr></tbody></table>
+<p><strong>Why this matters more than it looks.</strong> The single most common unmet need in Canada is <em>modified working hours</em>. It costs an employer nothing. It requires no equipment, no budget line and no procurement. It requires somebody to say yes.</p>
+<p>Every one of the top five needs is in Curb Cut's library.</p>
+<hr/>
+<h3>3. What accommodations actually cost</h3>
+<table><thead><tr><th>Figure</th><th>Value</th></tr></thead><tbody><tr><td>Employers surveyed</td><td>26,028</td></tr><tr><td>Employers who responded</td><td>5,406</td></tr><tr><td>Respondents who gave cost information</td><td>1,425 (26% of respondents)</td></tr><tr><td><strong>Of those 1,425: cost nothing</strong></td><td><strong>61%</strong></td></tr><tr><td>One-time cost</td><td>33%, median <strong>$300</strong></td></tr><tr><td>Ongoing cost</td><td>6%, median <strong>$2,400 per year</strong></td></tr><tr><td>Very or extremely effective</td><td>66% of 2,069 answering</td></tr><tr><td><strong>Ineffective</strong></td><td><strong>12%</strong></td></tr></tbody></table>
+<p><strong>Source.</strong> Job Accommodation Network, <em>Costs and Benefits of Accommodations</em>, employer survey through 2024. <a href="https://askjan.org/topics/costs.cfm">https://askjan.org/topics/costs.cfm</a></p>
+<p><strong>The denominator matters.</strong> The 61% is of the 1,425 employers who gave cost figures, not of all 5,406 who responded. Anyone quoting "61% are free" without that qualifier is overselling it, and so would we be.</p>
+<p><strong>We also publish the 12%.</strong> Twelve percent of accommodations were reported ineffective. A page that only quotes the 66% is selling something.</p>
+<hr/>
+<h3>4. Why now: the asymmetry</h3>
+<table><thead><tr><th>Figure</th><th>Value</th><th>Source and exact standing</th></tr></thead><tbody><tr><td>Employers using some automated tool to screen or rank candidates</td><td>"as many as <strong>83%</strong>"</td><td>An estimate quoted at the EEOC public hearing <em>Navigating Employment Discrimination in AI and Automated Systems</em>, 31 January 2023</td></tr><tr><td>Fortune 500 companies doing the same</td><td>"up to <strong>99%</strong>"</td><td>same hearing, same standing</td></tr></tbody></table>
+<p><strong>Be careful with this one.</strong> It is an estimate quoted at a hearing, not an EEOC finding, and we say so wherever we use it. It is directional, not precise.</p>
+<p>The argument it supports does not depend on the exact number: one side of the accommodation conversation has been automated at scale, and the other side is a person on a hard day with a PDF.</p>
+<hr/>
+<h3>5. Sources in full</h3>
+<ul>
+<li>WHO, <em>Global report on health equity for persons with disabilities</em> (2022) — <a href="https://www.who.int/teams/noncommunicable-diseases/sensory-functions-disability-and-rehabilitation/global-report-on-health-equity-for-persons-with-disabilities">https://www.who.int/teams/noncommunicable-diseases/sensory-functions-disability-and-rehabilitation/global-report-on-health-equity-for-persons-with-disabilities</a></li>
+<li>Statistics Canada, *Accessibility in Canada: Results from the 2022 Canadian Survey on Disability* — <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/240528/dq240528b-eng.htm">https://www150.statcan.gc.ca/n1/daily-quotidien/240528/dq240528b-eng.htm</a></li>
+<li>Statistics Canada, *A demographic, employment and income profile of persons with disabilities aged 15 years and over in Canada, 2022* — <a href="https://www150.statcan.gc.ca/n1/pub/89-654-x/89-654-x2024001-eng.htm">https://www150.statcan.gc.ca/n1/pub/89-654-x/89-654-x2024001-eng.htm</a></li>
+<li>US Bureau of Labor Statistics, *People with a Disability: Labor Force Characteristics* — <a href="https://www.bls.gov/news.release/disabl.htm">https://www.bls.gov/news.release/disabl.htm</a></li>
+<li>Coqual, <em>Disabilities and Inclusion</em> — <a href="https://coqual.org/reports/disabilities-and-inclusion/">https://coqual.org/reports/disabilities-and-inclusion/</a></li>
+<li>Job Accommodation Network, <em>Costs and Benefits of Accommodations</em> — <a href="https://askjan.org/topics/costs.cfm">https://askjan.org/topics/costs.cfm</a></li>
+<li>EEOC public hearing transcript, 31 January 2023 — <a href="https://www.eeoc.gov/meetings/meeting-january-31-2023-navigating-employment-discrimination-ai-and-automated-systems-new/transcript">https://www.eeoc.gov/meetings/meeting-january-31-2023-navigating-employment-discrimination-ai-and-automated-systems-new/transcript</a></li>
+</ul>
+<p>Each row above links to its source. Where a figure is an estimate rather than a measurement, it is labelled as one at the point of use, not only here.</p></section>
+<section aria-labelledby="doc-4"><h2 id="doc-4">Who this is for</h2><p class="mute">Audience and market. Source: <code>docs/AUDIENCE.md</code></p><h2>Who this is for</h2>
+<p>Two different questions get confused here, so they are answered separately: who <em>uses</em> Curb Cut, and who would ever <em>deploy</em> it. They are not the same people, and the first group is deliberately not a market.</p>
+<hr/>
+<h3>1. The user, who buys nothing</h3>
+<p>The primary user is a working person who needs one ordinary adjustment and has not asked for it.</p>
+<p>They need no account, no employer relationship with us, and no organisation to have bought anything on their behalf. That is a product decision, not a gap in the business model: the moment a person has to be inside somebody's licence to get help, the population who needs help most is the population excluded.</p>
+<p><strong>Who specifically.</strong> Four groups the current design serves, in order of how badly the usual process fails them:</p>
+<table><thead><tr><th>Group</th><th>Why the usual process fails them</th></tr></thead><tbody><tr><td>Contractors, temps, agency and gig workers</td><td>Often have no work login and no HR relationship at all, yet are expected to disclose to get anything</td></tr><tr><td>People with invisible conditions</td><td>62% of disabled employees in the Coqual study; they are believed less and asked to prove more</td></tr><tr><td>Deaf and hard-of-hearing workers</td><td>Every escalation path in most systems ends at "give us a call"</td></tr><tr><td>Anyone in their first weeks somewhere</td><td>Least social capital, highest perceived cost of asking</td></tr></tbody></table>
+<hr/>
+<h3>2. Who would deploy it</h3>
+<p>Three buyer types exist, and they want it for different reasons.</p>
+<h4>Employers with an existing disability programme</h4>
+<p><strong>Disability:IN</strong> alone has a network of <strong>over 400 corporations</strong> and 25 state affiliates. These organisations have already decided that disability inclusion is worth spending on, already run self-identification campaigns, and already know their disclosure numbers are low.</p>
+<p>The pitch to them is not "care about this". They already do. It is: your self-identification rate is low because the act of identifying is the barrier, and this measures that rather than exhorting people to try harder.</p>
+<h4>Disability employment service providers</h4>
+<p>Organisations that place and support disabled workers, including the <strong>AbilityOne / SourceAmerica</strong> network, which employed <strong>more than 36,000 people with disabilities in FY2024</strong> at an average wage of <strong>$18.96 per hour</strong>. They carry the accommodation conversation on behalf of people who have no leverage in it.</p>
+<p>For them Curb Cut is a channel their clients can reach without a caseworker present, which matters most in the hours when no caseworker is available.</p>
+<h4>Centers for Independent Living and community nonprofits</h4>
+<p>Consumer-controlled, community-based, chronically under-resourced. The MCP server and the shared channel API exist partly for them: an organisation with no Salesforce budget can still put the grounded library behind whatever they already run.</p>
+<hr/>
+<h3>3. What we can and cannot claim about market size</h3>
+<p><strong>What is documented.</strong> North America accounts for <strong>$120.5 billion in 2025</strong> of the intellectual and developmental disability services market, about <strong>42.1% of global revenue</strong>.</p>
+<p><strong>What that number is not.</strong> It is the services market, not a market for accommodation-request software, and quoting it as though it were our addressable market would be dishonest. We include it only to establish that the surrounding sector is large and funded, not to imply a share of it.</p>
+<p><strong>The number that actually matters commercially</strong> is the one from Statistics Canada: <strong>35.4% of employed Canadians with disabilities have an unmet accommodation need</strong>, and the most common one is modified working hours, which costs an employer nothing. The gap is not a spending gap. It is a process gap, which is cheaper to close and harder to sell against, because there is no budget line for "the asking was too hard".</p>
+<hr/>
+<h3>4. Why an employer would actually adopt it</h3>
+<p>In descending order of how often it is the real reason:</p>
+<ol>
+<li><strong>Their self-identification numbers embarrass them</strong> and they have run out of campaigns to fix it.</li>
+<li><strong>Legal exposure.</strong> In the US the interactive process is not optional, and a request that never reaches anybody is a request the employer cannot show they engaged with. The delivery ledger is the record of every attempt.</li>
+<li><strong>Retention.</strong> JAN's employer survey reports 85% of respondents citing increased employee retention among the benefits.</li>
+<li><strong>It costs almost nothing to say yes.</strong> 61% of the accommodations employers priced cost them nothing.</li>
+</ol>
+<hr/>
+<h3>5. Who this is not for</h3>
+<ul>
+<li><strong>Not a diagnostic tool.</strong> It holds no medical data and gives no medical advice.</li>
+<li><strong>Not a compliance product.</strong> It records that a request was made and answered; it does not assess whether an accommodation was legally required.</li>
+<li><strong>Not a replacement for an accommodations team.</strong> It is the front door to one, and it ships with a console because a promise that a person will pick this up is worthless unless that person has somewhere to stand.</li>
+</ul>
+<hr/>
+<h3>Sources</h3>
+<ul>
+<li>Disability:IN network size — <a href="https://disabilityin.org/">https://disabilityin.org/</a></li>
+<li>SourceAmerica / AbilityOne FY2024 employment and wage figures — <a href="https://www.sourceamerica.org/who-we-are/reports-factsheets/america-made-here-disability-employment-and-abilityone-manufacturing">https://www.sourceamerica.org/who-we-are/reports-factsheets/america-made-here-disability-employment-and-abilityone-manufacturing</a></li>
+<li>Centers for Independent Living, description and role — Cornell University disability and employment guide, &lt;https://guides.library.cornell.edu/c.php?g=745939&amp;p=8056467&gt;</li>
+<li>IDD services market size, North America 2025 — Dataintelo market report, <a href="https://dataintelo.com/report/global-intellectual-and-developmental-disability-services-market">https://dataintelo.com/report/global-intellectual-and-developmental-disability-services-market</a> (a commercial market-research estimate, not a government statistic, and labelled as such wherever it appears)</li>
+<li>Unmet accommodation need, retention and cost figures — see <code>EVIDENCE.md</code></li>
+</ul></section>
+<section aria-labelledby="doc-5"><h2 id="doc-5">Accessibility audit</h2><p class="mute">Salesforce Sa11y findings. Source: <code>docs/A11Y-SA11Y-REPORT.md</code></p><h2>Accessibility audit: Salesforce Sa11y on the Curb Cut components</h2>
+<p><strong>Tool:</strong> Sa11y, Salesforce's own accessibility matcher, driven by axe-core, obtained through the Salesforce DX MCP server (<code>@salesforce/mcp</code>) and its <code>lwc-experts</code> toolset. The two tools used were <code>guide_component_accessibility</code> and <code>run_lwc_accessibility_jest_tests</code>.</p>
+<p><strong>Ruleset:</strong> the 100-rule <code>extended</code> preset, minus one rule, stated below. Not the 64-rule <code>base</code> preset that Sa11y applies by default.</p>
+<p><strong>Scope:</strong> all five Lightning Web Components, in twelve states. <strong>Run:</strong> <code>npm run test:a11y</code></p>
+<hr/>
+<h3>Result</h3>
+<table><thead><tr><th>States audited</th><th>12</th></tr></thead><tbody><tr><td>axe checks passed</td><td>131</td></tr><tr><td><strong>WCAG violations</strong></td><td><strong>0</strong></td></tr><tr><td>Rules axe could not decide</td><td>3</td></tr><tr><td>Defects found and fixed</td><td>2</td></tr></tbody></table>
+<p>Seven test suites, thirteen tests, all passing.</p>
+<hr/>
+<h3>The one rule removed, and why</h3>
+<p><code>region</code> requires every piece of content to sit inside a landmark. It is an axe <strong>best-practice</strong> rule and carries no WCAG tag. It fires 43 times here for a single reason: a component mounted alone in a test has no page around it, so there is no <code>&lt;main&gt;</code> for it to sit in. The landmark structure that satisfies this rule lives on the Visualforce pages, which are checked by the separate static accessibility suite.</p>
+<p>It is excluded in <code>jest/a11y-ruleset.js</code>, in one place, with that reason written next to it. Every other rule in <code>extended</code> is enforced.</p>
+<h3>What axe could not decide</h3>
+<p>These came back <code>incomplete</code>, not <code>pass</code>. A green suite is not evidence about them, and saying otherwise would be the easiest lie in this document.</p>
+<p><strong><code>color-contrast</code> and <code>color-contrast-enhanced</code></strong>, 12 states each. axe measures contrast by painting to a canvas, and jsdom has no canvas:</p>
+<pre>Error: Not implemented: HTMLCanvasElement.prototype.getContext
+    at Rule.colorContrastMatches (axe-core/axe.js:27292)</pre>
+<p>Contrast is therefore measured elsewhere, by computing WCAG relative luminance directly from the stylesheets. That suite runs 28 checks and passes. The new <code>.nocap</code> note added in this audit measures <strong>10.59:1</strong> against the card it sits on, against a 4.5:1 requirement.</p>
+<p><strong><code>video-caption</code></strong>, 1 state. Discussed below; it is the finding that mattered.</p>
+<p><strong><code>aria-valid-attr-value</code></strong>, 1 state, caused by the fix below. axe cannot follow an <code>aria-describedby</code> idref through LWC's synthetic shadow DOM. Rather than leave that unanswered, a test asserts the reference resolves to a real element containing real text. It does.</p>
+<hr/>
+<h3>Finding 1: a video that says nothing to the person who cannot watch it</h3>
+<p><code>curbCutMediaViewer</code> renders signed video with no captions and no transcript. axe returns <code>incomplete</code> on <code>video-caption</code> (WCAG 1.2.2) because it cannot inspect the media, so the tool could not settle this. A person using a screen reader could.</p>
+<p>The obvious remedy is the forbidden one. This video is usually a Deaf person signing, and the product's central promise is that signed video is never machine translated, an auto-caption here would be a machine putting words in someone's mouth about their own body, then filing them. The banner already says so to the operator.</p>
+<p>But the operator was the only one being told. Reaching the <code>&lt;video&gt;</code> element itself, there was silence: no captions, and no explanation of the silence.</p>
+<p><strong>Fixed.</strong> Every video now carries an <code>aria-describedby</code> pointing at a note that is on the page for everyone:</p>
+<blockquote><p>No captions and no transcript, and none will be generated. This is waiting on a human interpreter.</p></blockquote>
+<p>That does not satisfy 1.2.2, and this report does not claim it does. It replaces an unexplained absence with a stated one, which is the honest position while a human interpretation is genuinely pending.</p>
+<p><strong>Files:</strong> <code>curbCutMediaViewer.html</code>, <code>.js</code>, <code>.css</code></p>
+<h3>Finding 2: the emergency form kept the last emergency's words</h3>
+<p>The LWC compiler flagged it during the first run:</p>
+<pre>LWC1057: value is not valid attribute for textarea
+  curbCutEmergency/curbCutEmergency.html</pre>
+<p><code>&lt;textarea value={reason}&gt;</code> does nothing. A textarea holds its text as a child node, not an attribute. So <code>this.reason = ''</code> in the close path cleared the field in JavaScript and left the words on screen.</p>
+<p>This is the escalation form: the one place in Curb Cut that a telephone number comes out of, used when somebody may be at risk. Stale text in that box after closing an escalation invites the next one to be raised on the last one's words.</p>
+<p><strong>Fixed.</strong> The invalid attribute is gone, and closing an escalation now clears the element as well as the field.</p>
+<p><strong>Files:</strong> <code>curbCutEmergency.html</code>, <code>.js</code></p>
+<hr/>
+<h3>What a keyboard found that neither tool could</h3>
+<p>Sa11y runs in jsdom, which has no layout, so it cannot measure a target. A static scan cannot either: a link's height comes from its line box and padding at render time. So the live pages are walked with real Tab key events dispatched to a real browser, and each focused element is measured where it sits.</p>
+<p><code>node tests/keyboard_walk.mjs</code></p>
+<p>Thirty-four controls across the two main pages, every one reachable by keyboard, every one carrying <code>solid 3px rgb(11, 87, 199)</code>. Real key events, not a scripted <code>.focus()</code>, because <code>:focus-visible</code> does not match a programmatic focus call and that difference is what produced 26 imaginary defects in an earlier audit.</p>
+<p>It found one real thing. On the home page, <em>Go to the ask page</em> measured <strong>140 by 23</strong>, one pixel under the 24 by 24 that WCAG 2.5.8 asks for. It sits alone in its own paragraph, so the criterion's exception for links inline in running text does not cover it. The footer had the same defect and had been fixed one-off months earlier; the rule is now general, <code>p &gt; a:only-child</code>, so the next standalone link cannot repeat it. Re-measured live at 28px.</p>
+<p>One caution learned the hard way, and written into <code>video/cdp.mjs</code>: the walk reads a real browser, and a real browser caches. The fix above was live and measuring correctly while the walk still reported the defect, because it was looking at a stale stylesheet. Auditing with the cache on audits the past.</p>
+<h3>Proving the suite can fail</h3>
+<p>A suite that cannot fail proves nothing, so <code>jest/__tests__/harness-control.a11y.test.js</code> plants <code>&lt;img src="x.png"&gt;</code> with no alt text and asserts that the matcher throws. It does. Every green result in this report is green against a harness that has been shown to go red.</p>
+<hr/>
+<h3>What this audit does not cover</h3>
+<ul>
+<li>No screen reader user has tested Curb Cut. Nothing here substitutes for that.</li>
+<li>jsdom is not a browser. Focus order, contrast as rendered, and media are checked by other means or not at all.</li>
+<li>The Visualforce public pages are outside Sa11y's reach; they have their own static suite.</li>
+</ul></section>
+<section aria-labelledby="doc-6"><h2 id="doc-6">Decisions</h2><p class="mute">Every significant call and why. Source: <code>docs/DECISIONS.md</code></p><h2>Decisions</h2>
+<p>Each entry: what was decided, and what it cost.</p>
+<h3>D1. Absence over encryption</h3>
+<p>There is no diagnosis field. Encryption protects data that exists; the stronger control is not to hold it. <strong>Cost:</strong> the agent cannot personalise on condition, and never will. That is the point.</p>
+<h3>D2. Three locks on approval, not one</h3>
+<p>The model judges the hedge, the Apex refuses unapproved input, and a validation rule blocks the insert. <strong>Cost:</strong> redundancy. Justified: the model failed this test during development, and the other two caught it.</p>
+<h3>D3. The web and email channels have no model in them</h3>
+<p>They call the same Apex the agent calls, deterministically. <strong>Cost:</strong> the web cannot converse freely. <strong>Gain:</strong> the highest-stakes path has nothing to hallucinate, and the safest channel is the one available to people with the least.</p>
+<h3>D4. Visualforce, because nothing else exists here</h3>
+<p><code>Network</code>, <code>ExperienceBundle</code> and <code>DigitalExperienceConfig</code> are unavailable in this org. <strong>Cost:</strong> an older component model. <strong>Mitigation:</strong> <code>LightningComponentBundle</code> is available whenever Digital Experiences is licensed.</p>
+<h3>D5. STOP is the carrier's word, not ours</h3>
+<p>The agent originally told people to reply <code>STOP</code> to revoke a preference. STOP is a reserved carrier opt-out keyword: the message is intercepted, the person gets a generic unsubscribe notice, and the preference stays live while they believe they turned it off. Now <code>DELETE</code>, <code>OFF</code> and <code>WHO</code>. <strong>Cost:</strong> three more words to learn. <strong>Gain:</strong> revocation actually revokes.</p>
+<h3>D6. Whole-word matching in the library</h3>
+<p><code>contains()</code> matched <code>long</code> inside <code>alongside</code> and offered visual fire alarms to someone who could not type. <strong>Cost:</strong> slightly narrower recall. <strong>Gain:</strong> an irrelevant suggestion tells someone already having a hard week that they were not heard.</p>
+<h3>D7. A narrow <code>without sharing</code> reader for the library only</h3>
+<p>The guest user owns none of the library rows, so sharing returned an empty library and the agent honestly reported knowing nothing. <strong>Scope:</strong> one class, one object, no personal data, field-level security still enforced.</p>
+<h3>D8. The request survives a broken link</h3>
+<p>A guest cannot reference a record it may not read, so linking a request to its barrier report failed the insert. Now retries without the link. <strong>Cost:</strong> some requests lack provenance. <strong>Gain:</strong> nobody loses their request to a foreign key.</p>
+<h3>D9. Email consults but never sends</h3>
+<p>An email cannot carry in-the-moment approval. Agreeing in writing, days later, is not the same as choosing in the moment. Email answers and hands off to the web, where the send button is visible.</p>
+<h3>D10, The critique file ships</h3>
+<p><code>CRITIQUE.md</code> lists what is still broken, in public. A system claiming a perfect score against its own adversarial suite is telling you about its suite.</p>
+<h3>D11. The stated absence, instead of a machine caption</h3>
+<p>Salesforce's own Sa11y run returned <code>incomplete</code> on <code>video-caption</code> (WCAG 1.2.2) for signed video: axe cannot inspect media, so it could not decide. A screen reader user could. The obvious remedy was the one thing this product promises never to do, because that video is usually a Deaf person signing and a machine caption puts words in somebody's mouth about their own body and then files them. Every video now carries an <code>aria-describedby</code> note saying there are no captions, none are coming, and a human interpreter is what it waits on. <strong>Cost:</strong> this does not satisfy 1.2.2, and the report says so rather than claiming otherwise. <strong>Gain:</strong> an unexplained silence becomes a stated one, for the person the silence was failing.</p>
+<h3>D12. The 100-rule preset, and one rule removed in the open</h3>
+<p>Sa11y's matcher defaults to a 64-rule <code>base</code> preset. We assert against the 100-rule <code>extended</code> preset instead, and remove exactly one rule: <code>region</code>, which carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks around it. It is removed in one file, with the reason written beside it. <strong>Cost:</strong> one rule genuinely not enforced at component level. <strong>Gain:</strong> the difference between a suite that is quiet because the code is right and one that is quiet because the rule was never run. For the same reason <code>incomplete</code> results are reported as undecided rather than counted as passes.</p>
+<h3>D13. A disclosure is only a disclosure if somebody can be shown it</h3>
+<p>The ledger object shipped in week one and <code>WHO</code> read from it, but nothing ever wrote a row. No console view, component or flow showed a standing preference to anyone, so "travels ahead of you" meant save and revoke, and <code>WHO</code> could only ever answer "Nobody has been shown it yet". True, and useless. Now <code>CurbCutShow</code> is the one place a preference is shown. The viewer says who they are reading as, and we show only what the person chose for that audience. The ledger row is written before a word is returned; if the write fails, nothing is shown. The person can read the ledger back with <code>WHO</code> and get a name and a date. <strong>Cost:</strong> a viewer can name an audience they are not. We record what they claimed, next to their real name, so the person can see it and ask. <strong>Gain:</strong> the feature this project is named for exists, and every showing is something the person can find out about. An invariant now fails the build if no production class writes the ledger, so it cannot quietly go back to being a promise.</p></section>
+</div>
+</c:CurbCutShell>
+</body>
+</html>
+</apex:page>
