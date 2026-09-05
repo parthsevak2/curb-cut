@@ -38,15 +38,15 @@ The request goes to the access desk of the organisation running the page, in you
 
 WHAT WE CAN SHOW, NOT JUST SAY
 
-We ran Salesforce's own accessibility checks (Sa11y, 131 checks across twelve component states) and our own: more than five hundred accessibility checks on seven public pages, 137 Apex tests, 512 structural invariants, 21 responsible-AI checks against Salesforce's published guidelines, and an 11-scenario adversarial suite through the Agent API. That suite scores 21 of 23 on every run, and we publish the two it fails rather than the best run. Every number in the film and on the site has its source and its denominator on the evidence page.
+We ran Salesforce's own accessibility checks (Sa11y, 131 checks) and our own: more than five hundred accessibility checks on seven public pages, 137 Apex tests, 512 structural invariants, 21 responsible-AI checks against Salesforce's published guidelines, and an 11-scenario adversarial suite through the Agent API. That suite scores 21 of 23 on every run, and we publish the two it fails rather than the best run. Every number we publish has its source and its denominator on the evidence page.
 
 WHAT WE GOT WRONG, AND FIXED IN THE OPEN
 
-"I get migraines from the office lighting" once returned "special chair or back support", because the word office appeared in that row. The ranker now weighs how much a word distinguishes, and four lighting rows were added. The agent was told never to record a volunteered condition; it agreed in words while the action stored the text anyway. So every safety rule moved into Apex, where the model's memory doesn't matter. And because the agent says "I discarded that" only about half the time, on four channels the code says it every time.
+"I get migraines from the office lighting" once returned "special chair or back support", because the word office appeared in that row. The ranker now weighs how much a word distinguishes, and four lighting rows were added. The agent was told never to record a volunteered condition; it agreed in words while the action stored the text anyway. So every safety rule moved into Apex. And because the agent says "I discarded that" only about half the time, on four channels the code says it every time.
 
 WHAT ISN'T DONE
 
-No one who uses a screen reader every day has tested this yet. A scripted walk of the ask page is published in its place, and one session with a real person comes before the next five features. Text and voice run through a relay on a laptop today. Delivery callbacks from the carrier aren't wired, so "accepted" isn't yet "delivered".
+No one who uses a screen reader every day has tested this yet. A scripted walk of the ask page is published in its place, and one session with a real person comes before the next feature. Text and voice run through a relay on a laptop today. Delivery callbacks from the carrier aren't wired, so "accepted" isn't yet "delivered".
 
 WHO THIS IS FOR
 
