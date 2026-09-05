@@ -124,14 +124,18 @@ nobody their likeness.
 ## 1a. It is not a white-collar problem
 
 The disclosure study above asked white-collar workers because that is where the
-question had never been asked. The national statistics say who actually holds
-the jobs.
+question had never been asked. The newest figures, from 2025 and 2026, say who
+actually holds the jobs and how few of them tell anyone.
 
 | Figure | Value | Population and definition | Source |
 |---|---|---|---|
+| Median share of employees who self-identified a disability to their employer, 2025 | **3.5%** (new hires: 4%), and it did not rise in 2025 | 655 submissions from large employers across eight countries | Disability:IN, *2025 Disability Index Report*, https://disabilityin.org/resource/2025-disability-index-report/ |
+| Employers reporting flexible or remote accommodations, 2026 | **98%**, while the report names persistent gaps in disclosure | 421 organisations, 627 submissions, released 27 July 2026 | Disability:IN, *2026 Disability Index Results and Insights*, https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights |
+| Persons with disabilities who require workplace accommodations, Canada, 2022 | **39.3%** | employed persons with disabilities | Statistics Canada, *International Day of Persons with Disabilities, 2025*, released 3 December 2025, https://www150.statcan.gc.ca/n1/daily-quotidien/251203/dq251203a-eng.htm |
+| Refused a job because of a disability, Canada, 2022 | **9.7%** (down from 11.7% in 2017) | persons with disabilities | same |
 | US adults with a disability | **more than 1 in 4** | All US adults, CDC definition | CDC, *Disability Impacts All of Us*, https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html |
 | Canadians with a disability | **27%**, 8.0 million | Canadians aged 15+, 2022 | Statistics Canada, *Canadian Survey on Disability*, 2022, https://www150.statcan.gc.ca/n1/daily-quotidien/231201/dq231201b-eng.htm |
-| Employed, US, 2025 | **22.8%** vs 65.2% | People 16+ with vs without a disability, employment-population ratio | US BLS, *People with a Disability: Labor Force Characteristics 2025*, https://www.bls.gov/news.release/disabl.nr0.htm |
+| Employed, US, 2025 | **22.8%** vs 65.2% | People 16+ with vs without a disability, employment-population ratio | US BLS, *People with a Disability: Labor Force Characteristics 2025*, released 3 March 2026, https://www.bls.gov/news.release/disabl.nr0.htm |
 | Unemployment rate, US, 2025 | **8.3%** vs 4.1% | same | same |
 | Usually work part time, US, 2025 | **about 30%** vs about 17% | employed people with vs without a disability | same |
 | In service occupations, US, 2025 | **20.0%** vs 16.5% | employed people with vs without a disability | same |
@@ -148,9 +152,11 @@ the jobs.
 **What this says.** The people this affects are more likely to be paid by the
 hour, to work part time, and to hold service, production and transport jobs
 than to sit at a desk. That is the shift worker, the cleaner, the warehouse
-picker, the minimum-wage hire with no work email and no HR desk. Nobody has
-measured how many of them tell their employer. The only study that measured
-telling at all asked white-collar workers and found three in a hundred.
+picker, the minimum-wage hire with no work email and no HR desk. Across 655
+large employers in 2025 the median share of staff who told their employer was
+3.5%, the same three in a hundred the older white-collar study found, and the
+2026 index says the programmes now exist at 98% of those employers while the
+disclosure gap has not moved. The programmes are there. The asking is not.
 
 **Why Curb Cut's doors look the way they do.** Text and voice on a basic phone,
 no work login, no account, and never a telephone call back: those are the
