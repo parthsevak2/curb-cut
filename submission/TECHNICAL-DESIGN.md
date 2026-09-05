@@ -297,7 +297,7 @@ FOUR LAYERS, all failing the build except the last.
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
   Structural invariants        508   every push, ~1s, no org needed
-  Apex tests                   124   every deploy
+  Apex tests                   137   every deploy
   Accessibility (live pages)   333   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states
   Contrast (both themes)        28   computed from design tokens
@@ -480,7 +480,7 @@ An LLM call is treated as the expensive operation it is.
   · 4 of 6 channels answer with NO model call at all. Web, email,
     Slack and any external caller compose their reply in Apex.
   · Redaction is a compiled regex, not a classifier.
-  · CI runs zero inference. All six auditors are static Python/Node.
+  · CI runs zero inference. All ten auditors are static Python/Node.
   · The adversarial suite is the only thing that calls the agent, run
     deliberately rather than per push, and its scorer exits non-zero on
     inconclusive results so nobody re-runs it hunting a green.
