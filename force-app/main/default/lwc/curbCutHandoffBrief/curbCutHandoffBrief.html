@@ -16,6 +16,38 @@
                    start again if you can avoid it.</p>
             </template>
 
+            <h2 class="h">What this person asked you to know</h2>
+            <p class="soft">If they saved something to travel ahead of them, they chose who
+               may see it. Say who you are reading this as. We show only what they chose
+               for that audience.</p>
+            <div class="asrow">
+                <label class="lbl" for="readingAs">I am reading this as</label>
+                <select id="readingAs" class="pick" onchange={roleChanged} disabled={asking}>
+                    <template for:each={roleOptions} for:item="o">
+                        <option key={o.value} value={o.value} selected={o.selected}>{o.label}</option>
+                    </template>
+                </select>
+            </div>
+            <button class="take ask" onclick={reveal} disabled={asking}>
+                Show me what they asked me to know
+            </button>
+            <p class="record">Reading this here is recorded. They can see that you saw it.</p>
+            <p class="soft" role="status" aria-live="polite" aria-atomic="true">{revealStatus}</p>
+            <template if:true={hasShown}>
+                <ul class="said">
+                    <template for:each={shown} for:item="s">
+                        <li key={s.preferenceId} class="saidItem">
+                            <blockquote class="words">{s.statement}</blockquote>
+                            <p class="soft">In their words, saved {s.savedOn}.
+                               Recorded as shown to {s.shownTo}.</p>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:true={showError}>
+                <p class="err" role="alert">{showError}</p>
+            </template>
+
             <h2 class="h">How to reach them</h2>
             <p class="reach">{reachLine}</p>
             <p class="rule">Never by telephone. That is the door this record exists to keep open.</p>

@@ -118,7 +118,11 @@ color-contrast came back "incomplete" in all twelve states, because axe measures
 
 WHAT WAS ALREADY IN PLACE
 
-333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 505 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+<<<<<<< HEAD
+333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 508 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+=======
+333 accessibility checks against the six live pages every build, plus 28 contrast, 16 reading-level and 508 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+>>>>>>> wave1/disclosure
 
 A FINDING WE DISPROVED
 
@@ -220,7 +224,11 @@ THE SURFACE AROUND THE AGENT
 The agent is one component. Everything around it is deterministic and gated on every build:
 
 - 124 Apex tests
-- 505 structural invariants (about one second, no org required)
+<<<<<<< HEAD
+- 508 structural invariants (about one second, no org required)
+=======
+- 508 structural invariants (about one second, no org required)
+>>>>>>> wave1/disclosure
 - 333 accessibility checks against the six live pages
 - 131 Sa11y checks, Salesforce's own axe-core matcher, across 12 component states
 - 21 responsible-AI checks against Salesforce's five published guidelines
@@ -268,7 +276,11 @@ Stripping a volunteered medical condition before storage runs against a compiled
 
 CI RUNS ZERO INFERENCE
 
-All ten auditors are static Python and Node: 505 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+<<<<<<< HEAD
+All ten auditors are static Python and Node: 508 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+=======
+All ten auditors are static Python and Node: 508 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+>>>>>>> wave1/disclosure
 
 The two accessibility suites are worth naming, because the greener choice was also the better one. Sa11y runs axe-core over the rendered components, and the keyboard walk drives a real browser with real Tab presses. Both measure. Neither asks a model what it thinks the page looks like, which would be slower, less repeatable, and impossible to hand a judge as evidence.
 
