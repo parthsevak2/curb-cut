@@ -1,10 +1,10 @@
-We could not find a Salesforce tool published as "Accessibility Expert Skill" in the provisioned org, on AgentExchange or in the Salesforce DX MCP server, so we ran the closest thing Salesforce ships and say so: the lwc-experts toolset in the DX MCP server (@salesforce/mcp), guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below stand on their own.
+We could not find a Salesforce tool published as "Accessibility Expert Skill" in the provisioned org, on AgentExchange or in the Salesforce DX MCP server, so we ran the closest thing Salesforce ships and say so: the lwc-experts toolset in the DX MCP server (@salesforce/mcp), guide_component_accessibility and run_lwc_accessibility_jest_tests, which stand up Sa11y, its axe-core matcher. If a different tool was intended, the findings below still stand.
 
 WHAT WE RAN
 
 Sa11y against all five Lightning Web Components in twelve states: 131 axe checks passed, 0 WCAG violations. We used the 100-rule "extended" preset, not the 64-rule "base" preset Sa11y applies by default. One rule, region, is excluded in one place with the reason beside it: it carries no WCAG tag and fires only because a component mounted alone in a test has no page landmarks.
 
-Before trusting that, we planted an image with no alt text and asserted the matcher throws. It does.
+Before trusting that, we planted an image with no alt text and checked the matcher throws. It does.
 
 WHAT IT FOUND
 
@@ -18,7 +18,7 @@ FIXED. Every video now carries an aria-describedby pointing at a note on the pag
 
 2. The emergency form kept the last emergency's words.
 
-The LWC compiler flagged LWC1057: value is not a valid attribute for textarea. A textarea holds its text as a child node, so the binding did nothing, and clearing the field in JavaScript left the words on screen. This is the one place in Curb Cut a telephone number comes out of, used when somebody may be at risk. Stale text there invites the next escalation to be raised on the last one's words.
+The LWC compiler flagged LWC1057: value is not a valid attribute for textarea. A textarea holds its text as a child node, so the binding did nothing, and clearing the field in JavaScript left the words on screen. This is the one place in Curb Cut a telephone number comes out of, used when somebody may be at risk.
 
 FIXED, and the element is now cleared alongside the field.
 

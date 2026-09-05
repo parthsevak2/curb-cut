@@ -1,10 +1,10 @@
-The people on the other end of this are asking about accommodations, sometimes while telling us about a medical condition, and what they need from us is a reliable answer. So we treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a better answer, not just a comparable one. Every choice below is also a correctness choice, which is why each of them survived.
+The people on the other end are asking about accommodations, sometimes while telling us about a medical condition, and what they need is a reliable answer. So we treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a better answer, not just a comparable one. Every choice below is also a correctness choice, which is why each of them survived.
 
 THE RANKER IS NOT INFERENCE
 
 Matching what somebody said against the accommodation library is a deterministic Apex function: tokenise, drop stopwords, a light stemmer, then score by how much each word distinguishes an option. It doesn't need embeddings, a vector store, a RAG pipeline kept warm, or a re-indexing job.
 
-The library is 28 curated, individually sourced rows, so a SOQL query and keyword scoring is enough. An embedding search would burn an inference per message and give worse-sourced answers, because a cosine similarity cannot be explained to somebody who was given bad advice and a cited row can.
+The library is 28 curated, individually sourced rows, so a SOQL query and keyword scoring is enough. An embedding search would burn an inference per message and give worse-sourced answers: a cosine similarity can't be explained to somebody who was given bad advice, and a cited row can.
 
 CONTROL WORDS NEVER REACH A MODEL
 
@@ -24,7 +24,7 @@ All ten auditors are static Python and Node: 512 invariants, accessibility, cont
 
 The two accessibility suites are worth naming, because the greener choice was also the better one. Sa11y runs axe-core over the rendered components, and the keyboard walk drives a real browser with real Tab presses. Both measure. Neither asks a model what it thinks the page looks like, which would be slower, less repeatable, and impossible to hand a judge as evidence.
 
-The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number. Repeated runs to chase a score are wasted energy, and we removed the incentive.
+The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number.
 
 SESSIONS EXPIRE
 
