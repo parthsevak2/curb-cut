@@ -95,10 +95,11 @@ phone and something else in an inbox.
 
 Ring **+1 276 495 9311** and say what is hard. Speech in and speech out.
 
-The same number takes text messages, but text is gated behind A2P 10DLC carrier
-registration, which carries a vetting fee and a legal attestation and is not
-complete. Voice on that number needs no such registration and works today. Test
-the text path through the shared door in section 3 instead.
+The same number takes text messages. Text **CURB CUT** to it and say what is
+hard. Both text and voice answer through a small relay that runs beside the org
+and checks Twilio's signature on every request. If that relay is ever down, the
+number goes quiet rather than replying with something wrong; the shared door in
+section 3 is the same path without the phone.
 
 ## 5. Slack and inbound email
 

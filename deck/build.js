@@ -303,7 +303,7 @@ divider('03','The build','An agent whose principal is the worker, not the employ
   });
   const lanes=[['Web',   [1,1,1,1,1], 'anonymous, no login'],
                ['Voice', [0,1,0,0,0], 'live, no registration'],
-               ['Text',  [1,1,1,1,0], 'awaiting carrier'],
+               ['Text',  [1,1,1,1,0], 'live, via relay'],
                ['Email', [1,1,0,0,1], 'answers, never sends'],
                ['Slack', [1,1,0,0,0], 'DM only, never sends'],
                ['MCP',   [1,1,1,0,0], 'external assistants']];
@@ -477,7 +477,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
   title(s,'What is still wrong.');
   const o=[['No screen-reader user has tested this.','Every accessibility claim is machine or browser verified, which isn\'t the same as a person using it. One session with somebody who uses one daily is worth more than the next five features.'],
            ['The agent’s narration is nondeterministic.','It rewrites what an action returns rather than relaying it. Three separate fixes didn\'t move it.'],
-           ['Text messaging isn\'t carrier registered.','A2P 10DLC gates SMS from a ten digit number. Voice on the same number needs none and works today.'],
+           ['Text and voice run through a relay on a laptop.','The number answers through a small relay beside the org. When it\'s down, the number goes quiet rather than replying wrongly. Hosting it is the first real deployment task.'],
            ['The Slack app has never met a real workspace.','The Apex behind it is live and verified. The handshake isn\'t.']];
   o.forEach(([t,d],i)=>{ const y=1.95+i*1.05;
     T(s,{t,o:{x:ML,y,w:4.5,h:0.45,fontSize:13.5,bold:true,fontFace:H,color:INK}});
