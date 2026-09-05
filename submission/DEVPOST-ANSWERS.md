@@ -182,76 +182,113 @@ Instructions are not controls. We told the agent not to record a volunteered con
 
 ## Builder Track: What's your agent's current error rate, and what would "good" look like?
 
-> **Measured, not estimated.** An 11-scenario adversarial suite runs headless
-> through the Agent API, no Lightning UI anywhere in the path, and scores 23
-> assertions. Across three consecutive runs on the same build it returned
-> **21 of 23, every time: an 8.7% assertion failure rate.**
->
-> The more useful number is the variance. One assertion fails on every run: the
-> agent does not reliably say out loud that it discarded a volunteered condition.
-> The second failure **alternates** between two different assertions run to run, > same build, same prompts, different answers. A single green run would have been a
-> misleading thing to report, which is why we ran it three times.
->
-> Determinism is where we push the error rate to zero. The condition is stripped
-> before storage by Apex on every channel, and on the four channels that compose
-> their reply in Apex, web, text, email, Slack. The person is told so **every
-> single time**, pinned by a test that exercises all four. The conversational agent
-> is the exception: it rewrites what an action returns rather than relaying it. We
-> tried a strengthened instruction (published as agent v7), the action returning
-> the exact sentence, and the sentence embedded in the action's payload. It still
-> says it about half the time. That is a model behaviour, and we state it rather
-> than average it away.
->
-> **What "good" looks like:** 23 of 23 with zero variance across five runs. Getting
-> there means moving anything safety-critical out of the model's narration and into
-> code that runs whether or not it remembers. Which is the direction every fix in
-> this project has taken.
->
-> Around the agent, the deterministic surface is already there: **124 Apex tests,
-> 494 structural invariants, 333 accessibility checks, 28 contrast checks and 16
-> reading-level checks, all passing, all on every build.** Six auditors fail the
-> build, including one that fails if an error message blames the user and one that
-> fails if anyone adds a field for a diagnosis.
+**Paste `devpost/Q3-error-rate.txt` verbatim,** 3,996 characters. Now carries the Telemetry reflection the rules require.
+
+---
+
+MEASURED, NOT ESTIMATED.
+
+An 11-scenario adversarial suite runs headless through the Agent API, no Lightning UI anywhere in the path, and scores 23 assertions. Across three consecutive runs on the same build it returned 21 of 23 every time: an 8.7% assertion failure rate.
+
+The more useful number is the variance, and it is why we ran it three times rather than once.
+
+One assertion fails on EVERY run: the agent does not reliably say out loud that it discarded a volunteered condition. The second failure ALTERNATES between two different assertions run to run, same build, same prompts, different answers. A single green run would have been a misleading thing to report, so we report the distribution instead of the best score.
+
+WHY THAT ONE ASSERTION KEEPS FAILING
+
+We tried three things, and none worked:
+1. A strengthened instruction, published as agent v7.
+2. The action returning the exact sentence for the agent to say.
+3. The sentence embedded inside the action's own payload.
+
+It still says it about half the time, because the agent rewrites what an action returns rather than relaying it. That is model behaviour, stated rather than averaged away.
+
+WHERE WE PUSHED THE ERROR RATE TO ZERO
+
+The condition is stripped before storage by Apex on every channel. That part is deterministic and it always holds. And on the four channels that compose their reply in Apex rather than through a model, web, text, email, Slack, the person is told so EVERY SINGLE TIME. Pinned by a test that exercises all four, and verified live against the deployed org.
+
+So the honest picture is two numbers, not one: 100% on the deterministic surface, roughly 50% on the model's narration of the same fact.
+
+WHAT "GOOD" LOOKS LIKE
+
+23 of 23 with zero variance across five consecutive runs.
+
+Getting there does not mean better prompting. It means moving anything safety-critical out of the model's narration and into code that runs whether or not it remembers. Every fix in this project has gone that way. The remaining assertion is a narration requirement, so the honest path is to stop asking a model to be the guarantee and make the channel say it.
+
+THE SURFACE AROUND THE AGENT
+
+The agent is one component. Everything around it is deterministic and gated on every build:
+
+- 124 Apex tests
+- 494 structural invariants (about one second, no org required)
+- 333 accessibility checks against the six live pages
+- 131 Sa11y checks, Salesforce's own axe-core matcher, across 12 component states
+- 21 responsible-AI checks against Salesforce's five published guidelines
+- 28 contrast, 16 reading-level, 54 link and copy, 34 controls walked by real Tab presses
+
+Ten auditors fail the build: one if anyone adds a field for a diagnosis; one if an error message blames the person reading it; one if our copy promises a word the router does not answer; one if a number we publish about ourselves has gone stale, which it had, twice.
+
+Two of those suites deliberately break their own checks and assert each one goes red, because a suite that cannot fail proves nothing about the code it passes.
+
+TELEMETRY, WITHOUT SURVEILLANCE
+
+Every attempt to reach a person, on every channel, lands in a delivery ledger: when, which channel, which direction, whether it arrived, and a salted hash of the handle. Never the message, never a raw number. Six classes write to it and none can write a body. Five reports and a dashboard sit on it for the person on duty: who is waiting, what did not arrive, who needs an interpreter. The system can say it is failing somebody without being able to say what they said.
+
+HOW WE COUNT FAILURE
+
+Our scorer used to exit zero with 100% of assertions inconclusive. It printed "silence must never read as success" and then did exactly that. It now exits non-zero on any inconclusive OR failed assertion, and names the missing transcripts. An empty transcript is a failure, not a pass. That change made our reported score worse and the number trustworthy, which is the trade we would make every time.
 
 ---
 
 ## Environmental impact
 
-> We treated an LLM call as the expensive operation it is, and removed it wherever
-> a cheaper mechanism gives a better answer.
->
-> **The library lookup is not inference.** Ranking accommodations against what
-> somebody said is a deterministic Apex stemmer with title-weighted scoring and a
-> tie-break. No model, no embeddings, no vector store, no RAG pipeline to keep
-> warm. The library is 28 curated, individually sourced rows. A keyword ranker over
-> 28 rows is a SOQL query and some string work; the equivalent embedding search
-> would cost more energy and give worse-sourced answers.
->
-> **Control words never reach a model.** Roughly 70 phrases. `HUMAN`, `OFF`,
-> `WHO`, `HELP`, `STOP` and their natural variants. Are matched in Apex before any
-> inference happens. Someone withdrawing consent gets an instant deterministic
-> answer instead of a generation, which is both greener and more reliable.
->
-> **Four of six channels answer with no LLM call at all.** Web, email, Slack and
-> any external caller go through one Apex REST door that composes its reply in
-> code. Only the conversational agent path invokes a model.
->
-> **Redaction is a regex, not a classifier.** Stripping a volunteered condition
-> runs against a compiled pattern list. A moderation model would have been the
-> obvious reach and would have cost an inference on every single message.
->
-> **CI runs no inference.** All six auditors are static Python and Node. The
-> adversarial suite is the only thing that calls the agent, it is run deliberately
-> rather than on every push, and its scorer now exits non-zero on inconclusive
-> results so nobody re-runs it hunting for a green.
->
-> **Sessions expire.** The relay holds one conversation per hashed handle with a
-> 30-minute TTL, so no context is kept alive longer than the conversation.
->
-> The design principle underneath all of it: if a rule matters, put it in code. A
-> model asked to remember a rule burns energy every time it is asked and still
-> forgets. Our own measurements show exactly that. The sentence the agent
-> sometimes forgets is the one Apex now says every time, for free.
+**Paste `devpost/Q4-environmental.txt` verbatim,** 3,987 characters.
+
+---
+
+We treated an LLM call as the expensive operation it is, and removed it wherever a cheaper mechanism gives a BETTER answer, not merely a comparable one. Every choice below is also a correctness choice, which is why they survived.
+
+THE RANKER IS NOT INFERENCE
+
+Matching what somebody said against the accommodation library is a deterministic Apex function: tokenise, drop stopwords, a light stemmer, then score by how much each word distinguishes an option. No embeddings, no vector store, no RAG pipeline to keep warm, no re-indexing job.
+
+The library is 28 curated, individually sourced rows. A vector index over 28 rows is theatre. The keyword ranker is a SOQL query and some string work; the equivalent embedding search would burn an inference per message and give worse-sourced answers, because a cosine similarity cannot be explained to somebody who was given bad advice and a cited row can.
+
+CONTROL WORDS NEVER REACH A MODEL
+
+Roughly 70 phrases. HUMAN, OFF, WHO, HELP, STOP and their natural variants. Are matched in Apex before any inference happens. Somebody withdrawing consent gets an instant deterministic answer instead of a generation. That is greener, faster, and more reliable, in that order of importance reversed: we did it for reliability and got the efficiency free.
+
+FOUR OF SIX CHANNELS MAKE NO MODEL CALL AT ALL
+
+Web, email, Slack and any external caller go through one authenticated Apex REST door that composes its reply in code. Only the conversational agent path invokes a model. Most traffic through this system will never touch inference.
+
+REDACTION IS A REGEX, NOT A CLASSIFIER
+
+Stripping a volunteered medical condition before storage runs against a compiled pattern list. A moderation model was the obvious reach and would have cost an inference on EVERY message, added latency to the one path that must never be slow, and produced a probabilistic answer to a question that deserves a deterministic one.
+
+CI RUNS ZERO INFERENCE
+
+All ten auditors are static Python and Node: 494 invariants, accessibility, contrast, component, link and copy, reading level, responsible AI, and a check that our own published numbers have not gone stale. They run in about a second on every push, with no org and no model.
+
+The two accessibility suites are worth naming, because the greener choice was also the better one. Sa11y runs axe-core over the rendered components, and the keyboard walk drives a real browser with real Tab presses. Both measure. Neither asks a model what it thinks the page looks like, which would be slower, less repeatable, and impossible to hand a judge as evidence.
+
+The adversarial suite is the only thing that calls the agent. It is run deliberately rather than on every push, and its scorer now exits non-zero on inconclusive results specifically so nobody re-runs it hoping for a greener number. Repeated runs to chase a score are wasted energy, and we removed the incentive.
+
+SESSIONS EXPIRE
+
+The relay holds one conversation per hashed handle with a 30-minute TTL. No context is kept alive longer than the conversation that needs it.
+
+WE PICKED THE SMALL MODEL PATH BY DEFAULT
+
+The agent's job is deliberately narrow: choose an action and phrase a reply at a grade-six reading level. It does not summarise documents, does not retrieve, does not reason over long context. The heavy lifting is a database query.
+
+THE PRINCIPLE UNDERNEATH ALL OF IT
+
+If a rule matters, put it in code. A model asked to remember a rule burns energy every single time it is asked, and still forgets.
+
+Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition. It says about half the time, across six measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
+
+The greenest token is the one you never had to generate, and it is usually also the one you can actually depend on.
 
 ---
 

@@ -3,6 +3,15 @@ FPS, W, H, GROUND = 30, 1920, 1080, '0xF2F3F4'
 
 def clip(src, secs, mobile, out):
     d = int(secs * FPS)
+    if src.endswith('.mp4'):
+        # a real recording: no loop, no zoom, just conform it to the frame and
+        # hold its last frame if the scene runs longer than the footage
+        vf = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+              f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:{GROUND},fps={FPS},tpad=stop_mode=clone:stop_duration={secs}")
+        subprocess.run(['ffmpeg','-y','-loglevel','error','-i',src,'-vf',vf,
+                        '-t',str(secs),'-r',str(FPS),'-an','-c:v','libx264','-pix_fmt','yuv420p',
+                        '-crf','18',out], check=True)
+        return
     base = (f"scale=-2:{H-80},pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:{GROUND}" if mobile else
             f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
             f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:{GROUND}")

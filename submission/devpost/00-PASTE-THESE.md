@@ -66,7 +66,7 @@ actually sees it.
 
 - `Q1-accessibility.txt`, 4,000 characters
 - `Q2-responsible-ai.txt`, 3,697 characters
-- `Q3-error-rate.txt`, 3,634 characters
+- `Q3-error-rate.txt`, 3,997 characters
 - `Q4-environmental.txt`, 3,988 characters
 
 All four are paste-ready as-is. Do not add a heading or a preamble: each is
