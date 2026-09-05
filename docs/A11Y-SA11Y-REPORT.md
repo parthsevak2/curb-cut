@@ -44,7 +44,7 @@ next to it. Every other rule in `extended` is enforced.
 These came back `incomplete`, not `pass`. A green suite is not evidence about
 them, and saying otherwise would be the easiest lie in this document.
 
-**`color-contrast` and `color-contrast-enhanced`** — 12 states each.
+**`color-contrast` and `color-contrast-enhanced`**, 12 states each.
 axe measures contrast by painting to a canvas, and jsdom has no canvas:
 
 ```
@@ -57,9 +57,9 @@ directly from the stylesheets. That suite runs 28 checks and passes. The new
 `.nocap` note added in this audit measures **10.59:1** against the card it sits
 on, against a 4.5:1 requirement.
 
-**`video-caption`** — 1 state. Discussed below; it is the finding that mattered.
+**`video-caption`**, 1 state. Discussed below; it is the finding that mattered.
 
-**`aria-valid-attr-value`** — 1 state, caused by the fix below. axe cannot
+**`aria-valid-attr-value`**, 1 state, caused by the fix below. axe cannot
 follow an `aria-describedby` idref through LWC's synthetic shadow DOM. Rather
 than leave that unanswered, a test asserts the reference resolves to a real
 element containing real text. It does.
@@ -75,7 +75,7 @@ reader could.
 
 The obvious remedy is the forbidden one. This video is usually a Deaf person
 signing, and the product's central promise is that signed video is never
-machine translated — an auto-caption here would be a machine putting words in
+machine translated, an auto-caption here would be a machine putting words in
 someone's mouth about their own body, then filing them. The banner already says
 so to the operator.
 
