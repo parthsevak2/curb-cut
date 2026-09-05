@@ -478,7 +478,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
   const o=[['No screen-reader user has tested this.','Every accessibility claim is machine or browser verified, which isn\'t the same as a person using it. One session with somebody who uses one daily is worth more than the next five features.'],
            ['The agent’s narration is nondeterministic.','It rewrites what an action returns rather than relaying it. Three separate fixes didn\'t move it.'],
            ['Text and voice run through a relay on a laptop.','The number answers through a small relay beside the org. When it\'s down, the number goes quiet rather than replying wrongly. Hosting it is the first real deployment task.'],
-           ['The Slack app has never met a real workspace.','The Apex behind it is live and verified. The handshake isn\'t.']];
+           ['Slack, text and voice all live on one laptop.','The Slack app is installed in a real workspace and answers over Socket Mode, but it runs beside the relay. When the laptop sleeps, three channels go quiet at once.']];
   o.forEach(([t,d],i)=>{ const y=1.95+i*1.05;
     T(s,{t,o:{x:ML,y,w:4.5,h:0.45,fontSize:13.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:5.5,y,w:6.95,h:0.95,fontSize:11.5,fontFace:B,color:SOFT}});
