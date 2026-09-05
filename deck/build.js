@@ -252,6 +252,23 @@ divider('03','The build','An agent whose principal is the worker, not the employ
   kicker(s,'The model sits inside LOGIC and nowhere else. It may choose an action and phrase a reply. It may not invent an accommodation, a cost, or a precedent.');
 }
 
+/* ------------------------------------------------------ 13a TELEMETRY */
+{ const s=light(); chip(s,'03  THE BUILD  |  TELEMETRY');
+  title(s,'It can say it is failing somebody. Not what they said.');
+  const cols=[['WHAT THE LEDGER HOLDS',GREEN,['When the attempt was made','Which channel, which direction','Whether it arrived, and why not','A salted hash of the handle','How much of today’s quota is spent']],
+              ['WHAT IT CANNOT HOLD',RED,['The message','A raw phone number or address','A name','Anything about a body','A reason for turning a disclosure off']]];
+  cols.forEach(([h,c,items],i)=>{ const x=ML+i*5.95;
+    s.addShape(p.ShapeType.roundRect,{x,y:1.98,w:5.65,h:2.9,rectRadius:0.05,fill:{color:SURF},line:{color:c,width:1.5}});
+    T(s,{t:h,o:{x:x+0.27,y:2.16,w:5.1,h:0.34,fontSize:11,bold:true,fontFace:M,color:c,charSpacing:1.2}});
+    T(s,{t:items.map((t,j)=>({text:t,options:{bullet:true,breakLine:j<items.length-1}})),
+      o:{x:x+0.27,y:2.6,w:5.1,h:2.2,fontSize:12.5,fontFace:B,color:INK,paraSpaceAfter:7}});
+  });
+  T(s,{t:'Six classes write to it. None can write a body, because there is no field for one. Five reports and one dashboard sit on top of it for the person on duty: who is waiting, what did not arrive, who needs an interpreter.',
+    o:{x:ML,y:5.08,w:11.6,h:0.9,fontSize:13.5,fontFace:B,color:SOFT}});
+  kicker(s,'Telemetry that would let an employer read a conversation is surveillance with a dashboard. This one measures the system and protects the person.');
+  src(s,'Message_Log__c   ·   9 fields, no body   ·   How_People_Reach_Us, Messages_That_Did_Not_Arrive, Who_Is_Waiting, Needs_An_Interpreter, Awaiting_A_Decision');
+}
+
 /* ------------------------------------------------ 13b THE GROUNDING PATH */
 { const s=light(); chip(s,'03  THE BUILD  |  GROUNDING');
   title(s,'Where the model is allowed to touch it.');
