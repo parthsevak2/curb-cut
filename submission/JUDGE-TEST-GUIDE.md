@@ -20,7 +20,7 @@ That is the whole product.
 | Any AI assistant, MCP, or a relay | **Live** | Yes, with org credentials |
 | Voice | Built, wired to a real number | Yes, by ringing it |
 | Text message | Built, **not carrier registered** | Through the shared door, below |
-| Slack | Built, **never met a real workspace** | Through the shared door, below |
+| Slack | Live in one workspace, DM only, never sends | Through the shared door, below |
 | Inbound email | Built, service active | Needs the address from Setup |
 | Operator console | Live | Yes, with org credentials |
 

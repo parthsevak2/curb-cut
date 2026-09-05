@@ -121,4 +121,4 @@ Be ready for these, and do not be defensive:
   runs, with one failure that alternates.
 - **The console has had less accessibility attention than the public site,**
   because the public site is where somebody arrives on a bad day.
-- **The Slack app has never run against a real workspace.**
+- **The Slack app runs on the same laptop as the relay.** It is installed in a real workspace and answers over Socket Mode; when the laptop sleeps, it goes quiet with text and voice.
