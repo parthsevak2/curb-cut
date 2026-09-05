@@ -10,7 +10,7 @@ So anyone deploying from our repository would have silently reintroduced the exa
 
 A FINDING WE WITHDREW
 
-The same run failed a check asserting that every library row states a cost. Nine do not. But the code was already right: it renders a cost only when one is known, and otherwise says "I have no cost or precedent figure to give you. I will not estimate one." The check was too strict, so we corrected the check rather than the code, and recorded the coverage gap as undecided instead of quietly passing it. We fixed the check rather than the code, and we're saying so here so nobody trusts a green that was never earned.
+The same run failed a check asserting that every library row states a cost. Nine do not. But the code was already right: it renders a cost only when one is known, and otherwise says "I have no cost or precedent figure to give you. I will not estimate one." The check was too strict, so we corrected the check rather than the code, and recorded the coverage gap as undecided instead of quietly passing it. We're saying so here so nobody trusts a green that was never earned.
 
 BIAS
 

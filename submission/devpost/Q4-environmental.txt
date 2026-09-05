@@ -38,6 +38,4 @@ THE PRINCIPLE UNDERNEATH ALL OF IT
 
 If a rule matters, put it in code. A model asked to remember a rule burns energy every time it is asked, and still forgets.
 
-Our own measurements prove that rather than assert it. The sentence the agent is supposed to say when it discards a volunteered condition. It says about half the time, across three measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.
-
-Four channels say the sentence every time with no model call; the agent says it about half the time.
+Our own measurements prove that rather than assert it: the sentence the agent is supposed to say when it discards a volunteered condition, it says about half the time, across three measured runs, despite three separate attempts to make it reliable. The same sentence is emitted by Apex on four channels 100% of the time, for no inference at all.

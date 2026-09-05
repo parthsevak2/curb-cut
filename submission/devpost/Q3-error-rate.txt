@@ -44,7 +44,7 @@ Two of those suites deliberately break their own checks and assert each one goes
 
 TELEMETRY, WITHOUT SURVEILLANCE
 
-Every attempt to reach a person, on every channel, lands in a delivery ledger: when, which channel, which direction, whether the platform accepted it (delivery callbacks are not wired yet), and a salted hash of the handle. It never holds the message body or a raw phone number. Six classes write to it and none can write a body. Five reports and a dashboard sit on it for the person on duty: who is waiting, what did not arrive, who needs an interpreter. The duty dashboard shows who is waiting and what the platform rejected; the ledger holds no message body.
+Every attempt to reach a person, on every channel, lands in a delivery ledger: when, which channel, which direction, whether the platform accepted it (delivery callbacks are not wired yet), and a salted hash of the handle. It never holds the message body or a raw phone number. Six classes write to it and none can write a body. Five reports and a dashboard sit on it for the person on duty: who is waiting, what the platform rejected, who needs an interpreter. The ledger holds no message body.
 
 HOW WE COUNT FAILURE
 
