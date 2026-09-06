@@ -19,6 +19,11 @@
     <a class="btn" href="#doors">Other ways to reach it</a>
   </div>
   <p class="cta-note">
+    No phone? No problem. Have a phone but no internet? Text <span class="kw">CURB CUT</span> to
+    <a href="sms:+12764959311?body=CURB%20CUT">+1 276 495 9311</a>, or call the same number.
+    It is a US number, so a prepaid plan may charge for the text.
+  </p>
+  <p class="cta-note">
     You can stop at any point. Nothing that could identify you is written down
     while you're anonymous, and nothing reaches your employer unless you say yes first.
   </p>
@@ -166,6 +171,10 @@
           Write in your own time, in your own words, with no one waiting on the
           other end of a cursor. If a reply can't be delivered, the message is
           handed to a person rather than dropped.
+        </p>
+        <p>
+          <a href="mailto:curbcut@k-1cnb5a59o6bjnzp8kkwyshpgr8g0vwi9qhgl3p29zz9m62h9pw.gk-yij5suax.can96.apex.salesforce.com?subject=What%20is%20hard%20at%20work">Email the desk</a>.
+          The address is long because Salesforce generates it; the link fills it in for you.
         </p>
       </div>
 

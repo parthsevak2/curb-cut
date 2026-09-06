@@ -122,9 +122,11 @@ public with sharing class CurbCutCreateRequest {
         }
         res.requestId = ar.Id;
         res.created = true;
-        res.message = 'Sent to the access desk of the organisation running this page. No manager has been told. '
-                    + 'Their target is to answer by ' + ar.Interactive_Process_Due__c.format()
-                    + '. That date is their commitment, not something this page can force. You can stop this any time.';
+        Date due = ar.Interactive_Process_Due__c;
+        String dueWords = Datetime.newInstanceGmt(due.year(), due.month(), due.day()).formatGmt('d MMMM yyyy');
+        res.message = 'Sent to the access desk of the organisation running this page, in your words. No manager has been told. '
+                    + 'Their target is to answer by ' + dueWords
+                    + '. That date is their commitment, not something this page can force.';
         return res;
     }
 }
