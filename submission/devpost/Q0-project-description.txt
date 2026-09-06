@@ -25,7 +25,7 @@ Six doors, all live today. An Agentforce agent written in Agent Script decides w
 - Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page, with numbered options.
 - Voice on the same number. It never rings you back.
 - Email.
-- Slack, private message only. It says up front that Slack belongs to your employer.
+- Slack, private message only. It says up front that Slack belongs to your employer. Judges can join our workspace and try it: https://join.slack.com/t/havihidigital/shared_invite/zt-493mf6btt-uxjLPiafBkOxXVzc2V2UFQ
 - Any assistant you already use, through tools that can't send.
 
 [image: slack-live]
