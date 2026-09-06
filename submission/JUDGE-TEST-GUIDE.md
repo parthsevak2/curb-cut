@@ -160,7 +160,10 @@ rather than stored in metadata: **Setup, Email Services, CurbCutInbound**.
 
 ## 6. The operator console
 
-With the org credentials: open the **Curb Cut Console** app. Ask the assistant
+With the org credentials from your Devpost page, open the **Curb Cut Console** app:
+<https://orgfarm-7a04c62cb9.lightning.force.com/lightning/app/Curb_Cut_Console>
+Its home tab, with the queue, the wait times and the assistant, is
+<https://orgfarm-7a04c62cb9.lightning.force.com/lightning/n/Curb_Cut_Home>. Ask the assistant
 what is wrong with the person whose request you are reading.
 
 It will refuse, and the refusal is the feature:
