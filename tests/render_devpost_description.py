@@ -29,7 +29,7 @@ def render():
             out.append('<ul>'+''.join(lis)+'</ul>'); continue
         p=' '.join(l.strip() for l in lines)
         if p.startswith("There's no field for a diagnosis"): out.append('<p>🔒 '+html.escape(p)+'</p>'); continue
-        if p.startswith('Watch the film'): out.append('<p>▶ <a href="https://youtu.be/yleHLiwWRKA">Watch the film, 4:59, every channel live</a></p>'); continue
+        if p.startswith('Watch the three-minute cut'): out.append('<p>▶ <a href="https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view">Watch the three-minute cut</a> · <a href="https://youtu.be/yleHLiwWRKA">The full film, 4:59, every channel live</a></p>'); continue
         if p.startswith('Try it, no login:'): out.append('<p>✿ Try it, no login: <a href="https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask">orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask</a></p>'); continue
         if p.startswith('Everything else'): out.append('<p>📖 Everything else, evidence included: <a href="https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/docs">orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/docs</a>. Code, MIT: <a href="https://github.com/parthsevak2/curb-cut">github.com/parthsevak2/curb-cut</a></p>'); continue
         out.append('<p>'+html.escape(p)+'</p>')
