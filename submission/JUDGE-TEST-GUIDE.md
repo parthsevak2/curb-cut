@@ -46,7 +46,7 @@ and contains this line:
 
 **What you should see at step 5.** The date the desk has committed to answer by, in words, with the sentence *That date is their commitment, not something this page can force.* Under it, what was sent stays on the screen with a copy button, and a line saying how an answer can reach you.*
 
-**Two things worth trying on purpose.** Press **A+** and **Contrast** at the top
+**Two things worth trying on purpose.** Press **Bigger text** and **Contrast** at the top
 of any page. Then try the whole flow with the keyboard only: Tab, and Enter or
 Space. Nothing needs a mouse.
 
@@ -175,7 +175,7 @@ It will refuse, and the refusal is the feature:
 ```bash
 python3 tests/invariants.py        # 512 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
-python3 tests/a11y_audit.py        # 528 accessibility checks, against the live pages
+python3 tests/a11y_audit.py        # 530 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks
 python3 tests/rai_self_check.py --selftest   # proves those checks can fail
