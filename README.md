@@ -36,7 +36,7 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Email | inbound service `CurbCutInbound`, address in Setup → Email Services | live |
 | Slack | `node channels/slack-app.mjs`, Socket Mode, DM only, never sends | live in a real workspace; manifest in `channels/slack-manifest.json` |
 | Agent | `Curb_Cut` v7, `Curb_Cut_Desk` v5 | both active |
-| Console (internal) | `/lightning/app/Curb_Cut_Console` | live |
+| Console (internal) | `/lightning/app/Curb_Cut_Console`, home tab `/lightning/n/Curb_Cut_Home`, org login needed | live |
 | Why now | `/curbcut/why` | live |
 | Messaging programme | `/curbcut/messaging` | live |
 | MCP server | `node channels/mcp-server.mjs` | 3 tools, none of which can send |
