@@ -559,7 +559,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   title(s,'Don\'t take any of it on trust.');
   const cmd=[['508','structural invariants','python3 tests/invariants.py'],
              ['127','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
-             ['331','accessibility checks, live pages','python3 tests/a11y_audit.py'],
+             ['530','accessibility checks, live pages','python3 tests/a11y_audit.py'],
              ['131','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
              ['21','responsible AI checks','python3 tests/rai_self_check.py'],
              ['28','contrast checks, both themes','python3 tests/contrast_audit.py'],
