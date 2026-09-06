@@ -109,10 +109,11 @@ Both route through the same Apex as everything else, so you can exercise their
 exact behaviour through section 3 by setting `channel` to `Slack` or `Email`.
 
 **Slack is live in one workspace, Havihi Digital.** It answers over Socket Mode
-from the same laptop as the text and voice relay. To try it yourself, ask
-parth@havihi.digital for an invite to that workspace, then open the Curb Cut
-app under "Agents & apps" and send it a direct message, or type `/curbcut`
-followed by what is hard. The app never posts where anyone else can see: in a
+from the same laptop as the text and voice relay. To try it yourself, join the
+workspace with this invite link: <https://join.slack.com/t/havihidigital/shared_invite/zt-493mf6btt-uxjLPiafBkOxXVzc2V2UFQ>
+Then open the Curb Cut app under "Agents & apps" and send it a direct message,
+or type `/curbcut` followed by what is hard. The link joins you as a member of
+a small consultancy's workspace, so please treat it as a demo space. The app never posts where anyone else can see: in a
 channel, `/curbcut` refuses, and it only ever replies to you.
 
 This is what came back on 5 September 2026 at 6:06 pm, to a real direct message
