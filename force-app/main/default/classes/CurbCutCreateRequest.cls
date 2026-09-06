@@ -126,7 +126,8 @@ public with sharing class CurbCutCreateRequest {
         String dueWords = Datetime.newInstanceGmt(due.year(), due.month(), due.day()).formatGmt('d MMMM yyyy');
         res.message = 'Sent to the access desk of the organisation running this page, in your words. No manager has been told. '
                     + 'Their target is to answer by ' + dueWords
-                    + '. That date is their commitment, not something this page can force.';
+                    + '. That date is their commitment, not something this page can force. '
+                    + 'If you would rather talk to a person at any point, say HUMAN on any channel and one picks it up.';
         return res;
     }
 }

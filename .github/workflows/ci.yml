@@ -101,9 +101,23 @@ jobs:
       - name: Apex tests
         if: steps.auth.outputs.authed == 'true'
         run: |
-          sf apex run test --target-org curbcut --wait 20 \
-            --test-level RunLocalTests \
-            --result-format human --code-coverage
+          # The org's asynchronous test runner sometimes answers UNKNOWN_EXCEPTION.
+          # When it does, run every test class synchronously, one at a time, and
+          # fail if any class fails. Same tests, same org, slower path.
+          if ! sf apex run test --target-org curbcut --wait 20 \
+               --test-level RunLocalTests \
+               --result-format human --code-coverage; then
+            echo "Asynchronous run failed; falling back to per-class synchronous runs"
+            fails=0
+            for f in force-app/main/default/classes/*Test.cls; do
+              c=$(basename "$f" .cls)
+              out=$(sf apex run test --target-org curbcut --class-names "$c" --synchronous --wait 20 --result-format human 2>&1)
+              res=$(echo "$out" | grep -iE '^Outcome' | awk '{print $NF}')
+              echo "$c: ${res:-no result}"
+              [ "$res" = "Passed" ] || { echo "$out" | tail -40; fails=$((fails+1)); }
+            done
+            [ "$fails" -eq 0 ]
+          fi
 
       # Compiles the Agent Script server-side. This is the only syntax check
       # that exists; there is no offline compiler.
