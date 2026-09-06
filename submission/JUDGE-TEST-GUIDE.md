@@ -9,8 +9,8 @@ otherwise.
 sentence about something that is hard at work. No login, no account, no name.
 That is the whole product.
 
-If you would rather watch first, the film is 4 minutes 59 seconds and shows every
-channel working: <https://youtu.be/yleHLiwWRKA>
+If you would rather watch first: a three-minute cut is at <https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view>, and the full film,
+4 minutes 59 seconds with every channel working, is at <https://youtu.be/yleHLiwWRKA>.
 
 ---
 
