@@ -469,7 +469,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
   T(s,{t:'"Good" is 23 of 23 with zero variance across five runs. Getting there means moving anything safety critical out of the model’s narration and into code that runs whether or not it remembers.',
     o:{x:ML,y:4.6,w:11.5,h:0.9,fontSize:14.5,fontFace:H,italic:true,color:INK}});
-  T(s,{t:'137 Apex   |   512 invariants   |   331 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
+  T(s,{t:'127 Apex   |   512 invariants   |   530 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
     o:{x:ML,y:5.7,w:11.7,h:0.5,fontSize:12,fontFace:M,color:SOFT}});
 }
 
@@ -558,7 +558,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
 { const s=light(); chip(s,'APPENDIX  |  VERIFICATION');
   title(s,'Don\'t take any of it on trust.');
   const cmd=[['508','structural invariants','python3 tests/invariants.py'],
-             ['137','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
+             ['127','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
              ['331','accessibility checks, live pages','python3 tests/a11y_audit.py'],
              ['131','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
              ['21','responsible AI checks','python3 tests/rai_self_check.py'],
