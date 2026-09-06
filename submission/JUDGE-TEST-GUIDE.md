@@ -174,7 +174,7 @@ It will refuse, and the refusal is the feature:
 
 ```bash
 python3 tests/invariants.py        # 512 structural invariants
-sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
+sf apex run test -o curbcut -l RunLocalTests   # 127 Apex tests
 python3 tests/a11y_audit.py        # 530 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks

@@ -31,7 +31,7 @@ THE SURFACE AROUND THE AGENT
 
 The agent is one component. Everything around it is deterministic and gated on every build:
 
-- 137 Apex tests
+- 127 Apex tests
 - 512 structural invariants (about one second, no org required)
 - 530 accessibility checks against the seven live pages
 - 131 Sa11y checks, Salesforce's own axe-core matcher, across 12 component states

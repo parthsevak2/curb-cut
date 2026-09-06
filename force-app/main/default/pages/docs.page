@@ -54,7 +54,7 @@
 </ul>
 <h4>Verification</h4>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
-<pre>137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
+<pre>127 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 512 structural invariants      python3 tests/invariants.py            ~1s, no org
 530 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
@@ -131,7 +131,7 @@ curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
 <hr/>
 <h3>Check the numbers rather than trusting them</h3>
 <pre>python3 tests/invariants.py        # 512 structural invariants
-sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
+sf apex run test -o curbcut -l RunLocalTests   # 127 Apex tests
 python3 tests/a11y_audit.py        # 530 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks
@@ -740,7 +740,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   employer sees a request in the person's words rather than a record
   about them. The agent is the same technology the employer's side
   already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      508 checks, ~1s
-  sf apex run test -o curbcut -l RunLocalTests      137 tests
+  sf apex run test -o curbcut -l RunLocalTests      127 tests
   python3 tests/a11y_audit.py                      527 checks, live pages
   npm run test:a11y                                131 Sa11y checks, 12 states
   python3 tests/contrast_audit.py                   28 checks, both themes
