@@ -328,7 +328,7 @@
     </p>
     <div class="proof">
       <div><b>512</b><span>structural checks that must hold before anything ships</span></div>
-      <div><b>137</b><span>Apex tests against the rules above</span></div>
+      <div><b>127</b><span>Apex tests against the rules above</span></div>
       <div><b>0</b><span>of the 61 fields in the system hold anything medical</span></div>
       <div><b>10</b><span>adversarial scenarios the assistant is scored against</span></div>
     </div>
