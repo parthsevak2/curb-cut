@@ -91,7 +91,7 @@
 </ol>
 <p><strong>What you should see at step 4.</strong> The request is written in the words you used, and contains this line:</p>
 <blockquote><p>I am not sharing a diagnosis, and I am not required to. This is about what I need to do my job.</p></blockquote>
-<p><strong>What you should see at step 5.</strong> A date, and the sentence <em>You can stop this any time.</em></p>
+<p><strong>What you should see at step 5.</strong> The date the desk has committed to answer by, in words, with the sentence <em>That date is their commitment, not something this page can force.</em> Under it, what was sent stays on the screen with a copy button, and a line saying how an answer can reach you.*</p>
 <p><strong>Two things worth trying on purpose.</strong> Press <strong>A+</strong> and <strong>Contrast</strong> at the top of any page. Then try the whole flow with the keyboard only: Tab, and Enter or Space. Nothing needs a mouse.</p>
 <h3>2. The same thing on a phone</h3>
 <p>Open the same link on a phone. It is the same page, not a cut-down one. Two of the six doors, voice and text, work on a handset with no internet at all.</p>
@@ -146,7 +146,7 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 </ul></section>
 <section aria-labelledby="doc-2"><h2 id="doc-2">What a screen reader is handed</h2><p class="mute">A scripted walk of the ask page, step by step, and what it cannot tell you. Source: <code>docs/SCREEN-READER-WALK.md</code></p><h3>What a screen reader is handed on /ask, step by step</h3>
 <p>This transcript was produced by a script, not by a person who uses a screen reader. It reads the same accessibility tree that NVDA, JAWS and VoiceOver read, drives the page with real key and click events, and records what a screen reader would be given at each step: where focus lands, what the live regions announce, and the order things are read. It cannot tell you what it is like to use. One session with a daily screen-reader user still comes before the next five features.</p>
-<p>Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 21:29 UTC.</p>
+<p>Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-06 01:56 UTC.</p>
 <h4>Step 0: the page loads</h4>
 <ul>
 <li>Focus is on: body</li>
@@ -214,7 +214,7 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <li>Focus is on: h2#resultsHeading "What other people have asked for"</li>
 <li>Live regions announce: "Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional."</li>
 </ul>
-<p>Reading order, the options that arrived (30 of 63 nodes):</p>
+<p>Reading order, the options that arrived (30 of 77 nodes):</p>
 <ul>
 <li>link "Skip to the main content"</li>
 <li>main (no name)</li>
@@ -250,9 +250,9 @@ python3 tests/contrast_audit.py    # 28 contrast checks</pre>
 <h4>Step 3: after pressing "Help me ask for one of these"</h4>
 <ul>
 <li>Focus is on: h2#draftHeading "Read this over"</li>
-<li>Live regions announce: "Read this over. Nothing is sent until you choose to send it."</li>
+<li>Live regions announce: "Read this over. Nothing is sent until you choose to send it. You did not pick one of the options, so this asks in your own words and leaves the rest to the desk."</li>
 </ul>
-<p>Reading order, the draft (25 of 68 nodes):</p>
+<p>Reading order, the draft (25 of 82 nodes):</p>
 <ul>
 <li>link "Skip to the main content"</li>
 <li>main (no name)</li>

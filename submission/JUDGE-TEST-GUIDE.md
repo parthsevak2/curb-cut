@@ -44,8 +44,7 @@ and contains this line:
 > I am not sharing a diagnosis, and I am not required to. This is about what I
 > need to do my job.
 
-**What you should see at step 5.** A date, and the sentence *You can stop this
-any time.*
+**What you should see at step 5.** The date the desk has committed to answer by, in words, with the sentence *That date is their commitment, not something this page can force.* Under it, what was sent stays on the screen with a copy button, and a line saying how an answer can reach you.*
 
 **Two things worth trying on purpose.** Press **A+** and **Contrast** at the top
 of any page. Then try the whole flow with the keyboard only: Tab, and Enter or

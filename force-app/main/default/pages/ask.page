@@ -22,7 +22,14 @@
     details.fold > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--ground, #F5F3ED); }
     details.fold > .foldBody { padding: 1rem .2rem 0; }
     .copyRow { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; margin-top: .5rem; }
-  </style>
+    .optionCards { display:grid; gap:1rem; margin:1rem 0; }
+  .optionCard { border:1px solid var(--line, #cfd6d2); border-radius:.5rem; padding:1rem 1.1rem; }
+  .optionCard h3 { margin:0 0 .35rem; font-size:1.15rem; }
+  .optionCard p { margin:0 0 .75rem; }
+  .btn.pick[aria-pressed="true"] { outline:3px solid var(--focus, #0B57C7); outline-offset:2px; }
+  .actions { display:flex; flex-wrap:wrap; gap:1.25rem; }
+  .sentText { margin:.5rem 0 1rem; padding:.75rem 1rem; border-left:4px solid var(--accent, #b8860b); white-space:pre-wrap; }
+</style>
 </head>
 <body>
 <c:CurbCutShell pageTitle="Ask" current="ask"
@@ -257,10 +264,72 @@
     Visualforce.remoting.Manager.invokeAction(fn, ...args, function (res, ev) {
       if (ev.status && res) { onOk(res); }
       else {
+        /* Give the button back and put focus on it, so "try again" is one press. */
+        var stuck = document.querySelectorAll('button[aria-busy="true"]');
+        for (var k = 0; k < stuck.length; k++) { stuck[k].disabled = false; stuck[k].setAttribute('aria-busy', 'false'); }
         say('Something went wrong on my end, and that isn\'t your problem to solve. ' +
             'Try again, or ask for a person.');
+        if (stuck.length) { stuck[0].focus(); }
       }
     }, { escape: false, timeout: 30000 });
+  }
+
+  /* The options arrive as plain text, one per '- ' line. Each becomes a card with
+     its own button, so a person can say which one they want asked for. */
+  function renderOptions(text) {
+    optionsBox.textContent = ''; chosen = null;
+    if (!text) { optionsBox.hidden = true; return; }
+    optionsBox.hidden = false;
+    var help = document.createElement('p'); help.className = 'fieldHelp'; help.id = 'pickHelp';
+    help.textContent = 'Pick the one you would like to ask for. You can also skip this and ask in your own words.';
+    optionsBox.appendChild(help);
+    var list = document.createElement('div'); list.className = 'optionCards';
+    list.setAttribute('role', 'group'); list.setAttribute('aria-labelledby', 'pickHelp');
+    var blocks = text.split(/\n(?=- )/);
+    for (var i = 0; i < blocks.length; i++) {
+      var lines = blocks[i].split('\n');
+      var title = lines[0].replace(/^- /, '').trim();
+      if (!title) { continue; }
+      var card = document.createElement('div'); card.className = 'optionCard';
+      var h = document.createElement('h3'); h.textContent = title; card.appendChild(h);
+      var rest = []; for (var j = 1; j < lines.length; j++) { if (lines[j].trim()) { rest.push(lines[j].trim()); } }
+      if (rest.length) { var p = document.createElement('p'); p.textContent = rest.join(' '); card.appendChild(p); }
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'btn pick';
+      b.setAttribute('aria-pressed', 'false'); b.textContent = 'Ask for this one';
+      b.setAttribute('aria-label', 'Ask for this one: ' + title);
+      (function (btn, name) {
+        btn.addEventListener('click', function () {
+          var all = list.querySelectorAll('button.pick');
+          for (var k = 0; k < all.length; k++) { all[k].setAttribute('aria-pressed', 'false'); all[k].textContent = 'Ask for this one'; }
+          chosen = name; btn.setAttribute('aria-pressed', 'true'); btn.textContent = 'Chosen';
+          say('Chosen: ' + name + '. Press "Help me ask for this" when you are ready. Nothing is sent until you approve the draft.');
+          document.getElementById('draftBtn').textContent = 'Help me ask for this';
+          document.getElementById('draftBtn').focus();
+        });
+      })(b, title);
+      card.appendChild(b); list.appendChild(card);
+    }
+    optionsBox.appendChild(list);
+  }
+
+  /* The ending keeps what was sent on the screen, because the person may want to
+     keep it, and says how an answer can reach them. */
+  function renderDone(message, sent) {
+    doneBox.textContent = '';
+    var m = document.createElement('p'); m.textContent = message; doneBox.appendChild(m);
+    if (sent) {
+      var h = document.createElement('h3'); h.textContent = 'What was sent'; doneBox.appendChild(h);
+      var q = document.createElement('blockquote'); q.className = 'sentText'; q.textContent = sent; doneBox.appendChild(q);
+      var c = document.createElement('button'); c.type = 'button'; c.className = 'btn'; c.textContent = 'Copy what was sent';
+      c.addEventListener('click', function () {
+        try { navigator.clipboard.writeText(sent); say('Copied.'); c.textContent = 'Copied'; }
+        catch (e) { say('Your browser would not copy it. You can select the text and copy it yourself.'); }
+      });
+      doneBox.appendChild(c);
+    }
+    var n = document.createElement('p'); n.className = 'fieldHelp';
+    n.textContent = 'This page has no way to reach you, and that is on purpose. To hear the answer, text CURB CUT to +1 276 495 9311 or use the person button, and the desk can reply there.';
+    doneBox.appendChild(n);
   }
 
   /* The form submits, so Enter in the box does what the button does. */
@@ -272,8 +341,7 @@
       busy(false, b);
       barrierId = r.barrierId;
       say(r.message);
-      optionsBox.textContent = r.noMatch ? '' : r.options;
-      optionsBox.hidden = !!r.noMatch;
+      renderOptions(r.noMatch ? '' : r.options);
       show(results); step(2);
       focusHeading('resultsHeading');
     });
@@ -289,7 +357,7 @@
       busy(false, b);
       draftText = r.draft;
       draftBox.textContent = r.draft;
-      say(r.message);
+      say(chosen ? r.message : r.message + ' You did not pick one of the options, so this asks in your own words and leaves the rest to the desk.');
       show(draftSection); step(3);
       focusHeading('draftHeading');
     });
@@ -299,9 +367,13 @@
     var b = this; busy(true, b); say('Sending it...');
     remote('{!$RemoteAction.CurbCutWeb.send}', [draftText, true, barrierId], function (r) {
       busy(false, b);
-      doneBox.textContent = r.message;
+      if (!r.created) {
+        say(r.message + ' Nothing was sent. The draft is still here.');
+        return;
+      }
+      renderDone(r.message, draftText);
       say(r.message);
-      hide(draftSection); show(doneSection); step(5); markSent();
+      hide(draftSection); hide(results); show(doneSection); step(5); markSent();
       focusHeading('doneHeading');
     });
   });
@@ -313,7 +385,10 @@
   });
 
   document.getElementById('stopHere').addEventListener('click', function () {
-    say('That\'s fine. Knowing is allowed, and asking is optional. Nothing has been sent to anyone.');
+    var note = document.getElementById('stopNote');
+    if (!note) { note = document.createElement('p'); note.id = 'stopNote'; note.className = 'fieldHelp'; note.setAttribute('tabindex', '-1'); results.appendChild(note); }
+    note.textContent = 'That\'s fine. Knowing is allowed, and asking is optional. Nothing has been sent to anyone, and you can close this page.';
+    say(note.textContent); note.focus();
   });
 
   /* ---------- showing instead of telling ---------- */
@@ -451,10 +526,11 @@
   var starterBtns = document.getElementById('starters').getElementsByTagName('button');
   for (var si = 0; si < starterBtns.length; si++) {
     starterBtns[si].addEventListener('click', function () {
-      need.value = this.textContent;
+      var had = need.value.trim();
+      need.value = had ? had + '\n' + this.textContent : this.textContent;
       need.focus();
       try { need.setSelectionRange(need.value.length, need.value.length); } catch (e) {}
-      say('Filled in for you. Change any of it, or press the button below.');
+      say(had ? 'Added under what you wrote. Change any of it, or press the button below.' : 'Filled in for you. Change any of it, or press the button below.');
     });
   }
 
