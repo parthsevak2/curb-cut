@@ -16,13 +16,13 @@ Curb Cut turns asking into one sentence. You say what's hard, in your own words,
 
 [image: ask-no-login]
 
-There's no field for a diagnosis anywhere. It simply isn't there, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored. When a manager asks the console what's wrong with someone, it answers that nobody knows and nobody can find out.
+There's no field for a diagnosis anywhere, and a build check fails if anyone adds one. Name a condition anyway and it's stripped before anything is stored. When a manager asks the console what's wrong with someone, it says nobody knows and nobody can find out.
 
 [image: console-refusal]
 
 Six doors, all live today. An Agentforce agent written in Agent Script decides what to say. A deterministic layer decides what may be true: it ranks the library, strips conditions, and holds the consent gate. So safety never depends on a model remembering a rule.
 - Web, no login, no account.
-- Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page, with numbered options.
+- Text CURB CUT to +1 276 495 9311, on any phone. The first reply comes from the same code as the web page.
 - Voice on the same number. It never rings you back.
 - Email.
 - Slack, private message only. It says up front that Slack belongs to your employer. Judges can join our workspace and try it: https://join.slack.com/t/havihidigital/shared_invite/zt-493mf6btt-uxjLPiafBkOxXVzc2V2UFQ
@@ -38,7 +38,7 @@ The request goes to the access desk of the organisation running the page, in you
 
 WHAT WE CAN SHOW, NOT JUST SAY
 
-We ran Salesforce's own accessibility checks (Sa11y, 131 checks) and our own: more than five hundred accessibility checks on seven public pages, 127 Apex tests, 512 structural invariants, 21 responsible-AI checks against Salesforce's published guidelines, and an 11-scenario adversarial suite through the Agent API. That suite scores 21 of 23 on every run, and we publish the two it fails rather than the best run. Every number we publish has its source and its denominator on the evidence page.
+We ran Salesforce's own accessibility checks (Sa11y) and our own: more than five hundred accessibility checks on seven public pages, 127 Apex tests, 512 structural invariants, 21 responsible-AI checks against Salesforce's published guidelines, and an 11-scenario adversarial suite. That suite scores 21 of 23 on every run, and we publish the two it fails rather than the best run. Every number has its source and denominator on the evidence page.
 
 WHAT WE GOT WRONG, AND FIXED IN THE OPEN
 
