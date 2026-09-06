@@ -28,7 +28,7 @@ color-contrast came back "incomplete" in all twelve states, because axe measures
 
 WHAT WAS ALREADY IN PLACE
 
-528 accessibility checks against the seven live pages every build, plus 28 contrast, 16 reading-level and 512 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
+530 accessibility checks against the seven live pages every build, plus 28 contrast, 16 reading-level and 512 invariant checks. The build fails on any. Earlier browser passes fixed a claim code that never took focus (shown once, unrecoverable, and the screen reader user was the one person not told), 46 unnamed sections announced as anonymous regions, and a 22px target under WCAG 2.5.8.
 
 A FINDING WE DISPROVED
 

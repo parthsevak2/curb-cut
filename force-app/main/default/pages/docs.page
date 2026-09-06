@@ -56,7 +56,7 @@
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
 <pre>137 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 512 structural invariants      python3 tests/invariants.py            ~1s, no org
-528 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+530 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
@@ -92,7 +92,7 @@
 <p><strong>What you should see at step 4.</strong> The request is written in the words you used, and contains this line:</p>
 <blockquote><p>I am not sharing a diagnosis, and I am not required to. This is about what I need to do my job.</p></blockquote>
 <p><strong>What you should see at step 5.</strong> The date the desk has committed to answer by, in words, with the sentence <em>That date is their commitment, not something this page can force.</em> Under it, what was sent stays on the screen with a copy button, and a line saying how an answer can reach you.*</p>
-<p><strong>Two things worth trying on purpose.</strong> Press <strong>A+</strong> and <strong>Contrast</strong> at the top of any page. Then try the whole flow with the keyboard only: Tab, and Enter or Space. Nothing needs a mouse.</p>
+<p><strong>Two things worth trying on purpose.</strong> Press <strong>Bigger text</strong> and <strong>Contrast</strong> at the top of any page. Then try the whole flow with the keyboard only: Tab, and Enter or Space. Nothing needs a mouse.</p>
 <h3>2. The same thing on a phone</h3>
 <p>Open the same link on a phone. It is the same page, not a cut-down one. Two of the six doors, voice and text, work on a handset with no internet at all.</p>
 <h3>3. Any AI assistant, a relay, or your own script</h3>
@@ -132,7 +132,7 @@ curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
 <h3>Check the numbers rather than trusting them</h3>
 <pre>python3 tests/invariants.py        # 512 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 137 Apex tests
-python3 tests/a11y_audit.py        # 528 accessibility checks, against the live pages
+python3 tests/a11y_audit.py        # 530 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks
 python3 tests/rai_self_check.py --selftest   # proves those checks can fail
