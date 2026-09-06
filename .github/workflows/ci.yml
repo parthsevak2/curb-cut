@@ -111,7 +111,7 @@ jobs:
             fails=0
             for f in force-app/main/default/classes/*Test.cls; do
               c=$(basename "$f" .cls)
-              out=$(sf apex run test --target-org curbcut --class-names "$c" --synchronous --wait 20 --result-format human 2>&1)
+              out=$(sf apex run test --target-org curbcut --class-names "$c" --synchronous --wait 20 --result-format human 2>&1 || true)
               res=$(echo "$out" | grep -iE '^Outcome' | awk '{print $NF}')
               echo "$c: ${res:-no result}"
               [ "$res" = "Passed" ] || { echo "$out" | tail -40; fails=$((fails+1)); }
