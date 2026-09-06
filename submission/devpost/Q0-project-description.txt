@@ -34,7 +34,7 @@ Six doors, all live today. An Agentforce agent written in Agent Script decides w
 
 WHAT HAPPENS AFTER YOU PRESS SEND
 
-The request goes to the access desk of the organisation running the page, in your words. No manager is told. You get a claim code, a date the desk has committed to answer by, and the words "you can stop this any time". If you'd rather talk to a person, say HUMAN on any channel and one picks it up.
+The request goes to the access desk of the organisation running the page, in your words. No manager is told. What you sent stays on your screen to keep, with the date the desk has committed to answer by, in words. If you'd rather talk to a person, say HUMAN on any channel and one picks it up.
 
 WHAT WE CAN SHOW, NOT JUST SAY
 

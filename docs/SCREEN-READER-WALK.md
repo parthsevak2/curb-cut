@@ -2,7 +2,7 @@
 
 This transcript was produced by a script, not by a person who uses a screen reader. It reads the same accessibility tree that NVDA, JAWS and VoiceOver read, drives the page with real key and click events, and records what a screen reader would be given at each step: where focus lands, what the live regions announce, and the order things are read. It cannot tell you what it is like to use. One session with a daily screen-reader user still comes before the next five features.
 
-Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-05 21:29 UTC.
+Page: https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask. Generated 2026-09-06 01:56 UTC.
 
 ### Step 0: the page loads
 
@@ -71,7 +71,7 @@ Reading order, on load (45 of 58 nodes):
 - Focus is on: h2#resultsHeading "What other people have asked for"
 - Live regions announce: "Here is what other people have asked for in situations like yours. You can stop here. Knowing is allowed; asking is optional."
 
-Reading order, the options that arrived (30 of 63 nodes):
+Reading order, the options that arrived (30 of 77 nodes):
 
 - link "Skip to the main content"
 - main (no name)
@@ -107,9 +107,9 @@ Reading order, the options that arrived (30 of 63 nodes):
 ### Step 3: after pressing "Help me ask for one of these"
 
 - Focus is on: h2#draftHeading "Read this over"
-- Live regions announce: "Read this over. Nothing is sent until you choose to send it."
+- Live regions announce: "Read this over. Nothing is sent until you choose to send it. You did not pick one of the options, so this asks in your own words and leaves the rest to the desk."
 
-Reading order, the draft (25 of 68 nodes):
+Reading order, the draft (25 of 82 nodes):
 
 - link "Skip to the main content"
 - main (no name)
