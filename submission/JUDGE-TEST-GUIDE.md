@@ -4,6 +4,21 @@ Every claim below was run against the live org before it was written here. Where
 something cannot be tested from outside, this page says so instead of implying
 otherwise.
 
+## Test every door in ten minutes
+
+Everything below is live now. Nothing needs an account except the console, which uses the org login on your Devpost page.
+
+1. **Web, one minute.** Open <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask>. Type one sentence about something hard at work, press the button, pick an option, press "Help me ask for this", read the draft, press "Yes, send this". What you sent stays on the screen with the date the desk has committed to.
+2. **Text, two minutes.** Text `CURB CUT` to **+1 276 495 9311** from any phone (a US number; a prepaid plan may charge). You get a welcome that says it is automated. Text one sentence about what is hard; you get numbered options from the same code as the web page. Reply with a number and it drafts in your words. `HUMAN` gets a person, `STOP` ends it, `HELP` explains.
+3. **Voice, two minutes.** Call the same number and say what is hard after the tone. It answers in a voice, never rings you back, and offers a person.
+4. **Email, one minute.** Send one sentence to [the desk's address](mailto:curbcut@k-1cnb5a59o6bjnzp8kkwyshpgr8g0vwi9qhgl3p29zz9m62h9pw.gk-yij5suax.can96.apex.salesforce.com). The reply opens by saying it is automated, lists options, and never sends a request from email.
+5. **Slack, two minutes.** Join with <https://join.slack.com/t/havihidigital/shared_invite/zt-493mf6btt-uxjLPiafBkOxXVzc2V2UFQ>, open **Curb Cut** under Agents and apps, and send it a direct message, or type `/curbcut` followed by what is hard. It says up front that Slack belongs to the employer and refuses to send anything from there.
+6. **Your own assistant, through MCP.** `channels/mcp-server.mjs` is a zero-dependency Model Context Protocol server over stdio. With the Salesforce CLI authorised to the org as `curbcut`, point any MCP client (Claude Desktop, Cursor, or your own) at `node channels/mcp-server.mjs`. It exposes lookup and draft tools and, on purpose, no tool that can send.
+7. **The headless agent, no UI at all.** `node tests/headless_agent_api.mjs` drives the Agentforce agent through the Agent API with the eleven adversarial scenarios in `tests/curb-cut-adversarial.yaml`, writes transcripts, and `python3 tests/score_adversarial.py` scores them. This is the path the film's agent scenes were captured from.
+8. **The person on the other end, two minutes.** With the org login, open the console at <https://orgfarm-7a04c62cb9.lightning.force.com/lightning/n/Curb_Cut_Home>. The On Duty page lists who is waiting for a person, whose request is past its date, and who is waiting on an interpreter, and tells whoever is on duty to work it top to bottom. Ask the console assistant what a person has; it says nobody knows and nobody can find out.
+
+![The On Duty page of the console: four tiles (waiting for a person, asked and not yet answered, waiting on an interpreter, replies that did not arrive), the instruction to work them top to bottom, and the list of people waiting](https://raw.githubusercontent.com/parthsevak2/curb-cut/main/submission/images/console-on-duty.png)
+
 **The one thing worth doing first, if you only do one:** open
 <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask> and type one
 sentence about something that is hard at work. No login, no account, no name.
