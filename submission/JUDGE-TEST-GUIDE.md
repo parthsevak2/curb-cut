@@ -8,7 +8,7 @@ otherwise.
 
 Everything below is live now. Nothing needs an account except the console, which uses the org login on your Devpost page.
 
-1. **Web, one minute.** Open <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask>. Type one sentence about something hard at work, press the button, pick an option, press "Help me ask for this", read the draft, press "Yes, send this". What you sent stays on the screen with the date the desk has committed to.
+1. **Web, one minute.** If you would rather see it first, [a 26-second recording of exactly this](https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view) was captured from the live page. Open <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask>. Type one sentence about something hard at work, press the button, pick an option, press "Help me ask for this", read the draft, press "Yes, send this". What you sent stays on the screen with the date the desk has committed to.
 2. **Text, two minutes.** Text `CURB CUT` to **+1 276 495 9311** from any phone (a US number; a prepaid plan may charge). You get a welcome that says it is automated. Text one sentence about what is hard; you get numbered options from the same code as the web page. Reply with a number and it drafts in your words. `HUMAN` gets a person, `STOP` ends it, `HELP` explains.
 3. **Voice, two minutes.** Call the same number and say what is hard after the tone. It answers in a voice, never rings you back, and offers a person.
 4. **Email, one minute.** Send one sentence to [the desk's address](mailto:curbcut@k-1cnb5a59o6bjnzp8kkwyshpgr8g0vwi9qhgl3p29zz9m62h9pw.gk-yij5suax.can96.apex.salesforce.com). The reply opens by saying it is automated, lists options, and never sends a request from email.
