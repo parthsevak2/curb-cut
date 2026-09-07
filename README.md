@@ -115,7 +115,6 @@ every run and one alternates, and both are reported rather than averaged away.
 | `channels/` | SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration |
 | `tests/` | the twelve suites above, plus `screen_reader_walk.mjs`, which writes docs/SCREEN-READER-WALK.md |
 | `deck/` | the deck as source; `submission/Curb-Cut.pptx` is generated from it |
-| `video/` | the demo film as source: screencast recorder, caption cards, one scene table |
 | `submission/` | every Devpost field paste-ready, the judge test guide, the technical design |
 | `legal/` | privacy and terms source |
 | `docs/` | architecture, BRD, evidence, audience, decisions, the two audit reports |
@@ -135,11 +134,9 @@ weak lives.
 | [`docs/EVIDENCE.md`](docs/EVIDENCE.md) | Every public figure, with source, denominator and caveat |
 | [`docs/AGENT-INTERFACES.md`](docs/AGENT-INTERFACES.md) | Headless, MCP, agent-to-agent, and the profile we will not build |
 | [`CRITIQUE.md`](CRITIQUE.md) | What is still wrong |
-| [`SPEC-CONFORMANCE.md`](SPEC-CONFORMANCE.md) | Build spec conformance |
 | [`FINDINGS.md`](FINDINGS.md) | Adversarial run results |
 | [`CI.md`](CI.md) | Pipeline and invariants |
 | [`DEPLOY.md`](DEPLOY.md) | Deployment |
-| [`TESTING.md`](TESTING.md) | Test strategy |
 
 ---
 
