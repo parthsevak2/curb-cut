@@ -10,7 +10,7 @@
  * exist for the things that change, and that nothing focusable is announced as
  * nothing. It is the closest a machine gets, and it says so.
  */
-import { launch } from '../video/cdp.mjs';
+import { launch } from './cdp.mjs';
 
 const BASE = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
 const PAGES = ['/ask', '', '/why', '/privacy', '/docs'];
