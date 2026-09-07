@@ -4,7 +4,7 @@
    VoiceOver read, walks the flow with real key and click events, and records,
    after every step, where focus landed (its role and accessible name), what the
    live regions announced, and the reading order of everything new on screen. */
-import { launch } from '../video/cdp.mjs';
+import { launch } from './cdp.mjs';
 import { writeFileSync } from 'node:fs';
 
 const SITE = process.env.CURB_CUT_SITE || 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
