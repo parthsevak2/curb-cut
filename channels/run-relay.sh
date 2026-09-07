@@ -17,5 +17,7 @@ done
 echo "$URL" > /tmp/curbcut-public-url.txt
 bash channels/configure-twilio.sh "$URL" >> logs/twilio-config.log 2>&1
 export PUBLIC_URL="$URL"
+# watchdog: if the public URL stops answering, leave; launchd restarts the whole thing with a fresh tunnel
+( while true; do sleep 60; if ! curl -sf -m 15 "$URL/health" > /dev/null; then sleep 20; if ! curl -sf -m 15 "$URL/health" > /dev/null; then echo "watchdog: $URL not answering, restarting" >> logs/relay.err.log; pkill -P $$ 2>/dev/null; kill -TERM $$ 2>/dev/null; fi; fi; done ) &
 trap 'kill $TUN 2>/dev/null' EXIT
 exec caffeinate -dims node channels/sms-relay.mjs
