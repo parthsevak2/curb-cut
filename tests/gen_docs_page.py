@@ -69,6 +69,7 @@ def md(src, title):
     flush(); close_list(); return '\n'.join(out)
 DOCS=[('README','README.md','What this is, what is live, how to verify it'),
       ('Test it yourself','submission/JUDGE-TEST-GUIDE.md','Every channel, end to end, with what came back'),
+      ("A judge's companion",'submission/JUDGE-COMPANION.md','What every press does, and where it lands, with real screenshots'),
       ('What a screen reader is handed','docs/SCREEN-READER-WALK.md','A scripted walk of the ask page, step by step, and what it cannot tell you'),
       ('Technical design','submission/TECHNICAL-DESIGN.md','How it fits together, verified against the org'),
       ('Evidence','docs/EVIDENCE.md','Every public figure, its source, its denominator and its caveat'),
