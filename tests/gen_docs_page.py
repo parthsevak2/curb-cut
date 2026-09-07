@@ -74,6 +74,9 @@ DOCS=[('README','README.md','What this is, what is live, how to verify it'),
       ('Evidence','docs/EVIDENCE.md','Every public figure, its source, its denominator and its caveat'),
       ('Who this is for','docs/AUDIENCE.md','Audience and market'),
       ('Accessibility audit','docs/A11Y-SA11Y-REPORT.md','Salesforce Sa11y findings'),
+      ('Accessibility Expert Skill reflection','docs/ACCESSIBILITY-REFLECTION.md',"The organisers' accessibility prompt, run over the whole submission"),
+      ('RAI Self Check reflection','docs/RAI-REFLECTION.md',"The organisers' responsible AI prompt, run over the agent, the code and the data"),
+      ('Agent observability reflection','docs/OBSERVABILITY-REFLECTION.md',"The organisers' observability prompt, run over logs, transcripts and the ledger"),
       ('Decisions','docs/DECISIONS.md','Every significant call and why')]
 def main():
     parts=[]; toc=[]
