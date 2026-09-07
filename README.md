@@ -9,7 +9,7 @@ stranger, in writing, in a language that may not be your first.
 
 Cost usually isn't the barrier.
 
-The film, 4 minutes 59 seconds, with every channel shown live: <https://youtu.be/yleHLiwWRKA>. A three-minute cut: <https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view>
+The film, 4 minutes 59 seconds, with every channel shown live: <https://youtu.be/yleHLiwWRKA>. A 26-second recording of trying the ask page: <https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view>. A three-minute cut: <https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view>
 
 | Evidence | Source |
 |---|---|
