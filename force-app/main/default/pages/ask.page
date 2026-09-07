@@ -30,6 +30,8 @@
   .btn.pick[aria-pressed="true"]::before { content:"\2713  "; }
   .actions { display:flex; flex-wrap:wrap; gap:1.25rem; }
   .sentText { margin:.5rem 0 1rem; padding:.75rem 1rem; border-left:4px solid var(--accent, #b8860b); white-space:pre-wrap; }
+  .nextHint { margin:.5rem 0 1rem; padding:.75rem 1rem; border-left:4px solid var(--accent, #b8860b); background:var(--raised, #f6f4ef); }
+  .nextHint strong { font-weight:700; }
 </style>
 </head>
 <body>
@@ -38,6 +40,7 @@
   heading="Tell me what's hard right now."
   lede="In your own words. You don't have to say why it's hard, only what is.">
 
+  <p class="nextHint" id="nextHint"><strong>Four steps, three presses.</strong> Say what's hard, pick what could help, read the draft, and nothing is sent until you press Yes. <span id="nextStep">Next: type one sentence in the box below and press the button.</span></p>
   <ol class="rail" role="list" id="rail" aria-label="Where you are">
     <li data-state="now"><span class="n">1</span>Say what's hard<span class="vh"> - you are here</span></li>
     <li data-state="todo"><span class="n">2</span>See what you could ask for<span class="vh"> - not started</span></li>
@@ -219,7 +222,9 @@
   /* The rail is set from one place so it can never disagree with the sections
      that are actually visible. State is carried by fill, by the numeral, and
      by words only a screen reader hears, never by colour on its own. */
+  var NEXT = {1:'Next: type one sentence in the box below and press the button.', 2:'Next: pick the option you would like to ask for, then press "Help me ask for this". Or stop here; knowing is allowed.', 3:'Next: read the draft. Press "Yes, send this" only if you want it sent. "Delete it" throws it away.', 4:'Next: read what was sent and keep it. You can close this page.', 5:'Sent. What you sent stays on this screen. You can close this page.'};
   function step(current) {
+    var hint = document.getElementById('nextStep'); if (hint && NEXT[current]) { hint.textContent = NEXT[current]; }
     for (var i = 0; i < railItems.length; i++) {
       var n = i + 1, li = railItems[i], vh = li.getElementsByTagName('span')[1];
       var state = n < current ? 'done' : (n === current ? 'now' : 'todo');
