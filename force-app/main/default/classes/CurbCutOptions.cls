@@ -194,7 +194,7 @@ public with sharing class CurbCutOptions {
             line += '\n  ' + opt.Plain_Language_Summary__c;
         }
         if (opt.Zero_Cost__c == true) {
-            line += '\n  Usually costs nothing.';
+            line += '\n  Usually costs the employer nothing.';
         } else if (opt.Typical_Cost__c != null && opt.Typical_Cost__c > 0) {
             line += '\n  Usually about $' + String.valueOf(opt.Typical_Cost__c.setScale(0)) + '.';
         }

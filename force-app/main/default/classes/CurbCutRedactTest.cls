@@ -88,7 +88,7 @@ private class CurbCutRedactTest {
         CurbCutWeb.Reply r = CurbCutWeb.consult(
             'I have multiple sclerosis and some days I cannot type for long');
         Test.stopTest();
-        System.assert(r.message.containsIgnoreCase('took it out'),
+        System.assert(r.message.containsIgnoreCase('took out the condition words'),
             'the person must be told their condition was removed: ' + r.message);
         System.assert(!r.message.containsIgnoreCase('sclerosis'),
             'and the reply must not repeat it back: ' + r.message);
@@ -109,7 +109,7 @@ private class CurbCutRedactTest {
                 'h-' + channel, null);
             String said = (a.message == null ? '' : a.message)
                         + ' ' + (a.options == null ? '' : a.options);
-            System.assert(said.containsIgnoreCase('took it out'),
+            System.assert(said.containsIgnoreCase('took out the condition words'),
                 channel + ' must say the condition was removed: ' + said);
             System.assert(!said.containsIgnoreCase('sclerosis'),
                 channel + ' must not echo the condition back: ' + said);
@@ -208,7 +208,7 @@ private class CurbCutRedactTest {
             'the part a host needs to read must survive: ' + kept);
 
         System.assertEquals(true, res.redacted, 'the result must say something was taken out');
-        System.assert(res.message.containsIgnoreCase('took it out'),
+        System.assert(res.message.containsIgnoreCase('took out the condition words'),
             'the person must be told in the same reply: ' + res.message);
         System.assert(!res.message.containsIgnoreCase('epilepsy'),
             'and the reply must not repeat it back: ' + res.message);
@@ -225,7 +225,7 @@ private class CurbCutRedactTest {
         System.assertEquals(said, statementStored(res),
             'the wording is the point; it must not be touched');
         System.assertEquals(false, res.redacted, 'nothing was taken out');
-        System.assert(!res.message.containsIgnoreCase('took it out'),
+        System.assert(!res.message.containsIgnoreCase('took out the condition words'),
             'no notice when nothing was removed: ' + res.message);
     }
 }

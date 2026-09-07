@@ -174,7 +174,8 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
         msg.setToAddresses(new List<String>{ envelope.fromAddress });
         msg.setSubject('Re: ' + (String.isBlank(email.subject) ? 'what could make work easier' : email.subject));
-        msg.setPlainTextBody(bodyText);
+        String disclosure = 'I am automated, not a person; reply HUMAN for one. A work mailbox belongs to your employer.\n\n';
+        msg.setPlainTextBody(bodyText.startsWith('Hi. I am automated') ? bodyText : disclosure + bodyText);
 
         CurbCutLog.record('Email', 'Inbound', 'Accepted', envelope.fromAddress, null, barrierId);
 
