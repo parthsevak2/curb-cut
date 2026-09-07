@@ -131,7 +131,7 @@ function respond(res, payload) {
 /* A failed reply to one person must never take the app down for everyone
    else. Log it, keep the socket open, keep listening. */
 process.on('uncaughtException', e => console.error('[slack] uncaught:', e?.message));
-process.on('unhandledRejection', e => console.error('[slack] unhandled:', e?.message || e));
+process.on('unhandledRejection', e => { console.error('[slack] unhandled:', e?.message || e); if (/fetch failed|ECONNRESET|ENOTFOUND|EAI_AGAIN/.test(String(e?.message || e))) { console.error('[slack] network failure, exiting so launchd restarts us'); process.exit(1); } });
 
 const server = http.createServer((req, res) => {
   if (req.method !== 'POST') { res.writeHead(405); return res.end(); }
@@ -210,7 +210,7 @@ async function socketMode(appToken) {
   const open = await fetch('https://slack.com/api/apps.connections.open', {
     method: 'POST', headers: { authorization: `Bearer ${appToken}` },
   }).then(r => r.json());
-  if (!open.ok) { console.error('[slack] socket open failed:', open.error); return; }
+  if (!open.ok) { console.error('[slack] socket open failed:', open.error, '- exiting so launchd restarts us'); process.exit(1); }
 
   const ws = new WebSocket(open.url);
   ws.onopen = () => console.log('  socket    connected, listening for DMs and /curbcut');
