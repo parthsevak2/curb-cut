@@ -10,7 +10,7 @@ The prompt, verbatim:
 
 Scope: The seven live public pages and their source, the five Lightning Web Components and console pages, and the submission content: the Devpost description with its five images, both caption files, the judge guide and the README.
 
-Run on 7 September 2026. Findings raised: 40. Verified by the second pass so far: 21, of which 2 were not upheld. Fixed the same day: 13. Still open: 27.
+Run on 7 September 2026. Findings raised: 40. Verified by the second pass so far: 29, of which 3 were not upheld. Fixed the same day: 13. Still open: 27.
 
 ## Done well, in the reviewers' words
 
@@ -120,7 +120,7 @@ Barrier or risk: A Deaf or hard-of-hearing judge has no way to know before click
 
 Fix proposed: Play both films with captions on and check every cue against the audio; upload the 12-cue SRT to the Drive file (Manage caption tracks) or host the short cut on YouTube as well; regenerate submission/curb-cut-demo.srt and VIDEO-NARRATION.md from the final script.py and rename the short cut's file curb-cut-3min.srt everywhere; then next to each film link in all three documents write '(captioned; transcript)' with a link to a transcript page.
 
-Status: Open
+Status: Open; second pass: upheld, Checked Q0 line 53, JUDGE-TEST-GUIDE.md 12-13, README.md 12, the live /curbcut/docs page and the YouTube description (none says either film is captioned or links a transcript), played the YouTube film with captions on at 36s/100s/279s/294s (the uploaded English track carries the final narration from scratchpad static/film.srt, so the "captions contradict the audio" worst case is refuted), and queried Drive's get_video_info for the three-minute cut, whose only caption track is kind="asr" (Google auto-captions, no uploaded track; the viewer's Transcript button is disabled). The committed submission/curb-cut-demo.srt and VIDEO-NARRATION.md (22 cues, 16:38) do differ from the final 23-cue film on cues 2, 16, 20, 21 and 22, omit the c04 line entirely, and start every cue from 7 onward 2.0s early; even the committed video/script.py no longer matches the film, so a Deaf judge who opens the first-listed Drive link gets only unlabeled machine captions and the only written alternative is stale.
 
 ### Forced-colours mode (Windows High Contrast) erases the only visual state on the tally, the progress rail and the current-page marker (severity 2)
 
@@ -280,7 +280,7 @@ Barrier or risk: The card is nothing but text. Sighted judges read 'Curb Cut was
 
 Fix proposed: Put the card's words in the description as text (a blockquote under PROBLEM TO SOLVE) and drop the image; or, if the image stays, make the alt the full text including the sources line and darken that line to at least 4.5:1 (about #5c6660 on that ground).
 
-Status: Fixed 7 Sep: the alt text carries the card's words and sources.
+Status: Fixed 7 Sep: the alt text carries the card's words and sources.; second pass: not upheld, Read the saved description straight from Devpost through the logged-in Browser tab (GET https://devpost.team/api/organizations/salesforce/projects/21130.json, HTTP 200, submission_state "submitted", description 7,055 chars) and the rendered edit page at https://devpost.team/salesforce/projects/21130/edit: the one-in-four img alt on both is the full "Card that reads: One in four adults has a disability. About three in a hundred have told their employer. The people in between manage quietly; they work around it, they leave early and make the time up, they carry the pain home rather than explain it to a manager. Curb Cut was built for them. Sources: CDC, Disability Impacts All of Us; Disability:IN Disability Equality Index 2025, 655 employers." (identical to /Users/drashtipathak/Downloads/curbcut_check/tests/render_devpost_description.py line 6), so the attribution does reach a screen-reader judge and the "alt drops the sources line" claim is false; the only text the alt shortens is the 17-word clause "a way to find out what could help, and to ask for it in your own words, without saying why", whose substance is already in the body under OUR SOLUTION ("in your own words, and you never have to say why"), and the reviewer's shorter alt matches an earlier render (scratchpad q0.html, 14:56) that was superseded before the description was saved. The contrast part alone is accurate but minor: decoding /Users/drashtipathak/Downloads/curbcut_check/submission/images/one-in-four.png gives the sources line's darkest pixel (112,122,117) at 3.93:1 and its CSS colour #7a847f (.foot in /Users/drashtipathak/Downloads/curbcut_check/submission/images/src/one-in-four.html) at 3.42:1 on #f3f1ec, about 8 px tall at the page's 512 px image width, while the card's heading and body measure 8.8:1 and 6.7:1, all five images carry descriptive alts, the one-in-four and 3.5%/655-employer figures are repeated as real text in PROBLEM TO SOLVE, and CDC and Disability:IN are cited on the live /curbcut/docs evidence page, so this deserves a separate severity-1 finding (fix: set .foot color to #5c6660, 5.3:1, and re-render the PNG, or move the card's words into a text blockquote), not the exclusion implied by an attribution that never reaches anyone.
 
 ### Low-contrast proof lines inside the console mock (severity 2)
 
@@ -300,7 +300,7 @@ Barrier or risk: A judge moving by headings hears 'brick, Problem to solve', 'ye
 
 Fix proposed: Delete the emoji from ICON, DOORS and the inline prefixes. Where a marker carries meaning, say it in words ('Not done yet:' instead of ⚠).
 
-Status: Partly fixed 7 Sep: the emoji before paragraphs are gone; headings and the six doors keep one each as visual signposts.
+Status: Partly fixed 7 Sep: the emoji before paragraphs are gone; headings and the six doors keep one each as visual signposts.; second pass: upheld, Decoded the body of the last Devpost description PUT (transcript line 21278, 7 Sep 19:24Z, HTTP 200) and it is byte-identical to the current tests/render_devpost_description.py output: seven h3s and six list items still carry emoji prefixes from ICON and DOORS, and Devpost is known to keep four-byte emoji, so a screen-reader judge hears them; the Devpost page itself is behind login so I could not view the rendered result. The five paragraph prefixes (🔒 🚪 ▶ ✿ 📖) were removed at 19:17Z today with the note "fewer spoken emoji" and are not in the live version, and the live Salesforce site has no emoji in any heading, so the finding is real but reduced to headings and doors, severity 2.
 
 ### Raw URLs used as link text, and two URLs not linked at all (severity 2)
 
@@ -310,7 +310,7 @@ Barrier or risk: A screen reader reads the Slack invite letter by letter ('join 
 
 Fix proposed: Link every URL and use words as the text: 'join the Slack workspace', 'the desk's console (org login needed)', 'Try the ask page, no login', 'the evidence page', 'the code on GitHub, MIT', 'the three-minute cut (captioned)', 'the full film, 4:59 (captioned)'. In markdown: [join the Slack workspace](https://join.slack.com/...).
 
-Status: Fixed 7 Sep: every link in the description has words for its text.
+Status: Fixed 7 Sep: every link in the description has words for its text.; second pass: upheld, Refuted for the Devpost description: tests/render_devpost_description.py (lines 28, 33-38) turns every URL in Q0 into a worded link ('join our Slack workspace', 'the desk's console', 'Try the ask page yourself, no login', 'The code, MIT licence'), my run of it produced seven anchors and no bare URL, and docs/ACCESSIBILITY-REFLECTION.md line 313 already records this as fixed 7 Sep (the live Devpost page is login-gated, so source and renderer are what I could check). Confirmed for the guide and README as served on the live /curbcut/docs page (HTTP 200): 21 of 27 external links there have the raw URL as link text, including the 84-character Slack invite, both console URLs, the ask URL twice and both film links twice, and README's 'Live now' web address is plain unlinked text because tests/gen_docs_page.py line 12 only links <url> autolinks; fix is [words](url) at JUDGE-TEST-GUIDE.md lines 8, 12-13, 34, 113, 164, 166 and README.md lines 12 and 30, then regenerate docs.page, at severity 2 since sentence context still meets 2.4.4 and only the links list (2.4.9) suffers.
 
 ### Captions are one block per scene, up to 48 words shown for 22 seconds, with no music cue (severity 2)
 
@@ -320,7 +320,7 @@ Barrier or risk: A 246-character cue renders as five or six lines across the low
 
 Fix proposed: In captions.py split each line at sentence or clause boundaries into cues of at most two lines and 7 s, timed to the per-line voice files (voice/NN.wav) rather than words/140; add '[soft music]' on the first cue and '[music fades]' at the end; never end a cue before its voice does.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in source and live: captions.py emits one cue per scene timed by word count, so the scratchpad 3-min SRT (identical files, also uploaded to Drive as Curb-Cut-demo-3min.srt) has cue 1 at 246 chars/21.8 s, cue 2 235/20.1 s, cue 7 226/20.1 s, cue 10 165/14.9 s (9 of 12 cues over 2 lines/7 s; 18 of 22 in the repo SRT), no [music] tag although mix_music.py puts a -23 dB bed in the final audio (voice-free spans measure -33 to -38 dB versus -91 dB in the voice-only file), and cue 5's caption ends at 80.2 s while its speech runs to 82.1 s (cue 9 also ends 0.5 s early). On the public YouTube film (yleHLiwWRKA) the uploaded en track shows the whole 246-char cue as one 839x75 px block (15% of an 873x491 player, ~3 lines, more on smaller players) over the form buttons in the screen recording, so the barrier is real though partial: a Deaf viewer gets the words but not the sentence-to-action sync, the music, or the last two seconds of cue 5; no captions are burned into the picture.
 
 ### No audio description; the narration never says what is typed or drafted on screen, and two cards in the full film are silent (severity 2)
 
@@ -330,7 +330,7 @@ Barrier or risk: A blind judge hears 'She hedges, and it waits. She says yes, an
 
 Fix proposed: Publish a described transcript (each narration line plus one line saying what is on screen, e.g. 'She types: The office lights give me a headache by lunch. Three lighting options appear, each with a usual cost.') and link it beside both film links; where the hold allows, let the narration in script.py name the on-screen words for scenes 0, 8 and 9 and give the two silent cards a spoken line.
 
-Status: Open
+Status: Open; second pass: upheld, Checked the shipped films in the scratchpad (static/film.mp4 = YouTube 299 s; film-3min.mp4 = Drive cut), the scene table (video/script.py, repo and the CURBCUT_KEEP variant that built the final), the generated SRTs, extracted frames, per-window loudness, the YouTube watch page, and every film link on README, Q0, the judge guide and live /docs: there is no audio-description track (YouTube lists only 'English' and 'English (auto-generated)' captions, no audioTrack), no described transcript linked anywhere (VIDEO-NARRATION.md is public on GitHub but is narration lines plus file names, and stale), scene 0 types 'My back hurts by the afternoon' (screencast.mjs:50, frames 0:06/0:14) which script.py:15 never names, the yes-gate frame at 1:10-1:22 shows 'I am asking to have captions turned on in all my meetings' and '9/15/2026' which script.py:32 never speaks, the c06 card's 'two separate locks' foot is unspoken, and c08 is narration-silent (script.py:47 empty, no SRT cue 3:16-3:23, audio there is -37.4 dB mean vs about -26 dB in narrated windows, i.e. music bed only). One correction: c04 is voiced in the shipped full film (script.py:29 has a line, film.srt cue at 1:33.8-1:41.1, audio -24.9 dB mean with -5.8 dB peaks), it reads as silence only in the stale committed VIDEO-NARRATION.md line 23, so it is one silent card not two, and c08's words are spoken over the next scene (script.py:49), which keeps this at severity 2; the project self-reports this finding on live /docs (docs.page 1104-1107).
 
 ### Text-heavy frames are held too briefly and rendered too small to read (severity 2)
 
@@ -340,7 +340,7 @@ Barrier or risk: A viewer with dyslexia, low vision or a cognitive disability ca
 
 Fix proposed: Cut each card to the sentence that is narrated (or hold text cards at least 1 s per 3 words), show one phone at a time at 28 px or larger, and put the full card and phone text in the transcript.
 
-Status: Open
+Status: Open; second pass: upheld, Rebuilt the 2:49 cut's timeline from the scratchpad video/script.py (CURBCUT_KEEP list; ffprobe 169.4 s matches build-short.log), pulled frames from curb-cut-3min.mp4 and rec/flow.mp4 and measured them: cards/c06.png carries 47 words (kicker, 70 px headline, two 31 px sub lines, 27 px footer "There are two separate locks...") in a 9 s hold at 1:01-1:10 with only the 7-word headline narrated, so 40 unnarrated words pass in about 8 s and appear in no caption or transcript; video/mocks/sms.png at 1:28-1:49 holds 352 words on three phones whose message lines measure 13 px tall (11 px small print) on the 1920 frame, about 6.5 px in a 960-px player, and the cost lines the narration points to ("Usually about $60", "Usually costs nothing") exist only there; the footer paragraph at 0:10 has a 17 px cap height (about 24 px type at 1920, 12 px at 960), which confirms the size but is incidental page chrome the take scrolled onto, not content the film needs. The WCAG labels are a loose fit (2.2.1 covers content-set time limits and a paused video is readable; 1.4.4 does not cover text in video), the card type is large and high-contrast, the phone text is readable elsewhere in the submission (live /docs, JUDGE-TEST-GUIDE.md) and script.fits() enforces 130 wpm + 2 s for spoken words, but that check is never applied to on-screen words and no described transcript exists, so a low-vision or dyslexic judge watching the Drive cut at default player size cannot read the phones or finish the gate card and the finding stands at severity 2 (arguably 3 for the SMS scene, which even a sighted viewer cannot read at 960 px; the one unverified piece is that the Drive upload is this exact render); fix: re-render sms.html one phone per frame at 28 px type as three 7 s scenes, cut c06 to its narrated headline or hold it 20 s, and publish the card and phone text as a described transcript linked beside both film links.
 
 ### README verification list is an ASCII table inside a code block (severity 2)
 
@@ -350,7 +350,7 @@ Barrier or risk: Count, suite, command and note are related only by spacing. A s
 
 Fix proposed: Make it a markdown table like the ones at lines 14 and 28, with headers Count | Suite | Command | Note.
 
-Status: Open
+Status: Open; second pass: upheld, README.md lines 83-96 are a fenced code block holding a 12-row, space-aligned table with no header row, and the live /docs page (generated from README.md by tests/gen_docs_page.py) emits it as a bare <pre> with white-space: pre-wrap, so assistive tech gets one text run with no row/column semantics and at narrow widths the wrapped lines put notes and commands out of alignment; the same page's own accessibility-audit section lists this exact finding as "Status: Open". The proposed fix stands: convert it to a markdown table with Count | Suite | Command | Note headers like the tables at lines 14 and 28, then regenerate the docs page; severity 2 is fair since this is judge/adopter documentation rather than the worker's ask journey.
 
 ### Arrow glyphs inside call-to-action links are read aloud (severity 1)
 
