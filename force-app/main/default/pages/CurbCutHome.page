@@ -28,7 +28,7 @@
     while you're anonymous, and nothing reaches your employer unless you say yes first.
   </p>
 
-  <section aria-labelledby="sec-sixty-one-employers-in-2">
+  <section aria-label="In one sentence">
     <div class="plain">
       <span class="tag">In one sentence</span>
       <p>
@@ -111,7 +111,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="sec-reach-it-however-you-2">
+  <section aria-label="Text and voice, in short">
     <p class="thesis">Cost usually isn't the barrier. <em>The process is.</em></p>
     <p class="thesis-sub">
       To get help you first have to find the policy, learn its words, hold a work
@@ -224,7 +224,7 @@
   <section aria-labelledby="sec-five-steps-and-you">
     <p class="sec-label">What happens</p>
     <h2 id="sec-five-steps-and-you">Five steps, and you can stop after any of them</h2>
-    <ol class="steps">
+    <ol class="steps" role="list">
       <li>
         <div>
           <h3>You say what is hard</h3>
@@ -283,7 +283,7 @@
       promise to behave. The difference matters, because a promise can be
       quietly revised.
     </p>
-    <ul class="negs">
+    <ul class="negs" role="list">
       <li>
         <b>Your diagnosis can't be stored, because there's nowhere to put it.</b>
         There's no field for a diagnosis, condition, disability type, medical

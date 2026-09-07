@@ -157,7 +157,7 @@
       These work on the web page, by text, and by email. They mean the same thing
       on all three.
     </p>
-    <ul class="kwlist">
+    <ul class="kwlist" role="list">
       <li><span class="kw">HUMAN</span><span>Hand this to a real person, on whichever channel you are already using. You will not be asked to explain it again, and nobody will ring you.</span></li>
       <li><span class="kw">WHO</span><span>See everyone who has been shown a preference of yours. Send it with your code, like <span class="kw">WHO 4KQ7MT</span>.</span></li>
       <li><span class="kw">OFF</span><span>Turn a saved preference off. Immediate, and sent with your code the same way. You will not be asked why, because there is nowhere to record a reason, so nobody can ask you for one later.</span></li>

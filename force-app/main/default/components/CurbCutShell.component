@@ -112,6 +112,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
    windows), it scrolls away like everything else. */
 @media (max-width:59.99rem), (max-height:40rem) { .top { position:static; } }
 h1, h2, h3, [tabindex="-1"], input, textarea, select, button, summary { scroll-margin-top:12rem; }
+/* Windows High Contrast and other forced-colour modes keep the states we draw with colour. */
+@media (forced-colors: active) {
+  .dots span.on, .tally-key i.on { forced-color-adjust:none; background:CanvasText; }
+  .rail li.now, nav a[aria-current="page"] { outline:3px solid CanvasText; outline-offset:2px; }
+  .btn.primary { border:2px solid ButtonText; }
+}
 .top-in {
   max-width:calc(var(--measure) + 8rem); margin:0 auto;
   padding:.75rem clamp(1rem,5vw,3rem);
@@ -649,7 +655,7 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
     sizeBtn.textContent = LABEL[i];
     sizeBtn.setAttribute('aria-pressed', i > 0 ? 'true' : 'false');
     sizeBtn.setAttribute('title', i === 2 ? 'Back to normal text size' : 'Make the text bigger');
-    sizeBtn.setAttribute('aria-label', SIZE_SAID[i] + '. Press to change.');
+    sizeBtn.setAttribute('aria-label', LABEL[i] + '. ' + SIZE_SAID[i] + '. Press to change.');
     if (spoken) { announce(SIZE_SAID[i]); }
   }
   function applyContrast(spoken) {

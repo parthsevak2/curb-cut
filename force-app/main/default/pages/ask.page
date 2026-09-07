@@ -26,7 +26,8 @@
   .optionCard { border:1px solid var(--line, #cfd6d2); border-radius:.5rem; padding:1rem 1.1rem; }
   .optionCard h3 { margin:0 0 .35rem; font-size:1.15rem; }
   .optionCard p { margin:0 0 .75rem; }
-  .btn.pick[aria-pressed="true"] { outline:3px solid var(--focus, #0B57C7); outline-offset:2px; }
+  .btn.pick[aria-pressed="true"] { background:var(--ink, #1f2a26); color:var(--paper, #fff); border-color:var(--ink, #1f2a26); }
+  .btn.pick[aria-pressed="true"]::before { content:"\2713  "; }
   .actions { display:flex; flex-wrap:wrap; gap:1.25rem; }
   .sentText { margin:.5rem 0 1rem; padding:.75rem 1rem; border-left:4px solid var(--accent, #b8860b); white-space:pre-wrap; }
 </style>
@@ -37,7 +38,7 @@
   heading="Tell me what's hard right now."
   lede="In your own words. You don't have to say why it's hard, only what is.">
 
-  <ol class="rail" id="rail" aria-label="Where you are">
+  <ol class="rail" role="list" id="rail" aria-label="Where you are">
     <li data-state="now"><span class="n">1</span>Say what's hard<span class="vh"> - you are here</span></li>
     <li data-state="todo"><span class="n">2</span>See what you could ask for<span class="vh"> - not started</span></li>
     <li data-state="todo"><span class="n">3</span>Read a draft<span class="vh"> - not started</span></li>
@@ -54,7 +55,7 @@
     <form id="askForm">
       <label for="need" class="fieldLabel">What's hard at work right now?</label>
       <p id="needHelp" class="fieldHelp">Tap one of these, or write your own. You can change it after.</p>
-      <ul class="starters" id="starters" aria-label="Common starting points. Choosing one fills the box, and you can change it.">
+      <ul class="starters" role="list" id="starters" aria-label="Common starting points. Choosing one fills the box, and you can change it.">
         <li><button type="button">I keep missing things in meetings</button></li>
         <li><button type="button">Typing hurts after a while</button></li>
         <li><button type="button">The noise in the office is too much</button></li>
@@ -336,7 +337,7 @@
   function ask() {
     var text = need.value.trim();
     if (!text) { say('Tell me what\'s hard, in your own words.'); need.focus(); return; }
-    var b = document.getElementById('go'); busy(true, b); say('Looking up what other people have asked for...');
+    var b = document.getElementById('go'); say('Looking up what other people have asked for...'); busy(true, b);
     remote('{!$RemoteAction.CurbCutWeb.consult}', [text], function (r) {
       busy(false, b);
       barrierId = r.barrierId;
@@ -352,7 +353,7 @@
   });
 
   document.getElementById('draftBtn').addEventListener('click', function () {
-    var b = this; busy(true, b); say('Putting that into words...');
+    var b = this; say('Putting that into words...'); busy(true, b);
     remote('{!$RemoteAction.CurbCutWeb.draft}', [need.value.trim(), chosen], function (r) {
       busy(false, b);
       draftText = r.draft;
@@ -364,7 +365,7 @@
   });
 
   document.getElementById('sendBtn').addEventListener('click', function () {
-    var b = this; busy(true, b); say('Sending it...');
+    var b = this; say('Sending it...'); busy(true, b);
     remote('{!$RemoteAction.CurbCutWeb.send}', [draftText, true, barrierId], function (r) {
       busy(false, b);
       if (!r.created) {
@@ -535,7 +536,7 @@
   }
 
   document.getElementById('wantHuman').addEventListener('click', function () {
-    var b = this; busy(true, b); say('Getting a person for you...');
+    var b = this; say('Getting a person for you...'); busy(true, b);
     remote('{!$RemoteAction.CurbCutWeb.human}', [need.value.trim(), barrierId], function (r) {
       busy(false, b);
       doneBox.textContent = r.message + (r.handlerName ? ' You\'re being picked up by ' + r.handlerName + '.' : '');

@@ -15,7 +15,8 @@
     .docs th, .docs td { text-align: left; vertical-align: top; padding: .45rem .6rem; border-bottom: 1px solid var(--line, #C6CACE); }
     .docs blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--line, #C6CACE); }
     .docs h3 { margin-top: 2rem; } .docs h4 { margin-top: 1.4rem; }
-    .docs .mute { color: var(--mute, #5B6167); }
+    .docs .mute { color: var(--ink-mute, #5B6167); }
+    .docs a, .docs code, .docs p, .docs li { overflow-wrap: anywhere; }
     .docs nav ol { columns: 2; gap: 2rem; }
   </style>
 </head>
