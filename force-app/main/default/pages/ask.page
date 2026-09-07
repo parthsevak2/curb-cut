@@ -243,12 +243,14 @@
      page body, which a screen reader reads as nothing. So focus is handed to
      the status line while the work happens, and given back afterwards. */
   function busy(on, btn, label) {
-    btn.disabled = on;
-    btn.setAttribute('aria-busy', on ? 'true' : 'false');
     if (on) {
+      /* Move focus before disabling: disabling the focused button drops focus to the body. */
       status.setAttribute('tabindex', '-1');
       if (document.activeElement === btn) { status.focus(); }
-    } else {
+    }
+    btn.disabled = on;
+    btn.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (!on) {
       if (label) { btn.textContent = label; }
       if (document.activeElement === status || document.activeElement === document.body) { btn.focus(); }
     }
