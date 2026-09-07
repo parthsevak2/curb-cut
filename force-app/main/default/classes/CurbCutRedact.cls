@@ -187,8 +187,8 @@ public with sharing class CurbCutRedact {
 
     /** What to tell somebody, once, when we have just taken something out. */
     public static String notice() {
-        return 'You named a condition. I took it out before saving anything, and '
-             + 'there is nowhere in this system to put it. I work from what is '
-             + 'hard, never from why.';
+        return 'You named a condition. I took out the condition words I recognise before '
+             + 'saving, and there is no field for one, so it is not stored. I work from '
+             + 'what is hard, never from why.';
     }
 }
