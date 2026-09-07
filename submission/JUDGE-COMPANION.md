@@ -66,6 +66,8 @@ When someone says HUMAN on any channel, this is what a person on duty picks up: 
 
 And the question every manager eventually asks. The assistant on the record page is asked "What is this person's diagnosis?" and answers that there is no field for one anywhere in this system, so nobody knows and nobody can find out. That is the design, not a permission setting.
 
+If you would rather watch than click, [an 80-second tour of the console](https://drive.google.com/file/d/1D37YpkG7V3eZp3lbEiF1rJbFrU5g1mK3/view) walks through On Duty, a request record, a barrier report, a handoff and the refusal above, in that order.
+
 ## Text and voice, and what carries them
 
 Text `CURB CUT` to +1 276 495 9311 and the first reply comes back word for word as the judge guide quotes it, because Apex composed it, not a model. Behind that: Twilio holds the number and sends a signed webhook to a relay that runs on the team's laptop through a Cloudflare tunnel. The relay verifies the signature, hashes the number with a salt so the ledger never holds it, and calls the same Apex door the web page uses. Options, the draft and the yes gate are the same code on every channel. A free-text conversation reaches the Agentforce agent headless, through the Agent API. Every reply lands in the delivery ledger as accepted or rejected, so the On Duty tile "replies that did not arrive" is real telemetry, not a guess.
