@@ -10,7 +10,7 @@ The prompt, verbatim:
 
 Scope: The seven live public pages and their source, the five Lightning Web Components and console pages, and the submission content: the Devpost description with its five images, both caption files, the judge guide and the README.
 
-Run on 7 September 2026. Findings raised: 40. Verified by the second pass so far: 0, of which 0 were not upheld. Fixed the same day: 13. Still open: 27.
+Run on 7 September 2026. Findings raised: 40. Verified by the second pass so far: 21, of which 2 were not upheld. Fixed the same day: 13. Still open: 27.
 
 ## Done well, in the reviewers' words
 
@@ -60,7 +60,7 @@ Barrier or risk: Chrome blurs a control the moment it becomes disabled, and ever
 
 Fix proposed: Never disable or unmount the control that was just pressed. Copy the reveal() guard (`if (this.busy) return;` plus aria-busy={busy} on the button) to runStep, askIt, sendHolding, doRaise, doClose, take and book, and drop `!this.working` from canTake. Where the control legitimately goes away on success, move focus deliberately in the same code path: to the .dial link after raise, to the .toggle after close, to the 'Picked up by ...' paragraph (give it tabindex="-1") after pick-up, and to the result panel title after an assistant answer. Do it after render (a renderedCallback flag or `await Promise.resolve()`), and add a Jest assertion on document.activeElement after each press, which jsdom supports.
 
-Status: Open
+Status: Open; second pass: upheld, Every cited line matches, and in real Chrome 148 a replica of each pattern sent document.activeElement to body the moment the pressed button was disabled (assist, raise) or unmounted (take), leaving it on body when the dial link or "Picked up" text appeared, while the aria-busy reveal() pattern kept focus; jsdom run with the project's own sfdx-lwc-jest config against the real components confirmed the unmount cases (activeElement=body) but does not blur on disable, so the proposed Jest assertion alone would miss the assist buttons. The public ask.page lines 242-254 already implement the correct hand-focus-to-status-and-back pattern with a comment naming this exact problem, so the console regressed from a known fix; the one overstatement is "dropped to the top" for sighted keyboard users, since Chrome keeps a sequential-focus starting point near the removed control, whereas the loss of place for screen-reader users and the missing focus move to the emergency number stand as described (severity 3: staff operators, not workers).
 
 ### The assistant's result panel is a live region created together with its text, so the first answer or refusal may go unannounced (severity 3)
 
@@ -70,7 +70,7 @@ Barrier or risk: Live regions are reliable only when the region already exists a
 
 Fix proposed: Render one status element unconditionally inside <template if:true={ready}> and only change its text: 'Working...' when busy is set, then `${resultTitle}. ${result.message}` when the call returns (aria-atomic="true"). Keep the visual panel, the <pre> body and the Copy button outside the live region so a long library listing is not read in one breath and the button is not inside a status. Add a Jest state for 'assist / result shown' and 'assist / refused'; neither exists today.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in source: force-app/main/default/lwc/curbCutAssist/curbCutAssist.html lines 32-41 wrap the only role="status" region in <template if:true={hasResult}>, so the region and its text enter the DOM together on the first offer/draft/ask result (curbCutAssist.js lines 64, 77, 89), the buttons only go disabled={busy} (lines 25, 48) with no aria-busy and no "working" text, and every other place in this project does it the reliable way (curbCutHandoffBrief.html line 35 always-present status with aria-busy on the button at line 31; the live /ask page has four always-present empty role="status" regions). Could not refute against the live console because it is login-gated (HTTP 302 to the session page), and the project's own checks would not catch it: tests/lwc_audit.py lines 83-90 pass on the string role="status" merely existing, and the Jest audit state named "assist / a plan with steps and a result" (jest/__tests__/a11y-audit.a11y.test.js:139-147) only emits the nextSteps wire and never mocks offer/ask/draftReply, so no test renders the result or Refused panel; severity 3, since a screen-reader operator can still arrow down to find the panel, but hears nothing when it arrives.
 
 ### Text-field borders are the only thing that shows where the field is, and they measure 1.56:1 (severity 3)
 
@@ -80,7 +80,7 @@ Barrier or risk: A low-vision operator cannot see where the 'Ask about this one'
 
 Fix proposed: Use the .pick treatment from curbCutHandoffBrief.css line 31 on .ask-input, .ta and .inp: `border: 2px solid #5e6568` (5.94:1), or at minimum #6b7174 (4.95:1). Then add the five LWC CSS files to tests/contrast_audit.py so the console's borders and text are measured, not assumed.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in source: curbCutAssist.css line 109 and curbCutEmergency.css line 30 both set `border: 1px solid #c9d0d4` on white fields (computed 1.56:1; 1.47:1 against the emergency box's #fdf7f6, fill-vs-box 1.06:1), only curbCutAssist has a prefers-contrast:more override, and the same console's select in curbCutHandoffBrief.css line 31 already uses 2px #5e6568 at 5.94:1 while tests/contrast_audit.py line 62 enforces 3:1 for input borders on the public site. The console cannot be fetched with curl (the components target lightning__RecordPage behind the org login), but the values are literal hex in class-scoped CSS with no runtime tokens, and no audit reads the LWC stylesheets (contrast_audit.py parses only CurbCutShell.component, lwc_audit.py is structural), so the Q1 Devpost claim that console contrast is "measured from the stylesheets: 28 checks" also does not cover these fields.
 
 ### The emergency reason's 15-character rule, and why the submit button is disabled, are never given to assistive technology (severity 3)
 
@@ -90,7 +90,7 @@ Barrier or risk: A screen-reader operator focuses the box and hears only 'Why is
 
 Fix proposed: Put `aria-describedby` on the textarea pointing at the hint (and on the callback input pointing at its hint). Prefer keeping the button enabled and validating on press: show the Apex message already written at CurbCutEmergency.cls line 71 ('Say why, in a sentence someone reviewing this in six months could understand...') in a role="alert" paragraph and move focus back to the textarea. If the disabled state is kept, make the hint aria-live="polite" so 'That will do' is heard when the threshold is crossed.
 
-Status: Open
+Status: Open; second pass: upheld, Checked curbCutEmergency.html/.js/.css, the Curb_Cut_Handoff_Record flexipage (component sits in the record-page sidebar, line 67), CurbCutEmergency.cls lines 70-71, the Jest a11y test, the public audit scripts and docs/; the console is behind a Salesforce login so this is source-verified rather than run under a screen reader. As described: textarea (html line 34) and tel input (line 46) are labelled but neither hint paragraph (lines 36, 48-51) has an id or is referenced by aria-describedby, the reason hint has no aria-live, the button (line 53) is disabled until 15 trimmed characters (js line 41) at opacity .45 (css line 39, composite roughly 2.3:1, exempt but hard to read), the Apex 'Say why...' message can never reach the UI because the client blocks first, the only Jest test audits the collapsed panel so the form is never rendered under axe, the public audits never touch the Lightning console, docs never mention this panel, and curbCutMediaViewer (aria-describedby with an LWC id) and curbCutHandoffBrief (role=status aria-live=polite) already prove the fix works in this repo. Severity 3: it affects a screen-reader operator during an escalation, not the worker on the public site.
 
 ### Signed or spoken media has no end state: once a human interpreter has done the work, the console has nowhere to show it (severity 3)
 
@@ -100,7 +100,7 @@ Barrier or risk: The refusal to machine-translate is right, and the note is hone
 
 Fix proposed: Add a long-text field on Barrier_Report__c (for example Human_Interpretation__c, help text 'Written by the named human interpreter. Never generated.') and a companion Interpreted_By__c, editable from the record. Have media() return it, and in curbCutMediaViewer show it under the video in place of the 'no captions' note once it is filled, with the interpreter's name and date. Render audio files with <audio controls> instead of a bare download link. Keep the note for the pending state.
 
-Status: Open
+Status: Open; second pass: upheld, Verified in the deployed curbcut org (sobject describe, Tooling API pull of CurbCutConsole and curbCutMediaViewer.html) that Barrier_Report__c has only the five listed fields, Human_Handoff__c has only Interpreter_Name/Interpreter_Booked_At, feeds are disabled on both, media() returns the file alone, and the 'waiting on a human interpreter' note renders unconditionally for every video with no read of the booked state, so an interpreted signed or spoken video has no place to surface for a blind or Deaf operator; the project's own Q1 text calls the note 'until a human interpreter has worked on the video' but no code reaches that point. The audio half is overstated: the live /ask accepts only image/* and video/*, email/SMS/voice never deliver an audio file (voice is Twilio-transcribed and lands as Text), and the org holds zero audio files against 4 signed-video reports and 0 booked interpreters, so this is a real structural gap for video and only a latent one for voice notes.
 
 ### Phone image alt describes an SMS conversation that is not in the picture (severity 3)
 
@@ -110,7 +110,7 @@ Barrier or risk: The alt says 'The same conversation by text, on a basic phone w
 
 Fix proposed: Either swap the file for video/mocks/sms.png (three phone screens: she texts CURB CUT, four options with costs, the draft, 'yes') and keep the alt, or keep the file and write what is shown: 'The ask page on a phone: the same page, not a cut-down one, with the Bigger text and Contrast buttons and the heading Tell me what is hard right now.'
 
-Status: Fixed 7 Sep: the alt text describes the picture.
+Status: Fixed 7 Sep: the alt text describes the picture.; second pass: not upheld, The reviewer was right about the version live on Devpost from 5 Sep 22:55Z until today, but the alt no longer exists as described: tests/render_devpost_description.py line 6 now reads "The ask page on a phone: one box that asks what is hard right now, large buttons, and the words you never have to say why", GitHub main matches, and the session transcript shows a Devpost PUT at 19:24:17Z today returning 200 with read-back altsOk true after two failed attempts. I viewed on-a-phone.png (nav, A+/Contrast, "Tell me what is hard right now", four steps, "Nothing has been sent") and the new alt describes it; the only residue is mild paraphrase (the text box sits below the crop and the crop says "Not why it is hard , just what is hard"), and the proposed sms.png swap targets a file that is not in the repo (only video/mocks/sms.html).
 
 ### Films are not marked as captioned, no transcript is offered, and the committed captions disagree with the final narration (severity 3)
 
@@ -130,7 +130,7 @@ Barrier or risk: A sighted person using Windows High Contrast sees the 61-of-100
 
 Fix proposed: Add an @media (forced-colors: active) block: set forced-color-adjust:none on .dots span.on and .tally-key i.on with background:CanvasText; give .rail li[data-state=now] .n background:Highlight and color:HighlightText (or add a glyph via ::before, e.g. content:"\25CF" / "" for done and now); and replace the nav's box-shadow underline with border-bottom or text-decoration, which forced-colours keeps.
 
-Status: Fixed 7 Sep: a forced-colors block keeps the tally squares, the current rail step and the current nav link visible.
+Status: Fixed 7 Sep: a forced-colors block keeps the tally squares, the current rail step and the current nav link visible.; second pass: upheld, Reproduced independently against the live site with headless Chrome under forced-colors emulation (cache disabled, read-only): computed styles show .dots span.on, .tally-key i.on and .rail li[data-state=now] .n all collapse to white background / black border, identical to their hollow siblings, and .nav a[aria-current=page] loses its box-shadow so only a 700-vs-600 weight difference remains; my own screenshots show 100 identical hollow squares with two identical key swatches on /, and four identical hollow numerals on /ask, versus 61 filled squares and a filled numeral in normal rendering. The source (CurbCutShell.component lines 344, 357, 445-448, 133) has no @media (forced-colors) block and docs never mention high contrast, so the proposed fix stands; one fairness point on severity is that the "61 of every 100" bignum text and the /ask section heading still carry the information, so a Windows High Contrast user is misled by the graphic and loses the progress cue rather than being blocked from the task.
 
 ### The busy-state focus hand-off on /ask targets a display:none element, so keyboard focus drops to body; the standing form hands focus to the wrong status line (severity 2)
 
@@ -140,7 +140,7 @@ Barrier or risk: On the most common first path, typing your own words and pressi
 
 Fix proposed: Call say() / saySt() before busy() so the target is rendered, pass the relevant status element into busy(on, btn, statusEl), and replace .statusLine:empty { display:none } with a rule that keeps the element in layout (for example min-height with visibility handled by content), or simply keep the region rendered and empty.
 
-Status: Fixed 7 Sep: the status line is written before the button is disabled, so focus lands on a rendered element.
+Status: Fixed 7 Sep: the status line is written before the button is disabled, so focus lands on a rendered element.; second pass: upheld, Verified on the live /ask in Chrome 148 (deployed busy() and .statusLine:empty{display:none} are identical to source): btn.disabled=true blurs the button synchronously, so document.activeElement is already BODY when the guard runs and status.focus() is never reached on the 'Show me', 'talk to a person' and 'Remember this' paths (and even when called directly, focus() on the empty display:none #status is a no-op), so focus does sit on body for the whole request and the code's stated hand-off is dead; note the reviewer's proposed fix (say() before busy()) still leaves BODY because the blur happens at disable time, so the status must be focused before btn.disabled is set (that ordering works). The described consequences are overstated, though: Chrome keeps the sequential-focus starting point at the disabled button, so Tab during the wait lands on 'I'd rather talk to a person' and then the photo/video summary, not the skip link, and the 'Remember this' jump-to-top/stale re-read cannot occur in Chrome because status.focus() never runs (only a browser that keeps focus on a disabled button, e.g. possibly Safari, untested, could show it), and the live region announces and focus is moved to the results heading afterwards, so this is a real but low-severity (1-2) 2.4.3 gap rather than the exclusion described.
 
 ### /docs scrolls horizontally at 320px because raw URLs are used as link text with no overflow-wrap (severity 2)
 
@@ -150,7 +150,7 @@ Barrier or risk: A low-vision reader at 400% zoom, or anyone on a narrow phone, 
 
 Fix proposed: Add .docs a, .docs code, .docs p, .docs li { overflow-wrap: anywhere; } and, better, replace URL-as-text links with descriptive text ('the three-minute cut on Google Drive', 'the Slack workspace invite') so screen readers are not read a 90-character string either.
 
-Status: Fixed 7 Sep: overflow-wrap on links, code and text in the docs page.
+Status: Fixed 7 Sep: overflow-wrap on links, code and text in the docs page.; second pass: upheld, Reproduced live at a 320 CSS px viewport: /docs has documentElement.scrollWidth 616 vs clientWidth 320, the 15 .tbl wrappers stay inside the viewport (max right edge 304px) so tables are not the cause, and the only non-table overflowers are 12 <a> elements whose text is the raw URL plus 6 inline <code> spans (Drive link right edge 611px, Lightning console 512/478, Slack invite 427, code 363), with computed overflow-wrap:normal on them; injecting a temporary `.docs a, .docs code { overflow-wrap:anywhere }` dropped scrollWidth to 349, and the screenshot shows the Drive URL clipped mid-string at the right edge. Source agrees (docs.page lines 32, 78-79, 86, 120, 128, 782-819, 865-868 use URLs as link text; the docs.page style block at lines 10-20 and the shell define no wrap rule except .sms at CurbCutShell.component line 513), the "Bigger text" control worsens it (step 1 gives scrollWidth 707, 22 overflowing elements), and the other six pages all measure 320/320 as the reviewer said.
 
 ### /docs 'Source:' lines use an undefined --mute token and fall to 3.0:1 in the dark theme (severity 2)
 
@@ -160,7 +160,7 @@ Barrier or risk: The eight lines that tell a reader what each document is and wh
 
 Fix proposed: Change the rule to .docs .mute { color: var(--ink-mute); } so it follows both themes (6.15:1 in dark) and responds to the site's Contrast control.
 
-Status: Fixed 7 Sep: the docs page uses the theme token, 6.15:1 in dark mode.
+Status: Fixed 7 Sep: the docs page uses the theme token, 6.15:1 in dark mode.; second pass: upheld, Confirmed in source (docs.page line 18 reads var(--mute, #5B6167); grep of all of force-app finds no --mute definition, only --ink-mute) and on the live /docs page rendered with prefers-color-scheme: dark, where all 8 .docs .mute lines compute to rgb(91,97,103) on body rgb(15,18,20) at 18px/400 weight, which my own WCAG calculation puts at 3.0:1 (light mode 5.55:1) against the 4.5:1 normal-text threshold. Setting data-contrast="more" live raised --ink-mute to #EDEEEA but left .mute at rgb(91,97,103), so the site's Contrast button does not rescue it, while the proposed --ink-mute swap would give 6.15:1 in dark and follow the contrast control.
 
 ### Five sections are labelled by a heading that belongs to a different section, producing duplicate and wrong region names (severity 2)
 
@@ -170,7 +170,7 @@ Barrier or risk: In a screen reader's landmarks or regions list the home page sh
 
 Fix proposed: Give each of those sections its own name: aria-label="In one sentence" / aria-label="The short version" / aria-label="The thesis" (as messaging.page already does), or add a visually-hidden h2 inside them with class="vh" and point aria-labelledby at that.
 
-Status: Fixed 7 Sep: the two sections have their own names.
+Status: Fixed 7 Sep: the two sections have their own names.; second pass: upheld, Confirmed in source and on the live pages: the served HTML has two consecutive <section aria-labelledby="..."> tags pointing at the same id on / (sec-sixty-one-employers-in-2 at lines 605/617, sec-reach-it-however-you-2 at 687/698), /why (sec-every-rule-so-far-2 at 674/688), /privacy (sec-what-does-not-exist-2 at 591/608) and /terms (sec-the-programme-2 at 591/609), with each h2 living only in the second section and the first containing just a span.tag or p.thesis and no heading; the shell's only runtime setAttribute calls touch the size/contrast buttons, so nothing corrects this in the browser, while /messaging uses aria-label and is clean. Because a named <section> is exposed as a region landmark, screen-reader landmark lists show the same name twice and the first entry lands on the plain-language box or thesis rather than the content named, which fails 1.3.1/2.4.6 as described; the proposed fix is sound and the .vh class it relies on already exists in CurbCutShell.component (line 424).
 
 ### The text-size control's visible label is not contained in its accessible name; the chosen option button has the same problem after it is pressed (severity 2)
 
@@ -180,7 +180,7 @@ Barrier or risk: A voice-control user (Dragon, Voice Control) who says 'click Bi
 
 Fix proposed: Keep the visible words at the start of the name: aria-label = label + '. Text size is ' + state (for example 'Bigger text. Text size is normal.'), or make the visible text itself carry the state ('Text size: normal') and drop aria-label. For the pick button, when pressed set aria-label to 'Chosen: ' + title.
 
-Status: Fixed 7 Sep: the visible words now start the accessible name.
+Status: Fixed 7 Sep: the visible words now start the accessible name.; second pass: upheld, Confirmed on the live site's accessibility tree and in CurbCutShell.component applySize() (line 652): the #tsize button's computed name is 'Text size: normal. Press to change.' while its visible text is 'Bigger text', and after one press it becomes 'Text size: larger. Press to change.' against visible 'Biggest text', so the visible label is never a substring of the name in any of the three states (a tree search for 'Bigger text' returns no match; the site's own /docs screen-reader dump records the same name without noticing the mismatch). For the pick button, the live /ask script (lines 955-961, identical to source line 299-305) sets aria-label 'Ask for this one: <title>' and on press changes textContent to 'Chosen' without touching aria-label, so the post-press name lacks the visible word; I did not exercise this path because generating options calls the backend, but the code is deterministic. The Contrast button passes since 'contrast' appears in its name. Impact is as described: a voice-control user saying 'click Bigger text' gets no match and must fall back to numbered overlays, and a screen-reader user hears a state description rather than the visible label; not blocking, but it lands on exactly the person the control exists for.
 
 ### Lists styled with list-style:none carry no role="list", so WebKit/VoiceOver flattens them (severity 2)
 
@@ -200,7 +200,7 @@ Barrier or risk: A sighted keyboard user who has just chosen an option sees a bl
 
 Fix proposed: Style the pressed state with a fill rather than an outline: background var(--deep-bg), border-color var(--deep), and a check glyph via ::before with content:"\2713" / "" so it also survives forced colours; leave the outline for focus only.
 
-Status: Fixed 7 Sep: the chosen option is shown with a fill and a check mark, not the focus ring.
+Status: Fixed 7 Sep: the chosen option is shown with a fill and a check mark, not the focus ring.; second pass: upheld, Confirmed in source and on the live /ask page: ask.page line 29 (live line 38) styles the pressed pick as outline 3px solid var(--focus) at 2px offset, CurbCutShell.component lines 95-100 (live 129-130) style button:focus-visible as outline 3px solid var(--focus) at 3px offset plus a ground-coloured box-shadow that is invisible on the page ground, and the click handler at ask.page lines 302-307 sets aria-pressed="true", relabels to "Chosen" and calls draftBtn.focus(); I reproduced it on the live page by rendering option cards with the same markup and handler (no backend call, nothing logged) and arriving by keyboard, and getComputedStyle then reported "Chosen" with outline rgb(11,87,199) solid 3px offset 2px and the focused "Help me ask for this" (activeElement, :focus-visible true) with outline rgb(11,87,199) solid 3px offset 3px, i.e. two identical blue rings one pixel apart in offset. It affects sighted keyboard users only (Chromium does not carry :focus-visible over a mouse click) and the ambiguous button only produces a draft, sending is a later screen with its own button, so severity is about 2-3 not 5; the cascade also means that when focus later lands on "Chosen" itself the pressed rule (specificity 0,3,0) beats button:focus-visible (0,1,1) for outline and offset, so that button shows no perceptible focus change at all, and the shell already uses a fill for its own pressed state (.tools button[aria-pressed="true"], background var(--ink)), so the proposed fill-plus-check-glyph fix matches the house pattern.
 
 ### Choosing a photo or video sends it immediately, with no confirmation and no way to cancel (severity 2)
 
@@ -210,7 +210,7 @@ Barrier or risk: Someone with a tremor, low vision or a cognitive disability who
 
 Fix proposed: After selection, show the file name and size with two buttons, 'Send this photo' and 'Choose a different one', and only call sendMedia from the first; announce the chosen file name in #mediaStatus.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in both source (ask.page 398-438) and the live /ask page: the change handler on each file input calls sendFile, which announces only "Sending your photo." (no file name) and calls CurbCutWeb.sendMedia straight away; CurbCutMedia.send stores the file, links it to a Barrier_Report and, for video, raises a Human_Handoff immediately, and the guest's remoting manifest (consult, draft, human, revokeStanding, saveStanding, send, sendMedia, whoSaw) has no action to remove or retract it. The text path, by contrast, has "Yes, send this" and "Delete it" buttons and updates the sentinel on send, while sendFile leaves "Nothing has been sent to anyone" on screen after a photo has gone to a person; the mitigating facts are that the label is honest and the recipient is the Curb Cut desk rather than the employer, so severity 3 with the fix being a name-and-size preview with "Send this photo" and "Choose a different one" before sendMedia is called.
 
 ### Two assistant text colours fall under 4.5:1, and the console's colours were never in the contrast suite (severity 2)
 
@@ -220,7 +220,7 @@ Barrier or risk: A low-vision operator cannot comfortably read the 'WHAT YOU COU
 
 Fix proposed: Set .panel-title to --ink-soft #4a4e4f (7.34:1 and above on both washes). Mark done steps without opacity: keep the strike-through and change .why to #5e6568 (5.94:1) and the number circle to a check mark. Extend tests/contrast_audit.py to parse the five LWC CSS files and their :host tokens, including blended opacity states, and correct the sentence in the report.
 
-Status: Open
+Status: Open; second pass: upheld, Recomputed from curbCutAssist.css: .panel-title (#6b7174, 10.88px bold, lines 92-95) is 4.38:1 on the result wash and 4.32:1 on the refused wash, and .step.is-done opacity .62 (line 59) composites the .why explanation (#4a4e4f, 13.44px) to #8f9192 at 3.17:1 on white, both under 4.5:1 in the default rendering (prefers-contrast: more mitigates only for users with that OS setting). tests/contrast_audit.py line 16 reads only CurbCutShell.component (14 pairs x 2 themes = the 28 passing checks) and no jest test computes contrast, the LWC even redefines --ink-mute to a lighter grey than the shell's #5E6568, and the "measured from the stylesheets, 28 checks" sentence is repeated in the Devpost Q1 answer; the component is login-only (lightning__RecordPage on Human_Handoff__c) so the public live site cannot show it, and the deployed build was assumed to match source.
 
 ### Reading order on the record pages contradicts the design's own priority: the person's words come after every field and related list (severity 2)
 
@@ -230,7 +230,7 @@ Barrier or risk: curbCutHandoffBrief.js lines 14-18 says what matters first is w
 
 Fix proposed: Move curbCutHandoffBrief to the top of the `main` region above force:detailPanel on the handoff page, and curbCutMediaViewer to the top of `main` on the barrier page (or switch both pages to a left-sidebar template). Keep the guide, the assistant and the emergency panel in the sidebar, where 'deliberately unlike everything else' still holds.
 
-Status: Open
+Status: Open; second pass: upheld, Opened HH-00020 and BR-00176 in the live console via the sf CLI login link and walked the rendered DOM including shadow roots: flexipage-record-home-template-desktop2 renders highlights, detail panel and related lists before the sidebar, the brief's h2 "What they already told us" comes after the four h3 detail sections, the first brief control is focus stop 51 of 59 with 27 stops (section toggles, seven Help and seven Edit pencils, related-list links) between Edit/Delete and "I am picking this up", and the media viewer on the barrier page likewise follows every field and related list; both pages are deployed and activated through actionOverrides. The sequence does match the visual left-then-right layout, so this is a priority-inversion burden for keyboard and screen-reader operators rather than a hard 1.3.2/2.4.3 conformance failure, softened by the brief's headings being the page's first h2s and Reachable By sitting in the highlights panel, so severity 2 and the proposed move of the brief and media viewer to the top of main is a valid, cheap fix.
 
 ### Triage tiles don't say, by name or by look, that they open a queue (severity 2)
 
@@ -240,7 +240,7 @@ Barrier or risk: A screen-reader operator hears a statistic, not something that 
 
 Fix proposed: Render each tile as an <a href> built with this[NavigationMixin.GenerateUrl] (still handling click for in-app navigation), add 'Open the queue' as visible text or an slds-assistive-text span at the end of the name, and give the tile a visible affordance: an underlined label or a trailing arrow and a border of at least 3:1 (#8e949a, the existing top stripe, measures 3.0:1 on white; #6b7174 is safer).
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in source and deployed metadata: curbCutTriage.html lines 16-41 render four <button class="card"> named only by count + label + note (only the waiting tile, and only once the longest wait passes 24h, carries any action word, "Start here."), curbCutTriage.js lines 66-77 fire NavigationMixin.Navigate (not GenerateUrl, so no href) to four list views that all exist in the repo, and curbCutTriage.css lines 13-19 give a 1px #d8dde1 border (1.37:1) and a #f7f9fa hover (1.06:1) with no underline, verb or arrow; the component is item one on Curb_Cut_Home.flexipage-meta.xml (line 7), the page Q0 sends judges to, and it does not appear on the public site (0 references in the live home page), so I could not exercise it live without the org login. The barrier is real but softer than stated: the "button" role is announced so a screen-reader operator knows the tile is actionable, just not what it opens; the top stripe measures 3.06:1 (#8e949a) to 8.24:1 (#8c2f26) in every tone, so 1.4.11 is satisfied on the boundary though nothing signals interactivity; and three of the four queues are also placed as standard filterListCards lower on the same page, leaving only "replies that did not arrive" (Message_Log__c / Did_Not_Reach_Them) with the tile as its sole on-page route, and the project's Sa11y suite cannot catch any of this (its only triage violation is the deliberately excluded "region" rule), so severity 2, and the fix is an <a href> built from GenerateUrl with an "Open the queue" suffix and a 3:1 edge or trailing arrow.
 
 ### The emergency disclosure loses its name when open: 'Close this' says nothing about what 'this' is (severity 2)
 
@@ -250,7 +250,7 @@ Barrier or risk: Once the panel is open, the only control that closes it is anno
 
 Fix proposed: Keep the accessible name stable ('Emergency escalation') and let aria-expanded carry open/closed; if a visible 'Close' is wanted, use 'Close emergency escalation'. Add aria-controls pointing at the .box.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed in source (curbCutEmergency.js:83, curbCutEmergency.html:3-4: no aria-label, no aria-controls, .box has no id, no heading inside the panel, and toggle() is the only thing that closes the panel) and by rendering the component under the project's own sfdx-lwc-jest/Sa11y harness from the scratchpad with mocked wire data: collapsed name "Emergency escalation" aria-expanded=false; after click, name "Close this" aria-expanded=true aria-controls=null box.id="" headings=0, and the extended axe ruleset reports nothing, which is why the repo's test (which only checks the collapsed first render) never caught it. It is console-only (the sidebar of Curb_Cut_Handoff_Record.flexipage, last after the brief, assist panel and a rich-text guide; the public pages carry no trace of it, the /ask and /docs grep hits are unrelated prose), so a screen-reader operator reaching the button from a button list hears only "Close this, expanded" and, once an escalation is raised, sits it beside a second button "Close it, and clear the callback number" that does something different; strictly 4.1.2 passes (a name exists) and the sharper fit is 2.4.6, focus itself stays on the button after toggling, and the proposed fix (stable name, aria-controls to an id on .box, optionally a heading in the panel) is correct and cheap.
 
 ### Photos are described by their file name, and the video has no name at all (severity 2)
 
@@ -260,7 +260,7 @@ Barrier or risk: A screen-reader operator hears 'IMG_4021.jpeg', then 'IMG_4021.
 
 Fix proposed: Build the alt from kind and time, not the file name: 'Photo the person sent on 2 September, in place of words. Not described by the system.' Give the video `aria-label="Signed or spoken video the person sent, {arrivedAt}"` alongside the existing aria-describedby. Make the link 'Download the original {kind}'. Keep the file name in the .meta line only.
 
-Status: Open
+Status: Open; second pass: upheld, Confirmed end to end in source and on the live site: the served /ask page (line 1077 of the HTML) passes `file.name` to CurbCutWeb.sendMedia (source ask.page line 421, not 420), CurbCutMedia.cls 135-136 stores it as ContentVersion.Title unless blank, CurbCutConsole.cls 162 returns it as `title`, and curbCutMediaViewer.html uses it as the img alt (line 26), repeats it in .meta (line 36), gives the video only aria-describedby and no accessible name (lines 29-30), and renders an identical "Download the original" link per item (line 37); the component is deployed on the Curb_Cut_Barrier_Record flexipage, web upload is the only production path for media, and the Jest a11y test masks the behaviour by emitting a hand-written title ("The doorway they cannot get through") that never occurs in practice, so axe's presence-only image-alt check passes. One softening the reviewer omits: a visible `<p class="kind">Photo</p>` (line 24) and the h2 "What they sent instead of typing" precede each image in reading order, so an operator reading linearly does hear the kind and the arrival time, which lowers severity to about 2-3 rather than refuting it, and the fix is cheap because CurbCutMedia.cls line 141 already writes an honest "what it is" sentence into ContentVersion.Description that CurbCutConsole.media() simply never SELECTs.
 
 ### Console image alt leaves out the question and the refusal, and 'her' has no referent (severity 2)
 
@@ -270,7 +270,7 @@ Barrier or risk: The picture's meaning is its words: 'What is this person's diag
 
 Fix proposed: Alt: 'Console mock-up. Asked What is this person's diagnosis?, the assistant answers: No. And not because of a permission setting. There is no field for a diagnosis, condition, disability type, medical note, severity or prognosis anywhere in this system. Beside it the request shows only the person's own words, I keep missing things in meetings, reachable by text, anonymous. Small print: 0 matches across 61 fields in 9 objects; a build fails if anyone adds one.' Or quote the refusal as text under the image, as the judge guide does at lines 171-173.
 
-Status: Fixed 7 Sep: the alt text carries the question and the refusal.
+Status: Fixed 7 Sep: the alt text carries the question and the refusal.; second pass: not upheld, Checked tests/render_devpost_description.py line 6 locally and on GitHub main, the script's rendered <img> output, the PNG (SHA-256 identical to the raw GitHub copy the description embeds), and the file's commit history: the alt the reviewer describes ("The console refusing to say what is wrong with her. There is no field for a diagnosis anywhere in this system, so nobody can be asked.") was real from 5 Sep 22:55 UTC until commit 05bda8cdc4 "Truthful alt texts in the description renderer" at 19:21 UTC today replaced it with "Console mock-up. Asked what this person's diagnosis is, the assistant answers: No, and not because of a permission setting; there is no field for a diagnosis, condition or medical note anywhere in this system", so at the cited line the question is named, the refusal is quoted (abridged: "disability type, severity or prognosis" dropped), and there is no "her" (that phrase now survives only in the film narration, video/script.py:52 and submission/VIDEO-NARRATION.md, where she is the film's protagonist). Two residuals a reviewer should still note: the new alt omits the image's small print "0 matches across 61 fields in 9 objects" (a figure Q0 gives nowhere else; "a build check fails if anyone adds one" is already in Q0 line 17) and the request card ("I keep missing things in meetings", text, anonymous), a minor severity-2 completeness gap the reviewer's proposed alt would close; and the live Devpost for Teams page (project 21130, login-gated, no URL in the repo, memory says the submission is frozen) may still carry the old alt unless the description was re-PUT from the script after 19:21 UTC today, which is the one fix left: re-run the renderer and PUT it, or paste the refusal as text under the image as the judge guide does at submission/JUDGE-TEST-GUIDE.md lines 171-173.
 
 ### The one-in-four card is an image of text whose alt drops a paragraph and the sources line, and the sources line is under 4.5:1 (severity 2)
 
@@ -290,7 +290,7 @@ Barrier or risk: The lines that carry the proof (the field count and the build c
 
 Fix proposed: Regenerate the mock with those labels at 4.5:1 or better (a grey like #5f6663 on #fafaf7 gives about 5.5:1), and carry the two proof lines in the alt or in the paragraph above.
 
-Status: Open
+Status: Open; second pass: upheld, Checked the SVG source (submission/devpost/mockups/07-console-refusal.svg) and pixel-sampled the 1400x787 PNG with ffmpeg: on the specified colours, 'HH-00042 · WAITING 4 MINUTES' (#74797A on #E4E4DE) is 3.46:1 and the two proof lines (#74797A on #FAFAF7) are 4.22:1, both failing 4.5:1 at 9 to 9.5 SVG-unit Courier, while 'THEIR WORDS · NOT A SUMMARY' (#2C6659 on #E4E4DE) is 5.22:1 and passes; the reviewer's 2.5/2.8/3.2 figures come from averaging anti-aliased ink pixels (my darkest-10% average reproduces them exactly), which WCAG excludes, so all three numbers are understated and one line is wrongly flagged. Severity 2, not higher, because the paragraph directly above the image already states the build-check claim, '61 fields across 9 objects' is in Q2 and on the live /docs page, and the alt carries the refusal; fix by changing the two #74797A fills in the SVG to #4A4E4F (already used on the same card; 6.6:1 on the card, 8.4:1 on the page, versus the suggested #5f6663 which only reaches 4.61:1 on the card), raising the mono size to 11, re-exporting the PNG, and adding 'no match across 61 fields in 9 objects' to the alt in tests/render_devpost_description.py.
 
 ### Emoji prefixes are announced on every heading, every door, and four paragraphs (severity 2)
 
