@@ -56,7 +56,7 @@ private class CurbCutOptionsTest {
     @IsTest
     static void statesZeroCostPlainly() {
         CurbCutOptions.Result res = run('captions meetings');
-        System.assert(res.options.contains('costs nothing'), 'Zero-cost should be stated plainly');
+        System.assert(res.options.contains('costs the employer nothing'), 'Zero-cost should be stated plainly');
     }
 
     @IsTest
