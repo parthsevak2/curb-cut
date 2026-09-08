@@ -39,7 +39,7 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 | Console (internal) | `/lightning/app/Curb_Cut_Console`, home tab `/lightning/n/Curb_Cut_Home`, org login needed | live |
 | Why now | `/curbcut/why` | live |
 | Messaging programme | `/curbcut/messaging` | live |
-| MCP server | `node channels/mcp-server.mjs` | 3 tools, none of which can send |
+| MCP server | `node channels/mcp-server.mjs` | 4 tools, none of which can send |
 | Any relay or assistant | `POST /services/apexrest/curbcut/v1/message/` | one door every channel above shares |
 
 The console is the half of this that nobody demos. Every promise the assistant
@@ -71,7 +71,7 @@ and nobody can find out.
 
 - **No automated sign language.** ASL is a complete language; recognition is unsolved. Signed video routes to a human, with immediate text acknowledgement so nobody waits in silence.
 - **No diagnosis field.** It isn't encrypted or restricted. It's absent. CI fails the build if anyone adds one.
-- **No phone fallback, ever.** `Reachable_By__c` is hard-coded to message.
+- **No phone fallback, ever.** `Reachable_By__c` accepts a message channel or email, and the code refuses a telephone number.
 - **No inference.** Nothing is profiled or predicted. Every signal is one the person set.
 
 ## Verification
@@ -83,7 +83,7 @@ quoted anywhere in the submission stops matching the artefact it describes.
 ```
 128 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
-530 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+690 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
@@ -105,7 +105,7 @@ every run and one alternates, and both are reported rather than averaged away.
 | Path | What |
 |---|---|
 | `force-app/main/default/objects/` | 9 objects, 61 fields, 31 list views, and no field for a diagnosis |
-| `force-app/main/default/classes/` | 18 Apex classes + 14 test classes |
+| `force-app/main/default/classes/` | 19 Apex classes + 15 test classes |
 | `force-app/main/default/lwc/` | 5 Lightning Web Components, each with a Sa11y suite beside it |
 | `force-app/main/default/aiAuthoringBundles/` | two Agent Scripts: `Curb_Cut` public, `Curb_Cut_Desk` internal |
 | `force-app/main/default/pages/` `components/` `sites/` | the public site, six pages, anonymous |
