@@ -35,7 +35,7 @@
 <p>Curb Cut is an Agentforce agent whose principal is <strong>the worker, not the employer</strong>.</p>
 <hr/>
 <h4>Live now</h4>
-<div class="tbl"><table><thead><tr><th scope="col">Surface</th><th scope="col">Address</th><th scope="col">State</th></tr></thead><tbody><tr><td>Web</td><td>https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut</td><td>live</td></tr><tr><td>Ask (full journey, no phone)</td><td><code>/curbcut/ask</code></td><td>live</td></tr><tr><td>Privacy</td><td><code>/curbcut/privacy</code></td><td>live</td></tr><tr><td>Terms</td><td><code>/curbcut/terms</code></td><td>live</td></tr><tr><td>SMS</td><td>+1 276 495 9311</td><td>live, through a relay we run beside the org</td></tr><tr><td>Voice</td><td>+1 276 495 9311</td><td>built, speech in and out</td></tr><tr><td>Email</td><td>inbound service <code>CurbCutInbound</code>, address in Setup → Email Services</td><td>live</td></tr><tr><td>Slack</td><td><code>node channels/slack-app.mjs</code>, Socket Mode, DM only, never sends</td><td>live in a real workspace; manifest in <code>channels/slack-manifest.json</code></td></tr><tr><td>Agent</td><td><code>Curb_Cut</code> v7, <code>Curb_Cut_Desk</code> v5</td><td>both active</td></tr><tr><td>Console (internal)</td><td><code>/lightning/app/Curb_Cut_Console</code>, home tab <code>/lightning/n/Curb_Cut_Home</code>, org login needed</td><td>live</td></tr><tr><td>Why now</td><td><code>/curbcut/why</code></td><td>live</td></tr><tr><td>Messaging programme</td><td><code>/curbcut/messaging</code></td><td>live</td></tr><tr><td>MCP server</td><td><code>node channels/mcp-server.mjs</code></td><td>3 tools, none of which can send</td></tr><tr><td>Any relay or assistant</td><td><code>POST /services/apexrest/curbcut/v1/message/</code></td><td>one door every channel above shares</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th scope="col">Surface</th><th scope="col">Address</th><th scope="col">State</th></tr></thead><tbody><tr><td>Web</td><td>https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut</td><td>live</td></tr><tr><td>Ask (full journey, no phone)</td><td><code>/curbcut/ask</code></td><td>live</td></tr><tr><td>Privacy</td><td><code>/curbcut/privacy</code></td><td>live</td></tr><tr><td>Terms</td><td><code>/curbcut/terms</code></td><td>live</td></tr><tr><td>SMS</td><td>+1 276 495 9311</td><td>live, through a relay we run beside the org</td></tr><tr><td>Voice</td><td>+1 276 495 9311</td><td>built, speech in and out</td></tr><tr><td>Email</td><td>inbound service <code>CurbCutInbound</code>, address in Setup → Email Services</td><td>live</td></tr><tr><td>Slack</td><td><code>node channels/slack-app.mjs</code>, Socket Mode, DM only, never sends</td><td>live in a real workspace; manifest in <code>channels/slack-manifest.json</code></td></tr><tr><td>Agent</td><td><code>Curb_Cut</code> v7, <code>Curb_Cut_Desk</code> v5</td><td>both active</td></tr><tr><td>Console (internal)</td><td><code>/lightning/app/Curb_Cut_Console</code>, home tab <code>/lightning/n/Curb_Cut_Home</code>, org login needed</td><td>live</td></tr><tr><td>Why now</td><td><code>/curbcut/why</code></td><td>live</td></tr><tr><td>Messaging programme</td><td><code>/curbcut/messaging</code></td><td>live</td></tr><tr><td>MCP server</td><td><code>node channels/mcp-server.mjs</code></td><td>4 tools, none of which can send</td></tr><tr><td>Any relay or assistant</td><td><code>POST /services/apexrest/curbcut/v1/message/</code></td><td>one door every channel above shares</td></tr></tbody></table></div>
 <p>The console is the half of this that nobody demos. Every promise the assistant makes about a person reaching a human being is worthless unless a human being has somewhere to stand. <code>Human_Handoff__c</code> was creating records that said "a person is picking this up" with no surface for that person.</p>
 <div class="tbl"><table><thead><tr><th scope="col">Console surface</th><th scope="col">What it is for</th></tr></thead><tbody><tr><td><strong>On Duty</strong> (app home)</td><td>Three queues in the order they should be worked, with standing orders above them</td></tr><tr><td>Waiting for a person</td><td>Someone asked for a human and is currently getting silence</td></tr><tr><td>Awaiting a decision</td><td>Approved requests an employer has not answered, nearest deadline first</td></tr><tr><td>Needs an interpreter</td><td>Signed video, waiting on a person, never machine translated</td></tr><tr><td>Curb Cut Overview (dashboard)</td><td>Where the system is failing people, in five panels</td></tr><tr><td>Record feeds</td><td>Two people often work one request, so the conversation lives on the record</td></tr></tbody></table></div>
 <p>Nothing in the console shows a diagnosis, because there is no field for one. An operator who is asked what a person has can only answer that nobody knows and nobody can find out.</p>
@@ -50,14 +50,14 @@
 <ul>
 <li><strong>No automated sign language.</strong> ASL is a complete language; recognition is unsolved. Signed video routes to a human, with immediate text acknowledgement so nobody waits in silence.</li>
 <li><strong>No diagnosis field.</strong> It isn't encrypted or restricted. It's absent. CI fails the build if anyone adds one.</li>
-<li><strong>No phone fallback, ever.</strong> <code>Reachable_By__c</code> is hard-coded to message.</li>
+<li><strong>No phone fallback, ever.</strong> <code>Reachable_By__c</code> accepts a message channel or email, and the code refuses a telephone number.</li>
 <li><strong>No inference.</strong> Nothing is profiled or predicted. Every signal is one the person set.</li>
 </ul>
 <h4>Verification</h4>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/submission_consistency.py</code> fails the build if any number quoted anywhere in the submission stops matching the artefact it describes.</p>
 <pre>128 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
-530 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+690 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
@@ -69,7 +69,7 @@
 21/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
 <p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial score is 21 of 23 on purpose: one assertion fails on every run and one alternates, and both are reported rather than averaged away.</p>
 <h4>Repository map</h4>
-<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>18 Apex classes + 14 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above, plus <code>screen_reader_walk.mjs</code>, which writes docs/SCREEN-READER-WALK.md</td></tr><tr><td><code>deck/</code></td><td>the deck as source; <code>submission/Curb-Cut.pptx</code> is generated from it</td></tr><tr><td><code>submission/</code></td><td>every Devpost field paste-ready, the judge test guide, the technical design</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>19 Apex classes + 15 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above, plus <code>screen_reader_walk.mjs</code>, which writes docs/SCREEN-READER-WALK.md</td></tr><tr><td><code>deck/</code></td><td>the deck as source; <code>submission/Curb-Cut.pptx</code> is generated from it</td></tr><tr><td><code>submission/</code></td><td>every Devpost field paste-ready, the judge test guide, the technical design</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
 <p>Start with <code>docs/ARCHITECTURE.md</code>, then <code>CRITIQUE.md</code>, which is where the honest list of what is still weak lives.</p>
 <h4>Documentation</h4>
 <div class="tbl"><table><thead><tr><th scope="col">Document</th><th scope="col">Purpose</th></tr></thead><tbody><tr><td><code>docs/ARCHITECTURE.md</code></td><td>How it fits together, with diagrams</td></tr><tr><td><code>docs/BRD.md</code></td><td>Business requirements and traceability</td></tr><tr><td><code>docs/ROADMAP.md</code></td><td>What is next, and what was rejected</td></tr><tr><td><code>docs/DECISIONS.md</code></td><td>Every significant call and why</td></tr><tr><td><code>docs/EVIDENCE.md</code></td><td>Every public figure, with source, denominator and caveat</td></tr><tr><td><code>docs/AGENT-INTERFACES.md</code></td><td>Headless, MCP, agent-to-agent, and the profile we will not build</td></tr><tr><td><code>CRITIQUE.md</code></td><td>What is still wrong</td></tr><tr><td><code>FINDINGS.md</code></td><td>Adversarial run results</td></tr><tr><td><code>CI.md</code></td><td>Pipeline and invariants</td></tr><tr><td><code>DEPLOY.md</code></td><td>Deployment</td></tr></tbody></table></div>
@@ -149,7 +149,7 @@ curl -s -X POST "$URL/services/apexrest/curbcut/v1/message/" \
 <h3>Check the numbers rather than trusting them</h3>
 <pre>python3 tests/invariants.py        # 517 structural invariants
 sf apex run test -o curbcut -l RunLocalTests   # 128 Apex tests
-python3 tests/a11y_audit.py        # 530 accessibility checks, against the live pages
+python3 tests/a11y_audit.py        # 690 accessibility checks, against the live pages
 npm run test:a11y                  # 131 Sa11y checks, Salesforce's own matcher
 python3 tests/rai_self_check.py    # 21 responsible AI checks
 python3 tests/rai_self_check.py --selftest   # proves those checks can fail
@@ -579,8 +579,8 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
   Structural invariants        517   every push, ~1s, no org needed
-  Apex tests                   127   every deploy
-  Accessibility (live pages)   530   against the deployed site
+  Apex tests                   128   every deploy
+  Accessibility (live pages)   690   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
@@ -601,7 +601,7 @@ Three deliberate choices make the number mean something.
   in one place with the reason beside it: it carries no WCAG tag and
   fires only because a component mounted alone in a test has no page
   landmarks around it. Landmarks are checked on the real pages by the
-  530-check live suite.
+  690-check live suite.
 
   The harness is proved able to fail. jest/__tests__/harness-control.a11y.test.js
   plants an image with no alt text and asserts the matcher throws. A
@@ -639,7 +639,7 @@ INVARIANTS THAT ARE UNUSUAL
     hearing ever enter the condition list.
   · adversarial-silence-is-not-success. Fails if the scorer stops
     treating inconclusive as failure.</pre><h3>9. AGENT DESIGN</h3><pre class="tdd">Two Agentforce agents, both Active:
-  Curb_Cut       v7  public, 6 subagents, 7 Apex actions
+  Curb_Cut       v8  public, 6 subagents, 7 Apex actions
   Curb_Cut_Desk  v5  internal, refuses medical questions
 
 WHAT THE AGENT MAY DO
@@ -797,9 +797,9 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   there is no account, the diagnosis field does not exist, and the
   employer sees a request in the person's words rather than a record
   about them. The agent is the same technology the employer's side
-  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      508 checks, ~1s
+  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      517 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      128 tests
-  python3 tests/a11y_audit.py                      527 checks, live pages
+  python3 tests/a11y_audit.py                      690 checks, live pages
   npm run test:a11y                                131 Sa11y checks, 12 states
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
