@@ -33,7 +33,21 @@ public with sharing class CurbCutOptions {
         'like','lot','bit','day','days','time','times',
         // 'work' is in half the library and in almost every phrase a person types,
         // so it separates nothing
-        'work','works','working','job'
+        'work','works','working','job',
+        // verbs of effort and motion that describe the person, not the barrier.
+        // 'It is hard to move from the car to the building' once returned 'Move
+        // away from overhead fluorescent lighting' on the strength of 'move'.
+        'move','moves','moved','moving','hard','harder','difficult','easy','easier',
+        'go','goes','going','went','come','comes','coming','take','takes','taking',
+        'find','finds','finding','feel','feels','feeling','help','helps','helping',
+        'able','around','between','through','where','which','who','how','every',
+        'something','anything','someone','people','person','other','others',
+        // 'dropped off at the entrance' once surfaced 'Turn off fluorescent lights';
+        // 'office' is where everyone is, not what anyone is asking about
+        'off','turn','turns','turned','office','offices',
+        // durations: 'I cannot type for long' once ranked an anti-glare filter
+        // first because its summary says 'a long day'
+        'long','longer','short','often','always','never'
     };
 
     private static final Integer TITLE_WEIGHT = 3;
@@ -139,8 +153,15 @@ public with sharing class CurbCutOptions {
                 Boolean inTitle = titleWords.contains(kw);
                 Boolean inBody  = bodyWords.contains(kw);
                 if (!inTitle && !inBody) { continue; }
-                score += inTitle ? TITLE_WEIGHT : BODY_WEIGHT;
                 Integer df = docFreq.containsKey(kw) ? docFreq.get(kw) : 0;
+                Integer weight = inTitle ? TITLE_WEIGHT : BODY_WEIGHT;
+                // A word that lives in exactly one option is that option's word.
+                // 'I use a wheelchair and the meeting rooms are upstairs' ranked
+                // the agenda and captions above the wheelchair row, because
+                // 'meeting' sits in four titles and outvoted the one word that
+                // said what the person actually needs.
+                if (df == 1) { weight *= 2; }
+                score += weight;
                 if (df > 0 && df <= rareMax) { discriminating = true; }
             }
             // At least one word that actually distinguishes this option.
