@@ -71,7 +71,7 @@ part that does not exist.
     Reachable_By__c / Return_Code_Hash__c
   Message_Log__c   (the delivery ledger)
   Emergency_Escalation__c
-  Accommodation_Option__c  (28 sourced library rows)
+  Accommodation_Option__c  (36 sourced library rows)
   Access_Profile__c
 
 WHY ABSENCE RATHER THAN ENCRYPTION
@@ -192,7 +192,7 @@ sentence about why.
 5. GROUNDING. WHY THERE IS NO RAG
 ─────────────────────────────────────────────────────────────────────
 
-The accommodation library is 28 rows, each individually sourced with a
+The accommodation library is 36 rows, each individually sourced with a
 citation URL, cost band, and plain-language summary.
 
 Ranking is a deterministic Apex function:
@@ -204,7 +204,7 @@ Ranking is a deterministic Apex function:
 
 WHY NOT EMBEDDINGS
 
-  · 28 rows. A vector index over 28 rows is theatre.
+  · 36 rows. A vector index over 36 rows is theatre.
   · Determinism. The same sentence returns the same options every time,
     which makes the adversarial suite meaningful.
   · Auditability. We can explain exactly why an option ranked first. A

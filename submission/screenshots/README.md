@@ -9,7 +9,7 @@ and `node video/flow.mjs`.
 | File | What it shows |
 |---|---|
 | 01-ask-one-question-no-login | The whole form. No name, no login, no diagnosis field |
-| 02-options-from-the-sourced-library | Options returned from the 28-row library, with what each usually costs |
+| 02-options-from-the-sourced-library | Options returned from the 36-row library, with what each usually costs |
 | 03-the-draft-in-her-words | "I am not sharing a diagnosis, and I am not required to." Written by the live agent |
 | 04-sent-with-a-date-she-can-hold-them-to | Sent, with the date the employer must answer by |
 | 05-home | The home page |
