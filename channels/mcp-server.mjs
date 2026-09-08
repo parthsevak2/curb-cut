@@ -136,7 +136,16 @@ async function findOptions(need, limit) {
     'still','about','over','under','without','you','your','their','there','here','keep','keeps',
     'keeping','need','needs','needed','make','makes','made','thing','things','right','now','way',
     'ways','use','uses','using','used','like','lot','bit','day','days','time','times','work',
-    'works','working','job']);
+    'works','working','job',
+    // kept in step with CurbCutOptions.cls: verbs of effort and motion, 'office',
+    // 'off' and durations describe the person or the room, not the barrier
+    'move','moves','moved','moving','hard','harder','difficult','easy','easier',
+    'go','goes','going','went','come','comes','coming','take','takes','taking',
+    'find','finds','finding','feel','feels','feeling','help','helps','helping',
+    'able','around','between','through','where','which','who','how','every',
+    'something','anything','someone','people','person','other','others',
+    'off','turn','turns','turned','office','offices',
+    'long','longer','short','often','always','never']);
   const stem = (w) => {
     if (w.length < 4) return w;
     if (/(ses|xes|zes)$/.test(w)) w = w.slice(0, -2);
@@ -152,12 +161,27 @@ async function findOptions(need, limit) {
   const raw  = (need || '').toLowerCase().split(/[^a-z]+/).filter(w => !STOP.has(w));
   const keywords = new Set(raw.filter(w => w.length >= 3).map(stem).filter(w => w.length >= 3));
 
-  const scored = [];
-  for (const o of res.records) {
+  // Same rules as CurbCutOptions.cls: a word in at most a quarter of the library
+  // is the only kind that can carry a match, and a word that lives in exactly one
+  // option is that option's word and counts double.
+  const docFreq = new Map();
+  const idx = res.records.map(o => {
     const title = words(o.Option__c), body = words(o.Plain_Language_Summary__c);
-    let score = 0;
-    for (const k of keywords) { if (title.has(k)) score += 3; else if (body.has(k)) score += 1; }
-    if (score > 0) scored.push({ o, score });
+    for (const w of new Set([...title, ...body])) docFreq.set(w, (docFreq.get(w) || 0) + 1);
+    return { o, title, body };
+  });
+  const rareMax = Math.max(3, Math.floor(res.records.length / 4));
+  const scored = [];
+  for (const { o, title, body } of idx) {
+    let score = 0, discriminating = false;
+    for (const k of keywords) {
+      const inTitle = title.has(k), inBody = body.has(k);
+      if (!inTitle && !inBody) continue;
+      const df = docFreq.get(k) || 0;
+      score += (inTitle ? 3 : 1) * (df === 1 ? 2 : 1);
+      if (df > 0 && df <= rareMax) discriminating = true;
+    }
+    if (score > 0 && discriminating) scored.push({ o, score });
   }
   scored.sort((a, b) => b.score - a.score ||
     (b.o.Precedent_Count__c || 0) - (a.o.Precedent_Count__c || 0) ||
