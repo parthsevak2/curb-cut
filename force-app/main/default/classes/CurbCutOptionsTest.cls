@@ -281,4 +281,34 @@ private class CurbCutOptionsTest {
         System.assert(res.options.containsIgnoreCase('keyboard'),
             'a keyboard is the point of that sentence: ' + res.options);
     }
+
+    /**
+     * A phrase about getting from the car park to the door is about access to
+     * the building, not lighting. 'Move' is a verb the person used, not a
+     * subject the library is about, and must not carry the match.
+     */
+    @IsTest
+    static void carToBuildingIsAboutAccessNotLighting() {
+        insert new List<Accommodation_Option__c>{
+            new Accommodation_Option__c(
+                Option__c = 'Move away from overhead fluorescent lighting',
+                Plain_Language_Summary__c = 'Sitting somewhere with softer or natural light instead. Usually just a change of desk.',
+                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/solutions/Lighting.cfm'),
+            new Accommodation_Option__c(
+                Option__c = 'Accessible parking space close to the entrance',
+                Plain_Language_Summary__c = 'A reserved parking space near the door, so the walk from the car to the building is short and step-free.',
+                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/topics/Parking.cfm'),
+            new Accommodation_Option__c(
+                Option__c = 'Workstation moved closer to the entrance',
+                Plain_Language_Summary__c = 'Your desk placed near the building entrance, lift or accessible toilet, so there is less distance to walk each day.',
+                Zero_Cost__c = true, Source_URL__c = 'https://askjan.org/limitations/Walking.cfm')
+        };
+        CurbCutOptions.Request req = new CurbCutOptions.Request();
+        req.need = 'It is hard to move from the car to the building';
+        req.limitSize = 4;
+        CurbCutOptions.Result res = CurbCutOptions.find(new List<CurbCutOptions.Request>{req})[0];
+        System.assertEquals(false, res.noMatch, 'Car to building should match the access options');
+        System.assert(res.options.contains('parking'), 'Expected the parking option, got: ' + res.options);
+        System.assert(!res.options.contains('lighting'), 'Lighting must not be offered for a parking barrier: ' + res.options);
+    }
 }
