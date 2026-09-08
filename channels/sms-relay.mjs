@@ -298,6 +298,7 @@ const server = createServer((req, res) => {
           if (answer.handedOff) {
             spokenReply = spokenReply
               .replace(/They will reply here, on this same channel\.?/i, '')
+              .replace(/,?\s*and\s+nobody will ring you\.?/i, '.')
               .replace(/\s+nobody will ring you\.?/i, '.')
               .replace(/\s{2,}/g, ' ').trim() +
               ' I hold no number for you, so nobody can ring you back. To reach them again, ' +
