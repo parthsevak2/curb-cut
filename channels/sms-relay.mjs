@@ -248,7 +248,7 @@ async function agentFor(handle) {
 const server = createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/health') {
     res.writeHead(200, {'content-type':'text/plain'});
-    return res.end('ok');
+    return res.end('curbcut-relay ok');
   }
   // Voice front door. The person CHOOSES to speak; nothing here ever requires
   // it, and nothing here ever places an outbound call. Speech in, speech out.
