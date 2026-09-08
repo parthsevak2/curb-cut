@@ -7,17 +7,36 @@ cd "$(dirname "$0")/.." || exit 1   # runs from ~/Library/Application Support/cu
 set -a; source channels/.env; set +a
 unset PUBLIC_URL
 pkill -f "cloudflared tunnel --url http://localhost:3000" 2>/dev/null
-cloudflared tunnel --url http://localhost:3000 > logs/tunnel.log 2>&1 &
-TUN=$!
-for i in $(seq 1 40); do
-  URL=$(grep -o "https://[a-z0-9-]*\.trycloudflare\.com" logs/tunnel.log | head -1)
-  [ -n "$URL" ] && break; sleep 1
+
+# Open a quick tunnel. cloudflared's own error text mentions api.trycloudflare.com,
+# so only a hostname that is not "api" counts, and only once the tunnel says it is up.
+URL=""
+for attempt in 1 2 3 4 5; do
+  : > logs/tunnel.log
+  cloudflared tunnel --url http://localhost:3000 >> logs/tunnel.log 2>&1 &
+  TUN=$!
+  for i in $(seq 1 40); do
+    URL=$(grep -o "https://[a-z0-9-]*\.trycloudflare\.com" logs/tunnel.log | grep -v "^https://api\." | head -1)
+    [ -n "$URL" ] && break
+    if grep -q "failed to request quick Tunnel" logs/tunnel.log || ! kill -0 $TUN 2>/dev/null; then break; fi
+    sleep 1
+  done
+  [ -n "$URL" ] && break
+  echo "tunnel attempt $attempt failed" >> logs/relay.err.log
+  kill $TUN 2>/dev/null; sleep 10
 done
-[ -z "$URL" ] && { echo "no tunnel url"; kill $TUN 2>/dev/null; exit 1; }
+[ -z "$URL" ] && { echo "no tunnel url after 5 attempts"; exit 1; }
 echo "$URL" > /tmp/curbcut-public-url.txt
 bash channels/configure-twilio.sh "$URL" >> logs/twilio-config.log 2>&1
 export PUBLIC_URL="$URL"
-# watchdog: if the public URL stops answering, leave; launchd restarts the whole thing with a fresh tunnel
-( while true; do sleep 60; if ! curl -sf -m 15 "$URL/health" > /dev/null; then sleep 20; if ! curl -sf -m 15 "$URL/health" > /dev/null; then echo "watchdog: $URL not answering, restarting" >> logs/relay.err.log; pkill -P $$ 2>/dev/null; kill -TERM $$ 2>/dev/null; fi; fi; done ) &
+
+# Watchdog: the public URL must answer with this relay's own health line, and the
+# tunnel process must still be alive. A quick tunnel's hostname can take several
+# minutes to appear in DNS, so nothing is judged for the first six minutes; after
+# that, three misses in a row (about two minutes) and the unit leaves, and launchd
+# restarts the whole thing with a fresh tunnel and re-points Twilio.
+healthy() { curl -sf -m 15 "$URL/health" 2>/dev/null | grep -q "curbcut-relay ok" && kill -0 $TUN 2>/dev/null; }
+( sleep 360; misses=0; while true; do sleep 40; if healthy; then misses=0; else misses=$((misses+1)); fi
+  if [ $misses -ge 3 ]; then echo "$(date -u +%FT%TZ) watchdog: $URL not answering as the relay, restarting" >> logs/relay.err.log; pkill -P $$ 2>/dev/null; kill -TERM $$ 2>/dev/null; fi; done ) &
 trap 'kill $TUN 2>/dev/null' EXIT
 exec caffeinate -dims node channels/sms-relay.mjs
