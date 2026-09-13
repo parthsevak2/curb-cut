@@ -9,7 +9,8 @@ set -a; source channels/.env; set +a
 : "${TWILIO_ACCOUNT_SID:?}" "${TWILIO_AUTH_TOKEN:?}" "${TWILIO_NUMBER:?}"
 PUBLIC="${1:?usage: configure-twilio.sh https://<tunnel>.trycloudflare.com}"
 
-api() { curl -sS -u "$TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN" "$@"; }
+# Retries ride out a dropped connection; the timeout stops a hung call holding the relay back.
+api() { curl -sS --retry 3 --retry-all-errors --retry-delay 5 -m 30 -u "$TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN" "$@"; }
 BASE="https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID"
 
 echo "== account =="
@@ -34,7 +35,10 @@ import json,sys; d=json.load(sys.stdin)
 print('  voice ->', d.get('voice_url'))
 print('  sms   ->', d.get('sms_url'))
 cap=d.get('capabilities',{})
-print('  capabilities:', ', '.join(k for k,v in cap.items() if v))"
+print('  capabilities:', ', '.join(k for k,v in cap.items() if v))
+ok = d.get('voice_url') == sys.argv[1] + '/voice' and d.get('sms_url') == sys.argv[1] + '/sms'
+if not ok: print('  Twilio did not take the new address')
+sys.exit(0 if ok else 3)" "$PUBLIC"
 
 echo "== A2P 10DLC (US SMS gate) =="
 api "https://messaging.twilio.com/v1/Services" \
