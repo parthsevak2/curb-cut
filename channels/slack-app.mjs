@@ -213,6 +213,22 @@ async function socketMode(appToken) {
   if (!open.ok) { console.error('[slack] socket open failed:', open.error, '- exiting so launchd restarts us'); process.exit(1); }
 
   const ws = new WebSocket(open.url);
+  globalThis.__curbcutSlackSocket = ws;
+  /* On 10 September a socket errored without ever closing, so nothing reconnected
+     and this app sat deaf for two and a half days while the process looked alive.
+     One watch, started once: if the socket has not been open for three minutes,
+     leave, and launchd starts a fresh app that opens a fresh socket. */
+  if (!globalThis.__curbcutSlackWatch) {
+    let downSince = 0;
+    globalThis.__curbcutSlackWatch = setInterval(() => {
+      if (globalThis.__curbcutSlackSocket?.readyState === 1) { downSince = 0; return; }
+      if (!downSince) downSince = Date.now();
+      if (Date.now() - downSince > 180000) {
+        console.error('[slack] socket not open for three minutes, exiting so launchd restarts us');
+        process.exit(1);
+      }
+    }, 30000);
+  }
   ws.onopen = () => console.log('  socket    connected, listening for DMs and /curbcut');
   ws.onclose = () => { console.log('  socket    closed, reconnecting in 3s'); setTimeout(() => socketMode(appToken), 3000); };
   ws.onerror = (e) => console.error('[slack] socket error', e?.message || e);
