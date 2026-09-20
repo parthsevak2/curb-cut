@@ -252,28 +252,25 @@ global with sharing class CurbCutWeb {
         return r;
     }
 
-    /** Immediate, and no reason is asked for, because there is nowhere to put one. */
+    /**
+     * Immediate, and no reason is asked for, because there is nowhere to put one.
+     *
+     * Gated on the person's six-letter claim code, never on a record Id. A
+     * Salesforce Id can be guessed, or read off a handoff brief by exactly the
+     * manager the preference is about, and an Id-gated revoke let any anonymous
+     * visitor turn off any person's preference. The code is the only proof we
+     * accept that the preference is the caller's to touch, and byCode answers a
+     * wrong code without confirming anything.
+     */
     @RemoteAction
-    global static Reply revokeStanding(String preferenceId) {
+    global static Reply revokeStanding(String claimCode) {
         Reply r = new Reply();
         r.created = false;
         ledger('Inbound', 'Accepted', 'standing: revoke', null);
 
-        if (String.isBlank(preferenceId)) {
-            r.message = 'Tell me which one to turn off and I will do it.';
-            return r;
-        }
-
-        CurbCutStanding.Request req = new CurbCutStanding.Request();
-        req.operation    = 'revoke';
-        req.preferenceId = preferenceId;
-
-        CurbCutStanding.Result res =
-            CurbCutStanding.run(new List<CurbCutStanding.Request>{ req })[0];
-
-        r.created      = res.ok;
-        r.preferenceId = preferenceId;
-        r.message      = res.message;
+        CurbCutStanding.Result res = CurbCutStanding.byCode('revoke', claimCode);
+        r.created = res.ok;
+        r.message = res.message;
         ledger('Outbound', res.ok ? 'Accepted' : 'Rejected', 'standing: revoked', null);
         return r;
     }
@@ -284,21 +281,23 @@ global with sharing class CurbCutWeb {
      * for it.
      */
     @RemoteAction
-    global static Reply whoSaw(String preferenceId) {
+    global static Reply whoSaw(String claimCode) {
         Reply r = new Reply();
         r.created = false;
         r.shownCount = 0;
         ledger('Inbound', 'Accepted', 'standing: who', null);
 
-        if (String.isBlank(preferenceId)) {
-            r.message = 'I do not have a preference to look up yet. Save one first and '
-                      + 'you can ask me any time who has been shown it.';
+        // Same gate as revoking: the claim code, never a record Id. The trail
+        // is a disclosure history, and an Id-gated read handed it to anyone.
+        CurbCutStanding.Result probe = CurbCutStanding.byCode('who', claimCode);
+        if (!probe.ok) {
+            r.message = probe.message;
             return r;
         }
 
         List<Disclosure_Event__c> seen;
         try {
-            seen = new Trail().forPreference(Id.valueOf(preferenceId));
+            seen = new Trail().forPreference(Id.valueOf(probe.preferenceId));
         } catch (Exception e) {
             r.message = 'I could not look that up just now.\n\n'
                       + 'Nothing has changed about what you saved. It is still exactly as you '

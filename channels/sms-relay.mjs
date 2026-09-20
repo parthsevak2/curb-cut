@@ -257,9 +257,11 @@ const server = createServer((req, res) => {
     req.on('data', c => { raw += c; if (raw.length > 1e5) req.destroy(); });
     req.on('end', async () => {
       const params = Object.fromEntries(new URLSearchParams(raw));
-      if (TWILIO_AUTH_TOKEN && PUBLIC_URL
+      /* Same closed-by-default guard as the text webhook. The old check was skipped whenever
+         PUBLIC_URL was unset, so a misconfigured start served forged calls. */
+      if (!ALLOW_UNVERIFIED
           && !signatureValid(PUBLIC_URL + '/voice', params, req.headers['x-twilio-signature'])) {
-        res.writeHead(403); res.end('bad signature'); return;
+        res.writeHead(403); return res.end();
       }
       const handle = handleFor(params.From || '');
       const said   = (params.SpeechResult || '').trim();
