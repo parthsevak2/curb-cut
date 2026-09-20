@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Curb Cut ✿</title>
+<meta name="description" content="Ask for what you need at work, without saying why. An Agentforce agent, deterministic Apex, and a human on the other end. Open source, Apache 2.0."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=JetBrains+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap"/>
+<style>
+:root{
+  --ground:#F2F1ED; --raised:#FBFAF7; --sunk:#E5E3DC;
+  --ink:#14171A; --ink-soft:#41474A; --ink-mute:#5E6568;
+  --line:#C8C6BC; --line-firm:#87857B;
+  --signal:#8A5D0F; --signal-bg:#F5E7CC;
+  --deep:#1F5A4E; --deep-bg:#D9E9E4; --on-deep:#F2F1ED;
+  --focus:#0B57C7;
+}
+@media (prefers-color-scheme: dark){:root{
+  --ground:#0F1214; --raised:#181C1E; --sunk:#080A0B;
+  --ink:#EDEEEA; --ink-soft:#BFC4C2; --ink-mute:#8E9593;
+  --line:#2C3133; --line-firm:#5F676A;
+  --signal:#E5B15A; --signal-bg:#2E2413;
+  --deep:#63B7A3; --deep-bg:#102B26; --on-deep:#0F1214;
+  --focus:#7FB0FF;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:1.06rem;line-height:1.55}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+a{color:var(--deep);text-underline-offset:.15em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:.2rem}
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute)}
+header.hero{padding:4.5rem 0 2.5rem}
+.hero h1{font-weight:800;font-size:clamp(2.4rem,7vw,3.6rem);margin:.4rem 0 .9rem}
+.hero .flower{color:var(--deep)}
+.lede{font-size:1.35rem;color:var(--ink-soft);max-width:34rem;margin:0 0 1.6rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{display:inline-block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1rem;padding:.7rem 1.15rem;border-radius:.5rem;border:1px solid var(--line-firm);background:var(--raised);color:var(--ink);text-decoration:none}
+.btn.primary{background:var(--deep);border-color:var(--deep);color:var(--on-deep)}
+.btn:hover{filter:brightness(.97)}
+.won{margin-top:1.6rem;display:inline-block;background:var(--signal-bg);color:var(--signal);border-radius:.4rem;padding:.35rem .7rem;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.8rem}
+section{padding:2.4rem 0;border-top:1px solid var(--line)}
+section h2{font-size:1.7rem;margin:0 0 1rem}
+.film{position:relative;aspect-ratio:16/9;border:1px solid var(--line);border-radius:.6rem;overflow:hidden;background:var(--sunk)}
+.film iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cols{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+.cols h3{font-size:1.1rem;margin:.2rem 0 .4rem}
+.cols p{margin:0;color:var(--ink-soft)}
+blockquote{margin:1.4rem 0 0;padding:1rem 1.2rem;background:var(--raised);border-left:4px solid var(--deep);border-radius:0 .5rem .5rem 0;font-size:1.12rem}
+blockquote footer{font-size:.9rem;color:var(--ink-mute);margin-top:.4rem}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+td,th{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:Archivo,system-ui,sans-serif;font-size:.85rem}
+td.num{font-family:"JetBrains Mono",ui-monospace,monospace;white-space:nowrap}
+.doors{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.doors li{background:var(--raised);border:1px solid var(--line);border-radius:.5rem;padding:.7rem .9rem}
+.doors b{font-family:Archivo,system-ui,sans-serif}
+.quiet{color:var(--ink-mute);font-size:.95rem}
+footer.page{padding:2.2rem 0 3.5rem;border-top:1px solid var(--line);color:var(--ink-mute);font-size:.95rem}
+footer.page a{color:inherit}
+@media (prefers-reduced-motion: no-preference){a.btn{transition:filter .15s}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">An open-source Agentforce asset</p>
+    <h1>Curb Cut <span class="flower" aria-hidden="true">✿</span></h1>
+    <p class="lede">Ask for what you need at work, in your own words, without ever saying why.</p>
+    <nav class="ctas" aria-label="Main actions">
+      <a class="btn primary" href="#film">Watch the film</a>
+      <a class="btn" href="https://github.com/parthsevak2/curb-cut">Read the code</a>
+      <a class="btn" href="https://github.com/parthsevak2/curb-cut/blob/main/DEPLOY.md">Bring it to your org</a>
+    </nav>
+    <p><span class="won">First place · Builder Track · Agentforce for Good · Dreamforce 2026</span></p>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <h2>Every workplace runs on unasked questions</h2>
+    <p>The parent who needs to leave at four for pickup. The expecting mom who could
+    use a little logistical grace. The new hire who'd do better work with a bigger
+    monitor, and never says so, because asking means justifying yourself to the
+    person who decides your career.</p>
+    <p>The cost lands hardest on disabled workers. More than one in four US adults
+    has a disability, yet at a typical large employer only 3.5% of staff have told
+    their employer about one. And of employers who told the Job Accommodation
+    Network what an accommodation cost, 61% said it cost nothing.</p>
+    <p><strong>Money is rarely the barrier. The hard part is the asking.</strong></p>
+  </div>
+</section>
+
+<section id="film" aria-label="The film">
+  <div class="wrap">
+    <h2>Five minutes, every door live</h2>
+    <div class="film">
+      <iframe src="https://www.youtube-nocookie.com/embed/yleHLiwWRKA" title="Curb Cut: the film, with captions" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <p class="quiet">Captions are built in. The film works with the sound off, on purpose.</p>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap">
+    <h2>What it does</h2>
+    <div class="cols">
+      <div>
+        <h3>For the person</h3>
+        <p>Say what's hard in one sentence. See what others have asked for, with
+        usual costs. If you want to ask, it writes the request in your words, and
+        nothing is sent until you clearly say yes.</p>
+      </div>
+      <div>
+        <h3>For the organisation</h3>
+        <p>Every ask arrives as a structured record in Salesforce with a committed
+        answer-by date and an audit trail, instead of a hallway remark that
+        evaporates. One volunteer on the access desk answers.</p>
+      </div>
+      <div>
+        <h3>For the person with no login</h3>
+        <p>A cleaner, a picker, a contractor mid-shift can text or call from the
+        most basic phone. No internet, no app, no account. The number lives on a
+        break-room poster.</p>
+      </div>
+    </div>
+    <ul class="doors" style="margin-top:1.4rem">
+      <li><b>No diagnosis field, anywhere.</b> The build fails if anyone adds one. A field that doesn't exist can't be leaked, shown to a manager, or subpoenaed.</li>
+      <li><b>The agent talks; the code decides.</b> Agentforce holds the conversation. What's stored and what's sent is decided by deterministic Apex, checked on every build.</li>
+      <li><b>Every door ends at a human.</b> Say "human" on any channel and a person on the access desk picks it up.</li>
+    </ul>
+    <blockquote>
+      <p>Wheelchair users fought for curb cuts, and now everyone rolls through them:
+      strollers, suitcases, delivery carts. Build for the people who get left out,
+      and it gets better for everyone.</p>
+      <footer>The name is the promise.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <h2>Verified, not asserted</h2>
+    <p>Every number below is the output of a command in the repository, run against
+    the deployed system.</p>
+    <table>
+      <caption class="quiet" style="text-align:left;padding:.3rem 0">The verification suites</caption>
+      <tbody>
+        <tr><td class="num">129</td><td>Apex tests, all passing</td></tr>
+        <tr><td class="num">517</td><td>structural invariants, including the one that fails the build if a diagnosis field ever appears</td></tr>
+        <tr><td class="num">517</td><td>accessibility checks against the live pages</td></tr>
+        <tr><td class="num">122</td><td>Sa11y checks with Salesforce's own axe-core matcher, zero WCAG violations</td></tr>
+        <tr><td class="num">23/23</td><td>adversarial scenarios against the live agent: prompt injection, a manager demanding a roster, a volunteered diagnosis, a hedged yes</td></tr>
+      </tbody>
+    </table>
+    <p class="quiet">Honest gaps are published too: no daily screen reader user has
+    tested it yet, and the security policy lists the hardening still ahead.</p>
+  </div>
+</section>
+
+<section id="adopt">
+  <div class="wrap">
+    <h2>Bring it to your organisation</h2>
+    <p>The code is free under Apache 2.0 and installs into the Salesforce org you
+    already run. Web and email work with nothing else; text and voice need your
+    own Twilio number and a small relay; Slack installs from a manifest in two
+    minutes. Four settings carry your number, site and mailbox.</p>
+    <p>What it truly needs is one volunteer willing to be the person on the other
+    end. Technical skill is secondary. If only one thing can be asked of an
+    organisation, it's willingness.</p>
+    <nav class="ctas" aria-label="Adoption links">
+      <a class="btn primary" href="https://github.com/parthsevak2/curb-cut/blob/main/DEPLOY.md">The install guide</a>
+      <a class="btn" href="https://github.com/parthsevak2/curb-cut/blob/main/SECURITY.md">Security policy</a>
+      <a class="btn" href="https://github.com/parthsevak2/curb-cut/tree/main/docs/hackathon">The hackathon record</a>
+    </nav>
+  </div>
+</section>
+
+<footer class="page">
+  <div class="wrap">
+    <p>Built by <a href="https://www.linkedin.com/in/parthsevak/">Parth Sevak</a> for the
+    Agentforce for Good Hackathon, September 2026. Apache 2.0.
+    Questions and access needs: <a href="mailto:curbcut@havihi.digital">curbcut@havihi.digital</a>.</p>
+    <p>I don't think AI for good is a category of project. Either what we build is
+    good for the people it touches, or it isn't.</p>
+  </div>
+</footer>
+</body>
+</html>
