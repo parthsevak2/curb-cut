@@ -37,8 +37,17 @@ const ALLOW_UNVERIFIED  = process.env.ALLOW_UNVERIFIED === '1' && !PUBLIC_URL;
 const HANDLE_SALT = process.env.HANDLE_SALT || 'curb-cut-local-dev-salt';
 // The public site. Carriers require the opt-in flow to be verifiable at a URL,
 // and the disclosure messages below quote these two pages by name.
-const SITE = process.env.CURB_CUT_SITE ||
-  'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+const SITE = process.env.CURB_CUT_SITE;
+if (!SITE) {
+  console.error('CURB_CUT_SITE is not set. The disclosure messages quote the public\n' +
+                'site by URL, so the relay refuses to run without one. Set it in\n' +
+                'channels/.env to your org\'s Force.com site, like\n' +
+                'https://YOUR-DOMAIN.my.salesforce-sites.com/curbcut');
+  process.exit(1);
+}
+// Where a person is sent when the automated path fails them. The maintainer's
+// address, never an individual's personal inbox.
+const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || 'curbcut@havihi.digital';
 
 /* ------------------------------------------------------------------
    Carrier compliance.
@@ -73,7 +82,7 @@ const HELP_REPLY =
 'Curb Cut helps you find out what could make work easier at work, and ask ' +
   'for it, without ever saying what condition you have. ' +
   'Message and data rates may apply. Reply STOP to stop. ' +
-  `Help: parth.sevak2@gmail.com Terms ${SITE}/terms`;
+  `Help: ${SUPPORT_EMAIL} Terms ${SITE}/terms`;
 
 const STOP_REPLY =
   'Curb Cut: you will not get any more messages from this number. ' +
@@ -304,7 +313,7 @@ const server = createServer((req, res) => {
               .replace(/\s+nobody will ring you\.?/i, '.')
               .replace(/\s{2,}/g, ' ').trim() +
               ' I hold no number for you, so nobody can ring you back. To reach them again, ' +
-              'call this number and say human, or write to parth.sevak2@gmail.com.';
+              'call this number and say human, or write to ' + SUPPORT_EMAIL + '.';
           }
           return res.end(gather(spokenReply));
         } catch (e) {
@@ -312,7 +321,7 @@ const server = createServer((req, res) => {
           await ledger('Voice', 'Outbound', 'Escalated', key, `control word failed: ${e?.message}`);
           return res.end(gather(
             'I could not do that just now, and I am not going to pretend I did. ' +
-            'Write to parth.sevak2@gmail.com and a person will sort it out.'));
+            'Write to ' + SUPPORT_EMAIL + ' and a person will sort it out.'));
         }
       }
 
@@ -402,7 +411,7 @@ const server = createServer((req, res) => {
         // Never leave somebody reaching for the exit with nothing.
         return xml(
           'I could not do that just now, and I am not going to pretend I did. ' +
-          'Write to parth.sevak2@gmail.com and a person will sort it out.');
+          'Write to ' + SUPPORT_EMAIL + ' and a person will sort it out.');
       }
     }
 

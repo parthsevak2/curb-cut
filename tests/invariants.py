@@ -316,10 +316,14 @@ if os.path.exists(RELAY):
         ('Curb Cut',                        'programme name'),
         ('Message and data rates may apply','rates disclosure'),
         ('STOP to stop',                    'STOP instruction'),
-        ('@',                               'a contact address'),
     ]:
         check('sms-help-reply-complete', needle in helper,
               f'HELP reply is missing the {why}')
+    # The contact address now arrives from CURB_CUT_SUPPORT_EMAIL at runtime, so
+    # the source must interpolate it (a literal @ would mean someone hard-coded
+    # a person's address again, which is the thing this used to allow).
+    check('sms-help-reply-complete', 'SUPPORT_EMAIL' in helper or '@' in helper,
+          'HELP reply carries no contact address, literal or interpolated')
 
 
     # Carrier keyword auto-responses cap at 320 characters. Ours are sent as

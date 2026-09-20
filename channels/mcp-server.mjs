@@ -31,6 +31,12 @@ import { join } from 'node:path';
 // The Salesforce CLI bundles @salesforce/core. Find it where the CLI is
 // installed, not where one laptop happened to keep it. SF_CLI_MODULES
 // overrides the lookup when the CLI lives somewhere unusual.
+// Deployment identity. The MCP server speaks for one installation, so its
+// contact points come from the environment, never from this file.
+const SITE = process.env.CURB_CUT_SITE || null;
+const NUMBER = process.env.TWILIO_NUMBER || null;
+const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || 'curbcut@havihi.digital';
+
 const SF_CLI_MODULES = process.env.SF_CLI_MODULES
   || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
           '@salesforce', 'cli', 'node_modules', '@salesforce');
@@ -281,9 +287,10 @@ async function callTool(name, args) {
         sent: false,
         note:
           'This has not been sent and cannot be sent from here. Give it to the person to ' +
-          'read. If they want it to go, they send it themselves at ' +
-          'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask or by texting ' +
-          '+1 276 495 9311. A hedge is not a yes.',
+          'read. If they want it to go, they send it themselves' +
+          (SITE ? ' at ' + SITE + '/ask' : ' on the Curb Cut web page') +
+          (NUMBER ? ', or by texting ' + NUMBER : '') +
+          '. A hedge is not a yes.',
       };
     case 'curbcut_reach_human': {
       /* Routed through the same Apex door as SMS, Slack and email, so an
@@ -299,7 +306,7 @@ async function callTool(name, args) {
         handler: answer?.handlerName ?? null,
         note: answer?.message ??
           'I could not reach a person just now, and will not pretend otherwise. ' +
-          'Tell them to write to parth.sevak2@gmail.com.',
+          'Tell them to write to ' + SUPPORT_EMAIL + '.',
       };
     }
     default:
