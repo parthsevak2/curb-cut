@@ -215,7 +215,7 @@
         "impact": "moderate",
         "help": "All page content should be contained by landmarks",
         "wcag": [],
-        "nodes": 8,
+        "nodes": 12,
         "html": "<p class=\"status\" lwc-3lhm1o92afd=\"\" data-tone=\"urgent\">Nobody has this yet. They have been waiting 1 day.</p>"
       }
     ],
@@ -233,7 +233,7 @@
         "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
       }
     ],
-    "passes": 11
+    "passes": 24
   },
   {
     "state": "handoffBrief / needs an interpreter",
@@ -243,7 +243,7 @@
         "impact": "moderate",
         "help": "All page content should be contained by landmarks",
         "wcag": [],
-        "nodes": 9,
+        "nodes": 13,
         "html": "<p class=\"status\" lwc-3lhm1o92afd=\"\" data-tone=\"urgent\">Sam has this. They waited 2 days.</p>"
       }
     ],
@@ -261,7 +261,7 @@
         "reason": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
       }
     ],
-    "passes": 11
+    "passes": 24
   },
   {
     "state": "assist / a plan with steps and a result",

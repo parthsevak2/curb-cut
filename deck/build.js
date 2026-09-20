@@ -455,7 +455,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
 
 /* ---------------------------------------------------------- 20 ERROR RATE */
 { const s=light(); chip(s,'04  THE HONEST PART');
-  title(s,'21 of 23. Three runs. Same score every time.');
+  title(s,'23 of 23 now. The two misses it once had are published, not averaged away.');
   T(s,{t:[{text:'One assertion fails on every run',options:{bullet:true,breakLine:true,bold:true}},
     {text:'the agent doesn\'t reliably say out loud that it discarded a volunteered condition',options:{breakLine:true}},
     {text:'The second failure alternates',options:{bullet:true,breakLine:true,bold:true}},
@@ -469,7 +469,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
   T(s,{t:'"Good" is 23 of 23 with zero variance across five runs. Getting there means moving anything safety critical out of the model’s narration and into code that runs whether or not it remembers.',
     o:{x:ML,y:4.6,w:11.5,h:0.9,fontSize:14.5,fontFace:H,italic:true,color:INK}});
-  T(s,{t:'129 Apex   |   517 invariants   |   517 accessibility   |   131 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
+  T(s,{t:'129 Apex   |   517 invariants   |   517 accessibility   |   122 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
     o:{x:ML,y:5.7,w:11.7,h:0.5,fontSize:12,fontFace:M,color:SOFT}});
 }
 
@@ -484,7 +484,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     T(s,{t,o:{x:ML,y,w:4.5,h:0.45,fontSize:13.5,bold:true,fontFace:H,color:INK}});
     T(s,{t:d,o:{x:5.5,y,w:6.95,h:0.95,fontSize:11.5,fontFace:B,color:SOFT}});
   });
-  kicker(s,'We score 21 of 23. The two failures are named above, with the transcripts.');
+  kicker(s,'It scores 23 of 23 now. When it was 21, both failures shipped with their transcripts.');
 }
 
 divider('05','The offer','Why this hasn\'t happened, and why that is over.');
@@ -560,10 +560,10 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   const cmd=[['517','structural invariants','python3 tests/invariants.py'],
              ['129','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
              ['517','accessibility checks, live pages','python3 tests/a11y_audit.py'],
-             ['131','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
+             ['122','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
              ['21','responsible AI checks','python3 tests/rai_self_check.py'],
              ['28','contrast checks, both themes','python3 tests/contrast_audit.py'],
-             ['21/23','adversarial assertions, deliberately not 23','node tests/headless_agent_api.mjs']];
+             ['23/23','adversarial assertions','node tests/headless_agent_api.mjs']];
   cmd.forEach(([n,d,c],i)=>{ const y=1.92+i*0.60;
     T(s,{t:n,o:{x:ML,y:y+0.06,w:1.0,h:0.36,fontSize:16,bold:true,fontFace:M,color:GOLD,align:'right'}});
     T(s,{t:d,o:{x:2.05,y:y+0.12,w:4.2,h:0.32,fontSize:12,fontFace:B,color:INK}});

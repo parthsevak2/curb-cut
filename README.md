@@ -109,20 +109,22 @@ invariant suite's own output so they cannot drift.
 129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
 517 accessibility checks       python3 tests/a11y_audit.py            against the live pages
-131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
+122 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses; set CURB_CUT_SITE
  21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
  28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
  16 reading-level checks       python3 tests/reading_level_audit.py
  76 link and copy checks       python3 tests/link_and_copy_audit.py
-21/23 adversarial assertions   node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
+23/23 adversarial assertions   node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 ```
 
 Two of those suites break their own checks on purpose and assert each one goes
 red (`--selftest`). A suite that cannot fail proves nothing about the code it
-passes. The adversarial score is 21 of 23 on purpose: one assertion fails on
-every run and one alternates, and both are reported rather than averaged away.
+passes. The adversarial suite once scored 21 of 23, and both failures were
+published with their transcripts rather than averaged away; the agent's
+refusal wording and the scorer have since converged, and the suite passes
+whole. The habit stands: a miss gets reported, never smoothed.
 
 ## Repository map
 
