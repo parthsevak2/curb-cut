@@ -142,3 +142,8 @@ weak lives.
 
 Built by Parth Sevak. Welland, Ontario, Canada.
 Agentforce for Good, Dreamforce 2026 · Builder Track · Abilityforce.
+
+## License
+
+Apache 2.0. The accommodation library ships in the repo with a source citation
+on every row. Use it, fork it, run it in your own org.
