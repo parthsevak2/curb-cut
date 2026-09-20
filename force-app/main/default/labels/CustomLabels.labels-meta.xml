@@ -6,7 +6,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>The deployment&apos;s text and voice number, as displayed</shortDescription>
-        <value>+1 276 495 9311</value>
+        <value>+1 000 000 0000 (set your number)</value>
     </labels>
     <labels>
         <fullName>CurbCut_SMS_Number_Link</fullName>
@@ -14,7 +14,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>The same number in E.164 form, for sms: and tel: links</shortDescription>
-        <value>+12764959311</value>
+        <value>+10000000000</value>
     </labels>
     <labels>
         <fullName>CurbCut_Support_Email</fullName>
@@ -22,7 +22,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Mailbox the access desk reads; quoted when the automated path fails</shortDescription>
-        <value>curbcut@havihi.digital</value>
+        <value>access-desk@example.com</value>
     </labels>
     <labels>
         <fullName>CurbCut_Site_URL</fullName>
@@ -30,6 +30,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>The public Force.com site, no trailing slash</shortDescription>
-        <value>https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut</value>
+        <value>https://YOUR-DOMAIN.my.salesforce-sites.com/curbcut</value>
     </labels>
 </CustomLabels>
