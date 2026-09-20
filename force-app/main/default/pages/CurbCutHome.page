@@ -20,7 +20,7 @@
   </div>
   <p class="cta-note">
     No phone? No problem. Have a phone but no internet? Text <span class="kw">CURB CUT</span> to
-    <a href="sms:+12764959311?body=CURB%20CUT">+1 276 495 9311</a>, or call the same number.
+    <a href="sms:{!$Label.CurbCut_SMS_Number_Link}?body=CURB%20CUT">{!$Label.CurbCut_SMS_Number}</a>, or call the same number.
     It is a US number, so a prepaid plan may charge for the text.
   </p>
   <p class="cta-note">
@@ -146,7 +146,7 @@
         <span class="chip live">Open now</span>
         <h3>Text message</h3>
         <p>
-          Text <span class="kw">CURB CUT</span> to <span class="kw">+1 276 495 9311</span>
+          Text <span class="kw">CURB CUT</span> to <span class="kw">{!$Label.CurbCut_SMS_Number}</span>
           and say what's hard. No app to install, and it works on a phone that
           can't run anything else. You text first, and every reply follows your
           own messages.
@@ -375,7 +375,7 @@
       <a class="btn primary" href="/ask">Start on this page <span class="arrow">&rarr;</span></a>
     </div>
     <p>
-      Or text <span class="kw">CURB CUT</span> to <span class="kw">+1 276 495 9311</span>
+      Or text <span class="kw">CURB CUT</span> to <span class="kw">{!$Label.CurbCut_SMS_Number}</span>
       and say what's hard. That's the whole thing.
     </p>
     <p class="cta-note">

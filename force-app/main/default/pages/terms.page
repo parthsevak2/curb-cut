@@ -38,7 +38,7 @@
       <tbody>
         <tr><th scope="row">Name</th><td>Curb Cut</td></tr>
         <tr><th scope="row">Number</th>
-            <td><span class="kw">+1 276 495 9311</span>, the number these
+            <td><span class="kw">{!$Label.CurbCut_SMS_Number}</span>, the number these
                 terms are about. If a message reaches you from anywhere else, it
                 is not us.</td></tr>
         <tr><th scope="row">Made by</th>
@@ -60,7 +60,7 @@
                 rate.</td></tr>
         <tr><th scope="row">Help</th>
             <td>Reply <span class="kw">HELP</span>, or email
-                <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a></td></tr>
+                <a href="mailto:{!$Label.CurbCut_Support_Email}">{!$Label.CurbCut_Support_Email}</a></td></tr>
         <tr><th scope="row">Phone companies</th>
             <td>Mobile carriers are not liable for messages that arrive late or
                 not at all.</td></tr>

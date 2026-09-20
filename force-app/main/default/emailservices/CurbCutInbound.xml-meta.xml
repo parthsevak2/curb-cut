@@ -5,7 +5,7 @@
     <authenticationFailureAction>Discard</authenticationFailureAction>
     <authorizationFailureAction>Discard</authorizationFailureAction>
     <authorizedSenders></authorizedSenders>
-    <errorRoutingAddress>parth.sevak2@gmail.com</errorRoutingAddress>
+    <errorRoutingAddress>curbcut@havihi.digital</errorRoutingAddress>
     <functionInactiveAction>Discard</functionInactiveAction>
     <functionName>CurbCutInbound</functionName>
     <isActive>true</isActive>

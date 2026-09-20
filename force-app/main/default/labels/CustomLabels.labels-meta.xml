@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CurbCut_SMS_Number</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The deployment&apos;s text and voice number, as displayed</shortDescription>
+        <value>+1 276 495 9311</value>
+    </labels>
+    <labels>
+        <fullName>CurbCut_SMS_Number_Link</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The same number in E.164 form, for sms: and tel: links</shortDescription>
+        <value>+12764959311</value>
+    </labels>
+    <labels>
+        <fullName>CurbCut_Support_Email</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mailbox the access desk reads; quoted when the automated path fails</shortDescription>
+        <value>curbcut@havihi.digital</value>
+    </labels>
+    <labels>
+        <fullName>CurbCut_Site_URL</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The public Force.com site, no trailing slash</shortDescription>
+        <value>https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut</value>
+    </labels>
+</CustomLabels>

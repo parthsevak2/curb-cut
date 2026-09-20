@@ -207,7 +207,7 @@ global with sharing class CurbCutWeb {
               + 'to ask. So keep this code: ' + res.returnCode + '. Send it here, or by '
               + 'text, or by email, and you land straight back with the same person.'
             : 'I could not reach a person just now, and I am not going to pretend I did. '
-              + 'Please email parth.sevak2@gmail.com and someone will pick it up.';
+              + 'Please email ' + System.Label.CurbCut_Support_Email + ' and someone will pick it up.';
         return r;
     }
 

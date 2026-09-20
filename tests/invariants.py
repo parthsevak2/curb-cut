@@ -356,7 +356,7 @@ MSG = os.path.join(PAGES, 'messaging.page')
 if os.path.exists(MSG):
     msg = open(MSG).read()
     for needle, why in [
-        ('+1 276 495 9311',                  'the number'),
+        ('{!$Label.CurbCut_SMS_Number}',     'the number'),
         ('you agree to receive text messages','the consent sentence'),
         ('Message frequency varies',         'message frequency'),
         ('Message and data rates may apply', 'the rates disclosure'),
