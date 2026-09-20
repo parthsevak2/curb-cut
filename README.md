@@ -1,5 +1,26 @@
 # Curb Cut
 
+Curb Cut lets any worker ask for a workplace accommodation in their own words,
+on the web with no login, by text or a call from a basic phone, by email, in a
+Slack DM, or through their own assistant, without ever disclosing a diagnosis.
+An Agentforce agent holds the conversation; deterministic Apex decides what is
+stored and sent; a person on the access desk answers. First place, Builder
+Track, Agentforce for Good Hackathon, Dreamforce 2026.
+
+```
+git clone https://github.com/parthsevak2/curb-cut
+cd curb-cut
+python3 tests/invariants.py     # 517 structural checks, offline, about a second
+```
+
+To install it into your own Salesforce org, follow [DEPLOY.md](DEPLOY.md).
+It needs Agentforce enabled; text and voice also need your own Twilio number
+and a small relay ([channels/](channels/)), and Slack needs the app created in
+your workspace from the manifest. Four Custom Labels carry your deployment's
+number, site URL and support address.
+
+## Why it exists
+
 **The process for requesting a disability accommodation is itself an accessibility barrier.**
 
 To get help you must first navigate a system designed by and for people without
@@ -23,7 +44,11 @@ Curb Cut is an Agentforce agent whose principal is **the worker, not the employe
 
 ---
 
-## Live now
+## The demo deployment, September 2026
+
+The hackathon deployment below is kept as a record of what judges tested. The
+demo org and its number retire with the hackathon; your install has its own
+addresses on every row.
 
 | Surface | Address | State |
 |---|---|---|
@@ -77,21 +102,20 @@ and nobody can find out.
 ## Verification
 
 Nothing below is asserted from memory. Each number is the output of the command
-beside it, and `tests/submission_consistency.py` fails the build if any number
-quoted anywhere in the submission stops matching the artefact it describes.
+beside it, and `tests/sync_counts.py` rewrites the published counts from the
+invariant suite's own output so they cannot drift.
 
 ```
-128 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
+129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
-516 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+690 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
- 34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
+ 34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses; set CURB_CUT_SITE
  21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
  28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
  16 reading-level checks       python3 tests/reading_level_audit.py
  76 link and copy checks       python3 tests/link_and_copy_audit.py
- 11 consistency checks         python3 tests/submission_consistency.py
 21/23 adversarial assertions   node tests/headless_agent_api.mjs && python3 tests/score_adversarial.py
 ```
 
