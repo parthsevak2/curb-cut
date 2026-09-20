@@ -18,5 +18,6 @@
   "x-notes": [
     "sms-relay.mjs and mcp-server.mjs import @salesforce/core and @salesforce/agents from the globally installed Salesforce CLI (npm root -g). They are not listed here on purpose: the CLI is the one that holds the org login, and it is already required. Set SF_CLI_MODULES if the CLI is installed somewhere unusual.",
     "slack-app.mjs and sms-relay.mjs read the org login from the CLI too, so no credential lives in this folder."
-  ]
+  ],
+  "license": "Apache-2.0"
 }

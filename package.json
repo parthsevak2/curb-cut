@@ -13,5 +13,5 @@
   "dependencies": {
     "jsforce": "^3.10.25"
   },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }
