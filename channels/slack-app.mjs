@@ -40,7 +40,13 @@ const SIGNING_SECRET = process.env.SLACK_SIGNING_SECRET || '';
 const ALIAS          = process.env.SF_ORG_ALIAS || 'curbcut';
 const HANDLE_SALT    = process.env.HANDLE_SALT || 'curb-cut-slack-salt-v1';
 
-const SITE = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+const SITE = process.env.CURB_CUT_SITE;
+if (!SITE) {
+  console.error('CURB_CUT_SITE is not set. The first-contact disclosure points the\n' +
+                'person at the private web door by URL, so the app refuses to run\n' +
+                'without one. Set it in channels/.env.');
+  process.exit(1);
+}
 
 /* Said once, on first contact, before anything else is discussed. Not buried in
    a privacy page nobody opens. */
