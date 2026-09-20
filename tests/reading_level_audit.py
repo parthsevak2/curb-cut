@@ -14,10 +14,11 @@ so the site had better not commit it.
 Flesch-Kincaid grade level. Not a perfect instrument, but a consistent one, and
 consistent is what catches drift.
 """
+import os
 import sys, re, os, glob, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut"
+SITE = os.environ.get("CURB_CUT_SITE", "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut")
 
 VOWELS = 'aeiouy'
 def syllables(word):

@@ -9,10 +9,11 @@ ships, including anything Visualforce rewrites on the way out.
 
 Exits non-zero on any error. Warnings are printed and do not fail.
 """
+import os
 import sys, re, urllib.request, html
 from html.parser import HTMLParser
 
-SITE = "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut"
+SITE = os.environ.get("CURB_CUT_SITE", "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut")
 PAGES = ["", "ask", "why", "messaging", "privacy", "terms", "docs"]
 
 errors, warnings, checked = [], [], 0
