@@ -12,10 +12,11 @@ Two failure modes this catches, both of which have already happened here:
    Anybody who followed the Apex would have lost the whole service and kept the
    preference. Surfaces drift silently; this makes the drift loud.
 """
+import os
 import sys, re, os, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut"
+SITE = os.environ.get("CURB_CUT_SITE", "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut")
 PAGES = ["", "ask", "why", "messaging", "privacy", "terms", "docs"]
 
 fails, checks = [], 0
