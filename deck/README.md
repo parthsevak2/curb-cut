@@ -1,6 +1,6 @@
 # The deck, as source
 
-`submission/Curb-Cut.pptx` is generated, not hand-edited. The source is
+`docs/hackathon/Curb-Cut.pptx` is generated, not hand-edited. The source is
 `build.js`, so a number in the deck can be checked against the same test run
 that produces it, and the deck can be rebuilt by anyone.
 

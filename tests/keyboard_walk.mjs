@@ -2,8 +2,9 @@
    actually computes to. :focus-visible does not match a programmatic .focus(),
    which is how a previous audit talked itself into 26 defects that were not
    there. So these are dispatched key events, not scripted focus calls. */
-import { launch } from '../video/cdp.mjs';
-const BASE='https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+import { launch } from './cdp.mjs';
+const BASE = process.env.CURB_CUT_SITE;
+if (!BASE) { console.log('SKIPPED: set CURB_CUT_SITE to walk a live deployment'); process.exit(0); }
 const b=await launch(); const wait=ms=>new Promise(r=>setTimeout(r,ms));
 
 const tab = async (shift=false) => {

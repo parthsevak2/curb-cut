@@ -83,7 +83,7 @@ quoted anywhere in the submission stops matching the artefact it describes.
 ```
 128 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
-690 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+516 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses, target sizes
@@ -114,8 +114,8 @@ every run and one alternates, and both are reported rather than averaged away.
 | `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard, no names anywhere |
 | `channels/` | SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration |
 | `tests/` | the twelve suites above, plus `screen_reader_walk.mjs`, which writes docs/SCREEN-READER-WALK.md |
-| `deck/` | the deck as source; `submission/Curb-Cut.pptx` is generated from it |
-| `submission/` | every Devpost field paste-ready, the judge test guide, the technical design |
+| `deck/` | the deck as source; the built copy lives in `docs/hackathon/` |
+| `docs/hackathon/` | the September 2026 hackathon record: judge guides, reflections, deck, stills |
 | `legal/` | privacy and terms source |
 | `docs/` | architecture, BRD, evidence, audience, decisions, the two audit reports |
 

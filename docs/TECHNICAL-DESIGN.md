@@ -298,7 +298,7 @@ FOUR LAYERS, all failing the build except the last.
   ─────────────────────────  ─────   ──────────────────────────────
   Structural invariants        517   every push, ~1s, no org needed
   Apex tests                   128   every deploy
-  Accessibility (live pages)   690   against the deployed site
+  Accessibility (live pages)   516   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
@@ -319,7 +319,7 @@ Three deliberate choices make the number mean something.
   in one place with the reason beside it: it carries no WCAG tag and
   fires only because a component mounted alone in a test has no page
   landmarks around it. Landmarks are checked on the real pages by the
-  690-check live suite.
+  516-check live suite.
 
   The harness is proved able to fail. jest/__tests__/harness-control.a11y.test.js
   plants an image with no alt text and asserts the matcher throws. A
@@ -561,7 +561,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
 
   python3 tests/invariants.py                      517 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      128 tests
-  python3 tests/a11y_audit.py                      690 checks, live pages
+  python3 tests/a11y_audit.py                      516 checks, live pages
   npm run test:a11y                                131 Sa11y checks, 12 states
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
