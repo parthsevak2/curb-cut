@@ -64,7 +64,7 @@ python3 tests/invariants.py     # 517 structural checks, offline, about a second
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, and <code>tests/sync_counts.py</code> rewrites the published counts from the invariant suite's own output so they cannot drift.</p>
 <pre>129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
-690 accessibility checks       python3 tests/a11y_audit.py            against the live pages
+517 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses; set CURB_CUT_SITE
@@ -320,7 +320,7 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
   ─────────────────────────  ─────   ──────────────────────────────
   Structural invariants        517   every push, ~1s, no org needed
   Apex tests                   129   every deploy
-  Accessibility (live pages)   690   against the deployed site
+  Accessibility (live pages)   517   against the deployed site
   Sa11y / axe-core             131   Salesforce's own matcher, 12 states
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
@@ -341,7 +341,7 @@ Three deliberate choices make the number mean something.
   in one place with the reason beside it: it carries no WCAG tag and
   fires only because a component mounted alone in a test has no page
   landmarks around it. Landmarks are checked on the real pages by the
-  690-check live suite.
+  517-check live suite.
 
   The harness is proved able to fail. jest/__tests__/harness-control.a11y.test.js
   plants an image with no alt text and asserts the matcher throws. A
