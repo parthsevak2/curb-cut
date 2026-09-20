@@ -108,9 +108,10 @@ your salt before anything is stored, and refuses to start without
 tunnel, which is demo-grade: fine on a laptop for a pilot, wrong for
 production. For production, use a named tunnel or any stable host.
 
-## 8. Optional: Slack
+## 8. The Slack door, two minutes
 
-Create the app in your workspace from `channels/slack-manifest.json` (Socket
+Where your people already live in Slack, this is the door most of them find
+first, so treat it as part of the install rather than an extra. Create the app in your workspace from `channels/slack-manifest.json` (Socket
 Mode is already on in the manifest), copy the three tokens into
 `channels/.env`, and run `node channels/slack-app.mjs`. It answers direct
 messages only, opens every first contact with the employer-can-export
