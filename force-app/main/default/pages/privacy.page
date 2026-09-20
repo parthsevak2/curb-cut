@@ -182,7 +182,7 @@
     </div>
 
     <p>
-      Or email <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
+      Or email <a href="mailto:{!$Label.CurbCut_Support_Email}">{!$Label.CurbCut_Support_Email}</a>
       to ask what is held about you, correct it, or have it deleted.
     </p>
     <p>

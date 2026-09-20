@@ -612,7 +612,7 @@ select.picker:focus-visible { outline:3px solid var(--focus); outline-offset:2px
     </p>
     <p class="who">
       Built by <strong>Parth Sevak</strong>. Welland, Ontario, Canada.
-      <a href="mailto:parth.sevak2@gmail.com">parth.sevak2@gmail.com</a>
+      <a href="mailto:{!$Label.CurbCut_Support_Email}">{!$Label.CurbCut_Support_Email}</a>
     </p>
     <p class="fine">
       Cost figures: Job Accommodation Network, 26,028 employers surveyed

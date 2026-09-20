@@ -152,12 +152,12 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
     }
 
     private static final String SITE =
-        'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+        System.Label.CurbCut_Site_URL;
 
     private String signature() {
         return '— Curb Cut\n'
              + SITE + '\n'
-             + 'Text +1 276 495 9311, or reply to this email. Whichever is easier.';
+             + 'Text ' + System.Label.CurbCut_SMS_Number + ', or reply to this email. Whichever is easier.';
     }
 
     /**

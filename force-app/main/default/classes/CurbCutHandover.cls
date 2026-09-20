@@ -125,8 +125,8 @@ public with sharing class CurbCutHandover {
 
         out.put('provenance', new Map<String, Object>{
             'system'  => 'Curb Cut',
-            'about'   => 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/why',
-            'privacy' => 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/privacy'
+            'about'   => System.Label.CurbCut_Site_URL + '/why',
+            'privacy' => System.Label.CurbCut_Site_URL + '/privacy'
         });
 
         return JSON.serializePretty(out);

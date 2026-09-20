@@ -93,7 +93,7 @@ global with sharing class CurbCutChannelApi {
                       + 'same channel. You will not have to explain it again, and nobody '
                       + 'will ring you.'
                     : 'I could not reach a person just now, and I am not going to pretend '
-                      + 'I did. Write to parth.sevak2@gmail.com and somebody will pick it up.';
+                      + 'I did. Write to ' + System.Label.CurbCut_Support_Email + ' and somebody will pick it up.';
             } else if (kw.intent == 'WHO' || kw.intent == 'OFF') {
                 if (String.isBlank(kw.code)) {
                     a.message = kw.message;
