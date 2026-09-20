@@ -8,7 +8,7 @@ config:
     developer_name: "Curb_Cut"
     agent_label: "Curb Cut"
     description: "Helps a person understand what they could ask for at work, and helps them ask for it. Works for the person, not their employer."
-    default_agent_user: "epic.22cafe63bfac@orgfarm.salesforce.com"
+    default_agent_user: "REPLACE-WITH-YOUR-AGENT-USER@example.com"
 
 language:
     default_locale: "en_US"
