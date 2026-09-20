@@ -68,16 +68,10 @@ def md(src, title):
         close_list(); para.append(l.strip()); i+=1
     flush(); close_list(); return '\n'.join(out)
 DOCS=[('README','README.md','What this is, what is live, how to verify it'),
-      ('Test it yourself','submission/JUDGE-TEST-GUIDE.md','Every channel, end to end, with what came back'),
-      ("A judge's companion",'submission/JUDGE-COMPANION.md','What every press does, and where it lands, with real screenshots'),
-      ('What a screen reader is handed','docs/SCREEN-READER-WALK.md','A scripted walk of the ask page, step by step, and what it cannot tell you'),
-      ('Technical design','submission/TECHNICAL-DESIGN.md','How it fits together, verified against the org'),
+      ('Technical design','docs/TECHNICAL-DESIGN.md','How it fits together, verified against the org'),
       ('Evidence','docs/EVIDENCE.md','Every public figure, its source, its denominator and its caveat'),
       ('Who this is for','docs/AUDIENCE.md','Audience and market'),
       ('Accessibility audit','docs/A11Y-SA11Y-REPORT.md','Salesforce Sa11y findings'),
-      ('Accessibility Expert Skill reflection','docs/ACCESSIBILITY-REFLECTION.md',"The organisers' accessibility prompt, run over the whole submission"),
-      ('RAI Self Check reflection','docs/RAI-REFLECTION.md',"The organisers' responsible AI prompt, run over the agent, the code and the data"),
-      ('Agent observability reflection','docs/OBSERVABILITY-REFLECTION.md',"The organisers' observability prompt, run over logs, transcripts and the ledger"),
       ('Decisions','docs/DECISIONS.md','Every significant call and why')]
 def main():
     parts=[]; toc=[]

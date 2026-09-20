@@ -5,8 +5,8 @@ import re, subprocess, sys
 out = subprocess.run(['python3','tests/invariants.py'], capture_output=True, text=True).stdout
 m = re.search(r'real count is (\d+)', out) or re.search(r'(\d+)/(\d+) invariants hold', out)
 real = int(m.group(1)) if 'real count' in (m.group(0) if m else '') else int(m.group(2))
-files = ['submission/TECHNICAL-DESIGN.md','deck/build.js','README.md',
-         'submission/JUDGE-TEST-GUIDE.md','docs/A11Y-SA11Y-REPORT.md']
+files = ['docs/TECHNICAL-DESIGN.md','deck/build.js','README.md',
+         'docs/hackathon/JUDGE-TEST-GUIDE.md','docs/A11Y-SA11Y-REPORT.md']
 n=0
 for f in files:
     try: s=open(f).read()

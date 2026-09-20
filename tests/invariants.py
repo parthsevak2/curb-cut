@@ -850,7 +850,7 @@ check('disclosure-event-has-a-production-writer', bool(ledger_writers),
 # nothing if it is stale, so the number checks itself.
 # ---------------------------------------------------------------------------
 CLAIM_FILES = [
-    'submission/TECHNICAL-DESIGN.md',
+    'docs/TECHNICAL-DESIGN.md',
     'deck/build.js',
 ]
 # Both orders: "494 structural invariants" and "Structural invariants   494".
