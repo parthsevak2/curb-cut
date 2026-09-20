@@ -299,12 +299,12 @@ FOUR LAYERS, all failing the build except the last.
   Structural invariants        517   every push, ~1s, no org needed
   Apex tests                   129   every deploy
   Accessibility (live pages)   517   against the deployed site
-  Sa11y / axe-core             131   Salesforce's own matcher, 12 states
+  Sa11y / axe-core             122   Salesforce's own matcher
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
   Link and copy                 54   every user-facing string
   Reading level                 16   Flesch-Kincaid, per surface
-  Adversarial assertions     21/23   headless Agent API, deliberate
+  Adversarial assertions     23/23   headless Agent API
 
 THE SA11Y LAYER, AND WHAT IT CANNOT SEE
 
@@ -562,11 +562,11 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   python3 tests/invariants.py                      517 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      129 tests
   python3 tests/a11y_audit.py                      690 checks, live pages
-  npm run test:a11y                                131 Sa11y checks, 12 states
+  npm run test:a11y                                122 Sa11y checks
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \
-    && python3 tests/score_adversarial.py          21/23
+    && python3 tests/score_adversarial.py          23/23
 
 Nothing in this document is asserted from memory. Every figure was read
 from the deployed org or the test run that produced it.

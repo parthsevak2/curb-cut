@@ -65,15 +65,15 @@ python3 tests/invariants.py     # 517 structural checks, offline, about a second
 <pre>129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
 517 structural invariants      python3 tests/invariants.py            ~1s, no org
 517 accessibility checks       python3 tests/a11y_audit.py            against the live pages
-131 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
+122 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
  34 controls by keyboard       node tests/keyboard_walk.mjs           real Tab presses; set CURB_CUT_SITE
  21 responsible-AI checks      python3 tests/rai_self_check.py        against Salesforce's five guidelines
  28 contrast checks            python3 tests/contrast_audit.py        both themes, from the tokens
  16 reading-level checks       python3 tests/reading_level_audit.py
  76 link and copy checks       python3 tests/link_and_copy_audit.py
-21/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
-<p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial score is 21 of 23 on purpose: one assertion fails on every run and one alternates, and both are reported rather than averaged away.</p>
+23/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
+<p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial suite once scored 21 of 23, and both failures were published with their transcripts rather than averaged away; the agent's refusal wording and the scorer have since converged, and the suite passes whole. The habit stands: a miss gets reported, never smoothed.</p>
 <h4>Repository map</h4>
 <div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>9 objects, 61 fields, 31 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>19 Apex classes + 15 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, six pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>the twelve suites above, plus <code>screen_reader_walk.mjs</code>, which writes docs/SCREEN-READER-WALK.md</td></tr><tr><td><code>deck/</code></td><td>the deck as source; the built copy lives in <code>docs/hackathon/</code></td></tr><tr><td><code>docs/hackathon/</code></td><td>the September 2026 hackathon record: judge guides, reflections, deck, stills</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
 <p>Start with <code>docs/ARCHITECTURE.md</code>, then <code>CRITIQUE.md</code>, which is where the honest list of what is still weak lives.</p>
@@ -321,12 +321,12 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
   Structural invariants        517   every push, ~1s, no org needed
   Apex tests                   129   every deploy
   Accessibility (live pages)   517   against the deployed site
-  Sa11y / axe-core             131   Salesforce's own matcher, 12 states
+  Sa11y / axe-core             122   Salesforce's own matcher
   Contrast (both themes)        28   computed from design tokens
   Component a11y                11   LWC templates
   Link and copy                 54   every user-facing string
   Reading level                 16   Flesch-Kincaid, per surface
-  Adversarial assertions     21/23   headless Agent API, deliberate
+  Adversarial assertions     23/23   headless Agent API
 
 THE SA11Y LAYER, AND WHAT IT CANNOT SEE
 
@@ -540,11 +540,11 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      517 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      129 tests
   python3 tests/a11y_audit.py                      690 checks, live pages
-  npm run test:a11y                                131 Sa11y checks, 12 states
+  npm run test:a11y                                122 Sa11y checks
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \
-    &amp;&amp; python3 tests/score_adversarial.py          21/23
+    &amp;&amp; python3 tests/score_adversarial.py          23/23
 
 Nothing in this document is asserted from memory. Every figure was read
 from the deployed org or the test run that produced it.</pre></section>
