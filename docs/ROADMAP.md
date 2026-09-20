@@ -141,3 +141,12 @@ Not backlog. Decisions.
 readers, keyboard use and contrast on the site was tested by the person who
 wrote it. One session with one worker who uses a screen reader daily would be
 worth more than the next five items on this list.
+
+## Distribution
+
+| Channel | State |
+|---|---|
+| **Install from the repo** | Live: deploy the org metadata, create the Slack app from `channels/slack-manifest.json` in your own workspace in about two minutes |
+| **Salesforce AppExchange, via Trailblazer Labs** | In motion: the pitch is written and posts when the cohort intake opens. This is Curb Cut's natural marketplace, because the org owns the deployment |
+| **Slack Marketplace listing** | Deliberately not yet. A listed Slack app must be one hosted service that many workspaces install, which would put a third party between a worker and their org's Salesforce, exactly the trust model this project refuses. If demand appears, the honest shape is an OAuth installer that still points every workspace at that org's own relay, and that is real engineering to do carefully, not a checkbox |
+
