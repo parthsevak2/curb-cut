@@ -49,6 +49,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: invariants
     timeout-minutes: 8
+    # Runs only where a live deployment is declared: set the CURB_CUT_SITE
+    # repository variable to your site URL. Forks without one skip cleanly.
+    if: ${{ vars.CURB_CUT_SITE != '' }}
+    env:
+      CURB_CUT_SITE: ${{ vars.CURB_CUT_SITE }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

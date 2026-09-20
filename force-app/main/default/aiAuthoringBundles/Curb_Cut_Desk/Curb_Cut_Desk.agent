@@ -8,7 +8,7 @@ config:
     developer_name: "Curb_Cut_Desk"
     agent_label: "Curb Cut Desk"
     description: "The internal agent for the people who answer. Same grounded library and the same refusals as the public agent, pointed at staff."
-    default_agent_user: "epic.22cafe63bfac@orgfarm.salesforce.com"
+    default_agent_user: "REPLACE-WITH-YOUR-AGENT-USER@example.com"
 
 language:
     default_locale: "en_US"

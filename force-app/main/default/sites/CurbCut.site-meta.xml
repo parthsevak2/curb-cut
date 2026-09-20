@@ -15,6 +15,5 @@
     <masterLabel>CurbCut</masterLabel>
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <siteType>Visualforce</siteType>
-    <subdomain>orgfarm-7a04c62cb9</subdomain>
     <urlPathPrefix>curbcut</urlPathPrefix>
 </CustomSite>
