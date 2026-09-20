@@ -137,10 +137,12 @@ private class CurbCutJourneyTest {
                 'STOP is the carrier keyword and would cost them the service');
             prefId = saved.preferenceId;
 
-            CurbCutWeb.Reply who = CurbCutWeb.whoSaw(prefId);
+            // The way off is the person's own code, never the record Id: the
+            // Id-gated path let anyone revoke anyone. Same principle, new key.
+            CurbCutWeb.Reply who = CurbCutWeb.whoSaw(saved.claimCode);
             System.assertEquals(0, who.shownCount, 'Nobody has been shown it yet');
 
-            CurbCutWeb.Reply off = CurbCutWeb.revokeStanding(prefId);
+            CurbCutWeb.Reply off = CurbCutWeb.revokeStanding(saved.claimCode);
             Test.stopTest();
             System.assertEquals(true, off.created, 'Could not turn it off: ' + off.message);
         }

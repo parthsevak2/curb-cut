@@ -451,6 +451,7 @@
   var stBox    = document.getElementById('standingBox');
   var whoBox   = document.getElementById('whoBox');
   var prefId   = null;
+  var heldCode = null;
 
   function saySt(msg) { stStatus.textContent = msg; }
 
@@ -470,6 +471,7 @@
         saySt(r.message);
         if (r.created) {
           prefId = r.preferenceId;
+          heldCode = r.claimCode || null;
           stBox.textContent = text;
           var code = r.claimCode || '';
           var cv = document.getElementById('codeValue');
@@ -506,9 +508,9 @@
   });
 
   document.getElementById('whoBtn').addEventListener('click', function () {
-    if (!prefId) { return; }
+    if (!heldCode) { return; }
     var b = this; busy(true, b); saySt('Looking up who has been shown it...');
-    remote('{!$RemoteAction.CurbCutWeb.whoSaw}', [prefId], function (r) {
+    remote('{!$RemoteAction.CurbCutWeb.whoSaw}', [heldCode], function (r) {
       busy(false, b);
       saySt(r.message);
       whoBox.textContent = r.shownTo || '';
@@ -518,13 +520,14 @@
   });
 
   document.getElementById('offBtn').addEventListener('click', function () {
-    if (!prefId) { return; }
+    if (!heldCode) { return; }
     var b = this; busy(true, b); saySt('Turning it off...');
-    remote('{!$RemoteAction.CurbCutWeb.revokeStanding}', [prefId], function (r) {
+    remote('{!$RemoteAction.CurbCutWeb.revokeStanding}', [heldCode], function (r) {
       busy(false, b);
       saySt(r.message + ' You weren\'t asked why, and there\'s nowhere to record a reason.');
       hide(stSaved);
       prefId = null;
+      heldCode = null;
       focusHeading('standingHeading');
     });
   });

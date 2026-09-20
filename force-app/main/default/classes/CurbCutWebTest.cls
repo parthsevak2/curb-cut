@@ -130,4 +130,41 @@ private class CurbCutWebTest {
         System.assertNotEquals(null, ar.Barrier_Report__c,
             'Provenance must survive: every web request was losing this link');
     }
+
+    /**
+     * The standing-preference actions are gated on the claim code. A raw
+     * Salesforce Id, however obtained, must open nothing: not the disclosure
+     * trail, not the off switch. This was real: both actions once took the Id.
+     */
+    @IsTest
+    static void standingActionsRefuseARecordId() {
+        CurbCutWeb.Reply saved = CurbCutWeb.saveStanding(
+            'Please text me, never call', 'Always', 'Manager only', false);
+        System.assertEquals(true, saved.created);
+        System.assert(String.isNotBlank(saved.claimCode), 'A code must come back');
+        Id prefId = [SELECT Id FROM Access_Preference__c LIMIT 1].Id;
+
+        // First, the attack: the raw Id. Nothing may open.
+        CurbCutWeb.Reply whoById = CurbCutWeb.whoSaw(String.valueOf(prefId));
+        CurbCutWeb.Reply offById = CurbCutWeb.revokeStanding(String.valueOf(prefId));
+        System.assertEquals(false, whoById.created, 'An Id must not open the trail');
+        System.assertEquals(0, whoById.shownCount, 'No trail rows for an Id');
+        System.assert(String.isBlank(whoById.shownTo), 'No names for an Id');
+        System.assertEquals(false, offById.created, 'An Id must not revoke');
+        System.assertEquals(whoById.message, offById.message,
+            'Wrong credentials get one non-oracle answer everywhere');
+        System.assertEquals(null,
+            [SELECT Revoked_On__c FROM Access_Preference__c WHERE Id = :prefId].Revoked_On__c,
+            'The Id calls must not have revoked anything');
+
+        // Then the person, with their own code. Both doors open.
+        CurbCutWeb.Reply whoByCode = CurbCutWeb.whoSaw(saved.claimCode);
+        System.assert(whoByCode.message.contains('Nobody has been shown it yet'),
+            'The code opens the trail: ' + whoByCode.message);
+        CurbCutWeb.Reply offByCode = CurbCutWeb.revokeStanding(saved.claimCode);
+        System.assertEquals(true, offByCode.created, 'The code revokes');
+        System.assertNotEquals(null,
+            [SELECT Revoked_On__c FROM Access_Preference__c WHERE Id = :prefId].Revoked_On__c,
+            'The preference is off after the coded revoke');
+    }
 }
