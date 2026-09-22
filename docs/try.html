@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Say what's hard ✿ Curb Cut</title>
+<meta name="description" content="Type one sentence about what's hard at work and see what others have asked for. Nothing you type leaves your browser."/>
+<meta property="og:title" content="Say what's hard ✿ Curb Cut"/>
+<meta property="og:description" content="Type one sentence about what's hard at work and see what others have asked for. Nothing you type leaves your browser."/>
+<meta property="og:url" content="https://parthsevak2.github.io/curb-cut/try.html"/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=JetBrains+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap"/>
+<style>
+:root{
+  --ground:#F2F1ED; --raised:#FBFAF7; --sunk:#E5E3DC;
+  --ink:#14171A; --ink-soft:#41474A; --ink-mute:#5E6568;
+  --line:#C8C6BC; --line-firm:#87857B;
+  --signal:#8A5D0F; --signal-bg:#F5E7CC;
+  --deep:#1F5A4E; --deep-bg:#D9E9E4; --on-deep:#F2F1ED;
+  --focus:#0B57C7;
+}
+@media (prefers-color-scheme: dark){:root{
+  --ground:#0F1214; --raised:#181C1E; --sunk:#080A0B;
+  --ink:#EDEEEA; --ink-soft:#BFC4C2; --ink-mute:#8E9593;
+  --line:#2C3133; --line-firm:#5F676A;
+  --signal:#E5B15A; --signal-bg:#2E2413;
+  --deep:#63B7A3; --deep-bg:#102B26; --on-deep:#0F1214;
+  --focus:#7FB0FF;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:1.06rem;line-height:1.55}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+a{color:var(--deep);text-underline-offset:.15em}
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:.2rem}
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute)}
+header.hero{padding:3.5rem 0 1.6rem}
+.hero h1{font-weight:800;font-size:clamp(2.2rem,7vw,3.2rem);margin:.4rem 0 .7rem}
+.hero .flower{color:var(--deep)}
+.lede{font-size:1.3rem;color:var(--ink-soft);max-width:34rem;margin:0}
+.promise{margin:1.6rem 0 0;padding:.9rem 1.1rem;background:var(--deep-bg);border:1px solid var(--deep);border-radius:.55rem;color:var(--ink)}
+.promise b{font-family:Archivo,system-ui,sans-serif}
+section{padding:1.8rem 0}
+label.big{display:block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.5rem}
+textarea{width:100%;min-height:6.5rem;padding:.85rem 1rem;font:inherit;color:var(--ink);background:var(--raised);border:1px solid var(--line-firm);border-radius:.55rem;resize:vertical}
+.hint{color:var(--ink-mute);font-size:.95rem;margin:.4rem 0 1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.4rem 0 1.2rem;padding:0;list-style:none}
+.chips button{font:inherit;font-size:.92rem;color:var(--ink-soft);background:var(--raised);border:1px solid var(--line);border-radius:1.2rem;padding:.4rem .85rem;cursor:pointer;text-align:left}
+.chips button:hover{border-color:var(--line-firm)}
+.go{display:inline-block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.05rem;padding:.75rem 1.3rem;border-radius:.5rem;border:1px solid var(--deep);background:var(--deep);color:var(--on-deep);cursor:pointer}
+.go:hover{filter:brightness(.97)}
+#results{margin-top:1rem}
+#results h2{font-size:1.5rem;margin:1.6rem 0 .9rem}
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.opts li{background:var(--raised);border:1px solid var(--line);border-radius:.55rem;padding:.85rem 1rem}
+.opts h3{font-size:1.08rem;margin:0 0 .25rem}
+.opts p{margin:0;color:var(--ink-soft)}
+.opts .meta{margin-top:.35rem;color:var(--ink-mute);font-size:.92rem}
+.next{margin-top:1.4rem;padding:1rem 1.2rem;background:var(--raised);border-left:4px solid var(--deep);border-radius:0 .5rem .5rem 0}
+.next h3{margin:0 0 .4rem;font-size:1.08rem}
+.next p{margin:0;color:var(--ink-soft)}
+.nomatch{padding:1rem 1.2rem;background:var(--signal-bg);border:1px solid var(--signal);border-radius:.55rem}
+.nomatch h2{margin:0 0 .5rem;font-size:1.3rem;color:var(--signal)}
+.nomatch p{margin:0;color:var(--ink)}
+#results h2:focus{outline:none}
+.quiet{color:var(--ink-mute);font-size:.95rem}
+details{margin-top:2rem;border-top:1px solid var(--line);padding-top:1.2rem}
+summary{font-family:Archivo,system-ui,sans-serif;font-weight:600;cursor:pointer}
+details .opts{margin-top:.9rem}
+footer.page{padding:2rem 0 3.2rem;border-top:1px solid var(--line);margin-top:2.4rem;color:var(--ink-mute);font-size:.95rem}
+footer.page a{color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion: no-preference){.go,.chips button{transition:filter .15s,border-color .15s}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none">Curb Cut <span class="flower" aria-hidden="true">✿</span></a> · feel it yourself</p>
+    <h1>Say what's hard.</h1>
+    <p class="lede">In your own words. One sentence is enough.</p>
+    <p class="promise"><b>A promise before you type:</b> this page has no server, no account,
+    no analytics and no memory. Nothing you write leaves your browser. Close the tab and it's gone.</p>
+  </div>
+</header>
+
+<section aria-label="Say what's hard">
+  <div class="wrap">
+    <form id="ask" novalidate>
+      <label class="big" for="need">What's hard at work right now?</label>
+      <textarea id="need" name="need" autocomplete="off" spellcheck="true"></textarea>
+      <p class="hint" id="need-hint">There's no wrong way to say it.</p>
+      <p class="quiet" style="margin:0 0 .3rem">Or start from something others have said:</p>
+      <ul class="chips" aria-label="Example sentences">
+        <li><button type="button">The lights above my desk give me a headache by the afternoon.</button></li>
+        <li><button type="button">I can't type for long.</button></li>
+        <li><button type="button">I use a wheelchair and the meeting rooms are upstairs.</button></li>
+        <li><button type="button">The noise in the office wears me down.</button></li>
+        <li><button type="button">It's hard to get from the car to the building.</button></li>
+        <li><button type="button">I'm on my feet all day and my back hurts.</button></li>
+      </ul>
+      <button class="go" type="submit">See what people ask for</button>
+    </form>
+
+    <div id="results" aria-live="polite"></div>
+
+    <details>
+      <summary>Browse the whole library, all 36 options</summary>
+      <p class="quiet" style="margin:.6rem 0 0">Every option carries a public source. Nothing here was
+      invented by an AI, and the live product refuses to suggest anything that isn't on this list.</p>
+      <ul class="opts" id="library-list"></ul>
+    </details>
+  </div>
+</section>
+
+<footer class="page">
+  <div class="wrap">
+    <p>This page runs the same matching rules as the live product, ported line for line
+    from the open source. <a href="https://github.com/parthsevak2/curb-cut/blob/main/force-app/main/default/classes/CurbCutOptions.cls">Read the code that ranks</a>,
+    or go back to <a href="index.html">the Curb Cut home page</a>.</p>
+    <p>Built by <a href="https://www.linkedin.com/in/parthsevak/">Parth Sevak</a>. Apache 2.0.
+    Questions and access needs: <a href="mailto:curbcut@havihi.digital">curbcut@havihi.digital</a>.</p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+/* The library, verbatim from accommodation_options_seed.csv. Every row has a public source. */
+var LIB = [
+{t:"Captions turned on in all meetings",s:"Live captions on by default in every meeting, not on request.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Agenda sent before the meeting",s:"Written agenda circulated ahead so nothing depends on catching it live.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Written follow-up after verbal instructions",s:"Instructions confirmed in writing so nothing rests on one spoken pass.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Face the person when speaking",s:"Speak facing the person, one at a time, no covered mouth.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Text instead of phone for all contact",s:"Contact by message rather than voice call, including from HR.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Visual fire and safety alerts",s:"Strobe or vibrating alerts alongside audio alarms. Life-safety, not convenience.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"ASL interpreter booked in advance",s:"Human interpreter arranged ahead of the meeting, not requested during it.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Noise-cancelling headset",s:"Headset to reduce background noise in an open or loud environment.",c:250,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"One-handed keyboard",s:"Keyboard usable with one hand.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Screen reader software",s:"Software that reads screen content aloud.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Flexible or shifted start time",s:"Start and end times moved to fit treatment, transit or energy patterns.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Service animal permitted at work",s:"Service animal allowed in the workplace.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Speech-to-text software",s:"Software that types what you say so you do not have to use a keyboard.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Alternative or ergonomic keyboard",s:"A keyboard shaped or laid out to make typing easier or less painful.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Modified or flexible work hours",s:"Start, finish or break at different times, so work fits treatment, transit or energy.",c:0,z:true,p:0,u:"https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"},
+{t:"Modified or different duties",s:"Some tasks swapped or reassigned so the job fits what you can do well.",c:0,z:true,p:0,u:"https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"},
+{t:"Working from home",s:"Work from home some days or all days instead of travelling in.",c:0,z:true,p:0,u:"https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"},
+{t:"Ergonomic workstation",s:"Desk and screen set at a height and angle that suits your body.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Special chair or back support",s:"A chair or back support chosen for you rather than the standard office one.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Extra breaks or rest time",s:"Short breaks when you need them, without asking each time.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Quiet space to work",s:"Somewhere with less noise and fewer interruptions to do focused work.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Written instructions instead of spoken",s:"Tasks given in writing so nothing depends on catching it once, out loud.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Screen magnification software",s:"Software that makes everything on screen larger and easier to read.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Reduced or part-time hours",s:"Fewer hours or shorter days, with pay and duties adjusted to match.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Adjustable or task lighting",s:"A desk lamp you control, so you are not working under whatever the ceiling gives you.",c:60,z:false,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
+{t:"Anti-glare filter or screen dimming",s:"A filter or setting that takes the glare off a screen, which can make a long day possible.",c:40,z:false,p:0,u:"https://askjan.org/solutions/Anti-Glare-Filters.cfm"},
+{t:"Move away from overhead fluorescent lighting",s:"Sitting somewhere with softer or natural light instead. Usually just a change of desk.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
+{t:"Turn off fluorescent lights nearby",s:"Switching off or removing the tubes directly above you, if others nearby do not need them.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
+{t:"Accessible parking space close to the entrance",s:"A reserved parking space near the door, so the walk from the car to the building is short and step-free.",c:0,z:true,p:0,u:"https://askjan.org/topics/Parking.cfm"},
+{t:"Drop-off point at the door",s:"Being dropped off and picked up at the entrance instead of walking in from the car park or the bus stop.",c:0,z:true,p:0,u:"https://askjan.org/topics/Parking.cfm"},
+{t:"Step-free route from the door to your desk",s:"A ramp or level route instead of steps or stairs, from the entrance to where you sit, with doors you can get through.",c:null,z:false,p:0,u:"https://askjan.org/solutions/Ramps.cfm"},
+{t:"Automatic or push-button door opener",s:"A door that opens itself or at a button, so a heavy door does not stand between you and the building.",c:null,z:false,p:0,u:"https://askjan.org/solutions/Automatic-Door-Openers.cfm"},
+{t:"Lift or elevator instead of stairs",s:"Using a lift rather than stairs to reach meeting rooms upstairs or on other floors, with a key or access card if the lift is normally locked.",c:null,z:false,p:0,u:"https://askjan.org/solutions/Elevators.cfm"},
+{t:"Workstation moved closer to the entrance",s:"Your desk placed near the building entrance, lift or accessible toilet, so you do not have to walk far each day.",c:0,z:true,p:0,u:"https://askjan.org/limitations/Walking.cfm"},
+{t:"Mobility scooter or wheelchair used at work",s:"Using your own scooter or wheelchair on site, with somewhere to park it and routes wide enough for it.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Scooters.cfm"},
+{t:"Extra time to get between places at work",s:"More time allowed to travel between meetings, buildings or floors, without it counting against you.",c:0,z:true,p:0,u:"https://askjan.org/limitations/Walking.cfm"}
+];
+
+/* Everything below is CurbCutOptions.cls, ported line for line. Same stopwords,
+   same stemmer, same rarity rule, same honest empty answer. */
+var STOPWORDS = new Set(["the","a","an","and","or","but","i","im","my","me","to","for","of","in","on",
+"at","it","is","am","are","was","were","be","been","with","that","this","have",
+"has","had","do","does","did","can","cant","cannot","not","no","when","what",
+"very","really","just","so","too","get","got","because","they","them",
+"after","before","while","during","than","then","rather","into","from","out",
+"own","one","some","all","any","each","more","less","most","much","also",
+"still","about","over","under","without","you","your","their","there","here",
+"keep","keeps","keeping","need","needs","needed","make","makes","made",
+"thing","things","right","now","way","ways","use","uses","using","used",
+"like","lot","bit","day","days","time","times",
+"work","works","working","job",
+"move","moves","moved","moving","hard","harder","difficult","easy","easier",
+"go","goes","going","went","come","comes","coming","take","takes","taking",
+"find","finds","finding","feel","feels","feeling","help","helps","helping",
+"able","around","between","through","where","which","who","how","every",
+"something","anything","someone","people","person","other","others",
+"off","turn","turns","turned","office","offices",
+"long","longer","short","often","always","never"]);
+
+function tokenize(text){
+  if(!text) return [];
+  return text.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){ return w.length>=3; });
+}
+function stem(w){
+  if(!w || w.length<4) return w;
+  if(w.endsWith("ses")||w.endsWith("xes")||w.endsWith("zes")) w=w.slice(0,-2);
+  else if(w.endsWith("s") && !w.endsWith("ss")) w=w.slice(0,-1);
+  if(w.length>=5 && w.endsWith("ing")) w=w.slice(0,-3);
+  else if(w.length>=4 && w.endsWith("ed")) w=w.slice(0,-2);
+  if(w.length>=4 && w.endsWith("e")) w=w.slice(0,-1);
+  return w;
+}
+function stemAll(words){
+  var out=new Set();
+  words.forEach(function(w){ var st=stem(w); if(st && st.length>=3) out.add(st); });
+  return out;
+}
+function extractKeywords(need){
+  var kept=tokenize(need).filter(function(w){ return !STOPWORDS.has(w); });
+  return Array.from(stemAll(kept));
+}
+
+var titleIdx=[], bodyIdx=[], docFreq={};
+LIB.forEach(function(opt,i){
+  var tw=stemAll(tokenize(opt.t)), bw=stemAll(tokenize(opt.s));
+  titleIdx[i]=tw; bodyIdx[i]=bw;
+  var seen=new Set(); tw.forEach(function(w){seen.add(w);}); bw.forEach(function(w){seen.add(w);});
+  seen.forEach(function(w){ docFreq[w]=(docFreq[w]||0)+1; });
+});
+var RARE_MAX=Math.max(3, Math.floor(LIB.length/4));
+var TITLE_WEIGHT=3, BODY_WEIGHT=1;
+
+function rank(need, cap){
+  var keywords=extractKeywords(need);
+  if(!keywords.length) return [];
+  var scored=[];
+  LIB.forEach(function(opt,i){
+    var score=0, discriminating=false;
+    keywords.forEach(function(kw){
+      var inTitle=titleIdx[i].has(kw), inBody=bodyIdx[i].has(kw);
+      if(!inTitle && !inBody) return;
+      var df=docFreq[kw]||0;
+      var weight=inTitle?TITLE_WEIGHT:BODY_WEIGHT;
+      if(df===1) weight*=2;
+      score+=weight;
+      if(df>0 && df<=RARE_MAX) discriminating=true;
+    });
+    if(score>0 && discriminating) scored.push({opt:opt,score:score});
+  });
+  scored.sort(function(a,b){
+    if(a.score!==b.score) return b.score-a.score;
+    if(a.opt.p!==b.opt.p) return b.opt.p-a.opt.p;
+    return a.opt.t<b.opt.t?-1:(a.opt.t>b.opt.t?1:0);
+  });
+  return scored.slice(0,cap||4).map(function(s){ return s.opt; });
+}
+
+function costLine(o){
+  if(o.z) return "Usually costs the employer nothing.";
+  if(o.c!==null && o.c>0) return "Usually about $"+o.c+".";
+  return "";
+}
+function sourceName(u){
+  return u.indexOf("statcan")>=0 ? "Statistics Canada" : "the Job Accommodation Network";
+}
+function esc(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function optionCard(o){
+  var cost=costLine(o);
+  return '<li><h3>'+esc(o.t)+'</h3><p>'+esc(o.s)+'</p>'
+    +'<p class="meta">'+(cost?esc(cost)+' ':'')
+    +'<a href="'+esc(o.u)+'">Source: '+sourceName(o.u)+'</a></p></li>';
+}
+
+var form=document.getElementById("ask");
+var box=document.getElementById("need");
+var results=document.getElementById("results");
+
+document.querySelectorAll(".chips button").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    box.value=btn.textContent;
+    box.focus();
+  });
+});
+
+form.addEventListener("submit",function(e){
+  e.preventDefault();
+  var need=box.value.trim();
+  if(!need){
+    results.innerHTML='<p class="hint" style="margin-top:.8rem">Whenever you\'re ready. One sentence, any words.</p>';
+    box.focus();
+    return;
+  }
+  var matches=rank(need,4);
+  if(!matches.length){
+    results.innerHTML=
+      '<div class="nomatch" role="region" aria-label="No match"><h2 tabindex="-1" id="res-h">An honest answer: I don\'t know.</h2>'
+      +'<p>Nothing in the library matches those words, and a guess would be worse than saying so. '
+      +'The live product answers exactly this way too, then offers you a human. '
+      +'Try different words, or browse the whole library below.</p></div>';
+  } else {
+    results.innerHTML=
+      '<h2 tabindex="-1" id="res-h">What others have asked for</h2>'
+      +'<ul class="opts">'+matches.map(optionCard).join("")+'</ul>'
+      +'<p class="quiet" style="margin-top:.7rem">Ranked by the same rules the live product runs. '
+      +'Nothing here is invented: every option comes from a public library with a source.</p>'
+      +'<div class="next"><h3>In the live product, the next step is yours</h3>'
+      +'<p>It writes the request in your words, shows it to you, and sends nothing until you '
+      +'clearly say yes. This page stops before that step on purpose: it was built unable to '
+      +'send, store or remember anything. Showing you what\'s normal to ask for is the point.</p></div>';
+  }
+  var h=document.getElementById("res-h");
+  if(h) h.focus();
+});
+
+document.getElementById("library-list").innerHTML=LIB.map(optionCard).join("");
+</script>
+</body>
+</html>

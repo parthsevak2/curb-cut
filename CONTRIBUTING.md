@@ -6,7 +6,7 @@ asking for help, not what they add.
 
 ## Ground rules that are checked by machines
 
-`python3 tests/invariants.py` runs 517 structural checks offline in about a
+`python3 tests/invariants.py` runs 521 structural checks offline in about a
 second, and CI blocks anything that breaks one. The inviolables:
 
 - **No diagnosis field, ever.** The build fails if any field API name matches
