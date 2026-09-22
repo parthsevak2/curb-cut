@@ -843,6 +843,50 @@ check('disclosure-event-has-a-production-writer', bool(ledger_writers),
       'can be shown to anyone and WHO can never name a person')
 
 
+# The hands-on page at docs/try.html embeds a copy of the accommodation
+# library and a port of the Apex ranking rules, so a visitor's browser can
+# answer without a server. A copy is a claim, and a claim that can drift must
+# be checked: if the seed library changes and the page does not, the page
+# shows the world options the product no longer offers, with the same
+# confidence as ever.
+TRY = os.path.join(ROOT, 'docs/try.html')
+if os.path.exists(TRY):
+    tryhtml = open(TRY).read()
+    page_rows = re.findall(
+        r'\{t:"(.*?)",s:"(.*?)",c:(null|\d+),z:(true|false),p:(\d+),u:"(.*?)"\}',
+        tryhtml)
+    with open(CSV_) as fh:
+        seed_rows = list(csv.DictReader(fh))
+    page_lib = {(t, s, '' if c == 'null' else c, z) for t, s, c, z, _, _ in page_rows}
+    seed_lib = {(r['Option__c'], r['Plain_Language_Summary__c'],
+                 (r['Typical_Cost__c'] or '').strip(),
+                 (r['Zero_Cost__c'] or 'false').strip()) for r in seed_rows}
+    check('try-page-library-matches-seed', page_lib == seed_lib,
+          'docs/try.html embeds a different library than accommodation_options_seed.csv: '
+          + '; '.join(sorted(t for t, _, _, _ in page_lib ^ seed_lib))[:300])
+    for m in re.finditer(r'all (\d+) options', tryhtml):
+        check('try-page-count-is-real', int(m.group(1)) == len(seed_rows),
+              f'docs/try.html says {m.group(1)} options; the library holds {len(seed_rows)}')
+    # The ranking is only the product's ranking while the words it ignores are
+    # the same words. The Apex list is the one the incidents shaped.
+    apex_src = open(os.path.join(CLS, 'CurbCutOptions.cls')).read()
+    apex_block = apex_src.split('STOPWORDS = new Set<String>{', 1)[1].split('};', 1)[0]
+    apex_stop = set(re.findall(r"'([a-z]+)'", apex_block))
+    try_block = tryhtml.split('var STOPWORDS = new Set([', 1)[1].split(']);', 1)[0]
+    try_stop = set(re.findall(r'"([a-z]+)"', try_block))
+    check('try-page-stopwords-match-apex', apex_stop == try_stop,
+          'docs/try.html stopwords differ from CurbCutOptions.cls: '
+          + ', '.join(sorted(apex_stop ^ try_stop))[:200])
+    # The page's first promise is that nothing typed leaves the browser. A
+    # promise a machine can break should be one a machine checks.
+    check('try-page-sends-nothing',
+          'fetch(' not in tryhtml and 'XMLHttpRequest' not in tryhtml
+          and 'sendBeacon' not in tryhtml and 'WebSocket' not in tryhtml
+          and 'new Image(' not in tryhtml,
+          'docs/try.html contains a network call; its first promise is that '
+          'nothing typed leaves the browser')
+
+
 # ---------------------------------------------------------------------------
 # The count in this file is quoted in the deck, in four Devpost answers and in
 # the technical design document. It has already drifted once: the suite grew and

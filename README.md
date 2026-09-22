@@ -10,7 +10,7 @@ Track, Agentforce for Good Hackathon, Dreamforce 2026.
 ```
 git clone https://github.com/parthsevak2/curb-cut
 cd curb-cut
-python3 tests/invariants.py     # 517 structural checks, offline, about a second
+python3 tests/invariants.py     # 521 structural checks, offline, about a second
 ```
 
 To install it into your own Salesforce org, follow [DEPLOY.md](DEPLOY.md).
@@ -107,7 +107,7 @@ invariant suite's own output so they cannot drift.
 
 ```
 129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-517 structural invariants      python3 tests/invariants.py            ~1s, no org
+521 structural invariants      python3 tests/invariants.py            ~1s, no org
 517 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 122 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed

@@ -469,7 +469,7 @@ divider('04','The honest part','What we shipped wrong, and what still fails.');
     o:{x:7.68,y:2.72,w:4.5,h:1.4,fontSize:12.5,fontFace:B,color:INK}});
   T(s,{t:'"Good" is 23 of 23 with zero variance across five runs. Getting there means moving anything safety critical out of the model’s narration and into code that runs whether or not it remembers.',
     o:{x:ML,y:4.6,w:11.5,h:0.9,fontSize:14.5,fontFace:H,italic:true,color:INK}});
-  T(s,{t:'129 Apex   |   517 invariants   |   517 accessibility   |   122 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
+  T(s,{t:'129 Apex   |   521 invariants   |   517 accessibility   |   122 Sa11y   |   28 contrast   |   16 reading level   |   all passing, every build',
     o:{x:ML,y:5.7,w:11.7,h:0.5,fontSize:12,fontFace:M,color:SOFT}});
 }
 
@@ -557,7 +557,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
 /* -------------------------------------------------------- 22d HOW TO CHECK */
 { const s=light(); chip(s,'APPENDIX  |  VERIFICATION');
   title(s,'Don\'t take any of it on trust.');
-  const cmd=[['517','structural invariants','python3 tests/invariants.py'],
+  const cmd=[['521','structural invariants','python3 tests/invariants.py'],
              ['129','Apex tests','sf apex run test -o curbcut -l RunLocalTests'],
              ['517','accessibility checks, live pages','python3 tests/a11y_audit.py'],
              ['122','Sa11y, Salesforce\u2019s own matcher','npm run test:a11y'],
@@ -583,7 +583,7 @@ divider('A','Appendix','Every figure, its source, and the command that proves it
   T(s,{t:'They only have to be able to ask.',o:{x:ML,y:4.2,w:10.5,h:0.7,fontSize:25,
     fontFace:H,italic:true,color:GOLDLT}});
   T(s,{t:'Verify anything in this deck:',o:{x:ML,y:5.3,w:6,h:0.35,fontSize:11.5,fontFace:M,color:DIMTX}});
-  T(s,{t:'python3 tests/invariants.py          517 checks\nsf apex run test -l RunLocalTests     129 tests\npython3 tests/a11y_audit.py          527 checks, against the live pages',
+  T(s,{t:'python3 tests/invariants.py          521 checks\nsf apex run test -l RunLocalTests     129 tests\npython3 tests/a11y_audit.py          517 checks, against the live pages',
     o:{x:ML,y:5.62,w:8.5,h:1.0,fontSize:10.5,fontFace:M,color:'D8DAD6'}});
   T(s,{t:'orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut',o:{x:ML,y:6.75,w:11,h:0.35,
     fontSize:11.5,fontFace:M,color:DIMTX}});
