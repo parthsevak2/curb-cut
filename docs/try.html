@@ -91,9 +91,10 @@ footer.page a{color:inherit}
     <form id="ask" novalidate>
       <label class="big" for="need">What's hard at work right now?</label>
       <textarea id="need" name="need" autocomplete="off" spellcheck="true"></textarea>
-      <p class="hint" id="need-hint">There's no wrong way to say it.</p>
-      <p class="quiet" style="margin:0 0 .3rem">Or start from something others have said:</p>
-      <ul class="chips" aria-label="Example sentences">
+      <p class="hint" id="need-hint">There's no wrong way to say it. Press Enter whenever you're ready.</p>
+      <button class="go" type="submit">See what people ask for</button>
+      <p class="quiet" style="margin:1.2rem 0 .3rem">Or tap something others have said:</p>
+      <ul class="chips" aria-label="Example sentences, tap one to see its answer">
         <li><button type="button">The lights above my desk give me a headache by the afternoon.</button></li>
         <li><button type="button">I can't type for long.</button></li>
         <li><button type="button">I use a wheelchair and the meeting rooms are upstairs.</button></li>
@@ -101,7 +102,6 @@ footer.page a{color:inherit}
         <li><button type="button">It's hard to get from the car to the building.</button></li>
         <li><button type="button">I'm on my feet all day and my back hurts.</button></li>
       </ul>
-      <button class="go" type="submit">See what people ask for</button>
     </form>
 
     <div id="results" aria-live="polite"></div>
@@ -268,15 +268,7 @@ var form=document.getElementById("ask");
 var box=document.getElementById("need");
 var results=document.getElementById("results");
 
-document.querySelectorAll(".chips button").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    box.value=btn.textContent;
-    box.focus();
-  });
-});
-
-form.addEventListener("submit",function(e){
-  e.preventDefault();
+function answer(){
   var need=box.value.trim();
   if(!need){
     results.innerHTML='<p class="hint" style="margin-top:.8rem">Whenever you\'re ready. One sentence, any words.</p>';
@@ -303,6 +295,23 @@ form.addEventListener("submit",function(e){
   }
   var h=document.getElementById("res-h");
   if(h) h.focus();
+}
+
+form.addEventListener("submit",function(e){
+  e.preventDefault();
+  answer();
+});
+box.addEventListener("keydown",function(e){
+  if(e.key==="Enter" && !e.shiftKey){
+    e.preventDefault();
+    answer();
+  }
+});
+document.querySelectorAll(".chips button").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    box.value=btn.textContent;
+    answer();
+  });
 });
 
 document.getElementById("library-list").innerHTML=LIB.map(optionCard).join("");
