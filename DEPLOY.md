@@ -122,6 +122,21 @@ disclosure, and cannot write or send a request by design.
 Assign the console app (`Curb_Cut_Console`) to whoever answers. The On Duty
 page is their whole job: work it top to bottom. Every door ends at them.
 
+## 10. Put it on the wall
+
+The people this serves most are the ones who never see your intranet. A
+print-ready poster lives at
+[parthsevak2.github.io/curb-cut/poster.html](https://parthsevak2.github.io/curb-cut/poster.html)
+(source: `docs/poster.html`). Put your own doors on it through the address
+bar, no editing:
+
+```
+poster.html?num=+1 555 000 1234&site=https://your-site/curbcut/ask
+```
+
+Print it and put it where people actually stand: the break room, the loading
+dock, beside the kettle.
+
 ## If something fails
 
 - `AiAuthoringBundle` not recognised: CLI below 2.149 or org below API 66.

@@ -146,6 +146,8 @@ worth more than the next five items on this list.
 
 | Channel | State |
 |---|---|
+| **The try-it page** | Live at [parthsevak2.github.io/curb-cut/try.html](https://parthsevak2.github.io/curb-cut/try.html): the Apex ranking ported line for line, running in the visitor's browser over the same 36-option library, with no server and no network call. Four invariants hold it to the seed data, and it outlives any demo org |
+| **The break-room poster** | Live at [poster.html](https://parthsevak2.github.io/curb-cut/poster.html): print-ready, customised entirely from the address bar (`?num=`&`site=`), with a QR code to the try-it page for the curious. The break room is where the people without laptops are |
 | **Install from the repo** | Live: deploy the org metadata, create the Slack app from `channels/slack-manifest.json` in your own workspace in about two minutes |
 | **Salesforce AppExchange, via Trailblazer Labs** | In motion: the pitch is written and posts when the cohort intake opens. This is Curb Cut's natural marketplace, because the org owns the deployment |
 | **Slack Marketplace listing** | Deliberately not yet. A listed Slack app must be one hosted service that many workspaces install, which would put a third party between a worker and their org's Salesforce, exactly the trust model this project refuses. If demand appears, the honest shape is an OAuth installer that still points every workspace at that org's own relay, and that is real engineering to do carefully, not a checkbox |
