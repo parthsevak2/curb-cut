@@ -61,7 +61,7 @@ addresses on every row.
 | Surface | Address | State |
 |---|---|---|
 | Web | https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut | live |
-| Ask (full journey, no phone) | `/curbcut/ask` | live |
+| Ask (the whole flow, no phone) | `/curbcut/ask` | live |
 | Privacy | `/curbcut/privacy` | live |
 | Terms | `/curbcut/terms` | live |
 | SMS | +1 276 495 9311 | live, through a relay we run beside the org |
