@@ -7,7 +7,7 @@ sounds. Everything in "Shipped" is verified live; everything below it is honest.
 
 | | Reaches |
 |---|---|
-| **Web front door**. Full journey, no phone, no account | Anyone with a browser: library computer, shared desktop, screen reader |
+| **Web front door**. The whole ask, start to finish, no phone, no account | Anyone with a browser: library computer, shared desktop, screen reader |
 | **SMS** (pending carrier approval) | Anyone with a basic phone and no smartphone, no data, no app |
 | **Voice, speech in and out** | Motor disability, dyslexia, low literacy, blindness. Anyone for whom speaking beats typing |
 | **Email** | No mobile plan; a shared phone; needing to compose slowly over days |
