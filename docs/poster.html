@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Break-room poster ✿ Curb Cut</title>
+<meta name="description" content="A print-ready poster for the break room. Add your own number and site through the address bar, press print, done."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=JetBrains+Mono:wght@500&family=Source+Sans+3:wght@400;600&display=swap"/>
+<style>
+/* A poster is paper. It keeps one theme on any screen so what you see is what prints. */
+:root{ --paper:#FFFFFF; --ink:#14171A; --soft:#41474A; --mute:#5E6568; --deep:#1F5A4E; --line:#C8C6BC; }
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0;background:#E5E3DC}
+body{font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;color:var(--ink)}
+.toolbar{max-width:52rem;margin:0 auto;padding:1rem 1.25rem;font-size:.95rem;color:var(--soft)}
+.toolbar b{font-family:Archivo,system-ui,sans-serif}
+.toolbar code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.85em;background:#F2F1ED;border:1px solid var(--line);border-radius:.3rem;padding:.05rem .35rem}
+.toolbar button{font:inherit;font-weight:600;font-family:Archivo,system-ui,sans-serif;padding:.5rem 1rem;border-radius:.45rem;border:1px solid var(--deep);background:var(--deep);color:#fff;cursor:pointer;margin-top:.5rem}
+.toolbar a{color:var(--deep)}
+.sheet{background:var(--paper);max-width:52rem;margin:0 auto 2rem;padding:3.2rem 3rem;border:1px solid var(--line)}
+h1{font-family:Archivo,system-ui,sans-serif;font-weight:800;font-size:3.1rem;line-height:1.05;letter-spacing:-.02em;margin:0 0 .6rem}
+h1 .flower{color:var(--deep)}
+.sub{font-size:1.45rem;color:var(--soft);margin:0 0 2rem;line-height:1.4}
+.how{margin:0 0 2rem;padding:0;list-style:none;display:grid;gap:.9rem}
+.how li{font-size:1.3rem;line-height:1.35}
+.how b{font-family:Archivo,system-ui,sans-serif}
+.channel{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:1.5rem;color:var(--deep);word-break:break-all}
+.promises{border-top:2px solid var(--ink);padding-top:1.3rem;margin:0;padding-left:0;list-style:none;display:grid;gap:.55rem}
+.promises li{font-size:1.15rem}
+.qr-row{display:flex;align-items:center;gap:1.2rem;margin-top:2.2rem}
+.qr-row img{width:9rem;height:9rem;flex:none}
+.qr-row p{margin:0;font-size:1.05rem;color:var(--soft)}
+.qr-row .u{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.9rem;color:var(--mute);word-break:break-all}
+.tiny{margin-top:2rem;color:var(--mute);font-size:.85rem}
+@media print{
+  html,body{background:#fff}
+  .toolbar{display:none}
+  .sheet{border:0;max-width:none;margin:0;padding:0}
+  @page{margin:16mm}
+}
+@media (max-width:640px){ .sheet{padding:1.6rem 1.25rem} h1{font-size:2.2rem} }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <p><b>This is a poster.</b> Print it with Ctrl+P or Cmd+P and put it where people
+  actually stand: the break room, the loading dock, beside the kettle.</p>
+  <p>To put your organisation's own doors on it, add them in the address bar:
+  <code>poster.html?num=+1 555 000 1234&amp;site=https://your-site/curbcut/ask</code>
+  and print again. Nothing to edit, nothing to install. Back to
+  <a href="index.html">the Curb Cut home page</a>.</p>
+  <button type="button" onclick="window.print()">Print this poster</button>
+</div>
+
+<div class="sheet">
+  <h1>Ask for what you need at&nbsp;work.&nbsp;<span class="flower" aria-hidden="true">✿</span></h1>
+  <p class="sub">In your own words. No login, no form, and you never have to
+  explain your health.</p>
+
+  <ul class="how" id="doors-org" hidden>
+    <li><b>Text or call, from any phone:</b><br/><span class="channel" id="num-out"></span></li>
+    <li><b>Or on the web:</b><br/><span class="channel" id="site-out"></span></li>
+  </ul>
+
+  <ul class="promises">
+    <li><b>You never have to say why.</b> There is no diagnosis box. It doesn't exist.</li>
+    <li><b>Nothing is sent until you clearly say yes.</b> You see every word first, in your words.</li>
+    <li><b>A real person answers.</b> Say "human" at any point and one picks it up.</li>
+  </ul>
+
+  <div class="qr-row">
+    <img src="try-qr.svg" alt="QR code for the Curb Cut try-it page" width="144" height="144"/>
+    <p id="qr-copy">Curious? Point your camera here, type one sentence about
+    what's hard, and see what people ask for. Nothing you type leaves your phone.
+    <span class="u">parthsevak2.github.io/curb-cut/try.html</span></p>
+  </div>
+
+  <p class="tiny">Curb Cut is free and open source, Apache 2.0. Built for the
+  people who get left out, better for everyone.</p>
+</div>
+
+<script>
+'use strict';
+/* The address bar is the whole configuration. textContent only, nothing executes. */
+var q = new URLSearchParams(location.search);
+var num = (q.get("num") || "").trim();
+var site = (q.get("site") || "").trim();
+if (num || site) {
+  var list = document.getElementById("doors-org");
+  list.hidden = false;
+  var numLi = list.children[0], siteLi = list.children[1];
+  if (num) { document.getElementById("num-out").textContent = num; } else { numLi.hidden = true; }
+  if (site) { document.getElementById("site-out").textContent = site; } else { siteLi.hidden = true; }
+}
+</script>
+</body>
+</html>

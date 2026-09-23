@@ -13,6 +13,14 @@ cd curb-cut
 python3 tests/invariants.py     # 521 structural checks, offline, about a second
 ```
 
+**Feel it before you read anything:** type one sentence at
+[parthsevak2.github.io/curb-cut/try.html](https://parthsevak2.github.io/curb-cut/try.html)
+and watch the product's own ranking answer, entirely in your browser. The
+landing page with the films is
+[parthsevak2.github.io/curb-cut](https://parthsevak2.github.io/curb-cut/), and
+a print-ready break-room poster is
+[poster.html](https://parthsevak2.github.io/curb-cut/poster.html).
+
 To install it into your own Salesforce org, follow [DEPLOY.md](DEPLOY.md).
 It needs Agentforce enabled; text and voice also need your own Twilio number
 and a small relay ([channels/](channels/)), and Slack needs the app created in
