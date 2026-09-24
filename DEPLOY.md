@@ -137,6 +137,10 @@ poster.html?num=+1 555 000 1234&site=https://your-site/curbcut/ask
 Print it and put it where people actually stand: the break room, the loading
 dock, beside the kettle.
 
+And when you're live, write to curbcut@havihi.digital and say so. With your
+permission we name workplaces where somebody answers, and every name on that
+list makes the next organisation braver.
+
 ## If something fails
 
 - `AiAuthoringBundle` not recognised: CLI below 2.149 or org below API 66.
