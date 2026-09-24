@@ -43,13 +43,17 @@ header.hero{padding:3.5rem 0 1.6rem}
 .promise{margin:1.6rem 0 0;padding:.9rem 1.1rem;background:var(--deep-bg);border:1px solid var(--deep);border-radius:.55rem;color:var(--ink)}
 .promise b{font-family:Archivo,system-ui,sans-serif}
 section{padding:1.8rem 0}
-label.big{display:block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.5rem}
-textarea{width:100%;min-height:6.5rem;padding:.85rem 1rem;font:inherit;color:var(--ink);background:var(--raised);border:1px solid var(--line-firm);border-radius:.55rem;resize:vertical}
-.hint{color:var(--ink-mute);font-size:.95rem;margin:.4rem 0 1rem}
-.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.4rem 0 1.2rem;padding:0;list-style:none}
-.chips button{font:inherit;font-size:.92rem;color:var(--ink-soft);background:var(--raised);border:1px solid var(--line);border-radius:1.2rem;padding:.4rem .85rem;cursor:pointer;text-align:left}
-.chips button:hover{border-color:var(--line-firm)}
-.go{display:inline-block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.05rem;padding:.75rem 1.3rem;border-radius:.5rem;border:1px solid var(--deep);background:var(--deep);color:var(--on-deep);cursor:pointer}
+label.big{display:block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.3rem;margin-bottom:.6rem}
+textarea{width:100%;min-height:4.6rem;padding:.5rem .1rem;font:inherit;font-size:1.28rem;line-height:1.5;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--line-firm);border-radius:0;resize:none}
+textarea:focus-visible{outline:none;border-bottom-color:var(--deep)}
+.hint{color:var(--ink-mute);font-size:.95rem;margin:.5rem 0 1rem}
+.chips{margin:.3rem 0 1.2rem;padding:0;list-style:none;display:grid;gap:.15rem}
+.chips button{font:inherit;font-size:1rem;font-style:italic;color:var(--ink-soft);background:transparent;border:0;padding:.28rem .1rem;cursor:pointer;text-align:left;text-underline-offset:.2em}
+.chips button::before{content:"\201C"}
+.chips button::after{content:"\201D"}
+.chips button:hover{color:var(--deep);text-decoration:underline}
+.go{display:inline-block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.05rem;padding:.75rem 1.4rem;border-radius:2rem;border:1px solid var(--deep);background:var(--deep);color:var(--on-deep);cursor:pointer}
+.go::after{content:" \2192"}
 .go:hover{filter:brightness(.97)}
 #results{margin-top:1rem}
 #results h2{font-size:1.5rem;margin:1.6rem 0 .9rem}
@@ -93,7 +97,7 @@ footer.page a{color:inherit}
       <textarea id="need" name="need" autocomplete="off" spellcheck="true"></textarea>
       <p class="hint" id="need-hint">There's no wrong way to say it. Press Enter whenever you're ready.</p>
       <button class="go" type="submit">See what people ask for</button>
-      <p class="quiet" style="margin:1.2rem 0 .3rem">Or tap something others have said:</p>
+      <p class="quiet" style="margin:1.3rem 0 .2rem">Or borrow someone else's words:</p>
       <ul class="chips" aria-label="Example sentences, tap one to see its answer">
         <li><button type="button">The lights above my desk give me a headache by the afternoon.</button></li>
         <li><button type="button">I can't type for long.</button></li>
