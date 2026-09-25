@@ -89,6 +89,16 @@ footer.page a{color:inherit}
 .payoff{margin-top:1.4rem;padding:1.1rem 1.2rem;background:var(--deep-bg);border:1px solid var(--deep);border-radius:.55rem}
 .payoff h2{margin:0 0 .5rem;font-size:1.4rem}
 .payoff p{margin:.5rem 0;color:var(--ink)}
+.askrow{display:flex;gap:.9rem;align-items:flex-end}
+.askrow textarea{flex:1;min-height:2.6rem;overflow:hidden}
+.askrow .go{white-space:nowrap;margin-bottom:.15rem}
+@media (max-width:40rem){.askrow{display:block}.askrow .go{margin-top:.9rem;width:100%}}
+.echo{margin:0 0 1.1rem;padding:.7rem 1rem;background:var(--raised);border-left:4px solid var(--deep);border-radius:0 .5rem .5rem 0;color:var(--ink-soft)}
+.echo b{color:var(--ink);font-style:italic;font-weight:400}
+.echo .change{font:inherit;font-size:.95rem;color:var(--deep);background:none;border:0;padding:0;margin-left:.6rem;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+#stage h2{font-size:1.5rem;margin:.2rem 0 .9rem}
+.backline{margin:1.2rem 0 0}
+.backline button{font:inherit;font-size:.98rem;color:var(--ink-mute);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: no-preference){.go,.chips button{transition:filter .15s,border-color .15s}}
 </style>
@@ -103,32 +113,11 @@ footer.page a{color:inherit}
   </div>
 </header>
 
-<section aria-label="Say what's hard">
+<section aria-label="Try Curb Cut">
   <div class="wrap">
-    <form id="ask" novalidate>
-      <label class="big" for="need">What's hard at work right now?</label>
-      <textarea id="need" name="need" autocomplete="off" spellcheck="true"></textarea>
-      <p class="hint" id="need-hint">One sentence is enough, any words. Press Enter when you're ready.</p>
-      <button class="go" type="submit">See what people ask for</button>
-      <p class="quiet" style="margin:1.3rem 0 .2rem">Or borrow someone else's words:</p>
-      <ul class="chips" aria-label="Example sentences, tap one to see its answer">
-        <li><button type="button">The lights above my desk give me a headache by the afternoon.</button></li>
-        <li><button type="button">I can't type for long.</button></li>
-        <li><button type="button">I use a wheelchair and the meeting rooms are upstairs.</button></li>
-        <li><button type="button">The noise in the office wears me down.</button></li>
-        <li><button type="button">It's hard to get from the car to the building.</button></li>
-        <li><button type="button">I'm on my feet all day and my back hurts.</button></li>
-      </ul>
-      <p class="quiet" style="margin:0 0 .2rem">Or try to stump it:</p>
-      <ul class="chips" aria-label="A sentence the library cannot answer, tap to see the honest refusal">
-        <li><button type="button">My dragon keeps eating the stapler.</button></li>
-      </ul>
-    </form>
+    <div id="stage"></div>
 
-    <div id="results" aria-live="polite"></div>
-    <div id="draftzone" aria-live="polite"></div>
-
-    <details>
+    <details id="library">
       <summary>Browse the whole library, all 36 options</summary>
       <p class="quiet" style="margin:.6rem 0 0">Every option carries a public source. Nothing here was
       invented by an AI, and the live product refuses to suggest anything that isn't on this list.</p>
@@ -287,103 +276,142 @@ function optionCard(o){
     +'<button type="button" class="pick" data-idx="'+LIB.indexOf(o)+'">See the ask this would become</button></li>';
 }
 
-var form=document.getElementById("ask");
-var box=document.getElementById("need");
-var results=document.getElementById("results");
+var stage=document.getElementById("stage");
+var lastNeed="";
 
-var draftzone=document.getElementById("draftzone");
-
-function answer(){
-  draftzone.innerHTML="";
-  var need=box.value.trim();
-  if(!need){
-    results.innerHTML='<p class="hint" style="margin-top:.8rem">Whenever you\'re ready. One sentence, any words.</p>';
-    box.focus();
-    return;
-  }
-  var matches=rank(need,4);
-  if(!matches.length){
-    results.innerHTML=
-      '<div class="nomatch" role="region" aria-label="No match"><h2 tabindex="-1" id="res-h">An honest answer: I don\'t know.</h2>'
-      +'<p>Nothing in the library matches those words, and a guess would be worse than saying so. '
-      +'The live product answers exactly this way too, then offers you a human. '
-      +'Try different words, or browse the whole library below.</p></div>';
-  } else {
-    results.innerHTML=
-      '<h2 tabindex="-1" id="res-h">What others have asked for</h2>'
-      +'<ul class="opts">'+matches.map(optionCard).join("")+'</ul>'
-      +'<p class="quiet" style="margin-top:.7rem">Ranked by the same rules the live product runs. '
-      +'Nothing here is invented: every option comes from a public library with a source. '
-      +'Browsing is not committing. Knowing is allowed.</p>'
-      +'<div class="next"><h3>Now walk the rest of it</h3>'
-      +'<p>Press "See the ask this would become" under any option, and this page writes the '
-      +'request in your words, shows you every word, and waits for your yes. Even then it '
-      +'cannot send, store or remember a thing. Feeling how that works is the point.</p></div>';
-  }
-  var h=document.getElementById("res-h");
-  if(h) h.focus();
+function focusStage(id){
+  var h=document.getElementById(id);
+  if(h){ h.focus(); h.scrollIntoView({block:"nearest"}); }
+}
+function echoLine(){
+  if(!lastNeed) return "";
+  return '<p class="echo">You said: <b>\u201C'+esc(lastNeed)+'\u201D</b>'
+    +'<button type="button" class="change" id="change-btn">change it</button></p>';
 }
 
-form.addEventListener("submit",function(e){
-  e.preventDefault();
-  answer();
-});
-box.addEventListener("keydown",function(e){
-  if(e.key==="Enter" && !e.shiftKey){
-    e.preventDefault();
-    answer();
-  }
-});
-document.querySelectorAll(".chips button").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    box.value=btn.textContent;
-    answer();
+function showAsk(){
+  stage.innerHTML=
+    '<form id="ask" novalidate>'
+    +'<label class="big" for="need">What\'s hard at work right now?</label>'
+    +'<div class="askrow">'
+    +'<textarea id="need" name="need" rows="1" autocomplete="off" spellcheck="true" aria-describedby="need-hint"></textarea>'
+    +'<button class="go" type="submit">Show me</button>'
+    +'</div>'
+    +'<p class="hint" id="need-hint">One sentence, any words. The answer appears right here.</p>'
+    +'<p class="quiet" style="margin:1.5rem 0 .2rem">Or borrow someone else\'s words:</p>'
+    +'<ul class="chips" aria-label="Example sentences, tap one to see its answer">'
+    +'<li><button type="button">The lights above my desk give me a headache by the afternoon.</button></li>'
+    +'<li><button type="button">I can\'t type for long.</button></li>'
+    +'<li><button type="button">I use a wheelchair and the meeting rooms are upstairs.</button></li>'
+    +'<li><button type="button">The noise in the office wears me down.</button></li>'
+    +'<li><button type="button">It\'s hard to get from the car to the building.</button></li>'
+    +'<li><button type="button">I\'m on my feet all day and my back hurts.</button></li>'
+    +'</ul>'
+    +'<p class="quiet" style="margin:0 0 .2rem">Or try to stump it:</p>'
+    +'<ul class="chips" aria-label="A sentence the library cannot answer, tap to see the honest refusal">'
+    +'<li><button type="button">My dragon keeps eating the stapler.</button></li>'
+    +'</ul></form>';
+  var box=document.getElementById("need");
+  box.value=lastNeed;
+  autoGrow(box);
+  box.addEventListener("input",function(){ autoGrow(box); });
+  document.getElementById("ask").addEventListener("submit",function(e){
+    e.preventDefault(); showResults(box.value.trim());
   });
-});
+  box.addEventListener("keydown",function(e){
+    if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); showResults(box.value.trim()); }
+  });
+  stage.querySelectorAll(".chips button").forEach(function(btn){
+    btn.addEventListener("click",function(){ showResults(btn.textContent); });
+  });
+  box.focus();
+}
+function autoGrow(box){
+  box.style.height="auto";
+  box.style.height=Math.max(box.scrollHeight, 8)+"px";
+}
 
-function renderDraft(idx){
+function showResults(need){
+  if(!need){ var b=document.getElementById("need"); if(b) b.focus(); return; }
+  lastNeed=need;
+  var matches=rank(need,3);
+  if(!matches.length){
+    stage.innerHTML=echoLine()
+      +'<div class="nomatch" role="region" aria-label="No match"><h2 tabindex="-1" id="stage-h">An honest answer: I don\'t know.</h2>'
+      +'<p>Nothing in the library matches those words, and a guess would be worse than saying so. '
+      +'The live product answers exactly this way too, then offers you a human.</p></div>'
+      +'<p class="backline"><button type="button" id="browse-btn">Browse the whole library instead</button></p>';
+    document.getElementById("browse-btn").addEventListener("click",function(){
+      var lib=document.getElementById("library"); lib.open=true; lib.scrollIntoView({block:"start"});
+    });
+  } else {
+    stage.innerHTML=echoLine()
+      +'<h2 tabindex="-1" id="stage-h">What others have asked for</h2>'
+      +'<ul class="opts">'+matches.map(optionCard).join("")+'</ul>'
+      +'<p class="quiet" style="margin-top:.7rem">Ranked by the same rules the live product runs, every option '
+      +'from a public library with a source. Browsing is not committing. Knowing is allowed.</p>';
+  }
+  var cb=document.getElementById("change-btn");
+  if(cb) cb.addEventListener("click",showAsk);
+  focusStage("stage-h");
+}
+
+function showDraft(idx){
   var o=LIB[idx];
-  var need=box.value.trim();
   var lines=["Hi,","","I'd like to ask for something that would help me do my job well: "+o.t+"."];
-  if(need){ lines.push("", "What's been hard, in my own words: \""+need+"\""); }
+  if(lastNeed){ lines.push("", "What's been hard, in my own words: \""+lastNeed+"\""); }
   lines.push("", o.s+(o.z?" It usually costs nothing to set up.":""));
   lines.push("", "Could we find a time to talk about it?", "", "Thank you.");
-  draftzone.innerHTML=
-    '<h2 tabindex="-1" id="draft-h">Your draft, every word yours</h2>'
+  stage.innerHTML=echoLine()
+    +'<h2 tabindex="-1" id="stage-h">Your draft, every word yours</h2>'
     +'<p class="quiet" style="margin:.2rem 0 .8rem">Edit anything below. In Curb Cut it is always your voice that goes, never a form\'s.</p>'
     +'<textarea id="draft" aria-label="Your request draft, editable"></textarea>'
     +'<div class="consent"><b>Nothing has been sent to anyone.</b> Only you can send it, and on this '
     +'page even that stays true after you press yes: it was built with no way to send.</div>'
     +'<button type="button" class="go" id="yes-btn">Yes, I\'d send this</button>'
-    +'<button type="button" class="notyet" id="notyet-btn">Not yet</button>';
+    +'<button type="button" class="notyet" id="notyet-btn">Not yet</button>'
+    +'<p class="backline"><button type="button" id="back-btn">Back to the options</button></p>';
   document.getElementById("draft").value=lines.join("\n");
-  var h=document.getElementById("draft-h");
-  h.scrollIntoView({block:"start",behavior:"smooth"});
-  h.focus();
-  document.getElementById("yes-btn").addEventListener("click",function(){
-    draftzone.innerHTML=
-      '<div class="payoff" role="region" aria-label="What your yes did"><h2 tabindex="-1" id="pay-h">That yes stayed yours.</h2>'
-      +'<p>No server heard it. Nothing you typed left this browser, and nothing was stored. '
-      +'You just walked the whole shape of Curb Cut: your words, real options with public sources, '
-      +'a draft you approved, and a yes that only you could press.</p>'
-      +'<p>In the live product, this is the moment your request reaches one person who answers. '
-      +'Knowing is allowed. So is asking.</p>'
-      +'<p class="quiet" style="margin-bottom:0"><a href="https://www.linkedin.com/pulse/curb-cut-sidewalk-stage-parth-sevak-bgnvc/">The story behind it</a> &middot; '
-      +'<a href="index.html">Put it in your workplace</a> &middot; '
-      +'<a href="https://github.com/parthsevak2/curb-cut">The code</a></p></div>';
-    var ph=document.getElementById("pay-h"); ph.focus();
-  });
-  document.getElementById("notyet-btn").addEventListener("click",function(){
-    draftzone.innerHTML=
-      '<div class="consent" role="region" aria-label="Not yet is a full answer"><b>Also a complete answer.</b> '
-      +'Nothing moves without your yes, today or ever. Close the tab and the draft is gone. '
-      +'That is the design, here and in the live product.</div>';
-  });
+  var cb=document.getElementById("change-btn");
+  if(cb) cb.addEventListener("click",showAsk);
+  document.getElementById("back-btn").addEventListener("click",function(){ showResults(lastNeed||""); if(!lastNeed) showAsk(); });
+  document.getElementById("yes-btn").addEventListener("click",showPayoff);
+  document.getElementById("notyet-btn").addEventListener("click",showNotYet);
+  focusStage("stage-h");
 }
+
+function showPayoff(){
+  stage.innerHTML=
+    '<div class="payoff" role="region" aria-label="What your yes did"><h2 tabindex="-1" id="stage-h">That yes stayed yours.</h2>'
+    +'<p>No server heard it. Nothing you typed left this browser, and nothing was stored. '
+    +'You just walked the whole shape of Curb Cut: your words, real options with public sources, '
+    +'a draft you approved, and a yes that only you could press.</p>'
+    +'<p>In the live product, this is the moment your request reaches one person who answers. '
+    +'Knowing is allowed. So is asking.</p>'
+    +'<p class="quiet" style="margin-bottom:0"><a href="https://www.linkedin.com/pulse/curb-cut-sidewalk-stage-parth-sevak-bgnvc/">The story behind it</a> &middot; '
+    +'<a href="index.html">Put it in your workplace</a> &middot; '
+    +'<a href="https://github.com/parthsevak2/curb-cut">The code</a></p></div>'
+    +'<p class="backline"><button type="button" id="again-btn">Start over with new words</button></p>';
+  document.getElementById("again-btn").addEventListener("click",function(){ lastNeed=""; showAsk(); });
+  focusStage("stage-h");
+}
+
+function showNotYet(){
+  stage.innerHTML=
+    '<div class="consent" role="region" aria-label="Not yet is a full answer"><h2 tabindex="-1" id="stage-h" style="margin:0 0 .5rem;font-size:1.3rem">Also a complete answer.</h2>'
+    +'Nothing moves without your yes, today or ever. Close the tab and the draft is gone. '
+    +'That is the design, here and in the live product.</div>'
+    +'<p class="backline"><button type="button" id="again-btn">Start over</button></p>';
+  document.getElementById("again-btn").addEventListener("click",function(){ lastNeed=""; showAsk(); });
+  focusStage("stage-h");
+}
+
 document.addEventListener("click",function(e){
   var b=e.target.closest?e.target.closest(".pick"):null;
-  if(b){ renderDraft(parseInt(b.getAttribute("data-idx"),10)); }
+  if(b){ showDraft(parseInt(b.getAttribute("data-idx"),10)); }
 });
+
+showAsk();
 
 document.getElementById("library-list").innerHTML=LIB.map(optionCard).join("");
 </script>
