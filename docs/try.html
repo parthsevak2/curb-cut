@@ -76,6 +76,19 @@ summary{font-family:Archivo,system-ui,sans-serif;font-weight:600;cursor:pointer}
 details .opts{margin-top:.9rem}
 footer.page{padding:2rem 0 3.2rem;border-top:1px solid var(--line);margin-top:2.4rem;color:var(--ink-mute);font-size:.95rem}
 footer.page a{color:inherit}
+.steps{color:var(--ink-mute);font-size:.98rem;margin:.8rem 0 0}
+.pick{display:inline-block;margin-top:.55rem;font:inherit;font-size:.98rem;font-weight:600;font-family:Archivo,system-ui,sans-serif;color:var(--deep);background:transparent;border:0;padding:.1rem 0;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.pick:hover{filter:brightness(.9)}
+#draftzone h2{font-size:1.5rem;margin:2rem 0 .4rem}
+#draft{min-height:13rem;padding:.9rem 1rem;border:1px solid var(--line-firm);border-radius:.55rem;background:var(--raised);resize:vertical}
+#draft:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-bottom-color:var(--line-firm)}
+.consent{margin:1rem 0;padding:.9rem 1.1rem;background:var(--deep-bg);border:1px solid var(--deep);border-radius:.55rem}
+.consent b{font-family:Archivo,system-ui,sans-serif}
+.notyet{display:inline-block;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.05rem;padding:.75rem 1.4rem;border-radius:2rem;border:1px solid var(--line-firm);background:transparent;color:var(--ink-soft);cursor:pointer;margin-left:.6rem}
+.notyet:hover{border-color:var(--ink-soft)}
+.payoff{margin-top:1.4rem;padding:1.1rem 1.2rem;background:var(--deep-bg);border:1px solid var(--deep);border-radius:.55rem}
+.payoff h2{margin:0 0 .5rem;font-size:1.4rem}
+.payoff p{margin:.5rem 0;color:var(--ink)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: no-preference){.go,.chips button{transition:filter .15s,border-color .15s}}
 </style>
@@ -85,9 +98,8 @@ footer.page a{color:inherit}
   <div class="wrap">
     <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none">Curb Cut <span class="flower" aria-hidden="true">✿</span></a> · feel it yourself</p>
     <h1>Say what's hard.</h1>
-    <p class="lede">In your own words. One sentence is enough.</p>
-    <p class="promise"><b>A promise before you type:</b> this page has no server, no account,
-    no analytics and no memory. Nothing you write leaves your browser. Close the tab and it's gone.</p>
+    <p class="lede">See what people in your shoes have asked for, and what it usually costs. Nobody will know you looked.</p>
+    <p class="promise"><b>Before you type:</b> this page has no server and no memory. Nothing you write leaves your browser.</p>
   </div>
 </header>
 
@@ -96,7 +108,7 @@ footer.page a{color:inherit}
     <form id="ask" novalidate>
       <label class="big" for="need">What's hard at work right now?</label>
       <textarea id="need" name="need" autocomplete="off" spellcheck="true"></textarea>
-      <p class="hint" id="need-hint">There's no wrong way to say it. Press Enter whenever you're ready.</p>
+      <p class="hint" id="need-hint">One sentence is enough, any words. Press Enter when you're ready.</p>
       <button class="go" type="submit">See what people ask for</button>
       <p class="quiet" style="margin:1.3rem 0 .2rem">Or borrow someone else's words:</p>
       <ul class="chips" aria-label="Example sentences, tap one to see its answer">
@@ -107,9 +119,14 @@ footer.page a{color:inherit}
         <li><button type="button">It's hard to get from the car to the building.</button></li>
         <li><button type="button">I'm on my feet all day and my back hurts.</button></li>
       </ul>
+      <p class="quiet" style="margin:0 0 .2rem">Or try to stump it:</p>
+      <ul class="chips" aria-label="A sentence the library cannot answer, tap to see the honest refusal">
+        <li><button type="button">My dragon keeps eating the stapler.</button></li>
+      </ul>
     </form>
 
     <div id="results" aria-live="polite"></div>
+    <div id="draftzone" aria-live="polite"></div>
 
     <details>
       <summary>Browse the whole library, all 36 options</summary>
@@ -126,7 +143,7 @@ footer.page a{color:inherit}
     from the open source. <a href="https://github.com/parthsevak2/curb-cut/blob/main/force-app/main/default/classes/CurbCutOptions.cls">Read the code that ranks</a>,
     or go back to <a href="index.html">the Curb Cut home page</a>.</p>
     <p>Built by <a href="https://www.linkedin.com/in/parthsevak/">Parth Sevak</a>. Apache 2.0.
-    Questions and access needs: <a href="mailto:curbcut@havihi.digital">curbcut@havihi.digital</a>.</p>
+    Questions and access needs: <a href="https://www.linkedin.com/in/parthsevak/">my channels are open</a>.</p>
   </div>
 </footer>
 
@@ -266,14 +283,18 @@ function optionCard(o){
   var cost=costLine(o);
   return '<li><h3>'+esc(o.t)+'</h3><p>'+esc(o.s)+'</p>'
     +'<p class="meta">'+(cost?esc(cost)+' ':'')
-    +'<a href="'+esc(o.u)+'">Source: '+sourceName(o.u)+'</a></p></li>';
+    +'<a href="'+esc(o.u)+'">Source: '+sourceName(o.u)+'</a></p>'
+    +'<button type="button" class="pick" data-idx="'+LIB.indexOf(o)+'">See the ask this would become</button></li>';
 }
 
 var form=document.getElementById("ask");
 var box=document.getElementById("need");
 var results=document.getElementById("results");
 
+var draftzone=document.getElementById("draftzone");
+
 function answer(){
+  draftzone.innerHTML="";
   var need=box.value.trim();
   if(!need){
     results.innerHTML='<p class="hint" style="margin-top:.8rem">Whenever you\'re ready. One sentence, any words.</p>';
@@ -292,11 +313,12 @@ function answer(){
       '<h2 tabindex="-1" id="res-h">What others have asked for</h2>'
       +'<ul class="opts">'+matches.map(optionCard).join("")+'</ul>'
       +'<p class="quiet" style="margin-top:.7rem">Ranked by the same rules the live product runs. '
-      +'Nothing here is invented: every option comes from a public library with a source.</p>'
-      +'<div class="next"><h3>In the live product, the next step is yours</h3>'
-      +'<p>It writes the request in your words, shows it to you, and sends nothing until you '
-      +'clearly say yes. This page stops before that step on purpose: it was built unable to '
-      +'send, store or remember anything. Showing you what\'s normal to ask for is the point.</p></div>';
+      +'Nothing here is invented: every option comes from a public library with a source. '
+      +'Browsing is not committing. Knowing is allowed.</p>'
+      +'<div class="next"><h3>Now walk the rest of it</h3>'
+      +'<p>Press "See the ask this would become" under any option, and this page writes the '
+      +'request in your words, shows you every word, and waits for your yes. Even then it '
+      +'cannot send, store or remember a thing. Feeling how that works is the point.</p></div>';
   }
   var h=document.getElementById("res-h");
   if(h) h.focus();
@@ -317,6 +339,50 @@ document.querySelectorAll(".chips button").forEach(function(btn){
     box.value=btn.textContent;
     answer();
   });
+});
+
+function renderDraft(idx){
+  var o=LIB[idx];
+  var need=box.value.trim();
+  var lines=["Hi,","","I'd like to ask for something that would help me do my job well: "+o.t+"."];
+  if(need){ lines.push("", "What's been hard, in my own words: \""+need+"\""); }
+  lines.push("", o.s+(o.z?" It usually costs nothing to set up.":""));
+  lines.push("", "Could we find a time to talk about it?", "", "Thank you.");
+  draftzone.innerHTML=
+    '<h2 tabindex="-1" id="draft-h">Your draft, every word yours</h2>'
+    +'<p class="quiet" style="margin:.2rem 0 .8rem">Edit anything below. In Curb Cut it is always your voice that goes, never a form\'s.</p>'
+    +'<textarea id="draft" aria-label="Your request draft, editable"></textarea>'
+    +'<div class="consent"><b>Nothing has been sent to anyone.</b> Only you can send it, and on this '
+    +'page even that stays true after you press yes: it was built with no way to send.</div>'
+    +'<button type="button" class="go" id="yes-btn">Yes, I\'d send this</button>'
+    +'<button type="button" class="notyet" id="notyet-btn">Not yet</button>';
+  document.getElementById("draft").value=lines.join("\n");
+  var h=document.getElementById("draft-h");
+  h.scrollIntoView({block:"start",behavior:"smooth"});
+  h.focus();
+  document.getElementById("yes-btn").addEventListener("click",function(){
+    draftzone.innerHTML=
+      '<div class="payoff" role="region" aria-label="What your yes did"><h2 tabindex="-1" id="pay-h">That yes stayed yours.</h2>'
+      +'<p>No server heard it. Nothing you typed left this browser, and nothing was stored. '
+      +'You just walked the whole shape of Curb Cut: your words, real options with public sources, '
+      +'a draft you approved, and a yes that only you could press.</p>'
+      +'<p>In the live product, this is the moment your request reaches one person who answers. '
+      +'Knowing is allowed. So is asking.</p>'
+      +'<p class="quiet" style="margin-bottom:0"><a href="https://www.linkedin.com/pulse/curb-cut-sidewalk-stage-parth-sevak-bgnvc/">The story behind it</a> &middot; '
+      +'<a href="index.html">Put it in your workplace</a> &middot; '
+      +'<a href="https://github.com/parthsevak2/curb-cut">The code</a></p></div>';
+    var ph=document.getElementById("pay-h"); ph.focus();
+  });
+  document.getElementById("notyet-btn").addEventListener("click",function(){
+    draftzone.innerHTML=
+      '<div class="consent" role="region" aria-label="Not yet is a full answer"><b>Also a complete answer.</b> '
+      +'Nothing moves without your yes, today or ever. Close the tab and the draft is gone. '
+      +'That is the design, here and in the live product.</div>';
+  });
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest(".pick"):null;
+  if(b){ renderDraft(parseInt(b.getAttribute("data-idx"),10)); }
 });
 
 document.getElementById("library-list").innerHTML=LIB.map(optionCard).join("");
