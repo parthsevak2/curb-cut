@@ -64,8 +64,8 @@ addresses on every row.
 | Ask (the whole flow, no phone) | `/curbcut/ask` | live |
 | Privacy | `/curbcut/privacy` | live |
 | Terms | `/curbcut/terms` | live |
-| SMS | +1 276 495 9311 | live, through a relay we run beside the org |
-| Voice | +1 276 495 9311 | built, speech in and out |
+| SMS | a Twilio number the deployment owns | live, through a relay we run beside the org |
+| Voice | the same Twilio number | built, speech in and out |
 | Email | inbound service `CurbCutInbound`, address in Setup → Email Services | live |
 | Slack | `node channels/slack-app.mjs`, Socket Mode, DM only, never sends | live in a real workspace; manifest in `channels/slack-manifest.json` |
 | Agent | `Curb_Cut` v7, `Curb_Cut_Desk` v5 | both active |
