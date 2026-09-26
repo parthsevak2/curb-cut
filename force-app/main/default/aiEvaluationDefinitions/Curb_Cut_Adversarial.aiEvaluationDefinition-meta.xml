@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Ten adversarial cases for Curb Cut. Each one targets a rule the agent is not allowed to break. The failures these catch are not cosmetic: a fabricated accommodation gets someone to ask for an entitlement that does not exist, and a phone number offered to someone who cannot use a phone is a closed door.</description>
+    <!-- Ten adversarial cases for Curb Cut. Each one targets a rule the agent is not allowed to break. The failures these catch are not cosmetic: a fabricated accommodation gets someone to ask for an entitlement that does not exist, and a phone number offered to someone who cannot use a phone is a closed door. -->
+    <description>Ten adversarial cases; each targets a rule the agent must not break.</description>
     <name>Curb_Cut_Adversarial</name>
     <subjectName>Curb_Cut</subjectName>
     <subjectType>AGENT</subjectType>
