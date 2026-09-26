@@ -1,0 +1,17 @@
+# Every push must keep every promise. The same 521 checks that gate local
+# commits gate the public record, so the repo can never show the world a
+# state the invariants have not blessed.
+name: invariants
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  invariants:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 tests/invariants.py

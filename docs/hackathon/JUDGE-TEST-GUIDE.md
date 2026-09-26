@@ -8,21 +8,21 @@ otherwise.
 
 Everything below is live now. Nothing needs an account except the console, which uses the org login on your Devpost page.
 
-1. **Web, one minute.** If you would rather see it first, [a 26-second recording of exactly this](https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view) was captured from the live page. Open <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask>. Type one sentence about something hard at work, press the button, pick an option, press "Help me ask for this", read the draft, press "Yes, send this". What you sent stays on the screen with the date the desk has committed to.
+1. **Web, one minute.** If you would rather see it first, [a 26-second recording of exactly this](https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view) was captured from the live page. Open <https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut/ask>. Type one sentence about something hard at work, press the button, pick an option, press "Help me ask for this", read the draft, press "Yes, send this". What you sent stays on the screen with the date the desk has committed to.
 2. **Text, two minutes.** From any phone, text the words `CURB CUT` to **the judging-window number (retired after judging; a deployment brings its own Twilio number)**. It is a US number; a prepaid plan may charge for the text. Within a few seconds you get this, word for word: "Curb Cut here. I am automated, not a person; reply HUMAN for one. Tell me what is hard at work right now, in your own words. You do not need an account, and you never have to say what condition you have." Now text one plain sentence, for example "the office lights give me headaches by lunch". You get numbered options with what each usually costs, then "Reply with a number and I will write the request in your words, and nothing is sent until you say yes." Reply `1`. You get the draft in your words. `HUMAN` gets a person, `STOP` ends it, `HELP` explains. If a reply takes longer than a minute, the relay's tunnel is restarting; text again.
 3. **Voice, two minutes.** Call **the same judging-window number**. A voice says: "This is Curb Cut, an automated line. Say human at any time to reach a person." Say one sentence about what is hard, then pause. It reads back what other people have asked for and offers to write it down. It never rings you back; say "human" and a person is recorded as owing you a reply on the channel you used.
 
    **What is behind text and voice, plainly.** Twilio owns the number. When you text or call, Twilio sends a signed webhook to a small relay (`channels/sms-relay.mjs`, about 500 lines, no framework). The relay runs on the team's laptop under launchd, reached through a Cloudflare tunnel, and it restarts itself with a fresh tunnel if the public URL stops answering. The relay checks Twilio's signature, hashes your number with a salt so the ledger never holds it, and calls the same Apex door the web page uses. The first reply is composed by Apex; only a free-text conversation reaches the Agentforce agent through the Agent API. Every reply is written back to the delivery ledger as accepted or rejected. The laptop is the honest limit: this is a hackathon deployment, and in an organisation the relay would run on a server or as a Salesforce Function.
-4. **Email, one minute.** Send one sentence to [the desk's address](mailto:curbcut@k-1cnb5a59o6bjnzp8kkwyshpgr8g0vwi9qhgl3p29zz9m62h9pw.gk-yij5suax.can96.apex.salesforce.com). The reply opens by saying it is automated, lists options, and never sends a request from email.
+4. **Email, one minute.** Send one sentence to [the desk's address](mailto:curbcut@z-1mgfhfb5iq5bm2jqebm0ingxwldu4wx584cdzhipmpqfb2cl0v.bm-10v8wbeai.usa876.apex.salesforce.com). The reply opens by saying it is automated, lists options, and never sends a request from email.
 5. **Slack, two minutes.** Join with the invite that was shared during judging (retired after the window, as the responsible-AI reflection promised), open **Curb Cut** under Agents and apps, and send it a direct message, or type `/curbcut` followed by what is hard. It says up front that Slack belongs to the employer and refuses to send anything from there.
 6. **Your own assistant, through MCP.** `channels/mcp-server.mjs` is a zero-dependency Model Context Protocol server over stdio. With the Salesforce CLI authorised to the org as `curbcut`, point any MCP client (Claude Desktop, Cursor, or your own) at `node channels/mcp-server.mjs`. It exposes lookup and draft tools and, on purpose, no tool that can send.
 7. **The headless agent, no UI at all.** `node tests/headless_agent_api.mjs` drives the Agentforce agent through the Agent API with the eleven adversarial scenarios in `tests/curb-cut-adversarial.yaml`, writes transcripts, and `python3 tests/score_adversarial.py` scores them. This is the path the film's agent scenes were captured from.
-8. **The person on the other end, two minutes.** With the org login, open the console at <https://orgfarm-7a04c62cb9.lightning.force.com/lightning/n/Curb_Cut_Home>. The On Duty page lists who is waiting for a person, whose request is past its date, and who is waiting on an interpreter, and tells whoever is on duty to work it top to bottom. Ask the console assistant what a person has; it says nobody knows and nobody can find out. [An 80-second tour of the console](https://drive.google.com/file/d/1D37YpkG7V3eZp3lbEiF1rJbFrU5g1mK3/view) shows what you will see before you sign in, and [the judge's companion](JUDGE-COMPANION.md) explains what every press does and where it lands.
+8. **The person on the other end, two minutes.** With the org login, open the console at <https://orgfarm-e0d3137fa0-dev-ed.develop.lightning.force.com/lightning/n/Curb_Cut_Home>. The On Duty page lists who is waiting for a person, whose request is past its date, and who is waiting on an interpreter, and tells whoever is on duty to work it top to bottom. Ask the console assistant what a person has; it says nobody knows and nobody can find out. [An 80-second tour of the console](https://drive.google.com/file/d/1D37YpkG7V3eZp3lbEiF1rJbFrU5g1mK3/view) shows what you will see before you sign in, and [the judge's companion](JUDGE-COMPANION.md) explains what every press does and where it lands.
 
 ![The On Duty page of the console: four tiles (waiting for a person, asked and not yet answered, waiting on an interpreter, replies that did not arrive), the instruction to work them top to bottom, and the list of people waiting](https://raw.githubusercontent.com/parthsevak2/curb-cut/main/submission/images/console-on-duty.png)
 
 **The one thing worth doing first, if you only do one:** open
-<https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask> and type one
+<https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut/ask> and type one
 sentence about something that is hard at work. No login, no account, no name.
 That is the whole product.
 
@@ -48,7 +48,7 @@ If you would rather watch first: a three-minute cut is at <https://drive.google.
 
 ## 1. The web, which needs nothing from you
 
-1. Open <https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask>
+1. Open <https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut/ask>
 2. Press one of the grey buttons, for example **My back hurts by the afternoon**.
    Or type your own sentence. You never say *why* it is hard.
 3. Press **Show me what I could ask for**.
@@ -147,7 +147,7 @@ from a real Slack client. Nothing was edited.
 > direct messages. I cannot change that, and I would rather you knew it now than
 > found out later.
 > If you want to ask something with no employer in the room, use
-> https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask in a private
+> https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut/ask in a private
 > browser window, or text the number on that page. Both work without an account
 > and without your name.
 > If Slack is the easiest thing for you to use, that is a real reason and I am
@@ -163,7 +163,7 @@ from a real Slack client. Nothing was edited.
 >   directly above you, if others nearby do not need them. Usually costs nothing.
 >
 > I will not write or send a request from Slack. When you want to actually ask
-> for something, do it at https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask, where you are
+> for something, do it at https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut/ask, where you are
 > anonymous and you press send yourself.
 
 The disclosure at the top is sent once per person, the first time they write.
@@ -179,9 +179,9 @@ rather than stored in metadata: **Setup, Email Services, CurbCutInbound**.
 ## 6. The operator console
 
 With the org credentials from your Devpost page, open the **Curb Cut Console** app:
-<https://orgfarm-7a04c62cb9.lightning.force.com/lightning/app/Curb_Cut_Console>
+<https://orgfarm-e0d3137fa0-dev-ed.develop.lightning.force.com/lightning/app/Curb_Cut_Console>
 Its home tab, with the queue, the wait times and the assistant, is
-<https://orgfarm-7a04c62cb9.lightning.force.com/lightning/n/Curb_Cut_Home>. Ask the assistant
+<https://orgfarm-e0d3137fa0-dev-ed.develop.lightning.force.com/lightning/n/Curb_Cut_Home>. Ask the assistant
 what is wrong with the person whose request you are reading.
 
 It will refuse, and the refusal is the feature:

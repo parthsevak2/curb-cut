@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <agentDSLEnabled>true</agentDSLEnabled>
+    <agentType>EinsteinServiceAgent</agentType>
+    <botMlDomain>
+        <label>Curb Cut</label>
+        <name>Curb_Cut</name>
+    </botMlDomain>
+    <botSource>None</botSource>
+    <botUser>curbcut.agent.6354b96cd046@agentforce.com</botUser>
+    <description>Helps a person understand what they could ask for at work, and helps them ask for it. Works for the person, not their employer.</description>
+    <label>Curb Cut</label>
+    <logPrivateConversationData>false</logPrivateConversationData>
+    <richContentEnabled>true</richContentEnabled>
+    <sessionTimeout>0</sessionTimeout>
+    <type>ExternalCopilot</type>
+</Bot>

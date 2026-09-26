@@ -12,7 +12,7 @@
  */
 import { launch } from './cdp.mjs';
 
-const BASE = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut';
+const BASE = 'https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut';
 const PAGES = ['/ask', '', '/why', '/privacy', '/docs'];
 const b = await launch();
 const wait = ms => new Promise(r => setTimeout(r, ms));
