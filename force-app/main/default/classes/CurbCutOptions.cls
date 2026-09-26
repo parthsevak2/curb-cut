@@ -244,8 +244,11 @@ public with sharing class CurbCutOptions {
     private static String stem(String w) {
         if (w == null || w.length() < 4) { return w; }
         // plural first, so 'meetings' can reach 'meet' via 'meeting'
+        // 'focus' keeps its s: stripping it made 'focu', which could never
+        // meet the library's 'focused', and the person asking for quiet to
+        // focus in was told we knew nothing. Words ending in 'us' stay whole.
         if (w.endsWith('ses') || w.endsWith('xes') || w.endsWith('zes')) { w = w.substring(0, w.length() - 2); }
-        else if (w.endsWith('s') && !w.endsWith('ss')) { w = w.substring(0, w.length() - 1); }
+        else if (w.endsWith('s') && !w.endsWith('ss') && !w.endsWith('us')) { w = w.substring(0, w.length() - 1); }
         if (w.length() >= 5 && w.endsWith('ing')) { w = w.substring(0, w.length() - 3); }
         else if (w.length() >= 4 && w.endsWith('ed')) { w = w.substring(0, w.length() - 2); }
         // 'type' and 'typing' both land on 'typ'
@@ -258,7 +261,11 @@ public with sharing class CurbCutOptions {
         Set<String> out = new Set<String>();
         for (String w : words) {
             String st = stem(w);
-            if (String.isNotBlank(st) && st.length() >= 3) { out.add(st); }
+            // 'cane' stems to 'can', and 'can' is in half the library's prose.
+            // A stem that lands on a stopword is noise wearing a keyword's
+            // coat: dropping it means 'cane' gets an honest empty answer
+            // instead of an anti-glare filter.
+            if (String.isNotBlank(st) && st.length() >= 3 && !STOPWORDS.contains(st)) { out.add(st); }
         }
         return out;
     }
