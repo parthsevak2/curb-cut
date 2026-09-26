@@ -60,7 +60,7 @@ addresses on every row.
 
 | Surface | Address | State |
 |---|---|---|
-| Web | https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut | live |
+| Web | https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut | live |
 | Ask (the whole flow, no phone) | `/curbcut/ask` | live |
 | Privacy | `/curbcut/privacy` | live |
 | Terms | `/curbcut/terms` | live |

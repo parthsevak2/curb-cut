@@ -47,7 +47,7 @@ if (!SITE) {
 }
 // Where a person is sent when the automated path fails them. The maintainer's
 // address, never an individual's personal inbox.
-const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || 'curbcut@havihi.digital';
+const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || '';
 
 /* ------------------------------------------------------------------
    Carrier compliance.

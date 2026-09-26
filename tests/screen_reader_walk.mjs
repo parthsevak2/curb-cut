@@ -7,7 +7,7 @@
 import { launch } from './cdp.mjs';
 import { writeFileSync } from 'node:fs';
 
-const SITE = process.env.CURB_CUT_SITE || 'https://orgfarm-e0d3137fa0-dev-ed.develop.my.salesforce-sites.com/curbcut';
+const SITE = process.env.CURB_CUT_SITE || 'https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut';
 const b = await launch();
 const out = [];
 const say = (s) => out.push(s);

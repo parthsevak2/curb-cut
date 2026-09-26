@@ -35,7 +35,7 @@ import { join } from 'node:path';
 // contact points come from the environment, never from this file.
 const SITE = process.env.CURB_CUT_SITE || null;
 const NUMBER = process.env.TWILIO_NUMBER || null;
-const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || 'curbcut@havihi.digital';
+const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || '';
 
 const SF_CLI_MODULES = process.env.SF_CLI_MODULES
   || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
