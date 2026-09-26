@@ -142,16 +142,16 @@ footer.page a{color:inherit}
 'use strict';
 /* The library, verbatim from accommodation_options_seed.csv. Every row has a public source. */
 var LIB = [
-{t:"Captions turned on in all meetings",s:"Live captions on by default in every meeting, not on request.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Captions turned on in all meetings",s:"Live captions on by default in every meeting, not on request. Built for deaf and hard of hearing colleagues, useful to everyone.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Agenda sent before the meeting",s:"Written agenda circulated ahead so nothing depends on catching it live.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Written follow-up after verbal instructions",s:"Instructions confirmed in writing so nothing rests on one spoken pass.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Face the person when speaking",s:"Speak facing the person, one at a time, no covered mouth.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Text instead of phone for all contact",s:"Contact by message rather than voice call, including from HR.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Visual fire and safety alerts",s:"Strobe or vibrating alerts alongside audio alarms. Life-safety, not convenience.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"ASL interpreter booked in advance",s:"Human interpreter arranged ahead of the meeting, not requested during it.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Visual fire and safety alerts",s:"Strobe or vibrating alerts alongside audio alarms, for anyone who cannot hear them. Life-safety, not convenience.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"ASL interpreter booked in advance",s:"A sign language interpreter for Deaf colleagues, arranged ahead of the meeting, not requested during it.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Noise-cancelling headset",s:"Headset to reduce background noise in an open or loud environment.",c:250,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"One-handed keyboard",s:"Keyboard usable with one hand.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Screen reader software",s:"Software that reads screen content aloud.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Screen reader software",s:"Software that reads screen content aloud, built for blind and low vision people.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Flexible or shifted start time",s:"Start and end times moved to fit treatment, transit or energy patterns.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Service animal permitted at work",s:"Service animal allowed in the workplace.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Speech-to-text software",s:"Software that types what you say so you do not have to use a keyboard.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
@@ -160,16 +160,16 @@ var LIB = [
 {t:"Modified or different duties",s:"Some tasks swapped or reassigned so the job fits what you can do well.",c:0,z:true,p:0,u:"https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"},
 {t:"Working from home",s:"Work from home some days or all days instead of travelling in.",c:0,z:true,p:0,u:"https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity"},
 {t:"Ergonomic workstation",s:"Desk and screen set at a height and angle that suits your body.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Special chair or back support",s:"A chair or back support chosen for you rather than the standard office one.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Extra breaks or rest time",s:"Short breaks when you need them, without asking each time.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Special chair or back support",s:"A chair or back support chosen for you when sitting hurts or back pain builds, rather than the standard office one.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Extra breaks or rest time",s:"Short breaks when you are tired, in pain or out of energy, without asking each time.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Quiet space to work",s:"Somewhere with less noise and fewer interruptions to do focused work.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Written instructions instead of spoken",s:"Tasks given in writing so nothing depends on catching it once, out loud.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Screen magnification software",s:"Software that makes everything on screen larger and easier to read.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
+{t:"Screen magnification software",s:"Software that makes everything on screen larger and easier to read, for low vision or the day your glasses break.",c:null,z:false,p:0,u:"https://askjan.org/topics/costs.cfm"},
 {t:"Reduced or part-time hours",s:"Fewer hours or shorter days, with pay and duties adjusted to match.",c:0,z:true,p:0,u:"https://askjan.org/topics/costs.cfm"},
-{t:"Adjustable or task lighting",s:"A desk lamp you control, so you are not working under whatever the ceiling gives you.",c:60,z:false,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
-{t:"Anti-glare filter or screen dimming",s:"A filter or setting that takes the glare off a screen, which can make a long day possible.",c:40,z:false,p:0,u:"https://askjan.org/solutions/Anti-Glare-Filters.cfm"},
-{t:"Move away from overhead fluorescent lighting",s:"Sitting somewhere with softer or natural light instead. Usually just a change of desk.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
-{t:"Turn off fluorescent lights nearby",s:"Switching off or removing the tubes directly above you, if others nearby do not need them.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Lighting.cfm"},
+{t:"Adjustable or task lighting",s:"A desk lamp you control when overhead light brings headaches, migraines or eye strain, instead of whatever the ceiling gives you.",c:60,z:false,p:0,u:"https://askjan.org/solutions/Task-Lighting.cfm"},
+{t:"Anti-glare filter or screen dimming",s:"A filter or setting that takes the glare off a screen, which can make a long day possible.",c:40,z:false,p:0,u:"https://askjan.org/limitations/Photosensitivity.cfm"},
+{t:"Move away from overhead fluorescent lighting",s:"Sitting somewhere with softer or natural light instead. Usually just a change of desk.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Alternative-Lighting.cfm"},
+{t:"Turn off fluorescent lights nearby",s:"Switching off or removing the tubes directly above you, if others nearby do not need them.",c:0,z:true,p:0,u:"https://askjan.org/solutions/Alternative-Lighting.cfm"},
 {t:"Accessible parking space close to the entrance",s:"A reserved parking space near the door, so the walk from the car to the building is short and step-free.",c:0,z:true,p:0,u:"https://askjan.org/topics/Parking.cfm"},
 {t:"Drop-off point at the door",s:"Being dropped off and picked up at the entrance instead of walking in from the car park or the bus stop.",c:0,z:true,p:0,u:"https://askjan.org/topics/Parking.cfm"},
 {t:"Step-free route from the door to your desk",s:"A ramp or level route instead of steps or stairs, from the entrance to where you sit, with doors you can get through.",c:null,z:false,p:0,u:"https://askjan.org/solutions/Ramps.cfm"},
@@ -208,7 +208,7 @@ function tokenize(text){
 function stem(w){
   if(!w || w.length<4) return w;
   if(w.endsWith("ses")||w.endsWith("xes")||w.endsWith("zes")) w=w.slice(0,-2);
-  else if(w.endsWith("s") && !w.endsWith("ss")) w=w.slice(0,-1);
+  else if(w.endsWith("s") && !w.endsWith("ss") && !w.endsWith("us")) w=w.slice(0,-1);
   if(w.length>=5 && w.endsWith("ing")) w=w.slice(0,-3);
   else if(w.length>=4 && w.endsWith("ed")) w=w.slice(0,-2);
   if(w.length>=4 && w.endsWith("e")) w=w.slice(0,-1);
@@ -216,7 +216,7 @@ function stem(w){
 }
 function stemAll(words){
   var out=new Set();
-  words.forEach(function(w){ var st=stem(w); if(st && st.length>=3) out.add(st); });
+  words.forEach(function(w){ var st=stem(w); if(st && st.length>=3 && !STOPWORDS.has(st)) out.add(st); });
   return out;
 }
 function extractKeywords(need){
