@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Curb Cut ✿, the sidewalk, and the stage</title>
+<meta name="description" content="The story behind Curb Cut: a sidewalk in San Francisco, the five rules that came before any code, the doors for the crew who never got a login, and the mango tree. A ten-minute read."/>
+<meta property="og:title" content="Curb Cut ✿, the sidewalk, and the stage"/>
+<meta property="og:description" content="A sidewalk in San Francisco, the five rules that came before any code, the doors for the crew who never got a login, and the mango tree. Ten minutes."/>
+<meta property="og:url" content="https://parthsevak2.github.io/curb-cut/story.html"/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://parthsevak2.github.io/curb-cut/story/cover.png"/>
+<link rel="canonical" href="https://parthsevak2.github.io/curb-cut/story.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&amp;family=JetBrains+Mono:wght@500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap"/>
+<style>
+:root{
+  --ground:#F2F1ED; --raised:#FBFAF7; --sunk:#E5E3DC;
+  --ink:#14171A; --ink-soft:#41474A; --ink-mute:#5E6568;
+  --line:#C8C6BC; --line-firm:#87857B;
+  --signal:#8A5D0F; --signal-bg:#F5E7CC;
+  --deep:#1F5A4E; --deep-bg:#D9E9E4; --on-deep:#F2F1ED;
+  --focus:#0B57C7;
+}
+@media (prefers-color-scheme: dark){:root{
+  --ground:#0F1214; --raised:#181C1E; --sunk:#080A0B;
+  --ink:#EDEEEA; --ink-soft:#BFC4C2; --ink-mute:#8E9593;
+  --line:#2C3133; --line-firm:#5F676A;
+  --signal:#E5B15A; --signal-bg:#2E2413;
+  --deep:#63B7A3; --deep-bg:#102B26; --on-deep:#0F1214;
+  --focus:#7FB0FF;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:1.06rem;line-height:1.55}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+a{color:var(--deep);text-underline-offset:.15em}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:.2rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--deep);color:var(--on-deep);padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:60}
+.skip:focus{left:0}
+h1,h2{font-family:Archivo,system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+nav.top{position:sticky;top:.6rem;z-index:50;display:flex;justify-content:center;padding:0 1rem}
+nav.top .pill{display:flex;align-items:center;gap:.15rem;max-width:100%;overflow-x:auto;background:color-mix(in srgb, var(--raised) 72%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:2rem;padding:.3rem .45rem;box-shadow:0 6px 24px rgba(0,0,0,.07)}
+nav.top a{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:.86rem;color:var(--ink-soft);text-decoration:none;padding:.42rem .8rem;border-radius:1.4rem;white-space:nowrap}
+nav.top a.brand{color:var(--ink)}
+nav.top a.brand .flower{color:var(--deep)}
+nav.top a[aria-current="true"]{background:var(--deep);color:var(--on-deep)}
+@media (prefers-reduced-motion: no-preference){nav.top a{transition:background .2s,color .2s}html{scroll-behavior:smooth}}
+@media (max-width:420px){nav.top a{font-size:.78rem;padding:.4rem .55rem}}
+header.story{padding:3.4rem 0 .6rem}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute)}
+header.story h1{font-weight:800;font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem}
+header.story .flower{color:var(--deep)}
+.byline{color:var(--ink-mute);font-size:.95rem;margin:0 0 1.8rem}
+article{padding-bottom:1rem}
+article p{margin:1.1rem 0;font-size:1.12rem}
+article h2{font-size:1.55rem;margin:2.6rem 0 .4rem}
+article blockquote{margin:1.6rem 0;padding:1rem 1.2rem;background:var(--raised);border-left:4px solid var(--deep);border-radius:0 .5rem .5rem 0;font-size:1.18rem;font-family:Archivo,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+article blockquote p{margin:0;font-size:inherit}
+article hr{border:0;border-top:1px solid var(--line);margin:2.6rem auto;max-width:8rem}
+figure{margin:1.8rem 0}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:.6rem;background:var(--sunk)}
+figure.cover img{border:0;border-radius:.8rem}
+figcaption{color:var(--ink-mute);font-size:.92rem;margin-top:.55rem;line-height:1.45}
+.film{position:relative;aspect-ratio:16/9;border:1px solid var(--line);border-radius:.6rem;overflow:hidden;background:var(--sunk);margin:1.8rem 0 .2rem}
+.film iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.quiet{color:var(--ink-mute);font-size:.95rem}
+ul.open-door{margin:1.1rem 0;padding-left:1.3rem}
+ul.open-door li{margin:.45rem 0;font-size:1.12rem}
+.links{background:var(--raised);border:1px solid var(--line);border-radius:.7rem;padding:1.2rem 1.4rem;margin:2.2rem 0}
+.links p{margin:.4rem 0;font-size:1.02rem}
+.links ul{margin:.4rem 0;padding-left:1.2rem}
+.links li{margin:.35rem 0;font-size:1.02rem}
+footer.page{padding:2rem 0 3.5rem;border-top:1px solid var(--line);color:var(--ink-mute);font-size:.95rem}
+footer.page a{color:inherit}
+</style>
+</head>
+<body>
+<a class="skip" href="#story-start">Skip to the story</a>
+<nav class="top" aria-label="Site">
+  <div class="pill">
+    <a class="brand" href="index.html">Curb Cut <span class="flower" aria-hidden="true">✿</span></a>
+    <a href="try.html">Feel it</a>
+    <a href="index.html#film">Films</a>
+    <a href="index.html#doors">Doors</a>
+    <a href="index.html#proof">Proof</a>
+    <a href="story.html" aria-current="true">Story</a>
+    <a href="index.html#adopt">Adopt</a>
+  </div>
+</nav>
+
+<div class="wrap">
+<header class="story">
+  <p class="eyebrow">The story</p>
+  <h1 id="story-start">Curb Cut <span class="flower" aria-hidden="true">✿</span>, the sidewalk, and the stage</h1>
+  <p class="byline">By <a href="https://www.linkedin.com/in/parthsevak/">Parth Sevak</a> · 25 September 2026 · about ten minutes ·
+  first published <a href="https://www.linkedin.com/pulse/curb-cut-sidewalk-stage-parth-sevak-bgnvc/">on LinkedIn</a></p>
+</header>
+
+<article>
+<figure class="cover">
+  <img src="story/cover.png" alt="A single hand-drawn flower on a deep green ground: the Curb Cut mark." width="1200" height="630"/>
+  <figcaption>A small flower for what grows where a curb is cut. Free, open, and yours to shape for the people you serve.</figcaption>
+</figure>
+
+<p>In September I spent five days at Dreamforce 2026 in San Francisco. I went as a
+speaker, to teach a session called <em>How Agentforce Helped a Nonprofit Do Good</em>,
+about a multi-agent build for a food rescue nonprofit. Along the way, kind people
+from the Agentforce for Good program nudged me to build something for their
+hackathon as well. I'm thankful for that nudge: Curb Cut ✿ grew out of it. The
+week also left me with a sidewalk I still think about.</p>
+
+<p>Every morning I walked the same blocks to Moscone Center. Inside, the future:
+agents, keynotes, demo floors the size of villages, the word intelligence on
+every wall. Outside, on the same block, a man slept in a doorway with everything
+he owned beside him. The crowd flowed around him like water around a stone, and
+I flowed with it, and the doors closed behind us, and the future resumed.</p>
+
+<p>Two worlds, one sidewalk. And the week kept teaching me the same lesson about
+the border between them: it's a staircase, and the steps are small.</p>
+
+<p>What you see on a street is the last symptom of a long chain. Behind a person
+sleeping outside there's pain that never got named, support that didn't come at
+the one moment it would have mattered, a choice someone couldn't unmake, or
+someone else's cruelty they couldn't deflect.</p>
+
+<p>People arrive on a sidewalk the way anyone arrives anywhere: one unanswered
+ask at a time.</p>
+
+<p>I couldn't do anything about that street.</p>
+
+<blockquote><p>This is not a story about a tech worker fixing homelessness with
+an app. It's a story about recognizing a shape.</p></blockquote>
+
+<p>The tool I'd brought for the hackathon was built against the smallest,
+earliest version of the same chain: the moment a person needs something, and
+asking feels more expensive than enduring, so they don't ask, and the chain gets
+its first link.</p>
+
+<h2>The lamp</h2>
+
+<p>Let me make that first link concrete. A sixty-dollar lamp can end a year of
+headaches. So why would anyone sit under lights that hurt for a year? Because of
+what the lamp costs to ask for. "The lights above my desk give me a headache by
+the afternoon." Saying that to a manager. Backing it up with proof. Explaining
+your body to the person who decides your career. The lamp costs sixty dollars
+once. The sentence costs courage every time, and while it stays unsaid, the
+headache stays too.</p>
+
+<figure>
+  <img src="story/sentence-draft.png" alt="A message box with safer drafts struck through, and the honest sentence about headaches half-typed, the cursor still waiting." loading="lazy"/>
+  <figcaption>The safer drafts come first, struck out, and the cursor still waiting.</figcaption>
+</figure>
+
+<p>The numbers say this is nobody's private weakness. More than one in four
+adults has a disability. At a typical large employer, the share of staff who
+have told their employer about one is 3.5 percent. And of the accommodations
+employers described to the Job Accommodation Network, 61 of every 100 cost the
+employer nothing at all. More often than not, money isn't the barrier; the
+asking is, and for the people the whole process is meant to serve, the asking is
+itself inaccessible.</p>
+
+<p>At home, you say what's hard once and someone is already up and helping. At
+work, the same ask turns into forms and proof, and many people choose silence
+instead. Curb Cut ✿ is one bet, made carefully: the care we know from home can
+live at work too.</p>
+
+<h2>What it does, in one paragraph</h2>
+
+<p>You say what's hard, in your own words. One sentence is enough. Curb Cut
+shows you what other people have asked for in situations like yours, with what
+each usually costs and a public source on every option. If you want to ask, it
+writes the request in your words, shows you every word, and sends nothing until
+you clearly say yes. On the other side, a person answers. That's the whole
+product. Everything else is making sure those promises can't quietly break.</p>
+
+<h2>The rules I wrote before the code</h2>
+
+<p>I build on Salesforce for a living, and I've read too many pages that assert
+things. So before the features, I wrote rules, and I taught the build to fail
+whenever a rule breaks. There are 521 of those checks now. They run in about a
+second, on every push, and most of them exist because the thing they forbid
+actually went wrong once.</p>
+
+<p>The first rule: there will be no diagnosis field. Not hidden, not encrypted.
+Absent. A field that doesn't exist can't be leaked, shown to a manager, or
+subpoenaed. One check scans every object for any field named after a medical
+concept and fails the build if it ever finds one. Ask the person on the other
+side what someone has, and the honest answer is that nobody knows and nobody can
+find out.</p>
+
+<p>The second rule: the AI talks, the code decides. An Agentforce agent holds
+the conversation, because conversation is what AI is genuinely good at. But what
+gets stored and sent is decided by deterministic Apex, not by a model's mood.
+The agent can't invent an accommodation: everything it names comes from a small
+library where every row carries a public source, and when nothing matches it
+says it doesn't have good information, rather than guessing. For this population
+a confident wrong answer isn't a harmless miss. It can cost somebody their one
+ask.</p>
+
+<figure>
+  <img src="story/options-with-sources.png" alt="Options listed with what each usually costs and a public source link on every row; a no-match reply says it doesn't have good information rather than guessing." loading="lazy"/>
+  <figcaption>Every option the agent can name, with its usual cost and a public source. When nothing matches, it says so instead of guessing.</figcaption>
+</figure>
+
+<p>The third rule: nothing sends without a clear yes. The draft appears in full,
+in the person's own words, under a heading that says nothing has been sent and
+only you can send it. A hedged yes is not a yes. There's an adversarial test
+where someone answers vaguely and the system must hold still, alongside tests
+for prompt injection, a manager demanding a roster, and a diagnosis volunteered
+mid-chat that the system must decline to keep.</p>
+
+<p>The fourth rule came from imagining a ringtone. The voice line answers when
+called and never calls back, because a phone ringing at the wrong moment can
+expose the one act of courage a person managed that week. Whether anyone ever
+knows they asked stays entirely in their hands.</p>
+
+<p>And the last rule: every door ends at a <em>human</em>. Say <em>human</em> on
+any channel and a person picks it up, from a queue ordered by who has waited
+longest.</p>
+
+<h2>The doors</h2>
+
+<p>The web door needs no login, no account, no name. But the people this serves
+most often have no company login at all: the crew in the field, the cleaner on
+the early shift, the contractor on the road. For them Curb Cut is a text
+message, or a phone call from the most basic phone there is, and the number can
+live on a poster in the break room. There's an email door, a Slack door that
+starts by telling the truth about what workspace owners can export, and tools
+that let any AI assistant look things up. None of those tools can send. A tool
+that was never given a send button can't be talked into pressing one.</p>
+
+<figure>
+  <img src="story/doors-six.png" alt="A card showing six doors, one lit: web, text, voice, email, Slack, and an AI assistant door, with a line beneath saying a person stands behind every one." loading="lazy"/>
+  <figcaption>Six doors, one of them lit: five for whatever phone or screen you've got, one for the AI assistant you already use, and behind every one a person.</figcaption>
+</figure>
+
+<p>If you want to feel why the doors matter, imagine your glasses broke at
+lunch. By two o'clock the spreadsheet is fog and every email is a guess. Then
+you go looking for help and find where the form lives.</p>
+
+<blockquote><p>The form that could help is on the screen you can't read.</p></blockquote>
+
+<p>For millions of people it's like this every day. So Curb Cut answers a phone,
+and the fog stops mattering.</p>
+
+<h2>The stage</h2>
+
+<p>Near the end of the week, Curb Cut won first place in the Builder Track of
+the Agentforce for Good hackathon. The program ran on volunteers from all
+sixteen Salesforce Equality Groups, drew forty-three projects from eleven
+countries, and its twenty-two judges gave every project real attention. I'm
+grateful. I'm more grateful for a criticism: the judges said it was hard to tell
+what was live product and what was presentation. That sentence rebuilt
+everything since. Every film now wears a LIVE badge on real footage and a
+CONTEXT badge on anything staged, and there's <a href="try.html">a page where
+you don't have to trust footage at all</a>. You type one sentence in your
+browser and the product's own ranking engine answers, with no server behind it,
+and nothing you type leaves the page. The build fails if anyone ever adds a
+network call there.</p>
+
+<figure>
+  <img src="story/trophy.png" alt="Parth accepting the award on stage, set in a deep green mat that reads: Curb Cut, First place, Builder Track, Agentforce for Good hackathon, Dreamforce 2026." loading="lazy"/>
+  <figcaption>Here only so the promises below feel solid. Everything this moment stood for is yours to try, experiment with, and pass along.</figcaption>
+</figure>
+
+<div class="film">
+  <iframe src="https://www.youtube-nocookie.com/embed/TwgZO1egk4s" title="One sentence: the film, with captions" allowfullscreen loading="lazy"></iframe>
+</div>
+<p class="quiet">One sentence, the film. Captions are built in, and it works with the sound off.</p>
+
+<figure>
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="story/fog-still.png"/>
+    <img src="story/fog-motion.gif" alt="The ask page shown sharp, then dissolving into fog, the way any page looks without the right glasses." loading="lazy"/>
+  </picture>
+  <figcaption>Even our own page, the way millions of people see every page. Watch it fog. It's why Curb Cut answers a phone.</figcaption>
+</figure>
+
+<p>The week kept turning in my head after I flew home. There are parallel worlds
+around us, and parallel worlds within us. They run along sidewalks, and they run
+through office floors: the colleague who presents confidently at ten o'clock is
+sometimes the same person rehearsing an unsaid sentence at noon. The outside is
+the symptom. Behind it, always, a chain of small unanswered asks.</p>
+
+<hr/>
+
+<h2>The mango tree</h2>
+
+<p>On the Showdown stage, every Builder finalist got the same question, with
+sixty seconds to answer: "What did you build that you didn't think was possible
+thirty days ago?" I gave the only answer I had: thirty days earlier I didn't
+think one person could build something a stranger might trust with the hardest
+sentence of their week. Something my favourite fruit taught me long ago explains
+how that became possible. Mangoes take years: you plant the tree, water it, pull
+the weeds, and care for it season after season, and one day there's more fruit
+than one family can eat. Most of the building went into the soil: the rules
+above, and the tests that keep them true. The features grew out of that.</p>
+
+<h2>One shape, many doors</h2>
+
+<p>Here's the part I'd most like nonprofits to hear, because nonprofits carry
+the least budget and serve the most people who find asking hard. Under the
+workplace words, Curb Cut is a pattern: someone says what's hard in their own
+words, from any phone, sees real options with sources, sends nothing without a
+clear yes, and always reaches a human. Swap the option library and the same
+machinery fits a food bank's request line, a shelter's intake, a school's parent
+door. That isn't a guess: the session I went there to teach was a forty-minute
+walk through a multi-agent food rescue system built on the same philosophy,
+guardrails first as code, one record carrying the state, a person approving.
+Different library, same shape. The chain I watched on that sidewalk is made of
+unanswered asks, and every ask answered early is a link that never gets forged.
+If you serve people who find asking hard and want a version shaped for them,
+write to me and I'll help you shape it, pro bono. If your cause needs hands more
+than software, I'll volunteer mine. Let's make it happen.</p>
+
+<h2>What it asks of you</h2>
+
+<p>Curb Cut is free, open source under Apache 2.0, and installs into the
+Salesforce system an organisation already runs, so everything it stores stays
+under your own roof. The install guide is one page. What it truly needs is one
+volunteer willing to be the person on the other end. Technical skill is
+secondary. If only one thing can be asked of an organisation, it's willingness.
+And when you're live, tell me: workplaces where somebody answers get named, with
+permission, and every name makes the next organisation braver.</p>
+
+<p>There's one more door, and I keep it propped open on purpose. A thing like
+this can end as a shiny trophy, a win that gets framed and then forgotten, and
+that would be the real shame: it was built to be used. So:</p>
+
+<ul class="open-door">
+  <li>Try it. Experiment with it.</li>
+  <li>Break it and tell me where it broke. So many of the 521 checks were born exactly that way.</li>
+  <li>Tell me what felt wrong as freely as what felt right.</li>
+  <li>If you can build this into something greater than I can alone: take it, name it better, make it your own, with my blessing as well as the license.</li>
+  <li>Or grow it with me.</li>
+</ul>
+
+<p>And if you see a possibility here I haven't, reach out.</p>
+
+<blockquote><p>This door ends at a human too.</p></blockquote>
+
+<p>One honest thing before the links. Curb Cut is tended the way the mango tree
+is: by hand, season after season, with nothing to sell. That's what keeps it
+free, and what keeps every promise in it a promise made to you. It also means
+the only way this reaches the people it was built for is a person like you
+passing it along. If it reached you, your hand is the amplifier: a comment, a
+share, a note to someone whose workplace needs it, a hard question, an issue on
+the repository. From where I stand, that kind of help is worth a million. And if
+I can ever help you back, ask.</p>
+
+<p>The name comes from the sidewalk ramps wheelchair users fought for. They were
+built for a few people, and now everyone rolls through them: parents with
+strollers, travellers with suitcases, delivery workers with carts. I noticed,
+that week in San Francisco, that the ramps are cut into the same sidewalks
+people sleep on. Both things are true at once. Build for the people who get left
+out, and it gets better for everyone. Leave the asking expensive, and the chain
+keeps its links.</p>
+
+<hr/>
+
+<div class="links">
+  <p>Feel it in your browser: <a href="try.html">the try page</a>. Nothing you type leaves the page.</p>
+  <p>Everything else: <a href="index.html">the Curb Cut home</a>. The code: <a href="https://github.com/parthsevak2/curb-cut">github.com/parthsevak2/curb-cut</a>.</p>
+  <p>For the builders who want to go deeper, four doors in:</p>
+  <ul>
+    <li><a href="https://github.com/parthsevak2/curb-cut/blob/main/docs/ARCHITECTURE.md">How it all fits together</a></li>
+    <li><a href="https://github.com/parthsevak2/curb-cut/blob/main/docs/TECHNICAL-DESIGN.md">The technical design, including the MCP layer that lets AI assistants look things up</a></li>
+    <li><a href="https://github.com/parthsevak2/curb-cut/blob/main/docs/CHANNELS.md">How each door is wired, Twilio voice and text to the agent</a></li>
+    <li><a href="https://github.com/parthsevak2/curb-cut/blob/main/docs/AGENT-INTERFACES.md">The agent's instructions and interfaces, guardrails first</a></li>
+  </ul>
+  <p>For questions, access needs, or a version for the people you serve,
+  <a href="https://www.linkedin.com/in/parthsevak/">my channels are open</a>. No message is too small.</p>
+</div>
+
+<blockquote><p>I don't think AI for good is a category of project. Either what
+we build is good for the people it touches, or it isn't.</p></blockquote>
+
+<figure>
+  <img src="story/theater.jpg" alt="The AgentExchange Theater at Moscone West, audience seated, volunteer judges shown on the screen." loading="lazy"/>
+  <figcaption>The AgentExchange Theater, volunteer judges on screen. The room the platform gave to this idea. Photo: the program team.</figcaption>
+</figure>
+</article>
+
+<footer class="page">
+  <p>This story first appeared <a href="https://www.linkedin.com/pulse/curb-cut-sidewalk-stage-parth-sevak-bgnvc/">on LinkedIn</a>,
+  where the conversation lives. Built and maintained by
+  <a href="https://www.linkedin.com/in/parthsevak/">Parth Sevak</a>, Havihi Digital.</p>
+</footer>
+</div>
+</body>
+</html>

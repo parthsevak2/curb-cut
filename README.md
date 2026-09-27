@@ -21,6 +21,8 @@ landing page with the films is
 a print-ready break-room poster is
 [poster.html](https://parthsevak2.github.io/curb-cut/poster.html).
 
+The story behind it, ten minutes: <https://parthsevak2.github.io/curb-cut/story.html>
+
 To install it into your own Salesforce org, follow [DEPLOY.md](DEPLOY.md).
 It needs Agentforce enabled; text and voice also need your own Twilio number
 and a small relay ([channels/](channels/)), and Slack needs the app created in
