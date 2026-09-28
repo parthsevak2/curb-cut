@@ -1,0 +1,54 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.parthsevak2/curb-cut-mcp",
+  "description": "Workplace accommodation options, cost evidence and drafts. Looks up and drafts; never sends.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/parthsevak2/curb-cut",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "curb-cut-mcp",
+      "version": "1.0.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SF_ORG_ALIAS",
+          "description": "Salesforce CLI alias of the Curb Cut org. Defaults to curbcut.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "CURB_CUT_SITE",
+          "description": "Public URL of this installation's Curb Cut site, quoted when a draft tells the person where they can send it themselves.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "TWILIO_NUMBER",
+          "description": "SMS number of this installation, offered next to the site as another way the person can send for themselves.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "CURB_CUT_SUPPORT_EMAIL",
+          "description": "Address given when a human handoff cannot be completed.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "SF_CLI_MODULES",
+          "description": "Override for the Salesforce CLI's node_modules/@salesforce directory when the CLI is installed somewhere unusual.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}
