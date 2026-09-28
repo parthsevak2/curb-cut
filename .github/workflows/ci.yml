@@ -101,6 +101,9 @@ jobs:
             --source-dir force-app/main/default/objects \
             --source-dir force-app/main/default/classes \
             --source-dir force-app/main/default/permissionsets \
+            --source-dir force-app/main/default/tabs \
+            --source-dir force-app/main/default/applications \
+            --source-dir force-app/main/default/layouts \
             --target-org curbcut --wait 20
 
       - name: Apex tests
