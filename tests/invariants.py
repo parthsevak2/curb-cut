@@ -30,6 +30,10 @@ VIEW_ALL_ALLOWED = {
         'Delivery telemetry. Holds a salted hash, never a raw address, and no '
         'message content. An operator cannot debug an undelivered reply without '
         'seeing that the attempt happened.',
+    'Nomination__c':
+        'Workplace names only. The record deliberately holds nothing about the '
+        'person who sent it, so there is nobody to protect from the desk '
+        'reading the queue whole - and the queue only works read whole.',
 }
 FORBIDDEN = re.compile(r'diagnos|condition|disabilit|medical|severity|prognos', re.I)
 
@@ -668,6 +672,35 @@ check('handoff-refuses-telephone',
       "'phone'" in handoff_src and 'NEVER' in handoff_src,
       'CurbCutCreateHandoff no longer refuses telephone as a reply channel')
 
+# ---------------------------------------------------------------------------
+# A nomination knows the workplace and nothing else.
+#
+# NOMINATE lets anyone point us at a workplace from any door, and the promise
+# on every door is "they will never be told who asked". That is enforced by
+# the schema - no field that could hold a hash, a handle or an address, and no
+# link to any other record - and by the acting class never being handed the
+# sender at all. A promise in a comment is not a control; these are.
+# ---------------------------------------------------------------------------
+nom_fields_dir = os.path.join(DEF, 'objects', 'Nomination__c', 'fields')
+nom_fields = sorted(os.path.basename(p)
+                    for p in glob.glob(os.path.join(nom_fields_dir, '*.field-meta.xml')))
+check('nomination-object-has-fields', len(nom_fields) >= 2,
+      'Nomination__c is missing; the NOMINATE door would have nowhere to write')
+for name in nom_fields:
+    low = name.lower()
+    check('nomination-stores-no-identity',
+          not any(w in low for w in ('hash', 'handle', 'phone', 'email',
+                                     'sender', 'contact', 'person', 'reporter')),
+          f'Nomination__c field {name} looks like it identifies the sender')
+    body = read(os.path.join(nom_fields_dir, name))
+    check('nomination-links-to-nothing',
+          '<type>Lookup</type>' not in body and '<type>MasterDetail</type>' not in body,
+          f'Nomination__c field {name} links to another record; a join is an identity')
+nominate_src = strip_apex_comments(read(os.path.join(CLS, 'CurbCutNominate.cls')))
+check('nominate-is-never-handed-the-sender',
+      'handle' not in nominate_src.lower() and 'hash' not in nominate_src.lower(),
+      'CurbCutNominate touches a handle or hash; the class must not know who asked')
+
 
 
 # ---------------------------------------------------------------------------
@@ -774,6 +807,19 @@ check('voice-uses-the-shared-router',
       'the /voice handler in sms-relay.mjs no longer checks CONTROL_WORDS and '
       'asks /curbcut/v1/message; a caller saying HUMAN or OFF would get the '
       'agent instead of the router')
+
+# NOMINATE must reach the router on both relay doors. Any other non-control
+# text falls through to the agent when the library has nothing, and a model
+# improvising about somebody's employer is exactly what this lane must never
+# allow.
+check('nominate-routes-on-text',
+      re.search(r'NOMINATE\.test\(body', relay_src) is not None,
+      'the /sms handler in sms-relay.mjs no longer routes NOMINATE to the '
+      'door; the agent would improvise on a workplace name')
+check('nominate-routes-on-voice',
+      re.search(r'NOMINATE\.test\(heard', voice_src) is not None,
+      'the /voice handler in sms-relay.mjs no longer routes NOMINATE to the '
+      'door; a caller nominating a workplace would get the model instead')
 
 
 

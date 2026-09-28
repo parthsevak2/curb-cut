@@ -18,6 +18,7 @@ private class CurbCutKeywordTest {
             'WHO' => 'WHO', 'who saw it' => 'WHO',
             'OFF' => 'OFF', 'turn it off' => 'OFF', 'stop sharing' => 'OFF',
             'HELP' => 'HELP', 'curb cut' => 'HELP',
+            'NOMINATE' => 'NOMINATE', 'nominate' => 'NOMINATE',
             'STOP' => 'STOP', 'unsubscribe' => 'STOP', 'START' => 'START'
         };
         for (String said : expect.keySet()) {
@@ -40,7 +41,8 @@ private class CurbCutKeywordTest {
                 'I want to stop working in an open plan office',
                 'Who I report to keeps changing my hours',
                 'my hearing aid whistles when I turn my head off to one side',
-                'I need help reading long documents on screen'}) {
+                'I need help reading long documents on screen',
+                'my manager wants to nominate me for an award'}) {
             CurbCutKeyword.Match m = CurbCutKeyword.route(need);
             System.assertEquals('NONE', m.intent,
                 'a described need must never be read as a command: ' + need);

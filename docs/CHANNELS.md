@@ -38,6 +38,7 @@ came in by.
 | `OFF` | turns off a standing disclosure, immediately, no reason asked | yes |
 | `WHO` | lists everyone who has been shown it | yes |
 | `HELP` `CURB CUT` | says what this is and how to get a person | no |
+| `NOMINATE` and a workplace name | writes the workplace down so a person can reach out and offer this; stores nothing about the sender, not even the hash | no |
 | `STOP` `START` | carrier-reserved; answered by the relay, never by the agent | no |
 
 Matching is whole-message only. "I need help typing" is a need, not a request

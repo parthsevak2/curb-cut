@@ -116,6 +116,25 @@ const TOOLS = [
       required: ['context'],
     },
   },
+  {
+    name: 'curbcut_nominate',
+    description:
+      'Nominate a workplace that should have Curb Cut. A person will reach out ' +
+      'to them kindly and offer it, free. This stores the workplace name and ' +
+      'the door it came through, and nothing about the person nominating - ' +
+      'not even a hash. Use it when somebody wishes their own workplace had ' +
+      'this and would rather not be the one to ask.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        workplace: {
+          type: 'string',
+          description: 'The workplace, like "Acme Foods in Welland". Only the first line is kept.',
+        },
+      },
+      required: ['workplace'],
+    },
+  },
 ];
 
 async function apex(path, method = 'GET', body) {
@@ -292,6 +311,16 @@ async function callTool(name, args) {
           (NUMBER ? ', or by texting ' + NUMBER : '') +
           '. A hedge is not a yes.',
       };
+    case 'curbcut_nominate': {
+      /* The same Apex door as every channel: the router keeps the first line
+         of the workplace and stores nothing about anyone. The reply comes
+         back verbatim so the assistant passes the promise on unchanged. */
+      const answer = await apex('/curbcut/v1/message/', 'POST', {
+        channel: 'MCP', text: 'nominate ' + String(args?.workplace ?? ''), handle: null,
+      });
+      return { note: answer?.message ??
+        'Nothing was written down. Say the workplace name and try again.' };
+    }
     case 'curbcut_reach_human': {
       /* Routed through the same Apex door as SMS, Slack and email, so an
          assistant handing somebody over gets exactly the handoff a text message

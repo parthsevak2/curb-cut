@@ -38,7 +38,10 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         // was the one route that did not work.
         CurbCutKeyword.Match kw = CurbCutKeyword.route(body);
         if (kw.matched) {
-            reply(email, envelope, forKeyword(kw), null);
+            // A nomination's ledger rows carry no address: the reply promises
+            // "nothing about you, not even the hash", so nothing joinable is
+            // written while the reply still reaches the person.
+            reply(email, envelope, forKeyword(kw), null, kw.intent == 'NOMINATE');
             return result;
         }
 
@@ -60,9 +63,14 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
     }
 
     private String pickBody(Messaging.InboundEmail email) {
+        // Block tags become line breaks before the strip, so "NOMINATE Acme"
+        // in one paragraph and a signature in the next stay separate lines.
         String b = String.isNotBlank(email.plainTextBody)
             ? email.plainTextBody
-            : (email.htmlBody == null ? '' : email.htmlBody.stripHtmlTags());
+            : (email.htmlBody == null ? ''
+               : email.htmlBody
+                   .replaceAll('(?i)<(br|/p|/div|/tr|/li|/h[1-6])[^>]*>', '\n')
+                   .stripHtmlTags());
         if (String.isBlank(b)) { return ''; }
         // Trim quoted history so a long reply chain is not read as the need.
         for (String marker : new List<String>{ '\nOn ', '\n>', '-----Original', 'From:' }) {
@@ -109,6 +117,9 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
             CurbCutStanding.Result sr =
                 CurbCutStanding.byCode(kw.intent == 'WHO' ? 'who' : 'revoke', kw.code);
             return sr.message + '\n\n' + signature();
+        }
+        if (kw.intent == 'NOMINATE') {
+            return CurbCutNominate.act(kw.payload, 'Email') + '\n\n' + signature();
         }
         if (kw.intent == 'STOP') {
             return 'Done. I will not write to you again unless you write first.\n\n'
@@ -171,13 +182,19 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
      */
     private void reply(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope,
                        String bodyText, String barrierId) {
+        reply(email, envelope, bodyText, barrierId, false);
+    }
+
+    private void reply(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope,
+                       String bodyText, String barrierId, Boolean anonymously) {
+        String logged = anonymously ? null : envelope.fromAddress;
         Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
         msg.setToAddresses(new List<String>{ envelope.fromAddress });
         msg.setSubject('Re: ' + (String.isBlank(email.subject) ? 'what could make work easier' : email.subject));
         String disclosure = 'I am automated, not a person; reply HUMAN for one. A work mailbox belongs to your employer.\n\n';
         msg.setPlainTextBody(bodyText.startsWith('Hi. I am automated') ? bodyText : disclosure + bodyText);
 
-        CurbCutLog.record('Email', 'Inbound', 'Accepted', envelope.fromAddress, null, barrierId);
+        CurbCutLog.record('Email', 'Inbound', 'Accepted', logged, null, barrierId);
 
         Boolean delivered = false;
         String detail = null;
@@ -201,12 +218,12 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
 
         CurbCutLog.record('Email', 'Outbound',
             delivered ? 'Accepted' : 'Rejected',
-            envelope.fromAddress, detail, barrierId);
+            logged, detail, barrierId);
 
         if (!delivered) {
             escalate(barrierId);
             CurbCutLog.record('Email', 'Outbound', 'Escalated',
-                envelope.fromAddress, 'Reply undeliverable; handed to a person.', barrierId);
+                logged, 'Reply undeliverable; handed to a person.', barrierId);
         }
     }
 

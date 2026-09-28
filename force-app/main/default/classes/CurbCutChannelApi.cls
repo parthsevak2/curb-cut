@@ -50,8 +50,12 @@ global with sharing class CurbCutChannelApi {
         String who     = str(body.get('handle'));
         String barrier = str(body.get('barrierId'));
 
+        // The door as the caller named it, kept before the reply coercion
+        // below: a voice or MCP nomination must record the door it really
+        // came through even though replies travel another way.
+        String door = channel;
         if (!REPLY_ON.containsKey(channel)) { channel = 'External'; }
-        return handle(channel, text, who, barrier);
+        return handle(channel, text, who, barrier, door);
     }
 
     private static String str(Object o) { return o == null ? null : String.valueOf(o); }
@@ -61,13 +65,24 @@ global with sharing class CurbCutChannelApi {
      * straight back in. The email handler and the tests use this directly.
      */
     public static Answer handle(String channel, String text, String handle, String barrierId) {
+        return handle(channel, text, handle, barrierId, channel);
+    }
+
+    public static Answer handle(String channel, String text, String handle,
+                                String barrierId, String door) {
         Answer a = new Answer();
         a.intent = 'NONE';
         a.noMatch = false;
         a.handedOff = false;
         a.barrierId = barrierId;
 
-        CurbCutLog.record(channel, 'Inbound', 'Accepted', handle, 'message received', barrierId);
+        // Routed before the ledger so a nomination is never joinable to a
+        // person: its rows carry no hash, because the reply promises "not
+        // even the hash", and a hash beside a timestamp is a join.
+        CurbCutKeyword.Match kw = String.isBlank(text) ? null : CurbCutKeyword.route(text);
+        String who = (kw != null && kw.matched && kw.intent == 'NOMINATE') ? null : handle;
+
+        CurbCutLog.record(channel, 'Inbound', 'Accepted', who, 'message received', barrierId);
 
         if (String.isBlank(text)) {
             a.message = 'Tell me what is hard at work, in your own words. You never '
@@ -76,7 +91,6 @@ global with sharing class CurbCutChannelApi {
         }
 
         // Control words first, everywhere, identically.
-        CurbCutKeyword.Match kw = CurbCutKeyword.route(text);
         if (kw.matched) {
             a.intent = kw.intent;
             if (kw.intent == 'HUMAN') {
@@ -102,10 +116,12 @@ global with sharing class CurbCutChannelApi {
                         kw.intent == 'WHO' ? 'who' : 'revoke', kw.code);
                     a.message = sr.message;
                 }
+            } else if (kw.intent == 'NOMINATE') {
+                a.message = CurbCutNominate.act(kw.payload, door);
             } else {
                 a.message = kw.message;
             }
-            CurbCutLog.record(channel, 'Outbound', 'Accepted', handle,
+            CurbCutLog.record(channel, 'Outbound', 'Accepted', who,
                               'keyword: ' + kw.intent.toLowerCase(), barrierId);
             return a;
         }
