@@ -1,0 +1,6 @@
+# Copied in by the prepack script from ../mcp-server.mjs and ../../LICENSE.
+# The source of truth stays in the repo; the copies never get committed.
+server.mjs
+LICENSE
+node_modules/
+*.tgz

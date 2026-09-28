@@ -1,0 +1,40 @@
+{
+  "name": "curb-cut-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Curb Cut: workplace accommodation options, published cost evidence, and request drafts. It looks up and it drafts; it never sends anything on anyone's behalf.",
+  "type": "module",
+  "bin": {
+    "curb-cut-mcp": "bin/curb-cut-mcp.mjs"
+  },
+  "files": [
+    "bin/",
+    "server.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "mcpName": "io.github.parthsevak2/curb-cut-mcp",
+  "scripts": {
+    "prepack": "cp ../mcp-server.mjs server.mjs && cp ../../LICENSE LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parthsevak2/curb-cut.git",
+    "directory": "channels/mcp-npm"
+  },
+  "homepage": "https://github.com/parthsevak2/curb-cut#readme",
+  "bugs": {
+    "url": "https://github.com/parthsevak2/curb-cut/issues"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "accommodations",
+    "workplace",
+    "accessibility",
+    "salesforce"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  }
+}
