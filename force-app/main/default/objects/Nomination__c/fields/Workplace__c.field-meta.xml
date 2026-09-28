@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Workplace__c</fullName>
+    <description>The workplace, in the words of the person who nominated it. First line only; anything below a line break was discarded unread, because that is where signatures live.</description>
+    <inlineHelpText>Exactly what the person sent, first line only, up to 255 characters.</inlineHelpText>
+    <label>Workplace</label>
+    <length>255</length>
+    <type>Text</type>
+</CustomField>

@@ -19,6 +19,7 @@
     <tabs>Accommodation_Option__c</tabs>
     <tabs>Disclosure_Event__c</tabs>
     <tabs>Message_Log__c</tabs>
+    <tabs>Nomination__c</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
     <uiType>Lightning</uiType>

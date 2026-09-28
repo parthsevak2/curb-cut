@@ -24,6 +24,8 @@ public with sharing class CurbCutKeyword {
         @AuraEnabled public String  intent  { get; set; }
         /** The claim code the person sent with it, if any. */
         @AuraEnabled public String  code    { get; set; }
+        /** What travelled with NOMINATE: a workplace, in the person's own casing. */
+        @AuraEnabled public String  payload { get; set; }
         /** Channel-neutral wording. A channel may add to it, never contradict it. */
         @AuraEnabled public String  message { get; set; }
     }
@@ -55,6 +57,10 @@ public with sharing class CurbCutKeyword {
             'stop sharing', 'stop sharing it', 'unshare', 'un share',
             'withdraw', 'withdraw it', 'take it back', 'take that back'
         },
+        // NOMINATE names a workplace that should have this. The bare word gets
+        // the how-to; a workplace travels after it, like a code after OFF, and
+        // NOMINATE_LEAD picks that up before this map is consulted.
+        'NOMINATE' => new Set<String>{ 'nominate' },
         'HELP' => new Set<String>{
             'help', 'info', 'information', 'what is this', 'what can you do',
             'what do you do', 'commands', 'menu',
@@ -82,6 +88,19 @@ public with sharing class CurbCutKeyword {
     private static final Pattern CODE_IN_TEXT =
         Pattern.compile('(?i)\\b([abcdefghjklmnpqrtuvwxyz2346789]{6})\\b');
 
+    // NOMINATE travels with a payload, the way OFF travels with a code. The
+    // payload is a workplace name, so it keeps the person's own casing and
+    // punctuation. Matching is on the leading word only: "we should nominate
+    // Deb" in the middle of a sentence is conversation, not a command.
+    private static final Pattern NOMINATE_LEAD =
+        Pattern.compile('(?i)^\\s*nominate\\b[ \\t:,.!-]*(.*)$');
+    // Ways of saying "I want to nominate" that name nobody yet. They get the
+    // how-to, never a nomination called "my workplace".
+    private static final Set<String> NOMINATE_ASKS = new Set<String>{
+        'my workplace', 'my work', 'my employer', 'my company', 'my job',
+        'a workplace', 'an employer', 'a company', 'us', 'somewhere', 'someone'
+    };
+
     /** A code the person keeps. We store only a hash, so we cannot look them up. */
     public static String newCode() {
         String s = '';
@@ -97,6 +116,24 @@ public with sharing class CurbCutKeyword {
         m.matched = false;
         m.intent  = 'NONE';
         if (String.isBlank(text)) { return m; }
+
+        // NOMINATE first, on the raw text, so the workplace keeps its casing.
+        // First line only: below a line break is where signatures live, so
+        // the command must name the workplace beside the word. A bare
+        // NOMINATE above a signature gets the how-to, never a nomination.
+        Matcher nom = NOMINATE_LEAD.matcher(text.split('\r?\n', 2)[0]);
+        if (nom.matches()) {
+            m.matched = true;
+            m.intent  = 'NOMINATE';
+            String given = nom.group(1) == null ? '' : nom.group(1).trim();
+            String asks  = given.toLowerCase().replaceAll('[^a-z0-9]+', ' ').trim();
+            if (String.isBlank(given) || NOMINATE_ASKS.contains(asks)) {
+                m.message = wording('NOMINATE');
+            } else {
+                m.payload = given;
+            }
+            return m;
+        }
 
         // Normalise: lower case, punctuation to spaces, collapse runs.
         String n = text.toLowerCase().replaceAll('[^a-z0-9]+', ' ').trim();
@@ -163,6 +200,12 @@ public with sharing class CurbCutKeyword {
             return 'Tell me what is hard at work, in your own words. I will tell you '
                  + 'what other people have asked for. You never have to say what '
                  + 'condition you have. Send HUMAN at any point for a real person.';
+        }
+        if (intent == 'NOMINATE') {
+            return 'You can point me at a workplace that should have this, and '
+                 + 'they will never be told who asked. Send NOMINATE and the '
+                 + 'name, like NOMINATE Acme Foods in Welland. I keep the '
+                 + 'workplace name and nothing about you.';
         }
         return null;
     }

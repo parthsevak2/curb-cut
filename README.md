@@ -74,7 +74,7 @@ addresses on every row.
 | Console (internal) | `/lightning/app/Curb_Cut_Console`, home tab `/lightning/n/Curb_Cut_Home`, org login needed | live |
 | Why now | `/curbcut/why` | live |
 | Messaging programme | `/curbcut/messaging` | live |
-| MCP server | `node channels/mcp-server.mjs` | 4 tools, none of which can send |
+| MCP server | `node channels/mcp-server.mjs` | 5 tools, none of which can send |
 | Any relay or assistant | `POST /services/apexrest/curbcut/v1/message/` | one door every channel above shares |
 
 The console is the half of this that nobody demos. Every promise the assistant
@@ -116,8 +116,8 @@ beside it, and `tests/sync_counts.py` rewrites the published counts from the
 invariant suite's own output so they cannot drift.
 
 ```
-129 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-521 structural invariants      python3 tests/invariants.py            ~1s, no org
+147 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
+552 structural invariants      python3 tests/invariants.py            ~1s, no org
 517 accessibility checks       python3 tests/a11y_audit.py            against the live pages
 122 Sa11y checks               npm run test:a11y                      Salesforce's own axe-core matcher
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed

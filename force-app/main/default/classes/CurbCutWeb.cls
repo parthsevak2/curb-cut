@@ -102,6 +102,11 @@ global with sharing class CurbCutWeb {
                 ledger('Outbound', 'Accepted', 'keyword: ' + kw.intent.toLowerCase(), null);
                 return r;
             }
+            if (kw.intent == 'NOMINATE') {
+                r.message = CurbCutNominate.act(kw.payload, 'Web');
+                ledger('Outbound', 'Accepted', 'keyword: nominate', null);
+                return r;
+            }
             r.message = kw.message;
             ledger('Outbound', 'Accepted', 'keyword: ' + kw.intent.toLowerCase(), null);
             return r;

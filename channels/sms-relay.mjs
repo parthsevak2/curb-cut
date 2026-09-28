@@ -138,6 +138,12 @@ const keyword = (text) => text.toLowerCase().replace(/[^a-z]/g, '');
 // A code travelling with the word: "off 4KQ7MT". Shared so the two paths agree.
 const CODE_COMMAND = /^(off|who)\s+[a-z0-9]{6}$/i;
 
+/* NOMINATE travels with a workplace name, the way OFF travels with a code.
+   Routed to the door, never the agent: a model improvising about somebody's
+   employer is exactly what this lane exists to avoid. The door stores the
+   workplace and nothing about the sender - not even the hash. */
+const NOMINATE = /^\s*nominate\b/i;
+
 /* Somebody on a call saying one of these is not describing a barrier, and a
    language model is the wrong thing to answer them. They go to the router as a
    request for a person, so a real handoff exists before anything else is said.
@@ -274,6 +280,8 @@ const server = createServer((req, res) => {
       }
       const handle = handleFor(params.From || '');
       const said   = (params.SpeechResult || '').trim();
+      // Same rule as text: a nomination's ledger rows carry no hash.
+      const nom    = NOMINATE.test(said);
       res.writeHead(200, {'content-type':'text/xml'});
 
       if (!said) {
@@ -287,7 +295,7 @@ const server = createServer((req, res) => {
 
       console.log(`[voice] ${handle.slice(0,8)}… ${said.length} chars`);
       const key = safeHandle(handle);
-      await ledger('Voice', 'Inbound', 'Accepted', key, `${said.length} chars`);
+      await ledger('Voice', 'Inbound', 'Accepted', nom ? null : key, `${said.length} chars`);
 
       /* Same router as text, before the agent ever hears it. Until this lane
          existed a caller who said "human" or "off" got a model, and the promise
@@ -295,13 +303,14 @@ const server = createServer((req, res) => {
       const heard  = rebuildSpokenCode(said);
       const spoken = heard.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
       const crisis = CRISIS_PHRASES.some(p => spoken.includes(p));
-      if (crisis || CONTROL_WORDS.has(keyword(said)) || CODE_COMMAND.test(heard.trim())) {
+      if (crisis || CONTROL_WORDS.has(keyword(said)) || CODE_COMMAND.test(heard.trim()) || NOMINATE.test(heard)) {
         try {
           const answer = await connection.apex.post('/curbcut/v1/message/', {
             channel: 'Voice', text: crisis ? 'human' : heard, handle: key,
           });
-          await ledger('Voice', 'Outbound', 'Accepted', key,
-                       crisis ? 'routed: crisis, handoff requested' : 'routed: control word');
+          await ledger('Voice', 'Outbound', 'Accepted', nom ? null : key,
+                       crisis ? 'routed: crisis, handoff requested'
+                              : nom ? 'routed: nominate' : 'routed: control word');
           /* The router's handoff reply promises an answer on the same channel.
              On a call we hold no number and never ring anyone, so on voice that
              sentence is replaced, not followed by a correction. */
@@ -371,7 +380,10 @@ const server = createServer((req, res) => {
       res.end(twiml(...m));
     };
 
-    await ledger('SMS', 'Inbound', 'Accepted', key, `${body.length} chars`);
+    // A nomination is never joinable to a person: its ledger rows carry no
+    // hash, because the reply promises "not even the hash".
+    const nom = NOMINATE.test(body);
+    await ledger('SMS', 'Inbound', 'Accepted', nom ? null : key, `${body.length} chars`);
 
     // Reserved keywords are answered here and never forwarded. If Twilio's own
     // Advanced Opt-Out is handling them this code never runs; if it is not, the
@@ -399,7 +411,7 @@ const server = createServer((req, res) => {
        may travel with the word - "off 4KQ7MT" - which is how somebody turns a
        standing disclosure off from a phone when we deliberately have no idea
        who they are. */
-    if (CONTROL_WORDS.has(word) || CODE_COMMAND.test(body.trim())) {
+    if (CONTROL_WORDS.has(word) || CODE_COMMAND.test(body.trim()) || NOMINATE.test(body)) {
       try {
         const answer = await connection.apex.post('/curbcut/v1/message/', {
           channel: 'SMS', text: body, handle: key,

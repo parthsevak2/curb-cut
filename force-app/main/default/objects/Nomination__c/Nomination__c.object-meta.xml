@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayoutAssignment>Nomination_Highlights</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A workplace somebody pointed us at, so a person can reach out kindly and offer this. Holds the workplace name and the door the nomination came through. CONTAINS NOTHING ABOUT WHO ASKED BY DESIGN: no hash, no handle, no link to any other record, because a promise not to tell is strongest when there is nothing to tell.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <label>Nomination</label>
+    <nameField>
+        <label>Nomination Number</label>
+        <type>AutoNumber</type>
+        <displayFormat>NOM-{000000}</displayFormat>
+    </nameField>
+    <pluralLabel>Nominations</pluralLabel>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

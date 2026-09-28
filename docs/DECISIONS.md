@@ -106,3 +106,22 @@ the agent get a free turn.
 person who wants to talk it through has to say so.
 **Gain:** the first reply on a basic phone is grounded every time, costs no
 model call, and reads the same as what the console shows the desk.
+
+## D15. Anyone can point us at a workplace, and we cannot say who did
+Send NOMINATE and a workplace name on any door - text, voice, email, web,
+Slack, an assistant - and a Nomination__c row is created holding the name,
+the channel it arrived on, and nothing else. No hash, no handle, no link to
+any other record. A person works the queue and reaches out kindly; the
+workplace is never told who asked, because nothing that could tell them was
+ever written down. The bare word gets the how-to instead of a nomination
+called "my workplace", and mid-sentence uses are conversation, not commands.
+Only the first line is kept: an email carries a signature below the name,
+which is exactly what this record promises never to hold, so everything
+after a line break is discarded unread.
+**Cost:** with no sender attached we cannot reply later with what came of it,
+and a prankster can fill the queue with noise a person has to read.
+**Gain:** the safest possible nudge. Somebody who wants Curb Cut where they
+work risks nothing at all, and the promise "nobody will know" is enforced by
+the schema rather than by our manners. Invariants fail the build if the
+object ever grows an identity-shaped field or a relay door stops routing the
+word.

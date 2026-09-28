@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Where this nomination is in being acted on by a person.</description>
+    <inlineHelpText>New until a person reaches out. The workplace decides the rest.</inlineHelpText>
+    <label>Status</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>New</fullName><default>true</default><label>New</label></value>
+            <value><fullName>Reached out</fullName><default>false</default><label>Reached out</label></value>
+            <value><fullName>Declined</fullName><default>false</default><label>Declined</label></value>
+            <value><fullName>Done</fullName><default>false</default><label>Done</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

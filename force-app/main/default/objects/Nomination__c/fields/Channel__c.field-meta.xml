@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Channel__c</fullName>
+    <description>Which door the nomination came through. The door, never the person.</description>
+    <inlineHelpText>Text, email, web, Slack, voice, or an assistant. Useful for knowing which doors people trust with this; useless for finding out who asked, on purpose.</inlineHelpText>
+    <label>Channel</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Email</fullName><default>false</default><label>Email</label></value>
+            <value><fullName>SMS</fullName><default>false</default><label>SMS</label></value>
+            <value><fullName>Voice</fullName><default>false</default><label>Voice</label></value>
+            <value><fullName>Web</fullName><default>false</default><label>Web</label></value>
+            <value><fullName>Slack</fullName><default>false</default><label>Slack</label></value>
+            <value><fullName>External</fullName><default>false</default><label>External</label></value>
+            <value><fullName>MCP</fullName><default>false</default><label>MCP</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
