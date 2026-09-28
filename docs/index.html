@@ -66,6 +66,10 @@ td.num{font-family:"JetBrains Mono",ui-monospace,monospace;white-space:nowrap}
 .doors b{font-family:Archivo,system-ui,sans-serif}
 .quiet{color:var(--ink-mute);font-size:.95rem}
 footer.page{padding:2.2rem 0 3.5rem;border-top:1px solid var(--line);color:var(--ink-mute);font-size:.95rem}
+details{background:var(--raised);border:1px solid var(--line);border-radius:.55rem;margin:.55rem 0;padding:.15rem 1rem}
+details summary{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.05rem;padding:.65rem 0;cursor:pointer}
+details[open] summary{border-bottom:1px solid var(--line)}
+details p{color:var(--ink-soft)}
 footer.page a{color:inherit}
 @media (prefers-reduced-motion: no-preference){a.btn{transition:filter .15s}}
 nav.top{position:sticky;top:.6rem;z-index:50;display:flex;justify-content:center;padding:0 1rem}
@@ -282,6 +286,49 @@ section, header.hero { scroll-margin-top: 4.2rem }
       <a class="btn" href="https://github.com/parthsevak2/curb-cut/blob/main/SECURITY.md">Security policy</a>
       <a class="btn" href="https://github.com/parthsevak2/curb-cut/tree/main/docs/hackathon">The hackathon record</a>
     </nav>
+  </div>
+</section>
+
+<section id="faq" aria-label="Fair questions">
+  <div class="wrap">
+    <h2>Fair questions, honest answers</h2>
+    <details>
+      <summary>Why not just ask a public chatbot?</summary>
+      <p>A chatbot can tell you what an accommodation is. It can't file your
+      request with the desk that has to answer, and it can't promise what
+      happens to your words. Here the AI only talks; deterministic code decides
+      what's stored and sent, and those rules are tested on every change.</p>
+    </details>
+    <details>
+      <summary>What stops someone asking for something they don't need?</summary>
+      <p>Curb Cut doesn't grant anything. It helps a person ask, in their own
+      words. Your access desk still has the conversation and makes the call,
+      and the person gets the date the desk committed to answer by.</p>
+    </details>
+    <details>
+      <summary>How do you know it won't keep someone's diagnosis?</summary>
+      <p>There's no field to keep it in, and a build check fails if anyone adds
+      one. Condition words are stripped before anything is saved. Early on, the
+      agent promised not to record a condition while an action saved the words
+      anyway; that's the day every safety rule moved out of instructions and
+      into code.</p>
+    </details>
+    <details>
+      <summary>What does adopting actually take?</summary>
+      <p>The code is free, Apache 2.0, and installs into the Salesforce org you
+      already run, so what it stores stays under your roof. The platform under
+      it is licensed, and the guide says so plainly. What it truly needs is one
+      volunteer willing to be the person on the other end. Technical skill is
+      secondary; willingness is the whole requirement.</p>
+    </details>
+    <details>
+      <summary>Has a screen reader user tested it?</summary>
+      <p>Not yet someone who uses one every day, and that's the gap we most
+      want to close. The automated checks pass, and a scripted screen reader
+      walk exists, but those can't tell us what a real person finds hard. If
+      that's you, <a href="https://www.linkedin.com/in/parthsevak/">we'd be
+      grateful</a>.</p>
+    </details>
   </div>
 </section>
 
