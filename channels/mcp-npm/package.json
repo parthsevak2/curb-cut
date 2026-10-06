@@ -1,6 +1,6 @@
 {
   "name": "curb-cut-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for Curb Cut: workplace accommodation options, published cost evidence, and request drafts. It looks up and it drafts; it never sends anything on anyone's behalf.",
   "type": "module",
   "bin": {

@@ -22,10 +22,13 @@ The server file itself is untouched: the packaged copy is byte-identical to
    namespace is the authenticated account's username. If you'd rather use a
    DNS namespace like Recordist did (`app.recordist`), that needs a domain,
    an Ed25519 key and a TXT record; the GitHub path is one browser login.
-3. **Version.** 1.0.0, matching the `serverInfo` version inside
-   `mcp-server.mjs`. If you want a more cautious 0.1.0 first release, change
-   it in `package.json` and in both `version` fields of `server.json`; the
-   server file stays as it is.
+3. **Version.** 1.0.1, matching the `serverInfo` version inside
+   `mcp-server.mjs`. 1.0.1 is the release that starts and answers
+   `initialize` and `tools/list` with no Salesforce CLI and no org login, and
+   that replies in newline-delimited JSON to clients that send it (every
+   SDK-based client, Glama included). A version lives in four places:
+   `package.json`, both `version` fields of `server.json`, and `VERSION` in
+   `channels/mcp-server.mjs`.
 
 ## 1. Publish to npm
 
@@ -46,8 +49,10 @@ npx -y curb-cut-mcp
 
 On this machine, with the CLI logged in, it should print
 `curb-cut MCP server ready (org curbcut, 5 tools)` to stderr; Ctrl-C to stop.
-On a machine without the CLI it should print the install instructions, not a
-stack trace. If you ever see "Permission denied", check for a stray global
+On a machine without the CLI it should print one line first, `Curb Cut tools
+need the Salesforce CLI and an org login: ...`, and then the same ready line,
+and keep running: introspection works there, and the tools that need the org
+answer with those setup steps instead of a stack trace. If you ever see "Permission denied", check for a stray global
 link shadowing npx, like the `npm link` leftover that bit Recordist.
 
 ## 3. Publish to the official MCP registry
@@ -71,6 +76,42 @@ curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=curb-cut" | 
 
 ## Later releases
 
-Bump the version in `package.json` and in both `version` fields of
-`server.json`, then repeat steps 1 and 3. The prepack copy means a change to
-`channels/mcp-server.mjs` flows into the package with no other work.
+Bump the version in `package.json`, in both `version` fields of
+`server.json` and in `VERSION` in `channels/mcp-server.mjs`, repeat steps 1
+and 3, then update the pinned version in the `Dockerfile`. The prepack copy
+means a change to `channels/mcp-server.mjs` flows into the package with no
+other work.
+
+## Glama listing
+
+The awesome-mcp-servers PR (punkpeye/awesome-mcp-servers#15294) waits on a
+Glama listing, and Glama's only check is that the server starts in its
+container and answers introspection. 1.0.1 does that with no CLI and no org,
+which is exactly the container Glama builds.
+
+1. Publish 1.0.1 to npm first (step 1 above). The `Dockerfile` installs
+   `curb-cut-mcp@1.0.1` from npm, so Glama cannot build it before then.
+2. Submit at https://glama.ai/mcp/servers, signed in with GitHub as
+   **parthsevak2** (the account that owns the repo).
+3. When it asks for a Dockerfile, paste the contents of `Dockerfile` in this
+   folder. It runs `curb-cut-mcp` over stdio; no environment variables are
+   needed for the check.
+4. Once Glama shows the server at `parthsevak2/curb-cut`, add this badge line
+   to the entry in PR #15294:
+
+   ```markdown
+   [![parthsevak2/curb-cut MCP server](https://glama.ai/mcp/servers/parthsevak2/curb-cut/badges/score.svg)](https://glama.ai/mcp/servers/parthsevak2/curb-cut)
+   ```
+
+   Check the path Glama actually assigns before pasting; if it differs, use
+   that path in both URLs.
+
+To check the container before submitting (needs Docker and 1.0.1 on npm):
+
+```bash
+docker build -t curb-cut-mcp channels/mcp-npm
+printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"check","version":"0"}}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' | docker run -i --rm curb-cut-mcp
+```
+
+It should print two JSON lines, the second listing 5 tools, plus the CLI
+notice on stderr.
