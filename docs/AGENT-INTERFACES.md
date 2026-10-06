@@ -31,9 +31,13 @@ else's conversation.
 
 ## 2. Model Context Protocol server
 
-`channels/mcp-server.mjs`. Zero dependencies, JSON-RPC 2.0 over stdio, both
-Content-Length framing and newline-delimited JSON so it can be driven from a
-shell for testing.
+`channels/mcp-server.mjs`. Zero dependencies, JSON-RPC 2.0 over stdio.
+Newline-delimited JSON, which is what the MCP stdio transport specifies and
+what SDK-based clients send, and Content-Length framing too; each reply goes
+back in the framing its request used. The org connection opens on the first
+tool call that needs it, so `initialize`, `tools/list`, the cost brief and the
+draft work with no Salesforce CLI or login, and the org-backed tools answer
+with setup steps instead of the server exiting.
 
 ```bash
 node channels/mcp-server.mjs

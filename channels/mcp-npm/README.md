@@ -26,7 +26,7 @@ Add it to your MCP client's configuration:
 }
 ```
 
-When it starts cleanly it prints `curb-cut MCP server ready` to stderr. When something's missing it says what, in one sentence, with the command that fixes it.
+When it starts it prints `curb-cut MCP server ready` to stderr. It starts even without the Salesforce CLI or an org login: it answers `initialize` and `tools/list`, and `curbcut_cost_brief` and `curbcut_draft_request` work, because neither touches the org. When the CLI is missing it says so in one line on startup, and a tool that does need the org returns the command that fixes it as its result, instead of the server stopping.
 
 ## The five tools
 

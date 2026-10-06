@@ -21,32 +21,74 @@
  * There is also no tool that accepts a diagnosis, because there is nowhere in
  * the system to put one. A caller who sends one gets told so.
  *
- * Zero dependencies. JSON-RPC 2.0 over stdio, framed by Content-Length, which
- * is all MCP actually requires of a server.
+ * Zero dependencies. JSON-RPC 2.0 over stdio. Newline-delimited JSON is what
+ * the MCP stdio transport specifies and what SDK-based clients send; the older
+ * Content-Length framing is still accepted. Every reply goes back in the
+ * framing its request arrived in, so neither kind of client is left waiting
+ * for a message it cannot parse.
  */
-import { createInterface } from 'node:readline';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-// The Salesforce CLI bundles @salesforce/core. Find it where the CLI is
-// installed, not where one laptop happened to keep it. SF_CLI_MODULES
-// overrides the lookup when the CLI lives somewhere unusual.
 // Deployment identity. The MCP server speaks for one installation, so its
 // contact points come from the environment, never from this file.
 const SITE = process.env.CURB_CUT_SITE || null;
 const NUMBER = process.env.TWILIO_NUMBER || null;
 const SUPPORT_EMAIL = process.env.CURB_CUT_SUPPORT_EMAIL || '';
 
-const SF_CLI_MODULES = process.env.SF_CLI_MODULES
-  || join(execSync('npm root -g', { encoding: 'utf8' }).trim(),
-          '@salesforce', 'cli', 'node_modules', '@salesforce');
-const { Org } = await import(join(SF_CLI_MODULES, 'core', 'lib', 'index.js'));
-
 const ALIAS = process.env.SF_ORG_ALIAS || 'curbcut';
 const PROTOCOL = '2024-11-05';
+const VERSION = '1.0.1';
 
-const org = await Org.create({ aliasOrUsername: ALIAS });
-const conn = org.getConnection();
+// The org is reached on the first tool call that needs it, never at startup.
+// Saying what the server is (initialize, tools/list) and the tools that never
+// touch the org (the cost brief, the draft) therefore work on a machine with
+// no Salesforce CLI and no login at all. Before this, a missing login killed
+// the process before it could answer anyone, including a directory checking
+// only that it starts. A call that does need the org gets a sentence saying
+// how to set it up instead of a dead server.
+const SETUP =
+  'Curb Cut tools need the Salesforce CLI and an org login: npm i -g @salesforce/cli, ' +
+  `then sf org login web --alias ${ALIAS}`;
+
+class SetupNeeded extends Error {}
+
+let connecting = null;
+function connection() {
+  // One connection, shared. A failed attempt is not cached, so the next call
+  // tries again and succeeds once the person has logged in.
+  connecting ??= openConnection().catch((e) => { connecting = null; throw e; });
+  return connecting;
+}
+
+async function openConnection() {
+  // The Salesforce CLI bundles @salesforce/core. Find it where the CLI is
+  // installed, not where one laptop happened to keep it. SF_CLI_MODULES
+  // overrides the lookup when the CLI lives somewhere unusual.
+  let Org;
+  try {
+    const modules = process.env.SF_CLI_MODULES
+      || join(execSync('npm root -g', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(),
+              '@salesforce', 'cli', 'node_modules', '@salesforce');
+    ({ Org } = await import(pathToFileURL(join(modules, 'core', 'lib', 'index.js')).href));
+  } catch {
+    throw new SetupNeeded(SETUP);
+  }
+  try {
+    const org = await Org.create({ aliasOrUsername: ALIAS });
+    return org.getConnection();
+  } catch (e) {
+    const msg = String(e?.message ?? e);
+    if (/NamedOrgNotFound|NoAuthInfoFound|No authorization information|No AuthInfo found/i
+        .test(`${e?.name} ${msg}`)) {
+      throw new SetupNeeded(
+        `The Salesforce CLI has no login for "${ALIAS}". ${SETUP}, ` +
+        'or set SF_ORG_ALIAS to an alias you are already logged in to.');
+    }
+    throw new SetupNeeded(`${SETUP}. Connecting to "${ALIAS}" failed: ${msg}`);
+  }
+}
 
 const FORBIDDEN = /diagnos|condition|disabilit|medical|severity|prognos/i;
 
@@ -138,6 +180,7 @@ const TOOLS = [
 ];
 
 async function apex(path, method = 'GET', body) {
+  const conn = await connection();
   return conn.request({
     method,
     url: `/services/apexrest${path}`,
@@ -152,6 +195,7 @@ async function findOptions(need, limit) {
   const soql =
     `SELECT Option__c, Plain_Language_Summary__c, Typical_Cost__c, Zero_Cost__c, ` +
     `Precedent_Count__c, Source_URL__c FROM Accommodation_Option__c LIMIT 500`;
+  const conn = await connection();
   const res = await conn.query(soql);
   const STOP = new Set(['the','a','an','and','or','but','i','im','my','me','to','for','of','in','on',
     'at','it','is','am','are','was','were','be','been','with','that','this','have','has','had','do',
@@ -344,19 +388,24 @@ async function callTool(name, args) {
 }
 
 // ---- JSON-RPC over stdio -------------------------------------------------
-function send(msg) {
+// framing is 'line' (newline-delimited, the MCP stdio spec) or 'header'
+// (Content-Length), whichever the request used.
+function write(msg, framing) {
   const body = JSON.stringify(msg);
-  process.stdout.write(`Content-Length: ${Buffer.byteLength(body, 'utf8')}\r\n\r\n${body}`);
+  process.stdout.write(framing === 'line'
+    ? body + '\n'
+    : `Content-Length: ${Buffer.byteLength(body, 'utf8')}\r\n\r\n${body}`);
 }
 
-async function handle(req) {
+async function handle(req, framing) {
+  const send = (msg) => write(msg, framing);
   const { id, method, params } = req;
   try {
     if (method === 'initialize') {
       return send({ jsonrpc: '2.0', id, result: {
         protocolVersion: PROTOCOL,
         capabilities: { tools: {} },
-        serverInfo: { name: 'curb-cut', version: '1.0.0' },
+        serverInfo: { name: 'curb-cut', version: VERSION },
         instructions:
           'Curb Cut helps a person find out what workplace adjustments they could ask ' +
           'for, and draft the ask, without ever disclosing a medical condition. Never ' +
@@ -366,10 +415,20 @@ async function handle(req) {
     }
     if (method === 'tools/list') return send({ jsonrpc: '2.0', id, result: { tools: TOOLS } });
     if (method === 'tools/call') {
-      const out = await callTool(params?.name, params?.arguments ?? {});
+      let out;
+      try {
+        out = await callTool(params?.name, params?.arguments ?? {});
+      } catch (e) {
+        if (!(e instanceof SetupNeeded)) throw e;
+        // An ordinary tool result, so the assistant can relay the fix instead
+        // of seeing a transport error. Nothing was looked up, stored or sent.
+        out = { setup_needed: true, reason: e.message,
+                note: 'Nothing was looked up, stored or sent.' };
+        if (params?.name === 'curbcut_reach_human') out.handedOff = false;
+      }
       return send({ jsonrpc: '2.0', id, result: {
         content: [{ type: 'text', text: JSON.stringify(out, null, 2) }],
-        isError: !!out.refused,
+        isError: !!(out.refused || out.setup_needed),
       }});
     }
     if (method === 'ping') return send({ jsonrpc: '2.0', id, result: {} });
@@ -380,26 +439,49 @@ async function handle(req) {
   }
 }
 
-// Content-Length framing, and bare newline-delimited JSON as a fallback so the
-// server can be driven from a shell for testing.
-let buf = '';
+// A message that is not JSON, or not a request object, gets a JSON-RPC error
+// back. It must never throw out of the stdin handler: that kills the server.
+function dispatch(text, framing) {
+  let req;
+  try { req = JSON.parse(text); } catch {
+    return write({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'parse error' } }, framing);
+  }
+  if (!req || typeof req !== 'object' || Array.isArray(req)) {
+    return write({ jsonrpc: '2.0', id: null, error: { code: -32600, message: 'invalid request' } }, framing);
+  }
+  handle(req, framing);
+}
+
+// The buffer is bytes, not a string: Content-Length counts bytes, and a
+// curly apostrophe in "I can’t type" is one character but three bytes.
+// latin1 maps one byte to one character, so header offsets are byte offsets.
+let buf = Buffer.alloc(0);
 process.stdin.on('data', (chunk) => {
-  buf += chunk.toString('utf8');
+  buf = Buffer.concat([buf, chunk]);
   for (;;) {
-    const m = /Content-Length:\s*(\d+)\r?\n\r?\n/i.exec(buf);
-    if (m) {
-      const start = m.index + m[0].length, len = Number(m[1]);
+    const text = buf.toString('latin1');
+    const lead = text.length - text.trimStart().length;
+    if (/^content-length/i.test(text.slice(lead, lead + 14))) {
+      const m = /^\s*Content-Length:\s*(\d+)\r?\n\r?\n/i.exec(text);
+      if (!m) {
+        const end = /\r?\n\r?\n/.exec(text.slice(lead));
+        if (!end) return;                                  // header still arriving
+        buf = buf.subarray(lead + end.index + end[0].length); // unreadable header
+        write({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'bad header' } }, 'header');
+        continue;
+      }
+      const start = m[0].length, len = Number(m[1]);
       if (buf.length < start + len) return;
-      const body = buf.slice(start, start + len);
-      buf = buf.slice(start + len);
-      handle(JSON.parse(body));
+      const body = buf.subarray(start, start + len).toString('utf8');
+      buf = buf.subarray(start + len);
+      dispatch(body, 'header');
       continue;
     }
-    const nl = buf.indexOf('\n');
+    const nl = buf.indexOf(0x0a);
     if (nl === -1) return;
-    const line = buf.slice(0, nl).trim();
-    buf = buf.slice(nl + 1);
-    if (line) handle(JSON.parse(line));
+    const line = buf.subarray(0, nl).toString('utf8').trim();
+    buf = buf.subarray(nl + 1);
+    if (line) dispatch(line, 'line');
   }
 });
 
