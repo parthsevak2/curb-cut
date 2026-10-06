@@ -932,6 +932,24 @@ if os.path.exists(TRY):
           'docs/try.html contains a network call; its first promise is that '
           'nothing typed leaves the browser')
 
+    # Two quieter leaks the call check above could not see. The page loaded its
+    # fonts from a font CDN, so every visit told a third party someone opened
+    # it. And read-aloud let the browser pick any voice, including online ones
+    # that send the spoken text, which includes what the person typed, to a
+    # speech service. Fonts now come from this site and read-aloud uses only
+    # voices that run on the device.
+    external = re.findall(
+        r'<(?:link|script|img|iframe|source|audio|video)\b[^>]*\b(?:href|src)\s*=\s*"(https?:)?//',
+        tryhtml, re.I)
+    check('try-page-loads-nothing-from-elsewhere', not external,
+          'docs/try.html loads a resource from another origin; every outside '
+          'request tells someone the page was opened')
+    check('try-page-speaks-only-on-device',
+          'SpeechSynthesisUtterance' not in tryhtml
+          or ('localService' in tryhtml and 'u.voice=' in tryhtml),
+          'docs/try.html reads text aloud without restricting to on-device '
+          'voices; an online voice would send what the person typed away')
+
 
 # ---------------------------------------------------------------------------
 # The count in this file is quoted in the deck, in four Devpost answers and in
