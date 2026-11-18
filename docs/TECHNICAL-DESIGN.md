@@ -296,7 +296,7 @@ FOUR LAYERS, all failing the build except the last.
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        625   every push, ~1s, no org needed
+  Structural invariants        627   every push, ~1s, no org needed
   Apex tests                   194   every deploy
   Accessibility (live pages)   509   against the deployed site
   Sa11y / axe-core tests        19   Salesforce's own matcher
@@ -559,7 +559,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
 14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT
 ─────────────────────────────────────────────────────────────────────
 
-  python3 tests/invariants.py                      625 checks, ~1s
+  python3 tests/invariants.py                      627 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      194 tests
   python3 tests/a11y_audit.py                      509 checks, live pages
   npm run test:a11y                                 19 Sa11y tests

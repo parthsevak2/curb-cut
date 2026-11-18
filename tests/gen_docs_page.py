@@ -16,6 +16,7 @@ def inline(t):
     t=re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', t)
     t=re.sub(r'(?<![\w*])\*([^*]+)\*(?![\w*])', r'<em>\1</em>', t)
     return t
+HTML_LINE=re.compile(r'^\s*</?(p|div|img|details|summary|br|a|picture|source|b|strong|em|span|sub|sup|kbd)(\s[^>]*)?/?>', re.I)
 def md(src, title):
     lines=src.split('\n')
     heads=[(len(m.group(1)),m.group(2).strip()) for l in lines for m in [re.match(r'^(#{1,6})\s+(.*)',l)] if m]
@@ -61,7 +62,25 @@ def md(src, title):
         if l.startswith('> '):
             flush(); close_list(); buf=[]
             while i<len(lines) and lines[i].startswith('>'): buf.append(lines[i][1:].strip()); i+=1
-            out.append('<blockquote><p>'+inline(' '.join(buf))+'</p></blockquote>'); continue
+            # GitHub callouts (> [!TIP]) become a labelled box instead of a
+            # stray "[!TIP]" in the text.
+            kind=re.match(r'^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]$', buf[0]) if buf else None
+            if kind:
+                label=kind.group(1).capitalize()
+                out.append('<blockquote class="callout callout-%s"><p><strong>%s.</strong> %s</p></blockquote>'
+                           % (kind.group(1).lower(), label, inline(' '.join(b for b in buf[1:] if b))))
+            else:
+                out.append('<blockquote><p>'+inline(' '.join(buf))+'</p></blockquote>')
+            continue
+        # A README written for GitHub carries a little HTML: centred images and
+        # collapsible sections. It is written as XHTML on purpose, so it can pass
+        # through unchanged into a Visualforce page, which must be well formed.
+        if HTML_LINE.match(l):
+            # A relative link in the README points into the repository; on the
+            # org's site it would point at a page that does not exist.
+            fixed=re.sub(r'(href|src)="(?!https?:|#|mailto:|/)([^"]+)"',
+                         lambda m: '%s="https://github.com/parthsevak2/curb-cut/blob/main/%s"' % (m.group(1), m.group(2)), l.strip())
+            flush(); close_list(); out.append(fixed); i+=1; continue
         if not l.strip(): flush(); close_list(); i+=1; continue
         if inlist and (l.startswith('  ') or l.startswith('\t')):
             out[-1]=out[-1][:-5]+' '+inline(l.strip())+'</li>'; i+=1; continue

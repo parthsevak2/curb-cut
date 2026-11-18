@@ -1149,6 +1149,18 @@ for _cf in glob.glob(os.path.join(_CLS, '*.cls')):
                   'textOpen()' in _near,
                   f'{os.path.basename(_cf)} line {_n + 1} offers the text number without CurbCutDoors.textOpen()')
 
+# The README is also rendered into the org's public docs page, a Visualforce
+# page that must be well-formed XML. HTML that GitHub forgives, an unclosed
+# <img> or <br>, would break that page, so it has to be written closed.
+_readme = read(os.path.join(ROOT, 'README.md'))
+_open_tags = [t for t in re.findall(r'<(?:img|br|source|hr)\b[^>]*>', _readme) if not t.endswith('/>')]
+check('readme-html-is-well-formed', not _open_tags,
+      f'README.md has HTML the docs page cannot carry: {_open_tags[:3]}')
+check('readme-images-have-alt-text',
+      all(re.search(r'\balt="[^"]{8,}"', t) for t in re.findall(r'<img\b[^>]*>', _readme))
+      and all(len(a) >= 8 for a in re.findall(r'!\[([^\]]*)\]\(', _readme)),
+      'an image in README.md has no real alt text')
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import count_claims  # the one list both this check and sync_counts.py read
 stale = []

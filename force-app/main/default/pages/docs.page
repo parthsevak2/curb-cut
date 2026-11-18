@@ -26,47 +26,126 @@
   heading="The documentation, published from the repository."
   lede="Eight documents, exactly as they sit in the code, so nothing here can drift from what is deployed.">
 <div class="docs">
-<nav aria-label="Documents on this page"><ol><li><a href="#doc-0">README</a></li><li><a href="#doc-1">Technical design</a></li><li><a href="#doc-2">Evidence</a></li><li><a href="#doc-3">Who this is for</a></li><li><a href="#doc-4">Accessibility audit</a></li><li><a href="#doc-5">Decisions</a></li></ol></nav><section aria-labelledby="doc-0"><h2 id="doc-0">README</h2><p class="mute">What this is, what is live, how to verify it. Source: <code>README.md</code></p><h3>Curb Cut</h3>
-<p>Curb Cut lets any worker ask for a workplace accommodation in their own words, on the web with no login, by text or a call from a basic phone, by email, in a Slack DM, or through their own assistant, without ever disclosing a diagnosis. An Agentforce agent holds the conversation; deterministic Apex decides what is stored and sent; a person on the access desk answers. First place, Builder Track, Agentforce for Good Hackathon, Dreamforce 2026.</p>
-<pre>git clone https://github.com/parthsevak2/curb-cut
-cd curb-cut
-python3 tests/invariants.py     # 625 structural checks, offline, about a second</pre>
-<p><strong>Feel it before you read anything:</strong> type one sentence at <a href="https://parthsevak2.github.io/curb-cut/try.html">parthsevak2.github.io/curb-cut/try.html</a> and watch the product's own ranking answer, entirely in your browser. The landing page with the films is <a href="https://parthsevak2.github.io/curb-cut/">parthsevak2.github.io/curb-cut</a>, and a print-ready break-room poster is <a href="https://parthsevak2.github.io/curb-cut/poster.html">poster.html</a>.</p>
-<p>The story behind it, ten minutes: <a href="https://parthsevak2.github.io/curb-cut/story.html">https://parthsevak2.github.io/curb-cut/story.html</a></p>
-<p>To install it into your own Salesforce org, follow DEPLOY.md. It needs Agentforce enabled; text and voice also need your own Twilio number and a small relay (channels/), and Slack needs the app created in your workspace from the manifest. Six Custom Labels carry your deployment's identity: who runs it, its number, inbound email, site URL and support address. Text, voice and email appear on your site only once their label holds a real value.</p>
-<h4>Why it exists</h4>
-<p><strong>The process for requesting a disability accommodation is itself an accessibility barrier.</strong></p>
-<p>To get help you must first navigate a system designed by and for people without your disability. Find the policy. Learn its vocabulary. Hold a corporate login. Complete a form. And disclose something you may be afraid to disclose, to a stranger, in writing, in a language that may not be your first.</p>
-<p>Cost usually isn't the barrier.</p>
-<p>The film, 4 minutes 59 seconds, with every channel shown live: <a href="https://youtu.be/yleHLiwWRKA">https://youtu.be/yleHLiwWRKA</a>. A 26-second recording of trying the ask page: <a href="https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view">https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view</a>. A three-minute cut: <a href="https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view">https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view</a></p>
-<div class="tbl"><table><thead><tr><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Across <strong>655</strong> large employers in 2025 the median share of staff who told their employer about a disability was <strong>3.5%</strong>, and it did not rise. By 2026, <strong>98%</strong> of them report accommodation programmes.</td><td><a href="https://disabilityin.org/resource/2025-disability-index-report/">Disability:IN 2025 Disability Index</a> and <a href="https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights">2026 results</a></td></tr><tr><td>In 2025, <strong>22.8%</strong> of Americans with a disability were employed against 65.2% without, and <strong>30%</strong> of those working were part time against 17%.</td><td><a href="https://www.bls.gov/news.release/disabl.nr0.htm">US BLS, People with a Disability 2025</a>, released 3 March 2026</td></tr><tr><td>Of the <strong>1,425</strong> employers who gave cost figures, <strong>61 of every 100</strong> accommodations cost them nothing. Median one-time cost of the rest: <strong>$300</strong>.</td><td><a href="https://askjan.org/topics/costs.cfm">JAN employer survey</a>, 5,406 employers responded, Jan 2019 to Dec 2024</td></tr><tr><td><strong>More than a third</strong> of employed Canadians with a disability had an accommodation need <strong>go unmet</strong> in 2022.</td><td><a href="https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity">Statistics Canada</a>, Canadian Survey on Disability</td></tr><tr><td>The <strong>GC Workplace Accessibility Passport</strong> already implements "ask once, not forever", and only for federal public servants.</td><td><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html">Government of Canada</a></td></tr></tbody></table></div>
-<p>Curb Cut is an Agentforce agent whose principal is <strong>the worker, not the employer</strong>.</p>
-<hr/>
-<h4>The live deployment</h4>
-<p>Curb Cut runs in an org of its own. Every web row below was checked from a logged-out machine on 17 November 2026, and the agents were read from the org the same day. Your install has its own address on every row; to feel the product with no org at all, use the <a href="https://parthsevak2.github.io/curb-cut/try.html">try page</a>.</p>
-<div class="tbl"><table><thead><tr><th scope="col">Surface</th><th scope="col">Address</th><th scope="col">State, 17 November 2026</th></tr></thead><tbody><tr><td>Web</td><td>https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut</td><td>live</td></tr><tr><td>Ask (the whole flow, no phone)</td><td><code>/curbcut/ask</code></td><td>live</td></tr><tr><td>Privacy</td><td><code>/curbcut/privacy</code></td><td>live</td></tr><tr><td>Terms</td><td><code>/curbcut/terms</code></td><td>live</td></tr><tr><td>Why now</td><td><code>/curbcut/why</code></td><td>live</td></tr><tr><td>Messaging programme</td><td><code>/curbcut/messaging</code></td><td>live</td></tr><tr><td>Docs</td><td><code>/curbcut/docs</code></td><td>live</td></tr><tr><td>SMS</td><td>a Twilio number the deployment owns</td><td>built; not answering today, because the relay cannot reach the number</td></tr><tr><td>Voice</td><td>the same Twilio number</td><td>built, speech in and out; same state as SMS</td></tr><tr><td>Email</td><td>inbound service <code>CurbCutInbound</code>, address in Setup → Email Services</td><td>receiving; replies need a verified sending domain</td></tr><tr><td>Slack</td><td><code>node channels/slack-app.mjs</code>, Socket Mode, DM only, never sends</td><td>runs beside the org; manifest in <code>channels/slack-manifest.json</code></td></tr><tr><td>Agent</td><td><code>Curb_Cut</code> v1, <code>Curb_Cut_Desk</code> v1</td><td>both active</td></tr><tr><td>Console (internal)</td><td><code>/lightning/app/Curb_Cut_Console</code>, home tab <code>/lightning/n/Curb_Cut_Home</code>, org login needed</td><td>live</td></tr><tr><td>MCP server</td><td><code>npx curb-cut-mcp</code>, or <code>node channels/mcp-server.mjs</code></td><td>5 tools; none can send a request</td></tr><tr><td>Any relay or assistant</td><td><code>POST /services/apexrest/curbcut/v1/message/</code></td><td>one door every channel above shares</td></tr></tbody></table></div>
-<p>What judges tested in September 2026 ran in the hackathon's own org, now retired; that record lives in docs/hackathon/.</p>
-<p>The console is the half of this that nobody demos. Every promise the assistant makes about a person reaching a human being is worthless unless a human being has somewhere to stand. <code>Human_Handoff__c</code> was creating records that said "a person is picking this up" with no surface for that person.</p>
-<div class="tbl"><table><thead><tr><th scope="col">Console surface</th><th scope="col">What it is for</th></tr></thead><tbody><tr><td><strong>On Duty</strong> (app home)</td><td>Three queues in the order they should be worked, with standing orders above them</td></tr><tr><td>Waiting for a person</td><td>Someone asked for a human and is currently getting silence</td></tr><tr><td>Awaiting a decision</td><td>Approved requests an employer has not answered, nearest deadline first</td></tr><tr><td>Needs an interpreter</td><td>Signed video, waiting on a person, never machine translated</td></tr><tr><td>Curb Cut Overview (dashboard)</td><td>Where the system is failing people, in five panels</td></tr><tr><td>Record feeds</td><td>Two people often work one request, so the conversation lives on the record</td></tr></tbody></table></div>
-<p>Nothing in the console shows a diagnosis, because there is no field for one. An operator who is asked what a person has can only answer that nobody knows and nobody can find out.</p>
-<h4>The four principles</h4>
+<nav aria-label="Documents on this page"><ol><li><a href="#doc-0">README</a></li><li><a href="#doc-1">Technical design</a></li><li><a href="#doc-2">Evidence</a></li><li><a href="#doc-3">Who this is for</a></li><li><a href="#doc-4">Accessibility audit</a></li><li><a href="#doc-5">Decisions</a></li></ol></nav><section aria-labelledby="doc-0"><h2 id="doc-0">README</h2><p class="mute">What this is, what is live, how to verify it. Source: <code>README.md</code></p><div align="center">
+<h3>Curb Cut ✿</h3>
+<p>
+<strong>Ask for what you need at work, in your own words, without ever saying why.</strong>
+<br/>
+<span>Free and open source, for any workplace. On the other side, a person answers.</span>
+</p>
+</div>
+<p align="center">
+<a href="https://github.com/parthsevak2/curb-cut/tree/main/docs/hackathon"><img src="https://img.shields.io/badge/First%20place-Agentforce%20for%20Good%202026-8a5a00" alt="First place, Builder Track, Agentforce for Good Hackathon, Dreamforce 2026" /></a>
+<a href="https://github.com/parthsevak2/curb-cut/blob/main/LICENSE"><img src="https://img.shields.io/badge/licence-Apache%202.0-1f5c50" alt="Licence: Apache 2.0" /></a>
+<a href="https://www.npmjs.com/package/curb-cut-mcp"><img src="https://img.shields.io/npm/v/curb-cut-mcp?label=npm%20curb-cut-mcp" alt="curb-cut-mcp on npm, current version" /></a>
+<a href="https://github.com/parthsevak2/curb-cut/blob/main/docs/ARCHITECTURE.md"><img src="https://img.shields.io/badge/built%20on-Agentforce%20and%20Apex-1f5c50" alt="Built on Agentforce and Apex" /></a>
+</p>
+<p align="center">
+<a href="https://parthsevak2.github.io/curb-cut/try.html"><strong>Feel it in ten seconds</strong></a> ·
+<a href="https://github.com/TrailblazerLabs/Cohort-Applications/discussions/8"><strong>Upvote the pitch</strong></a> ·
+<a href="https://youtu.be/yleHLiwWRKA"><strong>Watch the film</strong></a> ·
+<a href="https://github.com/parthsevak2/curb-cut/blob/main/DEPLOY.md"><strong>Bring it to your org</strong></a> ·
+<a href="https://parthsevak2.github.io/curb-cut/story.html"><strong>Read the story</strong></a>
+</p>
+<p align="center">
+<img src="https://parthsevak2.github.io/curb-cut/story/sentence-draft.png" alt="A dark green card. Two drafts are struck out: I'm fine, and Sorry to bother you, but. Below them, in large letters, the sentence that finally gets written: The lights above my desk give me a headache by the afternoon. Under it, in small letters: Twelve words." width="700" />
+</p>
+<p>A sixty-dollar lamp can end a year of headaches. So why would anyone sit under lights that hurt for a year?</p>
+<p>Because of what the lamp costs to ask for. Saying that sentence to a manager. Backing it up with proof. Explaining your body to the person who decides your career. The lamp costs sixty dollars once. The sentence costs courage every time, and while it stays unsaid, the headache stays too.</p>
+<p>Curb Cut is built for that sentence. You say what is hard, in your own words. It shows you what other people have asked for in situations like yours, with what each usually costs and a public source on every option. If you want to ask, it writes the request in your words, shows you every word, and sends nothing until you clearly say yes. Nobody asks what you have. There is nowhere to write it down.</p>
+<blockquote class="callout callout-tip"><p><strong>Tip.</strong> <strong>Feel it before you read another line.</strong> Type one sentence on the <a href="https://parthsevak2.github.io/curb-cut/try.html">try page</a> and the product's own ranking answers, entirely in your browser. No account, no server, and nothing you type leaves the page.</p></blockquote>
+<h4>💡 The asking is the barrier</h4>
+<p>The process for requesting a disability accommodation is itself an accessibility barrier. To get help you must first find the policy, learn its vocabulary, hold a corporate login, complete a form, and disclose something you may be afraid to disclose, to a stranger, in writing, in a language that may not be your first.</p>
+<p>Cost usually is not what stands in the way.</p>
+<div class="tbl"><table><thead><tr><th scope="col">What the numbers say</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Of the <strong>1,425</strong> employers who gave cost figures, <strong>61 of every 100</strong> accommodations cost them nothing. Median one-time cost of the rest: <strong>$300</strong>.</td><td><a href="https://askjan.org/topics/costs.cfm">JAN employer survey</a>, 5,406 employers responded, Jan 2019 to Dec 2024</td></tr><tr><td>Across <strong>655</strong> large employers in 2025 the median share of staff who told their employer about a disability was <strong>3.5%</strong>, and it did not rise. By 2026, <strong>98%</strong> of them report accommodation programmes.</td><td><a href="https://disabilityin.org/resource/2025-disability-index-report/">Disability:IN 2025 Disability Index</a> and <a href="https://www.disabilityin.org/articles-and-updates/2026-disability-index-results-and-insights">2026 results</a></td></tr><tr><td>In 2025, <strong>22.8%</strong> of Americans with a disability were employed against 65.2% without, and <strong>30%</strong> of those working were part time against 17%.</td><td><a href="https://www.bls.gov/news.release/disabl.nr0.htm">US BLS, People with a Disability 2025</a>, released 3 March 2026</td></tr><tr><td><strong>More than a third</strong> of employed Canadians with a disability had an accommodation need <strong>go unmet</strong> in 2022.</td><td><a href="https://www.statcan.gc.ca/o1/en/plus/7142-more-canadians-disabilities-workforce-unmet-accommodation-needs-among-barriers-equity">Statistics Canada</a>, Canadian Survey on Disability</td></tr><tr><td>The <strong>GC Workplace Accessibility Passport</strong> already implements "ask once, not forever", and only for federal public servants.</td><td><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/accessibility-public-service/government-canada-workplace-accessibility-passport.html">Government of Canada</a></td></tr></tbody></table></div>
+<p>The programmes exist. The help is usually cheap. The sentence still goes unsaid. Every figure above, with its denominator and its caveat, is in docs/EVIDENCE.md.</p>
+<h4>🚪 Every door ends at a human</h4>
+<p align="center">
+<img src="https://parthsevak2.github.io/curb-cut/story/doors-six.png" alt="Six doors in a row, drawn in white line on dark green and labelled web, a text, a call, email, Slack and human. The last door stands open with warm light pouring out. The caption reads: Say human on any channel and a person picks it up." width="700" />
+</p>
+<p>The people this serves most often have no company login at all: the crew in the field, the cleaner on the early shift, the contractor on the road. So no door is the real one. The web door needs no login, no account and no name. A text or a call works from the most basic phone there is, and the number can live on a poster in the break room. There is an email door, a Slack DM that starts by telling the truth about what workspace owners can export, and a set of tools for the AI assistant a person already uses.</p>
+<div class="tbl"><table><thead><tr><th scope="col">What makes asking hard</th><th scope="col">What Curb Cut does about it</th></tr></thead><tbody><tr><td>You are afraid of what you would have to disclose</td><td>There is no diagnosis field. It is not hidden or encrypted. It is absent, and the build fails if one ever appears. You say what is hard, never why.</td></tr><tr><td>You do not know what is normal to ask for</td><td>Every option comes from a small public library, with its usual cost and a source. When nothing matches, it says so instead of guessing.</td></tr><tr><td>You worry something will be sent before you are ready</td><td>The draft appears in full, in your words. Nothing sends without a clear yes, and a hedge is not a yes.</td></tr><tr><td>A phone ringing at the wrong moment could expose you</td><td>The phone line answers when you call and never calls back.</td></tr><tr><td>You have no login, or no computer</td><td>Web with no login, a text, a call, email, a Slack DM, or your own assistant. All of them are equal.</td></tr><tr><td>You would rather talk to a person</td><td>Say <strong>human</strong> on any door and a person picks it up, from a queue ordered by who has waited longest.</td></tr></tbody></table></div>
+<p><img src="https://parthsevak2.github.io/curb-cut/story/options-with-sources.png" alt="The try page answering the sentence about the lights. Under the heading What others have asked for, four options appear: adjustable or task lighting, usually about 60 dollars; turning off fluorescent lights nearby, usually no cost to the employer; moving away from overhead fluorescent lighting, usually no cost; and a step-free route from the door to your desk. Each one carries a link to its source, the Job Accommodation Network. A note below says the page stops before sending on purpose." loading="lazy" /></p>
+<p>If you want to feel why the phone door matters, imagine your glasses broke at lunch. By two o'clock the spreadsheet is fog and every email is a guess. Then you go looking for help, and the form that could help is on the screen you cannot read. For millions of people it is like this every day. So Curb Cut answers a phone, and the fog stops mattering.</p>
+<details>
+<summary>Watch a page turn to fog (a short looping animation, kept closed for anyone who prefers no motion)</summary>
+<p><img src="https://parthsevak2.github.io/curb-cut/story/fog-motion.gif" alt="A short animation. The Curb Cut ask page, with the heading Tell me what's hard right now, slowly blurs until none of it can be read, the way a page looks to someone whose glasses have just broken." loading="lazy" /></p>
+</details>
+<h5>How it is put together</h5>
+<p>An Agentforce agent, written in Agent Script, holds the conversation, because conversation is what a language model is good at. Deterministic Apex decides what is stored and what is sent, so none of the promises above depend on a model's mood. Curb Cut runs inside the employer's own Salesforce org, and its principal is still <strong>the worker, not the employer</strong>.</p>
+<p>The four principles it is built on:</p>
 <ol>
 <li><strong>The agent's principal is the worker.</strong> Nothing leaves that the person did not personally approve.</li>
 <li><strong>No channel is the real one.</strong> Text, voice, email and web are equal front doors.</li>
 <li><strong>Ask before you disclose.</strong> A real answer without identifying yourself or naming anything about your body.</li>
 <li><strong>Ask once, not forever.</strong> Standing preferences travel ahead of you.</li>
 </ol>
-<h4>What is deliberately not built</h4>
+<p>docs/ARCHITECTURE.md shows how it fits together, with diagrams, and docs/CHANNELS.md says what each door can and cannot do.</p>
+<h4>🏆 It is real, and it is checked</h4>
+<p>Curb Cut won <strong>first place in the Builder Track of the Agentforce for Good Hackathon at Dreamforce 2026</strong>, among 43 projects from 11 countries. The judges also said it was hard to tell what was live product and what was presentation. That criticism was a gift. Every film now marks real footage LIVE and anything staged CONTEXT, and the <a href="https://parthsevak2.github.io/curb-cut/try.html">try page</a> exists so that you do not have to trust footage at all.</p>
+<p><strong>The film</strong> is 4 minutes 59 seconds, captioned, with every door shown live: <a href="https://youtu.be/yleHLiwWRKA">watch it on YouTube</a>.</p>
+<p>The promises are kept by the build, not by good intentions. You can check the first of them yourself in about a second, with no Salesforce org:</p>
+<pre>git clone https://github.com/parthsevak2/curb-cut
+cd curb-cut
+python3 tests/invariants.py     # 627 structural checks, offline, about a second</pre>
+<p>Those are the 627 structural invariants, the rules the build refuses to break. The rest of the checking, today:</p>
+<div class="tbl"><table><thead><tr><th scope="col">What is checked</th><th scope="col">Count today</th></tr></thead><tbody><tr><td>Apex tests</td><td>194</td></tr><tr><td>Accessibility checks against the live pages</td><td>509</td></tr><tr><td>Sa11y tests, accessibility-tree checks, and controls walked by keyboard</td><td>19, 34 and 34</td></tr><tr><td>Contrast, reading-level, and link and copy checks</td><td>28, 17 and 71</td></tr><tr><td>Responsible-AI checks</td><td>21, of which 18 pass and 3 are honestly undecided</td></tr><tr><td>Adversarial assertions, across 11 conversations</td><td>23 of 23</td></tr><tr><td>Agentforce evaluation in the org</td><td>16 cases</td></tr></tbody></table></div>
+<p>The adversarial conversations include a vague answer that must not be taken for a yes, a prompt injection, a manager demanding a roster, and a diagnosis volunteered mid-chat that the system must decline to keep. The commands behind every number are under Verification below.</p>
+<h4>🤝 Who it is for</h4>
+<p><strong>If you are a worker.</strong> You do not need a login, a name or a reason. One sentence about what is hard is enough. You see what others have asked for, you read every word of your request before it goes anywhere, and you can say <strong>human</strong> at any point.</p>
+<p><strong>If you answer on the access desk.</strong> Every promise about reaching a person is worthless unless that person has somewhere to stand. The console gives you three queues in the order they should be worked: who is waiting for a person, which requests are awaiting a decision, and who needs an interpreter. Nothing in it shows a diagnosis, because there is no field for one.</p>
+<p><strong>If you run an organisation.</strong> Curb Cut installs into the Salesforce org you already have, so everything it stores stays under your own roof. The code is free under Apache 2.0. What it truly needs is one person willing to be on the other end.</p>
+<p><strong>If you are a nonprofit.</strong> Under the workplace words, Curb Cut is a pattern: someone says what is hard, from any phone, sees real options with sources, sends nothing without a clear yes, and always reaches a human. The accommodation library is one file with a source on every row. Swap it, and the same machinery could fit a food bank's request line, a shelter's intake, or a school's door for parents.</p>
+<h4>🏡 Bring it to your org</h4>
+<p>Once the Salesforce CLI is logged in to your org, one command does the typing. It asks a few plain questions, finds the rest in the org, and there is no XML to edit.</p>
+<pre>git clone https://github.com/parthsevak2/curb-cut
+cd curb-cut
+sf org login web --alias curbcut
+bash scripts/install.sh curbcut</pre>
+<p>Then, any time you want to know where you stand, in plain words:</p>
+<pre>node scripts/check-setup.mjs curbcut</pre>
+<p>The check prints a tick or a cross for each item and the exact next step for every cross. A few steps need a person, and it names them: accepting the Einstein Bots terms, creating the site, and activating the agents.</p>
+<blockquote class="callout callout-note"><p><strong>Note.</strong> Curb Cut needs a Salesforce org with Agentforce, and Salesforce CLI 2.149 or later. The open-source code is free; the platform under it is not. The web and email doors need nothing outside Salesforce. Text and voice also need your own Twilio number and a small relay (channels/), and Slack needs the app created in your workspace from the manifest. Six Custom Labels carry your deployment's identity, and <code>node scripts/configure.mjs</code> sets them for you. Text, voice and email appear on your site only once your deployment has connected its own number or address.</p></blockquote>
+<p>The whole guide is one page: DEPLOY.md. The scripts are described in scripts/README.md, and a print-ready poster for the break room is at <a href="https://parthsevak2.github.io/curb-cut/poster.html">poster.html</a>.</p>
+<h4>🧭 Use it from your AI assistant</h4>
+<p>Most people who need this are already inside some assistant, so Curb Cut comes to them. It is an MCP server with five tools, and none of them can send a request to an employer. A tool that was never given a send button cannot be talked into pressing one.</p>
+<pre>npx curb-cut-mcp</pre>
+<p>Or add it to your MCP client's configuration:</p>
+<pre>{
+  "mcpServers": {
+    "curb-cut": {
+      "command": "npx",
+      "args": ["-y", "curb-cut-mcp"],
+      "env": { "SF_ORG_ALIAS": "curbcut" }
+    }
+  }
+}</pre>
+<div class="tbl"><table><thead><tr><th scope="col">Tool</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>curbcut_find_options</code></td><td>Given what a person says is hard, returns adjustments they could ask for, with usual cost and a source. Returns nothing rather than guessing.</td></tr><tr><td><code>curbcut_cost_brief</code></td><td>Published evidence on what accommodations cost employers, with the survey, the sample and the denominator.</td></tr><tr><td><code>curbcut_draft_request</code></td><td>Drafts the ask in the person's own words, describing what would help and never why. It cannot send.</td></tr><tr><td><code>curbcut_reach_human</code></td><td>Hands the person to a named human handler on the channel they are already using. Never routes anyone to a phone call.</td></tr><tr><td><code>curbcut_nominate</code></td><td>Nominates a workplace that should have Curb Cut. Stores the workplace name and nothing about the person.</td></tr></tbody></table></div>
+<p>The cost brief and the draft work on their own. The other three read from a Salesforce org with Curb Cut deployed, through the Salesforce CLI. Details are in the MCP server's own README and docs/AGENT-INTERFACES.md.</p>
+<h4>🌱 Help it grow</h4>
+<p>Curb Cut is tended the way a mango tree is: by hand, season after season, with nothing to sell. That is what keeps it free. It also means the only way it reaches the people it was built for is a person like you passing it along.</p>
+<blockquote class="callout callout-important"><p><strong>Important.</strong> <strong>The kindest thing you can do today takes one minute.</strong> Curb Cut is pitched to the Salesforce Trailblazer Labs Builder in Residence cohort, and community upvotes help decide who is selected. Open <a href="https://github.com/TrailblazerLabs/Cohort-Applications/discussions/8">the Curb Cut pitch on the Trailblazer Labs board</a> and press the upvote arrow on the post. You need a free GitHub account, and nothing else.</p></blockquote>
+<p>Other ways to help, all of them welcome:</p>
+<ul>
+<li><strong>Nominate a workplace.</strong> Send <code>NOMINATE</code> and a workplace name on any door. The name is written down so a person can reach out and offer this. Nothing about you is kept.</li>
+<li><strong>Star this repository</strong>, so the next person who needs it can find it.</li>
+<li><strong>Break it and say where it broke.</strong> <a href="https://github.com/parthsevak2/curb-cut/issues">Open an issue</a>. Many of the checks in this repository were born exactly that way. What felt wrong is as welcome as what felt right.</li>
+<li><strong>Contribute.</strong> Start with CONTRIBUTING.md and the code of conduct.</li>
+<li><strong>Read and share the story</strong>, about ten minutes: <a href="https://parthsevak2.github.io/curb-cut/story.html">Curb Cut, the sidewalk, and the stage</a>. The landing page with the films is <a href="https://parthsevak2.github.io/curb-cut/">parthsevak2.github.io/curb-cut</a>.</li>
+</ul>
+<h4>📚 Reference</h4>
+<p>Everything below is for the reader who wants to look under the floorboards.</p>
+<h5>What is deliberately not built</h5>
 <ul>
 <li><strong>No automated sign language.</strong> ASL is a complete language; recognition is unsolved. Signed video routes to a human, with immediate text acknowledgement so nobody waits in silence.</li>
 <li><strong>No diagnosis field.</strong> It isn't encrypted or restricted. It's absent. CI fails the build if anyone adds one.</li>
 <li><strong>No phone fallback, ever.</strong> <code>Reachable_By__c</code> accepts a message channel or email, and the code refuses a telephone number.</li>
 <li><strong>No inference.</strong> Nothing is profiled or predicted. Every signal is one the person set.</li>
 </ul>
-<h4>Verification</h4>
+<h5>Verification</h5>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, last run 17 November 2026, and <code>tests/sync_counts.py</code> rewrites the published counts from the invariant suite's own output so they cannot drift.</p>
 <pre>194 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-625 structural invariants      python3 tests/invariants.py            ~1s, no org
+627 structural invariants      python3 tests/invariants.py            ~1s, no org
 509 accessibility checks       python3 tests/a11y_audit.py            against the live pages
  19 Sa11y tests                npm run test:a11y                      Salesforce's own axe-core matcher, 0 violations
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
@@ -77,15 +156,61 @@ python3 tests/invariants.py     # 625 structural checks, offline, about a second
  71 link and copy checks       python3 tests/link_and_copy_audit.py
 23/23 adversarial assertions   node tests/headless_agent_api.mjs &amp;&amp; python3 tests/score_adversarial.py</pre>
 <p>Two of those suites break their own checks on purpose and assert each one goes red (<code>--selftest</code>). A suite that cannot fail proves nothing about the code it passes. The adversarial suite once scored 21 of 23, and both failures were published with their transcripts rather than averaged away; the agent's refusal wording and the scorer have since converged, and the suite passes whole. The habit stands: a miss gets reported, never smoothed.</p>
-<h4>Repository map</h4>
-<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>10 objects, 64 fields, 33 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>20 Apex classes + 16 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, seven pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>tests/</code></td><td>every suite above, plus <code>lwc_audit.py</code>, <code>screen_reader_walk.mjs</code> (which writes docs/SCREEN-READER-WALK.md) and <code>count_claims.py</code>, the one list of every place a count is published</td></tr><tr><td><code>deck/</code></td><td>the deck as source; the built copy lives in <code>docs/hackathon/</code></td></tr><tr><td><code>docs/hackathon/</code></td><td>the September 2026 hackathon record: judge guides, reflections, deck, stills</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
+<details>
+<summary><strong>Shipped recently</strong></summary>
+<ul>
+<li>A one-command install, <code>bash scripts/install.sh</code>, and a setup check in plain words, <code>node scripts/check-setup.mjs</code>.</li>
+<li>Codes and handles are made under each org's own HMAC key.</li>
+<li>Uploads are checked for what they are.</li>
+<li>Return codes bring a person back to the same handler.</li>
+<li>Delivery receipts.</li>
+<li>Text, voice and email are offered only once the deployment connects its own number or address.</li>
+<li>Six labels, set by <code>node scripts/configure.mjs</code>.</li>
+</ul>
+<p>The full history is in CHANGELOG.md, and what is still open is in KNOWN-ISSUES.md.</p>
+</details>
+<details>
+<summary><strong>The live deployment</strong>, every surface and its state on 17 November 2026</summary>
+<p>Curb Cut runs in an org of its own. Every web row below was checked from a logged-out machine on 17 November 2026, and the agents were read from the org the same day. Your install has its own address on every row; to feel the product with no org at all, use the <a href="https://parthsevak2.github.io/curb-cut/try.html">try page</a>.</p>
+<div class="tbl"><table><thead><tr><th scope="col">Surface</th><th scope="col">Address</th><th scope="col">State, 17 November 2026</th></tr></thead><tbody><tr><td>Web</td><td>https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut</td><td>live</td></tr><tr><td>Ask (the whole flow, no phone)</td><td><code>/curbcut/ask</code></td><td>live</td></tr><tr><td>Privacy</td><td><code>/curbcut/privacy</code></td><td>live</td></tr><tr><td>Terms</td><td><code>/curbcut/terms</code></td><td>live</td></tr><tr><td>Why now</td><td><code>/curbcut/why</code></td><td>live</td></tr><tr><td>Messaging programme</td><td><code>/curbcut/messaging</code></td><td>live</td></tr><tr><td>Docs</td><td><code>/curbcut/docs</code></td><td>live</td></tr><tr><td>SMS</td><td>a Twilio number the deployment owns</td><td>built; this showcase has not connected a number, and each organisation brings its own</td></tr><tr><td>Voice</td><td>the same Twilio number</td><td>built, speech in and out; offered once a number is connected</td></tr><tr><td>Email</td><td>inbound service <code>CurbCutInbound</code>, address in Setup → Email Services</td><td>receiving; replies need a verified sending domain</td></tr><tr><td>Slack</td><td><code>node channels/slack-app.mjs</code>, Socket Mode, DM only, never sends</td><td>runs beside the org; manifest in <code>channels/slack-manifest.json</code></td></tr><tr><td>Agent</td><td><code>Curb_Cut</code> v1, <code>Curb_Cut_Desk</code> v1</td><td>both active</td></tr><tr><td>Console (internal)</td><td><code>/lightning/app/Curb_Cut_Console</code>, home tab <code>/lightning/n/Curb_Cut_Home</code>, org login needed</td><td>live</td></tr><tr><td>MCP server</td><td><code>npx curb-cut-mcp</code>, or <code>node channels/mcp-server.mjs</code></td><td>5 tools; none can send a request</td></tr><tr><td>Any relay or assistant</td><td><code>POST /services/apexrest/curbcut/v1/message/</code></td><td>one door every channel above shares</td></tr></tbody></table></div>
+<p>What judges tested in September 2026 ran in the hackathon's own org, now retired; that record lives in docs/hackathon/.</p>
+</details>
+<details>
+<summary><strong>The console</strong>, where the person on the other end stands</summary>
+<p>The console is the half of this that nobody demos. Every promise the assistant makes about a person reaching a human being is worthless unless a human being has somewhere to stand. <code>Human_Handoff__c</code> was creating records that said "a person is picking this up" with no surface for that person.</p>
+<div class="tbl"><table><thead><tr><th scope="col">Console surface</th><th scope="col">What it is for</th></tr></thead><tbody><tr><td><strong>On Duty</strong> (app home)</td><td>Three queues in the order they should be worked, with standing orders above them</td></tr><tr><td>Waiting for a person</td><td>Someone asked for a human and is currently getting silence</td></tr><tr><td>Awaiting a decision</td><td>Approved requests an employer has not answered, nearest deadline first</td></tr><tr><td>Needs an interpreter</td><td>Signed video, waiting on a person, never machine translated</td></tr><tr><td>Curb Cut Overview (dashboard)</td><td>Where the system is failing people, in five panels</td></tr><tr><td>Record feeds</td><td>Two people often work one request, so the conversation lives on the record</td></tr></tbody></table></div>
+<p>Nothing in the console shows a diagnosis, because there is no field for one. An operator who is asked what a person has can only answer that nobody knows and nobody can find out.</p>
+</details>
+<details>
+<summary><strong>More films</strong></summary>
+<ul>
+<li>The film, 4 minutes 59 seconds, captioned, with every channel shown live: <a href="https://youtu.be/yleHLiwWRKA">watch the film on YouTube</a></li>
+<li>A 26-second recording of trying the ask page: <a href="https://drive.google.com/file/d/13NApu8rq3MpJjuGG2yzKuJ2P02tKWwGx/view">watch the 26-second recording</a></li>
+<li>A three-minute cut: <a href="https://drive.google.com/file/d/1Loqum6Kbk1noQazJDKrrVEnHzoU3biMD/view">watch the three-minute cut</a></li>
+</ul>
+</details>
+<details>
+<summary><strong>Repository map</strong></summary>
+<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>10 objects, 64 fields, 33 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>20 Apex classes + 16 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, seven pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>scripts/</code></td><td>the one-command install, the label setup and the plain-words setup check</td></tr><tr><td><code>tests/</code></td><td>every suite above, plus <code>lwc_audit.py</code>, <code>screen_reader_walk.mjs</code> (which writes docs/SCREEN-READER-WALK.md) and <code>count_claims.py</code>, the one list of every place a count is published</td></tr><tr><td><code>deck/</code></td><td>the deck as source; the built copy lives in <code>docs/hackathon/</code></td></tr><tr><td><code>docs/hackathon/</code></td><td>the September 2026 hackathon record: judge guides, reflections, deck, stills</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
 <p>Start with <code>docs/ARCHITECTURE.md</code>, then <code>CRITIQUE.md</code>, which is where the honest list of what is still weak lives.</p>
-<h4>Documentation</h4>
+</details>
+<details>
+<summary><strong>Documentation</strong>, every document and what it is for</summary>
 <div class="tbl"><table><thead><tr><th scope="col">Document</th><th scope="col">Purpose</th></tr></thead><tbody><tr><td><code>docs/ARCHITECTURE.md</code></td><td>How it fits together, with diagrams</td></tr><tr><td><code>docs/BRD.md</code></td><td>Business requirements and traceability</td></tr><tr><td><code>docs/ROADMAP.md</code></td><td>What is next, and what was rejected</td></tr><tr><td><code>docs/DECISIONS.md</code></td><td>Every significant call and why</td></tr><tr><td><code>docs/EVIDENCE.md</code></td><td>Every public figure, with source, denominator and caveat</td></tr><tr><td><code>docs/AGENT-INTERFACES.md</code></td><td>Headless, MCP, agent-to-agent, and the profile we will not build</td></tr><tr><td><code>docs/CHANNELS.md</code></td><td>Every door, and what each one can and cannot do</td></tr><tr><td><code>docs/TECHNICAL-DESIGN.md</code></td><td>The full technical design</td></tr><tr><td><code>docs/AGENT-VERSIONING.md</code></td><td>How agent versions are published and activated</td></tr><tr><td><code>SECURITY.md</code></td><td>Reporting, and the hardening still ahead, named</td></tr><tr><td><code>KNOWN-ISSUES.md</code></td><td>What is open today, then the history</td></tr><tr><td><code>CHANGELOG.md</code></td><td>What changed, release by release</td></tr><tr><td><code>CRITIQUE.md</code></td><td>Self-critique, 30 August 2026, kept as written</td></tr><tr><td><code>FINDINGS.md</code></td><td>The first adversarial runs, kept as written</td></tr><tr><td><code>CI.md</code></td><td>Pipeline and invariants</td></tr><tr><td><code>DEPLOY.md</code></td><td>Deployment</td></tr></tbody></table></div>
+</details>
+<h4>Licence</h4>
+<p>Apache 2.0. The accommodation library ships in the repo with a source citation on every row. Use it, fork it, run it in your own org, and make it your own.</p>
 <hr/>
-<p>Built by Parth Sevak. Welland, Ontario, Canada. Agentforce for Good, Dreamforce 2026 · Builder Track · Abilityforce.</p>
-<h4>License</h4>
-<p>Apache 2.0. The accommodation library ships in the repo with a source citation on every row. Use it, fork it, run it in your own org.</p></section>
+<p>The name comes from the sidewalk ramps wheelchair users fought for. They were built for a few people, and now everyone rolls through them: parents with strollers, travellers with suitcases, delivery workers with carts. Build for the people who get left out, and it gets better for everyone.</p>
+<p>Built with love by Parth Sevak. Welland, Ontario, Canada. Agentforce for Good, Dreamforce 2026 · Builder Track · Abilityforce.</p>
+<p align="center">
+<strong>Curb Cut ✿</strong>
+<br/>
+<span>A small flower for what grows where a curb is cut.</span>
+<br/>
+<a href="https://parthsevak2.github.io/curb-cut/try.html">Say one sentence on the try page</a> ·
+<a href="https://github.com/TrailblazerLabs/Cohort-Applications/discussions/8">Upvote the pitch on the Trailblazer Labs board</a>
+</p></section>
 <section aria-labelledby="doc-1"><h2 id="doc-1">Technical design</h2><p class="mute">How it fits together, verified against the org. Source: <code>docs/TECHNICAL-DESIGN.md</code></p><pre class="tdd">CURB CUT. TECHNICAL DESIGN DOCUMENT
 Agentforce for Good, Dreamforce 2026 · Builder Track
 Verified against the deployed org, 5 September 2026</pre><h3>0. THE ONE SENTENCE</h3><pre class="tdd">The process for requesting a workplace accommodation is itself an
@@ -321,7 +446,7 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        625   every push, ~1s, no org needed
+  Structural invariants        627   every push, ~1s, no org needed
   Apex tests                   194   every deploy
   Accessibility (live pages)   509   against the deployed site
   Sa11y / axe-core tests        19   Salesforce's own matcher
@@ -540,7 +665,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   there is no account, the diagnosis field does not exist, and the
   employer sees a request in the person's words rather than a record
   about them. The agent is the same technology the employer's side
-  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      625 checks, ~1s
+  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      627 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      194 tests
   python3 tests/a11y_audit.py                      509 checks, live pages
   npm run test:a11y                                 19 Sa11y tests
