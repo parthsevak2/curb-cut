@@ -1,5 +1,9 @@
 # Adversarial run — findings
 
+> The record of the first adversarial runs, 30 August 2026, kept as written.
+> The suite now passes 23 of 23 assertions across 11 conversations
+> (README, Verification), and the library holds 36 rows, not the counts below.
+
 Run 2026-08-30 against the live agent through the **Agent API, headless**
 (`tests/headless_agent_api.mjs`). No Lightning UI in the path. This satisfies the
 spec section 3 Headless requirement and is the runner for the section 5 suite,

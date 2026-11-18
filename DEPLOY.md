@@ -22,6 +22,25 @@ last.
       npm install -g @salesforce/cli@latest
       sf --version
 
+## Quick install
+
+Once you are logged in (step 1), one command asks you a few plain questions,
+finds the rest in your org (your site's address, the inbound email address, your
+agent user), deploys the web door and both agents, assigns the permission set,
+loads the starter library, runs the tests, creates the org's own signing key,
+and then checks your setup. There is no XML to edit:
+
+    bash scripts/install.sh curbcut
+
+A few steps need a person: accepting the Einstein Bots terms, creating the
+site, and activating the agents. The check names whatever is left, in plain
+words, and you can run it again any time:
+
+    node scripts/check-setup.mjs curbcut
+
+The steps below are the same install by hand, with the reasons. See
+[scripts/README.md](scripts/README.md).
+
 ## 1. Authenticate
 
     sf org login web --alias curbcut
@@ -29,16 +48,22 @@ last.
 A browser opens; sign in to the target org. Every later command uses the alias.
 Add `--instance-url` only for a sandbox with My Domain.
 
-## 2. Make it yours: four labels, one file
+## 2. Make it yours: six labels, one file
 
-Edit `force-app/main/default/labels/CustomLabels.labels-meta.xml` before the
-first deploy. The four values are your deployment's identity, quoted in every
-reply, page and disclosure:
+`node scripts/configure.mjs curbcut` fills these in for you: it asks for what
+it cannot find out and reads the rest from your org, and the quick install runs
+it for you. To do it by hand instead, edit
+`force-app/main/default/labels/CustomLabels.labels-meta.xml` before the first
+deploy. The six values are your deployment's identity, quoted in every
+reply, page and disclosure. Two of them switch a door on: until they hold a
+real value, the site simply does not offer that door.
 
 | Label | What it is |
 |---|---|
-| `CurbCut_SMS_Number` | your Twilio number as displayed, or leave the placeholder until you add texting |
-| `CurbCut_SMS_Number_Link` | the same number in E.164 for tap-to-text links |
+| `CurbCut_Operator` | who runs this deployment, as people and carriers should read it |
+| `CurbCut_SMS_Number` | your Twilio number as displayed; leave the placeholder until you add texting |
+| `CurbCut_SMS_Number_Link` | the same number in E.164 (`+14165550123`). While it holds `+10000000000`, the site offers no texting or calling |
+| `CurbCut_Inbound_Email` | the address Setup generates for `CurbCutInbound` (step 6). While it holds the placeholder, the site offers no email door |
 | `CurbCut_Support_Email` | a mailbox your access desk reads |
 | `CurbCut_Site_URL` | your public site URL from step 5, no trailing slash |
 
@@ -57,7 +82,7 @@ you read, and `default_agent_user` in both files under
 
 The permission set matters: fields deployed through the Metadata API carry no
 field-level security, and without it every security-enforced query throws.
-Expect 129 tests, all passing. If the org's async test runner errors, run the
+Expect every test to pass; the README's Verification block carries the current count. If the org's async test runner errors, run the
 test classes one at a time with `--synchronous`; the classes are independent.
 
 ## 4. Activate the agent
@@ -78,7 +103,8 @@ Agentforce Session Tracing.
 
 Setup → Sites → New. Pick your Force.com domain, name the site, set the
 active home page to `CurbCutHome`, and assign the guest user the
-`Curb_Cut_Access` permission set. The repository ships no site subdomain on
+`Curb_Cut_Guest` permission set: read and create only, the most Salesforce
+lets a guest hold, and nothing on preferences or the disclosure ledger. The repository ships no site subdomain on
 purpose; the site is yours. Put the site's full URL into `CurbCut_Site_URL`
 (step 2) and redeploy the labels if you created the site after first deploy.
 
@@ -88,25 +114,57 @@ Verify from outside: the home page renders with your number and address, and
 ## 6. Email door
 
 Setup → Email Services → `CurbCutInbound` → the org generates the inbound
-address. Publish that address wherever your people are. Replies are sent by
+address. Put it in `CurbCut_Inbound_Email` and deploy the labels; the site's
+email door appears once it is set. Publish that address wherever your people
+are. Replies are sent by
 Apex; for them to reach inboxes reliably your org needs a verified sending
 domain (Setup → Deliverability, DKIM). Until then, an undeliverable reply
 becomes a human handoff rather than silence.
 
-## 7. Optional: text and voice
+## 7. Optional: text and voice, on your own number
 
-You need a Twilio account, a number (US texting also needs A2P 10DLC
-registration), and a machine with a stable HTTPS address to run the relay.
+Curb Cut answers texts and calls on a number your organisation owns. Until you
+connect one, the site and every reply simply do not offer texting or calling,
+so nobody is ever pointed at a number that does not answer.
 
-    cp channels/.env.example channels/.env    # fill it in; it stays gitignored
-    node channels/sms-relay.mjs               # or install the launchd/systemd unit
-    bash channels/configure-twilio.sh https://your-relay-host
+1. **Get a number.** In your own Twilio account, buy a number that can text and
+   take calls. A US number must be registered for A2P 10DLC before carriers
+   deliver its texts, and the reviewer reads your `/curbcut/messaging` page, so
+   open the web door (step 5) first.
+2. **Tell the org.** Set `CurbCut_SMS_Number` (the number as people should read
+   it) and `CurbCut_SMS_Number_Link` (the same number in E.164, like
+   `+14165550123`), then redeploy the labels. The text and call options appear
+   on the site the moment the link label holds a real number.
 
-The relay verifies Twilio's signature on every request, hashes numbers with
-your salt before anything is stored, and refuses to start without
-`CURB_CUT_SITE`. The `run-relay.sh` script wraps it in a Cloudflare quick
-tunnel, which is demo-grade: fine on a laptop for a pilot, wrong for
-production. For production, use a named tunnel or any stable host.
+       sf project deploy start --source-dir force-app/main/default/labels --target-org curbcut
+
+3. **Fill in the relay's settings.** Every value is yours, and the file stays
+   out of git:
+
+       cp channels/.env.example channels/.env
+
+   `channels/.env.example` explains each line. You need the Twilio account SID,
+   auth token and number, a long random `HANDLE_SALT` (`openssl rand -hex 32`),
+   your site address, your access-desk mailbox, and your org alias.
+4. **Run the relay** on a machine with a stable HTTPS address:
+
+       node channels/sms-relay.mjs        # or install the launchd/systemd unit
+
+   It refuses to start without the auth token and the site address. Set
+   `PUBLIC_URL` to its public address and every reply also asks Twilio to report
+   whether it reached the phone; those receipts land in the ledger.
+5. **Point the number at the relay:**
+
+       bash channels/configure-twilio.sh https://your-relay-host
+
+6. **Try it.** Text `CURB CUT` to your number. The welcome and the carrier
+   disclosure should come back, then `node scripts/check-setup.mjs curbcut`
+   shows the text door as open.
+
+The relay verifies Twilio's signature on every request and hashes numbers with
+your salt before anything is stored. `run-relay.sh` wraps it in a Cloudflare
+quick tunnel, which is fine on a laptop for a pilot and wrong for production;
+for production, use a named tunnel or any stable host.
 
 ## 8. The Slack door, two minutes
 

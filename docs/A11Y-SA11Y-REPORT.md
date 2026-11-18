@@ -25,6 +25,10 @@ Not the 64-rule `base` preset that Sa11y applies by default.
 
 Seven test suites, thirteen tests, all passing.
 
+**Re-run 17 November 2026:** seven suites, nineteen tests, all passing, zero
+violations. The runner reports tests, not axe rule passes, so the 131 above is
+the figure from the run this report describes.
+
 ---
 
 ## The one rule removed, and why

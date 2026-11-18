@@ -125,7 +125,8 @@ there is nothing to tell them.
 
 The Lightning Web Components are audited by Sa11y, Salesforce's own axe-core
 matcher, reached through the `lwc-experts` toolset in the Salesforce DX MCP
-server. Twelve component states, 131 checks, run by `npm run test:a11y`.
+server. The first audit covered twelve component states and passed 131 axe
+checks; today `npm run test:a11y` runs 19 tests in 7 suites, all passing.
 
 Two properties make it worth trusting. The harness is proved able to fail: a
 control test plants an image with no alt text and asserts the matcher throws.

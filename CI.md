@@ -1,10 +1,10 @@
 # CI/CD
 
-Three layers, fastest first. Each one exists because something actually broke.
+Four jobs, fastest first. Each one exists because something actually broke.
 
 ## 1. Invariants — no org, ~1 second, runs on every push and PR
 
-    python3 tests/invariants.py        # 102 checks
+    python3 tests/invariants.py        # 625 checks
 
 Also wired as a pre-commit hook, so a violation never reaches a commit:
 
@@ -27,16 +27,24 @@ Prove they bite before trusting them:
     # add a field named Diagnosis__c, then:
     python3 tests/invariants.py        # -> FAIL no-diagnosis-field
 
-## 2. Org checks — every push to main and every internal PR
+## 2. Public site — when the `CURB_CUT_SITE` variable is set
 
-Deploy **dry-run only** (CI never mutates the org), all 24 Apex tests with
+Runs against a deployed site, so it only runs when the repository variable
+`CURB_CUT_SITE` names one: accessibility of every page (`a11y_audit.py`), links
+and copy that must match across surfaces (`link_and_copy_audit.py`), and the
+reading level of everything a person in difficulty reads
+(`reading_level_audit.py`).
+
+## 3. Org checks — every push to main and every internal PR
+
+Deploy **dry-run only** (CI never mutates the org), every Apex test with
 coverage, and `sf agent validate` — which compiles the Agent Script server-side.
 There is no offline compiler, so this is the only syntax gate that exists.
 
 Skips itself cleanly when `SFDX_AUTH_URL` is absent, so forks still get a
 meaningful green run.
 
-## 3. Adversarial suite — opt-in
+## 4. Adversarial suite — opt-in
 
 Actions → CI → Run workflow → tick **run_adversarial**. Talks to the live agent
 through the Agent API and costs real calls, so it is never automatic.

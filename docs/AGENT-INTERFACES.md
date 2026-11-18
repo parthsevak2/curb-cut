@@ -43,6 +43,13 @@ with setup steps instead of the server exiting.
 node channels/mcp-server.mjs
 ```
 
+Or from npm, with nothing cloned, as listed in the official MCP Registry
+(`io.github.parthsevak2/curb-cut-mcp`):
+
+```bash
+npx curb-cut-mcp
+```
+
 Or as a client config entry:
 
 ```json
@@ -56,17 +63,20 @@ agent only half answers that, because it still requires the person to come to
 us. Somebody who already lives inside another assistant should be able to ask
 "what could I even ask for at work" there, and get a sourced answer.
 
-### The three tools
+### The five tools
 
 | Tool | Does | Cannot |
 |---|---|---|
 | `curbcut_find_options` | Grounded lookup against the sourced library, ranked by name over summary, stemmed so "type" finds "typing" | Return anything not in the library; state a cost that is not published |
 | `curbcut_cost_brief` | The JAN evidence with its sample, its denominator and its caveat | Round the caveat off |
 | `curbcut_draft_request` | Draft the ask in the person's words | Send it |
+| `curbcut_reach_human` | Open a real handoff to a named person on the channel already in use, and return a code the person keeps | Route anyone to a phone call; carry why something is hard |
+| `curbcut_nominate` | Record a workplace that should have Curb Cut, and the door it came through | Hold anything about the person nominating, not even a hash |
 
 ### What is deliberately absent
 
-- **There is no send tool.** Not a gated one, not an admin one. Sending requires
+- **There is no send tool.** Not a gated one, not an admin one. Two tools write
+  a record (a handoff, a nomination); neither can send a request to an employer. Sending requires
   an explicit yes from the person in a conversation they are present for, and a
   tool call made by a model is not that. Without this, a prompt-injected client
   could file an accommodation request in someone's name. A disclosure they did

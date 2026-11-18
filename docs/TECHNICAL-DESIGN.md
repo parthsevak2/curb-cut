@@ -153,7 +153,7 @@ Building a login to solve this would destroy the property that makes the
 product work.
 
 THE MECHANISM. Save →  code = 6 chars from a 30-char alphabet
-          store  SHA-256(salt || code)  in Claim_Code_Hash__c
+          store  HMAC-SHA256(org key, code)  in Claim_Code_Hash__c
           show   the plaintext code ONCE, never again
 
   later → "OFF 4KQ7MT" on ANY channel
@@ -296,14 +296,14 @@ FOUR LAYERS, all failing the build except the last.
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        554   every push, ~1s, no org needed
-  Apex tests                   129   every deploy
-  Accessibility (live pages)   517   against the deployed site
-  Sa11y / axe-core             122   Salesforce's own matcher
+  Structural invariants        625   every push, ~1s, no org needed
+  Apex tests                   194   every deploy
+  Accessibility (live pages)   509   against the deployed site
+  Sa11y / axe-core tests        19   Salesforce's own matcher
   Contrast (both themes)        28   computed from design tokens
-  Component a11y                11   LWC templates
-  Link and copy                 54   every user-facing string
-  Reading level                 16   Flesch-Kincaid, per surface
+  Component a11y                12   LWC templates
+  Link and copy                 71   every user-facing string
+  Reading level                 17   Flesch-Kincaid, per surface
   Adversarial assertions     23/23   headless Agent API
 
 THE SA11Y LAYER, AND WHAT IT CANNOT SEE
@@ -337,8 +337,8 @@ Three deliberate choices make the number mean something.
 THE DELIVERY LEDGER
 
 Message_Log__c records THAT we tried to reach someone and what happened.
-Never what was said. Never a raw address or number. A salted SHA-256
-handle truncated to 32 hex chars.
+Never what was said. Never a raw address or number. A keyed HMAC-SHA256
+handle, under a key unique to the org, truncated to 32 hex chars.
 
 This exists because the email channel failed silently for days while
 Salesforce reported "success". The gap between "the platform accepted it"
@@ -559,10 +559,10 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
 14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT
 ─────────────────────────────────────────────────────────────────────
 
-  python3 tests/invariants.py                      521 checks, ~1s
-  sf apex run test -o curbcut -l RunLocalTests      129 tests
-  python3 tests/a11y_audit.py                      690 checks, live pages
-  npm run test:a11y                                122 Sa11y checks
+  python3 tests/invariants.py                      625 checks, ~1s
+  sf apex run test -o curbcut -l RunLocalTests      194 tests
+  python3 tests/a11y_audit.py                      509 checks, live pages
+  npm run test:a11y                                 19 Sa11y tests
   python3 tests/contrast_audit.py                   28 checks, both themes
   bash tests/check_live.sh                         source vs deployed
   node tests/headless_agent_api.mjs \

@@ -1,5 +1,10 @@
 # Self-critique — 30 August 2026
 
+> Kept as written that day. Since then: photo and signed-video intake ship on
+> the web (`CurbCutMedia`), the library holds 36 rows, and five Lightning web
+> components ship in the console. What is still open lives in
+> [docs/ROADMAP.md](docs/ROADMAP.md) and [SECURITY.md](SECURITY.md).
+
 Written against the build, not the pitch. Everything here is a real weakness.
 
 ## Fixed this round

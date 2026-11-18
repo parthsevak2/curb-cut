@@ -1,6 +1,37 @@
-# Status after deploy — 2026-08-29
+# Known issues
 
-## Deployed and verified
+What is open today, then the history that got here. Everything open is also
+tracked, with the gap named in the code, in [docs/ROADMAP.md](docs/ROADMAP.md)
+and [SECURITY.md](SECURITY.md).
+
+## Open now
+
+| Issue | Effect | Where it is tracked |
+|---|---|---|
+| Preference audience honoured on trust | "Manager only" is enforced by the ledger, not row-level security | SECURITY.md, ROADMAP Next 1 |
+| Uploads are limited per request, not per visitor | Someone who opens a new request each time is not rate-limited | SECURITY.md, ROADMAP Next 1 |
+| Handoffs never close | Any return code can bring someone back to a handoff, however old; there is no closed state yet | ROADMAP Next 1 |
+| Code guessing is not rate-limited | Claim codes and return codes can be tried repeatedly | SECURITY.md |
+| Codes issued before an org set its key | They still match their old salted hash, so they stay guessable from an export until revoked or closed | SECURITY.md |
+| Email replies need a verified sending domain | Without one, Salesforce accepts the reply and it never arrives | ROADMAP, Blocked |
+
+## Install prerequisite that cannot be scripted
+
+Einstein Bots terms must be accepted by a person in Setup before an agent can
+be activated; until then activation fails with `fetch failed`. DEPLOY.md lists
+it first for that reason.
+
+---
+
+## History: the first deploy, 29 August 2026
+
+Everything below is the record as written that week, in the hackathon org. The
+blocker it describes was cleared the same week and both agents were published;
+the counts are that day's, not today's.
+
+### Status after deploy — 2026-08-29
+
+### Deployed and verified
 
 | Component            | Result                                  |
 |----------------------|-----------------------------------------|
@@ -18,7 +49,7 @@
 
 Org: EPIC OrgFarm, Enterprise Edition, API 67.0.
 
-## BLOCKER: Einstein Bots legal terms not accepted
+### BLOCKER: Einstein Bots legal terms not accepted
 
 Two of the three required org settings were enabled by metadata deploy:
 
@@ -45,7 +76,7 @@ Agent step with `TypeError: fetch failed` against
 Network was ruled out: Node fetch and curl both reach that host fine from
 this machine, and deploy / query / validate all work against the org.
 
-### To finish
+#### To finish
 
 1. Setup -> Einstein Bots (or Agentforce Agents) -> accept the terms and
    toggle the feature on.
@@ -57,14 +88,14 @@ this machine, and deploy / query / validate all work against the org.
 
        sf data query --query "SELECT DeveloperName FROM BotDefinition" --target-org curbcut
 
-### Housekeeping
+#### Housekeeping
 
 The bundle currently in the org has full name `Curb_Cut_1`, not `Curb_Cut` —
 an earlier failed publish attempt appears to have taken the base name. Check
 Setup and delete the orphan before publishing for real, or the demo may point
 at the wrong bundle.
 
-## The Agent Script was rewritten
+### The Agent Script was rewritten
 
 `Curb_Cut.agent` as shipped produced 510 compilation errors and failed from
 line 0 — it was written in a syntax that predates the shipped Agent Script
@@ -88,7 +119,7 @@ Structural changes forced by the grammar:
   in this grammar; behaviour is declared under `reasoning: actions:` using
   `@utils.transition`, `@utils.setVariables`, `@utils.escalate`
 
-## Actions: all five now implemented and wired
+### Actions: all five now implemented and wired
 
 | Action                | Apex class              | Bound target                  |
 |-----------------------|-------------------------|-------------------------------|
@@ -114,7 +145,7 @@ Tests: 13/13 pass.
 
 ---
 
-## Why `sf agent publish` cannot work from the CLI (diagnosed 2026-08-30)
+### Why `sf agent publish` cannot work from the CLI (diagnosed 2026-08-30)
 
 The CLI reports only `TypeError: fetch failed`. The real chain, surfaced by
 calling `ScriptAgent.publish()` directly through the library:
