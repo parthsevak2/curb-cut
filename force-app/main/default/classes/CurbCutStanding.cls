@@ -87,10 +87,10 @@ public with sharing class CurbCutStanding {
          * cannot see the row. Scoped to one field lookup, returning at most one
          * record, and only ever reachable by somebody holding the code.
          */
-        private List<Access_Preference__c> byHash(String hash) {
+        private List<Access_Preference__c> byHash(Set<String> hashes) {
             return [SELECT Id, Statement__c, Shared_With__c, Scope__c, Revoked_On__c
                       FROM Access_Preference__c
-                     WHERE Claim_Code_Hash__c = :hash
+                     WHERE Claim_Code_Hash__c IN :hashes
                      LIMIT 1];
         }
     }
@@ -143,7 +143,7 @@ public with sharing class CurbCutStanding {
                         + 'Your code is ' + code + '. Keep it somewhere you can find it.\n\n'
                         + 'Send WHO ' + code + ' to see everyone who has been shown this. '
                         + 'Send OFF ' + code + ' to turn it off. I will not ask why. '
-                        + 'Both work from here, by text, or by email.\n\n'
+                        + 'Both work ' + CurbCutDoors.orElsewhere() + '.\n\n'
                         + 'I am showing you this code because I cannot look you up. '
                         + 'I do not know who you are, and I would rather keep it that way.';
         } catch (DmlException e) {
@@ -172,11 +172,18 @@ public with sharing class CurbCutStanding {
         return res;
     }
 
-    private static final String CODE_SALT = 'curb-cut-claim-salt-v1';
-
+    /** What a new preference stores: keyed by this org's own secret when it has one. */
     private static String hash(String code) {
-        return EncodingUtil.convertToHex(Crypto.generateDigest(
-            'SHA-256', Blob.valueOf(CODE_SALT + code.toUpperCase()))).substring(0, 64);
+        return CurbCutKeys.digest(CurbCutKeys.Purpose.CLAIM_CODE, code.toUpperCase());
+    }
+
+    /**
+     * What a lookup accepts: the keyed form and the old salted one. Codes saved
+     * before this org had a key are in people's pockets, and the day the key is
+     * set must not be the day OFF stops working for them.
+     */
+    private static Set<String> hashes(String code) {
+        return CurbCutKeys.candidates(CurbCutKeys.Purpose.CLAIM_CODE, code.toUpperCase());
     }
 
     /**
@@ -199,7 +206,7 @@ public with sharing class CurbCutStanding {
             return res;
         }
 
-        List<Access_Preference__c> found = new Pen().byHash(hash(code));
+        List<Access_Preference__c> found = new Pen().byHash(hashes(code));
         if (found.isEmpty() || found[0].Revoked_On__c != null) {
             res.message = 'That code is not switched on for anything right now. '
                         + 'If you think it should be, send HUMAN and a person will '

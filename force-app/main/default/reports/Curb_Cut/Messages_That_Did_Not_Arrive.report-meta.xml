@@ -33,6 +33,11 @@
             <operator>equals</operator>
             <value>Outbound</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Message_Log__c.Status__c</column>
+            <operator>notEqual</operator>
+            <value>Delivered</value>
+        </criteriaItems>
     </filter>
     <timeFrameFilter>
         <dateColumn>CUST_CREATED_DATE</dateColumn>

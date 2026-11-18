@@ -87,6 +87,8 @@ public with sharing class CurbCutKeyword {
     private static final String CODE_ALPHABET = 'ABCDEFGHJKLMNPQRTUVWXYZ2346789';
     private static final Pattern CODE_IN_TEXT =
         Pattern.compile('(?i)\\b([abcdefghjklmnpqrtuvwxyz2346789]{6})\\b');
+    private static final Pattern CODE_ONLY =
+        Pattern.compile('(?i)[' + CODE_ALPHABET + ']{6}');
 
     // NOMINATE travels with a payload, the way OFF travels with a code. The
     // payload is a workplace name, so it keeps the person's own casing and
@@ -167,6 +169,16 @@ public with sharing class CurbCutKeyword {
             }
         }
         return m;
+    }
+
+    /**
+     * True when this could be one of our codes, in any case: six characters
+     * from the code alphabet, and not one of our own words. Shared so that a
+     * return code is recognised by exactly the rule a claim code is, and the
+     * two can never drift apart on what counts as a code.
+     */
+    public static Boolean isCode(String s) {
+        return s != null && CODE_ONLY.matcher(s).matches() && !isPhrase(s.toLowerCase());
     }
 
     private static Boolean isPhrase(String w) {

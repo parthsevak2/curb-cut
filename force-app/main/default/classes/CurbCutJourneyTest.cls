@@ -158,12 +158,17 @@ private class CurbCutJourneyTest {
         User u = restricted();
         System.runAs(u) {
             Test.startTest();
+            // Real headers: the door reads the first bytes, and 'v' is not a video.
+            String mp4  = EncodingUtil.base64Encode(EncodingUtil.convertFromHex(
+                '000000186674797069736f6d0000020069736f6d6d703431' + '00'.repeat(64)));
+            String jpeg = EncodingUtil.base64Encode(EncodingUtil.convertFromHex(
+                'ffd8ffe000104a464946' + '00'.repeat(64)));
             CurbCutMedia.Result v = CurbCutMedia.send(
-                null, 'signed.mp4', EncodingUtil.base64Encode(Blob.valueOf('v')), 'Video');
+                null, 'signed.mp4', mp4, 'Video');
             System.assertEquals(true, v.accepted, 'Video refused: ' + v.message);
             System.assertEquals(true, v.interpreter);
             CurbCutMedia.Result photo = CurbCutMedia.send(
-                v.barrierId, 'desk.jpg', EncodingUtil.base64Encode(Blob.valueOf('p')), 'Image');
+                v.barrierId, 'desk.jpg', jpeg, 'Image');
             Test.stopTest();
             System.assertEquals(true, photo.accepted);
 

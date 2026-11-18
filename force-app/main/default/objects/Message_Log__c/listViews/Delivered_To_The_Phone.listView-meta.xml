@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_To_The_Phone</fullName>
+    <columns>NAME</columns>
+    <columns>Channel__c</columns>
+    <columns>Status__c</columns>
+    <columns>Attempted_At__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Delivered</value>
+    </filters>
+    <label>Delivered to the phone</label>
+</ListView>

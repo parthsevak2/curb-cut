@@ -27,6 +27,15 @@ private class CurbCutKindnessTest {
         'say it again', 'come back'
     };
 
+    // The first bytes of a real photo, a real video and a PDF. Media is now
+    // checked by what it is, so a refusal test has to send something real.
+    private static final String A_PHOTO = EncodingUtil.base64Encode(EncodingUtil.convertFromHex(
+        'ffd8ffe000104a464946' + '00'.repeat(64)));
+    private static final String A_VIDEO = EncodingUtil.base64Encode(EncodingUtil.convertFromHex(
+        '000000186674797069736f6d0000020069736f6d6d703431' + '00'.repeat(64)));
+    private static final String PDF_AS_PHOTO = EncodingUtil.base64Encode(EncodingUtil.convertFromHex(
+        '255044462d312e370a' + '00'.repeat(64)));
+
     private static void assertKind(String label, String message) {
         System.assert(String.isNotBlank(message),
             label + ' failed silently. Silence is the worst answer this system can give.');
@@ -80,7 +89,28 @@ private class CurbCutKindnessTest {
         assertKind('a file we cannot place',
             CurbCutMedia.send(null, 'notes.txt',
                 EncodingUtil.base64Encode(Blob.valueOf('x')), 'Document').message);
+        assertKind('a document renamed as a photo',
+            CurbCutMedia.send(null, 'desk.jpg', PDF_AS_PHOTO, 'Image').message);
+        assertKind('a video sent through the photo button',
+            CurbCutMedia.send(null, 'clip.jpg', A_VIDEO, 'Image').message);
+        assertKind('a photo sent through the video button',
+            CurbCutMedia.send(null, 'desk.mp4', A_PHOTO, 'Video').message);
         Test.stopTest();
+    }
+
+    /** The limit is reached by somebody who is trying hard to show us. Kindly, then. */
+    @IsTest
+    static void theFileLimitFailsKindly() {
+        CurbCutMedia.Result first = CurbCutMedia.send(null, 'desk.jpg', A_PHOTO, 'Image');
+        for (Integer i = 1; i < CurbCutMedia.MAX_FILES; i++) {
+            CurbCutMedia.send(first.barrierId, 'desk.jpg', A_PHOTO, 'Image');
+        }
+        Test.startTest();
+        CurbCutMedia.Result r = CurbCutMedia.send(first.barrierId, 'desk.jpg', A_PHOTO, 'Image');
+        Test.stopTest();
+        System.assertEquals(false, r.accepted, 'setup: the limit must have been reached');
+        assertKind('one file too many', r.message);
+        assertReadable('one file too many', r.message);
     }
 
     @IsTest
@@ -106,7 +136,32 @@ private class CurbCutKindnessTest {
         assertReadable('a file we cannot place',
             CurbCutMedia.send(null, 'notes.txt',
                 EncodingUtil.base64Encode(Blob.valueOf('x')), 'Document').message);
+        assertReadable('a document renamed as a photo',
+            CurbCutMedia.send(null, 'desk.jpg', PDF_AS_PHOTO, 'Image').message);
+        assertReadable('a video sent through the photo button',
+            CurbCutMedia.send(null, 'clip.jpg', A_VIDEO, 'Image').message);
         Test.stopTest();
+    }
+
+    /**
+     * Coming back with a code is the moment somebody finds out whether the
+     * promise held. Found or not, the answer has to be plain and has to leave
+     * them somewhere to go.
+     */
+    @IsTest
+    static void comingBackWithACodeIsAnsweredKindly() {
+        CurbCutWeb.Reply asked = CurbCutWeb.human('', null);
+        Test.startTest();
+        String onTheWeb = CurbCutWeb.consult(asked.claimCode).message;
+        String byText   = CurbCutChannelApi.handle('SMS', asked.claimCode, 'kind-1', null).message;
+        String nowhere  = CurbCutWeb.consult('ZZZ7ZZ').message;
+        Test.stopTest();
+        assertKind('a code that leads back, on the web', onTheWeb);
+        assertKind('a code that leads back, by text', byText);
+        assertKind('a code that leads nowhere', nowhere);
+        assertReadable('a code that leads back, on the web', onTheWeb);
+        assertReadable('a code that leads back, by text', byText);
+        assertReadable('a code that leads nowhere', nowhere);
     }
 
     /**

@@ -82,6 +82,14 @@ global with sharing class CurbCutWeb {
             return r;
         }
 
+        // A code next, before the words are read as a need. The page told an
+        // anonymous person to type their code here to land back with the same
+        // handler, and for months it went to the library instead. Asked ahead
+        // of the control words because HUMAN with a code means "my person";
+        // CurbCutReturn leaves every other control word alone itself.
+        CurbCutReturn.Result back = CurbCutReturn.tryResume('Web', need);
+        if (back.message != null) { return returned(back); }
+
         // Control words first. Somebody typing OFF is withdrawing consent, not
         // describing a barrier, and answering that with a list of accommodations
         // is how a withdrawal gets quietly ignored.
@@ -186,10 +194,33 @@ global with sharing class CurbCutWeb {
         return r;
     }
 
+    /**
+     * Somebody came back with their code, or sent something that was plainly
+     * meant to be one. Carries the message and the handler's name and nothing
+     * else: no barrier id, no record id, no code, so nothing about the earlier
+     * request reaches whoever is holding it.
+     */
+    private static Reply returned(CurbCutReturn.Result back) {
+        Reply r = new Reply();
+        r.created     = false;
+        r.noMatch     = true;
+        r.intent      = 'RETURN';
+        r.message     = back.message;
+        r.handlerName = back.handlerName;
+        ledger('Outbound', 'Accepted',
+               back.found ? 'returned to a handoff' : 'return code not matched', null);
+        return r;
+    }
+
     /** Any point. A real person, reachable by message, never by phone. */
     @RemoteAction
     global static Reply human(String context, String barrierId) {
         ledger('Inbound', 'Accepted', 'asked for a person', barrierId);
+        // The person button sends whatever is in the box. If that is their
+        // code, they asked for their person, not a new one.
+        CurbCutReturn.Result back = CurbCutReturn.tryResume('Web', context);
+        if (back.found) { return returned(back); }
+
         CurbCutCreateHandoff.Request hr = new CurbCutCreateHandoff.Request();
         hr.context = context;
         hr.barrierReportId = barrierId;
@@ -209,8 +240,8 @@ global with sharing class CurbCutWeb {
             ? res.handlerName + ' is picking this up. You will not have to call anyone, '
               + 'and you will not have to explain any of this again.\n\n'
               + 'You have not told me anything I could reach you with, and I am not going '
-              + 'to ask. So keep this code: ' + res.returnCode + '. Send it here, or by '
-              + 'text, or by email, and you land straight back with the same person.'
+              + 'to ask. So keep this code: ' + res.returnCode + '. Send it '
+              + CurbCutDoors.orElsewhere() + ', and you land straight back with the same person.'
             : 'I could not reach a person just now, and I am not going to pretend I did. '
               + 'Please email ' + System.Label.CurbCut_Support_Email + ' and someone will pick it up.';
         return r;

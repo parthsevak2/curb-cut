@@ -54,6 +54,7 @@ public with sharing class CurbCutAssist {
     public static Answer nextSteps(Id handoffId) {
         Human_Handoff__c h = [
             SELECT Requested_At__c, Picked_Up_At__c, Handler_Name__c, Reachable_By__c,
+                   Returned_At__c,
                    Barrier_Report__c, Barrier_Report__r.Functional_Description__c,
                    Barrier_Report__r.Interpreter_Needed__c,
                    Barrier_Report__r.Inbound_Modality__c,
@@ -72,6 +73,21 @@ public with sharing class CurbCutAssist {
         Boolean taken = h.Picked_Up_At__c != null;
         Integer hours = h.Requested_At__c == null ? 0
             : (Integer) ((System.now().getTime() - h.Requested_At__c.getTime()) / 3600000);
+
+        // Above everything else, because they were just told this person still
+        // has it. A handoff already taken sits under "Being worked", not in the
+        // waiting queue, so this step is how its handler finds out somebody is
+        // back and waiting on them again.
+        if (h.Returned_At__c != null) {
+            Integer since = (Integer) ((System.now().getTime() - h.Returned_At__c.getTime()) / 3600000);
+            String handler = String.isBlank(h.Handler_Name__c) ? 'the access team' : h.Handler_Name__c;
+            a.steps.add(step('back', 'They came back',
+                'They came back with their code '
+                + (since < 1 ? 'within the last hour' : since + (since == 1 ? ' hour ago' : ' hours ago'))
+                + ', and were told ' + handler + ' still has this. Answer them before anything '
+                + 'newer, on the channel in Reachable By, and do not ask them to explain it again.',
+                since < 24 ? 'urgent' : 'live', false));
+        }
 
         a.steps.add(step('take', taken ? 'Taken by ' + h.Handler_Name__c : 'Put your name on it',
             taken ? 'The next shift can see this is not waiting on nobody.'

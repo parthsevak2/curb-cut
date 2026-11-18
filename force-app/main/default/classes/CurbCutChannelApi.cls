@@ -49,6 +49,10 @@ global with sharing class CurbCutChannelApi {
         String text    = str(body.get('text'));
         String who     = str(body.get('handle'));
         String barrier = str(body.get('barrierId'));
+        // An assistant handing somebody over says what was hard, in their
+        // words, so the person never explains it twice. Redacted like every
+        // other word that reaches a record.
+        handoffContext = str(body.get('context'));
 
         // The door as the caller named it, kept before the reply coercion
         // below: a voice or MCP nomination must record the door it really
@@ -57,6 +61,8 @@ global with sharing class CurbCutChannelApi {
         if (!REPLY_ON.containsKey(channel)) { channel = 'External'; }
         return handle(channel, text, who, barrier, door);
     }
+
+    @TestVisible private static String handoffContext;
 
     private static String str(Object o) { return o == null ? null : String.valueOf(o); }
 
@@ -90,12 +96,28 @@ global with sharing class CurbCutChannelApi {
             return a;
         }
 
+        // A return code before anything is read as a need, the same way the
+        // web asks it. CurbCutReturn leaves every control word but HUMAN to
+        // the branch below, so STOP, HELP, OFF, WHO and NOMINATE are answered
+        // exactly as they were, and OFF with a code is still a claim code.
+        CurbCutReturn.Result back = CurbCutReturn.tryResume(channel, text);
+        if (back.message != null) {
+            a.intent      = 'RETURN';
+            a.message     = back.message;
+            a.handlerName = back.handlerName;
+            CurbCutLog.record(channel, 'Outbound', 'Accepted', who,
+                back.found ? 'returned to a handoff' : 'return code not matched', barrierId);
+            return a;
+        }
+
         // Control words first, everywhere, identically.
         if (kw.matched) {
             a.intent = kw.intent;
             if (kw.intent == 'HUMAN') {
                 CurbCutCreateHandoff.Request hr = new CurbCutCreateHandoff.Request();
-                hr.context = 'Asked for a person on ' + channel + '.';
+                // Only the person's own words, when an assistant passed them on;
+                // the intake behind the handoff takes out any condition.
+                hr.context = String.isBlank(handoffContext) ? null : handoffContext.left(2000);
                 hr.barrierReportId = barrierId;
                 hr.reachableBy = REPLY_ON.get(channel);
                 CurbCutCreateHandoff.Result hres = CurbCutCreateHandoff.create(

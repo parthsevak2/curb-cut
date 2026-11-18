@@ -12,6 +12,8 @@
             <value><fullName>Accepted</fullName><default>true</default><label>Accepted by platform</label></value>
             <value><fullName>Rejected</fullName><default>false</default><label>Rejected</label></value>
             <value><fullName>Escalated</fullName><default>false</default><label>Escalated to a person</label></value>
+            <value><fullName>Delivered</fullName><default>false</default><label>Delivered to the phone</label></value>
+            <value><fullName>Undelivered</fullName><default>false</default><label>Not delivered</label></value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

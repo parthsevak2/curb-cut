@@ -20,6 +20,13 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
      */
     @TestVisible private static Boolean forceReplyFailure = false;
 
+    /**
+     * The body of the last reply, for tests only. Apex will not show a test
+     * what a suppressed send said, and what a returning person is told is the
+     * whole point of that path: the handler's name, and never their code.
+     */
+    @TestVisible private static String lastReply;
+
     global Messaging.InboundEmailResult handleInboundEmail(
             Messaging.InboundEmail email, Messaging.InboundEnvelope envelope) {
 
@@ -29,6 +36,16 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         String body = pickBody(email);
         if (String.isBlank(body)) {
             reply(email, envelope, greeting(), null);
+            return result;
+        }
+
+        // A return code before the body is read as a need. Email is where a
+        // code comes back inside a sentence ("my code is 4KQ7MT, any news?"),
+        // so CurbCutReturn looks through the whole body, and leaves every
+        // control word but HUMAN to the branch below, STOP included.
+        CurbCutReturn.Result back = CurbCutReturn.tryResume('Email', body);
+        if (back.message != null) {
+            reply(email, envelope, back.message + '\n\n' + signature(), null);
             return result;
         }
 
@@ -168,7 +185,9 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
     private String signature() {
         return '— Curb Cut\n'
              + SITE + '\n'
-             + 'Text ' + System.Label.CurbCut_SMS_Number + ', or reply to this email. Whichever is easier.';
+             + (CurbCutDoors.textOpen()
+                ? 'Text ' + System.Label.CurbCut_SMS_Number + ', or reply to this email. Whichever is easier.'
+                : 'Reply to this email whenever it suits you.');
     }
 
     /**
@@ -193,6 +212,7 @@ global with sharing class CurbCutEmail implements Messaging.InboundEmailHandler 
         msg.setSubject('Re: ' + (String.isBlank(email.subject) ? 'what could make work easier' : email.subject));
         String disclosure = 'I am automated, not a person; reply HUMAN for one. A work mailbox belongs to your employer.\n\n';
         msg.setPlainTextBody(bodyText.startsWith('Hi. I am automated') ? bodyText : disclosure + bodyText);
+        if (Test.isRunningTest()) { lastReply = msg.getPlainTextBody(); }
 
         CurbCutLog.record('Email', 'Inbound', 'Accepted', logged, null, barrierId);
 

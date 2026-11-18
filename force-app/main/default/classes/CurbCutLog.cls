@@ -12,14 +12,26 @@
  */
 public with sharing class CurbCutLog {
 
-    private static final String SALT =
-        'curb-cut-log-salt-v1';   // rotating this orphans old hashes, by design
-
-    /** Hashes the recipient so a log is never a contact list. */
+    /**
+     * Hashes the recipient so a log is never a contact list. Keyed by this
+     * org's own secret through CurbCutKeys; the salt that used to sit here was
+     * in a public repository, which made it a label rather than a secret.
+     */
     public static String handleFor(String raw) {
         if (String.isBlank(raw)) { return null; }
-        return EncodingUtil.convertToHex(
-            Crypto.generateDigest('SHA-256', Blob.valueOf(SALT + raw))).substring(0, 32);
+        return CurbCutKeys.digest(CurbCutKeys.Purpose.LOG_HANDLE, raw);
+    }
+
+    /**
+     * Every handle this recipient's rows might carry: rows written before the
+     * org had a key hold the old form, rows written after hold the new one.
+     * Anything that ever looks a person's rows up by handle - to ask whether
+     * they have had the disclosure, or to count what they were sent - must
+     * match IN this set, or the history splits in two the day the key is set.
+     */
+    public static Set<String> handlesFor(String raw) {
+        if (String.isBlank(raw)) { return new Set<String>(); }
+        return CurbCutKeys.candidates(CurbCutKeys.Purpose.LOG_HANDLE, raw);
     }
 
     public static void record(String channel, String direction, String status,

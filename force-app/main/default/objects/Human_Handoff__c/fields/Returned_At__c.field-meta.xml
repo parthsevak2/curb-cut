@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Returned_At__c</fullName>
+    <description>When the person last came back with their return code, on any channel. Set by CurbCutReturn, never by staff. Reachable By moves to the channel they came back on where one fits. Nothing they wrote is kept here, and nothing that could identify them: the code is hashed to find this record and then dropped. History is tracked, so every return is on the record.</description>
+    <inlineHelpText>They came back with their code at this time and were told you still have this. They are waiting on you again. Answer them before anything newer, on the channel in Reachable By, and do not ask them to explain it again.</inlineHelpText>
+    <label>Came Back At</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>DateTime</type>
+</CustomField>

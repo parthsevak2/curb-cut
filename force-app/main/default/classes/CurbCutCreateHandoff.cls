@@ -91,11 +91,22 @@ public with sharing class CurbCutCreateHandoff {
         return REACHABLE_BY;
     }
 
-    private static final String CODE_SALT = 'curb-cut-return-salt-v1';
-
+    /** What a new handoff stores: keyed by this org's own secret when it has one. */
     private static String hashCode(String code) {
-        return EncodingUtil.convertToHex(Crypto.generateDigest(
-            'SHA-256', Blob.valueOf(CODE_SALT + code.toUpperCase()))).substring(0, 64);
+        return CurbCutKeys.digest(CurbCutKeys.Purpose.RETURN_CODE, code.toUpperCase());
+    }
+
+    /**
+     * Every form a handoff's Return_Code_Hash__c might hold for this code: the
+     * keyed one, and the old salted one for codes handed out before this org
+     * had a key. Whatever brings a person back to their handler by code must
+     * match IN this set. Matching only the new form would strand everybody who
+     * was given a code before the key was set, at exactly the moment they were
+     * told they would not have to explain it again.
+     */
+    public static Set<String> returnCodeHashes(String code) {
+        if (String.isBlank(code)) { return new Set<String>(); }
+        return CurbCutKeys.candidates(CurbCutKeys.Purpose.RETURN_CODE, code.trim().toUpperCase());
     }
 
     private static Result createOne(Request req) {
@@ -103,6 +114,26 @@ public with sharing class CurbCutCreateHandoff {
         res.created = false;
         res.handoffId = '';
         res.handlerName = FALLBACK_HANDLER;
+
+        // What the person said was hard has to reach the person picking this
+        // up, or "you will not have to explain it again" is a promise with
+        // nothing behind it. For a long time the context was accepted here and
+        // then dropped. When there is no barrier report to link, the words go
+        // through the same intake as everything else, which takes out any
+        // condition before it is stored, and the handoff points at that report.
+        if (String.isBlank(req.barrierReportId) && String.isNotBlank(req.context)) {
+            try {
+                CurbCutIntake.Request ir = new CurbCutIntake.Request();
+                ir.functionalDescription = req.context.left(2000);
+                List<CurbCutIntake.Result> logged = CurbCutIntake.log(new List<CurbCutIntake.Request>{ ir });
+                if (!logged.isEmpty() && String.isNotBlank(logged[0].barrierReportId)) {
+                    req.barrierReportId = logged[0].barrierReportId;
+                }
+            } catch (Exception e) {
+                // A handoff must never fail because its context could not be kept.
+                System.debug(LoggingLevel.WARN, 'handoff context not kept: ' + e.getTypeName());
+            }
+        }
 
         String code = CurbCutKeyword.newCode();
         Human_Handoff__c hh = new Human_Handoff__c(

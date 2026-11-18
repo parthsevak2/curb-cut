@@ -10,7 +10,7 @@
     <filters>
         <field>Status__c</field>
         <operation>notEqual</operation>
-        <value>Accepted</value>
+        <value>Accepted,Delivered</value>
     </filters>
     <label>Did not reach them</label>
 </ListView>
