@@ -46,6 +46,13 @@ What changed, by date. The git history has every step; this is the shape of it.
   texting, calling and email only once the deployment has its own number and
   inbound address. The showcase stops pointing people at a retired hackathon
   number, and a fresh install never shows a placeholder.
+- **The relays key every handle.** The text, voice and Slack relays hash phone
+  numbers and Slack ids with HMAC-SHA256 under the deployment's own secret, and
+  refuse to start without one; each used to fall back to a salt written in this
+  public repository. Handles change once, so a person may see the one-time
+  disclosure again.
+- `docs/ARCHITECTURE.md` shows every door, including Slack, the MCP server and
+  the shared REST door.
 - **Set it up by asking.** A Claude Code plugin (`plugins/curb-cut`) carries a
   setup skill in Salesforce's own skill format and the MCP server. Say "set up
   Curb Cut in my org" and it runs the install, asking only what the org cannot

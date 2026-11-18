@@ -11,7 +11,7 @@
  * raw number is hashed on arrival and never stored or logged.
  */
 import { createServer } from 'node:http';
-import { createHash } from 'node:crypto';
+import { createHmac, randomBytes } from 'node:crypto';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { xmlEscape, makeTwiml, verifySignature, handleStatus } from './relay-lib.mjs';
@@ -35,7 +35,21 @@ const PUBLIC_URL        = process.env.PUBLIC_URL || '';
    the command line, and it refuses to combine with a public URL. */
 const ALLOW_UNVERIFIED  = process.env.ALLOW_UNVERIFIED === '1' && !PUBLIC_URL;
 // Salt so a stored handle cannot be reversed to a phone number by rainbow table.
-const HANDLE_SALT = process.env.HANDLE_SALT || 'curb-cut-local-dev-salt';
+/* The secret that keys every phone handle. There is deliberately no default:
+   a fallback written in public source would let anyone with an org export work
+   a hashed handle back to a phone number. Local testing (ALLOW_UNVERIFIED) gets
+   a fresh random secret per run instead, so nothing it writes outlives it. */
+const HANDLE_SALT = process.env.HANDLE_SALT
+  || (ALLOW_UNVERIFIED ? randomBytes(32).toString('hex') : '');
+if (HANDLE_SALT.length < 32) {
+  console.error(
+    'Refusing to start: HANDLE_SALT is not set, or shorter than 32 characters.\n' +
+    'It keys the hash that stands in for every phone number, so it must be a\n' +
+    'secret of your own. Make one with: openssl rand -hex 32, and put it in\n' +
+    'channels/.env as HANDLE_SALT.');
+  process.exit(1);
+}
+
 // The public site. Carriers require the opt-in flow to be verifiable at a URL,
 // and the disclosure messages below quote these two pages by name.
 const SITE = process.env.CURB_CUT_SITE;
@@ -174,7 +188,7 @@ const SESSION_TTL_MS = 30 * 60 * 1000;
 const sessions = new Map();
 
 const handleFor = (from) =>
-  createHash('sha256').update(HANDLE_SALT + from).digest('hex').slice(0, 32);
+  createHmac('sha256', HANDLE_SALT).update(String(from)).digest('hex').slice(0, 32);
 // Belt and braces before this ever reaches a SOQL string. It is our own hex
 // digest, so it cannot be anything else, and it still gets checked.
 const safeHandle = (h) => (/^[0-9a-f]{32}$/.test(h) ? h : null);

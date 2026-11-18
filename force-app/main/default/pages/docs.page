@@ -87,8 +87,8 @@
 <p>The promises are kept by the build, not by good intentions. You can check the first of them yourself in about a second, with no Salesforce org:</p>
 <pre>git clone https://github.com/parthsevak2/curb-cut
 cd curb-cut
-python3 tests/invariants.py     # 632 structural checks, offline, about a second</pre>
-<p>Those are the 632 structural invariants, the rules the build refuses to break. The rest of the checking, today:</p>
+python3 tests/invariants.py     # 638 structural checks, offline, about a second</pre>
+<p>Those are the 638 structural invariants, the rules the build refuses to break. The rest of the checking, today:</p>
 <div class="tbl"><table><thead><tr><th scope="col">What is checked</th><th scope="col">Count today</th></tr></thead><tbody><tr><td>Apex tests</td><td>194</td></tr><tr><td>Accessibility checks against the live pages</td><td>509</td></tr><tr><td>Sa11y tests, accessibility-tree checks, and controls walked by keyboard</td><td>19, 34 and 34</td></tr><tr><td>Contrast, reading-level, and link and copy checks</td><td>28, 17 and 71</td></tr><tr><td>Responsible-AI checks</td><td>21, of which 18 pass and 3 are honestly undecided</td></tr><tr><td>Adversarial assertions, across 11 conversations</td><td>23 of 23</td></tr><tr><td>Agentforce evaluation in the org</td><td>16 cases</td></tr></tbody></table></div>
 <p>The adversarial conversations include a vague answer that must not be taken for a yes, a prompt injection, a manager demanding a roster, and a diagnosis volunteered mid-chat that the system must decline to keep. The commands behind every number are under Verification below.</p>
 <h4>🤝 Who it is for</h4>
@@ -149,7 +149,7 @@ bash scripts/install.sh curbcut</pre>
 <h5>Verification</h5>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, last run 17 November 2026, and <code>tests/sync_counts.py</code> rewrites the published counts from the invariant suite's own output so they cannot drift.</p>
 <pre>194 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-632 structural invariants      python3 tests/invariants.py            ~1s, no org
+638 structural invariants      python3 tests/invariants.py            ~1s, no org
 509 accessibility checks       python3 tests/a11y_audit.py            against the live pages
  19 Sa11y tests                npm run test:a11y                      Salesforce's own axe-core matcher, 0 violations
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
@@ -450,7 +450,7 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        632   every push, ~1s, no org needed
+  Structural invariants        638   every push, ~1s, no org needed
   Apex tests                   194   every deploy
   Accessibility (live pages)   509   against the deployed site
   Sa11y / axe-core tests        19   Salesforce's own matcher
@@ -669,7 +669,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   there is no account, the diagnosis field does not exist, and the
   employer sees a request in the person's words rather than a record
   about them. The agent is the same technology the employer's side
-  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      632 checks, ~1s
+  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      638 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      194 tests
   python3 tests/a11y_audit.py                      509 checks, live pages
   npm run test:a11y                                 19 Sa11y tests

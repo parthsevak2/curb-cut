@@ -4,7 +4,7 @@ Four jobs, fastest first. Each one exists because something actually broke.
 
 ## 1. Invariants — no org, ~1 second, runs on every push and PR
 
-    python3 tests/invariants.py        # 632 checks
+    python3 tests/invariants.py        # 638 checks
 
 Also wired as a pre-commit hook, so a violation never reaches a commit:
 

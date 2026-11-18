@@ -31,14 +31,21 @@
  */
 
 import http from 'node:http';
-import { createHmac, timingSafeEqual, createHash } from 'node:crypto';
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 
 const PORT           = Number(process.env.SLACK_PORT || 3100);
 const SIGNING_SECRET = process.env.SLACK_SIGNING_SECRET || '';
 const ALIAS          = process.env.SF_ORG_ALIAS || 'curbcut';
-const HANDLE_SALT    = process.env.HANDLE_SALT || 'curb-cut-slack-salt-v1';
+// Keys the hash that stands in for every Slack id. No default on purpose: a
+// fallback in public source would let an org export be worked back to people.
+const HANDLE_SALT    = process.env.HANDLE_SALT || '';
+if (HANDLE_SALT.length < 32) {
+  console.error('Refusing to start: HANDLE_SALT is not set, or shorter than 32 characters. ' +
+    'Make one with: openssl rand -hex 32, and put it in channels/.env.');
+  process.exit(1);
+}
 
 const SITE = process.env.CURB_CUT_SITE;
 if (!SITE) {
@@ -84,7 +91,7 @@ const { Org } = await import(join(SF_CLI_MODULES, 'core', 'lib', 'index.js'));
 const conn = (await Org.create({ aliasOrUsername: ALIAS })).getConnection();
 
 const handleFor = (id) =>
-  createHash('sha256').update(HANDLE_SALT + id).digest('hex').slice(0, 32);
+  createHmac('sha256', HANDLE_SALT).update(String(id)).digest('hex').slice(0, 32);
 
 /* Slack signs every request. An unsigned one is not from Slack, and this is a
    public endpoint, so it is refused before the body is even parsed. */

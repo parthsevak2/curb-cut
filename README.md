@@ -148,10 +148,10 @@ first of them yourself in about a second, with no Salesforce org:
 ```
 git clone https://github.com/parthsevak2/curb-cut
 cd curb-cut
-python3 tests/invariants.py     # 632 structural checks, offline, about a second
+python3 tests/invariants.py     # 638 structural checks, offline, about a second
 ```
 
-Those are the 632 structural invariants, the rules the build refuses to break.
+Those are the 638 structural invariants, the rules the build refuses to break.
 The rest of the checking, today:
 
 | What is checked | Count today |
@@ -325,7 +325,7 @@ invariant suite's own output so they cannot drift.
 
 ```
 194 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-632 structural invariants      python3 tests/invariants.py            ~1s, no org
+638 structural invariants      python3 tests/invariants.py            ~1s, no org
 509 accessibility checks       python3 tests/a11y_audit.py            against the live pages
  19 Sa11y tests                npm run test:a11y                      Salesforce's own axe-core matcher, 0 violations
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed

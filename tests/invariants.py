@@ -1184,6 +1184,23 @@ if os.path.exists(_skill_path):
               for p in _mkt['plugins'])
     check('marketplace-points-at-real-plugins', _ok, 'the marketplace names a plugin that is not where it says, or under another name')
 
+# The relays key every phone number and Slack id with a secret of the
+# deployment's own (HMAC-SHA256), and refuse to start without one. Each once
+# fell back to a salt written in this public repository, which let an org
+# export be worked back to people while the docs said "keyed hashes".
+for _relay in ('channels/sms-relay.mjs', 'channels/slack-app.mjs'):
+    _src = read(os.path.join(ROOT, _relay))
+    _name = os.path.basename(_relay)
+    check(f'{_name}-has-no-default-handle-salt',
+          re.search(r"HANDLE_SALT\s*=\s*process\.env\.HANDLE_SALT\s*\|\|\s*'[^']+'", _src) is None,
+          f'{_relay} falls back to a handle salt written in public source')
+    check(f'{_name}-keys-handles-with-hmac',
+          re.search(r"handleFor\s*=\s*\([^)]*\)\s*=>\s*\n?\s*createHmac\('sha256',\s*HANDLE_SALT\)", _src) is not None,
+          f'{_relay} hashes handles without the deployment secret as an HMAC key')
+    check(f'{_name}-refuses-without-a-secret',
+          'HANDLE_SALT.length < 32' in _src and 'Refusing to start: HANDLE_SALT' in _src,
+          f'{_relay} would start without a handle secret of its own')
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import count_claims  # the one list both this check and sync_counts.py read
 stale = []

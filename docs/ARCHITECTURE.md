@@ -16,6 +16,9 @@ flowchart LR
     VOICE["Voice<br/>Twilio, speech in/out"]
     WEB["Web<br/>/curbcut/ask"]
     EMAIL["Email<br/>inbound service"]
+    SLACK["Slack DM<br/>Node app, Socket Mode"]
+    MCPS["AI assistants<br/>MCP server, no send tool"]
+    REST["Shared Apex REST door<br/>/curbcut/v1/message"]
   end
 
   subgraph Brain
@@ -46,6 +49,10 @@ flowchart LR
   P1 --> VOICE --> AGENT
   P2 --> WEB --> DET
   P3 --> EMAIL --> DET
+  P1 --> SLACK --> REST
+  P2 --> MCPS --> REST
+  SMS --> REST
+  REST --> DET
   M --> AGENT
 
   AGENT --> A1 & A2 & A3 & A4 & A5 & A6 & A7
@@ -59,6 +66,10 @@ flowchart LR
   A6 --> PREF & DISC
   A7 --> LIB
 ```
+
+Every door also shares one deterministic Apex REST door for control words
+(HUMAN, OFF, WHO, NOMINATE, STOP, HELP), first replies and return codes, so a
+word means the same thing wherever it is typed.
 
 **The web and email channels deliberately bypass the model.** They call exactly
 the same Apex actions the agent calls, in the same order, against the same
@@ -145,7 +156,7 @@ Established by querying the org, not assumed:
 | `LightningComponentBundle` | available | LWC is the upgrade path if Digital Experiences is ever licensed. |
 | `EmailServicesFunction` | available | email channel built. |
 | `CustomSite`, `ApexPage`, `StaticResource` | available | the site as it stands. |
-| Slack metadata | **none** | Slack cannot be built in this org. Roadmap only. |
+| Slack metadata | **none** | No native Slack metadata here, so the Slack door runs as a small Node app in `channels/` (Socket Mode, no public URL) and reaches the org through the shared REST door. |
 | Tableau | essentially absent | roadmap only. |
 | Data Cloud types | present, licensing unverified | roadmap only. |
 

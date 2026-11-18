@@ -24,7 +24,9 @@ Salesforce's own responsible disclosure programme.
 ## How codes and handles are protected
 
 Claim codes, return codes and ledger handles are stored only as HMAC-SHA256
-under a 256-bit key unique to each org. The key lives in the protected
+under a 256-bit key unique to each org. The text, voice and Slack relays key
+phone numbers and Slack ids the same way, under a secret each deployment sets
+(`HANDLE_SALT`), and refuse to start without one. The key lives in the protected
 hierarchy setting `Curb_Cut_Secret__c`, is granted in no permission set or
 profile (an invariant fails the build if it ever is), never sits in a String
 where a debug log could record it, and is created once by
