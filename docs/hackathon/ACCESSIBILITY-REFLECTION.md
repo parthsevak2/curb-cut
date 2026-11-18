@@ -306,7 +306,7 @@ Status: Partly fixed 7 Sep: the emoji before paragraphs are gone; headings and t
 
 Where: Q0 line 26 (Slack invite, emitted as plain escaped text by the renderer), line 35 (console address, plain text), lines 55 and 57 (link text is the URL); JUDGE-TEST-GUIDE.md lines 8, 12-13, 34, 113, 164, 166; README.md lines 12 and 30. Criterion: WCAG 2.4.4 Link Purpose (In Context); 2.4.9 as best practice.
 
-Barrier or risk: A screen reader reads the Slack invite letter by letter ('the invite, letter by letter...') with nothing to activate, and a judge with a motor impairment must select and copy 70 characters. Where URLs are links, the links list (VoiceOver rotor, JAWS Insert+F7) shows 'orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask' and '.../curbcut/docs' instead of what each does.
+Barrier or risk: A screen reader reads the Slack invite letter by letter with nothing to activate, and a judge with a motor impairment must select and copy 70 characters. Where URLs are links, the links list (VoiceOver rotor, JAWS Insert+F7) shows 'orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut/ask' and '.../curbcut/docs' instead of what each does.
 
 Fix proposed: Link every URL and use words as the text: 'join the Slack workspace', 'the desk's console (org login needed)', 'Try the ask page, no login', 'the evidence page', 'the code on GitHub, MIT', 'the three-minute cut (captioned)', 'the full film, 4:59 (captioned)'. In markdown: [join the Slack workspace](https://join.slack.com/...).
 
