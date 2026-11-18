@@ -74,11 +74,33 @@ SQUAD_ONLY = {
         'through Curb_Cut_Emergency rather than by everyone with a login. '
         'Granting it to a person is a decision.',
 }
+# Objects that hold a secret rather than anything about a person. Apex reads
+# them through getOrgDefaults() and nothing else does, so for these the rule is
+# inverted: granted in NO permission set and NO profile. A grant would hand the
+# key to every holder, and with it every six-letter code in an org export.
+DEF_ = os.path.join(ROOT, 'force-app/main/default')
+SECRET_ONLY = {
+    'Curb_Cut_Secret__c':
+        'The per-org HMAC key behind claim codes, return codes and ledger '
+        'handles. Read by CurbCutKeys alone. A grant makes an export enough '
+        'to brute-force every code again.',
+}
 SQUAD_PS = os.path.join(ROOT, 'force-app/main/default/permissionsets',
                         'Curb_Cut_Emergency.permissionset-meta.xml')
 squad_ps = open(SQUAD_PS).read() if os.path.exists(SQUAD_PS) else ''
 ps = open(PS).read()
 for o in objects():
+    if o in SECRET_ONLY:
+        meta = open(os.path.join(OBJ, o, o + '.object-meta.xml')).read()
+        check('secret-is-a-protected-hierarchy-setting',
+              '<customSettingsType>Hierarchy</customSettingsType>' in meta
+              and '<visibility>Protected</visibility>' in meta,
+              f'{o} must be a protected hierarchy custom setting')
+        for grant in (glob.glob(os.path.join(DEF_, 'permissionsets', '*.permissionset-meta.xml'))
+                      + glob.glob(os.path.join(DEF_, 'profiles', '*.profile-meta.xml'))):
+            check('secret-granted-nowhere', o not in open(grant).read(),
+                  f'{os.path.basename(grant)} grants {o}; the key must be readable by Apex alone')
+        continue
     if o in SQUAD_ONLY:
         # Still enforced - just against the squad's permission set instead.
         for fn, t in fields(o).items():
@@ -119,6 +141,12 @@ if os.path.exists(GUEST_PS):
           'guest set grants edit; Salesforce permits guests read and create only')
     for m in re.finditer(r'<object>([^<]+)</object>\s*<viewAllRecords>', g):
         pass
+    # The deploy guide is where a guest actually gets its permissions. It once
+    # named the full access set for the guest, which Salesforce refuses to
+    # assign and which would have granted edit and delete if it ever could.
+    named = re.findall(r'guest user the\s+`(\w+)` permission set', open(os.path.join(ROOT, 'DEPLOY.md')).read())
+    check('deploy-guide-guest-gets-guest-set', named and all(n == 'Curb_Cut_Guest' for n in named),
+          f'DEPLOY.md gives the guest user {named or "no permission set"}, not Curb_Cut_Guest')
     # A guest must never be able to create or read a disclosure ledger entry
     # about someone else.
     check('guest-no-disclosure-access', '<object>Disclosure_Event__c</object>' not in g,
@@ -293,7 +321,7 @@ for rp in glob.glob(os.path.join(DEF, 'reports', '*', '*.report-meta.xml')):
 #     the opt-in. Both are now checked here, because "we wrote it down once" is
 #     exactly how it was missed.
 RELAY = os.path.join(ROOT, 'channels/sms-relay.mjs')
-SITE_URL = 'https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut'
+SITE_URL = 'https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut'
 PAGES = os.path.join(DEF, 'pages')
 
 if os.path.exists(RELAY):
@@ -465,6 +493,8 @@ for obj in objects():
 # Every object an operator works in should have a compact layout, so the
 # highlights panel says something useful instead of the record name twice.
 for obj in objects():
+    if obj in SECRET_ONLY:
+        continue   # a custom setting has no record page or highlights panel
     cl = glob.glob(os.path.join(OBJ, obj, 'compactLayouts', '*.compactLayout-meta.xml'))
     check('object-has-compact-layout', bool(cl),
           f'{obj} has no compact layout; its highlights panel is Salesforce default')
@@ -784,6 +814,26 @@ check('webhook-fails-closed-without-a-token',
       'if (!TWILIO_AUTH_TOKEN) return false;' in relay_src,
       'signatureValid no longer fails closed; an empty TWILIO_AUTH_TOKEN would '
       'make every unsigned webhook look valid')
+# Delivery receipts. A row that says Accepted proves a platform took the
+# message, not that a phone got it. The relay asks Twilio for the carrier's
+# outcome, checks the signature on that callback like every other webhook, and
+# the console never counts a delivered message as one that did not arrive.
+relay_lib = read(os.path.join(ROOT, 'channels', 'relay-lib.mjs'))
+check('relay-asks-twilio-for-delivery-status',
+      'statusCallback="' in relay_lib and '/sms/status' in relay_lib,
+      "the relay's TwiML no longer asks Twilio to report delivery")
+check('status-route-checks-the-signature',
+      "'/sms/status'" in relay_src and 'handleStatus(' in relay_src
+      and "signatureValid(publicUrl + '/sms/status'" in relay_lib,
+      'the delivery-status route does not verify the Twilio signature')
+_status_xml = read(os.path.join(ROOT, 'force-app/main/default/objects/Message_Log__c/fields/Status__c.field-meta.xml'))
+check('ledger-can-say-delivered',
+      '<fullName>Delivered</fullName>' in _status_xml and '<fullName>Undelivered</fullName>' in _status_xml,
+      'Message_Log__c.Status__c cannot record whether the carrier delivered')
+_dnr = read(os.path.join(ROOT, 'force-app/main/default/objects/Message_Log__c/listViews/Did_Not_Reach_Them.listView-meta.xml'))
+check('did-not-reach-them-excludes-delivered',
+      re.search(r'<operation>notEqual</operation>\s*<value>[^<]*Delivered', _dnr) is not None,
+      'the "Did not reach them" view would list messages the carrier delivered')
 check('webhook-refuses-to-start-unverified',
       'Refusing to start' in relay_src,
       'the relay no longer refuses to start without a token, so it can be run '
@@ -957,18 +1007,155 @@ if os.path.exists(TRY):
 # every public claim silently became wrong. A number a judge can check is worth
 # nothing if it is stale, so the number checks itself.
 # ---------------------------------------------------------------------------
-CLAIM_FILES = [
-    'docs/TECHNICAL-DESIGN.md',
-    'deck/build.js',
-]
-# Both orders: "494 structural invariants" and "Structural invariants   494".
-CLAIM = re.compile(r'(\d{3})\s+(?:structural\s+)?invariant|invariants?\s+(\d{3})', re.I)
+# ---------------------------------------------------------------------------
+# The adversarial suite runs two ways: headless from tests/, and inside the org
+# as an Agentforce evaluation any adopter can re-run. The in-org copy once held
+# ten of the eleven conversations, which made "re-prove it in your own org" a
+# promise with a hole in it. Every conversation's opening line must be there.
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Codes and handles are hashed in one place, under this org's own key. Three
+# salts once sat in three classes in a public repository, which made every
+# six-letter code in an export a lookup table away. And lookups accept the old
+# form too, or setting the key would strand every code already handed out.
+# ---------------------------------------------------------------------------
+for _c in glob.glob(os.path.join(CLS, '*.cls')):
+    _n = os.path.basename(_c)
+    if _n.endswith('Test.cls') or _n == 'CurbCutKeys.cls':
+        continue
+    _b = strip_apex_comments(read(_c))
+    check('hashing-goes-through-curbcutkeys',
+          'generateDigest' not in _b and not re.search(r"'curb-cut-[a-z]+-salt", _b),
+          f'{_n} hashes on its own; codes and handles must go through CurbCutKeys')
+_keys = strip_apex_comments(read(os.path.join(CLS, 'CurbCutKeys.cls')))
+check('keys-are-hmac-under-the-org-default',
+      "generateMac('hmacSHA256'" in _keys and 'getOrgDefaults()' in _keys
+      and 'System.debug' not in _keys,
+      'CurbCutKeys must HMAC under the org-default key, and must never log')
+check('claim-code-lookup-accepts-both-forms',
+      'Claim_Code_Hash__c IN :' in strip_apex_comments(read(os.path.join(CLS, 'CurbCutStanding.cls'))),
+      'CurbCutStanding matches a claim code with =, stranding every code issued before the key')
+_gen = read(os.path.join(ROOT, 'scripts/apex/generate-key.apex'))
+check('key-script-never-prints-the-key',
+      'generateAesKey(256)' in _gen and not re.search(r'debug\([^;]*Key__c', _gen)
+      and 'String key' not in _gen,
+      'scripts/apex/generate-key.apex prints the key or holds it in a variable')
+_media = strip_apex_comments(read(os.path.join(CLS, 'CurbCutMedia.cls')))
+check('guest-upload-checks-what-it-is',
+      'sniff(base64)' in _media and 'filesOn(' in _media and 'MAX_FILES' in _media,
+      'CurbCutMedia no longer checks the first bytes of a file, or the per-report file limit')
+
+import html as _html
+_harness = read(os.path.join(ROOT, 'tests/headless_agent_api.mjs'))
+_openers = re.findall(r"^\s*\['\d{2}_[a-z_]+',\s*\[\s*\"((?:[^\"\\]|\\.)*)\"", _harness, re.M)
+_evaldef = read(os.path.join(ROOT, 'force-app/main/default/aiEvaluationDefinitions/Curb_Cut_Adversarial.aiEvaluationDefinition-meta.xml'))
+_in_org = {_html.unescape(u) for u in re.findall(r'<utterance>(.*?)</utterance>', _evaldef, re.S)}
+check('evaluation-names-a-real-agent-version',
+      re.search(r'<subjectVersion>v\d+</subjectVersion>', _evaldef) is not None,
+      'the evaluation names its agent version as a number; Salesforce wants the version API name, like v1, and refuses the deploy')
+_missing = [o for o in _openers if o.replace('\\"', '"') not in _in_org]
+check('in-org-evaluation-holds-every-adversarial-conversation', len(_openers) >= 11 and not _missing,
+      f'{len(_openers)} harness conversations; missing from the org evaluation: {_missing}')
+
+# ---------------------------------------------------------------------------
+# The one-command install and the setup check. The install must stop on the
+# first error, must never load the library twice, and must never hand the guest
+# the full access set. The check must only ever read, and must never select the
+# signing key's value, because its output is what people paste into an issue.
+# ---------------------------------------------------------------------------
+_inst = read(os.path.join(ROOT, 'scripts/install.sh'))
+_chk = read(os.path.join(ROOT, 'scripts/check-setup.mjs'))
+check('install-stops-on-first-error', 'set -euo pipefail' in _inst,
+      'scripts/install.sh no longer stops on the first error')
+check('install-loads-library-only-when-empty', 'COUNT()' in _inst and '-eq 0' in _inst,
+      'scripts/install.sh could load the accommodation library twice')
+check('install-never-gives-guest-full-access',
+      not re.search(r'assign permset[^\n]*Curb_Cut_Access[^\n]*(guest|Guest)', _inst),
+      'scripts/install.sh assigns Curb_Cut_Access to a guest user')
+_cmds = re.findall(r"\[\s*'(data|project|org|apex|sobject|force|agent)'\s*,\s*'([a-z-]+)'", _chk)
+_reads = {('data', 'query'), ('org', 'display'), ('sobject', 'describe'), ('org', 'list')}
+check('setup-check-only-reads', bool(_cmds) and all(c in _reads for c in _cmds),
+      f'scripts/check-setup.mjs runs something other than a read: {sorted(set(_cmds) - _reads)}')
+check('setup-check-holds-the-guest-rule',
+      'Curb_Cut_Guest' in _chk and 'Curb_Cut_Access' in _chk and 'GuestUserId' in _chk,
+      'scripts/check-setup.mjs no longer checks the guest holds Curb_Cut_Guest and not Curb_Cut_Access')
+check('setup-check-never-selects-the-key',
+      not re.search(r'SELECT[^`\'"]*Curb_Cut_Secret__c[^`\'"]*FROM|SELECT\s+(?!Id\b)[^`\'"]*FROM\s+Curb_Cut_Secret__c', _chk),
+      'scripts/check-setup.mjs selects a field of the signing key, not just its Id')
+
+# ---------------------------------------------------------------------------
+# The repository ships placeholders, never anyone's deployment. scripts/
+# configure.mjs writes a real operator, mailbox, number and agent user into a
+# checkout so a deploy can carry them; this keeps those values from ever being
+# committed back, where they would put one organisation's addresses on
+# everybody's site, which is exactly what a hard-coded inbound email once did.
+# ---------------------------------------------------------------------------
+_labels_xml = read(os.path.join(DEF, 'labels/CustomLabels.labels-meta.xml'))
+_placeholder = re.compile(r'YOUR-|REPLACE|example\.com|000 000 0000|^\+10000000000$|Your organisation, City', re.I)
+_label_values = dict(re.findall(r'<fullName>(\w+)</fullName>[\s\S]*?<value>([^<]*)</value>', _labels_xml))
+check('labels-ship-as-placeholders',
+      len(_label_values) >= 6 and all(_placeholder.search(v) for v in _label_values.values()),
+      'a label carries a real deployment value: ' + ', '.join(k for k, v in _label_values.items() if not _placeholder.search(v)))
+_agent_users = re.findall(r'default_agent_user:\s*"([^"]*)"', ''.join(
+    read(f) for f in glob.glob(os.path.join(DEF, 'aiAuthoringBundles/*/*.agent'))))
+check('agent-user-ships-as-placeholder',
+      len(_agent_users) >= 2 and all(u.startswith('REPLACE-WITH') for u in _agent_users),
+      f'an agent names a real user: {_agent_users}')
+_pages_src = ''.join(read(f) for f in glob.glob(os.path.join(DEF, 'pages/*.page')) if not f.endswith('docs.page'))
+check('no-inbound-address-hard-coded',
+      not re.search(r'@[\w.-]+\.apex\.salesforce\.com', _pages_src),
+      'a page hard-codes an inbound email address; use $Label.CurbCut_Inbound_Email')
+
+# ---------------------------------------------------------------------------
+# Promises a reply makes must be doors that exist. A return code was promised
+# to "land you straight back with the same person" for weeks while nothing
+# looked one up; every door now tries a code before it reads a new ask, and
+# accepts codes from before and after the org's key.
+# ---------------------------------------------------------------------------
+_CLS = os.path.join(DEF, 'classes')
+for _door, _intake in (('CurbCutChannelApi', 'CurbCutIntake'), ('CurbCutEmail', 'CurbCutIntake'), ('CurbCutWeb', 'CurbCutIntake')):
+    _src = read(os.path.join(_CLS, _door + '.cls'))
+    _r, _i = _src.find('CurbCutReturn.tryResume('), _src.find(_intake + '.log(')
+    check(f'{_door.lower()}-tries-a-return-code-first',
+          _r >= 0 and (_i < 0 or _r < _i),
+          f'{_door} reads a message as a new ask before trying it as a return code')
+check('return-code-lookup-accepts-both-forms',
+      re.search(r'Return_Code_Hash__c\s+IN\s*:', read(os.path.join(_CLS, 'CurbCutReturn.cls'))) is not None,
+      'CurbCutReturn matches return codes with = and strands codes issued before the key')
+check('handoff-context-is-kept',
+      'CurbCutIntake.log(' in read(os.path.join(_CLS, 'CurbCutCreateHandoff.cls')),
+      'CurbCutCreateHandoff accepts what the person said and drops it again')
+
+# A text number is only offered once one is connected. Pages wrap every
+# mention in the switch on the link label; replies go through CurbCutDoors.
+_SWITCH = r"\$Label\.CurbCut_SMS_Number_Link != '\+10000000000'"
+for _pf in glob.glob(os.path.join(DEF, 'pages/*.page')):
+    if _pf.endswith('docs.page'):
+        continue
+    _p = read(_pf)
+    _p = re.sub(r'<apex:outputPanel[^>]*rendered="\{!' + _SWITCH + r'\}"[^>]*>.*?</apex:outputPanel>', '', _p, flags=re.S)
+    _p = re.sub(r'\{!IF\(' + _SWITCH + r'.*?\)\}', '', _p, flags=re.S)
+    check(f'text-door-switched-on-{os.path.basename(_pf)}',
+          re.search(r'\$Label\.CurbCut_SMS_Number(?!_Link)', _p) is None,
+          f'{os.path.basename(_pf)} offers the text number without checking one is connected')
+for _cf in glob.glob(os.path.join(_CLS, '*.cls')):
+    if _cf.endswith('Test.cls') or _cf.endswith('CurbCutDoors.cls'):
+        continue
+    _lines = read(_cf).split('\n')
+    for _n, _l in enumerate(_lines):
+        if re.search(r'System\.Label\.CurbCut_SMS_Number(?!_Link)', _l):
+            _near = '\n'.join(_lines[max(0, _n - 3):_n + 1])
+            check(f'text-door-switched-on-{os.path.basename(_cf)}-{_n + 1}',
+                  'textOpen()' in _near,
+                  f'{os.path.basename(_cf)} line {_n + 1} offers the text number without CurbCutDoors.textOpen()')
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import count_claims  # the one list both this check and sync_counts.py read
 stale = []
-for rel in CLAIM_FILES:
-    for m in CLAIM.finditer(read(os.path.join(ROOT, rel))):
-        num = m.group(1) or m.group(2)
+for rel in count_claims.FILES:
+    for _, _, num in count_claims.claims(read(os.path.join(ROOT, rel))):
         # +1 because this very check has not been counted yet when it runs
-        if int(num) != checks + 1:
+        if num != checks + 1:
             stale.append(f'{rel} claims {num}')
 check('published-invariant-count-is-current', not stale,
       f'the real count is {checks + 1}: ' + '; '.join(stale))

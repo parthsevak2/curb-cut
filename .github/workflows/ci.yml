@@ -33,6 +33,12 @@ jobs:
         # Accessibility claims rot silently. Somebody nudges a grey to calm a
         # panel down and the help text under every field stops being readable.
         run: python3 tests/contrast_audit.py
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Delivery receipts, offline
+        # The status callback is the only proof a text reached a phone. Its
+        # signature check and status mapping run here with no network and no org.
+        run: node tests/delivery_receipts_test.mjs
       - name: XML well-formedness
         run: |
           fail=0
@@ -154,7 +160,7 @@ jobs:
           printf '%s' "$SFDX_AUTH_URL" > /tmp/auth.txt
           sf org login sfdx-url --sfdx-url-file /tmp/auth.txt --alias curbcut
           rm -f /tmp/auth.txt
-      - name: Run the ten adversarial cases, headless
+      - name: Run the eleven adversarial conversations, headless
         run: node tests/headless_agent_api.mjs
       - name: Score
         run: python3 tests/score_adversarial.py

@@ -18,7 +18,7 @@ import os
 import sys, re, os, glob, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = os.environ.get("CURB_CUT_SITE", "https://orgfarm-7a04c62cb9.my.salesforce-sites.com/curbcut")
+SITE = os.environ.get("CURB_CUT_SITE", "https://curbcut-dev-ed.develop.my.salesforce-sites.com/curbcut")
 
 VOWELS = 'aeiouy'
 def syllables(word):
@@ -100,7 +100,7 @@ if os.path.exists(RELAY):
 
 # --- the messages Apex hands to a person -----------------------------------
 for cls in ('CurbCutWeb', 'CurbCutMedia', 'CurbCutCreateRequest', 'CurbCutStanding',
-            'CurbCutKeyword', 'CurbCutChannelApi'):
+            'CurbCutKeyword', 'CurbCutChannelApi', 'CurbCutReturn'):
     path = os.path.join(ROOT, 'force-app/main/default/classes', cls + '.cls')
     if not os.path.exists(path):
         continue
