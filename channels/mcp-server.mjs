@@ -371,8 +371,12 @@ async function callTool(name, args) {
          would have created - not a polite sentence with nothing behind it. That
          was the bug: every channel advertised a way out and none of them
          routed it. */
+      // Their words travel with the handoff, so the person picking it up
+      // already knows what is hard and nobody has to ask twice. The org takes
+      // any condition out before it is stored.
       const answer = await apex('/curbcut/v1/message/', 'POST', {
         channel: 'External', text: 'human', handle: null,
+        context: String(args?.context ?? '').slice(0, 2000),
       });
       return {
         handedOff: Boolean(answer?.handedOff),

@@ -11,9 +11,10 @@
  * raw number is hashed on arrival and never stored or logged.
  */
 import { createServer } from 'node:http';
-import { createHmac, createHash } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
+import { xmlEscape, makeTwiml, verifySignature, handleStatus } from './relay-lib.mjs';
 
 // The Salesforce CLI bundles @salesforce/core and @salesforce/agents. Find
 // them where the CLI is installed, not where one laptop happened to keep them.
@@ -178,10 +179,6 @@ const handleFor = (from) =>
 // digest, so it cannot be anything else, and it still gets checked.
 const safeHandle = (h) => (/^[0-9a-f]{32}$/.test(h) ? h : null);
 
-const xmlEscape = (s) => String(s)
-  .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
-  .replaceAll('"','&quot;').replaceAll("'",'&apos;');
-
 // Speech in, speech out. A long timeout because people who are choosing to
 // speak may need a moment; rushing them is its own barrier.
 const gather = (say) =>
@@ -192,14 +189,9 @@ const gather = (say) =>
   `<Say voice="Polly.Joanna">I did not hear anything. Call back any time, or send a message instead.</Say>` +
   `</Response>`;
 
-// More than one <Message> is allowed, and the order matters. The useful answer
-// goes first and the disclosure second, because someone who is having a hard
-// enough week to be texting this number should not have to read carrier
-// boilerplate before they read the help.
-const twiml = (...bodies) =>
-  `<?xml version="1.0" encoding="UTF-8"?><Response>` +
-  bodies.filter(Boolean).map(b => `<Message>${xmlEscape(b)}</Message>`).join('') +
-  `</Response>`;
+/* Each <Message> asks Twilio to report the carrier outcome back to this relay.
+   See relay-lib.mjs for why and for when the attribute is left off. */
+const twiml = makeTwiml(PUBLIC_URL);
 
 /* Delivery ledger. The email channel failed silently for days because nothing
    recorded the attempt, and SMS had exactly the same hole. Records that we
@@ -239,13 +231,12 @@ async function needsDisclosure(handle) {
    meant an empty TWILIO_AUTH_TOKEN - exactly what was sitting in channels/.env -
    turned every unsigned request into a valid one. Anyone who learned the URL
    could post a forged From and Body, drive the agent, create handoffs and write
-   to the ledger. An unverified webhook must refuse, not wave things through. */
+   to the ledger. An unverified webhook must refuse, not wave things through.
+   The comparison lives in relay-lib.mjs so a test can exercise it; the guard
+   stays here, where it is read. */
 function signatureValid(url, params, header) {
   if (!TWILIO_AUTH_TOKEN) return false;
-  const data = Object.keys(params).sort()
-    .reduce((acc, k) => acc + k + params[k], url);
-  const expected = createHmac('sha1', TWILIO_AUTH_TOKEN).update(Buffer.from(data,'utf-8')).digest('base64');
-  return header === expected;
+  return verifySignature(TWILIO_AUTH_TOKEN, url, params, header);
 }
 
 async function agentFor(handle) {
@@ -352,6 +343,23 @@ const server = createServer((req, res) => {
     return;
   }
 
+  /* Delivery receipts. Twilio reports what the carrier did with a reply we
+     sent. Accepted only ever proved a platform took it; this is the row that
+     says whether it reached the phone. Must sit before the /sms match below. */
+  if (req.method === 'POST' && req.url.split('?')[0] === '/sms/status') {
+    let raw = '';
+    req.on('data', c => { raw += c; if (raw.length > 1e5) req.destroy(); });
+    req.on('end', async () => {
+      const params = Object.fromEntries(new URLSearchParams(raw));
+      const code = await handleStatus({
+        params, header: req.headers['x-twilio-signature'], publicUrl: PUBLIC_URL,
+        allowUnverified: ALLOW_UNVERIFIED, signatureValid, handleFor, safeHandle, ledger,
+      });
+      res.writeHead(code); res.end();
+    });
+    return;
+  }
+
   if (req.method !== 'POST' || !req.url.startsWith('/sms')) {
     res.writeHead(404); return res.end();
   }
@@ -451,6 +459,13 @@ const server = createServer((req, res) => {
         const answer = await connection.apex.post('/curbcut/v1/message/', {
           channel: 'SMS', text: body, handle: key,
         });
+        /* A return code. The door has already taken them back to the same
+           person and written down that they came back; its answer is the one
+           to send, not a fresh conversation with the agent. */
+        if (answer.intent === 'RETURN' && answer.message) {
+          await ledger('SMS', 'Outbound', 'Accepted', key, disclose ? 'returned + disclosure' : 'returned');
+          return xml(answer.message, disclose);
+        }
         const titles = (answer.options || '').split('\n').filter(l => l.startsWith('- ')).map(l => l.slice(2).trim());
         if (!answer.noMatch && titles.length) {
           picks.set(handle, titles);
@@ -500,5 +515,6 @@ server.listen(PORT, () => {
   console.log(`  agent    ${AGENT}`);
   console.log(`  verify   ${TWILIO_AUTH_TOKEN ? 'on' : 'OFF — UNVERIFIED, local only'}`);
   console.log(`  POST /voice  ready now, no registration; control words and crisis go to the router`);
+  console.log(`  POST /sms/status  carrier delivery receipts, signed like the rest`);
   console.log(`  POST /sms    HELP/STOP/START handled here, disclosure on first reply`);
 });

@@ -1,7 +1,11 @@
 # Publishing curb-cut-mcp
 
-Everything in this folder is prepared and checked, and nothing has been
-published, committed or pushed. These are the exact commands, in order.
+**Status, 17 November 2026.** 1.0.0 is on npm and listed in the official MCP
+Registry. 1.0.1 is committed and checked but **not yet published**, and it
+matters: 1.0.0 exits on start when the Salesforce CLI cannot reach an org,
+which is exactly what a stranger's first `npx curb-cut-mcp` looks like. 1.0.1
+answers first and asks for the org only when a tool needs it. Run steps 1 to 3
+below for 1.0.1. These are the exact commands, in order.
 Publishing runs from this directory inside the repo checkout, because the
 prepack script copies `../mcp-server.mjs` and `../../LICENSE` in at pack time.
 The server file itself is untouched: the packaged copy is byte-identical to
