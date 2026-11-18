@@ -87,8 +87,8 @@
 <p>The promises are kept by the build, not by good intentions. You can check the first of them yourself in about a second, with no Salesforce org:</p>
 <pre>git clone https://github.com/parthsevak2/curb-cut
 cd curb-cut
-python3 tests/invariants.py     # 627 structural checks, offline, about a second</pre>
-<p>Those are the 627 structural invariants, the rules the build refuses to break. The rest of the checking, today:</p>
+python3 tests/invariants.py     # 632 structural checks, offline, about a second</pre>
+<p>Those are the 632 structural invariants, the rules the build refuses to break. The rest of the checking, today:</p>
 <div class="tbl"><table><thead><tr><th scope="col">What is checked</th><th scope="col">Count today</th></tr></thead><tbody><tr><td>Apex tests</td><td>194</td></tr><tr><td>Accessibility checks against the live pages</td><td>509</td></tr><tr><td>Sa11y tests, accessibility-tree checks, and controls walked by keyboard</td><td>19, 34 and 34</td></tr><tr><td>Contrast, reading-level, and link and copy checks</td><td>28, 17 and 71</td></tr><tr><td>Responsible-AI checks</td><td>21, of which 18 pass and 3 are honestly undecided</td></tr><tr><td>Adversarial assertions, across 11 conversations</td><td>23 of 23</td></tr><tr><td>Agentforce evaluation in the org</td><td>16 cases</td></tr></tbody></table></div>
 <p>The adversarial conversations include a vague answer that must not be taken for a yes, a prompt injection, a manager demanding a roster, and a diagnosis volunteered mid-chat that the system must decline to keep. The commands behind every number are under Verification below.</p>
 <h4>🤝 Who it is for</h4>
@@ -105,10 +105,14 @@ bash scripts/install.sh curbcut</pre>
 <p>Then, any time you want to know where you stand, in plain words:</p>
 <pre>node scripts/check-setup.mjs curbcut</pre>
 <p>The check prints a tick or a cross for each item and the exact next step for every cross. A few steps need a person, and it names them: accepting the Einstein Bots terms, creating the site, and activating the agents.</p>
+<p><strong>Or just ask your coding agent.</strong> In Claude Code, add Curb Cut's plugin:</p>
+<pre>/plugin marketplace add parthsevak2/curb-cut
+/plugin install curb-cut@curb-cut</pre>
+<p>Then say <em>set up Curb Cut in my org</em>. It runs the same scripts, asks you only what the org cannot answer, and stops for the steps only a person can do. The skill inside, <code>curb-cut-org-setup</code>, follows the open Agent Skills format, so other agents that read skills can use it too.</p>
 <blockquote class="callout callout-note"><p><strong>Note.</strong> Curb Cut needs a Salesforce org with Agentforce, and Salesforce CLI 2.149 or later. The open-source code is free; the platform under it is not. The web and email doors need nothing outside Salesforce. Text and voice also need your own Twilio number and a small relay (channels/), and Slack needs the app created in your workspace from the manifest. Six Custom Labels carry your deployment's identity, and <code>node scripts/configure.mjs</code> sets them for you. Text, voice and email appear on your site only once your deployment has connected its own number or address.</p></blockquote>
 <p>The whole guide is one page: DEPLOY.md. The scripts are described in scripts/README.md, and a print-ready poster for the break room is at <a href="https://parthsevak2.github.io/curb-cut/poster.html">poster.html</a>.</p>
 <h4>🧭 Use it from your AI assistant</h4>
-<p>Most people who need this are already inside some assistant, so Curb Cut comes to them. It is an MCP server with five tools, and none of them can send a request to an employer. A tool that was never given a send button cannot be talked into pressing one.</p>
+<p>Most people who need this are already inside some assistant, so Curb Cut comes to them. The Claude Code plugin above brings it along; on its own, it is an MCP server with five tools, and none of them can send a request to an employer. A tool that was never given a send button cannot be talked into pressing one.</p>
 <pre>npx curb-cut-mcp</pre>
 <p>Or add it to your MCP client's configuration:</p>
 <pre>{
@@ -145,7 +149,7 @@ bash scripts/install.sh curbcut</pre>
 <h5>Verification</h5>
 <p>Nothing below is asserted from memory. Each number is the output of the command beside it, last run 17 November 2026, and <code>tests/sync_counts.py</code> rewrites the published counts from the invariant suite's own output so they cannot drift.</p>
 <pre>194 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-627 structural invariants      python3 tests/invariants.py            ~1s, no org
+632 structural invariants      python3 tests/invariants.py            ~1s, no org
 509 accessibility checks       python3 tests/a11y_audit.py            against the live pages
  19 Sa11y tests                npm run test:a11y                      Salesforce's own axe-core matcher, 0 violations
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
@@ -191,7 +195,7 @@ bash scripts/install.sh curbcut</pre>
 </details>
 <details>
 <summary><strong>Repository map</strong></summary>
-<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>10 objects, 64 fields, 33 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>20 Apex classes + 16 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, seven pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>scripts/</code></td><td>the one-command install, the label setup and the plain-words setup check</td></tr><tr><td><code>tests/</code></td><td>every suite above, plus <code>lwc_audit.py</code>, <code>screen_reader_walk.mjs</code> (which writes docs/SCREEN-READER-WALK.md) and <code>count_claims.py</code>, the one list of every place a count is published</td></tr><tr><td><code>deck/</code></td><td>the deck as source; the built copy lives in <code>docs/hackathon/</code></td></tr><tr><td><code>docs/hackathon/</code></td><td>the September 2026 hackathon record: judge guides, reflections, deck, stills</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th scope="col">Path</th><th scope="col">What</th></tr></thead><tbody><tr><td><code>force-app/main/default/objects/</code></td><td>10 objects, 64 fields, 33 list views, and no field for a diagnosis</td></tr><tr><td><code>force-app/main/default/classes/</code></td><td>20 Apex classes + 16 test classes</td></tr><tr><td><code>force-app/main/default/lwc/</code></td><td>5 Lightning Web Components, each with a Sa11y suite beside it</td></tr><tr><td><code>force-app/main/default/aiAuthoringBundles/</code></td><td>two Agent Scripts: <code>Curb_Cut</code> public, <code>Curb_Cut_Desk</code> internal</td></tr><tr><td><code>force-app/main/default/pages/</code> <code>components/</code> <code>sites/</code></td><td>the public site, seven pages, anonymous</td></tr><tr><td><code>force-app/main/default/emailservices/</code></td><td>inbound email channel</td></tr><tr><td><code>force-app/main/default/applications/</code> <code>tabs/</code> <code>flexipages/</code></td><td>the internal console</td></tr><tr><td><code>force-app/main/default/reports/</code> <code>dashboards/</code></td><td>five reports and the overview dashboard, no names anywhere</td></tr><tr><td><code>channels/</code></td><td>SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration</td></tr><tr><td><code>scripts/</code></td><td>the one-command install, the label setup and the plain-words setup check</td></tr><tr><td><code>plugins/curb-cut/</code></td><td>the Claude Code plugin: the setup skill and the MCP server, listed by <code>.claude-plugin/marketplace.json</code></td></tr><tr><td><code>tests/</code></td><td>every suite above, plus <code>lwc_audit.py</code>, <code>screen_reader_walk.mjs</code> (which writes docs/SCREEN-READER-WALK.md) and <code>count_claims.py</code>, the one list of every place a count is published</td></tr><tr><td><code>deck/</code></td><td>the deck as source; the built copy lives in <code>docs/hackathon/</code></td></tr><tr><td><code>docs/hackathon/</code></td><td>the September 2026 hackathon record: judge guides, reflections, deck, stills</td></tr><tr><td><code>legal/</code></td><td>privacy and terms source</td></tr><tr><td><code>docs/</code></td><td>architecture, BRD, evidence, audience, decisions, the two audit reports</td></tr></tbody></table></div>
 <p>Start with <code>docs/ARCHITECTURE.md</code>, then <code>CRITIQUE.md</code>, which is where the honest list of what is still weak lives.</p>
 </details>
 <details>
@@ -446,7 +450,7 @@ than sending. Verified in the adversarial suite as a 3-turn sequence:
 
   Layer                      Count   Runs
   ─────────────────────────  ─────   ──────────────────────────────
-  Structural invariants        627   every push, ~1s, no org needed
+  Structural invariants        632   every push, ~1s, no org needed
   Apex tests                   194   every deploy
   Accessibility (live pages)   509   against the deployed site
   Sa11y / axe-core tests        19   Salesforce's own matcher
@@ -665,7 +669,7 @@ PRIOR ART, AND WHAT IS DIFFERENT HERE
   there is no account, the diagnosis field does not exist, and the
   employer sees a request in the person's words rather than a record
   about them. The agent is the same technology the employer's side
-  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      627 checks, ~1s
+  already runs. The difference is who it works for.</pre><h3>14. HOW TO VERIFY ANY CLAIM IN THIS DOCUMENT</h3><pre class="tdd">python3 tests/invariants.py                      632 checks, ~1s
   sf apex run test -o curbcut -l RunLocalTests      194 tests
   python3 tests/a11y_audit.py                      509 checks, live pages
   npm run test:a11y                                 19 Sa11y tests

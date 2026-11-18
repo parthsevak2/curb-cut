@@ -46,6 +46,12 @@ What changed, by date. The git history has every step; this is the shape of it.
   texting, calling and email only once the deployment has its own number and
   inbound address. The showcase stops pointing people at a retired hackathon
   number, and a fresh install never shows a placeholder.
+- **Set it up by asking.** A Claude Code plugin (`plugins/curb-cut`) carries a
+  setup skill in Salesforce's own skill format and the MCP server. Say "set up
+  Curb Cut in my org" and it runs the install, asking only what the org cannot
+  answer. The roadmap gains three directions from what Salesforce shipped this
+  autumn: Curb Cut's manners as AI Skills, Canadian French through Agentforce
+  Voice, and requests that cannot die in an inbox.
 - **Six labels, set by answering questions.** `scripts/configure.mjs` reads the
   org for the site address, the inbound email address and the agent user, asks
   for the rest, and writes the labels; the install runs it. The site's email

@@ -1,0 +1,11 @@
+{
+  "name": "curb-cut",
+  "displayName": "Curb Cut",
+  "version": "1.0.0",
+  "description": "Set up Curb Cut in a Salesforce org by asking, not by reading a guide, and give your assistant Curb Cut's five tools: find accommodation options with sources, the cost evidence, a draft in the person's words, a handoff to a human, and a nomination. None of them can send a request to an employer.",
+  "author": { "name": "Parth Sevak", "url": "https://github.com/parthsevak2/curb-cut" },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/parthsevak2/curb-cut",
+  "repository": "https://github.com/parthsevak2/curb-cut.git",
+  "keywords": ["salesforce", "agentforce", "accessibility", "accommodation", "mcp", "setup"]
+}

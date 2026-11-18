@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "curb-cut": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "curb-cut-mcp"
+      ]
+    }
+  }
+}

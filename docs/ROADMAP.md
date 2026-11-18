@@ -33,6 +33,7 @@ README's Verification block; everything below it names the gap in the code.
 | **Return codes that bring you back**. On the web, by text or by email, a code takes the person back to the same handler, who is told they came back | The anonymous visitor who was promised they would not have to explain it again |
 | **What was hard reaches the handler**, from every door including an AI assistant, with any condition removed first | The person answering, and the person who never has to say it twice |
 | **Doors offered only when they exist**. Text, voice and email appear on the site and in replies only once the deployment has its own number and inbound address | Everyone; nobody is pointed at a door that does not answer |
+| **A setup skill and a Claude Code plugin** (`plugins/curb-cut`). Say "set up Curb Cut in my org" to a coding agent and it runs the same install, asking only what it cannot find out; the plugin also brings the MCP server | The admin who would rather ask than read a guide |
 | **The whole adversarial suite, inside the org**. Sixteen evaluation cases cover every conversation the headless harness drives; the build fails if one goes missing | Every adopter, who can re-prove the refusals in their own org |
 
 ## Blocked on something outside the code
@@ -107,7 +108,36 @@ The honest limit: Slackbot and Claude reach the org as a signed-in Salesforce
 user. That suits the access desk, who are Salesforce users already, and staff
 who sign in anyway. Everyone else keeps the doors that need no login at all.
 
-### 6. A React client. A decision, not a task
+### 6. Curb Cut's manners, as skills any agent can run
+The rules this project is built on are not specific to accommodations: never
+ask why; a hedge is not a yes; never route anyone to a phone; name a source or
+say you do not know; plain words. Salesforce made AI Skills generally available
+in Agentforce Coworker on 10 November 2026: reusable instructions that run as
+the person using them, with Coworker pausing for approval before it creates or
+updates a record ([Salesforce](https://www.salesforce.com/blog/ai-skills-in-coworker/)).
+That pause is this project's yes-gate. Packaged as skills, the manners would
+let every agent in an organisation be safe to tell something hard to, not only
+this one. The honest limit: Coworker is the first agent with skills, and when
+others follow is not yet announced.
+
+### 7. Canadian French, and the languages people work in
+Agentforce Voice now speaks Canadian French, Spanish, Portuguese, German,
+Italian and Japanese ([Dreamforce 2026](https://www.salesforce.com/blog/dreamforce-2026-announcements/)).
+Today's voice door speaks US English through the relay. Moving it to
+Agentforce Voice is the shortest road to answering in the language somebody
+thinks in; it has its own licensing and telephony, to be checked per
+deployment.
+
+### 8. Requests that cannot die in an inbox
+On the desk side, a long-running agent could carry each request for weeks:
+nudging whoever decides as the interactive-process date nears, escalating with
+a person's approval, and never contacting the worker unprompted. Salesforce's
+long-horizon runtime does this kind of work, but so far only for its own agents;
+customer-built ones are planned, with no date
+([MindBlaze](https://mindblaze.ai/blog/agentforce-long-horizon-runtime/)). Until
+then, scheduled Apex can carry the clock.
+
+### 9. A React client. A decision, not a task
 
 Asked for repeatedly, and not built. The reasoning is in
 [`AGENT-INTERFACES.md`](AGENT-INTERFACES.md): Force.com Sites is the only thing

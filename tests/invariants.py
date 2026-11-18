@@ -1161,6 +1161,29 @@ check('readme-images-have-alt-text',
       and all(len(a) >= 8 for a in re.findall(r'!\[([^\]]*)\]\(', _readme)),
       'an image in README.md has no real alt text')
 
+# The setup skill and its plugin. A coding agent follows SKILL.md to the
+# letter, so every script it names must exist, the marketplace must point at a
+# real plugin of the same name, and the skill must keep the two rules that
+# matter most when an agent is doing the typing: the guest never gets the full
+# access set, and nobody's password passes through the agent.
+_skill_path = os.path.join(ROOT, 'plugins/curb-cut/skills/curb-cut-org-setup/SKILL.md')
+if os.path.exists(_skill_path):
+    _skill = read(_skill_path)
+    _named = set(re.findall(r'\b(scripts/[\w./-]+\.(?:sh|mjs|apex))', _skill))
+    check('setup-skill-names-only-real-scripts', bool(_named) and all(os.path.exists(os.path.join(ROOT, n)) for n in _named),
+          f'the setup skill names scripts that do not exist: {sorted(n for n in _named if not os.path.exists(os.path.join(ROOT, n)))}')
+    check('setup-skill-has-a-name-and-trigger', re.search(r'^name:\s*curb-cut-org-setup\s*$', _skill, re.M) is not None and 'Trigger:' in _skill,
+          'the setup skill lost its name or its trigger phrases')
+    check('setup-skill-keeps-the-guest-rule', 'Curb_Cut_Guest' in _skill and re.search(r'never.{0,80}Curb_Cut_Access', _skill, re.I | re.S) is not None,
+          'the setup skill no longer says the guest gets Curb_Cut_Guest and never Curb_Cut_Access')
+    check('setup-skill-never-handles-passwords', re.search(r'never.{0,40}password', _skill, re.I | re.S) is not None,
+          'the setup skill no longer forbids handling passwords')
+    _mkt = json.loads(read(os.path.join(ROOT, '.claude-plugin/marketplace.json')))
+    _ok = all(os.path.exists(os.path.join(ROOT, p['source'], '.claude-plugin/plugin.json'))
+              and json.loads(read(os.path.join(ROOT, p['source'], '.claude-plugin/plugin.json')))['name'] == p['name']
+              for p in _mkt['plugins'])
+    check('marketplace-points-at-real-plugins', _ok, 'the marketplace names a plugin that is not where it says, or under another name')
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import count_claims  # the one list both this check and sync_counts.py read
 stale = []

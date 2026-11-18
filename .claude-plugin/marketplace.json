@@ -1,0 +1,14 @@
+{
+  "name": "curb-cut",
+  "version": "1.0.0",
+  "description": "Curb Cut: ask for what you need at work, in your own words, without ever saying why.",
+  "owner": { "name": "Parth Sevak" },
+  "plugins": [
+    {
+      "name": "curb-cut",
+      "source": "./plugins/curb-cut",
+      "description": "Set up Curb Cut in a Salesforce org by asking, and give your assistant Curb Cut's five tools, none of which can send a request to an employer.",
+      "keywords": ["salesforce", "agentforce", "accessibility", "accommodation", "setup", "mcp"]
+    }
+  ]
+}

@@ -38,6 +38,10 @@ words, and you can run it again any time:
 
     node scripts/check-setup.mjs curbcut
 
+Prefer to ask? In Claude Code, `/plugin marketplace add parthsevak2/curb-cut`,
+then `/plugin install curb-cut@curb-cut`, then say *set up Curb Cut in my org*.
+The skill runs these same scripts and stops for the steps only a person can do.
+
 The steps below are the same install by hand, with the reasons. See
 [scripts/README.md](scripts/README.md).
 

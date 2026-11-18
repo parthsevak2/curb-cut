@@ -148,10 +148,10 @@ first of them yourself in about a second, with no Salesforce org:
 ```
 git clone https://github.com/parthsevak2/curb-cut
 cd curb-cut
-python3 tests/invariants.py     # 627 structural checks, offline, about a second
+python3 tests/invariants.py     # 632 structural checks, offline, about a second
 ```
 
-Those are the 627 structural invariants, the rules the build refuses to break.
+Those are the 632 structural invariants, the rules the build refuses to break.
 The rest of the checking, today:
 
 | What is checked | Count today |
@@ -217,6 +217,19 @@ The check prints a tick or a cross for each item and the exact next step for
 every cross. A few steps need a person, and it names them: accepting the
 Einstein Bots terms, creating the site, and activating the agents.
 
+**Or just ask your coding agent.** In Claude Code, add Curb Cut's plugin:
+
+```
+/plugin marketplace add parthsevak2/curb-cut
+/plugin install curb-cut@curb-cut
+```
+
+Then say *set up Curb Cut in my org*. It runs the same scripts, asks you only
+what the org cannot answer, and stops for the steps only a person can do. The
+skill inside, [`curb-cut-org-setup`](plugins/curb-cut/skills/curb-cut-org-setup/SKILL.md),
+follows the open Agent Skills format, so other agents that read skills can use
+it too.
+
 > [!NOTE]
 > Curb Cut needs a Salesforce org with Agentforce, and Salesforce CLI 2.149 or
 > later. The open-source code is free; the platform under it is not. The web
@@ -235,7 +248,8 @@ break room is at
 ## 🧭 Use it from your AI assistant
 
 Most people who need this are already inside some assistant, so Curb Cut comes
-to them. It is an MCP server with five tools, and none of them can send a
+to them. The Claude Code plugin above brings it along; on its own, it is an MCP
+server with five tools, and none of them can send a
 request to an employer. A tool that was never given a send button cannot be
 talked into pressing one.
 
@@ -311,7 +325,7 @@ invariant suite's own output so they cannot drift.
 
 ```
 194 Apex tests                 sf apex run test -o curbcut -l RunLocalTests
-627 structural invariants      python3 tests/invariants.py            ~1s, no org
+632 structural invariants      python3 tests/invariants.py            ~1s, no org
 509 accessibility checks       python3 tests/a11y_audit.py            against the live pages
  19 Sa11y tests                npm run test:a11y                      Salesforce's own axe-core matcher, 0 violations
  34 accessibility-tree checks  node tests/ax_tree_audit.mjs           what a screen reader is handed
@@ -424,6 +438,7 @@ and nobody can find out.
 | `force-app/main/default/reports/` `dashboards/` | five reports and the overview dashboard, no names anywhere |
 | `channels/` | SMS + voice relay, Slack app (Socket Mode), MCP server, Twilio configuration |
 | `scripts/` | the one-command install, the label setup and the plain-words setup check |
+| `plugins/curb-cut/` | the Claude Code plugin: the setup skill and the MCP server, listed by `.claude-plugin/marketplace.json` |
 | `tests/` | every suite above, plus `lwc_audit.py`, `screen_reader_walk.mjs` (which writes docs/SCREEN-READER-WALK.md) and `count_claims.py`, the one list of every place a count is published |
 | `deck/` | the deck as source; the built copy lives in `docs/hackathon/` |
 | `docs/hackathon/` | the September 2026 hackathon record: judge guides, reflections, deck, stills |
