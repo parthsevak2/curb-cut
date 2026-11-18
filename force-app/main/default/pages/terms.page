@@ -37,12 +37,16 @@
     <table class="facts">
       <tbody>
         <tr><th scope="row">Name</th><td>Curb Cut</td></tr>
+        <apex:outputPanel layout="none" rendered="{!$Label.CurbCut_SMS_Number_Link != '+10000000000'}">
         <tr><th scope="row">Number</th>
             <td><span class="kw">{!$Label.CurbCut_SMS_Number}</span>, the number these
                 terms are about. If a message reaches you from anywhere else, it
                 is not us.</td></tr>
-        <tr><th scope="row">Made by</th>
-            <td>Parth Sevak, in Welland, Ontario, Canada</td></tr>
+        </apex:outputPanel>
+        <tr><th scope="row">Run by</th>
+            <td>{!$Label.CurbCut_Operator}</td></tr>
+        <tr><th scope="row">Software</th>
+            <td>Curb Cut, open source under Apache 2.0, built by Parth Sevak</td></tr>
         <tr><th scope="row">What it does</th>
             <td>Helps you work out what could make work easier, and helps you ask
                 for it. It can write a request and send it to your employer, but

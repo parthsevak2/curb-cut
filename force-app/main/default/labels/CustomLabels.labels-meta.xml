@@ -32,4 +32,20 @@
         <shortDescription>The public Force.com site, no trailing slash</shortDescription>
         <value>https://YOUR-DOMAIN.my.salesforce-sites.com/curbcut</value>
     </labels>
+    <labels>
+        <fullName>CurbCut_Inbound_Email</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The inbound email address Salesforce generates for CurbCutInbound</shortDescription>
+        <value>inbound-address@example.com</value>
+    </labels>
+    <labels>
+        <fullName>CurbCut_Operator</fullName>
+        <categories>CurbCut</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Who runs this deployment, as people and carriers should read it</shortDescription>
+        <value>Your organisation, City, Province or State, Country</value>
+    </labels>
 </CustomLabels>

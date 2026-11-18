@@ -18,11 +18,13 @@
     <a class="btn primary" href="/ask">Ask now <span class="arrow">&rarr;</span></a>
     <a class="btn" href="#doors">Other ways to reach it</a>
   </div>
+  <apex:outputPanel layout="none" rendered="{!$Label.CurbCut_SMS_Number_Link != '+10000000000'}">
   <p class="cta-note">
     No phone? No problem. Have a phone but no internet? Text <span class="kw">CURB CUT</span> to
     <a href="sms:{!$Label.CurbCut_SMS_Number_Link}?body=CURB%20CUT">{!$Label.CurbCut_SMS_Number}</a>, or call the same number.
-    It is a US number, so a prepaid plan may charge for the text.
+    Message and data rates may apply.
   </p>
+  </apex:outputPanel>
   <p class="cta-note">
     You can stop at any point. Nothing that could identify you is written down
     while you're anonymous, and nothing reaches your employer unless you say yes first.
@@ -142,6 +144,7 @@
         <p><a href="/ask">Go to the ask page &rarr;</a></p>
       </div>
 
+      <apex:outputPanel layout="none" rendered="{!$Label.CurbCut_SMS_Number_Link != '+10000000000'}">
       <div class="card open">
         <span class="chip live">Open now</span>
         <h3>Text message</h3>
@@ -163,7 +166,9 @@
           not calls, so this one needed no registration and works today.
         </p>
       </div>
+      </apex:outputPanel>
 
+      <apex:outputPanel layout="none" rendered="{!NOT(CONTAINS($Label.CurbCut_Inbound_Email, 'example.com'))}">
       <div class="card open">
         <span class="chip live">Open now</span>
         <h3>Email</h3>
@@ -173,10 +178,11 @@
           handed to a person rather than dropped.
         </p>
         <p>
-          <a href="mailto:curbcut@k-1cnb5a59o6bjnzp8kkwyshpgr8g0vwi9qhgl3p29zz9m62h9pw.gk-yij5suax.can96.apex.salesforce.com?subject=What%20is%20hard%20at%20work">Email the desk</a>.
+          <a href="mailto:{!$Label.CurbCut_Inbound_Email}?subject=What%20is%20hard%20at%20work">Email the desk</a>.
           The address is long because Salesforce generates it; the link fills it in for you.
         </p>
       </div>
+      </apex:outputPanel>
 
       <div class="card pending">
         <span class="chip wait">Only in a direct message</span>
@@ -374,6 +380,7 @@
     <div class="cta">
       <a class="btn primary" href="/ask">Start on this page <span class="arrow">&rarr;</span></a>
     </div>
+    <apex:outputPanel layout="none" rendered="{!$Label.CurbCut_SMS_Number_Link != '+10000000000'}">
     <p>
       Or text <span class="kw">CURB CUT</span> to <span class="kw">{!$Label.CurbCut_SMS_Number}</span>
       and say what's hard. That's the whole thing.
@@ -382,6 +389,7 @@
       Message and data rates may apply. Reply <span class="kw">HELP</span> for
       help, or <span class="kw">STOP</span> to stop receiving messages.
     </p>
+    </apex:outputPanel>
   </section>
 
   <section aria-labelledby="sec-this-page-too">

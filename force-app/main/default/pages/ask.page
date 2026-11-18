@@ -183,7 +183,7 @@
               <button type="button" id="copyCode" class="btn">Copy the code</button>
             </div>
             <p class="codeHelp">
-              Keep this somewhere safe. Send <strong>OFF</strong> and your code, here, by text, or by email,
+              Keep this somewhere safe. Send <strong>OFF</strong> and your code, here{!IF($Label.CurbCut_SMS_Number_Link != '+10000000000', ', or by text', '')}{!IF(NOT(CONTAINS($Label.CurbCut_Inbound_Email, 'example.com')), ', or by email', '')},
               and it's turned off. Send <strong>WHO</strong> and your code to see everyone who's been shown it.
               I can't look you up, because I don't know who you are.
             </p>
@@ -336,7 +336,7 @@
       doneBox.appendChild(c);
     }
     var n = document.createElement('p'); n.className = 'fieldHelp';
-    n.textContent = 'This page has no way to reach you, and that is on purpose. To hear the answer, text CURB CUT to {!JSENCODE($Label.CurbCut_SMS_Number)} or use the person button, and the desk can reply there.';
+    n.textContent = {!IF($Label.CurbCut_SMS_Number_Link != '+10000000000', "'This page has no way to reach you, and that is on purpose. To hear the answer, text CURB CUT to " + JSENCODE($Label.CurbCut_SMS_Number) + " or use the person button, and the desk can reply there.'", "'This page has no way to reach you, and that is on purpose. To hear the answer, use the person button and keep the code it gives you.'")};
     doneBox.appendChild(n);
   }
 

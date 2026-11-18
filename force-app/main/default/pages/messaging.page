@@ -14,6 +14,18 @@
   heading="You text first. That's the only way in."
   lede="Nobody is added to a list here. There's no list.">
 
+  <apex:outputPanel layout="block" rendered="{!$Label.CurbCut_SMS_Number_Link == '+10000000000'}">
+  <section aria-label="Not connected yet">
+    <div class="plain">
+      <p>
+        This site has not connected a text number yet, so there is nothing to sign
+        up for here. You can ask on the web instead, with no account and no phone:
+        <a href="/ask">go to the ask page</a>.
+      </p>
+    </div>
+  </section>
+  </apex:outputPanel>
+  <apex:outputPanel layout="block" rendered="{!$Label.CurbCut_SMS_Number_Link != '+10000000000'}">
   <section aria-label="In one sentence">
     <div class="plain">
       <span class="tag">In one sentence</span>
@@ -32,7 +44,7 @@
     <table class="facts">
       <tbody>
         <tr><th>Programme name</th><td>Curb Cut</td></tr>
-        <tr><th>Operated by</th><td>Parth Sevak, Welland, Ontario, Canada</td></tr>
+        <tr><th>Operated by</th><td>{!$Label.CurbCut_Operator}</td></tr>
         <tr><th>Number</th><td><span class="kw">{!$Label.CurbCut_SMS_Number}</span></td></tr>
         <tr><th>Who it's for</th>
             <td>Anyone at work, or trying to get work, who wants to know what
@@ -158,6 +170,7 @@
     </p>
   </section>
 
+  </apex:outputPanel>
 </c:CurbCutShell>
 </body>
 </html>
