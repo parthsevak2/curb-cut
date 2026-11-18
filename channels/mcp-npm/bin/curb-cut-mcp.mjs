@@ -15,10 +15,9 @@
  * still exits.
  *
  * It hands over by importing ../server.mjs resolved from this file's own URL.
- * There is no comparison against process.argv[1], on purpose: Recordist 0.1.0
- * shipped a direct-run guard that compared basenames and silently started
- * nothing under the npx shim symlink. Resolving from import.meta.url cannot
- * be fooled that way.
+ * There is no comparison against process.argv[1], on purpose: a direct-run
+ * guard that compares basenames silently starts nothing under the npx shim
+ * symlink. Resolving from import.meta.url cannot be fooled that way.
  */
 import { existsSync } from 'node:fs';
 import { execSync } from 'node:child_process';

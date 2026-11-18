@@ -23,9 +23,9 @@ The server file itself is untouched: the packaged copy is byte-identical to
 2. **Registry namespace.** Prepared as `io.github.parthsevak2/curb-cut-mcp`,
    which matches where the repo lives. `mcp-publisher login github` must be
    done signed in as **parthsevak2**, not parthsevak-hash, because the
-   namespace is the authenticated account's username. If you'd rather use a
-   DNS namespace like Recordist did (`app.recordist`), that needs a domain,
-   an Ed25519 key and a TXT record; the GitHub path is one browser login.
+   namespace is the authenticated account's username. A reverse-DNS
+   namespace instead needs a domain, an Ed25519 key and a TXT record; the
+   GitHub path is one browser login.
 3. **Version.** 1.0.1, matching the `serverInfo` version inside
    `mcp-server.mjs`. 1.0.1 is the release that starts and answers
    `initialize` and `tools/list` with no Salesforce CLI and no org login, and
@@ -40,11 +40,11 @@ The server file itself is untouched: the packaged copy is byte-identical to
 cd path/to/your/clone/channels/mcp-npm
 
 npm pack --dry-run        # look at the file list one last time
-npm login                 # opens the browser; needs your npm 2FA, same as Recordist
+npm login --auth-type=web # opens the browser, where npm asks for your 2FA
 npm publish               # prints an auth URL for 2FA again; unscoped packages are public
 ```
 
-## 2. Verify from a clean cache (the Recordist lesson)
+## 2. Verify from a clean cache
 
 ```bash
 rm -rf ~/.npm/_npx
@@ -57,7 +57,7 @@ On a machine without the CLI it should print one line first, `Curb Cut tools
 need the Salesforce CLI and an org login: ...`, and then the same ready line,
 and keep running: introspection works there, and the tools that need the org
 answer with those setup steps instead of a stack trace. If you ever see "Permission denied", check for a stray global
-link shadowing npx, like the `npm link` leftover that bit Recordist.
+link shadowing npx: an `npm link` leftover can shadow it.
 
 ## 3. Publish to the official MCP registry
 
